@@ -1,0 +1,729 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content=",,,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="这是一篇很长的文章，详细描述了机房的网络服务与其相关的部署、维护方法。既是机房网络的维护手册，同时作为我在其部署、维护过程中的学习笔记；亦可作为最佳实践供网络条件相近或是需求相近的人参考。 这篇文章假定读者有网络、Linux的基础知识。">
+<meta name="keywords" content="linux,long,the Great Wall">
+<meta property="og:type" content="website">
+<meta property="og:title" content="西一楼A206机房的网络方案">
+<meta property="og:url" content="http://192217.space/drafts/deprecated/x206_network.html">
+<meta property="og:site_name" content="Hobo Chen">
+<meta property="og:description" content="这是一篇很长的文章，详细描述了机房的网络服务与其相关的部署、维护方法。既是机房网络的维护手册，同时作为我在其部署、维护过程中的学习笔记；亦可作为最佳实践供网络条件相近或是需求相近的人参考。 这篇文章假定读者有网络、Linux的基础知识。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://192217.space/uploads/pic/001.png">
+<meta property="og:updated_time" content="2020-12-17T13:51:34.405Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="西一楼A206机房的网络方案">
+<meta name="twitter:description" content="这是一篇很长的文章，详细描述了机房的网络服务与其相关的部署、维护方法。既是机房网络的维护手册，同时作为我在其部署、维护过程中的学习笔记；亦可作为最佳实践供网络条件相近或是需求相近的人参考。 这篇文章假定读者有网络、Linux的基础知识。">
+<meta name="twitter:image" content="http://192217.space/uploads/pic/001.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://192217.space/drafts/deprecated/x206_network.html">
+
+
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+
+
+
+
+
+  <title>
+  
+
+  
+    西一楼A206机房的网络方案 | Hobo Chen
+  
+</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right  ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hobo Chen</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">50% Humanities 50% Science</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/var/www/html/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-notebook">
+          <a href="/note" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br>
+            
+            Notebook
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+  <header class="post-header">
+
+	<h2 class="post-title" itemprop="name headline">西一楼A206机房的网络方案</h2>
+
+
+
+</header>
+
+    
+    
+      <p>这是一篇很长的文章，详细描述了机房的网络服务与其相关的部署、维护方法。<br>既是机房网络的<code>维护手册</code>，同时作为我在其部署、维护过程中的<code>学习笔记</code>；亦可作为<code>最佳实践</code>供网络条件相近或是需求相近的人参考。</p>
+<p>这篇文章假定读者有<code>网络</code>、<code>Linux</code>的基础知识。</p>
+<a id="more"></a>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><h4 id="在线"><a href="#在线" class="headerlink" title="在线"></a>在线</h4><ul>
+<li>Dell R720 <code>服务器</code>, 双 Xeon E5 2665 C2, 16 GB Ecc 内存, 两个600GB 10K硬盘, 四口 100/1000</li>
+<li>HP Z220 <code>工作站</code>, E3-1230 V2, 32GB ECC 内存, 256GB SSD, 三口 100/1000</li>
+<li>Raspberry Pi 3 <code>服务器</code>, BCM2837, 1GB内存, 64GB TF卡, 双口100</li>
+<li>Netgear GS308 <code>交换机</code>, 8口 10/100/1000自适应, 属于<code>hobochen</code></li>
+<li>Asus AC-68U 路由器, 300/866Mbps, 用作<code>无线AP</code>, 属于<code>hobochen</code></li>
+<li>HP P1108 <code>激光打印机</code>, 用于无线打印, <code>zccz14</code>捐助</li>
+<li><code>VPS</code>, 位于美国西海岸, IP: 50.116.7.134, <code>hobochen</code>捐助</li>
+<li>两个公网IP, <code>IP1</code>:202.117.15.243, <code>IP2</code>: 202.117.15.245</li>
+<li><code>校内VPS</code>， <code>IP3</code>: 58.206.125.46</li>
+</ul>
+<h4 id="已离线"><a href="#已离线" class="headerlink" title="已离线"></a>已离线</h4><ul>
+<li>IBM X3650-M2 <code>服务器</code>, Xeon L5420, 4GB Ecc 内存, 无硬盘, 双口 100/1000</li>
+<li>IBM X3650-M2 <code>服务器</code>, 双 Xeon E5420, 16GB Ecc 内存, 四个146GB 15K硬盘, 双口 100/1000</li>
+</ul>
+<h4 id="机房目前在线服务"><a href="#机房目前在线服务" class="headerlink" title="机房目前在线服务"></a>机房目前在线服务</h4><ul>
+<li>无线网络, SSID: ACM-TEAM, DHCP分配地址，地址池10.0.0.100-10.0.254.254</li>
+<li>透明互联网，所有目标地址非中国IP的TCP数据包由VPS转发</li>
+<li>VPN入口</li>
+<li>GitLab, 位于10.0.0.4</li>
+<li>无线打印服务, 位于<a href="http://10.0.0.4:631/printers/HP-LaserJet-Professional-P1108" target="_blank" rel="noopener">http://10.0.0.4:631/printers/HP-LaserJet-Professional-P1108</a></li>
+</ul>
+<h3 id="核心网络拓扑图"><a href="#核心网络拓扑图" class="headerlink" title="核心网络拓扑图"></a>核心网络拓扑图</h3><p><img src="/uploads/pic/001.png" alt="图"></p>
+<h3 id="GS308交换机接口说明"><a href="#GS308交换机接口说明" class="headerlink" title="GS308交换机接口说明"></a>GS308交换机接口说明</h3><p>从左往右编号1-8。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">接口编号</th>
+<th style="text-align:center">设备</th>
+<th style="text-align:center">操作系统</th>
+<th style="text-align:center">静态IP</th>
+<th style="text-align:center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">ThinkPad X200</td>
+<td style="text-align:center">Ubuntu 16.04.2 LTS</td>
+<td style="text-align:center">10.0.0.6</td>
+<td style="text-align:center">属于<code>hobochen</code></td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">空</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">HP-Z220</td>
+<td style="text-align:center">Ubuntu 16.04.2 LTS</td>
+<td style="text-align:center">10.0.0.4</td>
+<td style="text-align:center">属于<code>hobochen</code></td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">Raspberry Pi 3</td>
+<td style="text-align:center">Debian 8</td>
+<td style="text-align:center">10.0.0.9</td>
+<td style="text-align:center">属于<code>hobochen</code></td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">空</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">Asus AC-68U</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">10.0.0.3</td>
+<td style="text-align:center">属于<code>hobochen</code></td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">空</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">Dell R720</td>
+<td style="text-align:center">VMware EXSi 6</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">-</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="内网静态IP管理-TBD"><a href="#内网静态IP管理-TBD" class="headerlink" title="内网静态IP管理(TBD)"></a>内网静态IP管理(TBD)</h3><p>10.0.0.1-10.0.0.99为静态IP段。</p>
+<p>注意：如无特殊需求，设备应当以DHCP方式获取IP。</p>
+<h2 id="重启网络方案"><a href="#重启网络方案" class="headerlink" title="重启网络方案"></a>重启网络方案</h2><h3 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h3><h4 id="网关-HP-Z220"><a href="#网关-HP-Z220" class="headerlink" title="网关(HP Z220)"></a>网关(HP Z220)</h4><ul>
+<li>两个网卡<ul>
+<li>网卡ens32；202.117.15.245，是整个机房的国内流量出口</li>
+<li>网卡ens33；10.0.0.4，是子网10.0.0.0/16的网关，同时负责DHCP地址分配和DNS解析</li>
+</ul>
+</li>
+</ul>
+<h3 id="所需权限"><a href="#所需权限" class="headerlink" title="所需权限"></a>所需权限</h3><ol>
+<li>HP-Z220密码</li>
+</ol>
+<p>状态：机房断电。</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>打开Z220电源。</li>
+<li>打开交换机电源。</li>
+<li>打开Z220，确保服务全部启动。<ul>
+<li><code>ss-redir</code></li>
+<li><code>haproxy</code></li>
+<li><code>iptables</code></li>
+<li><code>overture</code></li>
+<li><code>dnsmasq</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="透明互联网"><a href="#透明互联网" class="headerlink" title="透明互联网"></a>透明互联网</h2><p>过程可以参考<strong>soft-router</strong>这篇日志。</p>
+<h3 id="Shadowsocks负载均衡"><a href="#Shadowsocks负载均衡" class="headerlink" title="Shadowsocks负载均衡"></a>Shadowsocks负载均衡</h3><p>由于校园网环境下限制了10Mbps的国际出口，所以使用<code>IP1-3</code>来负载均衡Shadowsocks转发。</p>
+<p>使用<code>haproxy</code>来提供负载均衡功能。</p>
+<p>master - slave模式。<br>master负责将TCP端口52222负载均衡到slave的23334端口。</p>
+<p>slave 使用<code>socat</code>将23334端口转发到<code>VPS</code>的8087端口。</p>
+<p><code>haproxy</code>配置文件如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">defaults</span><br><span class="line">	mode	tcp</span><br><span class="line"></span><br><span class="line">frontend ss-in</span><br><span class="line">	bind *:52222</span><br><span class="line">	default_backend ss-out</span><br><span class="line">backend ss-out</span><br><span class="line">	mode tcp</span><br><span class="line">	balance   roundrobin</span><br><span class="line">	option tcplog</span><br><span class="line">    server s1 58.206.125.46:23334 weight 10 maxconn 20480 check inter 1500 rise 3 fall 3</span><br><span class="line">	server s2 10.0.0.8:23334 weight 10 maxconn 20480 check inter 1500 rise 3 fall 3</span><br><span class="line">	server s3 10.0.0.2:23334 weight 10 maxconn 20480 check inter 1500 rise 3 fall 3</span><br></pre></td></tr></table></figure>
+<h3 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h3><p>安装<code>haveged</code>, 运行。<br>编辑<code>/etc/sysctl.conf</code>，加入以下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.ip_local_port_range = 1024 65535</span><br><span class="line">net.core.rmem_max=16777216</span><br><span class="line">net.core.wmem_max=16777216</span><br><span class="line">net.ipv4.tcp_rmem=4096 87380 16777216</span><br><span class="line">net.ipv4.tcp_wmem=4096 65536 16777216</span><br><span class="line">net.ipv4.tcp_fin_timeout = 10</span><br><span class="line">net.ipv4.tcp_tw_recycle = 1</span><br><span class="line">net.ipv4.tcp_timestamps = 0</span><br><span class="line">net.ipv4.tcp_window_scaling = 0</span><br><span class="line">net.ipv4.tcp_sack = 0</span><br><span class="line">net.core.netdev_max_backlog = 30000</span><br><span class="line">net.ipv4.tcp_no_metrics_save=1</span><br><span class="line">net.core.somaxconn = 4096</span><br><span class="line">net.ipv4.tcp_syncookies = 0</span><br><span class="line">net.ipv4.tcp_max_orphans = 262144</span><br><span class="line">net.ipv4.tcp_max_syn_backlog = 262144</span><br><span class="line">net.ipv4.tcp_synack_retries = 2</span><br><span class="line">net.ipv4.tcp_syn_retries = 2</span><br></pre></td></tr></table></figure></p>
+<p>运行以下脚本，需要<code>root</code>权限。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/sbin/sysctl -p /etc/sysctl.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="built_in">ulimit</span> -HSn 65536 &gt;&gt; /etc/rc.local</span><br><span class="line"><span class="built_in">ulimit</span> -HSn 65536</span><br></pre></td></tr></table></figure></p>
+<h2 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a>VPN</h2><p>使用<code>softether</code>来提供VPN。<br>VPN运行在树莓派3上，虚拟HUB桥接到10.0.0.9。</p>
+<p>目前VPN已经开放给所有ACM校队成员。</p>
+<h2 id="GitLab"><a href="#GitLab" class="headerlink" title="GitLab"></a>GitLab</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl https://packages.gitlab.com/gpg.key 2&gt; /dev/null | sudo apt-key add - &amp;&gt;/dev/null</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"deb https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/ubuntu xenial main"</span> | sudo tee /etc/apt/sources.list.d/gitlab-ce.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install gitlab-ce</span><br></pre></td></tr></table></figure>
+<h3 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-rake gitlab:backup:create RAILS_ENV=production</span><br></pre></td></tr></table></figure>
+<p>备份产生的文件位于<code>/var/opt/gitlab/backups</code>。</p>
+<p>后<code>rsync</code>同步一下，后在新的服务器下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-rake gitlab:backup:restore RAILS_ENV=production   BACKUP=$name</span><br></pre></td></tr></table></figure></p>
+<p>name是备份文件名，注意新旧服务器的版本必须完全一样。</p>
+<h3 id="优化内存占用"><a href="#优化内存占用" class="headerlink" title="优化内存占用"></a>优化内存占用</h3><p>编辑<code>/etc/gitlab/gitlab.rb</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unicorn[&apos;worker_processes&apos;] = 2</span><br><span class="line">unicorn[&apos;worker_timeout&apos;] = 60</span><br></pre></td></tr></table></figure>
+<h2 id="无线打印"><a href="#无线打印" class="headerlink" title="无线打印"></a>无线打印</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install cups</span><br><span class="line">sudo apt install hplip</span><br><span class="line">sudo hp-setup</span><br></pre></td></tr></table></figure>
+<h2 id="网络维护日志"><a href="#网络维护日志" class="headerlink" title="网络维护日志"></a>网络维护日志</h2><p>2017.5.12 更换IP，两个新的IP作MAC绑定。<br>2017.5.13 更换网络结构。<br>2017.5.15 获得1x账号，待启用。<br>2017.5.16 Z220停机升级内存至16GB。</p>
+
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Hobo Chen">
+          <p class="site-author-name" itemprop="name">Hobo Chen</p>
+          <p class="site-description motion-element" itemprop="description">a blog of hobo</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/Prime687509" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hobochen" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:hobochen96@gmail.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              My Friends
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zccz14.com/" title="zccz" target="_blank">zccz</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="hobod1"> &nbsp;&nbsp; &nbsp;Hobo Chen </span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <!-- <span class="author" itemprop="copyrightHolder">Hobo Chen</span> -->
+  <span class="hobod2">
+    <a class="Zhuo Liu" href="https://lzed.github.io/"> Caesium Liu </a>
+  </span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  <a class="theme-link" href="https://creativecommons.org/licenses/by-nc-nd/3.0/cn/">
+  CC-BY-NC-ND 3.0
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'hobo-blog';
+      var disqus_identifier = 'drafts/deprecated/x206_network.html';
+
+      var disqus_title = "西一楼A206机房的网络方案";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
