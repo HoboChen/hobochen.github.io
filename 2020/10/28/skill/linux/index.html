@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="整理了一下之前的Linux若干篇备忘录，合并为此。">
+<meta name="description" content="Linux all in ONE.">
 <meta name="keywords" content="short,practice">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux 备忘录">
+<meta property="og:title" content="Linux Memo">
 <meta property="og:url" content="http://192217.space/2020/10/28/skill/linux/index.html">
 <meta property="og:site_name" content="Hobo Chen">
-<meta property="og:description" content="整理了一下之前的Linux若干篇备忘录，合并为此。">
+<meta property="og:description" content="Linux all in ONE.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-17T13:51:38.337Z">
+<meta property="og:updated_time" content="2021-05-10T03:59:38.811Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux 备忘录">
-<meta name="twitter:description" content="整理了一下之前的Linux若干篇备忘录，合并为此。">
+<meta name="twitter:title" content="Linux Memo">
+<meta name="twitter:description" content="Linux all in ONE.">
 
 
 
@@ -132,7 +132,7 @@
 
 
 
-  <title> Linux 备忘录 | Hobo Chen </title>
+  <title> Linux Memo | Hobo Chen </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -186,7 +186,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/var/www/html/" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
@@ -218,9 +218,19 @@
         <li class="menu-item menu-item-notebook">
           <a href="/note" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-sticky-note"></i> <br>
             
-            Notebook
+            Notes
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-slide">
+          <a href="/slide" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-desktop"></i> <br>
+            
+            Slides
           </a>
         </li>
       
@@ -287,7 +297,7 @@
             
             
               
-                Linux 备忘录
+                Linux Memo
               
             
           </h1>
@@ -343,51 +353,57 @@
       
 
       
-        <p>整理了一下之前的Linux若干篇备忘录，合并为此。</p>
+        <p>Linux all in ONE.</p>
 <a id="more"></a>
-<h1 id="Bootstrap-Ubuntu"><a href="#Bootstrap-Ubuntu" class="headerlink" title="Bootstrap Ubuntu"></a>Bootstrap Ubuntu</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt upgrade</span><br><span class="line">sudo apt install gnome-tweak-tool git zsh tmux curl \</span><br><span class="line">  build-essential clang ghc texlive-full \</span><br><span class="line">  python3 openjdk-11-jdk net-tools htop iftop vim \</span><br><span class="line">  lm-sensors chromium-browser wget</span><br><span class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br><span class="line"><span class="comment"># to store local time in bios, compatibility issue when dual boot windows</span></span><br><span class="line">timedatectl <span class="built_in">set</span>-local-rtc 1</span><br></pre></td></tr></table></figure>
-<h1 id="Tune-Max-Open-Files"><a href="#Tune-Max-Open-Files" class="headerlink" title="Tune Max Open Files"></a>Tune Max Open Files</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 系统</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'fs.file-max = 65535'</span> | sudo tee <span class="_">-a</span> /etc/sysctl.conf</span><br><span class="line">sudo sysctl -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用户</span></span><br><span class="line">sudo tee <span class="_">-a</span> /etc/security/limits.conf &lt;&lt; EOF</span><br><span class="line">*               hard    nofile          65535</span><br><span class="line">*               soft    nofile          65535</span><br><span class="line">root            hard    nofile          65535</span><br><span class="line">root            soft    nofile          65535</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># Systemd</span></span><br><span class="line">sudo sed -i <span class="string">'/DefaultLimitNOFILE/c DefaultLimitNOFILE=65535'</span> /etc/systemd/*.conf</span><br><span class="line">sudo systemctl daemon-reexec</span><br></pre></td></tr></table></figure>
-<h1 id="hd-idle"><a href="#hd-idle" class="headerlink" title="hd-idle"></a><code>hd-idle</code></h1><p><a href="https://github.com/adelolmo/hd-idle" target="_blank" rel="noopener">Github Page</a>.</p>
+<h1 id="Bootstrap-Ubuntu"><a href="#Bootstrap-Ubuntu" class="headerlink" title="Bootstrap Ubuntu"></a>Bootstrap Ubuntu</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt upgrade -y</span><br><span class="line">sudo apt install sysstat net-tools htop iftop wget tmux curl zsh \</span><br><span class="line">  vim git build-essential \</span><br><span class="line">  python3 openjdk-11-jdk clang ghc texlive-full \</span><br><span class="line">  gnome-tweak-tool lm-sensors</span><br><span class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br><span class="line"><span class="comment"># to store local time in bios, to resolve compatibility issue when dual boot windows</span></span><br><span class="line">timedatectl <span class="built_in">set</span>-local-rtc 1</span><br></pre></td></tr></table></figure>
+<h1 id="System-Tune"><a href="#System-Tune" class="headerlink" title="System Tune"></a>System Tune</h1><h2 id="Tune-Max-Open-Files"><a href="#Tune-Max-Open-Files" class="headerlink" title="Tune Max Open Files"></a>Tune Max Open Files</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 系统</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'fs.file-max = 65535'</span> | sudo tee <span class="_">-a</span> /etc/sysctl.conf</span><br><span class="line">sudo sysctl -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用户</span></span><br><span class="line">sudo tee <span class="_">-a</span> /etc/security/limits.conf &lt;&lt; EOF</span><br><span class="line">*               hard    nofile          65535</span><br><span class="line">*               soft    nofile          65535</span><br><span class="line">root            hard    nofile          65535</span><br><span class="line">root            soft    nofile          65535</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># Systemd</span></span><br><span class="line">sudo sed -i <span class="string">'/DefaultLimitNOFILE/c DefaultLimitNOFILE=65535'</span> /etc/systemd/*.conf</span><br><span class="line">sudo systemctl daemon-reexec</span><br></pre></td></tr></table></figure>
+<h2 id="hd-idle"><a href="#hd-idle" class="headerlink" title="hd-idle"></a><code>hd-idle</code></h2><p><a href="https://github.com/adelolmo/hd-idle" target="_blank" rel="noopener">Github Page</a>.</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># /etc/default/hd-idle</span></span><br><span class="line"></span><br><span class="line"><span class="attr">START_HD_IDLE</span>=<span class="literal">true</span></span><br><span class="line"><span class="attr">HD_IDLE_OPTS</span>=<span class="string">"-i 120 -d -l /var/log/hd-idle.log"</span></span><br></pre></td></tr></table></figure>
-<h1 id="Add-Swap-and-Mount"><a href="#Add-Swap-and-Mount" class="headerlink" title="Add Swap and Mount"></a>Add Swap and Mount</h1><h2 id="Add-Swap"><a href="#Add-Swap" class="headerlink" title="Add Swap"></a>Add Swap</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo fallocate <span class="_">-l</span> 2G /swapfile</span><br><span class="line">sudo chmod 600 /swapfile</span><br><span class="line">sudo mkswap /swapfile</span><br><span class="line">sudo swapon /swapfile</span><br></pre></td></tr></table></figure>
-<h2 id="Check-if-works"><a href="#Check-if-works" class="headerlink" title="Check if works"></a>Check if works</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure>
-<h1 id="Auto-Mount-Disk"><a href="#Auto-Mount-Disk" class="headerlink" title="Auto Mount Disk"></a>Auto Mount Disk</h1><h2 id="Check"><a href="#Check" class="headerlink" title="Check"></a>Check</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk <span class="_">-l</span></span><br></pre></td></tr></table></figure>
-<p>You may see like that:</p>
-<h2 id="Partition"><a href="#Partition" class="headerlink" title="Partition"></a>Partition</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk /dev/sdb</span><br></pre></td></tr></table></figure>
+<h2 id="Add-Swap-and-Mount"><a href="#Add-Swap-and-Mount" class="headerlink" title="Add Swap and Mount"></a>Add Swap and Mount</h2><p>Add Swap:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo fallocate <span class="_">-l</span> 2G /swapfile</span><br><span class="line">sudo chmod 600 /swapfile</span><br><span class="line">sudo mkswap /swapfile</span><br><span class="line">sudo swapon /swapfile</span><br></pre></td></tr></table></figure>
+<p>Check if works:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure>
+<h1 id="System-Maintainance-Manual"><a href="#System-Maintainance-Manual" class="headerlink" title="System Maintainance Manual"></a>System Maintainance Manual</h1><h2 id="Add-New-Disk"><a href="#Add-New-Disk" class="headerlink" title="Add New Disk"></a>Add New Disk</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk <span class="_">-l</span></span><br></pre></td></tr></table></figure>
+<p>to partition:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk /dev/sdb</span><br></pre></td></tr></table></figure>
 <p>Then type:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g <span class="comment"># create a new GPT disk lable</span></span><br><span class="line">n <span class="comment"># new partition, i only add one partition is this disk, </span></span><br><span class="line">  <span class="comment"># so i press enter for two times then</span></span><br><span class="line">w <span class="comment"># write the changes</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="Format"><a href="#Format" class="headerlink" title="Format"></a>Format</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfs -t ext4 /dev/sdb1 <span class="comment"># use ext4 file system</span></span><br></pre></td></tr></table></figure>
-<h2 id="Mount"><a href="#Mount" class="headerlink" title="Mount"></a>Mount</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/flush</span><br><span class="line">sudo mount /dev/sdb1 ~/flush</span><br></pre></td></tr></table></figure>
+<p>format:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfs -t ext4 /dev/sdb1 <span class="comment"># use ext4 file system</span></span><br></pre></td></tr></table></figure>
+<p>mount:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/flush</span><br><span class="line">sudo mount /dev/sdb1 ~/flush</span><br></pre></td></tr></table></figure>
 <p>Then check the new disk.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>
-<h2 id="Auto-Mount-when-Boot"><a href="#Auto-Mount-when-Boot" class="headerlink" title="Auto Mount when Boot"></a>Auto Mount when Boot</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/fstab</span><br></pre></td></tr></table></figure>
+<p>auto mount:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/fstab</span><br></pre></td></tr></table></figure>
 <p>Add this line in the end of file.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sdb1	/home/hobochen/flush ext4 defaults 0 0</span><br></pre></td></tr></table></figure></p>
-<p><strong>All is done!</strong></p>
-<h1 id="Install-glog"><a href="#Install-glog" class="headerlink" title="Install glog"></a>Install <code>glog</code></h1><p>I want to install Google Log(C++) in my Ubuntu, but I met the problem:<br><code>/usr/bin/ld: //usr/local/lib/libgflags.a(gflags.cc.o): relocation R_X86_64_32 against .rodata.str1.1&#39; can not be used when making a shared object; recompile with -fPIC</code>.</p>
+<h2 id="ZFS-related"><a href="#ZFS-related" class="headerlink" title="ZFS related"></a>ZFS related</h2><h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install zfsutils-linux</span><br></pre></td></tr></table></figure>
+<h3 id="some-notes"><a href="#some-notes" class="headerlink" title="some notes:"></a>some notes:</h3><ol>
+<li>Use ECC mem.</li>
+<li>Persistence in the L2ARC is not needed.</li>
+<li>watch: <a href="https://www.youtube.com/watch?v=ptY6-K78McY" target="_blank" rel="noopener">https://www.youtube.com/watch?v=ptY6-K78McY</a></li>
+<li>learn some filesystem</li>
+<li>TODO</li>
+</ol>
+<h1 id="Installing-Software-Manual"><a href="#Installing-Software-Manual" class="headerlink" title="Installing Software Manual"></a>Installing Software Manual</h1><h2 id="Install-glog"><a href="#Install-glog" class="headerlink" title="Install glog"></a>Install <code>glog</code></h2><p>I want to install Google Log(C++) in my Ubuntu, but I met the problem:<br><code>/usr/bin/ld: //usr/local/lib/libgflags.a(gflags.cc.o): relocation R_X86_64_32 against .rodata.str1.1&#39; can not be used when making a shared object; recompile with -fPIC</code>.</p>
 <p>The cause is that the <code>gflags</code> is not compiled as shared libraries when installing.<br>Here is a solution.</p>
 <p>Jump to gflags directory, and run <code>ccmake .</code>. Change the <code>BUILD_SHARED_LIBS</code> to <code>ON</code>.</p>
 <p>If you found that <code>ccmake</code> is not found.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install cmake-curses-gui</span><br></pre></td></tr></table></figure>
 <p>Then, jump back to <code>glog</code> directory, run:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -j`nproc` &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure>
-<h1 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a>Gitlab</h1><h2 id="使用之前"><a href="#使用之前" class="headerlink" title="使用之前"></a>使用之前</h2><ol>
-<li>需要使用Git保管的东西包括哪些？</li>
-<li>为什么不用GitHub？</li>
-<li>GitLab CE部署在哪里？</li>
-</ol>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y curl openssh-server ca-certificates</span><br><span class="line">curl <span class="_">-s</span>S https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash</span><br><span class="line">sudo apt install gitlab-ce</span><br></pre></td></tr></table></figure>
-<p>配置文件是<code>/etc/gitlab/gitlab.rb</code>。</p>
-<p>修改：</p>
+<h2 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a>Gitlab</h2><h3 id="install-1"><a href="#install-1" class="headerlink" title="install"></a>install</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y curl openssh-server ca-certificates</span><br><span class="line">curl <span class="_">-s</span>S https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash</span><br><span class="line">sudo apt install gitlab-ce</span><br></pre></td></tr></table></figure>
+<p>Conf file is: <code>/etc/gitlab/gitlab.rb</code>。</p>
+<p>If machine has a real FQDN:</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">external_url <span class="string">'http://gitlab-hz.192217.space'</span></span><br></pre></td></tr></table></figure>
-<h3 id="小内存优化"><a href="#小内存优化" class="headerlink" title="小内存优化"></a>小内存优化</h3><p>我在tinker上的配置如：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unicorn[<span class="string">'worker_processes'</span>] = <span class="number">2</span> <span class="comment"># minimum is 2, recommend to cores + 1</span></span><br><span class="line">sidekiq[<span class="string">'concurrency'</span>] = <span class="number">2</span> <span class="comment">#  recommend to cores</span></span><br><span class="line">prometheus[<span class="string">'enable'</span>] = <span class="literal">false</span> <span class="comment"># about 200MB</span></span><br><span class="line">postgresql[<span class="string">'shared_buffers'</span>] = <span class="string">"128MB"</span> <span class="comment"># **recommend value is 1/4 of total RAM, up to 14GB.**</span></span><br></pre></td></tr></table></figure></p>
-<p>我在W500上的配置如：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unicorn[<span class="string">'worker_processess'</span>] = <span class="number">4</span></span><br><span class="line">sidekiq[<span class="string">'concurrency'</span>] = <span class="number">10</span></span><br><span class="line">prometheus[<span class="string">'enable'</span>] = <span class="literal">true</span></span><br><span class="line">postgresql[<span class="string">'shared_buffers'</span>] = <span class="string">"512MB"</span> <span class="comment"># **recommend value is 1/4 of total RAM, up to 14GB.**</span></span><br></pre></td></tr></table></figure>
-<h3 id="使用外部SMTP服务"><a href="#使用外部SMTP服务" class="headerlink" title="使用外部SMTP服务"></a>使用外部SMTP服务</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">gitlab_rails[<span class="string">'gitlab_email_from'</span>] = <span class="string">'hobochen96@qq.com'</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_address'</span>] = <span class="string">"smtp.qq.com"</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_authentication'</span>] = <span class="string">"login"</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_domain'</span>] = <span class="string">"smtp.qq.com"</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_enable_starttls_auto'</span>] = <span class="literal">true</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_enable'</span>] = <span class="literal">true</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_password'</span>] = <span class="string">"say_you_love_me"</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_port'</span>] = <span class="number">465</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_tls'</span>] = <span class="literal">true</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_user_name'</span>] = <span class="string">"hobochen96"</span></span><br></pre></td></tr></table></figure>
-<p>可以使用命令<code>sudo gitlab-ctl reconfigure</code>来使上文的所有配置生效。</p>
-<h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><p>备份至少包含：数据、元数据。</p>
-<h3 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/gitlab/gitlab-secrets.json</span><br><span class="line">/etc/gitlab/gitlab.rb</span><br></pre></td></tr></table></figure>
-<h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-rake gitlab:backup:create</span><br></pre></td></tr></table></figure>
-<h2 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sudo cp _file /var/opt/gitlab/backups/</span><br><span class="line">sudo chown git.git /var/opt/gitlab/backups/_file</span><br><span class="line"></span><br><span class="line">sudo gitlab-ctl stop unicorn</span><br><span class="line">sudo gitlab-ctl stop sidekiq</span><br><span class="line"></span><br><span class="line"><span class="comment"># Verify</span></span><br><span class="line">sudo gitlab-ctl status</span><br><span class="line"></span><br><span class="line"><span class="comment"># This command will overwrite the contents of your GitLab database!</span></span><br><span class="line">sudo gitlab-rake gitlab:backup:restore BACKUP=1493107454_2018_04_25_10.6.4-ce</span><br><span class="line"></span><br><span class="line"><span class="comment"># Restore the meta</span></span><br><span class="line"></span><br><span class="line">sudo gitlab-ctl restart</span><br><span class="line">sudo gitlab-rake gitlab:check SANITIZE=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>参考：</p>
+<h3 id="memory-tune"><a href="#memory-tune" class="headerlink" title="memory tune"></a>memory tune</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">puma[<span class="string">'per_worker_max_memory_mb'</span>] = <span class="number">512</span></span><br><span class="line">puma[<span class="string">'worker_processes'</span>] = <span class="number">4</span></span><br><span class="line">sidekiq[<span class="string">'concurrency'</span>] = <span class="number">16</span></span><br><span class="line">prometheus[<span class="string">'enable'</span>] = <span class="literal">true</span></span><br><span class="line">postgresql[<span class="string">'shared_buffers'</span>] = <span class="string">"512MB"</span> <span class="comment"># **recommend value is 1/4 of total RAM, up to 14GB.**</span></span><br></pre></td></tr></table></figure>
+<h3 id="to-use-external-smtp-service"><a href="#to-use-external-smtp-service" class="headerlink" title="to use external smtp service"></a>to use external smtp service</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">gitlab_rails[<span class="string">'gitlab_email_from'</span>] = <span class="string">'hobochen96@qq.com'</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_address'</span>] = <span class="string">"smtp.qq.com"</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_authentication'</span>] = <span class="string">"login"</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_domain'</span>] = <span class="string">"smtp.qq.com"</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_enable_starttls_auto'</span>] = <span class="literal">true</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_enable'</span>] = <span class="literal">true</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_password'</span>] = <span class="string">"say_you_love_me"</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_port'</span>] = <span class="number">465</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_tls'</span>] = <span class="literal">true</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_user_name'</span>] = <span class="string">"hobochen96"</span></span><br></pre></td></tr></table></figure>
+<p><code>sudo gitlab-ctl reconfigure</code> to make changes effective.</p>
+<h3 id="to-back-up"><a href="#to-back-up" class="headerlink" title="to back up"></a>to back up</h3><p>meta:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/gitlab/gitlab-secrets.json</span><br><span class="line">/etc/gitlab/gitlab.rb</span><br></pre></td></tr></table></figure>
+<p>data:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-rake gitlab:backup:create</span><br></pre></td></tr></table></figure>
+<h3 id="to-restore"><a href="#to-restore" class="headerlink" title="to restore"></a>to restore</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sudo cp _file /var/opt/gitlab/backups/</span><br><span class="line">sudo chown git.git /var/opt/gitlab/backups/_file</span><br><span class="line"></span><br><span class="line">sudo gitlab-ctl stop unicorn</span><br><span class="line">sudo gitlab-ctl stop sidekiq</span><br><span class="line"></span><br><span class="line"><span class="comment"># Verify</span></span><br><span class="line">sudo gitlab-ctl status</span><br><span class="line"></span><br><span class="line"><span class="comment"># This command will overwrite the contents of your GitLab database!</span></span><br><span class="line">sudo gitlab-rake gitlab:backup:restore BACKUP=1493107454_2018_04_25_10.6.4-ce</span><br><span class="line"></span><br><span class="line"><span class="comment"># Restore the meta</span></span><br><span class="line"></span><br><span class="line">sudo gitlab-ctl restart</span><br><span class="line">sudo gitlab-rake gitlab:check SANITIZE=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>Ref：</p>
 <ol>
 <li><a href="https://docs.gitlab.com/ee/raketasks/backup_restore.html" target="_blank" rel="noopener">https://docs.gitlab.com/ee/raketasks/backup_restore.html</a></li>
 </ol>
@@ -510,7 +526,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -520,7 +536,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -532,15 +548,6 @@
 
         <div class="links-of-author motion-element">
           
-            
-              <span class="links-of-author-item">
-                <a href="https://twitter.com/Prime687509" target="_blank" title="Twitter">
-                  
-                    <i class="fa fa-fw fa-twitter"></i>
-                  
-                  Twitter
-                </a>
-              </span>
             
               <span class="links-of-author-item">
                 <a href="https://github.com/hobochen" target="_blank" title="GitHub">
@@ -598,7 +605,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Bootstrap-Ubuntu"><span class="nav-number">1.</span> <span class="nav-text">Bootstrap Ubuntu</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tune-Max-Open-Files"><span class="nav-number">2.</span> <span class="nav-text">Tune Max Open Files</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hd-idle"><span class="nav-number">3.</span> <span class="nav-text">hd-idle</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Add-Swap-and-Mount"><span class="nav-number">4.</span> <span class="nav-text">Add Swap and Mount</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Swap"><span class="nav-number">4.1.</span> <span class="nav-text">Add Swap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Check-if-works"><span class="nav-number">4.2.</span> <span class="nav-text">Check if works</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Auto-Mount-Disk"><span class="nav-number">5.</span> <span class="nav-text">Auto Mount Disk</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Check"><span class="nav-number">5.1.</span> <span class="nav-text">Check</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Partition"><span class="nav-number">5.2.</span> <span class="nav-text">Partition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Format"><span class="nav-number">5.3.</span> <span class="nav-text">Format</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mount"><span class="nav-number">5.4.</span> <span class="nav-text">Mount</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Auto-Mount-when-Boot"><span class="nav-number">5.5.</span> <span class="nav-text">Auto Mount when Boot</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Install-glog"><span class="nav-number">6.</span> <span class="nav-text">Install glog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gitlab"><span class="nav-number">7.</span> <span class="nav-text">Gitlab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用之前"><span class="nav-number">7.1.</span> <span class="nav-text">使用之前</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">7.2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小内存优化"><span class="nav-number">7.2.1.</span> <span class="nav-text">小内存优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用外部SMTP服务"><span class="nav-number">7.2.2.</span> <span class="nav-text">使用外部SMTP服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份"><span class="nav-number">7.3.</span> <span class="nav-text">备份</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#元数据"><span class="nav-number">7.3.1.</span> <span class="nav-text">元数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据"><span class="nav-number">7.3.2.</span> <span class="nav-text">数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复"><span class="nav-number">7.4.</span> <span class="nav-text">恢复</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Bootstrap-Ubuntu"><span class="nav-number">1.</span> <span class="nav-text">Bootstrap Ubuntu</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#System-Tune"><span class="nav-number">2.</span> <span class="nav-text">System Tune</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tune-Max-Open-Files"><span class="nav-number">2.1.</span> <span class="nav-text">Tune Max Open Files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hd-idle"><span class="nav-number">2.2.</span> <span class="nav-text">hd-idle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Swap-and-Mount"><span class="nav-number">2.3.</span> <span class="nav-text">Add Swap and Mount</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#System-Maintainance-Manual"><span class="nav-number">3.</span> <span class="nav-text">System Maintainance Manual</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-New-Disk"><span class="nav-number">3.1.</span> <span class="nav-text">Add New Disk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ZFS-related"><span class="nav-number">3.2.</span> <span class="nav-text">ZFS related</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#install"><span class="nav-number">3.2.1.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#some-notes"><span class="nav-number">3.2.2.</span> <span class="nav-text">some notes:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Installing-Software-Manual"><span class="nav-number">4.</span> <span class="nav-text">Installing Software Manual</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-glog"><span class="nav-number">4.1.</span> <span class="nav-text">Install glog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gitlab"><span class="nav-number">4.2.</span> <span class="nav-text">Gitlab</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#install-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#memory-tune"><span class="nav-number">4.2.2.</span> <span class="nav-text">memory tune</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#to-use-external-smtp-service"><span class="nav-number">4.2.3.</span> <span class="nav-text">to use external smtp service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#to-back-up"><span class="nav-number">4.2.4.</span> <span class="nav-text">to back up</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#to-restore"><span class="nav-number">4.2.5.</span> <span class="nav-text">to restore</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -619,7 +626,7 @@
         <div class="copyright">
   
   &copy;  2013 - 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="hobod1"> &nbsp;&nbsp; &nbsp;Hobo Chen </span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -727,7 +734,7 @@
       var disqus_shortname = 'hobo-blog';
       var disqus_identifier = '2020/10/28/skill/linux/';
 
-      var disqus_title = "Linux 备忘录";
+      var disqus_title = "Linux Memo";
 
 
       function run_disqus_script(disqus_script) {

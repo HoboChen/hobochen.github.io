@@ -84,17 +84,16 @@
 
 
 
-<meta name="description" content="Maze problem: xxx. Abstract FactoryTo provide an interface for creating families of related or dependent objects withour specifying their concrete classes. Structure Pic Pros:  It isolates clients fro">
+<meta name="description" content="a blog of hobo">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hobo Chen">
-<meta property="og:url" content="http://192217.space/drafts/patterns/creational.html">
+<meta property="og:url" content="http://192217.space/archives/2021/04/index.html">
 <meta property="og:site_name" content="Hobo Chen">
-<meta property="og:description" content="Maze problem: xxx. Abstract FactoryTo provide an interface for creating families of related or dependent objects withour specifying their concrete classes. Structure Pic Pros:  It isolates clients fro">
+<meta property="og:description" content="a blog of hobo">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-17T13:51:34.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hobo Chen">
-<meta name="twitter:description" content="Maze problem: xxx. Abstract FactoryTo provide an interface for creating families of related or dependent objects withour specifying their concrete classes. Structure Pic Pros:  It isolates clients fro">
+<meta name="twitter:description" content="a blog of hobo">
 
 
 
@@ -122,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="http://192217.space/drafts/patterns/creational.html">
+  <link rel="canonical" href="http://192217.space/archives/2021/04/">
 
 
 <link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
@@ -131,13 +130,7 @@
 
 
 
-  <title>
-  
-
-  
-     | Hobo Chen
-  
-</title>
+  <title> Archive | Hobo Chen </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -158,7 +151,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  ">
+  <div class="container one-collumn sidebar-position-right  page-archive  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -191,7 +184,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/var/www/html/" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
@@ -223,9 +216,19 @@
         <li class="menu-item menu-item-notebook">
           <a href="/note" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-sticky-note"></i> <br>
             
-            Notebook
+            Notes
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-slide">
+          <a href="/slide" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-desktop"></i> <br>
+            
+            Slides
           </a>
         </li>
       
@@ -258,41 +261,64 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-  <header class="post-header">
+  <section id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
 
-	<h2 class="post-title" itemprop="name headline"></h2>
-
-
-
-</header>
-
-    
-    
-      <p>Maze problem: xxx.</p>
-<h2 id="Abstract-Factory"><a href="#Abstract-Factory" class="headerlink" title="Abstract Factory"></a>Abstract Factory</h2><p>To provide an interface for creating families of related or dependent objects withour specifying their concrete classes.</p>
-<p>Structure Pic</p>
-<p>Pros:</p>
-<ol>
-<li>It isolates clients from concrete classes, both for symbols and APIs.</li>
-<li>Supporting new kinds of products is difficult, as modifing APIs of abstract product requires the change of all subclasses.</li>
-</ol>
-<p>Implementations:</p>
-<ol>
-<li>Factories as singletons.</li>
-<li>If many product families are possible, the concrete factory can be implemented using the Prototype (117) pattern. Q?</li>
-</ol>
-<p>Interviews uses the “Kit” suffix [Lin92] to denote AbstractFactory classes.</p>
-<p>Related PatternsAbstractFactory classes are often implemented with factory methods (Factory Method (107)), but they can also be implemented using Prototype (117).A concrete factory is often a singleton (Singleton (127)).</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">abstract <span class="keyword">class</span> factory &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> alphaFactory : factory &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> betaFactory : factory &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">product <span class="title">create</span><span class="params">(factory&amp; f)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> product(f.create());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">create(<span class="keyword">new</span> alphaFactory());</span><br></pre></td></tr></table></figure>
-<h2 id="Builder"><a href="#Builder" class="headerlink" title="Builder"></a>Builder</h2><p>Separate the construction of a complex object from its representation so that the same construction process can create different representations.</p>
-<p>So it should be easy to add a new conversion without modifying the reader.</p>
-<h3 id="Related-Patterns"><a href="#Related-Patterns" class="headerlink" title="Related Patterns"></a>Related Patterns</h3><p>Abstract Factory (87) is similar to Builder in that it too may construct complex objects. The primary difference is that the Builder pattern focuses on constructing a complex object step by step. Abstract Factory’s emphasis is on families of product objects (either simple or complex). Builder returns the product as a final step, but as far as the Abstract Factory pattern is concerned, the product gets returned immediately.</p>
-<p>A Composite (163) is what the builder often builds.</p>
-<h2 id="Factory-Method"><a href="#Factory-Method" class="headerlink" title="Factory Method"></a>Factory Method</h2><p>Intent<br>Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.</p>
+    <span class="archive-page-counter">
+      
+      
+      
+        
+      
+      Um..! 16 posts in total. Keep on posting.
+    </span>
 
     
-  </div>
+
+      
+      
+      
+
+      
+        
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2021">2021</h2>
+        </div>
+      
+      
+
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2021/04/07/quater/2021Q1/" itemprop="url">
+              
+                <span itemprop="name">2021 Q1</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2021-04-07T14:56:17+08:00" content="2021-04-07">
+          04-07
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+    
+
+  </section>
+
+  
+
 
 
           </div>
@@ -300,17 +326,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -340,7 +355,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -350,7 +365,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -362,15 +377,6 @@
 
         <div class="links-of-author motion-element">
           
-            
-              <span class="links-of-author-item">
-                <a href="https://twitter.com/Prime687509" target="_blank" title="Twitter">
-                  
-                    <i class="fa fa-fw fa-twitter"></i>
-                  
-                  Twitter
-                </a>
-              </span>
             
               <span class="links-of-author-item">
                 <a href="https://github.com/hobochen" target="_blank" title="GitHub">
@@ -433,7 +439,7 @@
         <div class="copyright">
   
   &copy;  2013 - 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="hobod1"> &nbsp;&nbsp; &nbsp;Hobo Chen </span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -519,6 +525,12 @@
   
 
   
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
+
 
   
 
@@ -535,7 +547,7 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'hobo-blog';
-      var disqus_identifier = 'drafts/patterns/creational.html';
+      var disqus_identifier = 'archives/2021/04/index.html';
 
       var disqus_title = "";
 
@@ -550,13 +562,6 @@
 
       run_disqus_script('count.js');
 
-      
-        var disqus_config = function () {
-            this.page.url = disqus_url;
-            this.page.identifier = disqus_identifier;
-            this.page.title = disqus_title;
-        };
-        run_disqus_script('embed.js');
       
 
     </script>
