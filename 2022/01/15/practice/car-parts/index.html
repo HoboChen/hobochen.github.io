@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="apac,algorithm,long,">
+  <meta name="keywords" content="misc,long,">
 
 
 
@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="不知道从哪里翻出了这个题解，只翻到了Round C，那就放出来吧；大概是2017年夏天写的。">
-<meta name="keywords" content="apac,algorithm,long">
+<meta name="description" content="记一下我的车有关的信息。 一个小目标: 持有两辆车10年/20万km.">
+<meta name="keywords" content="misc,long">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Google APAC 2017 Round C 题解">
-<meta property="og:url" content="http://192217.space/2018/04/14/algorithm-problem-solution/google-apac-2017/index.html">
+<meta property="og:title" content="CT4&#x2F;GTI 手册">
+<meta property="og:url" content="http://192217.space/2022/01/15/practice/car-parts/index.html">
 <meta property="og:site_name" content="Hobo Chen&#39;s Blog">
-<meta property="og:description" content="不知道从哪里翻出了这个题解，只翻到了Round C，那就放出来吧；大概是2017年夏天写的。">
+<meta property="og:description" content="记一下我的车有关的信息。 一个小目标: 持有两辆车10年/20万km.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-07-13T07:31:30.950Z">
+<meta property="og:updated_time" content="2022-01-22T05:43:22.375Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Google APAC 2017 Round C 题解">
-<meta name="twitter:description" content="不知道从哪里翻出了这个题解，只翻到了Round C，那就放出来吧；大概是2017年夏天写的。">
+<meta name="twitter:title" content="CT4&#x2F;GTI 手册">
+<meta name="twitter:description" content="记一下我的车有关的信息。 一个小目标: 持有两辆车10年/20万km.">
 
 
 
@@ -123,7 +123,7 @@
 
 
 
-  <link rel="canonical" href="http://192217.space/2018/04/14/algorithm-problem-solution/google-apac-2017/">
+  <link rel="canonical" href="http://192217.space/2022/01/15/practice/car-parts/">
 
 
 <link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
@@ -132,7 +132,7 @@
 
 
 
-  <title> Google APAC 2017 Round C 题解 | Hobo Chen's Blog </title>
+  <title> CT4/GTI 手册 | Hobo Chen's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -273,7 +273,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://192217.space/2018/04/14/algorithm-problem-solution/google-apac-2017/">
+  <link itemprop="mainEntityOfPage" href="http://192217.space/2022/01/15/practice/car-parts/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Hobo Chen">
@@ -297,7 +297,7 @@
             
             
               
-                Google APAC 2017 Round C 题解
+                CT4/GTI 手册
               
             
           </h1>
@@ -310,8 +310,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-14T22:03:24+08:00">
-                2018-04-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-01-15T14:56:17+08:00">
+                2022-01-15
               </time>
             
 
@@ -326,8 +326,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2018/04/14/algorithm-problem-solution/google-apac-2017/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/04/14/algorithm-problem-solution/google-apac-2017/" itemprop="commentCount"></span>
+                <a href="/2022/01/15/practice/car-parts/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/01/15/practice/car-parts/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -353,29 +353,147 @@
       
 
       
-        <p>不知道从哪里翻出了这个题解，只翻到了Round C，那就放出来吧；大概是2017年夏天写的。</p>
+        <p>记一下我的车有关的信息。</p>
+<p>一个小目标: 持有两辆车10年/20万km.</p>
 <a id="more"></a>
-<p>代码/测试数据可以在<a href="https://github.com/HoboChen/hoboalgocode" target="_blank" rel="noopener">这个GitHub仓库</a>中的google-apac子目录中找到。</p>
-<h1 id="Round-C"><a href="#Round-C" class="headerlink" title="Round C"></a>Round C</h1><h2 id="A-Monster-Path"><a href="#A-Monster-Path" class="headerlink" title="A Monster Path"></a>A Monster Path</h2><p>简单的DFS即可通过。</p>
-<p>输入数据中的地图中字符使用空格隔开需要注意一下。</p>
-<p>时间复杂度$O(4^S), S \leq 9$。</p>
-<h2 id="B-Safe-Squares"><a href="#B-Safe-Squares" class="headerlink" title="B Safe Squares"></a>B Safe Squares</h2><p>一个简单的DP，印象中Leetcode里这道题的难度是Medium。</p>
-<p><script type="math/tex">dp[i][j] = 以[i, j]为右下角的正方形数目</script>，那么转移就很简单了。</p>
-<p>最终答案是$\sum_{i, j}dp[i][j]$。</p>
-<p>最终答案需要<code>long long</code>来保存。</p>
-<p>时间复杂度$O(RC),R\leq3000,C\leq3000$。</p>
-<h2 id="C-Evaluation"><a href="#C-Evaluation" class="headerlink" title="C Evaluation"></a>C Evaluation</h2><p>有向图判断是否连同以及有环。</p>
-<p>注意，当某个变量只作为参数出现是不合法的（无法计算出），所以需要判断是否连通。</p>
-<p>我的代码中判环使用<strong>拓扑排序</strong>。</p>
-<p>时间复杂度$O(n)$。</p>
-<h2 id="D-Soldiers"><a href="#D-Soldiers" class="headerlink" title="D Soldiers"></a>D Soldiers</h2><p>一个博弈。</p>
-<p>局面分为两种：</p>
-<ul>
-<li>存在一个士兵同时有最大攻击和最大防御，Alice胜</li>
-<li>不存在<strong>局面一</strong>的条件，那么分别删除最大攻击和最大防御的士兵们；答案即这个子问题的解</li>
-</ul>
-<p>如果某次删除了所有的士兵，Bob胜。</p>
-<p>上面的做法时间复杂度$O(n^2)$，但可以做到$O(n\log n)$。</p>
+<h2 id="CT4"><a href="#CT4" class="headerlink" title="CT4"></a>CT4</h2><h3 id="保养周期"><a href="#保养周期" class="headerlink" title="保养周期"></a>保养周期</h3><p>每1万km/1年 机油 机滤 空调滤<br>每2万km/2年 空气滤<br>每3万km/2年 制动液<br>每6万km 火花塞 轮胎 汽油滤<br>每8万km 变速箱油 刹车片<br>每24万km/5年 冷却液<br>每4万km 检查皮带,每15万km/10年更换皮带  </p>
+<h3 id="保养所需配件表"><a href="#保养所需配件表" class="headerlink" title="保养所需配件表"></a>保养所需配件表</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">原厂配件号</th>
+<th style="text-align:center">原厂价格(工时)</th>
+<th style="text-align:center">可替换型号(价格)</th>
+<th style="text-align:center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">机油</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">力魔能量型 0W-40</td>
+<td style="text-align:center">5L, DEXOS1GEN2</td>
+</tr>
+<tr>
+<td style="text-align:center">机滤</td>
+<td style="text-align:center">55501357</td>
+<td style="text-align:center">70(-)</td>
+<td style="text-align:center">曼W7076(33) 马勒OC1268(31)</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">放油螺丝</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">驾驰DP8340(9)</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">空调滤</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">曼CUK24003(98) 马勒LAK1282P(89)</td>
+<td style="text-align:center">马勒带PM2.5</td>
+</tr>
+<tr>
+<td style="text-align:center">空气滤</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">马勒LX5406(99)</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">火花塞</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">NGK94524(99)</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">轮胎</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">PS4S225/40R18(1200)</td>
+<td style="text-align:center">-</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="保养记录"><a href="#保养记录" class="headerlink" title="保养记录"></a>保养记录</h3><p>2021.6 购买.</p>
+<p>2021.8 3500km</p>
+<p>机油(0w20), 机滤.</p>
+<p>20212.1.17 8600km</p>
+<p>空调滤, 马勒LAK1282P.</p>
+<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><h2 id="GTI"><a href="#GTI" class="headerlink" title="GTI"></a>GTI</h2><h3 id="保养周期-1"><a href="#保养周期-1" class="headerlink" title="保养周期"></a>保养周期</h3><p>每1万km 机油 机滤 空调滤<br>每2万km 空气滤 火花塞<br>每6万km 变速箱油 轮胎  汽油滤<br>每8万km 刹车片<br>每12万km/6年 皮带<br>每24万km/15年 燃油管<br>每3年后每2年 刹车油</p>
+<h3 id="保养所需配件表-1"><a href="#保养所需配件表-1" class="headerlink" title="保养所需配件表"></a>保养所需配件表</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">原厂配件号</th>
+<th style="text-align:center">原厂价格(工时)</th>
+<th style="text-align:center">可替换型号(价格)</th>
+<th style="text-align:center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">机油</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">力魔能量型0W-40 美孚EP0W-20</td>
+<td style="text-align:center">5.5L, VW50800/50200</td>
+</tr>
+<tr>
+<td style="text-align:center">机滤</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">马勒OX1107D(31)</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">放油螺丝</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">DP8090(9)</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">空调滤</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">曼CUK26009(65) 马勒LAK1184-1(112)</td>
+<td style="text-align:center">马勒带PM0.3</td>
+</tr>
+<tr>
+<td style="text-align:center">空气滤</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">曼C30005(109) 马勒LX4160(55)</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">火花塞</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">NGK94833(75)</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">轮胎</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">PS4S225/40R18(1200)</td>
+<td style="text-align:center">-</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="保养记录-1"><a href="#保养记录-1" class="headerlink" title="保养记录"></a>保养记录</h3><p>2021.12 购买.</p>
+<p>2022.1.7 3100km</p>
+<p>机油(0w20), 机滤.</p>
 
       
     </div>
@@ -399,9 +517,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/apac/" rel="tag"># apac</a>
-          
-            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+            <a href="/tags/misc/" rel="tag"># misc</a>
           
             <a href="/tags/long/" rel="tag"># long</a>
           
@@ -412,8 +528,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/10/practice/computers/" rel="next" title="我的电子产品">
-                <i class="fa fa-chevron-left"></i> 我的电子产品
+              <a href="/2021/11/30/misc/petrolhead/" rel="next" title="汽油脑袋">
+                <i class="fa fa-chevron-left"></i> 汽油脑袋
               </a>
             
           </div>
@@ -421,10 +537,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/24/misc/new-life/" rel="prev" title="元">
-                元 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -576,7 +688,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Round-C"><span class="nav-number">1.</span> <span class="nav-text">Round C</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Monster-Path"><span class="nav-number">1.1.</span> <span class="nav-text">A Monster Path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-Safe-Squares"><span class="nav-number">1.2.</span> <span class="nav-text">B Safe Squares</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-Evaluation"><span class="nav-number">1.3.</span> <span class="nav-text">C Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D-Soldiers"><span class="nav-number">1.4.</span> <span class="nav-text">D Soldiers</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CT4"><span class="nav-number">1.</span> <span class="nav-text">CT4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#保养周期"><span class="nav-number">1.1.</span> <span class="nav-text">保养周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保养所需配件表"><span class="nav-number">1.2.</span> <span class="nav-text">保养所需配件表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保养记录"><span class="nav-number">1.3.</span> <span class="nav-text">保养记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备注"><span class="nav-number">1.4.</span> <span class="nav-text">备注</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GTI"><span class="nav-number">2.</span> <span class="nav-text">GTI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#保养周期-1"><span class="nav-number">2.1.</span> <span class="nav-text">保养周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保养所需配件表-1"><span class="nav-number">2.2.</span> <span class="nav-text">保养所需配件表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保养记录-1"><span class="nav-number">2.3.</span> <span class="nav-text">保养记录</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -703,9 +815,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'hobo-blog';
-      var disqus_identifier = '2018/04/14/algorithm-problem-solution/google-apac-2017/';
+      var disqus_identifier = '2022/01/15/practice/car-parts/';
 
-      var disqus_title = "Google APAC 2017 Round C 题解";
+      var disqus_title = "CT4/GTI 手册";
 
 
       function run_disqus_script(disqus_script) {
