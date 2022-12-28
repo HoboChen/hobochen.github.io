@@ -1,0 +1,930 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="short,practice,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="Linux all in ONE.">
+<meta name="keywords" content="short,practice">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Memo">
+<meta property="og:url" content="http://192217.space/2020/10/28/skill/linux/index.html">
+<meta property="og:site_name" content="Hobo Chen&#39;s Blog">
+<meta property="og:description" content="Linux all in ONE.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2022-10-17T04:47:32.956Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux Memo">
+<meta name="twitter:description" content="Linux all in ONE.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://192217.space/2020/10/28/skill/linux/">
+
+
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+
+
+
+
+
+  <title> Linux Memo | Hobo Chen's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hobo Chen's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">50% Humanities 50% Science</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-notebook">
+          <a href="/note" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sticky-note"></i> <br>
+            
+            Notes
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-slide">
+          <a href="/slide" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-desktop"></i> <br>
+            
+            Slides
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://192217.space/2020/10/28/skill/linux/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Hobo Chen">
+    <meta itemprop="description" content>
+    <meta itemprop="image" content="/uploads/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hobo Chen's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hobo Chen's Blog" src>
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux Memo
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-10-28T14:56:17-07:00">
+                2020-10-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2020/10/28/skill/linux/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/10/28/skill/linux/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Linux all in ONE.</p>
+<a id="more"></a>
+<h1 id="Bootstrap-Ubuntu"><a href="#Bootstrap-Ubuntu" class="headerlink" title="Bootstrap Ubuntu"></a>Bootstrap Ubuntu</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt upgrade -y</span><br><span class="line">sudo apt install sysstat net-tools htop iftop wget tmux curl zsh \</span><br><span class="line">  vim git build-essential \</span><br><span class="line">  python3 openjdk-11-jdk clang ghc texlive-full \</span><br><span class="line">  gnome-tweak-tool lm-sensors</span><br><span class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br><span class="line"><span class="comment"># to store local time in bios, to resolve compatibility issue when dual boot windows</span></span><br><span class="line">timedatectl <span class="built_in">set</span>-local-rtc 1</span><br></pre></td></tr></table></figure>
+<h1 id="System-Tune"><a href="#System-Tune" class="headerlink" title="System Tune"></a>System Tune</h1><h2 id="Tune-Max-Open-Files"><a href="#Tune-Max-Open-Files" class="headerlink" title="Tune Max Open Files"></a>Tune Max Open Files</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 系统</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'fs.file-max = 65535'</span> | sudo tee <span class="_">-a</span> /etc/sysctl.conf</span><br><span class="line">sudo sysctl -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用户</span></span><br><span class="line">sudo tee <span class="_">-a</span> /etc/security/limits.conf &lt;&lt; EOF</span><br><span class="line">*               hard    nofile          65535</span><br><span class="line">*               soft    nofile          65535</span><br><span class="line">root            hard    nofile          65535</span><br><span class="line">root            soft    nofile          65535</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># Systemd</span></span><br><span class="line">sudo sed -i <span class="string">'/DefaultLimitNOFILE/c DefaultLimitNOFILE=65535'</span> /etc/systemd/*.conf</span><br><span class="line">sudo systemctl daemon-reexec</span><br></pre></td></tr></table></figure>
+<h2 id="hd-idle"><a href="#hd-idle" class="headerlink" title="hd-idle"></a><code>hd-idle</code></h2><p><a href="https://github.com/adelolmo/hd-idle" target="_blank" rel="noopener">Github Page</a>.</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># /etc/default/hd-idle</span></span><br><span class="line"></span><br><span class="line"><span class="attr">START_HD_IDLE</span>=<span class="literal">true</span></span><br><span class="line"><span class="attr">HD_IDLE_OPTS</span>=<span class="string">"-i 120 -d -l /var/log/hd-idle.log"</span></span><br></pre></td></tr></table></figure>
+<h2 id="Add-Swap-and-Mount"><a href="#Add-Swap-and-Mount" class="headerlink" title="Add Swap and Mount"></a>Add Swap and Mount</h2><p>Add Swap:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo fallocate <span class="_">-l</span> 2G /swapfile</span><br><span class="line">sudo chmod 600 /swapfile</span><br><span class="line">sudo mkswap /swapfile</span><br><span class="line">sudo swapon /swapfile</span><br></pre></td></tr></table></figure>
+<p>Check if works:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure>
+<h1 id="System-Maintainance-Manual"><a href="#System-Maintainance-Manual" class="headerlink" title="System Maintainance Manual"></a>System Maintainance Manual</h1><h2 id="Add-New-Disk"><a href="#Add-New-Disk" class="headerlink" title="Add New Disk"></a>Add New Disk</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk <span class="_">-l</span></span><br></pre></td></tr></table></figure>
+<p>to partition:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk /dev/sdb</span><br></pre></td></tr></table></figure>
+<p>Then type:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g <span class="comment"># create a new GPT disk lable</span></span><br><span class="line">n <span class="comment"># new partition, i only add one partition is this disk, </span></span><br><span class="line">  <span class="comment"># so i press enter for two times then</span></span><br><span class="line">w <span class="comment"># write the changes</span></span><br></pre></td></tr></table></figure></p>
+<p>format:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfs -t ext4 /dev/sdb1 <span class="comment"># use ext4 file system</span></span><br></pre></td></tr></table></figure>
+<p>mount:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/flush</span><br><span class="line">sudo mount /dev/sdb1 ~/flush</span><br></pre></td></tr></table></figure>
+<p>Then check the new disk.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>
+<p>auto mount:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/fstab</span><br></pre></td></tr></table></figure>
+<p>Add this line in the end of file.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sdb1	/home/hobochen/flush ext4 defaults 0 0</span><br></pre></td></tr></table></figure></p>
+<h2 id="ZFS-related"><a href="#ZFS-related" class="headerlink" title="ZFS related"></a>ZFS related</h2><h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install zfsutils-linux</span><br></pre></td></tr></table></figure>
+<h3 id="Easy-mirror-rpool"><a href="#Easy-mirror-rpool" class="headerlink" title="Easy mirror rpool"></a>Easy mirror rpool</h3><p>This section is copied from <a href="https://gist.github.com/yorickdowne/a2a330873b16ebf288d74e87d35bff3e" target="_blank" rel="noopener">here</a>.</p>
+<p>All the rights belong to the original auther. This is just a backup.</p>
+<h4 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h4><p>Ubuntu Desktop 20.04 supports a single ZFS boot drive out of the box. I wanted a ZFS mirror, without going through an entirely manual setup of Ubuntu as described by <a href="https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/Ubuntu%2020.04%20Root%20on%20ZFS.html" target="_blank" rel="noopener">OpenZFS</a></p>
+<p>This adds a mirror to an existing Ubuntu ZFS boot drive after the fact.</p>
+<p>ZFS requires native encryption to be added at pool / dataset creation. Ubuntu 21.04 supports this during installation. Whether these instructions are suitable for mirroring such a setup has not been tested. For Ubuntu 20.04, these instructions are not suitable for creating an encrypted ZFS boot disk, please use the full instructions linked above for that. You can, however, add an encrypted dataset after the fact: You could encrypt just the portion of your file system that holds secrets.</p>
+<p>Note: If your use case is running docker instances, and not a full-fledged Ubuntu install, then take a look at <a href="https://www.truenas.com/truenas-scale/" target="_blank" rel="noopener">TrueNAS SCALE</a>, which will manage the ZFS parts for you.</p>
+<p>It can also be worthwhile to boot from a regular ext4 disk, whether single or mirrored, and then use a ZFS mirror pool for just <code>/home</code> and <code>/var</code>. In that case these instructions aren’t needed.</p>
+<h4 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h4><p>ZFS has a few advantages that are good to have</p>
+<ul>
+<li>It uses checksums, which means that hardware failure and disk corruption will be detected and flagged during regular “scrub” operations</li>
+<li>It supports mirrors, which means that even with a failed drive, data is not lost</li>
+<li>It is a Copy-on-Write file system, which means that snapshots are fast to create and fast to roll back to (seconds), and only<br>take as much space as what was written after their creation. They can be created on a per-dataset basis.</li>
+<li>It has the concept of datasets, making it easy to take snapshots of specific portions of the file system, as desired. <a href="https://briankoopman.com/zfs-automated-snapshots/" target="_blank" rel="noopener">Automated ZFS snapshots</a> with a rotation lifetime make a lot of sense.</li>
+<li>It can expand the size of a vdev by replacing first one, then the other drive with a larger one.</li>
+</ul>
+<p>ZFS functions unlike traditional file systems such as ext4. Ars Technica has a good <a href="https://arstechnica.com/information-technology/2020/05/zfs-101-understanding-zfs-storage-and-performance/" target="_blank" rel="noopener">introduction to ZFS</a>.</p>
+<h4 id="How"><a href="#How" class="headerlink" title="How"></a>How</h4><h5 id="Assumptions-and-requirements"><a href="#Assumptions-and-requirements" class="headerlink" title="Assumptions and requirements"></a>Assumptions and requirements</h5><ul>
+<li>All drives will be formatted. These instructions are not suitable for dual-boot</li>
+<li>No hardware or software RAID is to be used, these would keep ZFS from detecting disk errors and correcting them. In UEFI, set controller mode<br>to AHCI, not RAID.</li>
+<li>These instructions are specific to UEFI systems and GPT. If you have an older BIOS/MBR system, please use the full instructions linked above</li>
+</ul>
+<h5 id="Initial-Ubuntu-installation"><a href="#Initial-Ubuntu-installation" class="headerlink" title="Initial Ubuntu installation"></a>Initial Ubuntu installation</h5><ul>
+<li>Install from an Ubuntu Desktop 20.04 or later install USB. Ubuntu Server does not offer ZFS boot disk.</li>
+<li>For the “Erase disk and install Ubuntu” option, click “Advanced Features” and choose “Experimental ZFS”</li>
+<li>Continue install as normal and boot into Ubuntu</li>
+</ul>
+<h5 id="Add-second-drive"><a href="#Add-second-drive" class="headerlink" title="Add second drive"></a>Add second drive</h5><p>All work will be done from CLI. Open a Terminal. In the following, use copy &amp; paste extensively, it’ll help avoid typos. Right-click in Terminal pastes.</p>
+<ul>
+<li>Update Ubuntu: <code>sudo apt update &amp;&amp; sudo apt dist-upgrade</code></li>
+<li>Find the names of your two disks: <code>ls -l /dev/disk/by-id</code>. The first disk will have four partitions, the second none.</li>
+<li><p>Let’s set variables for those disk paths so we can refer to them in the following</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DISK1=/dev/disk/by-id/scsi-disk1</span><br><span class="line">DISK2=/dev/disk/by-id/scsi-disk2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Install tools: <code>sudo apt install -y gdisk mdadm grub-efi-amd64</code></p>
+</li>
+</ul>
+<h6 id="Create-partitions-on-second-drive"><a href="#Create-partitions-on-second-drive" class="headerlink" title="Create partitions on second drive"></a>Create partitions on second drive</h6><ul>
+<li>List partitions: <code>sudo sgdisk -p $DISK1</code>, you expect to see four of them</li>
+<li>Change swap partition type: <code>sudo sgdisk -t2:FD00 $DISK1</code></li>
+<li>Copy partition table from disk 1 to disk 2: <code>sudo sgdisk -R$DISK2 $DISK1</code></li>
+<li>Change GUID of second disk: <code>sudo sgdisk -G $DISK2</code></li>
+</ul>
+<blockquote>
+<p>Ubuntu 21.04 required a reboot at this point in my testing,<br>so that <code>/dev/disk/by-partuuid</code> was correct.If you need to do that,<br>recreate <code>DISK1</code> and <code>DISK2</code> after the reboot.</p>
+</blockquote>
+<h6 id="Mirror-boot-pool"><a href="#Mirror-boot-pool" class="headerlink" title="Mirror boot pool"></a>Mirror boot pool</h6><ul>
+<li>Confirm that disk 1 partition 3 is the device in the <strong>bpool</strong> by comparing “Partition unique GUID” to the device id shown in zpool status: <code>sudo sgdisk -i3 $DISK1</code> and <code>zpool status bpool</code></li>
+<li>Get GUID of partition 3 on disk 2: <code>sudo sgdisk -i3 $DISK2</code></li>
+<li>Add that partition to the pool: <code>sudo zpool attach bpool EXISTING-UID /dev/disk/by-partuuid/DISK2-PART3-GUID</code>, for example <code>sudo zpool attach bpool ac78ee0c-2d8d-3641-97dc-eb8b50abd492 /dev/disk/by-partuuid/8e1830b3-4e59-459c-9c02-a09c80428052</code></li>
+<li>Verify with <code>zpool status bpool</code>. You expect to see mirror-0 now, which has been resilvered</li>
+</ul>
+<h6 id="Mirror-root-pool"><a href="#Mirror-root-pool" class="headerlink" title="Mirror root pool"></a>Mirror root pool</h6><ul>
+<li>Confirm that disk 1 partition 4 is the device in the <strong>rpool</strong> by comparing “Partition unique GUID” to the device id shown in zpool status: <code>sudo sgdisk -i4 $DISK1</code> and <code>zpool status rpool</code></li>
+<li>Get GUID of partition 4 on disk 2: <code>sudo sgdisk -i4 $DISK2</code></li>
+<li>Add that partition to the pool: <code>sudo zpool attach rpool EXISTING-UID /dev/disk/by-partuuid/DISK2-PART4-GUID</code>, for example <code>sudo zpool attach rpool d9844f27-a1f8-3049-9831-77b51318d9a7 /dev/disk/by-partuuid/d9844f27-a1f8-3049-9831-77b51318d9a7</code></li>
+<li>Verify with <code>zpool status rpool</code>. You expect to see mirror-0 now, which either is resilvering or has been resilvered</li>
+</ul>
+<h6 id="Mirror-swap"><a href="#Mirror-swap" class="headerlink" title="Mirror swap"></a>Mirror swap</h6><ul>
+<li>Remove existing swap: <code>sudo swapoff -a</code></li>
+<li>Remove the swap mount line in /etc/fstab: <code>sudo nano /etc/fstab</code>, find the swap line at the end of the file and delete it, then save with Ctrl-x</li>
+<li>Create software mirror drive for swap: <code>sudo mdadm --create /dev/md0 --metadata=1.2 --level=mirror --raid-devices=2 ${DISK1}-part2 ${DISK2}-part2</code></li>
+<li>Configure it for swap: <code>sudo mkswap -f /dev/md0</code></li>
+<li>Place it into fstab: <code>sudo sh -c &quot;echo UUID=$(sudo blkid -s UUID -o value /dev/md0) none swap discard 0 0 &gt;&gt; /etc/fstab&quot;</code></li>
+<li>Verify that line is in fstab: <code>cat /etc/fstab</code></li>
+<li>Use the new swap: <code>sudo swapon -a</code></li>
+<li>And verify: <code>swapon -s</code></li>
+</ul>
+<h6 id="Move-GRUB-boot-menu-to-ZFS"><a href="#Move-GRUB-boot-menu-to-ZFS" class="headerlink" title="Move GRUB boot menu to ZFS"></a>Move GRUB boot menu to ZFS</h6><ul>
+<li>Verify grub can “see” the ZFS boot pool: <code>sudo grub-probe /boot</code></li>
+<li>Create EFI file system on second disk: <code>sudo mkdosfs -F 32 -s 1 -n EFI ${DISK2}-part1</code></li>
+<li>Remove /boot/grub from fstab: <code>sudo nano /etc/fstab</code>, find the line for /boot/grub and remove it. Leave the line for /boot/efi in place. Save with Ctrl-x.</li>
+<li>Unmount /boot/grub: <code>sudo umount /boot/grub</code></li>
+<li>Verify with <code>df -h</code>, <code>/boot</code> should be mounted on <code>bpool/BOOT/ubuntu_UID</code>, <code>/boot/efi</code> on <code>/dev/sda1</code> or similar depending on device name of your first disk, and no <code>/boot/grub</code></li>
+<li>Remove /boot/grub: <code>sudo rm -rf /boot/grub</code></li>
+<li>And create a ZFS dataset for it: <code>sudo zfs create -o com.ubuntu.zsys:bootfs=no bpool/grub</code></li>
+<li>Refresh initrd files: <code>sudo update-initramfs -c -k all</code></li>
+<li>Disable memory zeroing to address a performance regression of ZFS on Linux: <code>sudo nano /etc/default/grub</code> and add <code>init_on_alloc=0</code> to <code>GRUB_CMDLINE_LINUX_DEFAULT</code>, it’ll likely look like this: <code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash init_on_alloc=0&quot;</code>. Save with Ctrl-x</li>
+<li>Update the boot config: <code>sudo update-grub</code> and ignore any errors you may see from osprober</li>
+<li>Install GRUB to the ESP: <code>sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ubuntu --recheck --no-floppy</code></li>
+<li>Disable grub-initrd-fallback.service: <code>sudo systemctl mask grub-initrd-fallback.service</code>. This is the service for /boot/grub/grubenv which does not work on mirrored or raidz topologies. Disabling this keeps it from blocking subsequent mounts of /boot/grub if that mount ever fails.</li>
+</ul>
+<h6 id="Reboot-and-install-GRUB-to-second-disk"><a href="#Reboot-and-install-GRUB-to-second-disk" class="headerlink" title="Reboot and install GRUB to second disk"></a>Reboot and install GRUB to second disk</h6><ul>
+<li>Cross fingers and reboot! <code>sudo reboot</code></li>
+<li>Once back up, open a Terminal again and install GRUB to second disk: <code>sudo dpkg-reconfigure grub-efi-amd64</code> , keep defaults and when it comes to system partitions, use space bar to select<br>first partition on both drives, e.g. /dev/sda1 and /dev/sdb1</li>
+<li>And for good measure signed efi: <code>sudo dpkg-reconfigure grub-efi-amd64-signed</code> , this should finish without prompting you</li>
+<li>If you like, you can remove the primary drive and reboot. You expect reboot to take a little longer, and to be successful. <code>zpool status</code> should show degraded pools without error</li>
+</ul>
+<h5 id="Replacing-a-failed-drive"><a href="#Replacing-a-failed-drive" class="headerlink" title="Replacing a failed drive"></a>Replacing a failed drive</h5><p>If a mirrored drive fails, you can replace it by following a similar method as adding a second drive in the first place.</p>
+<p>First, find the id of the replacement drive with <code>ls -l /dev/disk/by-id</code> and create a variable for it:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NEWDISK=/dev/disk/by-id/NEWDRIVEID</span><br></pre></td></tr></table></figure></p>
+<p>The new drive may already contain ZFS or mdadm signatures. Check using <code>sudo wipefs $NEWDISK</code>. If that output is not empty, run <code>sudo wipefs -a $NEWDISK</code>.</p>
+<h6 id="Create-partition-table-on-replacement-disk"><a href="#Create-partition-table-on-replacement-disk" class="headerlink" title="Create partition table on replacement disk"></a>Create partition table on replacement disk</h6><ul>
+<li>Copy partition table from existing disk to replacement disk: <code>sudo sgdisk -R$NEWDISK /dev/disk/by-id/ID-OF-EXISTING-DRIVE</code></li>
+<li>Change GUID of replacement disk: <code>sudo sgdisk -G $NEWDISK</code></li>
+</ul>
+<h6 id="Repair-boot-pool"><a href="#Repair-boot-pool" class="headerlink" title="Repair boot pool"></a>Repair boot pool</h6><ul>
+<li>Get the ID of the “UNAVAIL” disk on <strong>bpool</strong> with <code>zpool status bpool</code></li>
+<li>Get GUID of partition 3 on the replacement disk: <code>sudo sgdisk -i3 $NEWDISK</code></li>
+<li>Replace the failed member with that partition: <code>sudo zpool replace bpool EXISTING-UID /dev/disk/by-partuuid/NEWDISK-PART4-GUID</code>, for example <code>sudo zpool replace bpool 6681469899058372901 /dev/disk/by-partuuid/06f5ef6d-cb69-45e8-ad3b-c69cad5c216a</code></li>
+<li>Verify with <code>zpool status bpool</code>. You expect to see state “ONLINE” for the pool and both devices in mirror-0.</li>
+</ul>
+<h6 id="Repair-root-pool"><a href="#Repair-root-pool" class="headerlink" title="Repair root pool"></a>Repair root pool</h6><ul>
+<li>Get the ID of the “UNAVAIL” disk on <strong>rpool</strong> with <code>zpool status rpool</code></li>
+<li>Get GUID of partition 4 on the replacement disk: <code>sudo sgdisk -i4 $NEWDISK</code></li>
+<li>Replace the failed member with that partition: <code>sudo zpool replace rpool EXISTING-UID /dev/disk/by-partuuid/NEWDISK-PART4-GUID</code>, for example <code>sudo zpool replace rpool 8712274632631823759 /dev/disk/by-partuuid/8c4ec74f-cd4d-4048-bfca-b4a58756563d</code></li>
+<li>Verify with <code>zpool status rpool</code>. You expect to see state “ONLINE” for the pool and both devices in mirror-0, or state “DEGRADED” for the pool with “resilver in progress” and a “replacing-0” entry under “mirror-0”</li>
+</ul>
+<h6 id="Repair-swap"><a href="#Repair-swap" class="headerlink" title="Repair swap"></a>Repair swap</h6><ul>
+<li>Verify that the failed disk shows as “removed”: <code>sudo mdadm -D /dev/md0</code></li>
+<li>Add partition 2 of the replacement disk: <code>sudo mdadm /dev/md0 --add ${NEWDISK}-part2</code></li>
+<li>And verify that you can see “spare rebuilding” or “active sync”: <code>sudo mdadm -D /dev/md0</code></li>
+</ul>
+<h6 id="Repair-EFI"><a href="#Repair-EFI" class="headerlink" title="Repair EFI"></a>Repair EFI</h6><ul>
+<li>Create EFI file system on replacement disk: <code>sudo mkdosfs -F 32 -s 1 -n EFI ${NEWDISK}-part1</code></li>
+<li>Install GRUB to replacement disk: <code>sudo dpkg-reconfigure grub-efi-amd64</code> , keep defaults and when it comes to system partitions, use space bar to select first partition on both drives, e.g. /dev/sda1 and /dev/sdb1</li>
+<li>And for good measure signed efi: <code>sudo dpkg-reconfigure grub-efi-amd64-signed</code> , this should finish without prompting you</li>
+</ul>
+<h6 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h6><p>If you like, test by rebooting: <code>sudo reboot</code>, and confirm that pools are healthy after reboot with <code>zpool status</code></p>
+<h5 id="Increasing-drive-space"><a href="#Increasing-drive-space" class="headerlink" title="Increasing drive space"></a>Increasing drive space</h5><p>Similar to replacing a failed drive, just that partition 4, the rpool partition, will be bigger. Wait for resilver after replacement, then replace the second drive. Once both drives have been replaced, rpool has the new capacity.</p>
+<p>First, find the id of the replacement drive with <code>ls -l /dev/disk/by-id</code> and create a variable for it:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NEWDISK=/dev/disk/by-id/NEWDRIVEID</span><br></pre></td></tr></table></figure></p>
+<p>The new drive may already contain ZFS or mdadm signatures. Check using <code>sudo wipefs $NEWDISK</code>. If that output is not empty, run <code>sudo wipefs -a $NEWDISK</code>.</p>
+<h6 id="Create-partition-table-on-replacement-disk-1"><a href="#Create-partition-table-on-replacement-disk-1" class="headerlink" title="Create partition table on replacement disk"></a>Create partition table on replacement disk</h6><ul>
+<li>Copy partition table from existing disk to replacement disk: <code>sudo sgdisk -R$NEWDISK /dev/disk/by-id/ID-OF-EXISTING-DRIVE</code></li>
+<li>Change GUID of replacement disk: <code>sudo sgdisk -G $NEWDISK</code></li>
+<li>Remove partition 4: <code>sudo sgdisk -d4 $NEWDISK</code></li>
+<li>Recreate partition 4 with maximum size: <code>sudo sgdisk -n4:0:0 -t4:BF00 $NEWDISK</code></li>
+<li>Tell the kernel to use the new partition table: <code>sudo partprobe</code></li>
+<li>Tell ZFS to use expanded space automatically: <code>sudo zpool set autoexpand=on rpool</code></li>
+</ul>
+<h6 id="Repair-boot-pool-root-pool-swap-and-EFI"><a href="#Repair-boot-pool-root-pool-swap-and-EFI" class="headerlink" title="Repair boot pool, root pool, swap and EFI"></a>Repair boot pool, root pool, swap and EFI</h6><p>Follow the instructions under “Replacing a failed drive”, starting from “Repair boot pool”. <strong>Wait for resilver to complete afterwards.</strong> Then, run through these instructions again, replacing the second drive. Once resilver is done a second time, you will have the new capacity on the <code>rpool</code>.</p>
+<h4 id="Alternate-idea"><a href="#Alternate-idea" class="headerlink" title="Alternate idea"></a>Alternate idea</h4><p>The <a href="https://zfsbootmenu.org/" target="_blank" rel="noopener">ZFS Boot Menu</a> project aims to provide a cleaner, FreeBSD-ish boot experience complete with boot environments and full support for native ZFS encryption. <a href="https://github.com/zbm-dev/zfsbootmenu/wiki/Debian-Buster-installation-with-ESP-on-the-zpool-disk" target="_blank" rel="noopener">Community instructions for Debian</a> exist and could be adapted to Ubuntu by way of blending them with the <a href="https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/Ubuntu%2020.04%20Root%20on%20ZFS.html" target="_blank" rel="noopener">OpenZFS Ubuntu instructions</a>.</p>
+<p>If you get that up and running on Ubuntu, please share the instructions!</p>
+<h4 id="Youtube"><a href="#Youtube" class="headerlink" title="Youtube"></a>Youtube</h4><p>I did a <a href="https://www.youtube.com/watch?v=uwq47T_22p8" target="_blank" rel="noopener">walkthrough</a> of these instructions.</p>
+<h3 id="maintain"><a href="#maintain" class="headerlink" title="maintain"></a>maintain</h3><p>keep latest 4 snapshots</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zfs list -t snapshot -o name -S creation -r bpool | grep autozsys | tail -n +16 | xargs -n 1 <span class="built_in">echo</span> sudo zfs destroy -vr</span><br></pre></td></tr></table></figure>
+<p>check free space with snapshots</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zfs list -o space -r bpool</span><br></pre></td></tr></table></figure>
+<h1 id="Installing-Software-Manual"><a href="#Installing-Software-Manual" class="headerlink" title="Installing Software Manual"></a>Installing Software Manual</h1><h2 id="Install-glog"><a href="#Install-glog" class="headerlink" title="Install glog"></a>Install <code>glog</code></h2><p>I want to install Google Log(C++) in my Ubuntu, but I met the problem:<br><code>/usr/bin/ld: //usr/local/lib/libgflags.a(gflags.cc.o): relocation R_X86_64_32 against .rodata.str1.1&#39; can not be used when making a shared object; recompile with -fPIC</code>.</p>
+<p>The cause is that the <code>gflags</code> is not compiled as shared libraries when installing.<br>Here is a solution.</p>
+<p>Jump to gflags directory, and run <code>ccmake .</code>. Change the <code>BUILD_SHARED_LIBS</code> to <code>ON</code>.</p>
+<p>If you found that <code>ccmake</code> is not found.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install cmake-curses-gui</span><br></pre></td></tr></table></figure>
+<p>Then, jump back to <code>glog</code> directory, run:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -j`nproc` &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a>Gitlab</h2><h3 id="install-1"><a href="#install-1" class="headerlink" title="install"></a>install</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y curl openssh-server ca-certificates</span><br><span class="line">curl <span class="_">-s</span>S https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash</span><br><span class="line">sudo apt install gitlab-ce</span><br></pre></td></tr></table></figure>
+<p>Conf file is: <code>/etc/gitlab/gitlab.rb</code>。</p>
+<p>If machine has a real FQDN:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">external_url <span class="string">'http://gitlab-hz.192217.space'</span></span><br></pre></td></tr></table></figure>
+<h3 id="memory-tune"><a href="#memory-tune" class="headerlink" title="memory tune"></a>memory tune</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">puma[<span class="string">'per_worker_max_memory_mb'</span>] = <span class="number">512</span></span><br><span class="line">puma[<span class="string">'worker_processes'</span>] = <span class="number">4</span></span><br><span class="line">sidekiq[<span class="string">'concurrency'</span>] = <span class="number">16</span></span><br><span class="line">prometheus[<span class="string">'enable'</span>] = <span class="literal">true</span></span><br><span class="line">postgresql[<span class="string">'shared_buffers'</span>] = <span class="string">"512MB"</span> <span class="comment"># **recommend value is 1/4 of total RAM, up to 14GB.**</span></span><br></pre></td></tr></table></figure>
+<h3 id="to-use-external-smtp-service"><a href="#to-use-external-smtp-service" class="headerlink" title="to use external smtp service"></a>to use external smtp service</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">gitlab_rails[<span class="string">'gitlab_email_from'</span>] = <span class="string">'hobochen96@qq.com'</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_address'</span>] = <span class="string">"smtp.qq.com"</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_authentication'</span>] = <span class="string">"login"</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_domain'</span>] = <span class="string">"smtp.qq.com"</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_enable_starttls_auto'</span>] = <span class="literal">true</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_enable'</span>] = <span class="literal">true</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_password'</span>] = <span class="string">"say_you_love_me"</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_port'</span>] = <span class="number">465</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_tls'</span>] = <span class="literal">true</span></span><br><span class="line">gitlab_rails[<span class="string">'smtp_user_name'</span>] = <span class="string">"hobochen96"</span></span><br></pre></td></tr></table></figure>
+<p><code>sudo gitlab-ctl reconfigure</code> to make changes effective.</p>
+<h3 id="to-back-up"><a href="#to-back-up" class="headerlink" title="to back up"></a>to back up</h3><p>meta:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/gitlab/gitlab-secrets.json</span><br><span class="line">/etc/gitlab/gitlab.rb</span><br></pre></td></tr></table></figure>
+<p>data:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-rake gitlab:backup:create</span><br></pre></td></tr></table></figure>
+<h3 id="to-restore"><a href="#to-restore" class="headerlink" title="to restore"></a>to restore</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sudo cp _file /var/opt/gitlab/backups/</span><br><span class="line">sudo chown git.git /var/opt/gitlab/backups/_file</span><br><span class="line"></span><br><span class="line">sudo gitlab-ctl stop unicorn</span><br><span class="line">sudo gitlab-ctl stop sidekiq</span><br><span class="line"></span><br><span class="line"><span class="comment"># Verify</span></span><br><span class="line">sudo gitlab-ctl status</span><br><span class="line"></span><br><span class="line"><span class="comment"># This command will overwrite the contents of your GitLab database!</span></span><br><span class="line">sudo gitlab-rake gitlab:backup:restore BACKUP=1493107454_2018_04_25_10.6.4-ce</span><br><span class="line"></span><br><span class="line"><span class="comment"># Restore the meta</span></span><br><span class="line"></span><br><span class="line">sudo gitlab-ctl restart</span><br><span class="line">sudo gitlab-rake gitlab:check SANITIZE=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>Ref：</p>
+<ol>
+<li><a href="https://docs.gitlab.com/ee/raketasks/backup_restore.html" target="_blank" rel="noopener">https://docs.gitlab.com/ee/raketasks/backup_restore.html</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/short/" rel="tag"># short</a>
+          
+            <a href="/tags/practice/" rel="tag"># practice</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/25/misc/why-i-prefer-linux/" rel="next" title="Why Do I Prefer Linux">
+                <i class="fa fa-chevron-left"></i> Why Do I Prefer Linux
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/17/annual/2020/" rel="prev" title="2020">
+                2020 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Hobo Chen">
+          <p class="site-author-name" itemprop="name">Hobo Chen</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hobochen" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:hobochen96@gmail.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              My Friends
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zccz14.com/" title="zccz" target="_blank">zccz</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Bootstrap-Ubuntu"><span class="nav-number">1.</span> <span class="nav-text">Bootstrap Ubuntu</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#System-Tune"><span class="nav-number">2.</span> <span class="nav-text">System Tune</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tune-Max-Open-Files"><span class="nav-number">2.1.</span> <span class="nav-text">Tune Max Open Files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hd-idle"><span class="nav-number">2.2.</span> <span class="nav-text">hd-idle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Swap-and-Mount"><span class="nav-number">2.3.</span> <span class="nav-text">Add Swap and Mount</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#System-Maintainance-Manual"><span class="nav-number">3.</span> <span class="nav-text">System Maintainance Manual</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-New-Disk"><span class="nav-number">3.1.</span> <span class="nav-text">Add New Disk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ZFS-related"><span class="nav-number">3.2.</span> <span class="nav-text">ZFS related</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#install"><span class="nav-number">3.2.1.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Easy-mirror-rpool"><span class="nav-number">3.2.2.</span> <span class="nav-text">Easy mirror rpool</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Overview"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Why"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">Why</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How"><span class="nav-number">3.2.2.3.</span> <span class="nav-text">How</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Assumptions-and-requirements"><span class="nav-number">3.2.2.3.1.</span> <span class="nav-text">Assumptions and requirements</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Initial-Ubuntu-installation"><span class="nav-number">3.2.2.3.2.</span> <span class="nav-text">Initial Ubuntu installation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Add-second-drive"><span class="nav-number">3.2.2.3.3.</span> <span class="nav-text">Add second drive</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Create-partitions-on-second-drive"><span class="nav-number">3.2.2.3.3.1.</span> <span class="nav-text">Create partitions on second drive</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Mirror-boot-pool"><span class="nav-number">3.2.2.3.3.2.</span> <span class="nav-text">Mirror boot pool</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Mirror-root-pool"><span class="nav-number">3.2.2.3.3.3.</span> <span class="nav-text">Mirror root pool</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Mirror-swap"><span class="nav-number">3.2.2.3.3.4.</span> <span class="nav-text">Mirror swap</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Move-GRUB-boot-menu-to-ZFS"><span class="nav-number">3.2.2.3.3.5.</span> <span class="nav-text">Move GRUB boot menu to ZFS</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Reboot-and-install-GRUB-to-second-disk"><span class="nav-number">3.2.2.3.3.6.</span> <span class="nav-text">Reboot and install GRUB to second disk</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Replacing-a-failed-drive"><span class="nav-number">3.2.2.3.4.</span> <span class="nav-text">Replacing a failed drive</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Create-partition-table-on-replacement-disk"><span class="nav-number">3.2.2.3.4.1.</span> <span class="nav-text">Create partition table on replacement disk</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Repair-boot-pool"><span class="nav-number">3.2.2.3.4.2.</span> <span class="nav-text">Repair boot pool</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Repair-root-pool"><span class="nav-number">3.2.2.3.4.3.</span> <span class="nav-text">Repair root pool</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Repair-swap"><span class="nav-number">3.2.2.3.4.4.</span> <span class="nav-text">Repair swap</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Repair-EFI"><span class="nav-number">3.2.2.3.4.5.</span> <span class="nav-text">Repair EFI</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Test"><span class="nav-number">3.2.2.3.4.6.</span> <span class="nav-text">Test</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Increasing-drive-space"><span class="nav-number">3.2.2.3.5.</span> <span class="nav-text">Increasing drive space</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Create-partition-table-on-replacement-disk-1"><span class="nav-number">3.2.2.3.5.1.</span> <span class="nav-text">Create partition table on replacement disk</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Repair-boot-pool-root-pool-swap-and-EFI"><span class="nav-number">3.2.2.3.5.2.</span> <span class="nav-text">Repair boot pool, root pool, swap and EFI</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Alternate-idea"><span class="nav-number">3.2.2.4.</span> <span class="nav-text">Alternate idea</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Youtube"><span class="nav-number">3.2.2.5.</span> <span class="nav-text">Youtube</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maintain"><span class="nav-number">3.2.3.</span> <span class="nav-text">maintain</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Installing-Software-Manual"><span class="nav-number">4.</span> <span class="nav-text">Installing Software Manual</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-glog"><span class="nav-number">4.1.</span> <span class="nav-text">Install glog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gitlab"><span class="nav-number">4.2.</span> <span class="nav-text">Gitlab</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#install-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#memory-tune"><span class="nav-number">4.2.2.</span> <span class="nav-text">memory tune</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#to-use-external-smtp-service"><span class="nav-number">4.2.3.</span> <span class="nav-text">to use external smtp service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#to-back-up"><span class="nav-number">4.2.4.</span> <span class="nav-text">to back up</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#to-restore"><span class="nav-number">4.2.5.</span> <span class="nav-text">to restore</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="hobod1"> &nbsp;&nbsp; &nbsp;Hobo Chen </span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <!-- <span class="author" itemprop="copyrightHolder">Hobo Chen</span> -->
+  <span class="hobod2">
+    <a class="Zhuo Liu" href="https://lzed.github.io/"> Caesium Liu </a>
+  </span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  <a class="theme-link" href="https://creativecommons.org/licenses/by-nc-nd/3.0/cn/">
+  CC-BY-NC-ND 3.0
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'hobo-blog';
+      var disqus_identifier = '2020/10/28/skill/linux/';
+
+      var disqus_title = "Linux Memo";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
