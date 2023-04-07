@@ -1,290 +1,209 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.9.0">
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0-rc1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"192217.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":280,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content="HoboChen">
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
-
-
-
-
-
-
-<meta name="description" content="世界观决定方法论。  所见即所得 与 所想即所得纵观所有的写电子文档的工具、方法，可以分为两种，所见即所得与所想即所得。 所见即所得，即是使得编辑文字时在屏幕上直接呈现最终显示效果，如打印到纸张上的效果。第一个所见即所得的文字处理软件是1974年发布的Bravo，由Butle LampsonBL和Charles Simonyi完成，运行在Xerox Alto上。所见即所得的实践Microsoft">
+  <meta name="description" content="世界观决定方法论。  所见即所得 与 所想即所得 纵观所有的写电子文档的工具、方法，可以分为两种，所见即所得与所想即所得。 所见即所得，即是使得编辑文字时在屏幕上直接呈现最终显示效果，如打印到纸张上的效果。第一个所见即所得的文字处理软件是1974年发布的Bravo，由Butle Lampson1和Charles Simonyi完成，运行在Xerox Alto上。所见即所得的实践Microsoft">
 <meta property="og:type" content="website">
 <meta property="og:title" content="一种写文档的实践 - I">
-<meta property="og:url" content="http://192217.space/drafts/deprecated/practice/document.html">
+<meta property="og:url" content="https://192217.space/drafts/deprecated/practice/document.html">
 <meta property="og:site_name" content="Hobo Chen&#39;s Blog">
-<meta property="og:description" content="世界观决定方法论。  所见即所得 与 所想即所得纵观所有的写电子文档的工具、方法，可以分为两种，所见即所得与所想即所得。 所见即所得，即是使得编辑文字时在屏幕上直接呈现最终显示效果，如打印到纸张上的效果。第一个所见即所得的文字处理软件是1974年发布的Bravo，由Butle LampsonBL和Charles Simonyi完成，运行在Xerox Alto上。所见即所得的实践Microsoft">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-10-17T04:47:32.956Z">
+<meta property="og:description" content="世界观决定方法论。  所见即所得 与 所想即所得 纵观所有的写电子文档的工具、方法，可以分为两种，所见即所得与所想即所得。 所见即所得，即是使得编辑文字时在屏幕上直接呈现最终显示效果，如打印到纸张上的效果。第一个所见即所得的文字处理软件是1974年发布的Bravo，由Butle Lampson1和Charles Simonyi完成，运行在Xerox Alto上。所见即所得的实践Microsoft">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-12-08T22:56:17.000Z">
+<meta property="article:modified_time" content="2022-10-17T04:47:32.956Z">
+<meta property="article:author" content="Hobo Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一种写文档的实践 - I">
-<meta name="twitter:description" content="世界观决定方法论。  所见即所得 与 所想即所得纵观所有的写电子文档的工具、方法，可以分为两种，所见即所得与所想即所得。 所见即所得，即是使得编辑文字时在屏幕上直接呈现最终显示效果，如打印到纸张上的效果。第一个所见即所得的文字处理软件是1974年发布的Bravo，由Butle LampsonBL和Charles Simonyi完成，运行在Xerox Alto上。所见即所得的实践Microsoft">
+
+<link rel="canonical" href="https://192217.space/drafts/deprecated/practice/document">
 
 
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'en'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://192217.space/drafts/deprecated/practice/document.html">
-
-
-<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
-
-
-
-
-
-  <title>
-  
-
-  
-    一种写文档的实践 - I | Hobo Chen's Blog
-  
+  <title>一种写文档的实践 - I | Hobo Chen's Blog
 </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-right  ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
 
-  <div class="custom-logo-site-title">
+  <div class="site-meta">
+
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Hobo Chen's Blog</span>
+      <h1 class="site-title">Hobo Chen's Blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">50% Humanities 50% Science</p>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
-            
-            Home
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
-            
-            About
-          </a>
-        </li>
-      
-        
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
-            
-            Archives
-          </a>
-        </li>
-      
-        
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
         <li class="menu-item menu-item-notebook">
-          <a href="/note" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sticky-note"></i> <br>
-            
-            Notes
-          </a>
-        </li>
-      
-        
+
+    <a href="/note" rel="section"><i class="fa fa-sticky-note fa-fw"></i>Notes</a>
+
+  </li>
         <li class="menu-item menu-item-slide">
-          <a href="/slide" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-desktop"></i> <br>
-            
-            Slides
-          </a>
-        </li>
-      
-        
+
+    <a href="/slide" rel="section"><i class="fa fa-desktop fa-fw"></i>Slides</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
-            
-            Tags
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
 
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+  
+  
+
+          <div class="content page posts-expand">
             
 
-  <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
 
-	<h2 class="post-title" itemprop="name headline">一种写文档的实践 - I</h2>
+<h1 class="post-title" itemprop="name headline">一种写文档的实践 - I
+</h1>
 
+<div class="post-meta">
+  
+  <ul class="breadcrumb">
+          
+            <li><a href="/drafts/">DRAFTS</a></li>
+            <li><a href="/drafts/deprecated/">DEPRECATED</a></li>
+            <li><a href="/drafts/deprecated/practice/">PRACTICE</a></li>
+            <li>DOCUMENT</li>
+          
+  </ul>
 
+</div>
 
 </header>
 
-    
-    
-      <blockquote>
+      
+      
+      
+      <div class="post-body">
+          <blockquote>
 <p>世界观决定方法论。</p>
 </blockquote>
-<h1 id="所见即所得-与-所想即所得"><a href="#所见即所得-与-所想即所得" class="headerlink" title="所见即所得 与 所想即所得"></a>所见即所得 与 所想即所得</h1><p>纵观所有的写电子文档的工具、方法，可以分为两种，所见即所得与所想即所得。</p>
-<p>所见即所得，即是使得编辑文字时在屏幕上直接呈现最终显示效果，如打印到纸张上的效果。第一个所见即所得的文字处理软件是1974年发布的<strong>Bravo</strong>，由Butle Lampson<sup><a href="#fn_BL" id="reffn_BL">BL</a></sup>和Charles Simonyi完成，运行在Xerox Alto上。所见即所得的实践<code>Microsoft Word</code>在除了特定领域几乎成了电子文档的标准。</p>
-<p>所想即所得，即是在编辑的时候使用带标记语法的纯文本来描述电子文档，比如引用关系、字体字号等。<br>典型的代表即是1978年发布的<strong>TeX</strong>，主要由Donald Knuth<sup><a href="#fn_DK" id="reffn_DK">DK</a></sup>开发；<strong>LaTeX</strong>则基于<strong>TeX</strong>，由Leslie Lamport<sup><a href="#fn_LL" id="reffn_LL">LL</a></sup>开发；<br>在本文中，我们讨论<strong>XeLaTeX</strong>，同样基于<strong>TeX</strong>，但提供了非英文字符、PDF输出的支持。<br><strong>LaTeX</strong>是科学出版领域的事实标准。</p>
+<h1 id="所见即所得-与-所想即所得">所见即所得 与 所想即所得</h1>
+<p>纵观所有的写电子文档的工具、方法，可以分为两种，所见即所得与所想即所得。</p>
+<p>所见即所得，即是使得编辑文字时在屏幕上直接呈现最终显示效果，如打印到纸张上的效果。第一个所见即所得的文字处理软件是1974年发布的<strong>Bravo</strong>，由Butle Lampson<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>和Charles Simonyi完成，运行在Xerox Alto上。所见即所得的实践<code>Microsoft Word</code>在除了特定领域几乎成了电子文档的标准。</p>
+<p>所想即所得，即是在编辑的时候使用带标记语法的纯文本来描述电子文档，比如引用关系、字体字号等。 典型的代表即是1978年发布的<strong>TeX</strong>，主要由Donald Knuth<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>开发；<strong>LaTeX</strong>则基于<strong>TeX</strong>，由Leslie Lamport<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>开发； 在本文中，我们讨论<strong>XeLaTeX</strong>，同样基于<strong>TeX</strong>，但提供了非英文字符、PDF输出的支持。 <strong>LaTeX</strong>是科学出版领域的事实标准。</p>
 <p>我尽量避免和Word忠实用户讨论LaTeX的优缺点，但是请想一想以下几个场景：</p>
 <ul>
 <li>修改简历，简历使用空格来保证复杂的对齐</li>
@@ -292,216 +211,222 @@
 <li>需要自动化地从某个数据仓库或其他地方生成一个报告文档，报告中有图片、表格等</li>
 </ul>
 <p>所见即所得与所想即所得这两种方法论的差异本质上是<code>文本</code>与<code>对象</code>的世界观差异，不过这里不展开。</p>
-<h1 id="Markdown与Pandoc"><a href="#Markdown与Pandoc" class="headerlink" title="Markdown与Pandoc"></a>Markdown与Pandoc</h1><p>显然，对于标记语法，语法复杂程度是学习成本/使用成本与语法表达能力的权衡；LaTeX选择了后者，而Markdown选择了前者。</p>
+<h1 id="markdown与pandoc">Markdown与Pandoc</h1>
+<p>显然，对于标记语法，语法复杂程度是学习成本/使用成本与语法表达能力的权衡；LaTeX选择了后者，而Markdown选择了前者。</p>
 <p>Pandoc是一个能将文档在不同标记语法（如HTML, Markdown, Office Open XML, LaTeX等）之间转换的工具。</p>
 <p>我的写文档实践（即本文和之后的数篇）将介绍如何在享受到MD语法的便捷的同时，能够提高MD语法的表达能力。</p>
 <p>我使用的主要方法即是借助于Pandoc，在MD文档中直接使用LaTeX的语法，有一点像JSX做的事情（在JS中直接写HTML）。</p>
-<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>你需要安装XeLaTeX、Pandoc，并且有文本编辑器；同时，我假设你能看懂最基本的Makefile。</p>
-<p>XeLaTeX在几乎所有的TeX发行版中都提供了，Pandoc可以在其<a href="https://github.com/jgm/pandoc/releases" target="_blank" rel="noopener">GitHub仓库</a>的Release页面下载到其支持的平台的二进制包，如果没有，由于其工作在Haskell上，所以几乎可以工作在任何平台上。</p>
-<h1 id="我们所需要的表达能力"><a href="#我们所需要的表达能力" class="headerlink" title="我们所需要的表达能力"></a>我们所需要的表达能力</h1><ul>
+<h1 id="方法">方法</h1>
+<p>你需要安装XeLaTeX、Pandoc，并且有文本编辑器；同时，我假设你能看懂最基本的Makefile。</p>
+<p>XeLaTeX在几乎所有的TeX发行版中都提供了，Pandoc可以在其<a href="https://github.com/jgm/pandoc/releases">GitHub仓库</a>的Release页面下载到其支持的平台的二进制包，如果没有，由于其工作在Haskell上，所以几乎可以工作在任何平台上。</p>
+<h1 id="我们所需要的表达能力">我们所需要的表达能力</h1>
+<ul>
 <li>页</li>
 <li>表格</li>
 <li>公式</li>
 <li>图</li>
 <li>特定排版</li>
 </ul>
-<h2 id="页"><a href="#页" class="headerlink" title="页"></a>页</h2><p><strong>页</strong>的概念可以说是HTML和TeX这两种现代标记语言差别最不同的地方了，其取舍与适用场景这里并不展开，我假设你需要产出十分正式的文档，以至于需要打印出来。</p>
+<h2 id="页">页</h2>
+<p><strong>页</strong>的概念可以说是HTML和TeX这两种现代标记语言差别最不同的地方了，其取舍与适用场景这里并不展开，我假设你需要产出十分正式的文档，以至于需要打印出来。</p>
 <p>传统的MD由于没有页的概念</p>
-<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>TODO</p>
-<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><p>确实，Mathjax可以做很多事情，但是仍然有一些公式、数学字体没有得到支持；具体可以参考：<a href="http://docs.mathjax.org/en/latest/tex.html#environments" target="_blank" rel="noopener">Mathjax and LaTeX</a>。</p>
-<h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><p>TODO</p>
-<h2 id="特定排版"><a href="#特定排版" class="headerlink" title="特定排版"></a>特定排版</h2><p>TODO</p>
-<h1 id="给Pandoc添加新的块高亮描述"><a href="#给Pandoc添加新的块高亮描述" class="headerlink" title="给Pandoc添加新的块高亮描述"></a>给Pandoc添加新的块高亮描述</h1><p>假设你创造了一种新的DSL，给其他MD渲染器加上其词法高亮可能是困难的；对于一个少见的语言也是如此，比如protobuf。</p>
+<h2 id="表格">表格</h2>
+<p>TODO</p>
+<h2 id="公式">公式</h2>
+<p>确实，Mathjax可以做很多事情，但是仍然有一些公式、数学字体没有得到支持；具体可以参考：<a href="http://docs.mathjax.org/en/latest/tex.html#environments">Mathjax and LaTeX</a>。</p>
+<h2 id="图">图</h2>
+<p>TODO</p>
+<h2 id="特定排版">特定排版</h2>
+<p>TODO</p>
+<h1 id="给pandoc添加新的块高亮描述">给Pandoc添加新的块高亮描述</h1>
+<p>假设你创造了一种新的DSL，给其他MD渲染器加上其词法高亮可能是困难的；对于一个少见的语言也是如此，比如protobuf。</p>
 <p>不过</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="https://www.overleaf.com/learn/latex/Articles/The_TeX_family_tree:_LaTeX,_pdfTeX,_XeTeX,_LuaTeX_and_ConTeXt" target="_blank" rel="noopener">The TeX Family Tree</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Xerox_Alto" target="_blank" rel="noopener">Xerox Alto wiki</a></li>
+<h1 id="参考">参考</h1>
+<ul>
+<li><a href="https://www.overleaf.com/learn/latex/Articles/The_TeX_family_tree:_LaTeX,_pdfTeX,_XeTeX,_LuaTeX_and_ConTeXt">The TeX Family Tree</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Xerox_Alto">Xerox Alto wiki</a></li>
 </ul>
-<blockquote id="fn_BL">
-<sup>BL</sup>. 1992年图灵奖得主，GUI开创者，维基百科<a href="https://en.wikipedia.org/wiki/Butler_Lampson" target="_blank" rel="noopener">链接</a>。<a href="#reffn_BL" title="Jump back to footnote [BL] in the text."> &#8617;</a>
-</blockquote>
-<blockquote id="fn_DK">
-<sup>DK</sup>. 1978年图灵奖得主，TAOCP作者，维基百科<a href="https://en.wikipedia.org/wiki/Donald_Knuth" target="_blank" rel="noopener">链接</a>。<a href="#reffn_DK" title="Jump back to footnote [DK] in the text."> &#8617;</a>
-</blockquote>
-<blockquote id="fn_LL">
-<sup>LL</sup>. 2013年图灵奖得主，分布式系统领域奠基者，维基百科<a href="https://en.wikipedia.org/wiki/Leslie_Lamport" target="_blank" rel="noopener">链接</a>。<a href="#reffn_LL" title="Jump back to footnote [LL] in the text."> &#8617;</a>
-</blockquote>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>1992年图灵奖得主，GUI开创者，维基百科<a href="https://en.wikipedia.org/wiki/Butler_Lampson">链接</a>。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>1978年图灵奖得主，TAOCP作者，维基百科<a href="https://en.wikipedia.org/wiki/Donald_Knuth">链接</a>。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>2013年图灵奖得主，分布式系统领域奠基者，维基百科<a href="https://en.wikipedia.org/wiki/Leslie_Lamport">链接</a>。<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+      </div>
+      
+      
+      
+    </div>
+    
+  <ul class="breadcrumb">
+          
+            <li><a href="/drafts/">DRAFTS</a></li>
+            <li><a href="/drafts/deprecated/">DEPRECATED</a></li>
+            <li><a href="/drafts/deprecated/practice/">PRACTICE</a></li>
+            <li>DOCUMENT</li>
+          
+  </ul>
 
     
-  </div>
+    
+    
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Hobo Chen">
-          <p class="site-author-name" itemprop="name">Hobo Chen</p>
-          <p class="site-description motion-element" itemprop="description"></p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">26</span>
-              <span class="site-state-item-name">posts</span>
-            </a>
-          </div>
-
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/hobochen" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="mailto:hobochen96@gmail.com" target="_blank" title="Email">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                  Email
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              My Friends
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://zccz14.com/" title="zccz" target="_blank">zccz</a>
-                </li>
-              
-            </ul>
-          </div>
-        
-
-        
-
-
-      </section>
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">
-  
-  &copy;  2013 - 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="hobod1"> &nbsp;&nbsp; &nbsp;Hobo Chen </span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <!-- <span class="author" itemprop="copyrightHolder">Hobo Chen</span> -->
-  <span class="hobod2">
-    <a class="Zhuo Liu" href="https://lzed.github.io/"> Caesium Liu </a>
-  </span>
-</div>
-
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  <a class="theme-link" href="https://creativecommons.org/licenses/by-nc-nd/3.0/cn/">
-  CC-BY-NC-ND 3.0
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%80%E8%A7%81%E5%8D%B3%E6%89%80%E5%BE%97-%E4%B8%8E-%E6%89%80%E6%83%B3%E5%8D%B3%E6%89%80%E5%BE%97"><span class="nav-text">所见即所得 与 所想即所得</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#markdown%E4%B8%8Epandoc"><span class="nav-text">Markdown与Pandoc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-text">方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%91%E4%BB%AC%E6%89%80%E9%9C%80%E8%A6%81%E7%9A%84%E8%A1%A8%E8%BE%BE%E8%83%BD%E5%8A%9B"><span class="nav-text">我们所需要的表达能力</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5"><span class="nav-text">页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E6%A0%BC"><span class="nav-text">表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F"><span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE"><span class="nav-text">图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%AE%9A%E6%8E%92%E7%89%88"><span class="nav-text">特定排版</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%99pandoc%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%9A%84%E5%9D%97%E9%AB%98%E4%BA%AE%E6%8F%8F%E8%BF%B0"><span class="nav-text">给Pandoc添加新的块高亮描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hobo Chen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Hobo Chen</p>
+  <div class="site-description" itemprop="description">50% Humanities 50% Science</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hobochen" title="GitHub → https://github.com/hobochen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hobochen96@gmail.com" title="Email → mailto:hobochen96@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hobo Chen</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
 
 
 
@@ -512,120 +437,62 @@
 
   
 
-
-
   
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+      
 
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-
-
-  
-
-    <script type="text/javascript">
-      var disqus_shortname = 'hobo-blog';
-      var disqus_identifier = 'drafts/deprecated/practice/document.html';
-
-      var disqus_title = "一种写文档的实践 - I";
-
-
-      function run_disqus_script(disqus_script) {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
       }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
-      run_disqus_script('count.js');
-
-      
-        var disqus_config = function () {
-            this.page.url = disqus_url;
-            this.page.identifier = disqus_identifier;
-            this.page.title = disqus_title;
-        };
-        run_disqus_script('embed.js');
-      
-
-    </script>
-  
-
-
-
-
+    
 
   
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
-
-
-  
-
-  
-
-  
-
 
 </body>
 </html>

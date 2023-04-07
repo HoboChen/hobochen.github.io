@@ -1,645 +1,437 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.9.0">
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0-rc1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"192217.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":280,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content="short,tutor,">
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
-
-
-
-
-
-
-<meta name="description" content="This is some code samples/briefing of my RSA slides.">
-<meta name="keywords" content="short,tutor">
+  <meta name="description" content="This is some code samples&#x2F;briefing of my RSA slides.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Practical RSA">
-<meta property="og:url" content="http://192217.space/2023/02/20/tutor/rsa/index.html">
+<meta property="og:url" content="https://192217.space/2023/02/20/tutor/rsa/index.html">
 <meta property="og:site_name" content="Hobo Chen&#39;s Blog">
-<meta property="og:description" content="This is some code samples/briefing of my RSA slides.">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2023-02-21T06:12:48.849Z">
+<meta property="og:description" content="This is some code samples&#x2F;briefing of my RSA slides.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-02-20T22:56:17.000Z">
+<meta property="article:modified_time" content="2023-02-21T06:12:48.849Z">
+<meta property="article:author" content="Hobo Chen">
+<meta property="article:tag" content="short">
+<meta property="article:tag" content="tutor">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Practical RSA">
-<meta name="twitter:description" content="This is some code samples/briefing of my RSA slides.">
+
+<link rel="canonical" href="https://192217.space/2023/02/20/tutor/rsa/">
 
 
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://192217.space/2023/02/20/tutor/rsa/">
-
-
-<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+  <title>Practical RSA | Hobo Chen's Blog</title>
+  
 
 
 
 
 
-  <title> Practical RSA | Hobo Chen's Blog </title>
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-right page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
 
-  <div class="custom-logo-site-title">
+  <div class="site-meta">
+
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Hobo Chen's Blog</span>
+      <h1 class="site-title">Hobo Chen's Blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">50% Humanities 50% Science</p>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
-            
-            Home
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
-            
-            About
-          </a>
-        </li>
-      
-        
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
-            
-            Archives
-          </a>
-        </li>
-      
-        
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
         <li class="menu-item menu-item-notebook">
-          <a href="/note" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sticky-note"></i> <br>
-            
-            Notes
-          </a>
-        </li>
-      
-        
+
+    <a href="/note" rel="section"><i class="fa fa-sticky-note fa-fw"></i>Notes</a>
+
+  </li>
         <li class="menu-item menu-item-slide">
-          <a href="/slide" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-desktop"></i> <br>
-            
-            Slides
-          </a>
-        </li>
-      
-        
+
+    <a href="/slide" rel="section"><i class="fa fa-desktop fa-fw"></i>Slides</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
-            
-            Tags
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
 
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://192217.space/2023/02/20/tutor/rsa/">
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://192217.space/2023/02/20/tutor/rsa/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Hobo Chen">
-    <meta itemprop="description" content>
-    <meta itemprop="image" content="/uploads/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Hobo Chen's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Hobo Chen's Blog" src>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Hobo Chen">
+      <meta itemprop="description" content="50% Humanities 50% Science">
     </span>
-  </span>
 
-    
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hobo Chen's Blog">
+    </span>
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Practical RSA
-              
-            
-          </h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          Practical RSA
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-02-20T14:56:17-08:00">
-                2023-02-20
-              </time>
-            
+              
 
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2023/02/20/tutor/rsa/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2023/02/20/tutor/rsa/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
+              <time title="Created: 2023-02-20 14:56:17 / Modified: 22:12:48" itemprop="dateCreated datePublished" datetime="2023-02-20T14:56:17-08:00">2023-02-20</time>
+            </span>
 
           
 
         </div>
       </header>
+
     
-
-
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
         <p>This is some code samples/briefing of my RSA slides.</p>
-<a id="more"></a>
-<h2 id="concepts"><a href="#concepts" class="headerlink" title="concepts"></a>concepts</h2><p>public key: $(n, e)$; $e$ is typically 65537<br>private key: $(n, d)$</p>
-<p>$p, q$ is large primes.</p>
+<span id="more"></span>
+<h2 id="concepts">concepts</h2>
+<p>public key: <span class="math inline">\((n, e)\)</span>; <span class="math inline">\(e\)</span> is typically 65537 private key: <span class="math inline">\((n, d)\)</span></p>
+<p><span class="math inline">\(p, q\)</span> is large primes.</p>
 <p>truth:</p>
-<script type="math/tex; mode=display">n = pq</script><script type="math/tex; mode=display">de \equiv 1 \text{ mod } \varphi(n)</script><p>It is hard to get $\varphi(n)$ from $n$ without knowing $p$ and $q$.</p>
+<p><span class="math display">\[n = pq\]</span> <span class="math display">\[de \equiv 1 \text{ mod } \varphi(n) \]</span></p>
+<p>It is hard to get <span class="math inline">\(\varphi(n)\)</span> from <span class="math inline">\(n\)</span> without knowing <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>.</p>
 <p>use openssl to generate rsa key pair:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Generate a 2048-bit RSA key pair</span></span><br><span class="line">openssl genpkey -algorithm RSA -out private_key.pem -aes256 -outform PEM -aes-256-cbc -pass pass:password</span><br><span class="line"></span><br><span class="line"><span class="comment"># or with out aes password protection</span></span><br><span class="line"></span><br><span class="line">openssl genpkey -algorithm RSA -out private_key.pem</span><br><span class="line"></span><br><span class="line"><span class="comment"># Extract the public key from the private key</span></span><br><span class="line">openssl rsa -pubout -in private_key.pem -out public_key.pem</span><br></pre></td></tr></table></figure>
-<h2 id="extended-wiki-page"><a href="#extended-wiki-page" class="headerlink" title="extended wiki page"></a>extended wiki page</h2><p>for length diff of p and q: </p>
-<p><a href="https://crypto.stackexchange.com/questions/35087/should-rsa-primes-p-and-q-differ-in-length-by-a-few-digits" target="_blank" rel="noopener">https://crypto.stackexchange.com/questions/35087/should-rsa-primes-p-and-q-differ-in-length-by-a-few-digits</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Generate a 2048-bit RSA key pair</span></span><br><span class="line">openssl genpkey -algorithm RSA -out private_key.pem -aes256 -outform PEM -aes-256-cbc -pass pass:password</span><br><span class="line"></span><br><span class="line"><span class="comment"># or with out aes password protection</span></span><br><span class="line"></span><br><span class="line">openssl genpkey -algorithm RSA -out private_key.pem</span><br><span class="line"></span><br><span class="line"><span class="comment"># Extract the public key from the private key</span></span><br><span class="line">openssl rsa -pubout -<span class="keyword">in</span> private_key.pem -out public_key.pem</span><br></pre></td></tr></table></figure>
+<h2 id="extended-wiki-page">extended wiki page</h2>
+<p>for length diff of p and q:</p>
+<p>https://crypto.stackexchange.com/questions/35087/should-rsa-primes-p-and-q-differ-in-length-by-a-few-digits</p>
 <p>for why e has less hamming weight would benefit effiency:</p>
-<p><a href="https://en.wikipedia.org/wiki/Hamming_weight" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Hamming_weight</a></p>
+<p>https://en.wikipedia.org/wiki/Hamming_weight</p>
 <p>In modular exponentiation by squaring, the number of modular multiplications required for an exponent e is log2 e + weight(e). This is the reason that the public key value e used in RSA is typically chosen to be a number of low Hamming weight.</p>
-<h2 id="sign-and-verify"><a href="#sign-and-verify" class="headerlink" title="sign and verify"></a>sign and verify</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Sign the message using the RSA private key</span></span><br><span class="line">openssl dgst -sha256 -sign private_key.pem -out signature.bin message.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># Verify the signature using the RSA public key</span></span><br><span class="line">openssl dgst -sha256 -verify public_key.pem -signature signature.bin message.txt</span><br></pre></td></tr></table></figure>
-<h3 id="concept"><a href="#concept" class="headerlink" title="concept"></a>concept</h3><p>sign:</p>
+<h2 id="sign-and-verify">sign and verify</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Sign the message using the RSA private key</span></span><br><span class="line">openssl dgst -sha256 -sign private_key.pem -out signature.bin message.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># Verify the signature using the RSA public key</span></span><br><span class="line">openssl dgst -sha256 -verify public_key.pem -signature signature.bin message.txt</span><br></pre></td></tr></table></figure>
+<h3 id="concept">concept</h3>
+<p>sign:</p>
 <p>message is m, use private key to encrypt h(m), got s;</p>
 <p>verify:</p>
 <p>use public key to decrypt s; see if equals h(m)</p>
 <p>fun fact:</p>
 <p>you can use private key to encrpt or decrypt, depends on which operation you want to protect; as encrypt and decrypt are dual operations.</p>
-<p>if you choose to use a long enough public key (rather than 65537, aka, keeping public key as a secret as well), then the 2 sides can both encrypt/decrypt — just like symmetric encryption.</p>
-<h2 id="encrypt-decrypt"><a href="#encrypt-decrypt" class="headerlink" title="encrypt/decrypt"></a>encrypt/decrypt</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Decrypt the encrypted message using the RSA private key</span></span><br><span class="line">openssl rsautl -decrypt -inkey private_key.pem -in encrypted_message.bin -out decrypted_message.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># Encrypt the message using the RSA public key</span></span><br><span class="line">openssl rsautl -encrypt -pubin -inkey public_key.pem -in message.txt -out encrypted_message.bin</span><br></pre></td></tr></table></figure>
-<h2 id="generate-new-public-private-key-pair"><a href="#generate-new-public-private-key-pair" class="headerlink" title="generate new public/private key pair"></a>generate new public/private key pair</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> cryptography.hazmat.backends <span class="keyword">import</span> default_backend</span><br><span class="line"><span class="keyword">from</span> cryptography.hazmat.primitives <span class="keyword">import</span> serialization</span><br><span class="line"><span class="keyword">from</span> cryptography.hazmat.primitives.asymmetric <span class="keyword">import</span> rsa</span><br><span class="line"></span><br><span class="line"><span class="comment"># Generate a 2048-bit RSA key pair</span></span><br><span class="line">private_key = rsa.generate_private_key(</span><br><span class="line">    public_exponent=<span class="number">65537</span>,</span><br><span class="line">    key_size=<span class="number">2048</span>,</span><br><span class="line">    backend=default_backend()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Serialize the private key to PEM format</span></span><br><span class="line">private_pem = private_key.private_bytes(</span><br><span class="line">    encoding=serialization.Encoding.PEM,</span><br><span class="line">    format=serialization.PrivateFormat.PKCS8,</span><br><span class="line">    encryption_algorithm=serialization.NoEncryption()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Write the private key to a file</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"private_key.pem"</span>, <span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(private_pem)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Extract the public key from the private key</span></span><br><span class="line">public_key = private_key.public_key()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Serialize the public key to PEM format</span></span><br><span class="line">public_pem = public_key.public_bytes(</span><br><span class="line">    encoding=serialization.Encoding.PEM,</span><br><span class="line">    format=serialization.PublicFormat.SubjectPublicKeyInfo</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Write the public key to a file</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"public_key.pem"</span>, <span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(public_pem)</span><br></pre></td></tr></table></figure>
-<h2 id="private-key-to-public-key"><a href="#private-key-to-public-key" class="headerlink" title="private key to public key"></a>private key to public key</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -in private_key.pem -pubout -out public_key.pem</span><br></pre></td></tr></table></figure>
-<p>or </p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> cryptography.hazmat.backends <span class="keyword">import</span> default_backend</span><br><span class="line"><span class="keyword">from</span> cryptography.hazmat.primitives <span class="keyword">import</span> serialization</span><br><span class="line"><span class="keyword">from</span> cryptography.hazmat.primitives.asymmetric <span class="keyword">import</span> rsa</span><br><span class="line"></span><br><span class="line"><span class="comment"># Generate a 2048-bit RSA key pair</span></span><br><span class="line">private_key = rsa.generate_private_key(</span><br><span class="line">    public_exponent=<span class="number">65537</span>,</span><br><span class="line">    key_size=<span class="number">2048</span>,</span><br><span class="line">    backend=default_backend()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Serialize the private key to PEM format</span></span><br><span class="line">private_pem = private_key.private_bytes(</span><br><span class="line">    encoding=serialization.Encoding.PEM,</span><br><span class="line">    format=serialization.PrivateFormat.PKCS8,</span><br><span class="line">    encryption_algorithm=serialization.NoEncryption()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Write the private key to a file</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"private_key.pem"</span>, <span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(private_pem)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Extract the public key from the private key</span></span><br><span class="line">public_key = private_key.public_key()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Serialize the public key to PEM format</span></span><br><span class="line">public_pem = public_key.public_bytes(</span><br><span class="line">    encoding=serialization.Encoding.PEM,</span><br><span class="line">    format=serialization.PublicFormat.SubjectPublicKeyInfo</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Write the public key to a file</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"public_key.pem"</span>, <span class="string">"wb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(public_pem)</span><br></pre></td></tr></table></figure>
+<p>if you choose to use a long enough public key (rather than 65537, aka, keeping public key as a secret as well), then the 2 sides can both encrypt/decrypt -- just like symmetric encryption.</p>
+<h2 id="encryptdecrypt">encrypt/decrypt</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Decrypt the encrypted message using the RSA private key</span></span><br><span class="line">openssl rsautl -decrypt -inkey private_key.pem -<span class="keyword">in</span> encrypted_message.bin -out decrypted_message.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># Encrypt the message using the RSA public key</span></span><br><span class="line">openssl rsautl -encrypt -pubin -inkey public_key.pem -<span class="keyword">in</span> message.txt -out encrypted_message.bin</span><br></pre></td></tr></table></figure>
+<h2 id="generate-new-publicprivate-key-pair">generate new public/private key pair</h2>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> cryptography.hazmat.backends <span class="keyword">import</span> default_backend</span><br><span class="line"><span class="keyword">from</span> cryptography.hazmat.primitives <span class="keyword">import</span> serialization</span><br><span class="line"><span class="keyword">from</span> cryptography.hazmat.primitives.asymmetric <span class="keyword">import</span> rsa</span><br><span class="line"></span><br><span class="line"><span class="comment"># Generate a 2048-bit RSA key pair</span></span><br><span class="line">private_key = rsa.generate_private_key(</span><br><span class="line">    public_exponent=<span class="number">65537</span>,</span><br><span class="line">    key_size=<span class="number">2048</span>,</span><br><span class="line">    backend=default_backend()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Serialize the private key to PEM format</span></span><br><span class="line">private_pem = private_key.private_bytes(</span><br><span class="line">    encoding=serialization.Encoding.PEM,</span><br><span class="line">    <span class="built_in">format</span>=serialization.PrivateFormat.PKCS8,</span><br><span class="line">    encryption_algorithm=serialization.NoEncryption()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Write the private key to a file</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;private_key.pem&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(private_pem)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Extract the public key from the private key</span></span><br><span class="line">public_key = private_key.public_key()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Serialize the public key to PEM format</span></span><br><span class="line">public_pem = public_key.public_bytes(</span><br><span class="line">    encoding=serialization.Encoding.PEM,</span><br><span class="line">    <span class="built_in">format</span>=serialization.PublicFormat.SubjectPublicKeyInfo</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Write the public key to a file</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;public_key.pem&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(public_pem)</span><br></pre></td></tr></table></figure>
+<h2 id="private-key-to-public-key">private key to public key</h2>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -<span class="keyword">in</span> private_key.pem -pubout -out public_key.pem</span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> cryptography.hazmat.backends <span class="keyword">import</span> default_backend</span><br><span class="line"><span class="keyword">from</span> cryptography.hazmat.primitives <span class="keyword">import</span> serialization</span><br><span class="line"><span class="keyword">from</span> cryptography.hazmat.primitives.asymmetric <span class="keyword">import</span> rsa</span><br><span class="line"></span><br><span class="line"><span class="comment"># Generate a 2048-bit RSA key pair</span></span><br><span class="line">private_key = rsa.generate_private_key(</span><br><span class="line">    public_exponent=<span class="number">65537</span>,</span><br><span class="line">    key_size=<span class="number">2048</span>,</span><br><span class="line">    backend=default_backend()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Serialize the private key to PEM format</span></span><br><span class="line">private_pem = private_key.private_bytes(</span><br><span class="line">    encoding=serialization.Encoding.PEM,</span><br><span class="line">    <span class="built_in">format</span>=serialization.PrivateFormat.PKCS8,</span><br><span class="line">    encryption_algorithm=serialization.NoEncryption()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Write the private key to a file</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;private_key.pem&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(private_pem)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Extract the public key from the private key</span></span><br><span class="line">public_key = private_key.public_key()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Serialize the public key to PEM format</span></span><br><span class="line">public_pem = public_key.public_bytes(</span><br><span class="line">    encoding=serialization.Encoding.PEM,</span><br><span class="line">    <span class="built_in">format</span>=serialization.PublicFormat.SubjectPublicKeyInfo</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Write the public key to a file</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;public_key.pem&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(public_pem)</span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
-    <div>
-      
-        
+    
+    
+    
 
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/short/" rel="tag"># short</a>
-          
-            <a href="/tags/tutor/" rel="tag"># tutor</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2023/02/04/tutor/missing-semester/" rel="next" title="Note of MIT Missing Semester">
-                <i class="fa fa-chevron-left"></i> Note of MIT Missing Semester
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/short/" rel="tag"># short</a>
+              <a href="/tags/tutor/" rel="tag"># tutor</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/02/20/tutor/cert/" rel="prev" title="Practical Cert">
-                Practical Cert <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
 
-      
-      
-    </footer>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/02/04/tutor/missing-semester/" rel="prev" title="Note of MIT Missing Semester">
+      <i class="fa fa-chevron-left"></i> Note of MIT Missing Semester
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/02/20/tutor/cert/" rel="next" title="Practical Cert">
+      Practical Cert <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
-  </div>
-
-
-        </div>
-        
-          
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Hobo Chen">
-          <p class="site-author-name" itemprop="name">Hobo Chen</p>
-          <p class="site-description motion-element" itemprop="description"></p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">26</span>
-              <span class="site-state-item-name">posts</span>
-            </a>
-          </div>
-
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/hobochen" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="mailto:hobochen96@gmail.com" target="_blank" title="Email">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                  Email
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              My Friends
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://zccz14.com/" title="zccz" target="_blank">zccz</a>
-                </li>
-              
-            </ul>
-          </div>
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#concepts"><span class="nav-number">1.</span> <span class="nav-text">concepts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extended-wiki-page"><span class="nav-number">2.</span> <span class="nav-text">extended wiki page</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sign-and-verify"><span class="nav-number">3.</span> <span class="nav-text">sign and verify</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#concept"><span class="nav-number">3.1.</span> <span class="nav-text">concept</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#encrypt-decrypt"><span class="nav-number">4.</span> <span class="nav-text">encrypt/decrypt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#generate-new-public-private-key-pair"><span class="nav-number">5.</span> <span class="nav-text">generate new public/private key pair</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#private-key-to-public-key"><span class="nav-number">6.</span> <span class="nav-text">private key to public key</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">
   
-  &copy;  2013 - 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="hobod1"> &nbsp;&nbsp; &nbsp;Hobo Chen </span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <!-- <span class="author" itemprop="copyrightHolder">Hobo Chen</span> -->
-  <span class="hobod2">
-    <a class="Zhuo Liu" href="https://lzed.github.io/"> Caesium Liu </a>
-  </span>
-</div>
-
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  <a class="theme-link" href="https://creativecommons.org/licenses/by-nc-nd/3.0/cn/">
-  CC-BY-NC-ND 3.0
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
-
   
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#concepts"><span class="nav-text">concepts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extended-wiki-page"><span class="nav-text">extended wiki page</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sign-and-verify"><span class="nav-text">sign and verify</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#concept"><span class="nav-text">concept</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#encryptdecrypt"><span class="nav-text">encrypt&#x2F;decrypt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#generate-new-publicprivate-key-pair"><span class="nav-text">generate new public&#x2F;private key pair</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#private-key-to-public-key"><span class="nav-text">private key to public key</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hobo Chen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Hobo Chen</p>
+  <div class="site-description" itemprop="description">50% Humanities 50% Science</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hobochen" title="GitHub → https://github.com/hobochen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hobochen96@gmail.com" title="Email → mailto:hobochen96@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hobo Chen</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
 
 
 
@@ -650,124 +442,62 @@
 
   
 
-
-
   
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+      
 
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-
-
-  
-
-    <script type="text/javascript">
-      var disqus_shortname = 'hobo-blog';
-      var disqus_identifier = '2023/02/20/tutor/rsa/';
-
-      var disqus_title = "Practical RSA";
-
-
-      function run_disqus_script(disqus_script) {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
       }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
-      run_disqus_script('count.js');
-
-      
-        var disqus_config = function () {
-            this.page.url = disqus_url;
-            this.page.identifier = disqus_identifier;
-            this.page.title = disqus_title;
-        };
-        run_disqus_script('embed.js');
-      
-
-    </script>
-  
-
-
-
-
+    
 
   
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
-
-
-  
-
-  
-
-  
-
 
 </body>
 </html>

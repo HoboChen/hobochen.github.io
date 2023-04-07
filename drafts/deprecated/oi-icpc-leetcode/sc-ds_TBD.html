@@ -1,299 +1,224 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.9.0">
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0-rc1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"192217.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":280,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content=",,,">
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
-
-
-
-
-
-
-<meta name="description" content="这篇博客包含了一些常见数据结构。这篇博客中的std代码可以在这个仓库中的datastructure中找到。">
-<meta name="keywords" content="acm,algorithm,long">
+  <meta name="description" content="这篇博客包含了一些常见数据结构。 这篇博客中的std代码可以在这个仓库中的datastructure中找到。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ACM-数据结构(TBD)">
-<meta property="og:url" content="http://192217.space/drafts/deprecated/oi-icpc-leetcode/sc-ds_TBD.html">
+<meta property="og:url" content="https://192217.space/drafts/deprecated/oi-icpc-leetcode/sc-ds_TBD.html">
 <meta property="og:site_name" content="Hobo Chen&#39;s Blog">
-<meta property="og:description" content="这篇博客包含了一些常见数据结构。这篇博客中的std代码可以在这个仓库中的datastructure中找到。">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-10-17T04:47:32.956Z">
+<meta property="og:description" content="这篇博客包含了一些常见数据结构。 这篇博客中的std代码可以在这个仓库中的datastructure中找到。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-08-01T12:55:43.000Z">
+<meta property="article:modified_time" content="2022-10-17T04:47:32.956Z">
+<meta property="article:author" content="Hobo Chen">
+<meta property="article:tag" content="acm">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="long">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ACM-数据结构(TBD)">
-<meta name="twitter:description" content="这篇博客包含了一些常见数据结构。这篇博客中的std代码可以在这个仓库中的datastructure中找到。">
+
+<link rel="canonical" href="https://192217.space/drafts/deprecated/oi-icpc-leetcode/sc-ds_TBD">
 
 
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'en'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://192217.space/drafts/deprecated/oi-icpc-leetcode/sc-ds_TBD.html">
-
-
-<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
-
-
-
-
-
-  <title>
-  
-
-  
-    ACM-数据结构(TBD) | Hobo Chen's Blog
-  
+  <title>ACM-数据结构(TBD) | Hobo Chen's Blog
 </title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-right  ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
 
-  <div class="custom-logo-site-title">
+  <div class="site-meta">
+
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Hobo Chen's Blog</span>
+      <h1 class="site-title">Hobo Chen's Blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">50% Humanities 50% Science</p>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
-            
-            Home
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
-            
-            About
-          </a>
-        </li>
-      
-        
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
-            
-            Archives
-          </a>
-        </li>
-      
-        
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
         <li class="menu-item menu-item-notebook">
-          <a href="/note" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sticky-note"></i> <br>
-            
-            Notes
-          </a>
-        </li>
-      
-        
+
+    <a href="/note" rel="section"><i class="fa fa-sticky-note fa-fw"></i>Notes</a>
+
+  </li>
         <li class="menu-item menu-item-slide">
-          <a href="/slide" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-desktop"></i> <br>
-            
-            Slides
-          </a>
-        </li>
-      
-        
+
+    <a href="/slide" rel="section"><i class="fa fa-desktop fa-fw"></i>Slides</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
-            
-            Tags
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
 
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+  
+  
+
+          <div class="content page posts-expand">
             
 
-  <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
 
-	<h2 class="post-title" itemprop="name headline">ACM-数据结构(TBD)</h2>
+<h1 class="post-title" itemprop="name headline">ACM-数据结构(TBD)
+</h1>
 
+<div class="post-meta">
+  
+  <ul class="breadcrumb">
+          
+            <li><a href="/drafts/">DRAFTS</a></li>
+            <li><a href="/drafts/deprecated/">DEPRECATED</a></li>
+            <li><a href="/drafts/deprecated/oi-icpc-leetcode/">OI-ICPC-LEETCODE</a></li>
+            <li>SC-DS_TBD</li>
+          
+  </ul>
 
+</div>
 
 </header>
 
-    
-    
-      <p>这篇博客包含了一些常见<code>数据结构</code>。<br>这篇博客中的std代码可以在<a href="https://github.com/HoboChen/hoboojcode" target="_blank" rel="noopener">这个仓库</a>中的datastructure中找到。</p>
-<a id="more"></a>
+      
+      
+      
+      <div class="post-body">
+          <p>这篇博客包含了一些常见<code>数据结构</code>。 这篇博客中的std代码可以在<a href="https://github.com/HoboChen/hoboojcode">这个仓库</a>中的datastructure中找到。</p>
+<span id="more"></span>
 <p>Because my english is so bad, this series of posts (ACM-*) will be written in Chinese.</p>
-<p>基础：<br>堆<br>树状数组<br>线段树<br>ST表RMQ</p>
-<p>进阶：<br>左偏树<br>斐波那契堆/二项堆<br>伸展树(Splay Tree)<br>树链剖分<br>动态树(Link Cut Tree)<br>加上可持久化的许多东西: 可持久化线段树etc</p>
-<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>堆是一种可以在$O(n)$内由有序数组建立，建立后单次插入需要$\log(2)$级复杂度维护；可以 $O(1)$维护最大值/最小值的东西。</p>
-<h3 id="树状数组与线段树"><a href="#树状数组与线段树" class="headerlink" title="树状数组与线段树"></a>树状数组与线段树</h3><p>线段树可以在$\log (2)$解决区间最值/和的问题，并且可以区间加/置。</p>
-<p>树状数组可以单点修改，并且可以查询区间和。<br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1166" target="_blank" rel="noopener">HDU 1166</a>, 单点修改，区间查询和。<br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1566" target="_blank" rel="noopener">HDU 1556</a>, 区间修改（仅加1），单点查询。<br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1754" target="_blank" rel="noopener">HDU 1754</a>, 单点修改（置），区间查询最值。<br><a href="http://poj.org/problem?id=3468" target="_blank" rel="noopener">POJ 3468</a>,区间加，区间查询最值。可以用树状数组/线段树来做。</p>
-<h3 id="ST表RMQ"><a href="#ST表RMQ" class="headerlink" title="ST表RMQ"></a>ST表RMQ</h3><p><a href="http://poj.org/problem?id=2019" target="_blank" rel="noopener">POJ2019</a>, 二维RMQ，可以转换成一维去做。<br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=5443" target="_blank" rel="noopener">HDU5443</a></p>
-<h3 id="左偏树"><a href="#左偏树" class="headerlink" title="左偏树"></a>左偏树</h3><p>左偏树是一种可以在$ \log(n) $时间内将两个堆合并的数据结构。</p>
+<p>基础： 堆 树状数组 线段树 ST表RMQ</p>
+<p>进阶： 左偏树 斐波那契堆/二项堆 伸展树(Splay Tree) 树链剖分 动态树(Link Cut Tree) 加上可持久化的许多东西: 可持久化线段树etc</p>
+<h3 id="堆">堆</h3>
+<p>堆是一种可以在<span class="math inline">\(O(n)\)</span>内由有序数组建立，建立后单次插入需要<span class="math inline">\(\log(2)\)</span>级复杂度维护；可以 <span class="math inline">\(O(1)\)</span>维护最大值/最小值的东西。</p>
+<h3 id="树状数组与线段树">树状数组与线段树</h3>
+<p>线段树可以在<span class="math inline">\(\log (2)\)</span>解决区间最值/和的问题，并且可以区间加/置。</p>
+<p>树状数组可以单点修改，并且可以查询区间和。 <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1166">HDU 1166</a>, 单点修改，区间查询和。 <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1566">HDU 1556</a>, 区间修改（仅加1），单点查询。 <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1754">HDU 1754</a>, 单点修改（置），区间查询最值。 <a href="http://poj.org/problem?id=3468">POJ 3468</a>,区间加，区间查询最值。可以用树状数组/线段树来做。</p>
+<h3 id="st表rmq">ST表RMQ</h3>
+<p><a href="http://poj.org/problem?id=2019">POJ2019</a>, 二维RMQ，可以转换成一维去做。 <a href="http://acm.hdu.edu.cn/showproblem.php?pid=5443">HDU5443</a></p>
+<h3 id="左偏树">左偏树</h3>
+<p>左偏树是一种可以在$ (n) $时间内将两个堆合并的数据结构。</p>
 <p>当然二项堆/斐波那契堆也可以做到不多于log(n)的堆合并。</p>
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1512" target="_blank" rel="noopener">HDU1512 - Monkey King</a> </p>
-<p>以及这道题的代码中给出了<strong>pbds中二项堆/配对堆的时间对比。（以及一些</strong>pbds中其他的数据结构）<br>并查集+左偏树。</p>
-<h3 id="Splay-伸展树"><a href="#Splay-伸展树" class="headerlink" title="Splay - 伸展树"></a>Splay - 伸展树</h3><p>伸展树是一种典型的平衡二叉树。<br>伸展树最基本的操作的是splay(x, S)意思就是将在S树中的x旋到树根。</p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1512">HDU1512 - Monkey King</a></p>
+<p>以及这道题的代码中给出了__pbds中二项堆/配对堆的时间对比。（以及一些__pbds中其他的数据结构） 并查集+左偏树。</p>
+<h3 id="splay---伸展树">Splay - 伸展树</h3>
+<p>伸展树是一种典型的平衡二叉树。 伸展树最基本的操作的是splay(x, S)意思就是将在S树中的x旋到树根。</p>
 <p>Splay支持以下基本操作：</p>
 <ul>
 <li>find(x, S) 查询x是否在S中，仿照普通BST找到x，后splay(x, S)</li>
@@ -302,192 +227,190 @@
 <li>split(x, S) 先find(x, S)后左子树是一棵splay，右子树也是一棵splay</li>
 <li>join(S1, S2) 保证S1中最大元素小于S2中最小元素，找到最大元素（一直往右），后splay(x, S1); 然后S2的根连到S1根的右子位置</li>
 </ul>
-<p><a href="http://poj.org/problem?id=2761" target="_blank" rel="noopener">POJ2761 - Feed the dogs</a></p>
-<p>这道题的做法非常多，我是直接用了splay的做法<br>静态区间第k大。</p>
-<h3 id="树链剖分"><a href="#树链剖分" class="headerlink" title="树链剖分"></a>树链剖分</h3><p>树链剖分可以将树上的链/点映射到一维上，加上线段树/全局平衡树可以高效地解决许多问题。</p>
-<p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1036" target="_blank" rel="noopener">ZJOI2013 - 树的统计</a></p>
+<p><a href="http://poj.org/problem?id=2761">POJ2761 - Feed the dogs</a></p>
+<p>这道题的做法非常多，我是直接用了splay的做法 静态区间第k大。</p>
+<h3 id="树链剖分">树链剖分</h3>
+<p>树链剖分可以将树上的链/点映射到一维上，加上线段树/全局平衡树可以高效地解决许多问题。</p>
+<p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1036">ZJOI2013 - 树的统计</a></p>
 <p>单点修改树上节点。查询树上u-&gt;v链上的和/最值。</p>
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=5452" target="_blank" rel="noopener">HDU5452 - Minimum Cut</a></p>
-<p>这是一道图论题，但是我目前只会树链剖分的做法。<br>如果u,v之间存在图边，那么给u-&gt;v这条链上的所有边权+1。<br>查询树中边权最小值。<br>值得注意地是这道题不论是使用树状数组或是线段树做区间修改都会TLE，需要使用差分数列。</p>
-<p><a href="http://poj.org/problem?id=2763" target="_blank" rel="noopener">POJ2763 - Housewife Wind</a></p>
-<p>动态地修改树上边权，查询路径边权和。<br>和ZJOI2013 - 树的统计算在一起，树链剖分的两种常见操作（对点/边的动态修改进行维护）就全了。</p>
+<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=5452">HDU5452 - Minimum Cut</a></p>
+<p>这是一道图论题，但是我目前只会树链剖分的做法。 如果u,v之间存在图边，那么给u-&gt;v这条链上的所有边权+1。 查询树中边权最小值。 值得注意地是这道题不论是使用树状数组或是线段树做区间修改都会TLE，需要使用差分数列。</p>
+<p><a href="http://poj.org/problem?id=2763">POJ2763 - Housewife Wind</a></p>
+<p>动态地修改树上边权，查询路径边权和。 和ZJOI2013 - 树的统计算在一起，树链剖分的两种常见操作（对点/边的动态修改进行维护）就全了。</p>
 <p>TODO: 同步仓库里和这里的题解。</p>
 
+      </div>
+      
+      
+      
+    </div>
     
-  </div>
+  <ul class="breadcrumb">
+          
+            <li><a href="/drafts/">DRAFTS</a></li>
+            <li><a href="/drafts/deprecated/">DEPRECATED</a></li>
+            <li><a href="/drafts/deprecated/oi-icpc-leetcode/">OI-ICPC-LEETCODE</a></li>
+            <li>SC-DS_TBD</li>
+          
+  </ul>
+
+    
+    
+    
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Hobo Chen">
-          <p class="site-author-name" itemprop="name">Hobo Chen</p>
-          <p class="site-description motion-element" itemprop="description"></p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">26</span>
-              <span class="site-state-item-name">posts</span>
-            </a>
-          </div>
-
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">12</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/hobochen" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="mailto:hobochen96@gmail.com" target="_blank" title="Email">
-                  
-                    <i class="fa fa-fw fa-envelope"></i>
-                  
-                  Email
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              My Friends
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://zccz14.com/" title="zccz" target="_blank">zccz</a>
-                </li>
-              
-            </ul>
-          </div>
-        
-
-        
-
-
-      </section>
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">
-  
-  &copy;  2013 - 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="hobod1"> &nbsp;&nbsp; &nbsp;Hobo Chen </span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <!-- <span class="author" itemprop="copyrightHolder">Hobo Chen</span> -->
-  <span class="hobod2">
-    <a class="Zhuo Liu" href="https://lzed.github.io/"> Caesium Liu </a>
-  </span>
-</div>
-
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  <a class="theme-link" href="https://creativecommons.org/licenses/by-nc-nd/3.0/cn/">
-  CC-BY-NC-ND 3.0
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86"><span class="nav-text">堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E4%B8%8E%E7%BA%BF%E6%AE%B5%E6%A0%91"><span class="nav-text">树状数组与线段树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#st%E8%A1%A8rmq"><span class="nav-text">ST表RMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E5%81%8F%E6%A0%91"><span class="nav-text">左偏树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#splay---%E4%BC%B8%E5%B1%95%E6%A0%91"><span class="nav-text">Splay - 伸展树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86"><span class="nav-text">树链剖分</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hobo Chen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Hobo Chen</p>
+  <div class="site-description" itemprop="description">50% Humanities 50% Science</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hobochen" title="GitHub → https://github.com/hobochen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hobochen96@gmail.com" title="Email → mailto:hobochen96@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hobo Chen</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
 
 
 
@@ -498,120 +421,62 @@
 
   
 
-
-
   
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+      
 
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-
-
-  
-
-    <script type="text/javascript">
-      var disqus_shortname = 'hobo-blog';
-      var disqus_identifier = 'drafts/deprecated/oi-icpc-leetcode/sc-ds_TBD.html';
-
-      var disqus_title = "ACM-数据结构(TBD)";
-
-
-      function run_disqus_script(disqus_script) {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
       }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
-      run_disqus_script('count.js');
-
-      
-        var disqus_config = function () {
-            this.page.url = disqus_url;
-            this.page.identifier = disqus_identifier;
-            this.page.title = disqus_title;
-        };
-        run_disqus_script('embed.js');
-      
-
-    </script>
-  
-
-
-
-
+    
 
   
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
-
-
-  
-
-  
-
-  
-
 
 </body>
 </html>
