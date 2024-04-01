@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0-rc1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"192217.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":280,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Contents This will not cover:  Syntax of Rust, e.g. for, if, fn, let, etc. You can read The Rust Programming Language.  This will cover:  Resource acquisition is initialization, RAII, comparing to C#.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Intro to (a Subset of) Concepts of Rust PL">
+<meta property="og:url" content="https://192217.space/uploads/slide/rust.html">
+<meta property="og:site_name" content="Hobo Chen&#39;s Blog">
+<meta property="og:description" content="Contents This will not cover:  Syntax of Rust, e.g. for, if, fn, let, etc. You can read The Rust Programming Language.  This will cover:  Resource acquisition is initialization, RAII, comparing to C#.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-04-01T18:37:08.766Z">
+<meta property="article:modified_time" content="2024-04-01T18:37:08.766Z">
+<meta property="article:author" content="Hobo Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://192217.space/uploads/slide/rust">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Intro to (a Subset of) Concepts of Rust PL | Hobo Chen's Blog
+</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hobo Chen's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-notebook">
+
+    <a href="/note" rel="section"><i class="fa fa-sticky-note fa-fw"></i>Notes</a>
+
+  </li>
+        <li class="menu-item menu-item-slide">
+
+    <a href="/slide" rel="section"><i class="fa fa-desktop fa-fw"></i>Slides</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">Intro to (a Subset of) Concepts of Rust PL
+</h1>
+
+<div class="post-meta">
+  
+  <ul class="breadcrumb">
+          
+            <li><a href="/uploads/">UPLOADS</a></li>
+            <li><a href="/uploads/slide/">SLIDE</a></li>
+            <li>RUST</li>
+          
+  </ul>
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h2 id="contents">Contents</h2>
+<p>This will not cover:</p>
+<ol type="1">
+<li>Syntax of Rust, e.g. <code>for</code>, <code>if</code>, <code>fn</code>, <code>let</code>, etc. You can read <a href="https://doc.rust-lang.org/book/title-page.html">The Rust Programming Language</a>.</li>
+</ol>
+<p>This will cover:</p>
+<ol type="1">
+<li>Resource acquisition is initialization, RAII, comparing to C#.</li>
+<li>Smart pointers.</li>
+</ol>
+<p>Some things should be covered (but not today):</p>
+<ol type="1">
+<li>RTTI, comparing to C#.</li>
+<li>Generic, comparing to C++.</li>
+<li>Compile-time function execution, comparing to C++.</li>
+</ol>
+<p>But to follow the tradition:</p>
+<hr />
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">s</span> = <span class="type">String</span>::<span class="title function_ invoke__">new</span>();</span><br><span class="line">    io::<span class="title function_ invoke__">stdin</span>().<span class="title function_ invoke__">read_line</span>(&amp;<span class="keyword">mut</span> s).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">a</span>: <span class="type">i32</span> = s.<span class="title function_ invoke__">trim</span>().<span class="title function_ invoke__">parse</span>().<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line"></span><br><span class="line">    s.<span class="title function_ invoke__">clear</span>();</span><br><span class="line"></span><br><span class="line">    io::<span class="title function_ invoke__">stdin</span>().<span class="title function_ invoke__">read_line</span>(&amp;<span class="keyword">mut</span> s).<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">b</span>: <span class="type">i32</span> = s.<span class="title function_ invoke__">trim</span>().<span class="title function_ invoke__">parse</span>().<span class="title function_ invoke__">unwrap</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">sum</span> = a + b;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, sum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="resource-acquisition-is-initialization-raii">Resource acquisition is initialization, RAII</h2>
+<ol type="1">
+<li>A resource is anything that has to be acquired and released after use, regardless of explicitly or implicitly.<br />
+</li>
+<li>Examples are memory, locks, sockets, thread handles, and file handles.<br />
+</li>
+<li>A good resource management system handles all kinds of resources.<br />
+</li>
+<li>Leaks must be avoided in any long-running systems, but excessive resource retention can be almost as bad as a leak.</li>
+</ol>
+<p>Some designs about resource management:</p>
+<ol type="1">
+<li>No abstraction at all: C, etc</li>
+<li>RAII: C++, Rust, etc</li>
+<li>GC: C#, Java, etc</li>
+</ol>
+<hr />
+<p>Starting with no abstraction:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">func</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// allocate 100-size char array in stack</span></span><br><span class="line">    <span class="type">char</span> x[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// allocate 100-size char array in heap</span></span><br><span class="line">    <span class="type">char</span>* y = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">char</span>) * <span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// free it before return</span></span><br><span class="line">    <span class="built_in">free</span>(y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<p>What if?</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">func</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// allocate 100-size char array in stack</span></span><br><span class="line">    <span class="type">char</span> x[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// this is just a compile warning for gcc 11.4</span></span><br><span class="line">    <span class="comment">// warning: ‘free’ called on unallocated object ‘x’</span></span><br><span class="line">    <span class="comment">// segmentation fault (core dumped)</span></span><br><span class="line">    <span class="comment">// and there could be no warning at all for compilers</span></span><br><span class="line">    <span class="built_in">free</span>(x);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// allocate 100-size char array in heap</span></span><br><span class="line">    <span class="type">char</span>* y = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">char</span>) * <span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// no free</span></span><br><span class="line">    <span class="comment">// memory leak</span></span><br><span class="line">    <span class="comment">// free(y);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<p>In the real world:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a very complex function</span></span><br><span class="line"><span class="comment">// in a deep function calling chain</span></span><br><span class="line"><span class="comment">// with early returns</span></span><br><span class="line"><span class="comment">// x and y are passed as pointer</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// no info of whether in stack or heap (can or cannot free)</span></span><br><span class="line"><span class="comment">// no info of ownership (should or should not free)</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">func</span><span class="params">(<span class="type">char</span>* x, <span class="type">char</span>* y)</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<p>To solve this issue, ownership design would be straight forward.</p>
+<p>As only the owner knows when it should be free (or destructed / garbage collected).</p>
+<p>Specifically for Rust:</p>
+<ul>
+<li>Each value in Rust has an owner.</li>
+<li>There can only be one owner at a time.</li>
+<li>When the owner goes out of scope, the value will be dropped.</li>
+</ul>
+<p>And:</p>
+<ul>
+<li>There are move and reference(borrowing).</li>
+<li>There are smart pointers.</li>
+</ul>
+<hr />
+<p>Move:</p>
+<p>The ownership of a variable follows the same pattern every time: assigning a value to another variable moves it. When a variable that includes data on the heap goes out of scope, the value will be cleaned up by drop unless ownership of the data has been moved to another variable.</p>
+<hr />
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s2</span> = s1;</span><br><span class="line"></span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;, world!&quot;</span>, s1);</span><br><span class="line"><span class="comment">// compile failure!</span></span><br><span class="line"><span class="comment">// as = is default to `move` in rust for complex types!</span></span><br></pre></td></tr></table></figure>
+<hr />
+<figure class="highlight rs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// move the ownership to calculate_length</span></span><br><span class="line">    <span class="keyword">let</span> (s2, len) = <span class="title function_ invoke__">calculate_length</span>(s1);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;The length of &#x27;&#123;&#125;&#x27; is &#123;&#125;.&quot;</span>, s2, len);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">calculate_length</span>(s: <span class="type">String</span>) <span class="punctuation">-&gt;</span> (<span class="type">String</span>, <span class="type">usize</span>) &#123;</span><br><span class="line">    <span class="comment">// len() returns the length of a String</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">length</span> = s.<span class="title function_ invoke__">len</span>(); </span><br><span class="line"></span><br><span class="line">    <span class="comment">// move the ownership back</span></span><br><span class="line">    (s, length)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<p>Reference:</p>
+<p>A reference is like a pointer in that it’s an address we can follow to access the data stored at that address; that data is owned by some other variable. Unlike a pointer, a reference is guaranteed to point to a valid value of a particular type for the life of that reference.</p>
+<hr />
+<figure class="highlight rs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">len</span> = <span class="title function_ invoke__">calculate_length</span>(&amp;s1);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;The length of &#x27;&#123;&#125;&#x27; is &#123;&#125;.&quot;</span>, s1, len);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">calculate_length</span>(s: &amp;<span class="type">String</span>) <span class="punctuation">-&gt;</span> <span class="type">usize</span> &#123;</span><br><span class="line">    s.<span class="title function_ invoke__">len</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<p>Note: the closure works the same with function, which could capture the variable via ref, mutable ref, or move.</p>
+<p>Some interesting tiny design choices:</p>
+<ol type="1">
+<li>Reference is immutable by default, which is opposite of C++.</li>
+<li>Conpulsory compile-time check of lifetime(scope) &amp; multi mutable ref, which could prevent issues (e.g. dangling pointers / data races), which is not conpulsory of C++. But the check can be bypassed via RefCell or Unsafe.</li>
+</ol>
+<hr />
+<p>RAII:</p>
+<!-- 1. Tie the lifecycle of a resource to the lifecycle of an object.
+2. RAII is typically implemented using constructors for acquisition and destructors for release. -->
+<ol type="1">
+<li>There is almost zero overhead. The ideal situation is the releasing happens right after it is no longer needed.</li>
+<li>It can goes wrong in runtime (and it is impossible to detect all the issues during compile-time), crash (dangling pointers), memory leak (cyclic ref), etc.</li>
+<li>More complex for lock free concurrent environment, e.g. <a href="https://en.wikipedia.org/wiki/Hazard_pointer">Hazard pointer</a>.</li>
+</ol>
+<hr />
+<p>Comparsions with GC:</p>
+<ol type="1">
+<li>GC is not deterministic, and there is much more overhead. (Recall: GC makes trade-off between footprint, throughput, latency).</li>
+<li>GC can only collect managed resources. (Recall: <code>Dispose</code> of C#).</li>
+</ol>
+<p>Further topics of performance difference when there is runtime or not:</p>
+<ol type="1">
+<li>Expected lifetime of each allocation. (or the ratio of IO/Compute)</li>
+<li>Performance optimization methods brought by runtime:
+<ol type="1">
+<li>PGO, LTO.</li>
+</ol></li>
+<li>How modern GC makes the trade-off:
+<ol type="1">
+<li><a href="https://www.usenix.org/legacy/events/vee05/full_papers/p46-click.pdf">The Pauseless GC Algorithm</a></li>
+<li><a href="https://openjdk.org/jeps/439">JEP 439</a></li>
+</ol></li>
+</ol>
+<h2 id="smart-pointers">Smart pointers</h2>
+<p>References only borrow data, in many cases, smart pointers own the data they point to.</p>
+<ul>
+<li><code>Box&lt;T&gt;</code> for allocating values on the heap</li>
+<li><code>Rc&lt;T&gt;</code>, a reference counting type that enables multiple ownership</li>
+<li><code>Ref&lt;T&gt;</code> and <code>RefMut&lt;T&gt;</code>, accessed through <code>RefCell&lt;T&gt;</code>, a type that enforces the borrowing rules at runtime instead of compile time</li>
+</ul>
+<hr />
+<p><code>Box&lt;T&gt;</code> is the Rust version of <code>unique_ptr</code>.</p>
+<p>It represents exclusive ownership. Boxes allow you to store data on the heap rather than the stack.</p>
+<figure class="highlight rs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">List</span> &#123; <span class="title function_ invoke__">Cons</span>(<span class="type">i32</span>, List), Nil, &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> crate::List::&#123;Cons, Nil&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">list</span> = <span class="title function_ invoke__">Cons</span>(<span class="number">1</span>, <span class="title function_ invoke__">Cons</span>(<span class="number">2</span>, <span class="title function_ invoke__">Cons</span>(<span class="number">3</span>, Nil)));</span><br><span class="line">    <span class="comment">// fail! recursive type `List` has infinite size</span></span><br><span class="line">    <span class="comment">// fail to put in stack</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ----- the following would do -----</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">List</span> &#123;</span><br><span class="line">    <span class="title function_ invoke__">Cons</span>(<span class="type">i32</span>, <span class="type">Box</span>&lt;List&gt;),</span><br><span class="line">    Nil,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<p><code>Rc&lt;T&gt;</code> is the Rust version of <code>shared_ptr</code>, but immutable.</p>
+<figure class="highlight rs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">List</span> &#123;</span><br><span class="line">    <span class="title function_ invoke__">Cons</span>(<span class="type">i32</span>, Rc&lt;List&gt;),</span><br><span class="line">    Nil,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> crate::List::&#123;Cons, Nil&#125;;</span><br><span class="line"><span class="keyword">use</span> std::rc::Rc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">a</span> = Rc::<span class="title function_ invoke__">new</span>(<span class="title function_ invoke__">Cons</span>(<span class="number">5</span>, Rc::<span class="title function_ invoke__">new</span>(<span class="title function_ invoke__">Cons</span>(<span class="number">10</span>, Rc::<span class="title function_ invoke__">new</span>(Nil)))));</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">b</span> = <span class="title function_ invoke__">Cons</span>(<span class="number">3</span>, Rc::<span class="title function_ invoke__">clone</span>(&amp;a));</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">c</span> = <span class="title function_ invoke__">Cons</span>(<span class="number">4</span>, Rc::<span class="title function_ invoke__">clone</span>(&amp;a));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<p>Note:</p>
+<ol type="1">
+<li>The <code>Rc::clone</code> only increments the reference count! It is different with <code>.clone()</code>.</li>
+<li><code>Rc&lt;T&gt;</code> allows only immutable ref, as "multiple mutable borrows to the same place can cause data races and inconsistencies". You may need <code>RefCell&lt;T&gt;</code> for multi mutable ref.</li>
+<li><code>Rc&lt;T&gt;</code> the increase / decrease of count is <strong>NOT</strong> thread safe (read: atomic)! If you need concurrency, use <code>Arc&lt;T&gt;</code>. This is a interesting design choice.</li>
+</ol>
+<hr />
+<p>What is reference counting?</p>
+<figure class="highlight rs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">a</span> = Rc::<span class="title function_ invoke__">new</span>(<span class="title function_ invoke__">Cons</span>(<span class="number">5</span>, Rc::<span class="title function_ invoke__">new</span>(<span class="title function_ invoke__">Cons</span>(<span class="number">10</span>, Rc::<span class="title function_ invoke__">new</span>(Nil)))));</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;count after creating a = &#123;&#125;&quot;</span>,</span><br><span class="line">        Rc::<span class="title function_ invoke__">strong_count</span>(&amp;a));</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">b</span> = <span class="title function_ invoke__">Cons</span>(<span class="number">3</span>, Rc::<span class="title function_ invoke__">clone</span>(&amp;a));</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;count after creating b = &#123;&#125;&quot;</span>,</span><br><span class="line">        Rc::<span class="title function_ invoke__">strong_count</span>(&amp;a));</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">c</span> = <span class="title function_ invoke__">Cons</span>(<span class="number">4</span>, Rc::<span class="title function_ invoke__">clone</span>(&amp;a));</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;count after creating c = &#123;&#125;&quot;</span>,</span><br><span class="line">            Rc::<span class="title function_ invoke__">strong_count</span>(&amp;a));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;count after c goes out of scope = &#123;&#125;&quot;</span>,</span><br><span class="line">        Rc::<span class="title function_ invoke__">strong_count</span>(&amp;a));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<figure class="highlight rs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">$ cargo run</span></span><br><span class="line"><span class="comment">   Compiling cons-list v0.1.0 (file:///projects/cons-list)</span></span><br><span class="line"><span class="comment">    Finished dev [unoptimized + debuginfo] target(s) in 0.45s</span></span><br><span class="line"><span class="comment">     Running `target/debug/cons-list`</span></span><br><span class="line"><span class="comment">count after creating a = 1</span></span><br><span class="line"><span class="comment">count after creating b = 2</span></span><br><span class="line"><span class="comment">count after creating c = 3</span></span><br><span class="line"><span class="comment">count after c goes out of scope = 2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<hr />
+<p><code>RefCell&lt;T&gt;</code> is used for <em>Interior mutability</em>, which is a design pattern in Rust that allows you to mutate data even when there are immutable references to that data.</p>
+<p>With references and <code>Box&lt;T&gt;</code>, the borrowing rules’ invariants are enforced at <strong>compile time</strong>. With <code>RefCell&lt;T&gt;</code>, these invariants are enforced at <strong>runtime</strong>. So, the program will <code>panic</code> rather than <code>compile failure</code>.</p>
+<p><code>RefCell&lt;T&gt;</code> is needed as, it is impossible to detect all the issues during compile-time (Recall: The halting problem is undecidable).</p>
+<hr />
+<figure class="highlight rs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#[derive(Debug)]</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">List</span> &#123;</span><br><span class="line">    <span class="title function_ invoke__">Cons</span>(Rc&lt;RefCell&lt;<span class="type">i32</span>&gt;&gt;, Rc&lt;List&gt;),</span><br><span class="line">    Nil,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> crate::List::&#123;Cons, Nil&#125;;</span><br><span class="line"><span class="keyword">use</span> std::cell::RefCell;</span><br><span class="line"><span class="keyword">use</span> std::rc::Rc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">value</span> = Rc::<span class="title function_ invoke__">new</span>(RefCell::<span class="title function_ invoke__">new</span>(<span class="number">5</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">a</span> = Rc::<span class="title function_ invoke__">new</span>(<span class="title function_ invoke__">Cons</span>(Rc::<span class="title function_ invoke__">clone</span>(&amp;value), Rc::<span class="title function_ invoke__">new</span>(Nil)));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">b</span> = <span class="title function_ invoke__">Cons</span>(Rc::<span class="title function_ invoke__">new</span>(RefCell::<span class="title function_ invoke__">new</span>(<span class="number">3</span>)), Rc::<span class="title function_ invoke__">clone</span>(&amp;a));</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">c</span> = <span class="title function_ invoke__">Cons</span>(Rc::<span class="title function_ invoke__">new</span>(RefCell::<span class="title function_ invoke__">new</span>(<span class="number">4</span>)), Rc::<span class="title function_ invoke__">clone</span>(&amp;a));</span><br><span class="line"></span><br><span class="line">    *value.<span class="title function_ invoke__">borrow_mut</span>() += <span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<p>Note:</p>
+<ol type="1">
+<li>Recall <code>const_cast</code> of C++.</li>
+<li>Using <code>Rc&lt;T&gt;</code> with <code>RefCell&lt;T&gt;</code>, we finally get the full equivalent of <code>shared_ptr</code> of C++. So we can create the cyclic ref to leak the memory!</li>
+</ol>
+<hr />
+<figure class="highlight rs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">a</span> = Rc::<span class="title function_ invoke__">new</span>(<span class="title function_ invoke__">Cons</span>(<span class="number">5</span>, RefCell::<span class="title function_ invoke__">new</span>(Rc::<span class="title function_ invoke__">new</span>(Nil))));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">b</span> = Rc::<span class="title function_ invoke__">new</span>(<span class="title function_ invoke__">Cons</span>(<span class="number">10</span>, RefCell::<span class="title function_ invoke__">new</span>(Rc::<span class="title function_ invoke__">clone</span>(&amp;a))));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> <span class="variable">Some</span>(link) = a.<span class="title function_ invoke__">tail</span>() &#123;</span><br><span class="line">        *link.<span class="title function_ invoke__">borrow_mut</span>() = Rc::<span class="title function_ invoke__">clone</span>(&amp;b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;a next item = &#123;:?&#125;&quot;</span>, a.<span class="title function_ invoke__">tail</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<p>But how can we break the cycle? <code>Weak&lt;T&gt;</code> would be the solution. Instead of creating the cycle, checking if the value has already been dropped in runtime is needed. (Recall: <code>weak_ptr</code> of C++).</p>
+<!-- ## Run-time type information, RTTI
+
+## Generic
+
+<figure class="highlight rs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">enum Option&lt;T&gt; &#123;</span></span><br><span class="line"><span class="comment">    Some(T),</span></span><br><span class="line"><span class="comment">    None,</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">integer</span> = Option_i32::<span class="title function_ invoke__">Some</span>(<span class="number">5</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">float</span> = Option_f64::<span class="title function_ invoke__">Some</span>(<span class="number">5.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>After the monomorphization of compiler:</p>
+<figure class="highlight rs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">Option_i32</span> &#123;</span><br><span class="line">    <span class="title function_ invoke__">Some</span>(<span class="type">i32</span>),</span><br><span class="line">    <span class="literal">None</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">Option_f64</span> &#123;</span><br><span class="line">    <span class="title function_ invoke__">Some</span>(<span class="type">f64</span>),</span><br><span class="line">    <span class="literal">None</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">integer</span> = Option_i32::<span class="title function_ invoke__">Some</span>(<span class="number">5</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">float</span> = Option_f64::<span class="title function_ invoke__">Some</span>(<span class="number">5.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Option_i32</code> and <code>Option_f64</code> are irrelevant types.</p>
+<p>Further readings include:</p>
+<ol type="1">
+<li></li>
+</ol>
+<p>You can read the <em>Generic Support of PLs</em> for more details, which is one of the <a href="https://192217.space/slide/">former slides written by me</a>. --&gt;</p>
+<!-- ## More to Read
+
+### `=` assignment
+
+In Rust, the `=` operator is used for assignment, just like in many other programming languages. However, Rust's handling of assignment can be interesting due to its ownership and type system. Let's delve into how assignment works with different types in Rust:
+
+1. **Primitive Types**: For types that implement the `Copy` trait, such as integers, floating-point numbers, booleans, and characters, assignment is straightforward. When you assign one variable to another, the value is copied:
+
+   <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">x</span> = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">y</span> = x; <span class="comment">// y is now a copy of x</span></span><br></pre></td></tr></table></figure>
+<p>In this case, <code>x</code> and <code>y</code> are independent; changing one does not affect the other.</p>
+<ol start="2" type="1">
+<li><p><strong>Complex Types</strong>: For types that do not implement the <code>Copy</code> trait but do implement the <code>Clone</code> trait, such as <code>String</code> or user-defined structs, assignment moves the value unless explicitly cloned:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s2</span> = s1; <span class="comment">// s1 is moved to s2</span></span><br><span class="line"><span class="comment">// println!(&quot;&#123;&#125;&quot;, s1); // This would result in a compile-time error because s1 is no longer valid.</span></span><br></pre></td></tr></table></figure>
+<p>If you want to keep the original value, you need to explicitly clone it:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s2</span> = s1.<span class="title function_ invoke__">clone</span>(); <span class="comment">// s1 is cloned to s2</span></span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, s1); <span class="comment">// This is valid.</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>References</strong>: When you assign a reference, you are copying the reference, not the data it points to. This behavior allows multiple references to the same data:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">x</span> = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">y</span> = &amp;x; <span class="comment">// y is a reference to x</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">z</span> = y; <span class="comment">// z is now another reference to x</span></span><br></pre></td></tr></table></figure>
+<p>Both <code>y</code> and <code>z</code> point to the same <code>x</code>, and modifying the data through a mutable reference would affect all references to that data.</p></li>
+<li><p><strong>Mutability</strong>: In Rust, variables are immutable by default. When you assign a new value to an immutable variable, it results in a compile-time error. To reassign values, the variable must be mutable:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">x</span> = <span class="number">5</span>;</span><br><span class="line">x = <span class="number">10</span>; <span class="comment">// valid because x is mutable</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Tuples and Arrays</strong>: When you assign a tuple or an array to another variable, the same rules apply. If all the elements implement <code>Copy</code>, the entire structure is copied. Otherwise, the ownership is moved:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">tuple1</span> = (<span class="number">1</span>, <span class="number">2</span>, <span class="string">&quot;hello&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">tuple2</span> = tuple1; <span class="comment">// Works because all elements implement `Copy`</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable">arr1</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> <span class="variable">arr2</span> = arr1; <span class="comment">// Works because integers implement `Copy`</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>Understanding these nuances is crucial in Rust to manage memory effectively and avoid common pitfalls like dangling references or double frees. Rust's compiler enforces these rules at compile time, helping to prevent many common bugs seen in languages with manual memory management. --&gt;</p>
+
+      </div>
+      
+      
+      
+    </div>
+    
+  <ul class="breadcrumb">
+          
+            <li><a href="/uploads/">UPLOADS</a></li>
+            <li><a href="/uploads/slide/">SLIDE</a></li>
+            <li>RUST</li>
+          
+  </ul>
+
+    
+    
+    
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#contents"><span class="nav-text">Contents</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#resource-acquisition-is-initialization-raii"><span class="nav-text">Resource acquisition is initialization, RAII</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smart-pointers"><span class="nav-text">Smart pointers</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hobo Chen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Hobo Chen</p>
+  <div class="site-description" itemprop="description">50% Humanities 50% Science</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hobochen" title="GitHub → https://github.com/hobochen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hobochen96@gmail.com" title="Email → mailto:hobochen96@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2013 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hobo Chen</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
