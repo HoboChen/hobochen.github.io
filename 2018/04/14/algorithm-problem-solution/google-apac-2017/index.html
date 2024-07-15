@@ -217,9 +217,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>不知道从哪里翻出了这个题解，只翻到了Round C，那就放出来吧；大概是2017年夏天写的。</p>
+        <p>不知道从哪里翻出了这个题解，只翻到了Round
+C，那就放出来吧；大概是2017年夏天写的。</p>
 <span id="more"></span>
-<p>代码/测试数据可以在<a href="https://github.com/HoboChen/hoboalgocode">这个GitHub仓库</a>中的google-apac子目录中找到。 <!-- TODO --></p>
+
+<p>代码/测试数据可以在<a
+href="https://github.com/HoboChen/hoboalgocode">这个GitHub仓库</a>中的google-apac子目录中找到。
+<!-- TODO --></p>
 <h1 id="round-c">Round C</h1>
 <h2 id="a-monster-path">A Monster Path</h2>
 <p>简单的DFS即可通过。</p>
@@ -227,10 +231,13 @@
 <p>时间复杂度<span class="math inline">\(O(4^S), S \leq 9\)</span>。</p>
 <h2 id="b-safe-squares">B Safe Squares</h2>
 <p>一个简单的DP，印象中Leetcode里这道题的难度是Medium。</p>
-<p><span class="math display">\[dp[i][j] = 以[i, j]为右下角的正方形数目\]</span>，那么转移就很简单了。</p>
-<p>最终答案是<span class="math inline">\(\sum_{i, j}dp[i][j]\)</span>。</p>
+<p><span class="math display">\[dp[i][j] = 以[i,
+j]为右下角的正方形数目\]</span>，那么转移就很简单了。</p>
+<p>最终答案是<span class="math inline">\(\sum_{i,
+j}dp[i][j]\)</span>。</p>
 <p>最终答案需要<code>long long</code>来保存。</p>
-<p>时间复杂度<span class="math inline">\(O(RC),R\leq3000,C\leq3000\)</span>。</p>
+<p>时间复杂度<span
+class="math inline">\(O(RC),R\leq3000,C\leq3000\)</span>。</p>
 <h2 id="c-evaluation">C Evaluation</h2>
 <p>有向图判断是否连同以及有环。</p>
 <p>注意，当某个变量只作为参数出现是不合法的（无法计算出），所以需要判断是否连通，我的代码中判环使用<strong>拓扑排序</strong>。</p>
@@ -243,7 +250,9 @@
 <li>不存在<strong>局面一</strong>的条件，那么分别删除最大攻击和最大防御的士兵们；答案即这个子问题的解</li>
 </ul>
 <p>如果某次删除了所有的士兵，Bob胜。</p>
-<p>上面的做法时间复杂度<span class="math inline">\(O(n^2)\)</span>，但可以做到<span class="math inline">\(O(n\log n)\)</span>。</p>
+<p>上面的做法时间复杂度<span
+class="math inline">\(O(n^2)\)</span>，但可以做到<span
+class="math inline">\(O(n\log n)\)</span>。</p>
 
     </div>
 
