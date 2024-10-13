@@ -22,14 +22,14 @@
 
   <meta name="description" content="这是Leetcode Top 100 Liked Problems中大部分题目（83道）的题解。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode Top 100 Liked Problems Solutions TODO">
+<meta property="og:title" content="Leetcode Top 100 Liked Problems Solutions">
 <meta property="og:url" content="https://192217.space/2019/03/19/algorithm-problem-solution/sc-leetcode_100like/index.html">
-<meta property="og:site_name" content="Hobo Chen&#39;s Blog">
+<meta property="og:site_name" content="Jingqi Chen&#39;s Blog">
 <meta property="og:description" content="这是Leetcode Top 100 Liked Problems中大部分题目（83道）的题解。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-03-20T05:03:24.000Z">
-<meta property="article:modified_time" content="2024-03-21T03:24:48.461Z">
-<meta property="article:author" content="Hobo Chen">
+<meta property="article:modified_time" content="2024-08-21T01:54:46.230Z">
+<meta property="article:author" content="Jingqi Chen">
 <meta property="article:tag" content="algorithm">
 <meta property="article:tag" content="long">
 <meta property="article:tag" content="leetcode">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>Leetcode Top 100 Liked Problems Solutions TODO | Hobo Chen's Blog</title>
+  <title>Leetcode Top 100 Liked Problems Solutions | Jingqi Chen's Blog</title>
   
 
 
@@ -99,7 +99,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hobo Chen's Blog</h1>
+      <h1 class="site-title">Jingqi Chen's Blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -177,16 +177,16 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.png">
-      <meta itemprop="name" content="Hobo Chen">
+      <meta itemprop="name" content="Jingqi Chen">
       <meta itemprop="description" content="50% Humanities 50% Science">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hobo Chen's Blog">
+      <meta itemprop="name" content="Jingqi Chen's Blog">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Leetcode Top 100 Liked Problems Solutions TODO
+          Leetcode Top 100 Liked Problems Solutions
         </h1>
 
         <div class="post-meta">
@@ -203,7 +203,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-03-20 20:24:48" itemprop="dateModified" datetime="2024-03-20T20:24:48-07:00">2024-03-20</time>
+                <time title="Modified: 2024-08-20 18:54:46" itemprop="dateModified" datetime="2024-08-20T18:54:46-07:00">2024-08-20</time>
               </span>
 
           
@@ -410,15 +410,18 @@ class="math inline">\(T(mn)\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>记<span class="math inline">\(dp\_{i,j}\)</span>为<span
-class="math inline">\(s\_{i..}\)</span>与<span
-class="math inline">\(p\_{j..}\)</span>匹配与否。</p>
+<p>记<span class="math inline">\(dp_{i,j}\)</span>为<span
+class="math inline">\(s_{i..}\)</span>与<span
+class="math inline">\(p_{j..}\)</span>匹配与否。</p>
 <p>对于当前位置，显然有 <span class="math inline">\(match\_here = (s_i =
 p_j) \lor (p_j = \text{.})\)</span> 。</p>
-<p>$$ dp_{i,j} = \begin{cases}</p>
-<pre><code>match\_here \land dp_&#123;i+1, j&#125; \lor dp_&#123;i, j+2&#125; \quad, &amp; p_&#123;j+1&#125;=\text&#123;*&#125; \\
-match\_here \land dp_&#123;i+1,j+1&#125; \quad, &amp; \text&#123;else&#125; \\</code></pre>
-<p>\end{cases} $$</p>
+<p><span class="math display">\[
+dp_{i,j} = \begin{cases}
+match\_here \land dp_{i+1, j} \lor dp_{i, j+2} \quad, &amp;
+p_{j+1}=\text{*} \\
+match\_here \land dp_{i+1,j+1} \quad, &amp; \text{else} \\
+\end{cases}
+\]</span></p>
 <h2 id="11-container-with-most-water">*11. Container With Most
 Water</h2>
 <p>给定一个数组<span class="math inline">\(h_i\)</span>，表示在<span
@@ -558,13 +561,12 @@ class="math inline">\(O(n)\)</span>。</p>
 class="math inline">\(p_i\)</span>，求下一个字典序排列。</p>
 <p>分为三步：</p>
 <ol type="1">
-<li>找到最大的i，使 <span
-class="math inline">\(p\_i&gt;p\_{i-1}\)</span>
+<li>找到最大的i，使 <span class="math inline">\(p_i&gt;p_{i-1}\)</span>
 ；如果不存在，则跳到4</li>
 <li>从i开始，找到最大的j，使 <span
-class="math inline">\(p\_j&gt;p\_{i-1}\)</span></li>
-<li>交换 <span class="math inline">\(p\_{i-1}, p\_j\)</span></li>
-<li>翻转 <span class="math inline">\(p\_{i..}\)</span></li>
+class="math inline">\(p_j&gt;p_{i-1}\)</span></li>
+<li>交换 <span class="math inline">\(p_{i-1}, p_j\)</span></li>
+<li>翻转 <span class="math inline">\(p_{i..}\)</span></li>
 </ol>
 <p>思考：如何将这个题的代码给第46题使用？</p>
 <h2 id="32-longest-valid-parentheses">*32. Longest Valid
@@ -740,9 +742,9 @@ class="math inline">\(s\)</span>？操作可以包括：</p>
 <li>增加一个字母</li>
 <li>替换一个字母</li>
 </ol>
-<p>记 <span class="math inline">\(dp\_{i,j}\)</span> 表示 <span
-class="math inline">\(p\_{..i}\)</span> 到 <span
-class="math inline">\(s\_{..j}\)</span> 的最少操作数，那么有转移：</p>
+<p>记 <span class="math inline">\(dp_{i,j}\)</span> 表示 <span
+class="math inline">\(p_{..i}\)</span> 到 <span
+class="math inline">\(s_{..j}\)</span> 的最少操作数，那么有转移：</p>
 <p><span class="math display">\[
 dp_{i,j} = \begin{cases}
 |i-j| \quad , &amp; i = -1 \lor j = -1 \\
@@ -840,7 +842,7 @@ class="math inline">\(p\_i\)</span>组成（可以使用多次）。</p>
 <p>记 <span class="math inline">\(dp\_i\)</span> 为 <span
 class="math inline">\(s[0:i)\)</span> 能否由若干个 <span
 class="math inline">\(p\_i\)</span> 组成，那么显然答案是 <span
-class="math inline">\(dp\_{|s|}\)</span> 。并且有DP方程：</p>
+class="math inline">\(dp_{|s|}\)</span> 。并且有DP方程：</p>
 <p><span class="math display">\[
 dp_{i} =
 (dp_{i-|p_j|..i-1} = p_j) \land dp_{i-|p_j|} , \forall j \in [1, n], j
@@ -1151,9 +1153,9 @@ Unsorted Continuous Subarray</span></a></li><li class="nav-item nav-level-2"><a 
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Hobo Chen"
+    <img class="site-author-image" itemprop="image" alt="Jingqi Chen"
       src="/uploads/avatar.png">
-  <p class="site-author-name" itemprop="name">Hobo Chen</p>
+  <p class="site-author-name" itemprop="name">Jingqi Chen</p>
   <div class="site-description" itemprop="description">50% Humanities 50% Science</div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -1207,7 +1209,7 @@ Unsorted Continuous Subarray</span></a></li><li class="nav-item nav-level-2"><a 
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Hobo Chen</span>
+  <span class="author" itemprop="copyrightHolder">Jingqi Chen</span>
 </div>
 
         
