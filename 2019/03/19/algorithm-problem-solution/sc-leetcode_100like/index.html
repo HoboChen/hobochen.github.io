@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.0.0-rc1">
+<meta name="generator" content="Hexo 7.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
@@ -130,11 +130,6 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
-        <li class="menu-item menu-item-notebook">
-
-    <a href="/note" rel="section"><i class="fa fa-sticky-note fa-fw"></i>Notes</a>
-
-  </li>
         <li class="menu-item menu-item-slide">
 
     <a href="/slide" rel="section"><i class="fa fa-desktop fa-fw"></i>Slides</a>
@@ -219,7 +214,6 @@
       
         <p>这是Leetcode Top 100 Liked Problems中大部分题目（83道）的题解。</p>
 <span id="more"></span>
-
 <p>按照题号排序。</p>
 <p>每道题及部分一题多解的代码可以在<a
 href="https://github.com/HoboChen/hoboalgocode">这个GitHub仓库</a>中的leetcode子目录中找到。</p>
@@ -246,27 +240,25 @@ href="https://github.com/HoboChen/hoboalgocode">这个GitHub仓库</a>中的leet
 </ol>
 <p>拓展阅读：</p>
 <ol type="1">
-<li>链表专题：<a
-href="http://wuchong.me/blog/2014/03/25/interview-link-questions/">http://wuchong.me/blog/2014/03/25/interview-link-questions/</a></li>
-<li>Leetcode另一份题解：<a
-href="https://zhuanlan.zhihu.com/p/25697275">https://zhuanlan.zhihu.com/p/25697275</a>
-； 有567题，但更简略</li>
+<li>链表专题：http://wuchong.me/blog/2014/03/25/interview-link-questions/</li>
+<li>Leetcode另一份题解：https://zhuanlan.zhihu.com/p/25697275 ；
+有567题，但更简略</li>
 </ol>
-<h2 id="1-two-sum">1. Two Sum</h2>
+<h2 id="two-sum">1. Two Sum</h2>
 <p>给一个数组，找出两个数和为<span
 class="math inline">\(k\)</span>，输出这两个数的下标。</p>
 <p>用一个<code>unordered_set</code>记录之前的数即可，时间复杂度是<span
 class="math inline">\(O(n)\)</span>。</p>
-<h2 id="2-add-two-numbers">2. Add Two Numbers</h2>
+<h2 id="add-two-numbers">2. Add Two Numbers</h2>
 <p>大整数加法，数据结构是链表。</p>
-<h2 id="3-longest-substring-without-repeating-characters">3. Longest
+<h2 id="longest-substring-without-repeating-characters">3. Longest
 Substring Without Repeating Characters</h2>
 <p>找一个最长的字串，要求不含有相同的字符。</p>
 <p>双指针<span class="math inline">\(i,j\)</span>，每次固定<span
 class="math inline">\(i\)</span>，找到最优的<span
 class="math inline">\(j\)</span>，时间复杂度是<span
 class="math inline">\(O(n)\)</span>。</p>
-<h2 id="4-median-of-two-sorted-arrays">*4. Median of Two Sorted
+<h2 id="median-of-two-sorted-arrays">*4. Median of Two Sorted
 Arrays</h2>
 <p>找两个有序数组的中位数。</p>
 <p>记两个数组大小分别为<span class="math inline">\(n,m\)</span>。</p>
@@ -316,7 +308,7 @@ m)\)</span>。这个做法可以解决找多个有序数组内的第k大问题�
 class="math inline">\(O(\sum(\log
 n_i))\)</span>，记第i个数组的大小为<span
 class="math inline">\(n_i\)</span>。</p>
-<h2 id="5-longest-palindromic-substring">5. Longest Palindromic
+<h2 id="longest-palindromic-substring">5. Longest Palindromic
 Substring</h2>
 <p>最长回文子串。</p>
 <p>记字符串长度为<span class="math inline">\(n\)</span>。</p>
@@ -377,7 +369,7 @@ class="math inline">\(T(n^2)\)</span></td>
 </tr>
 </tbody>
 </table>
-<h2 id="10-regular-expression-matching">*10. Regular Expression
+<h2 id="regular-expression-matching">*10. Regular Expression
 Matching</h2>
 <p>只有<code>.*</code>的正则表达式匹配。</p>
 <p>记字符串<span class="math inline">\(s\)</span>长度为<span
@@ -417,18 +409,17 @@ class="math inline">\(p_{j..}\)</span>匹配与否。</p>
 p_j) \lor (p_j = \text{.})\)</span> 。</p>
 <p><span class="math display">\[
 dp_{i,j} = \begin{cases}
-match\_here \land dp_{i+1, j} \lor dp_{i, j+2} \quad, &amp;
+    match\_here \land dp_{i+1, j} \lor dp_{i, j+2} \quad, &amp;
 p_{j+1}=\text{*} \\
-match\_here \land dp_{i+1,j+1} \quad, &amp; \text{else} \\
+    match\_here \land dp_{i+1,j+1} \quad, &amp; \text{else} \\
 \end{cases}
 \]</span></p>
-<h2 id="11-container-with-most-water">*11. Container With Most
-Water</h2>
+<h2 id="container-with-most-water">*11. Container With Most Water</h2>
 <p>给定一个数组<span class="math inline">\(h_i\)</span>，表示在<span
 class="math inline">\(i\)</span>的位置有一个长度为<span
 class="math inline">\(h_i\)</span>的薄板，求任意选取两块薄板所能装下的最大水量。</p>
 <p>贪心即可；时间复杂度<span class="math inline">\(O(n)\)</span>。</p>
-<h2 id="15-3-sum">*15. 3 Sum</h2>
+<h2 id="sum">*15. 3 Sum</h2>
 <p>给一个数组，输出所有和为<span
 class="math inline">\(k\)</span>的三元组。</p>
 <p>记数组长度为<span class="math inline">\(n\)</span>。</p>
@@ -491,28 +482,28 @@ class="math inline">\(k\)</span>相同。</p>
 <p>排序B，即排序后枚举<span
 class="math inline">\(i\)</span>，然后双指针移动<span
 class="math inline">\(j, k\)</span>。</p>
-<h2 id="17-letter-combinations-of-a-phone-number">17. Letter
-Combinations of a Phone Number</h2>
+<h2 id="letter-combinations-of-a-phone-number">17. Letter Combinations
+of a Phone Number</h2>
 <p>九宫格输入法，给一个输入的数字顺序，求所有可能的结果。</p>
 <p>模拟一下。</p>
-<h2 id="19-remove-nth-node-from-end-of-list">*19. Remove Nth Node From
-End of List</h2>
+<h2 id="remove-nth-node-from-end-of-list">*19. Remove Nth Node From End
+of List</h2>
 <p>删除单向链表的倒数第<span
 class="math inline">\(n\)</span>个节点。</p>
 <p>用两个指针即可，保持前一个指针和后一个指针间隔为<span
 class="math inline">\(n\)</span>。</p>
-<h2 id="20-valid-parentheses">20. Valid Parentheses</h2>
+<h2 id="valid-parentheses">20. Valid Parentheses</h2>
 <p>一个含有<code>&#123;,[,(,),],&#125;</code>的括号序列，询问是否合法。</p>
 <p>用一个栈模拟一下即可。</p>
-<h2 id="21-merge-two-sorted-lists">21. Merge Two Sorted Lists</h2>
+<h2 id="merge-two-sorted-lists">21. Merge Two Sorted Lists</h2>
 <p>合并两个有序链表，归并一下即可。</p>
-<h2 id="22-generate-parentheses">22. Generate Parentheses</h2>
+<h2 id="generate-parentheses">22. Generate Parentheses</h2>
 <p>生成所有长度为<span
 class="math inline">\(2l\)</span>的合法括号串，仅使用<code>()</code>。</p>
 <p>DFS一下即可。</p>
 <p>这个题的时间复杂度是合法括号串的数目，即是第<span
 class="math inline">\(l\)</span>个卡特兰数。</p>
-<h2 id="23-merge-k-sorted-lists">*23. Merge k Sorted Lists</h2>
+<h2 id="merge-k-sorted-lists">*23. Merge k Sorted Lists</h2>
 <p><span class="math inline">\(k\)</span>路归并链表。</p>
 <p>记有<span class="math inline">\(k\)</span>个链表，共有<span
 class="math inline">\(n\)</span>个元素。</p>
@@ -556,7 +547,7 @@ class="math inline">\(O(1)\)</span></td>
 <p>分治的做法即为每次两两合并，显然需要<span class="math inline">\(\log
 k\)</span>次，而合并两个有序链表复杂度是<span
 class="math inline">\(O(n)\)</span>。</p>
-<h2 id="31-next-permutation">31. Next Permutation</h2>
+<h2 id="next-permutation">31. Next Permutation</h2>
 <p>给定一个排列<span
 class="math inline">\(p_i\)</span>，求下一个字典序排列。</p>
 <p>分为三步：</p>
@@ -569,8 +560,7 @@ class="math inline">\(p_j&gt;p_{i-1}\)</span></li>
 <li>翻转 <span class="math inline">\(p_{i..}\)</span></li>
 </ol>
 <p>思考：如何将这个题的代码给第46题使用？</p>
-<h2 id="32-longest-valid-parentheses">*32. Longest Valid
-Parentheses</h2>
+<h2 id="longest-valid-parentheses">*32. Longest Valid Parentheses</h2>
 <p>给一个仅含有<code>()</code>的括号序列，求最长合法子串。</p>
 <table>
 <thead>
@@ -604,32 +594,33 @@ class="math inline">\(s_i\)</span>为结尾的最长串的长度。</p>
 <p>那么有转移：</p>
 <p><span class="math display">\[
 dp_{i} = \begin{cases}
-0 \quad , &amp; s_i=\text{(} \\
-dp_{i-2} + 2\quad , &amp; s_{i-1}=\text{(} \land s_i=\text{)} \\
-f \quad, &amp; s_{i-1}=\text{)} \land s_i=\text{)} \land
+    0 \quad , &amp; s_i=\text{(} \\
+    dp_{i-2} + 2\quad , &amp; s_{i-1}=\text{(} \land s_i=\text{)} \\
+    f \quad, &amp; s_{i-1}=\text{)} \land s_i=\text{)} \land
 s_{i-dp_{i-1}-1} = \text{(} \\
-0 \quad , &amp; \text{else}
+    0 \quad , &amp; \text{else}
 \end{cases} \\
 f =
 \begin{cases}
-dp_{i-1} + 2 \quad , &amp; i-dp_{i-1}-1 = 0 \\
-dp_{i-1} + dp_{i-dp_{i-1}-2} + 2 \quad , &amp; i-dp_{i-1}-1 &gt; 0 \\
+    dp_{i-1} + 2 \quad , &amp; i-dp_{i-1}-1 = 0 \\
+    dp_{i-1} + dp_{i-dp_{i-1}-2} + 2 \quad , &amp; i-dp_{i-1}-1 &gt; 0
+\\
 \end{cases}
 \]</span></p>
-<h2 id="33-search-in-rotated-sorted-array">*33. Search in Rotated Sorted
+<h2 id="search-in-rotated-sorted-array">*33. Search in Rotated Sorted
 Array</h2>
 <p>给出一个旋转意义下有序的数组，要求在<span
 class="math inline">\(O(\log
 n)\)</span>的时间复杂度内判断是否包含一个元素。</p>
 <p>旋转意义下有序的例子如：5 6 7 1 2 3 4。</p>
 <p>在二分的时候，显然至少有一侧是有序的；并且能直接知道要找的元素是否在这一侧。</p>
-<h2 id="34-find-first-and-last-position-of-element-in-sorted-array">34.
+<h2 id="find-first-and-last-position-of-element-in-sorted-array">34.
 Find First and Last Position of Element in Sorted Array</h2>
 <p>二分即可。</p>
-<h2 id="39-combination-sum">39. Combination Sum</h2>
+<h2 id="combination-sum">39. Combination Sum</h2>
 <p>给出若干数，输出使用这些数凑齐<span
 class="math inline">\(k\)</span>的方案数，每个数可以使用多次；DFS即可。</p>
-<h2 id="42-trapping-rain-water">*42. Trapping Rain Water</h2>
+<h2 id="trapping-rain-water">*42. Trapping Rain Water</h2>
 <table>
 <thead>
 <tr class="header">
@@ -680,41 +671,37 @@ class="math inline">\(O(n)\)</span>。</p>
 class="math inline">\(i\)</span>位置的一个<span
 class="math inline">\(p_i\)</span>的不增子序列，即当前状态的一侧薄板们；只需要迭代一次。</p>
 <!-- 1. 如果栈不空且 $p_i$ 大于栈顶 -->
-
 <!--    a. 弹出栈顶；如果栈空则跳到2 -->
-
 <!--    b. 长 = i - 栈顶 - 1；高 = min(p_i，p_栈顶) - p_原栈顶；更新答案 -->
-
 <!-- 1. $i$入栈 -->
-
-<h2 id="46-permutations">*46. Permutations</h2>
+<h2 id="permutations">*46. Permutations</h2>
 <p>给出若干个不同的数，求其生成的所有排列。</p>
 <p>拓展：如果有相同的数呢？</p>
-<h2 id="48-rotate-image">48. Rotate Image</h2>
+<h2 id="rotate-image">48. Rotate Image</h2>
 <p>先上下翻转，后沿对角线翻转。</p>
-<h2 id="49-group-anagrams">49. Group Anagrams</h2>
+<h2 id="group-anagrams">49. Group Anagrams</h2>
 <p>模拟一下即可。</p>
-<h2 id="53-maximum-subarray">53. Maximum Subarray</h2>
+<h2 id="maximum-subarray">53. Maximum Subarray</h2>
 <p>找出一个数组的最大区间和。</p>
 <p>可以DP，可以使用前缀和；时间复杂度都是<span
 class="math inline">\(O(n)\)</span>。</p>
-<h2 id="55-jump-game">55. Jump Game</h2>
+<h2 id="jump-game">55. Jump Game</h2>
 <p>给定一个数组<span class="math inline">\(p\)</span>，对于<span
 class="math inline">\(p\_i\)</span>表示<span
 class="math inline">\(p\_{i..i+p_i}\)</span>可达，给定起点，问<span
 class="math inline">\(p\_j\)</span>是否可达？</p>
 <p>维护当前最远可以到达的点；时间复杂度<span
 class="math inline">\(O(n)\)</span>。</p>
-<h2 id="56-merge-intervals">56. Merge Intervals</h2>
+<h2 id="merge-intervals">56. Merge Intervals</h2>
 <p>给出若干段区间，要求将其覆盖的部分合并。</p>
 <p>排序后扫一遍即可；时间复杂度<span class="math inline">\(O(n\log
 n)\)</span>。</p>
-<h2 id="62-unique-paths">62. Unique Paths</h2>
+<h2 id="unique-paths">62. Unique Paths</h2>
 <p>给出一个<span class="math inline">\(n\times
 m\)</span>的网格，求左上角走到右下角的方案数，只可以往右或往下走。</p>
 <p>显然最后的答案是<span
 class="math inline">\(C_{n+m-2}^{n-1}\)</span>。</p>
-<h2 id="64-minimum-path-sum">*64. Minimum Path Sum</h2>
+<h2 id="minimum-path-sum">*64. Minimum Path Sum</h2>
 <p>给一个<span class="math inline">\(n\times m\)</span>的矩阵<span
 class="math inline">\(M\)</span>，每个元素是一个整数，给出从左上角到右下角的路径，使其经过的数字和最小。</p>
 <p>记<span class="math inline">\(dp_{i,j}\)</span>为走到<span
@@ -727,12 +714,12 @@ M_{i,j} + dp_{i, j - 1} \quad , &amp; i = 0 \land j &gt; 0 \\
 M_{i,j} + \min(dp_{i-1,j}, dp_{i, j-1}) \quad, &amp; \text{else}
 \end{cases}
 \]</span></p>
-<h2 id="70-climbing-stairs">70. Climbing Stairs</h2>
+<h2 id="climbing-stairs">70. Climbing Stairs</h2>
 <p>爬<span
 class="math inline">\(n\)</span>级台阶，每次爬一步或者两步，问有多少种爬的方案。</p>
 <p>显然最后的答案是斐波那契数列的第<span
 class="math inline">\(n\)</span>项。</p>
-<h2 id="72-edit-distance">*72. Edit Distance</h2>
+<h2 id="edit-distance">*72. Edit Distance</h2>
 <p>给定两个串<span class="math inline">\(p,
 s\)</span>，求最少经过多少步操作，<span
 class="math inline">\(p\)</span>可以变到<span
@@ -755,27 +742,27 @@ dp_{i-1, j-1} \quad , &amp; s_i = p_j \\
 \]</span></p>
 <p>显然最后的答案是<span
 class="math inline">\(dp_{|s|,|p|}\)</span>。</p>
-<h2 id="75-sort-colors">75. Sort Colors</h2>
+<h2 id="sort-colors">75. Sort Colors</h2>
 <p>给定一个数组仅包含0,1,2；要求使用<span
 class="math inline">\(O(n)\)</span>时间、<span
 class="math inline">\(T(1)\)</span>空间排序。</p>
 <p>计数排序可以做到，有一个更优的做法可以做到只扫一遍，见<a
 href="https://en.wikipedia.org/wiki/Dutch_national_flag_problem">Dutch
 National Flag Problem</a>。</p>
-<h2 id="76-minimum-window-substring">76. Minimum Window Substring</h2>
+<h2 id="minimum-window-substring">76. Minimum Window Substring</h2>
 <p>给定串<span class="math inline">\(s, t\)</span>，求<span
 class="math inline">\(s\)</span>的最短字串<span
 class="math inline">\(s&#39;\)</span>，<span
 class="math inline">\(s&#39;\)</span>中包含<span
 class="math inline">\(t\)</span>的所有字母。</p>
 <p>扫一遍即可。</p>
-<h2 id="78-subsets">78. Subsets</h2>
+<h2 id="subsets">78. Subsets</h2>
 <p>求幂集，DFS/二进制枚举均可。</p>
-<h2 id="79-word-search">79. Word Search</h2>
+<h2 id="word-search">79. Word Search</h2>
 <p>给定一个<span class="math inline">\(n\times
 m\)</span>的矩阵，每个元素是一个字符，求是否存在一条路径组成某个单词。</p>
 <p>DFS即可。</p>
-<h2 id="84-largest-rectangle-in-histogram">84. Largest Rectangle in
+<h2 id="largest-rectangle-in-histogram">84. Largest Rectangle in
 Histogram</h2>
 <p>给出一个数组<span class="math inline">\(p_i\)</span>，表示在数轴<span
 class="math inline">\(i\)</span>的位置上有一个高为<span
@@ -784,57 +771,55 @@ class="math inline">\(p_i\)</span>的薄板，问薄板覆盖的面积中最大�
 <p>单调栈内维护对于<span
 class="math inline">\(i\)</span>的左边最低；时间复杂度<span
 class="math inline">\(O(n)\)</span>。</p>
-<h2 id="85-maximal-rectangle">*85. Maximal Rectangle</h2>
+<h2 id="maximal-rectangle">*85. Maximal Rectangle</h2>
 <p>对于一个<span class="math inline">\(n \times
 m\)</span>的0/1矩阵，找出最大全1子矩阵。</p>
 <p>对于每行，找出每个元素往上连续的'1'的数目；那么对于这一行，可以使用84题的做法；时间复杂度<span
 class="math inline">\(O(nm)\)</span>。</p>
-<h2 id="94-binary-tree-inorder-traversal">94. Binary Tree Inorder
+<h2 id="binary-tree-inorder-traversal">94. Binary Tree Inorder
 Traversal</h2>
 <p>DFS或者用栈即可。</p>
-<h2 id="96-unique-binary-search-trees">96. Unique Binary Search
-Trees</h2>
+<h2 id="unique-binary-search-trees">96. Unique Binary Search Trees</h2>
 <p>显然，一个节点数为<span
 class="math inline">\(n\)</span>的BST的方案数为第<span
 class="math inline">\(n\)</span>个卡特兰数。</p>
-<h2 id="98-validate-binary-search-tree">98. Validate Binary Search
+<h2 id="validate-binary-search-tree">98. Validate Binary Search
 Tree</h2>
 <p>判断一棵二叉树是不是二叉搜索树，记二叉树有<span
 class="math inline">\(n\)</span>个节点。</p>
 <p>DFS即可。</p>
-<h2 id="101-symmetric-tree">101. Symmetric Tree</h2>
+<h2 id="symmetric-tree">101. Symmetric Tree</h2>
 <p>判断一颗二叉树是不是对称的。</p>
 <p>DFS即可；时间复杂度<span class="math inline">\(O(n)\)</span></p>
-<h2 id="102-binary-tree-level-order-traversal">102. Binary Tree Level
-Order Traversal</h2>
+<h2 id="binary-tree-level-order-traversal">102. Binary Tree Level Order
+Traversal</h2>
 <p>给出一棵二叉树的层序遍历，BFS即可。</p>
-<h2 id="104-maximum-depth-of-binary-tree">104. Maximum Depth of Binary
+<h2 id="maximum-depth-of-binary-tree">104. Maximum Depth of Binary
 Tree</h2>
 <p>计算一棵二叉树的高度，DFS即可。</p>
-<h2
-id="105-construct-binary-tree-from-preorder-and-inorder-traversal">*105.
+<h2 id="construct-binary-tree-from-preorder-and-inorder-traversal">*105.
 Construct Binary Tree from Preorder and Inorder Traversal</h2>
 <p>已知一棵二叉树结点无相同的值，给出一棵二叉树前序和中序遍历，求这个二叉树。</p>
 <p>显然前序遍历的第一个值可以将中序遍历分为左子树和右子树，那么DFS即可。</p>
-<h2 id="114-flatten-binary-tree-to-linked-list">114. Flatten Binary Tree
-to Linked List</h2>
+<h2 id="flatten-binary-tree-to-linked-list">114. Flatten Binary Tree to
+Linked List</h2>
 <p>DFS一次即可。</p>
-<h2 id="121-best-time-to-buy-and-sell-stock">121. Best Time to Buy and
-Sell Stock</h2>
+<h2 id="best-time-to-buy-and-sell-stock">121. Best Time to Buy and Sell
+Stock</h2>
 <p>给出一个股票的时间序列，问最好的买入、卖出区间（只能交易一次）。</p>
 <p>扫一遍即可，维护最小持有成本。</p>
-<h2 id="124-binary-tree-maximum-path-sum">124. Binary Tree Maximum Path
+<h2 id="binary-tree-maximum-path-sum">124. Binary Tree Maximum Path
 Sum</h2>
 <p>求二叉树的最大路径和，DFS即可。</p>
-<h2 id="128-longest-consecutive-sequence">128. Longest Consecutive
+<h2 id="longest-consecutive-sequence">128. Longest Consecutive
 Sequence</h2>
 <p>给定一个数组，求最长能组成连续自然数序列的子序列。</p>
 <p>任意从数组中取出一个数，贪心地从数组中取出数再更新答案即可；时间复杂度<span
 class="math inline">\(O(n)\)</span>。</p>
-<h2 id="136-single-number">136. Single Number</h2>
+<h2 id="single-number">136. Single Number</h2>
 <p>给定一个数组，数组中仅一个一个数出现了1次，其他数都保证出现了2次。</p>
 <p>最好的做法是全部异或一遍。</p>
-<h2 id="139-word-break">139. Word Break</h2>
+<h2 id="word-break">139. Word Break</h2>
 <p>给出一个串<span class="math inline">\(s\)</span>，和若干个串<span
 class="math inline">\(p\_i\)</span>，问<span
 class="math inline">\(s\)</span>能否由若干个<span
@@ -848,13 +833,13 @@ dp_{i} =
 (dp_{i-|p_j|..i-1} = p_j) \land dp_{i-|p_j|} , \forall j \in [1, n], j
 \in \mathbb{Z}
 \]</span></p>
-<h2 id="141-linked-list-cycle">141. Linked List Cycle</h2>
+<h2 id="linked-list-cycle">141. Linked List Cycle</h2>
 <p>给出一个单项链表，询问其是否存在环。</p>
 <p>快慢两个指针，快指针每次前进两步，慢指针每次前进一步，如果有环那么快慢指针一定相遇。</p>
-<h2 id="142-linked-list-cycle-ii">*142. Linked List Cycle II</h2>
+<h2 id="linked-list-cycle-ii">*142. Linked List Cycle II</h2>
 <p>给出一个单项链表，询问其是否存在环；如果有环，求环的第一个结点。</p>
 <p>快慢两个指针，快指针每次前进两步，慢指针每次前进一步，如果有环那么快慢指针一定相遇，此时另有一个慢指针从头开始移动，同时移动慢指针，它们一定相遇于环的第一个结点。</p>
-<h2 id="146-lru-cache">*146. LRU Cache</h2>
+<h2 id="lru-cache">*146. LRU Cache</h2>
 <p>实现一个LRU Cache。</p>
 <p>记有<span class="math inline">\(k\)</span>次操作，容量为<span
 class="math inline">\(n\)</span>。</p>
@@ -895,49 +880,49 @@ class="math inline">\(T(n)\)</span></td>
 </tr>
 </tbody>
 </table>
-<h2 id="148-sort-list">*148. Sort List</h2>
+<h2 id="sort-list">*148. Sort List</h2>
 <p>给一个单向链表排序，要求时间复杂度不超过<span
 class="math inline">\(O(n\log n)\)</span>。</p>
 <p>归并排序即可。</p>
-<h2 id="152-maximum-product-subarray">152. Maximum Product Subarray</h2>
+<h2 id="maximum-product-subarray">152. Maximum Product Subarray</h2>
 <p>给出一个数组，求最大区间积。</p>
 <p>扫一遍即可，维护当前遇到的最大值和最小值。</p>
-<h2 id="155-min-stack">155. Min Stack</h2>
+<h2 id="min-stack">155. Min Stack</h2>
 <p>用两个栈，另一个记录当前遇到的最小值。</p>
-<h2 id="160-intersection-of-two-linked-lists">160. Intersection of Two
+<h2 id="intersection-of-two-linked-lists">160. Intersection of Two
 Linked Lists</h2>
 <p>求两个单向链表的交点。</p>
 <p>将较长链表的头往后移动两个链表的长度差次，后一起移动直到两个指针相遇，相遇点显然是交点。</p>
-<h2 id="169-majority-element">169. Majority Element</h2>
+<h2 id="majority-element">169. Majority Element</h2>
 <p>已知一个数组<span
 class="math inline">\(s\)</span>内一个元素出现了多于<span
 class="math inline">\(\frac{|s|}{2}\)</span>次，求这个元素。</p>
 <p><a
 href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm">摩尔投票算法</a>可以解决这个问题。</p>
-<h2 id="198-house-robber">198. House Robber</h2>
+<h2 id="house-robber">198. House Robber</h2>
 <p>给定一个数组<span
 class="math inline">\(s\)</span>，随机选取一些元素，要求选取的元素中不能有在原数组中相邻的，求一个方案使选取的元素和最大。</p>
 <p>维护到（包括）当前点的最大值，分为当前点取、不取两种情况。</p>
-<h2 id="200-number-of-islands">200. Number of Islands</h2>
+<h2 id="number-of-islands">200. Number of Islands</h2>
 <p>求一个<span class="math inline">\(m \times
 n\)</span>网格图上的连通块数目。</p>
 <p>DFS/BFS即可。</p>
-<h2 id="206-reverse-linked-list">206. Reverse Linked List</h2>
+<h2 id="reverse-linked-list">206. Reverse Linked List</h2>
 <p>反转一个单向链表。</p>
-<h2 id="207-course-schedule">207. Course Schedule</h2>
+<h2 id="course-schedule">207. Course Schedule</h2>
 <p>询问一个有向图是否有环，使用BFS/DFS/拓扑排序/并查集等等算法均可；时间复杂度<span
 class="math inline">\(O(V+E)\)</span>。</p>
-<h2 id="208-implement-trie-prefix-tree">208. Implement Trie (Prefix
+<h2 id="implement-trie-prefix-tree">208. Implement Trie (Prefix
 Tree)</h2>
 <p>实现一棵前缀树。</p>
-<h2 id="226-invert-binary-tree">226. Invert Binary Tree</h2>
+<h2 id="invert-binary-tree">226. Invert Binary Tree</h2>
 <p>翻转二叉树，DFS即可。</p>
-<h2 id="234-palindrome-linked-list">234. Palindrome Linked List</h2>
+<h2 id="palindrome-linked-list">234. Palindrome Linked List</h2>
 <p>判断一个单向链表是不是回文的。</p>
 <p>记链表长度为<span class="math inline">\(l\)</span>先找到第<span
 class="math inline">\([\frac
 l2]\)</span>结点，后将这个结点的后继（子链表）反向；问题转化为两个链表是否一个为另一个的前缀。</p>
-<h2 id="239-sliding-window-maximum">*239. Sliding Window Maximum</h2>
+<h2 id="sliding-window-maximum">*239. Sliding Window Maximum</h2>
 <p>给出一个数组<span
 class="math inline">\(p_i\)</span>，滑动窗口内的最值问题。</p>
 <p>单调队列可以解决这个问题。</p>
@@ -945,16 +930,15 @@ class="math inline">\(p_i\)</span>，滑动窗口内的最值问题。</p>
 i\)</span>那么对于<span class="math inline">\(j..n\)</span>，<span
 class="math inline">\(j\)</span>一定比<span
 class="math inline">\(i\)</span>优。</p>
-<h2 id="283-move-zeroes">283. Move Zeroes</h2>
+<h2 id="move-zeroes">283. Move Zeroes</h2>
 <p>将一个数组中的0原地地移动到数组尾部。</p>
-<h2 id="300-longest-increasing-subsequence">300. Longest Increasing
+<h2 id="longest-increasing-subsequence">300. Longest Increasing
 Subsequence</h2>
 <p>求最长上升子序列的长度。</p>
-<h2 id="301-remove-invalid-parentheses">301. Remove Invalid
-Parentheses</h2>
+<h2 id="remove-invalid-parentheses">301. Remove Invalid Parentheses</h2>
 <p>这个题目神奇的地方在于，它真的是<span
 class="math inline">\(O(n^2)\)</span>的。</p>
-<h2 id="312-burst-balloons">*312. Burst Balloons</h2>
+<h2 id="burst-balloons">*312. Burst Balloons</h2>
 <p>给出若干个气球，<span class="math inline">\(b_i\)</span>，戳破<span
 class="math inline">\(b_i\)</span>可以得到<span
 class="math inline">\(\prod_{i-1}^{i+1}b_i\)</span>的金币，求一个戳破顺序使获得的金币最多。可以假设最前面和最后面分别由一个价值为1且不可戳破的气球。</p>
@@ -967,15 +951,15 @@ dp_{i,j} = \begin{cases}
 \mathbb{Z} \quad , &amp; \text{else} \\
 \end{cases}
 \]</span></p>
-<h2 id="337-house-robber-iii">*337. House Robber III</h2>
+<h2 id="house-robber-iii">*337. House Robber III</h2>
 <p>在一棵有<span
 class="math inline">\(n\)</span>个结点的二叉树上随机选取一些结点，要求不能有任意两个相连结点被同时选取，求一个方案使选取的结点和最大；输出这个最大值。</p>
 <p>记忆化DFS一下即可，时间复杂度<span
 class="math inline">\(O(n)\)</span>。</p>
-<h2 id="338-counting-bits">338 Counting Bits</h2>
+<h2 id="counting-bits">338 Counting Bits</h2>
 <p>询问<span
 class="math inline">\(0-n\)</span>内每个数的二进制表示中有多少个1。</p>
-<h2 id="416-partition-equal-subset-sum">*416. Partition Equal Subset
+<h2 id="partition-equal-subset-sum">*416. Partition Equal Subset
 Sum</h2>
 <p>给出一个集合<span
 class="math inline">\(s\)</span>，问是否存在一个划分使两部分的和相等。</p>
@@ -987,49 +971,49 @@ class="math inline">\(\frac
 S2\)</span>，显然0/1背包可以解决；时间复杂度<span
 class="math inline">\(O(|s|S)\)</span>，空间复杂度<span
 class="math inline">\(T(S)\)</span>。</p>
-<h2 id="437-path-sum-iii">437. Path Sum III</h2>
+<h2 id="path-sum-iii">437. Path Sum III</h2>
 <p>问树上有多少个路径的和为<span class="math inline">\(k\)</span>。</p>
 <p>DFS即可。</p>
-<h2 id="448-find-all-numbers-disappeared-in-an-array">448. Find All
-Numbers Disappeared in an Array</h2>
+<h2 id="find-all-numbers-disappeared-in-an-array">448. Find All Numbers
+Disappeared in an Array</h2>
 <p>给出一个数组，长度为<span
 class="math inline">\(n\)</span>，其中仅包含范围在<span
 class="math inline">\([1,n]\)</span>的数，有的数可能出现了多次，要求找出没有出现过的数。</p>
 <p>扫一遍即可，时间复杂度<span
 class="math inline">\(O(n)\)</span>，空间复杂度<span
 class="math inline">\(O(1)\)</span>。</p>
-<h2 id="461-hamming-distance">461. Hamming Distance</h2>
+<h2 id="hamming-distance">461. Hamming Distance</h2>
 <p>求两个数的二级制位不同的数目。</p>
 <p><code>__builtin_popcount(x ^ y)</code>即是答案。</p>
-<h2 id="494-target-sum">494. Target Sum</h2>
+<h2 id="target-sum">494. Target Sum</h2>
 <p>给出若干个数，在每个数前添加加号或减号使表达式的值等于<span
 class="math inline">\(k\)</span>，问有多少种方案。</p>
 <p>DFS即可。</p>
-<h2 id="538-convert-bst-to-greater-tree">*538. Convert BST to Greater
+<h2 id="convert-bst-to-greater-tree">*538. Convert BST to Greater
 Tree</h2>
 <p>给定一棵二叉搜索树，要求对于树上所有的结点，其值加上所有值大于它的值的结点的和。</p>
 <p>DFS即可，利用二叉搜索树的性质；时间复杂度<span
 class="math inline">\(O(n)\)</span>。</p>
-<h2 id="543-diameter-of-binary-tree">543. Diameter of Binary Tree</h2>
+<h2 id="diameter-of-binary-tree">543. Diameter of Binary Tree</h2>
 <p>求一棵二叉树的最长路径。</p>
 <p>DFS即可，时间复杂度<span class="math inline">\(O(n)\)</span>。</p>
-<h2 id="560-subarray-sum-equals-k">560. Subarray Sum Equals K</h2>
+<h2 id="subarray-sum-equals-k">560. Subarray Sum Equals K</h2>
 <p>给出一个数组，求其所有连续子数组和为K的数目。</p>
 <p>前缀和+哈希，时间复杂度<span
 class="math inline">\(O(n)\)</span>。</p>
-<h2 id="572-subtree-of-another-tree">572. Subtree of Another Tree</h2>
+<h2 id="subtree-of-another-tree">572. Subtree of Another Tree</h2>
 <p>给出两棵树，询问一棵树是否为另一个树的子树。</p>
 <p>DFS即可。</p>
-<h2 id="581-shortest-unsorted-continuous-subarray">581. Shortest
-Unsorted Continuous Subarray</h2>
+<h2 id="shortest-unsorted-continuous-subarray">581. Shortest Unsorted
+Continuous Subarray</h2>
 <p>给定一个数组，求一个长度最小的区间：如果将这个区间排序，那么整个数组有序。</p>
 <p>可以用栈扫一遍，时间复杂度<span
 class="math inline">\(O(n)\)</span>；也可以排序，时间复杂度<span
 class="math inline">\(O(n\log n)\)</span>。</p>
-<h2 id="617-merge-two-binary-trees">617. Merge Two Binary Trees</h2>
+<h2 id="merge-two-binary-trees">617. Merge Two Binary Trees</h2>
 <p>合并两棵二叉树，要求新树的结点的值是原树对应位置的和（没有则视为0）。
 模拟即可。</p>
-<h2 id="771-jewels-and-stones">771. Jewels and Stones</h2>
+<h2 id="jewels-and-stones">771. Jewels and Stones</h2>
 <p>给出两个串<span class="math inline">\(s,p\)</span>，问<span
 class="math inline">\(p\)</span>中有多少个字符在<span
 class="math inline">\(s\)</span>中也有。</p>
@@ -1118,36 +1102,32 @@ class="math inline">\(s\)</span>中也有。</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-two-sum"><span class="nav-text">1. Two Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-add-two-numbers"><span class="nav-text">2. Add Two Numbers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-longest-substring-without-repeating-characters"><span class="nav-text">3. Longest
-Substring Without Repeating Characters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-median-of-two-sorted-arrays"><span class="nav-text">*4. Median of Two Sorted
-Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-longest-palindromic-substring"><span class="nav-text">5. Longest Palindromic
-Substring</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-regular-expression-matching"><span class="nav-text">*10. Regular Expression
-Matching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-container-with-most-water"><span class="nav-text">*11. Container With Most
-Water</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-3-sum"><span class="nav-text">*15. 3 Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-letter-combinations-of-a-phone-number"><span class="nav-text">17. Letter
-Combinations of a Phone Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-remove-nth-node-from-end-of-list"><span class="nav-text">*19. Remove Nth Node From
-End of List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-valid-parentheses"><span class="nav-text">20. Valid Parentheses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-merge-two-sorted-lists"><span class="nav-text">21. Merge Two Sorted Lists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-generate-parentheses"><span class="nav-text">22. Generate Parentheses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-merge-k-sorted-lists"><span class="nav-text">*23. Merge k Sorted Lists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#31-next-permutation"><span class="nav-text">31. Next Permutation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32-longest-valid-parentheses"><span class="nav-text">*32. Longest Valid
-Parentheses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#33-search-in-rotated-sorted-array"><span class="nav-text">*33. Search in Rotated Sorted
-Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#34-find-first-and-last-position-of-element-in-sorted-array"><span class="nav-text">34.
-Find First and Last Position of Element in Sorted Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#39-combination-sum"><span class="nav-text">39. Combination Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#42-trapping-rain-water"><span class="nav-text">*42. Trapping Rain Water</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#46-permutations"><span class="nav-text">*46. Permutations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#48-rotate-image"><span class="nav-text">48. Rotate Image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#49-group-anagrams"><span class="nav-text">49. Group Anagrams</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#53-maximum-subarray"><span class="nav-text">53. Maximum Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#55-jump-game"><span class="nav-text">55. Jump Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#56-merge-intervals"><span class="nav-text">56. Merge Intervals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#62-unique-paths"><span class="nav-text">62. Unique Paths</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#64-minimum-path-sum"><span class="nav-text">*64. Minimum Path Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#70-climbing-stairs"><span class="nav-text">70. Climbing Stairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#72-edit-distance"><span class="nav-text">*72. Edit Distance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#75-sort-colors"><span class="nav-text">75. Sort Colors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#76-minimum-window-substring"><span class="nav-text">76. Minimum Window Substring</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#78-subsets"><span class="nav-text">78. Subsets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#79-word-search"><span class="nav-text">79. Word Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#84-largest-rectangle-in-histogram"><span class="nav-text">84. Largest Rectangle in
-Histogram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#85-maximal-rectangle"><span class="nav-text">*85. Maximal Rectangle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#94-binary-tree-inorder-traversal"><span class="nav-text">94. Binary Tree Inorder
-Traversal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#96-unique-binary-search-trees"><span class="nav-text">96. Unique Binary Search
-Trees</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#98-validate-binary-search-tree"><span class="nav-text">98. Validate Binary Search
-Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#101-symmetric-tree"><span class="nav-text">101. Symmetric Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#102-binary-tree-level-order-traversal"><span class="nav-text">102. Binary Tree Level
-Order Traversal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#104-maximum-depth-of-binary-tree"><span class="nav-text">104. Maximum Depth of Binary
-Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#105-construct-binary-tree-from-preorder-and-inorder-traversal"><span class="nav-text">*105.
-Construct Binary Tree from Preorder and Inorder Traversal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#114-flatten-binary-tree-to-linked-list"><span class="nav-text">114. Flatten Binary Tree
-to Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#121-best-time-to-buy-and-sell-stock"><span class="nav-text">121. Best Time to Buy and
-Sell Stock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#124-binary-tree-maximum-path-sum"><span class="nav-text">124. Binary Tree Maximum Path
-Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#128-longest-consecutive-sequence"><span class="nav-text">128. Longest Consecutive
-Sequence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#136-single-number"><span class="nav-text">136. Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#139-word-break"><span class="nav-text">139. Word Break</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#141-linked-list-cycle"><span class="nav-text">141. Linked List Cycle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#142-linked-list-cycle-ii"><span class="nav-text">*142. Linked List Cycle II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#146-lru-cache"><span class="nav-text">*146. LRU Cache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#148-sort-list"><span class="nav-text">*148. Sort List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#152-maximum-product-subarray"><span class="nav-text">152. Maximum Product Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#155-min-stack"><span class="nav-text">155. Min Stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#160-intersection-of-two-linked-lists"><span class="nav-text">160. Intersection of Two
-Linked Lists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#169-majority-element"><span class="nav-text">169. Majority Element</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#198-house-robber"><span class="nav-text">198. House Robber</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#200-number-of-islands"><span class="nav-text">200. Number of Islands</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#206-reverse-linked-list"><span class="nav-text">206. Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#207-course-schedule"><span class="nav-text">207. Course Schedule</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#208-implement-trie-prefix-tree"><span class="nav-text">208. Implement Trie (Prefix
-Tree)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#226-invert-binary-tree"><span class="nav-text">226. Invert Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#234-palindrome-linked-list"><span class="nav-text">234. Palindrome Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#239-sliding-window-maximum"><span class="nav-text">*239. Sliding Window Maximum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#283-move-zeroes"><span class="nav-text">283. Move Zeroes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#300-longest-increasing-subsequence"><span class="nav-text">300. Longest Increasing
-Subsequence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#301-remove-invalid-parentheses"><span class="nav-text">301. Remove Invalid
-Parentheses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#312-burst-balloons"><span class="nav-text">*312. Burst Balloons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#337-house-robber-iii"><span class="nav-text">*337. House Robber III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#338-counting-bits"><span class="nav-text">338 Counting Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#416-partition-equal-subset-sum"><span class="nav-text">*416. Partition Equal Subset
-Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#437-path-sum-iii"><span class="nav-text">437. Path Sum III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#448-find-all-numbers-disappeared-in-an-array"><span class="nav-text">448. Find All
-Numbers Disappeared in an Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#461-hamming-distance"><span class="nav-text">461. Hamming Distance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#494-target-sum"><span class="nav-text">494. Target Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#538-convert-bst-to-greater-tree"><span class="nav-text">*538. Convert BST to Greater
-Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#543-diameter-of-binary-tree"><span class="nav-text">543. Diameter of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#560-subarray-sum-equals-k"><span class="nav-text">560. Subarray Sum Equals K</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#572-subtree-of-another-tree"><span class="nav-text">572. Subtree of Another Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#581-shortest-unsorted-continuous-subarray"><span class="nav-text">581. Shortest
-Unsorted Continuous Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#617-merge-two-binary-trees"><span class="nav-text">617. Merge Two Binary Trees</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#771-jewels-and-stones"><span class="nav-text">771. Jewels and Stones</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#two-sum"><span class="nav-text">1. Two Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-two-numbers"><span class="nav-text">2. Add Two Numbers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#longest-substring-without-repeating-characters"><span class="nav-text">3. Longest
+Substring Without Repeating Characters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#median-of-two-sorted-arrays"><span class="nav-text">*4. Median of Two Sorted
+Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#longest-palindromic-substring"><span class="nav-text">5. Longest Palindromic
+Substring</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#regular-expression-matching"><span class="nav-text">*10. Regular Expression
+Matching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#container-with-most-water"><span class="nav-text">*11. Container With Most Water</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sum"><span class="nav-text">*15. 3 Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#letter-combinations-of-a-phone-number"><span class="nav-text">17. Letter Combinations
+of a Phone Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove-nth-node-from-end-of-list"><span class="nav-text">*19. Remove Nth Node From End
+of List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#valid-parentheses"><span class="nav-text">20. Valid Parentheses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge-two-sorted-lists"><span class="nav-text">21. Merge Two Sorted Lists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#generate-parentheses"><span class="nav-text">22. Generate Parentheses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge-k-sorted-lists"><span class="nav-text">*23. Merge k Sorted Lists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-permutation"><span class="nav-text">31. Next Permutation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#longest-valid-parentheses"><span class="nav-text">*32. Longest Valid Parentheses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#search-in-rotated-sorted-array"><span class="nav-text">*33. Search in Rotated Sorted
+Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find-first-and-last-position-of-element-in-sorted-array"><span class="nav-text">34.
+Find First and Last Position of Element in Sorted Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#combination-sum"><span class="nav-text">39. Combination Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trapping-rain-water"><span class="nav-text">*42. Trapping Rain Water</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#permutations"><span class="nav-text">*46. Permutations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rotate-image"><span class="nav-text">48. Rotate Image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#group-anagrams"><span class="nav-text">49. Group Anagrams</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximum-subarray"><span class="nav-text">53. Maximum Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jump-game"><span class="nav-text">55. Jump Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge-intervals"><span class="nav-text">56. Merge Intervals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unique-paths"><span class="nav-text">62. Unique Paths</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#minimum-path-sum"><span class="nav-text">*64. Minimum Path Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#climbing-stairs"><span class="nav-text">70. Climbing Stairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#edit-distance"><span class="nav-text">*72. Edit Distance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-colors"><span class="nav-text">75. Sort Colors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#minimum-window-substring"><span class="nav-text">76. Minimum Window Substring</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#subsets"><span class="nav-text">78. Subsets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#word-search"><span class="nav-text">79. Word Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#largest-rectangle-in-histogram"><span class="nav-text">84. Largest Rectangle in
+Histogram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximal-rectangle"><span class="nav-text">*85. Maximal Rectangle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binary-tree-inorder-traversal"><span class="nav-text">94. Binary Tree Inorder
+Traversal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unique-binary-search-trees"><span class="nav-text">96. Unique Binary Search Trees</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#validate-binary-search-tree"><span class="nav-text">98. Validate Binary Search
+Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#symmetric-tree"><span class="nav-text">101. Symmetric Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binary-tree-level-order-traversal"><span class="nav-text">102. Binary Tree Level Order
+Traversal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximum-depth-of-binary-tree"><span class="nav-text">104. Maximum Depth of Binary
+Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#construct-binary-tree-from-preorder-and-inorder-traversal"><span class="nav-text">*105.
+Construct Binary Tree from Preorder and Inorder Traversal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flatten-binary-tree-to-linked-list"><span class="nav-text">114. Flatten Binary Tree to
+Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#best-time-to-buy-and-sell-stock"><span class="nav-text">121. Best Time to Buy and Sell
+Stock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binary-tree-maximum-path-sum"><span class="nav-text">124. Binary Tree Maximum Path
+Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#longest-consecutive-sequence"><span class="nav-text">128. Longest Consecutive
+Sequence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#single-number"><span class="nav-text">136. Single Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#word-break"><span class="nav-text">139. Word Break</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linked-list-cycle"><span class="nav-text">141. Linked List Cycle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linked-list-cycle-ii"><span class="nav-text">*142. Linked List Cycle II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lru-cache"><span class="nav-text">*146. LRU Cache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-list"><span class="nav-text">*148. Sort List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximum-product-subarray"><span class="nav-text">152. Maximum Product Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#min-stack"><span class="nav-text">155. Min Stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#intersection-of-two-linked-lists"><span class="nav-text">160. Intersection of Two
+Linked Lists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#majority-element"><span class="nav-text">169. Majority Element</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#house-robber"><span class="nav-text">198. House Robber</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#number-of-islands"><span class="nav-text">200. Number of Islands</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reverse-linked-list"><span class="nav-text">206. Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#course-schedule"><span class="nav-text">207. Course Schedule</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#implement-trie-prefix-tree"><span class="nav-text">208. Implement Trie (Prefix
+Tree)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#invert-binary-tree"><span class="nav-text">226. Invert Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#palindrome-linked-list"><span class="nav-text">234. Palindrome Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sliding-window-maximum"><span class="nav-text">*239. Sliding Window Maximum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#move-zeroes"><span class="nav-text">283. Move Zeroes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#longest-increasing-subsequence"><span class="nav-text">300. Longest Increasing
+Subsequence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove-invalid-parentheses"><span class="nav-text">301. Remove Invalid Parentheses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#burst-balloons"><span class="nav-text">*312. Burst Balloons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#house-robber-iii"><span class="nav-text">*337. House Robber III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#counting-bits"><span class="nav-text">338 Counting Bits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partition-equal-subset-sum"><span class="nav-text">*416. Partition Equal Subset
+Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#path-sum-iii"><span class="nav-text">437. Path Sum III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find-all-numbers-disappeared-in-an-array"><span class="nav-text">448. Find All Numbers
+Disappeared in an Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hamming-distance"><span class="nav-text">461. Hamming Distance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#target-sum"><span class="nav-text">494. Target Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#convert-bst-to-greater-tree"><span class="nav-text">*538. Convert BST to Greater
+Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#diameter-of-binary-tree"><span class="nav-text">543. Diameter of Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#subarray-sum-equals-k"><span class="nav-text">560. Subarray Sum Equals K</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#subtree-of-another-tree"><span class="nav-text">572. Subtree of Another Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shortest-unsorted-continuous-subarray"><span class="nav-text">581. Shortest Unsorted
+Continuous Subarray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge-two-binary-trees"><span class="nav-text">617. Merge Two Binary Trees</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jewels-and-stones"><span class="nav-text">771. Jewels and Stones</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
