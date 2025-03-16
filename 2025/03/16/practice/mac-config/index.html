@@ -20,17 +20,21 @@
     var CONFIG = {"hostname":"192217.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":280,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="50% Humanities 50% Science">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jingqi Chen&#39;s Blog">
-<meta property="og:url" content="https://192217.space/archives/2018/01/index.html">
+  <meta name="description" content="变身果粉了，写一点自己的macOS的配置。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="macOS 配置">
+<meta property="og:url" content="https://192217.space/2025/03/16/practice/mac-config/index.html">
 <meta property="og:site_name" content="Jingqi Chen&#39;s Blog">
-<meta property="og:description" content="50% Humanities 50% Science">
+<meta property="og:description" content="变身果粉了，写一点自己的macOS的配置。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-16T21:56:17.000Z">
+<meta property="article:modified_time" content="2025-03-16T18:16:12.037Z">
 <meta property="article:author" content="Jingqi Chen">
+<meta property="article:tag" content="long">
+<meta property="article:tag" content="practice">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://192217.space/archives/2018/01/">
+<link rel="canonical" href="https://192217.space/2025/03/16/practice/mac-config/">
 
 
 <script id="page-configurations">
@@ -38,12 +42,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Archive | Jingqi Chen's Blog</title>
+  <title>macOS 配置 | Jingqi Chen's Blog</title>
   
 
 
@@ -156,50 +160,95 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">Um..! 16 posts in total. Keep on posting.</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://192217.space/2025/03/16/practice/mac-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Jingqi Chen">
+      <meta itemprop="description" content="50% Humanities 50% Science">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jingqi Chen's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          macOS 配置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-03-16 14:56:17 / Modified: 11:16:12" itemprop="dateCreated datePublished" datetime="2025-03-16T14:56:17-07:00">2025-03-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2018</span>
+        <p>变身果粉了，写一点自己的macOS的配置。</p>
+<span id="more"></span>
+<h2 id="keyboard">Keyboard</h2>
+<p>Settings - Keyboard:</p>
+<ul>
+<li>Key repeat rate</li>
+<li>Delay until repeat</li>
+</ul>
+<p>Accessibility - Keyboard - Slow Keys:</p>
+<ul>
+<li>Acceptance delay</li>
+</ul>
+<p>Key held down behavior:</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write NSGlobalDomain <span class="string">&quot;ApplePressAndHoldEnabled&quot;</span> -bool <span class="string">&quot;false&quot;</span></span><br></pre></td></tr></table></figure>
+<!-- https://macos-defaults.com/keyboard/applepressandholdenabled.html#key-held-down-behavior -->
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-01-10T14:56:17-08:00"
-              content="2018-01-10">
-          01-10
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/long/" rel="tag"># long</a>
+              <a href="/tags/practice/" rel="tag"># practice</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/01/10/practice/electronics/" itemprop="url">
-            <span itemprop="name">我的电子产品</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/14/annual/2024/" rel="prev" title="2024 Q[1, 2, 3, 4]">
+      <i class="fa fa-chevron-left"></i> 2024 Q[1, 2, 3, 4]
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -252,6 +301,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#keyboard"><span class="nav-text">Keyboard</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

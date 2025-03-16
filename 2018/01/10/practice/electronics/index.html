@@ -28,7 +28,7 @@
 <meta property="og:description" content="这篇博客简单记录了我家的电子产品。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-01-10T22:56:17.000Z">
-<meta property="article:modified_time" content="2024-12-03T00:57:08.380Z">
+<meta property="article:modified_time" content="2025-03-16T18:16:12.037Z">
 <meta property="article:author" content="Jingqi Chen">
 <meta property="article:tag" content="long">
 <meta property="article:tag" content="practice">
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-12-02 16:57:08" itemprop="dateModified" datetime="2024-12-02T16:57:08-08:00">2024-12-02</time>
+                <time title="Modified: 2025-03-16 11:16:12" itemprop="dateModified" datetime="2025-03-16T11:16:12-07:00">2025-03-16</time>
               </span>
 
           
@@ -257,7 +257,7 @@
 </tr>
 <tr class="odd">
 <td style="text-align: left;">显卡</td>
-<td style="text-align: left;">Geforce 4070 Super</td>
+<td style="text-align: left;">4070 Super</td>
 <td style="text-align: left;">35.48 TFLOPS</td>
 </tr>
 <tr class="even">
@@ -277,8 +277,22 @@
 <li>750使用一张PCIE 3.0 x8 -&gt; 两根SFF 8643 -&gt; SFF 8639连接</li>
 </ul></li>
 </ul>
-<p>磁盘E-L组成ZFS z2阵列。</p>
-<h3 id="台式机---银欣-kl07b">台式机 - 银欣 KL07B</h3>
+<p>磁盘E-L组成ZFS z2阵列, A和B各分了40GB组成mirror ZIL,
+A的剩余空间是L2ARC，B的剩余空间是下载缓存（供transmission使用）。</p>
+<p>用途：</p>
+<ol type="1">
+<li>plex</li>
+<li>gitlab</li>
+<li>transmission</li>
+<li>adhoc machine learning jobs</li>
+</ol>
+<p>问题：</p>
+<ol type="1">
+<li>BIOS中回电后开机设置无效。</li>
+<li>BMC无效。</li>
+<li>5900X不能稳定运行，负载一高就随机重启/失去响应。</li>
+</ol>
+<h3 id="笔记本---mbp-14">笔记本 - MBP 14</h3>
 <table>
 <thead>
 <tr class="header">
@@ -290,33 +304,18 @@
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">CPU</td>
-<td style="text-align: left;">Ryzen 5900X</td>
-<td style="text-align: left;">Passmark 39534</td>
+<td style="text-align: left;">M4 Pro</td>
+<td style="text-align: left;">8P4E, Passmark 33139</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">内存</td>
-<td style="text-align: left;">64 GiB</td>
-<td style="text-align: left;">4*16GiB 3000 Mhz</td>
+<td style="text-align: left;">48 GiB</td>
+<td style="text-align: left;">-</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">磁盘A</td>
-<td style="text-align: left;">960 GiB</td>
-<td style="text-align: left;">905P</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">磁盘B-C</td>
-<td style="text-align: left;">800 GiB</td>
-<td style="text-align: left;">P3600</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">显卡</td>
-<td style="text-align: left;">Radeon 6800XT</td>
-<td style="text-align: left;">20.74 TFLOPS</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">网卡</td>
-<td style="text-align: left;">AQC107</td>
-<td style="text-align: left;">10Gbps</td>
+<td style="text-align: left;">磁盘</td>
+<td style="text-align: left;">1 TiB</td>
+<td style="text-align: left;">-</td>
 </tr>
 </tbody>
 </table>
@@ -324,21 +323,10 @@
 <li>外设：
 <ul>
 <li>Sony A90K 42'</li>
-<li>HHKB Pro2 Type S; 已改装蓝牙</li>
-<li>Razer DeathAdder V3</li>
-<li>罗技 Brio</li>
-<li>Fiio K5 Pro + SRH840A</li>
-<li>精英手柄</li>
-<li>Xbox 手柄接收器</li>
-</ul></li>
-<li>其他配件：
-<ul>
-<li>MSI X570 Unify</li>
-<li>利民 IB·E散热器; 猫头鹰A15</li>
-<li>长城 G13; 这个电源在110V下只有850W输出</li>
-<li>猫头鹰A14 PWM * 3 进风；猫头鹰A14 PWM 出风</li>
-<li>900p使用M.2-&gt;SFF8639连接</li>
-<li>P3600使用一张PCIE 3.0 x8 -&gt; 两根SFF 8643 -&gt; SFF 8639连接</li>
+<li>HHKB Hybrid</li>
+<li>Trackpad</li>
+<li>10GbE</li>
+<li>Shure SRH840A</li>
 </ul></li>
 </ul>
 <h3 id="台式机---乔思伯-d30">台式机 - 乔思伯 D30</h3>
@@ -373,7 +361,7 @@
 </tr>
 <tr class="odd">
 <td style="text-align: left;">显卡</td>
-<td style="text-align: left;">Geforce 4080</td>
+<td style="text-align: left;">4080</td>
 <td style="text-align: left;">48.74 TFLOPS</td>
 </tr>
 <tr class="even">
@@ -395,7 +383,6 @@
 <li>Filco 87 双模 粉色</li>
 <li>Razer DeathAdder V3</li>
 <li>精英手柄</li>
-<li>罗技 魔音海妖 粉色</li>
 <li>SMSL M400 + SP400 + Susvara</li>
 </ul></li>
 <li>其他配件：
@@ -438,8 +425,13 @@
 </tr>
 <tr class="odd">
 <td style="text-align: left;">显卡</td>
-<td style="text-align: left;">Radeon 6700XT</td>
+<td style="text-align: left;">6700XT</td>
 <td style="text-align: left;">13.21 TFLOPS</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">网卡</td>
+<td style="text-align: left;">AQC107</td>
+<td style="text-align: left;">10Gbps</td>
 </tr>
 </tbody>
 </table>
@@ -450,7 +442,7 @@
 <li>XBows</li>
 <li>Razer DeathAdder V3</li>
 <li>罗技 Brio</li>
-<li>Fiio K9 + HE1000V2</li>
+<li>Fiio K19 + Susvara</li>
 </ul></li>
 <li>其他配件：
 <ul>
@@ -492,8 +484,8 @@
 </tr>
 <tr class="odd">
 <td style="text-align: left;">显卡</td>
-<td style="text-align: left;">Radeon 6600XT</td>
-<td style="text-align: left;">10.60 TFLOPS</td>
+<td style="text-align: left;">3060Ti</td>
+<td style="text-align: left;">16.20 TFLOPS</td>
 </tr>
 </tbody>
 </table>
@@ -504,9 +496,8 @@
 <li>Realforce 87u 分区压力</li>
 <li>Razer DeathAdder V3</li>
 <li>罗技 Brio</li>
-<li>Sony MDR-1000X ii</li>
-<li>Bose QC45</li>
-<li>Fiio K7 + HD600</li>
+<li>Sony WH-1000XM5</li>
+<li>Fiio K9 + HE1000V2</li>
 <li>Wacom 数位板</li>
 </ul></li>
 <li>其他配件：
@@ -535,8 +526,8 @@
 </tr>
 <tr class="even">
 <td style="text-align: left;">内存</td>
-<td style="text-align: left;">32 GiB</td>
-<td style="text-align: left;">2*16GiB 3200 MHz</td>
+<td style="text-align: left;">64 GiB</td>
+<td style="text-align: left;">3200 MHz</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">磁盘A</td>
@@ -585,26 +576,31 @@
 <li><p>Sony FE 20 F1.8 G</p></li>
 <li><p>Sony FE 35 F1.4 G Master</p></li>
 <li><p>Sony FE 50 F1.4 G Master</p></li>
-<li><p>Sony FE 50 F1.4 ZA</p></li>
-<li><p>Sony FE 70-200 F2.8 G Master OSS II</p></li>
+<li><p>Sony FE 70-200 F2.8 G Master OSS II, 1.4x TC</p></li>
 <li><p>Sigma 14-24 F2.8 DG DN Art</p></li>
 <li><p>Sigma 28-70 F2.8 DG DN Contemporary</p></li>
 <li><p>Sigma 100-400 F5-6.3 DG DN Contemporary</p></li>
 <li><p>Sigma 105 F2.8 DG DN MACRO Art</p></li>
 <li><p>ZEISS Loxia 2.4/25 Distagon</p></li>
 <li><p>Voigtlander 50 mm / 1:2.0 APO LANTHAR E</p></li>
-<li><p>存储卡/保护镜/CPL/ND/相机包/三脚架</p></li>
+<li><p>Viltrox 28mm f4.5 E</p></li>
+<li><p>Sony FE 50 F1.4 ZA</p></li>
 </ul></li>
-<li>Nikon Z8:
+<li>Nikon Z8 &amp; Z6:
 <ul>
+<li>Nikon Z 24-70 f/4 S</li>
 <li>Nikon Z 50 f/1.8 S</li>
 <li>Nikon Z 85 f/1.2 S</li>
 <li>Nikon Z 400 f/4.5 VR S</li>
-<li>存储卡/保护镜</li>
+</ul></li>
+<li>Nikon Z30:
+<ul>
+<li>Nikon Z DX 16-50 f/3.5-6.3 VR <!-- - Nikon Z DX 24 f/1.7 --></li>
 </ul></li>
 <li>Nikon D850:</li>
 <li>Nikon F100:
 <ul>
+<li>Zeiss Milvus 1.4/25 Distagon</li>
 <li>Zeiss Otus 1.4/55 Distagon</li>
 <li>Sigma 40 F1.4 DG HSM Art</li>
 <li>Nikon AF-S 50 f/1.8 G</li>
@@ -623,44 +619,124 @@
 <li>osmo action 5</li>
 <li>osmo mobile</li>
 </ul>
+<p>也写一点对未来器材的规划。</p>
+<p>E卡口：</p>
+<p>最想要的：</p>
+<ol type="1">
+<li>A7CR通过固件更新支持MF中被摄体识别与放大联动。毕竟这个事情的概率还是比Loxia发售Z卡口高，虽然还是不太高。</li>
+<li>读出速度相比于60mp不倒退的100mp；有的话可以按发布顺序更新R5和CR。</li>
+<li>新的原厂饼干镜头，规格稍稍放宽，但是素质看齐2870GM同焦段同光圈。</li>
+<li>RX1R3，我也不知道它和1概率哪个高。</li>
+<li>1224GM，已经有1424DN的情况下它的优先级确实不太高。</li>
+<li>1635PZ，配合新视频机食用（理想情况能支持4K120、6K60、8K30中的至少两种），毕竟用A7R3/R5/CR拍视频都有点抽象。</li>
+</ol>
+<p>比较想要但是要看售价的：</p>
+<ol type="1">
+<li>下一代堆栈式传感器，可能是A1m3。</li>
+<li>A7C3，至少要支持一下4K60，全像素12bit读出不慢于15ms。</li>
+<li>下一代原厂90微距，更好的对焦，更好的防抖。</li>
+<li>2870G，素质看齐2470GM2同光圈，500g。</li>
+</ol>
+<p>还没想好买不买的：</p>
+<ol start="2" type="1">
+<li>下一代GS传感器，可能是A9m4，DR要能赶上初代A7R。</li>
+</ol>
+<p>Z/F卡口：</p>
+<p>最想要的：</p>
+<ol type="1">
+<li>支持 MF中被摄体识别与放大联动
+的高像素机型，Otus和Milvus需要它，理想情况下是新的Z7（60mp或更高），中等情况下是Z8的新固件，最坏情况下是同传感器的Z82（索尼A1m2的行为）。另需购买大和号配合食用。</li>
+<li>高性能log曲线，理想情况对标SLOG3，中等情况对标Samsung
+Log，最坏情况开放14bit RAW录制。</li>
+<li>105微，本时代唯一带防抖的东西，如果索尼的原厂90微迟迟不来，那可以本着凑单的原则先把105微买了。</li>
+<li>超长焦，500DG的对焦比较令人不满意（在D850和转接Z8都是如此），而且我也确实缺乏锻炼；理想情况下是500TC（略超2kg），中等情况下是640TC或者863。</li>
+</ol>
+<p>比较想要但是还没想好什么时候买的：</p>
+<ol start="4" type="1">
+<li>胶片系统中有点想玩的镜头，目前包括Milvus50M和Milvus135；和有点想玩的机身，目前包括F6和F80s。</li>
+<li>D850，主要功能是给胶片系统当备用机；另购买一个200-400 f/4G
+II搭配使用。</li>
+</ol>
 <!-- 
 - Sony A7R5
+- Sony A7R3
 - Sony A7CR
-- Sony A1M3(currently A7R3)
-- Sony A7C3/FX3
-    - Sony FE 12-24 F2.8 G Master
-    - Sony FE 16-35 F4 G PZ
+- Sony A7C3 *
+- Sony A1M3 *
     - Sony FE 20 F1.8 G
     - Sony FE 35 F1.4 G Master
     - Sony FE 50 F1.4 G Master
+    - Sony FE 12-24 F2.8 G Master *
+    - Sony FE 28-70 F2 G Master *
     - Sony FE 70-200 F2.8 G Master OSS II, 1.4x TC
 
-    - Sigma 28-70 F2.8 DG DN Contemporary
-    - Sigma 105 F2.8 DG DN MACRO Art
+    - Sony FE 16-35 F4 G PZ *
+    - Sony FE 24 F1.4 G Master *
 
     - ZEISS Loxia 2.4/25 Distagon
     - Voigtlander 50 mm / 1:2.0 APO LANTHAR E
 
-SELL: 50ZA, 1424DN, 140DN, A7R3.
+    - 50ZA
+    - 28/2.8 (replace 28/4.5) x1k
+
+- Sony A7M5(或者其他什么)
+    - Sigma 14-24 F2.8 DG DN Art
+    - Sigma 28-70 F2.8 DG DN Contemporary
+    - Sigma 100-400 F5-6.3 DG DN Contemporary
+    - Sigma 105 F2.8 DG DN MACRO Art
+
+SELL: Viltrox 28/4.5.
+
+出门旅游组合：
+1. R5 + 35GM, 1224GM(可选), 50GM(可选)
+2. 随便什么机身 + 720GM2 + 1.4x
+
+超轻量出门组合：
+1. CR+Loxia25+50APO+FL28; OR
+2. R5+1635PZ+50GM/720GM2+FL28
 
 - Nikon Z8
-- Nikon Z7m3
+- Nikon Z7m3/Z8m2 *
+- Nikon Z6
+    - Nikon Z 24-70 f/4 S
+    - Nikon Z 28 f/1.8 S *
     - Nikon Z 50 f/1.8 S
-    - Nikon Z 58 f/0.95 S Noct x
+    - Nikon Z 58 f/0.95 S Noct *
     - Nikon Z 85 f/1.2 S
-    - Nikon Z 105 f/2.8 VR S x
+    - Nikon Z 105 f/2.8 VR S *
     - Nikon Z 400 f/4.5 VR S
-    - Nikon Z 600 f/4 TC VR S x
+    - Nikon Z 600 f/4 TC VR S *
+
+- Nikon Z30
+- Nikon Z50 ii
+    - Z DX 12-28 *
+    - Z DX 50-250 *
 
 - Nikon D850
-- Nikon F6
+- Nikon D850 *
+    - ZEISS Milvus 1.4/25 Distagon
     - Sigma 40 F1.4 DG HSM Art
     - ZEISS Otus 1.4/55 Distagon
-    - Laowa 100mm f/2.8 2x Ultra Macro APO
-    - Sigma 500 F4 DG HSM Sport x
+    - Nikon 200-400 f/4G II / Sigma 500 F4 DG Sport(P) *
 
+- Nikon F6 *
+- Nikon F80s *
 - Nikon F100
+- Nikon F100 *
     - Nikon AF-S 50 f/1.8G
+    - Laowa 100mm f/2.8 2x Ultra Macro APO
+    - Zeiss 50 Macro * / Nikon AF-S 24 f/1.8 G
+    - Zeiss 135#2 / 100#1.4 * / Laowa 14mm f/4
+
+出门健身组合：
+
+1. D850 + 40ART & Z8 + 85/1.2S & SB800
+
+给爸买的机身：
+1. Z50II, 12-28, 50-250, 27Pro, 75Pro; $2000
+2. Z6III, 17-28, 28-400, 35S, 85S; $5000
+3. R52 (3500), 1535(1800), 100-500(2200), 50VCM(1200), 135VCM(1800); $10000; 不太行
+4. EF?, 100-400 II, 16-35 III, 35 II, 实在想不出第四枚镜头了（如果EF 428 III足够便宜的话可以）；不太行
 -->
 <h3 id="望远镜">望远镜</h3>
 <ul>
@@ -671,6 +747,9 @@ SELL: 50ZA, 1424DN, 140DN, A7R3.
 </ul>
 <h2 id="手机平板手表降噪">手机/平板/手表/降噪</h2>
 <ul>
+<li><p>iPhone 16 Pro Max</p></li>
+<li><p>Watch 8 45mm</p></li>
+<li><p>Apple Airpods Pro Gen 2 (lightning)</p></li>
 <li><p>Samsung Galaxy Flip 6</p></li>
 <li><p>Samsung Watch 7 40mm</p></li>
 <li><p>Samsung Galaxy Tab S9 Ultra</p></li>
@@ -682,27 +761,23 @@ SELL: 50ZA, 1424DN, 140DN, A7R3.
 </ul></li>
 <li><p>iPad Pro 11 2022; 4G, 256G</p>
 <ul>
-<li>Apple Pencil</li>
-</ul></li>
-<li><p>Apple Airpods Pro Gen 2 (lightning)</p></li>
-<li><p>Surface Go 2 8G/128G/4G</p>
-<ul>
-<li>Keyboard, Pen</li>
+<li>Pencil</li>
 </ul></li>
 <li><p>Kindle Paperwhite</p></li>
 <li><p>Kindle Scribe</p></li>
 <li><p>iPhone 12 mini</p></li>
-<li><p>Apple Airpods Pro Gen 1</p></li>
-<li><p>Watch 8 45mm</p></li>
 </ul>
 <p>Caesium:</p>
 <ul>
 <li><p>iPhone 15 Pro</p></li>
-<li><p>Watch 8 45mm</p></li>
+<li><p>Watch 10 46mm</p></li>
 <li><p>Apple Airpods Pro Gen 2 (typeC)</p></li>
+<li><p>Apple Airpods Max (typeC)</p></li>
+<li><p>Samsung S25</p></li>
+<li><p>Sony WH-1000XM5</p></li>
 <li><p>iPad Pro 11 2024</p>
 <ul>
-<li>Apple Pencil</li>
+<li>Pencil Pro, Magic Keyboard</li>
 </ul></li>
 <li><p>Kindle Scribe</p></li>
 <li><p>iPad mini 2024</p></li>
@@ -713,159 +788,68 @@ SELL: 50ZA, 1424DN, 140DN, A7R3.
 <li>Calman校色仪</li>
 <li>红蜘蛛校色仪</li>
 <li>XBows；在公司</li>
-<li>G304 ；在公司</li>
+<li>Razer DeathAdder V3；在公司</li>
 <li>Realforce 87u 分区压力；在Caesium 工位</li>
 <li>G703；在Caesium 工位</li>
 </ul>
 <h2 id="吃灰中">吃灰中</h2>
-<h3 id="pc-1">PC</h3>
-<h4 id="deskmini">deskmini</h4>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">组件</th>
-<th style="text-align: left;">型号</th>
-<th style="text-align: left;">备注</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">CPU</td>
-<td style="text-align: left;">Ryzen 5700G</td>
-<td style="text-align: left;">Passmark 24668</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">内存</td>
-<td style="text-align: left;">64 GiB</td>
-<td style="text-align: left;">2*32GiB UDIMM 3200 Mhz</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">磁盘</td>
-<td style="text-align: left;">2 TiB</td>
-<td style="text-align: left;">SN850X</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">显卡</td>
-<td style="text-align: left;">Radeon Vega 7</td>
-<td style="text-align: left;">1.702 TFLOPS</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>其他配件：
-<ul>
-<li>AXP90-X47 纯铜 + 猫头鹰A9x14</li>
-</ul></li>
-</ul>
-<p>在公司。</p>
-<h4 id="deskmini-1">deskmini</h4>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">组件</th>
-<th style="text-align: left;">型号</th>
-<th style="text-align: left;">备注</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">CPU</td>
-<td style="text-align: left;">Core i5 12600K</td>
-<td style="text-align: left;">Passmark 27831</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">内存</td>
-<td style="text-align: left;">64 GiB</td>
-<td style="text-align: left;">2*32GiB 3200 Mhz</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">磁盘A</td>
-<td style="text-align: left;">1 TiB</td>
-<td style="text-align: left;">980 Pro</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">磁盘B</td>
-<td style="text-align: left;">1 TiB</td>
-<td style="text-align: left;">SN850X</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">磁盘C</td>
-<td style="text-align: left;">1 TiB</td>
-<td style="text-align: left;">870 Evo</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">磁盘D</td>
-<td style="text-align: left;">1 TiB</td>
-<td style="text-align: left;">MX500</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">显卡</td>
-<td style="text-align: left;">UHD 770</td>
-<td style="text-align: left;">742 GFLOPS</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>其他配件：
-<ul>
-<li>AXP90-X47 + 猫头鹰A9x14</li>
-</ul></li>
-</ul>
-<p>在苏州家里。</p>
-<h4 id="thinkpad-x1-carbon">Thinkpad X1 Carbon</h4>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">组件</th>
-<th style="text-align: center;">型号</th>
-<th style="text-align: center;">备注</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">CPU</td>
-<td style="text-align: center;">i7 8550U</td>
-<td style="text-align: center;">Passmark 5941</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">内存</td>
-<td style="text-align: center;">16 GiB</td>
-<td style="text-align: center;">2133 MHz</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">磁盘</td>
-<td style="text-align: center;">1 TiB</td>
-<td style="text-align: center;">-</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">显卡</td>
-<td style="text-align: center;">UHD 620</td>
-<td style="text-align: center;">-</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>其他配件：
-<ul>
-<li>Fibocom F850-GL</li>
-</ul></li>
-</ul>
+<!-- ### PC -->
+<!-- 
+#### deskmini
+
+|组件|型号|备注|
+|:--|:--|:--|
+|CPU|Ryzen 5700G|Passmark 24668
+|内存|64 GiB|2*32GiB UDIMM 3200 Mhz
+|磁盘|2 TiB|SN850X
+|显卡|Radeon Vega 7|1.702 TFLOPS
+
+- 其他配件：
+    - AXP90-X47 纯铜 + 猫头鹰A9x14
+
+在公司。 -->
+<!-- #### deskmini
+
+|组件|型号|备注|
+|:--|:--|:--|
+|CPU|Core i5 12600K|Passmark 27831
+|内存|64 GiB|2*32GiB 3200 Mhz
+|磁盘A|1 TiB|980 Pro
+|磁盘B|1 TiB|SN850X
+|磁盘C|1 TiB|870 Evo
+|磁盘D|1 TiB|MX500
+|显卡|UHD 770|742 GFLOPS
+
+- 其他配件：
+    - AXP90-X47 + 猫头鹰A9x14
+
+在苏州家里。 -->
+<!-- #### Thinkpad X1 Carbon
+
+|组件|型号|备注|
+|:--:|:--:|:--:|
+|CPU|i7 8550U|Passmark 5941
+|内存|16 GiB|2133 MHz
+|磁盘|1 TiB|-
+|显卡|UHD 620|-
+
+- 其他配件：
+    - Fibocom F850-GL -->
 <h3 id="外设">外设</h3>
 <ul>
 <li>Realforce 87u</li>
-<li>HHKB 黑色无刻</li>
+<li>HHKB 白色无刻</li>
 <li>Razer 猎魂光蛛竞技版 60</li>
 <li>Razer 猎魂光蛛竞技版 87</li>
 <li>Nuphy 60</li>
 <li>罗技 G304 * 若干</li>
-<li>Apple Magic Trackpad</li>
 <li>雷蛇 魔音海妖 黑 白, 铁三角 AT2500</li>
 <li>Asus tinkerboard</li>
 <li>Wacom 数位板</li>
 </ul>
 <p>在苏州：</p>
 <ul>
-<li>Viewsonic VG2781</li>
+<li>Viewsonic VG2781; Deskmini B660, 12600k, 64G, 1TiB * 4</li>
 <li>Dell U2720Q</li>
 <li>Dell U2719D</li>
 <li>Redmi 1A</li>
@@ -884,9 +868,11 @@ SELL: 50ZA, 1424DN, 140DN, A7R3.
 </ul></li>
 <li>存储:
 <ul>
-<li>P3700 800g * 2</li>
 <li>905P 1.5TB * 4</li>
+<li>905P 960GB * 2</li>
 <li>900P 280g * 2</li>
+<li>P3700 800g * 2</li>
+<li>P3600 800g * 2</li>
 <li>983 zet 480g * 2</li>
 <li>970 pro 512g</li>
 <li>860 evo 512g</li>
@@ -894,13 +880,26 @@ SELL: 50ZA, 1424DN, 140DN, A7R3.
 <li>hgst 3tb * 2</li>
 <li>Optane M10 16G * 若干</li>
 </ul></li>
+<li>CPU:
+<ul>
+<li>5900X</li>
+</ul></li>
+<li>机箱：
+<ul>
+<li>KL07B，4 * A14 PWM</li>
+</ul></li>
+<li>主板：
+<ul>
+<li>X570 Unify</li>
+</ul></li>
 <li>显卡：
 <ul>
-<li>3060Ti</li>
+<li>6600XT</li>
+<li>6800XT</li>
 </ul></li>
 <li>电源:
 <ul>
-<li>GF1 850w * 2</li>
+<li>GF1 850w</li>
 <li>F10 1000w</li>
 </ul></li>
 <li>散热器:
@@ -918,21 +917,22 @@ SELL: 50ZA, 1424DN, 140DN, A7R3.
 </ul>
 <h3 id="耳机耳放播放器">耳机/耳放/播放器</h3>
 <ul>
-<li>舒尔 SE535 LTD；已换4.4平衡线</li>
-<li>森海塞尔 HD25 AMP</li>
-<li>森海塞尔 HD25 Light</li>
-<li>创新 Air</li>
-<li>飞利浦 SHP9500</li>
-<li>Sony A10 录音笔</li>
-<li>Sony A55, IE40 Pro</li>
-<li>Fiio BTR3</li>
-<li>Fiio KA3, 拜亚动力 DT770 Pro</li>
+<li><p>创新 Air</p></li>
+<li><p>舒尔 SE535 LTD；已换4.4平衡线</p></li>
+<li><p>飞利浦 SHP9500</p></li>
+<li><p>拜亚动力 DT770 Pro</p></li>
+<li><p>森海塞尔 HD25 AMP</p></li>
+<li><p>森海塞尔 HD25 Light</p></li>
+<li><p>森海塞尔 HD600</p></li>
+<li><p>Sony A10 录音笔</p></li>
+<li><p>Sony A55</p></li>
+<li><p>Fiio BTR3</p></li>
+<li><p>Fiio KA3</p></li>
+<li><p>Fiio K7 / K5 Pro</p></li>
 </ul>
 <p>苏州:</p>
 <ul>
 <li>AUNE X1S * 2, X7S</li>
-<li>Schiit Magni 2</li>
-<li>AKG K701</li>
 <li>铁三角 ES10</li>
 <li>铁三角 ESW9</li>
 <li>漫步者 A300</li>
@@ -944,42 +944,23 @@ SELL: 50ZA, 1424DN, 140DN, A7R3.
 <li>Thinkpad T60</li>
 <li>Apple Macbook 2007</li>
 </ul>
+<!-- 还有个MBP 2015 13 inch 在爸那里吃灰 -->
 <!--
 
 比较合理的装备：
 
-1. MBP 16 + Mac Studio (optional)
-1. Studio Display * 2
-1. 27 4K + WFH台式机 (optional)
-1. 42 4k OLED (optional)
+1. 三个1:1/3:2的屏幕，用来写代码（freebsd+clang一套, all bsd / mac os)，mac mini
+2. 42 OLED + mac studio 修图/视频
+3. 27 5K * 4 (viewsonic) / 27 4k 144 + mac studio m3 ultra(256g)
 
-1. 三个1:1的屏幕，用来写代码（freebsd+clang一套, all bsd)
-2. 42 OLED + Studio Display (P3) 修图/视频
-3. U3224KB + Windows/SAW 干点杂活
-
-1. 裸板测试机箱 * 4 
-
-0. tomtac L号包
-    1. EDC
-        1. 钱包  护照
-        1. 布地奈德喷雾 人工眼泪
-        1. iPhone / Airpods Pro / Watch
-    1. Surface Go 2; LTE
-    1. 可选:
-        1. 10' 墨水平板
-        1. ipad pro 11 & pencil
-        1. 65w gan 2c
-        1. 录音笔 IE600
-        1. 创可贴、3M耳塞、眼镜布、口罩
 1. elecom
     1. EDC
-        1. 钱包  护照
-        1. 布地奈德喷雾 人工眼泪
-        1. Flip6 & Watch7 & WF1000XM5
+        1. 钱包 护照
+        1. 布地奈德喷雾 人工眼泪 抗过敏眼药水
+        1. Flip6 & Watch7 & WF1000XM5 / watch & 16e & Airpods max
     1. SAW
-    1. 其他
-        1. 3M耳塞、眼镜布、口罩
-    1. A7R3 & 50APO & Loxia25
+    1. 其他: 3M耳塞、眼镜布、N95口罩
+    1. A7CR & 50APO & Loxia25 & F28RM
 -->
 
     </div>
@@ -1063,7 +1044,7 @@ SELL: 50ZA, 1424DN, 140DN, A7R3.
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pc"><span class="nav-text">PC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nas---fractal-design-node-804"><span class="nav-text">NAS - Fractal Design Node
-804</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B0%E5%BC%8F%E6%9C%BA---%E9%93%B6%E6%AC%A3-kl07b"><span class="nav-text">台式机 - 银欣 KL07B</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B0%E5%BC%8F%E6%9C%BA---%E4%B9%94%E6%80%9D%E4%BC%AF-d30"><span class="nav-text">台式机 - 乔思伯 D30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wfh%E5%8F%B0%E5%BC%8F%E6%9C%BA---%E4%B9%94%E6%80%9D%E4%BC%AF-a9"><span class="nav-text">WFH台式机 - 乔思伯 A9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wfh%E5%8F%B0%E5%BC%8F%E6%9C%BA---%E4%B9%94%E6%80%9D%E4%BC%AF-a9-1"><span class="nav-text">WFH台式机 - 乔思伯 A9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%94%BE%E5%BC%8F%E5%8F%B0%E5%BC%8F%E6%9C%BA"><span class="nav-text">开放式台式机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E6%9C%BA"><span class="nav-text">游戏机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E9%95%9C%E5%A4%B4%E6%9C%9B%E8%BF%9C%E9%95%9C"><span class="nav-text">相机&amp;镜头&amp;望远镜</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA"><span class="nav-text">相机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%9B%E8%BF%9C%E9%95%9C"><span class="nav-text">望远镜</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E6%9C%BA%E5%B9%B3%E6%9D%BF%E6%89%8B%E8%A1%A8%E9%99%8D%E5%99%AA"><span class="nav-text">手机&#x2F;平板&#x2F;手表&#x2F;降噪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%83%E7%81%B0%E4%B8%AD"><span class="nav-text">吃灰中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pc-1"><span class="nav-text">PC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#deskmini"><span class="nav-text">deskmini</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#deskmini-1"><span class="nav-text">deskmini</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thinkpad-x1-carbon"><span class="nav-text">Thinkpad X1 Carbon</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E8%AE%BE"><span class="nav-text">外设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pc%E9%85%8D%E4%BB%B6"><span class="nav-text">PC配件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%80%B3%E6%9C%BA%E8%80%B3%E6%94%BE%E6%92%AD%E6%94%BE%E5%99%A8"><span class="nav-text">耳机&#x2F;耳放&#x2F;播放器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%9E%83%E5%9C%BE%E4%BD%AC%E4%B8%93%E5%B1%9E"><span class="nav-text">其他垃圾佬专属</span></a></li></ol></li></ol></div>
+804</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%94%E8%AE%B0%E6%9C%AC---mbp-14"><span class="nav-text">笔记本 - MBP 14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B0%E5%BC%8F%E6%9C%BA---%E4%B9%94%E6%80%9D%E4%BC%AF-d30"><span class="nav-text">台式机 - 乔思伯 D30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wfh%E5%8F%B0%E5%BC%8F%E6%9C%BA---%E4%B9%94%E6%80%9D%E4%BC%AF-a9"><span class="nav-text">WFH台式机 - 乔思伯 A9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wfh%E5%8F%B0%E5%BC%8F%E6%9C%BA---%E4%B9%94%E6%80%9D%E4%BC%AF-a9-1"><span class="nav-text">WFH台式机 - 乔思伯 A9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%94%BE%E5%BC%8F%E5%8F%B0%E5%BC%8F%E6%9C%BA"><span class="nav-text">开放式台式机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E6%9C%BA"><span class="nav-text">游戏机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E9%95%9C%E5%A4%B4%E6%9C%9B%E8%BF%9C%E9%95%9C"><span class="nav-text">相机&amp;镜头&amp;望远镜</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA"><span class="nav-text">相机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%9B%E8%BF%9C%E9%95%9C"><span class="nav-text">望远镜</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E6%9C%BA%E5%B9%B3%E6%9D%BF%E6%89%8B%E8%A1%A8%E9%99%8D%E5%99%AA"><span class="nav-text">手机&#x2F;平板&#x2F;手表&#x2F;降噪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%83%E7%81%B0%E4%B8%AD"><span class="nav-text">吃灰中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E8%AE%BE"><span class="nav-text">外设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pc%E9%85%8D%E4%BB%B6"><span class="nav-text">PC配件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%80%B3%E6%9C%BA%E8%80%B3%E6%94%BE%E6%92%AD%E6%94%BE%E5%99%A8"><span class="nav-text">耳机&#x2F;耳放&#x2F;播放器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%9E%83%E5%9C%BE%E4%BD%AC%E4%B8%93%E5%B1%9E"><span class="nav-text">其他垃圾佬专属</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1079,7 +1060,7 @@ SELL: 50ZA, 1424DN, 140DN, A7R3.
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1121,7 +1102,7 @@ SELL: 50ZA, 1424DN, 140DN, A7R3.
 <div class="copyright">
   
   &copy; 2013 – 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
