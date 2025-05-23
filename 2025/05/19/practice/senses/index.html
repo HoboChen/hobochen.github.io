@@ -20,21 +20,21 @@
     var CONFIG = {"hostname":"192217.space","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":280,"display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="These are the interesting (read: annoying) bugs I met.">
+  <meta name="description" content="简单记录我家的专业向光学&#x2F;声学产品。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Interesting Bugs">
-<meta property="og:url" content="https://192217.space/2021/07/18/practice/bugs/index.html">
+<meta property="og:title" content="我的光学&#x2F;声学产品">
+<meta property="og:url" content="https://192217.space/2025/05/19/practice/senses/index.html">
 <meta property="og:site_name" content="Jingqi Chen&#39;s Blog">
-<meta property="og:description" content="These are the interesting (read: annoying) bugs I met.">
+<meta property="og:description" content="简单记录我家的专业向光学&#x2F;声学产品。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-07-18T21:56:17.000Z">
-<meta property="article:modified_time" content="2024-03-21T03:40:10.118Z">
+<meta property="article:published_time" content="2025-05-19T21:56:17.000Z">
+<meta property="article:modified_time" content="2025-05-20T05:09:42.555Z">
 <meta property="article:author" content="Jingqi Chen">
 <meta property="article:tag" content="long">
 <meta property="article:tag" content="practice">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://192217.space/2021/07/18/practice/bugs/">
+<link rel="canonical" href="https://192217.space/2025/05/19/practice/senses/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>Interesting Bugs | Jingqi Chen's Blog</title>
+  <title>我的光学/声学产品 | Jingqi Chen's Blog</title>
   
 
 
@@ -167,7 +167,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://192217.space/2021/07/18/practice/bugs/">
+    <link itemprop="mainEntityOfPage" href="https://192217.space/2025/05/19/practice/senses/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.png">
@@ -180,7 +180,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Interesting Bugs
+          我的光学/声学产品
         </h1>
 
         <div class="post-meta">
@@ -189,16 +189,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-07-18 14:56:17" itemprop="dateCreated datePublished" datetime="2021-07-18T14:56:17-07:00">2021-07-18</time>
+              <time title="Created: 2025-05-19 14:56:17 / Modified: 22:09:42" itemprop="dateCreated datePublished" datetime="2025-05-19T14:56:17-07:00">2025-05-19</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-03-20 20:40:10" itemprop="dateModified" datetime="2024-03-20T20:40:10-07:00">2024-03-20</time>
-              </span>
 
           
 
@@ -211,59 +205,208 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>These are the interesting (read: annoying) bugs I met.</p>
+        <p>简单记录我家的专业向光学/声学产品。</p>
 <span id="more"></span>
-<h2
-id="flashing-msi-bios-without-cpu-requires-the-flash-to-be-mbr-partitioned">Flashing
-MSI BIOS without CPU Requires the Flash to be MBR Partitioned</h2>
-<p>But there is no documentation indicates that. And, there are few
-people met that, as barely no results using Google.</p>
-<p>Solution: <a
-href="https://docs.microsoft.com/en-us/windows-server/storage/disk-management/change-a-gpt-disk-into-an-mbr-disk">Make
-it MBR</a>.</p>
-<p>Wasted time: 2h.</p>
-<h2 id="radeon-6800xt-wont-wake-up-after-s3-sleep">Radeon 6800XT Won't
-Wake Up after S3 Sleep</h2>
-<p>Many people met this.</p>
-<p>Workaround: diable S3 sleep.</p>
-<p>Wasted time: 5h.</p>
-<hr />
-<p>Update in 2024.3: I don't remember how long did the issue last, but
-currently S3 sleep works well.</p>
-<h2 id="asrock-x470d4u-appears-post-failure">Asrock X470D4U Appears POST
-Failure</h2>
-<p>I get a black screen after power on. I waitted for several minutes,
-still black.</p>
-<p>Cause: It is a server motherboard, it takes a long time for memory
-check and etc. And it will wait BMC for around 100 secs. You need to be
-patient enough.</p>
-<p>Wasted time: 5h.</p>
-<h2
-id="no-s3-sleep-for-dell-xps-7590-and-high-battery-drain-for-modern-standby">No
-S3 Sleep for Dell XPS 7590 and High Battery Drain for Modern
-Standby</h2>
-<p>Wasted time: 20h+.</p>
-<p>I will never buy new Windows notebook unless the S3 sleep is back or
-modern standby is stable enough.</p>
-<hr />
-<p>Update in 2024.3: Mordern standy is still not stable enough.</p>
-<h2 id="windows-tpm-attestation-fails-for-amd-platform">Windows TPM
-Attestation Fails for AMD Platform</h2>
-<p>Wasted time: 4h+.</p>
-<h2 id="windows-kb5034441-fails-to-install">Windows KB5034441 Fails to
-Install</h2>
-<p>Wasted time: 1h+.</p>
-<p>The error message ('Download Error') is not true. <a
-href="https://answers.microsoft.com/en-us/windows/forum/all/kb5034441-update-problem-error-0x80070643/0821b603-9707-4587-9da5-e5809cac3779">This</a>
-will solve it.</p>
-<h2
-id="connecting-nvidia-3040-gpu-hdmi-to-sony-a90k-causes-blackflickering">Connecting
-nVIDIA 30/40 GPU HDMI to Sony A90K Causes Black/Flickering</h2>
-<p>Ref: <a
-href="https://www.avsforum.com/threads/hdmi-is-broken-on-newer-sony-tvs-with-nvidia-rtx-3000-4000-series-cards.3260397/page-120">HDMI
-is broken on newer Sony TVs with Nvidia RTX 3000/4000 series
-cards</a></p>
-<p>Wasted time: 5h+.</p>
+<h2 id="相机系统">相机系统</h2>
+<h3 id="e">E</h3>
+<ul>
+<li>Sony A7R5 &amp; A7CR &amp; A7R3A:
+<ul>
+<li><p>Sony FE 20 F1.8 G</p></li>
+<li><p>Sony FE 35 F1.4 G Master</p></li>
+<li><p>Sony FE 50 F1.4 G Master</p></li>
+<li><p>Sony FE 70-200 F2.8 G Master OSS II, 1.4x TC</p></li>
+<li><p>Sigma 14-24 F2.8 DG DN Art</p></li>
+<li><p>Sigma 28-70 F2.8 DG DN Contemporary</p></li>
+<li><p>Sigma 100-400 F5-6.3 DG DN Contemporary</p></li>
+<li><p>Sigma 105 F2.8 DG DN MACRO Art</p></li>
+<li><p>ZEISS Loxia 2.4/25 Distagon</p></li>
+<li><p>Voigtlander 50 mm / 1:2.0 APO LANTHAR E</p></li>
+<li><p>Viltrox 28mm f4.5 E</p></li>
+<li><p>Sony FE 50 F1.4 ZA</p></li>
+</ul></li>
+</ul>
+<h3 id="z">Z</h3>
+<ul>
+<li>Nikon Z8 &amp; Z6:
+<ul>
+<li>Nikon Z 24-70 f/4 S</li>
+<li>Nikon Z 50 f/1.8 S</li>
+<li>Nikon Z 85 f/1.2 S</li>
+<li>Nikon Z 400 f/4.5 VR S</li>
+</ul></li>
+<li>Nikon Z30:
+<ul>
+<li>Nikon Z DX 16-50 f/3.5-6.3 VR</li>
+<li>Nikon Z DX 24 f/1.7</li>
+</ul></li>
+</ul>
+<h3 id="f">F</h3>
+<ul>
+<li>Nikon D850:</li>
+<li>Nikon F100:
+<ul>
+<li>Zeiss Milvus 1.4/25 Distagon</li>
+<li>Zeiss Otus 1.4/55 Distagon</li>
+<li>Sigma 40 F1.4 DG HSM Art</li>
+<li>Nikon AF-S 50 f/1.8 G</li>
+<li>Laowa 100mm f/2.8 2x Ultra Macro APO</li>
+</ul></li>
+</ul>
+<h3 id="fd">FD</h3>
+<ul>
+<li>Canon A-1</li>
+<li>Canon AE-1
+<ul>
+<li>Canon nFD 28mm f/2.8</li>
+<li>Canon nFD 50mm f/1.4</li>
+<li>Canon nFD 135mm f/2.8</li>
+<li>Canon nFD 300mm f/4 L <!-- - Canon AE-1
+  - Canon nFD 50mm f/1.4 --></li>
+</ul></li>
+<li>osmo pocket 3</li>
+<li>osmo action 5</li>
+<li>osmo mobile</li>
+</ul>
+<h3 id="未来规划">未来规划</h3>
+<h4 id="e-1">E</h4>
+<p>最想要的：</p>
+<ol type="1">
+<li>A7CR通过固件更新支持MF中被摄体识别与放大联动。毕竟这个事情的概率还是比Loxia发售Z卡口高，虽然还是不太高。</li>
+<li>读出速度相比于60mp不倒退的100mp；有的话可以按发布顺序更新R5和CR。</li>
+<li>新的原厂饼干镜头，规格稍稍放宽，但是素质看齐2870GM同焦段同光圈。</li>
+<li>RX1R3，我也不知道它和1概率哪个高。</li>
+<li>1224GM，已经有1424DN的情况下它的优先级确实不太高。</li>
+<li>1635PZ，配合新视频机食用（理想情况能支持4K120、6K60、8K30中的至少两种），毕竟用A7R3/R5/CR拍视频都有点抽象。</li>
+</ol>
+<p>比较想要但是要看售价的：</p>
+<ol type="1">
+<li>下一代堆栈式传感器，可能是A1m3。</li>
+<li>A7C3，至少要支持一下4K60，全像素12bit读出不慢于15ms。</li>
+<li>下一代原厂90微距，更好的对焦，更好的防抖。</li>
+<li>2870G，素质看齐2470GM2同光圈，500g。</li>
+</ol>
+<p>还没想好买不买的：</p>
+<ol type="1">
+<li>下一代GS传感器，可能是A9m4，DR要能赶上初代A7R。</li>
+</ol>
+<h4 id="zf">Z/F</h4>
+<p>最想要的：</p>
+<ol type="1">
+<li>支持 MF中被摄体识别与放大联动
+的高像素机型，Otus和Milvus需要它，理想情况下是新的Z7（60mp或更高），中等情况下是Z8的新固件，最坏情况下是同传感器的Z82（索尼A1m2的行为）。另需购买大和号配合食用。</li>
+<li>高性能log曲线，理想情况对标SLOG3，中等情况对标Samsung
+Log，最坏情况开放14bit RAW录制。</li>
+<li>105微，本时代唯一带防抖的东西，如果索尼的原厂90微迟迟不来，那可以本着凑单的原则先把105微买了。</li>
+<li>超长焦，500DG的对焦比较令人不满意（在D850和转接Z8都是如此），而且我也确实缺乏锻炼；理想情况下是500TC（略超2kg），中等情况下是640TC或者863。</li>
+</ol>
+<p>比较想要但是还没想好什么时候买的：</p>
+<ol type="1">
+<li>胶片系统中有点想玩的镜头，目前包括Milvus50M和Otus85/Milvus135；和有点想玩的机身，目前包括F6和F80s。</li>
+<li>D850，主要功能是给胶片系统当备用机；另购买一个200-400 f/4G
+II搭配使用。</li>
+</ol>
+<!-- 
+- Sony A7R5
+- Sony A7R3
+- Sony A7CR
+- Sony A7C3 *
+- Sony A1M3 *
+    - Sony FE 20 F1.8 G
+    - Sony FE 35 F1.4 G Master
+    - Sony FE 50 F1.4 G Master
+    - Sony FE 12-24 F2.8 G Master *
+    - Sony FE 28-70 F2 G Master *
+    - Sony FE 70-200 F2.8 G Master OSS II, 1.4x TC
+
+    - Sony FE 16-35 F4 G PZ *
+    - Sony FE 24 F1.4 G Master *
+
+    - ZEISS Loxia 2.4/25 Distagon
+    - Voigtlander 50 mm / 1:2.0 APO LANTHAR E
+
+    - 50ZA
+    - 28/2.8 (replace 28/4.5) x1k
+
+- Sony A7M5(或者其他什么)
+    - Sigma 14-24 F2.8 DG DN Art
+    - Sigma 28-70 F2.8 DG DN Contemporary
+    - Sigma 100-400 F5-6.3 DG DN Contemporary
+    - Sigma 105 F2.8 DG DN MACRO Art
+
+SELL: Viltrox 28/4.5.
+
+出门旅游组合：
+1. R5 + 35GM, 1224GM(可选), 50GM(可选)
+2. 随便什么机身 + 720GM2 + 1.4x
+
+超轻量出门组合：
+1. CR+Loxia25+50APO+FL28; OR
+2. R5+1635PZ+50GM/720GM2+FL28
+
+- Nikon Z8
+- Nikon Z7m3/Z8m2
+    - Nikon Z 24-70 f/4 S
+    - Nikon Z 28 f/1.8 S *
+    - Nikon Z 50 f/1.8 S
+    - Nikon Z 58 f/0.95 S Noct *
+    - Nikon Z 85 f/1.2 S
+    - Nikon Z 105 f/2.8 VR S *
+    - Nikon Z 400 f/4.5 VR S
+    - Nikon Z 600 f/4 TC VR S *
+
+- Nikon Z30
+- Nikon Z30m2 *
+    - Nikon Z DX 16-50 f/3.5-6.3 VR
+    - Nikon Z DX 24 f/1.7
+
+- Nikon D850
+- Nikon D850 *
+    - ZEISS Milvus 1.4/25 Distagon
+    - Sigma 40 F1.4 DG HSM Art
+    - ZEISS Otus 1.4/55 Distagon
+    - Nikon 200-400 f/4G II / Sigma 500 F4 DG Sport Preferred *
+
+- Nikon F6 *
+- Nikon F80s *
+- Nikon F100
+- Nikon F100 *
+    - Nikon AF-S 50 f/1.8G
+    - Laowa 100mm f/2.8 2x Ultra Macro APO
+    - Zeiss 50 Macro * / Nikon AF-S 24 f/1.8 G
+    - Zeiss 135#2 / 100#1.4 * / Laowa 14mm f/4
+
+出门健身组合：
+
+1. D850 + 40ART & Z8 + 85/1.2S & SB800
+-->
+<h2 id="望远镜">望远镜</h2>
+<ul>
+<li>Canon 10x42L IS</li>
+<li>Nikon M7 8x42</li>
+<li>Pentax 8.5x21 Papilio ii</li>
+<li>Pentax 6.5x21 Papilio ii</li>
+</ul>
+<h2 id="耳机耳放播放器">耳机/耳放/播放器</h2>
+<ul>
+<li><p>水月雨 变奏曲</p></li>
+<li><p>创新 Air</p></li>
+<li><p>舒尔 SE535 LTD</p></li>
+<li><p>飞利浦 SHP9500</p></li>
+<li><p>森海塞尔 HD25 AMP</p></li>
+<li><p>森海塞尔 HD25 Light</p></li>
+<li><p>森海塞尔 HD600</p></li>
+<li><p>Sony A10, A55</p></li>
+<li><p>Fiio BTR3, KA3, KA17, K5 Pro, K7</p></li>
+<li><p>水月雨 小白线</p></li>
+</ul>
+<p>苏州:</p>
+<ul>
+<li>AUNE X1S * 2, X7S</li>
+<li>铁三角 ES10</li>
+<li>铁三角 ESW9</li>
+<li>漫步者 A300</li>
+</ul>
 
     </div>
 
@@ -283,13 +426,10 @@ cards</a></p>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/04/07/annual/2021/" rel="prev" title="2021 Q[1,2,3,4]">
-      <i class="fa fa-chevron-left"></i> 2021 Q[1,2,3,4]
+    <a href="/2025/03/16/practice/mac-config/" rel="prev" title="macOS 配置">
+      <i class="fa fa-chevron-left"></i> macOS 配置
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/11/30/misc/petrolhead/" rel="next" title="汽油脑袋">
-      汽油脑袋 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -348,15 +488,7 @@ cards</a></p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#flashing-msi-bios-without-cpu-requires-the-flash-to-be-mbr-partitioned"><span class="nav-text">Flashing
-MSI BIOS without CPU Requires the Flash to be MBR Partitioned</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#radeon-6800xt-wont-wake-up-after-s3-sleep"><span class="nav-text">Radeon 6800XT Won&#39;t
-Wake Up after S3 Sleep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#asrock-x470d4u-appears-post-failure"><span class="nav-text">Asrock X470D4U Appears POST
-Failure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#no-s3-sleep-for-dell-xps-7590-and-high-battery-drain-for-modern-standby"><span class="nav-text">No
-S3 Sleep for Dell XPS 7590 and High Battery Drain for Modern
-Standby</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows-tpm-attestation-fails-for-amd-platform"><span class="nav-text">Windows TPM
-Attestation Fails for AMD Platform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows-kb5034441-fails-to-install"><span class="nav-text">Windows KB5034441 Fails to
-Install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connecting-nvidia-3040-gpu-hdmi-to-sony-a90k-causes-blackflickering"><span class="nav-text">Connecting
-nVIDIA 30&#x2F;40 GPU HDMI to Sony A90K Causes Black&#x2F;Flickering</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E7%B3%BB%E7%BB%9F"><span class="nav-text">相机系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#e"><span class="nav-text">E</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#z"><span class="nav-text">Z</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f"><span class="nav-text">F</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fd"><span class="nav-text">FD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AA%E6%9D%A5%E8%A7%84%E5%88%92"><span class="nav-text">未来规划</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#e-1"><span class="nav-text">E</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zf"><span class="nav-text">Z&#x2F;F</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%9B%E8%BF%9C%E9%95%9C"><span class="nav-text">望远镜</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%80%B3%E6%9C%BA%E8%80%B3%E6%94%BE%E6%92%AD%E6%94%BE%E5%99%A8"><span class="nav-text">耳机&#x2F;耳放&#x2F;播放器</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -372,7 +504,7 @@ nVIDIA 30&#x2F;40 GPU HDMI to Sony A90K Causes Black&#x2F;Flickering</span></a><
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
