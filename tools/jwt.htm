@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jingqi's JWT Parser</title>
+
+  <!-- Monaco Editor loader -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+  <script>require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs' } });</script>
+
+  <style>
+    :root {
+      --bg: #f2f5f7;
+      --panel-bg: #fff;
+      --text: #111;
+      --border: #d0d5da
+    }
+
+    @media(prefers-color-scheme:dark) {
+      :root {
+        --bg: #0d1117;
+        --panel-bg: #161b22;
+        --text: #c9d1d9;
+        --border: #30363d
+      }
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: system-ui, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text)
+    }
+
+    h1 {
+      margin: 0 auto .75rem;
+      padding: 0 1rem;
+      width: 98%;
+      max-width: 3000px;
+      font-size: clamp(1.6rem, 2vw+.8rem, 2.6rem);
+      line-height: 1.15
+    }
+
+    #workspace {
+      flex: 1 1 auto;
+      max-width: 3000px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1rem 1rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      box-sizing: border-box
+    }
+
+    .panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden
+    }
+
+    .panel h2 {
+      margin: 0;
+      padding: .75rem 1rem;
+      font-size: 1.05rem;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .panel-content {
+      flex: 1 1 auto;
+      overflow: hidden;
+      padding: 0
+    }
+
+    .monaco-container {
+      width: 100%;
+      height: 98%
+    }
+
+    .error {
+      color: #e00;
+      font-weight: bold;
+      font-family: monospace;
+      white-space: pre-wrap;
+      padding: 1rem
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Jingqi's JWT Parser</h1>
+  <div id="workspace">
+    <section class="panel">
+      <h2>Input</h2>
+      <div class="panel-content">
+        <div id="input" class="monaco-container"></div>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>Output</h2>
+      <div class="panel-content">
+        <div id="output" class="monaco-container"></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    /********* Utility functions *********/
+    const jwtRegex = /^(?:[A-Za-z0-9_-]+\.){2}[A-Za-z0-9_-]*$/;
+
+    // Hoisted function definition so it is available before use
+    function getInitialToken() {
+      const searchParams = new URLSearchParams(window.location.search);
+      const hashParams = new URLSearchParams(
+        window.location.hash.startsWith('#') ? window.location.hash.slice(1) : ''
+      );
+      return (
+        searchParams.get('token') ||
+        searchParams.get('jwt') ||
+        hashParams.get('token') ||
+        hashParams.get('jwt')
+      );
+    }
+
+    const base64UrlDecode = s => { s = s.replace(/-/g, '+').replace(/_/g, '/'); const p = s.length % 4; if (p) s += '='.repeat(4 - p); return atob(s); };
+    const findJwt = t => { const m = t.match(/([A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]*)/); return m ? m[1] : null; };
+    const debounce = (fn, ms = 300) => { let id; return (...a) => { clearTimeout(id); id = setTimeout(fn, ms, ...a); }; };
+    const extractJsonWithSig = str => { let d = 0; for (let i = 0; i < str.length; i++) { const c = str[i]; if (c === '{' || c === '[') d++; if (c === '}' || c === ']') d--; if (d === 0) { if (i === str.length - 1) return [str, null]; if (str[i + 1] === '.') return [str.slice(0, i + 1), str.slice(i + 2)]; } } return [str, null]; };
+    function parseClaim(v) {
+      if (typeof v === 'string') {
+        if (jwtRegex.test(v)) {
+          try { const [p0, p1] = v.split('.', 3); const hdr = parseClaim(JSON.parse(base64UrlDecode(p0))); const plS = base64UrlDecode(p1); let pl; try { pl = parseClaim(JSON.parse(plS)); } catch { pl = plS; } return { NESTED_JWT: { header: hdr, payload: pl } }; } catch { }
+        }
+        const t = v.trim(); if (t.startsWith('{') || t.startsWith('[')) {
+          const [j] = extractJsonWithSig(t); try { return { NESTED_JSON: parseClaim(JSON.parse(j)) }; } catch { }
+        }
+        return v;
+      }
+      if (Array.isArray(v)) return v.map(parseClaim);
+      if (v && typeof v === 'object') { const o = {}; for (const [k, val] of Object.entries(v)) o[k] = parseClaim(val); return o; }
+      return v;
+    }
+    /********* Monaco setup *********/
+    let inputEditor, outputEditor;
+    function render(text) { outputEditor.setValue(text); }
+    function parseAndRender() {
+      const raw = inputEditor.getValue(); const tok = findJwt(raw);
+      if (!tok) { render('No JWT found.'); return; }
+      const parts = tok.split('.'); if (parts.length < 3) { render('Malformed JWT (needs 2 dots).'); return; }
+      try {
+        const hdr = parseClaim(JSON.parse(base64UrlDecode(parts[0])));
+        const plRaw = base64UrlDecode(parts[1]); let pl; try { pl = parseClaim(JSON.parse(plRaw)); } catch { pl = plRaw; }
+        render(JSON.stringify({ header: hdr, payload: pl }, null, 2));
+      } catch (e) { render(`Failed to decode: ${e.message}`); }
+    }
+    require(['vs/editor/editor.main'], () => {
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      const common = { automaticLayout: false, wordWrap: 'on', minimap: { enabled: false } };
+      const createEditors = theme => {
+        if (inputEditor) inputEditor.dispose(); if (outputEditor) outputEditor.dispose();
+        inputEditor = monaco.editor.create(document.getElementById('input'), { value: '', language: 'plaintext', theme, readOnly: false, ...common });
+        outputEditor = monaco.editor.create(document.getElementById('output'), { value: 'Waiting for valid JWT…', language: 'json', theme, readOnly: true, ...common });
+        inputEditor.onDidChangeModelContent(debounce(parseAndRender, 250));
+
+        // Custom shortcut: Alt+Shift+P opens Command Palette in output pane
+        outputEditor.addCommand(monaco.KeyMod.Alt | monaco.KeyMod.Shift | monaco.KeyCode.KEY_P, () => {
+          const act = outputEditor.getAction('editor.action.showCommands'); act && act.run();
+        });
+
+        // Pre-populate from URL
+        const initialToken = getInitialToken();
+        if (initialToken) {
+          inputEditor.setValue(initialToken);
+          parseAndRender();
+        }
+      };
+      createEditors(mq.matches ? 'vs-dark' : 'vs');
+      const updateTheme = () => monaco.editor.setTheme(mq.matches ? 'vs-dark' : 'vs');
+      mq.addEventListener ? mq.addEventListener('change', updateTheme) : mq.addListener(updateTheme);
+
+    });
+    // inside createEditors()
+    outputEditor.addCommand(
+      monaco.KeyCode.F1,
+      () => outputEditor.getAction('editor.action.showCommands').run()
+    );
+
+    // stop the browser-help page
+    outputEditor.onKeyDown(e => {
+      if (e.keyCode === monaco.KeyCode.F1) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+
+    // pre‑populate input with JWT provided via URL param (token or jwt)
+    const initialToken = getQueryParam('token') || getQueryParam('jwt');
+    if (initialToken) {
+      inputEditor.setValue(initialToken);
+      parseAndRender();
+    }
+  </script>
+</body>
+
+</html>
