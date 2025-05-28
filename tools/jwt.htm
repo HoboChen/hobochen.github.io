@@ -18,6 +18,11 @@
       --border: #d0d5da
     }
 
+    /* Make every element use border-box so padding never enlarges the real width */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     @media(prefers-color-scheme:dark) {
       :root {
         --bg: #0d1117;
@@ -42,12 +47,11 @@
     }
 
     h1 {
-      margin: 0 auto .75rem;
+      margin: 0 0 .75rem;           /* no auto → aligned with panels */
       padding: 0 1rem;
-      width: 98%;
       max-width: 3000px;
       font-size: clamp(1.6rem, 2vw+.8rem, 2.6rem);
-      line-height: 1.15
+      line-height: 1.15;
     }
 
     #workspace {
@@ -57,9 +61,8 @@
       margin: 0 auto;
       padding: 0 1rem 1rem;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1rem;
-      box-sizing: border-box
     }
 
     .panel {
@@ -68,7 +71,8 @@
       border-radius: 10px;
       display: flex;
       flex-direction: column;
-      overflow: hidden
+      overflow: hidden;
+      width: 100%;
     }
 
     .panel h2 {
@@ -83,10 +87,9 @@
       overflow: hidden;
       padding: 0
     }
-
     .monaco-container {
       width: 100%;
-      height: 98%
+      height: 99%;
     }
 
     .error {
@@ -167,7 +170,7 @@
     }
     require(['vs/editor/editor.main'], () => {
       const mq = window.matchMedia('(prefers-color-scheme: dark)');
-      const common = { automaticLayout: false, wordWrap: 'on', minimap: { enabled: false } };
+      const common = { automaticLayout: true, wordWrap: 'on', minimap: { enabled: false } };
       const createEditors = theme => {
         if (inputEditor) inputEditor.dispose(); if (outputEditor) outputEditor.dispose();
         inputEditor = monaco.editor.create(document.getElementById('input'), { value: '', language: 'plaintext', theme, readOnly: false, ...common });
