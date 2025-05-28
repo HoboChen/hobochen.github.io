@@ -11,6 +11,7 @@
   <script>require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs' } });</script>
 
   <style>
+    /* ---------- existing variables ---------- */
     :root {
       --bg: #f2f5f7;
       --panel-bg: #fff;
@@ -47,11 +48,39 @@
     }
 
     h1 {
-      margin: 0 0 .75rem;           /* no auto → aligned with panels */
-      padding: 0 1rem;
-      max-width: 3000px;
+      margin: 0;                    /* header takes care of outer spacing */
       font-size: clamp(1.6rem, 2vw+.8rem, 2.6rem);
       line-height: 1.15;
+    }
+
+    /* ---------- compact header & buttons ---------- */
+    #header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:0 1rem;
+      max-width:3000px;
+      margin:0 0 .75rem;
+    }
+    #controls{display:flex;gap:.5rem;flex-shrink:0;}
+    .toggle-btn{
+      padding:.35rem .8rem;
+      font-size:.85rem;
+      border:1px solid var(--border);
+      border-radius:6px;
+      background:var(--panel-bg);
+      color:var(--text);
+      cursor:pointer;
+      transition:background .15s,color .15s;
+    }
+    .toggle-btn.active{
+      background:var(--text);
+      color:var(--panel-bg);
+    }
+    .toggle-btn:focus-visible{
+      outline:2px solid #2f6be0;
+      outline-offset:2px;
     }
 
     #workspace {
@@ -99,20 +128,30 @@
       white-space: pre-wrap;
       padding: 1rem
     }
+
+    /* hide element when JS adds .hidden */
+    .hidden { display:none !important; }
   </style>
 </head>
 
 <body>
-  <h1>Jingqi's JWT Parser</h1>
+  <header id="header">
+    <h1>Jingqi's JWT Parser</h1>
+    <div id="controls">
+      <button id="btn-input"  class="toggle-btn active" aria-pressed="true">JWT</button>
+      <button id="btn-output" class="toggle-btn active" aria-pressed="true">Parsed</button>
+    </div>
+  </header>
+
   <div id="workspace">
-    <section class="panel">
-      <h2>Input</h2>
+    <section class="panel" id="panel-input">
+      <h2>JWT</h2>
       <div class="panel-content">
         <div id="input" class="monaco-container"></div>
       </div>
     </section>
-    <section class="panel">
-      <h2>Output</h2>
+    <section class="panel" id="panel-output">
+      <h2>Parsed</h2>
       <div class="panel-content">
         <div id="output" class="monaco-container"></div>
       </div>
@@ -194,27 +233,24 @@
       mq.addEventListener ? mq.addEventListener('change', updateTheme) : mq.addListener(updateTheme);
 
     });
-    // inside createEditors()
-    outputEditor.addCommand(
-      monaco.KeyCode.F1,
-      () => outputEditor.getAction('editor.action.showCommands').run()
-    );
 
-    // stop the browser-help page
-    outputEditor.onKeyDown(e => {
-      if (e.keyCode === monaco.KeyCode.F1) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    });
+    /********* Panel-toggle logic *********/
+    const panelInput  = document.getElementById('panel-input');
+    const panelOutput = document.getElementById('panel-output');
+    const btnInput    = document.getElementById('btn-input');
+    const btnOutput   = document.getElementById('btn-output');
 
-    // pre‑populate input with JWT provided via URL param (token or jwt)
-    const initialToken = getQueryParam('token') || getQueryParam('jwt');
-    if (initialToken) {
-      inputEditor.setValue(initialToken);
-      parseAndRender();
+    function hook(btn, panel){
+      btn.addEventListener('click', () => {
+        panel.classList.toggle('hidden');
+        const visible = !panel.classList.contains('hidden');
+        btn.classList.toggle('active', visible);
+        btn.setAttribute('aria-pressed', visible);
+      });
     }
+    hook(btnInput,  panelInput);
+    hook(btnOutput, panelOutput);
+
   </script>
 </body>
-
 </html>
