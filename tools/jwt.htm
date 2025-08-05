@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jingqi's JWT Parser</title>
+
+  <!-- Monaco Editor loader -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+  <script>require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs' } });</script>
+
+  <style>
+    /* ---------- existing variables ---------- */
+    :root {
+      --bg: #f2f5f7;
+      --panel-bg: #fff;
+      --text: #111;
+      --border: #d0d5da
+    }
+
+    /* Make every element use border-box so padding never enlarges the real width */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    @media(prefers-color-scheme:dark) {
+      :root {
+        --bg: #0d1117;
+        --panel-bg: #161b22;
+        --text: #c9d1d9;
+        --border: #30363d
+      }
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: system-ui, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text)
+    }
+
+    h1 {
+      margin: 0;                    /* header takes care of outer spacing */
+      font-size: clamp(1.6rem, 2vw+.8rem, 2.6rem);
+      line-height: 1.15;
+    }
+
+    /* ---------- compact header & buttons ---------- */
+    #header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:0 1rem;
+      max-width:3000px;
+      margin:0 0 .75rem;
+    }
+    #controls{display:flex;gap:.5rem;flex-shrink:0;}
+    .toggle-btn{
+      padding:.35rem .8rem;
+      font-size:.85rem;
+      border:1px solid var(--border);
+      border-radius:6px;
+      background:var(--panel-bg);
+      color:var(--text);
+      cursor:pointer;
+      transition:background .15s,color .15s;
+    }
+    .toggle-btn.active{
+      background:var(--text);
+      color:var(--panel-bg);
+    }
+    .toggle-btn:focus-visible{
+      outline:2px solid #2f6be0;
+      outline-offset:2px;
+    }
+
+    #workspace {
+      flex: 1 1 auto;
+      max-width: 3000px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1rem 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .panel h2 {
+      margin: 0;
+      padding: .75rem 1rem;
+      font-size: 1.05rem;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .panel-content {
+      flex: 1 1 auto;
+      overflow: hidden;
+      padding: 0
+    }
+    .monaco-container {
+      width: 100%;
+      height: 99%;
+    }
+
+    .error {
+      color: #e00;
+      font-weight: bold;
+      font-family: monospace;
+      white-space: pre-wrap;
+      padding: 1rem
+    }
+
+    /* hide element when JS adds .hidden */
+    .hidden { display:none !important; }
+  </style>
+</head>
+
+<body>
+  <header id="header">
+    <h1>Jingqi's JWT Parser</h1>
+    <div id="controls">
+      <button id="btn-input"  class="toggle-btn active" aria-pressed="true">JWT</button>
+      <button id="btn-output" class="toggle-btn active" aria-pressed="true">Parsed</button>
+    </div>
+  </header>
+
+  <div id="workspace">
+    <section class="panel" id="panel-input">
+      <h2>JWT</h2>
+      <div class="panel-content">
+        <div id="input" class="monaco-container"></div>
+      </div>
+    </section>
+    <section class="panel" id="panel-output">
+      <h2>Parsed</h2>
+      <div class="panel-content">
+        <div id="output" class="monaco-container"></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    /********* Utility functions *********/
+    const jwtRegex = /^(?:[A-Za-z0-9_-]+\.){2}[A-Za-z0-9_-]*$/;
+
+    // Hoisted function definition so it is available before use
+    function getInitialToken() {
+      const searchParams = new URLSearchParams(window.location.search);
+      const hashParams = new URLSearchParams(
+        window.location.hash.startsWith('#') ? window.location.hash.slice(1) : ''
+      );
+      return (
+        searchParams.get('token') ||
+        searchParams.get('jwt') ||
+        hashParams.get('token') ||
+        hashParams.get('jwt')
+      );
+    }
+
+    const base64UrlDecode = s => { s = s.replace(/-/g, '+').replace(/_/g, '/'); const p = s.length % 4; if (p) s += '='.repeat(4 - p); return atob(s); };
+    const findJwt = t => { const m = t.match(/([A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]*)/); return m ? m[1] : null; };
+    const debounce = (fn, ms = 300) => { let id; return (...a) => { clearTimeout(id); id = setTimeout(fn, ms, ...a); }; };
+    const extractJsonWithSig = str => { let d = 0; for (let i = 0; i < str.length; i++) { const c = str[i]; if (c === '{' || c === '[') d++; if (c === '}' || c === ']') d--; if (d === 0) { if (i === str.length - 1) return [str, null]; if (str[i + 1] === '.') return [str.slice(0, i + 1), str.slice(i + 2)]; } } return [str, null]; };
+    function parseClaim(v) {
+      if (typeof v === 'string') {
+        if (jwtRegex.test(v)) {
+          try { const [p0, p1] = v.split('.', 3); const hdr = parseClaim(JSON.parse(base64UrlDecode(p0))); const plS = base64UrlDecode(p1); let pl; try { pl = parseClaim(JSON.parse(plS)); } catch { pl = plS; } return { NESTED_JWT: { header: hdr, payload: pl } }; } catch { }
+        }
+        const t = v.trim(); if (t.startsWith('{') || t.startsWith('[')) {
+          const [j] = extractJsonWithSig(t); try { return { NESTED_JSON: parseClaim(JSON.parse(j)) }; } catch { }
+        }
+        return v;
+      }
+      if (Array.isArray(v)) return v.map(parseClaim);
+      if (v && typeof v === 'object') { const o = {}; for (const [k, val] of Object.entries(v)) o[k] = parseClaim(val); return o; }
+      return v;
+    }
+    /********* Monaco setup *********/
+    let inputEditor, outputEditor;
+    function render(text) { outputEditor.setValue(text); }
+    function parseAndRender() {
+      const raw = inputEditor.getValue(); const tok = findJwt(raw);
+      if (!tok) { render('No JWT found.'); return; }
+      const parts = tok.split('.'); if (parts.length < 3) { render('Malformed JWT (needs 2 dots).'); return; }
+      try {
+        const hdr = parseClaim(JSON.parse(base64UrlDecode(parts[0])));
+        const plRaw = base64UrlDecode(parts[1]); let pl; try { pl = parseClaim(JSON.parse(plRaw)); } catch { pl = plRaw; }
+        render(JSON.stringify({ header: hdr, payload: pl }, null, 2));
+      } catch (e) { render(`Failed to decode: ${e.message}`); }
+    }
+    require(['vs/editor/editor.main'], () => {
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      const common = { automaticLayout: true, wordWrap: 'on', minimap: { enabled: false } };
+      const createEditors = theme => {
+        if (inputEditor) inputEditor.dispose(); if (outputEditor) outputEditor.dispose();
+        inputEditor = monaco.editor.create(document.getElementById('input'), { value: '', language: 'plaintext', theme, readOnly: false, ...common });
+        outputEditor = monaco.editor.create(document.getElementById('output'), { value: 'Waiting for valid JWT…', language: 'json', theme, readOnly: true, ...common });
+        inputEditor.onDidChangeModelContent(debounce(parseAndRender, 250));
+
+        // Custom shortcut: Alt+Shift+P opens Command Palette in output pane
+        outputEditor.addCommand(monaco.KeyMod.Alt | monaco.KeyMod.Shift | monaco.KeyCode.KEY_P, () => {
+          const act = outputEditor.getAction('editor.action.showCommands'); act && act.run();
+        });
+
+        // Pre-populate from URL
+        const initialToken = getInitialToken();
+        if (initialToken) {
+          inputEditor.setValue(initialToken);
+          parseAndRender();
+        }
+      };
+      createEditors(mq.matches ? 'vs-dark' : 'vs');
+      const updateTheme = () => monaco.editor.setTheme(mq.matches ? 'vs-dark' : 'vs');
+      mq.addEventListener ? mq.addEventListener('change', updateTheme) : mq.addListener(updateTheme);
+
+    });
+
+    /********* Panel-toggle logic *********/
+    const panelInput  = document.getElementById('panel-input');
+    const panelOutput = document.getElementById('panel-output');
+    const btnInput    = document.getElementById('btn-input');
+    const btnOutput   = document.getElementById('btn-output');
+
+    function hook(btn, panel){
+      btn.addEventListener('click', () => {
+        panel.classList.toggle('hidden');
+        const visible = !panel.classList.contains('hidden');
+        btn.classList.toggle('active', visible);
+        btn.setAttribute('aria-pressed', visible);
+      });
+    }
+    hook(btnInput,  panelInput);
+    hook(btnOutput, panelOutput);
+
+  </script>
+</body>
+</html>
