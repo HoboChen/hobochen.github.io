@@ -28,7 +28,7 @@
 <meta property="og:description" content="简单记录我家的消费电子产品。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-01-10T22:56:17.000Z">
-<meta property="article:modified_time" content="2025-05-21T18:23:38.890Z">
+<meta property="article:modified_time" content="2025-10-09T00:25:09.005Z">
 <meta property="article:author" content="Jingqi Chen">
 <meta property="article:tag" content="long">
 <meta property="article:tag" content="practice">
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-05-21 11:23:38" itemprop="dateModified" datetime="2025-05-21T11:23:38-07:00">2025-05-21</time>
+                <time title="Modified: 2025-10-08 17:25:09" itemprop="dateModified" datetime="2025-10-08T17:25:09-07:00">2025-10-08</time>
               </span>
 
           
@@ -214,6 +214,11 @@
         <p>简单记录我家的消费电子产品。</p>
 <span id="more"></span>
 <h2 id="pc">PC</h2>
+<!--
+
+需要把SSD / HDD NAS合二为一。
+
+-->
 <h3 id="nas---fractal-design-node-804">NAS - Fractal Design Node
 804</h3>
 <table>
@@ -394,23 +399,24 @@ href="https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-
 </tr>
 <tr class="even">
 <td style="text-align: left;">内存</td>
-<td style="text-align: left;">32 GiB</td>
-<td style="text-align: left;">2*16GiB DDR5 6000 Mhz</td>
+<td style="text-align: left;">64 GiB</td>
+<td style="text-align: left;">2*32GiB ECC UDIMM 5600Mhz</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">磁盘A-B</td>
+<td style="text-align: left;">磁盘A</td>
 <td style="text-align: left;">960 GiB</td>
 <td style="text-align: left;">905P</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">磁盘C</td>
+<td style="text-align: left;">磁盘B-C</td>
 <td style="text-align: left;">7.68 TiB</td>
 <td style="text-align: left;">SN640</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">显卡</td>
 <td style="text-align: left;">nVIDIA 5070Ti</td>
-<td style="text-align: left;">-</td>
+<td style="text-align: left;">Gigabyte Windforce, <a
+href="https://www.techpowerup.com/gpu-specs/gigabyte-rtx-5070-ti-windforce-oc-sff.b11965">spec</a></td>
 </tr>
 </tbody>
 </table>
@@ -420,6 +426,7 @@ href="https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-
 <li>Sony A90K 42'</li>
 <li>HHKB Hybrid</li>
 <li>Razer DeathAdder V3</li>
+<li>谷粒 金刚3 Pro</li>
 <li>Fiio K19 + Susvara</li>
 </ul></li>
 <li>其他配件：
@@ -430,13 +437,35 @@ href="https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-
 <li>Noctua A12x25 出风</li>
 </ul></li>
 </ul>
-<!-- ### 笔记本 - Apple Macbook Pro 14 2024
-
-|组件|型号|备注|
-|:--|:--|:--|
-|CPU|M4 Pro|8P4E
-|内存|48 GiB|-
-|磁盘|1 TiB|- -->
+<p>磁盘B-C组成ReFS mirror阵列，并且打开了文件数据校验。</p>
+<h3 id="笔记本---apple-macbook-pro-14-2024">笔记本 - Apple Macbook Pro
+14 2024</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">组件</th>
+<th style="text-align: left;">型号</th>
+<th style="text-align: left;">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CPU</td>
+<td style="text-align: left;">M4 Pro</td>
+<td style="text-align: left;">8P4E</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">内存</td>
+<td style="text-align: left;">48 GiB</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">磁盘</td>
+<td style="text-align: left;">1 TiB</td>
+<td style="text-align: left;">-</td>
+</tr>
+</tbody>
+</table>
 <h3 id="台式机---fractal-design-north-1">台式机 - Fractal Design
 North</h3>
 <table>
@@ -498,7 +527,7 @@ href="https://www.techpowerup.com/gpu-specs/msi-rtx-4080-ventus-3x-oc.b9761">spe
 </ul></li>
 <li>其他配件：
 <ul>
-<li>Asrock Z890 Pro RS</li>
+<li>Asrock Z890 Pro RS (Dr.MOS 60A)</li>
 <li>Noctua D15</li>
 <li>长城 F10</li>
 <li>Noctua A12x25 出风</li>
@@ -521,14 +550,14 @@ href="https://www.techpowerup.com/gpu-specs/msi-rtx-4080-ventus-3x-oc.b9761">spe
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">CPU</td>
-<td style="text-align: left;">Core i5 12600KF</td>
-<td style="text-align: left;">6P4E, <a
-href="https://www.intel.com/content/www/us/en/products/sku/134590/intel-core-i512600kf-processor-20m-cache-up-to-4-90-ghz/specifications.html">spec</a></td>
+<td style="text-align: left;">Core Ultra 7 265KF</td>
+<td style="text-align: left;">8P12E, <a
+href="https://www.intel.com/content/www/us/en/products/sku/241062/intel-core-ultra-7-processor-265kf-30m-cache-up-to-5-50-ghz/specifications.html">spec</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">内存</td>
-<td style="text-align: left;">32 GiB</td>
-<td style="text-align: left;">2*16GiB DDR5 6000 Mhz</td>
+<td style="text-align: left;">64 GiB</td>
+<td style="text-align: left;">4*16GiB DDR5 5200 Mhz</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">磁盘A</td>
@@ -563,7 +592,7 @@ href="https://www.intel.com/content/www/us/en/products/sku/134590/intel-core-i51
 </ul></li>
 <li>其他配件：
 <ul>
-<li>MSI B660M Mortar Max</li>
+<li>Gigabyte Z890M Aorus Elite Ice</li>
 <li>利民 SS135</li>
 <li>EVGA SFX 750GM</li>
 <li>利民C9; 出风</li>
@@ -586,14 +615,14 @@ href="https://www.intel.com/content/www/us/en/products/sku/134590/intel-core-i51
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">CPU</td>
-<td style="text-align: left;">Core i5 12600KF</td>
-<td style="text-align: left;">6P4E, <a
-href="https://www.intel.com/content/www/us/en/products/sku/134590/intel-core-i512600kf-processor-20m-cache-up-to-4-90-ghz/specifications.html">spec</a></td>
+<td style="text-align: left;">Core Ultra 7 265KF</td>
+<td style="text-align: left;">8P12E, <a
+href="https://www.intel.com/content/www/us/en/products/sku/241062/intel-core-ultra-7-processor-265kf-30m-cache-up-to-5-50-ghz/specifications.html">spec</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">内存</td>
-<td style="text-align: left;">64 GiB</td>
-<td style="text-align: left;">4*16GiB DDR4 3200 Mhz</td>
+<td style="text-align: left;">96 GiB</td>
+<td style="text-align: left;">2*48GiB DDR5 6400 Mhz</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">磁盘A-B</td>
@@ -620,7 +649,7 @@ href="https://www.techpowerup.com/gpu-specs/geforce-rtx-3060-ti.c3681">spec</a><
 </ul></li>
 <li>其他配件：
 <ul>
-<li>ASRock B660M PRO RS</li>
+<li>Gigabyte Z890M Aorus Elite Ice</li>
 <li>利民 SS135</li>
 <li>EVGA SFX 850GM</li>
 <li>利民C9; 出风</li>
@@ -677,19 +706,16 @@ href="https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-
 <p>有两台。</p>
 <h2 id="游戏机">游戏机</h2>
 <ul>
-<li>Xbox Series X
-<ul>
-<li>精英手柄 * 2</li>
-<li>黑色手柄 * 1</li>
-</ul></li>
 <li>PS5
 <ul>
 <li>2TiB 扩展存储</li>
 <li>手柄充电座</li>
-<li>手柄 * 3；黑 红 白</li>
+<li>手柄 * 2；黑 白</li>
 </ul></li>
 <li>Steam Deck 512G</li>
-<li>Switch</li>
+<li>Lenovo Legion Go S Z1E</li>
+<li>Switch Lite</li>
+<li>Switch 2</li>
 </ul>
 <h2 id="手机平板手表降噪">手机/平板/手表/降噪</h2>
 <ul>
@@ -733,7 +759,7 @@ href="https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-
 <ul>
 <li>Calman校色仪</li>
 <li>红蜘蛛校色仪</li>
-<li>XBows, Razer DeathAdder V3；在工位</li>
+<li>XBows；在工位</li>
 <li>Realforce 87u 分区压力；在Caesium 工位</li>
 </ul>
 <h2 id="吃灰中">吃灰中</h2>
@@ -806,6 +832,11 @@ href="https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-
 </ul>
 <h3 id="pc配件">PC配件</h3>
 <ul>
+<li>板U内存套装：
+<ul>
+<li>12600kf+B660m Pro RS+DDR4 16G * 4</li>
+<li>12600kf+B660m Mortar+DDR5 16G * 2</li>
+</ul></li>
 <li>内存:
 <ul>
 <li>16g ddr4 2133 笔记本</li>
@@ -851,19 +882,36 @@ href="https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-
 <!-- 还有个MBP 2015 13 inch 在爸那里吃灰 -->
 <!--
 
+理想的个人PC：
+
+1. Linux base, ZFS on root (mirror), zbm boot
+2. pcie passthrough to windows on demand (on demand possible?)
+3. virtual machines, working folder, linux itself on different zfs dataset
+4. native encryption (but bypass the dataset of virtual machines?)
+
+
+
+理想的电子产品总和：
+
+1. 一个中心化的PC，9950X+5090+ECC memory+SSD+2*SSD(15.36T)+6*HDD(Z2, ~100T)
+1. 或者EPYC(128C) + K14PA + E1.S?
+1. 一个带4块5K屏幕的PC
+1. 一个手机
+
 比较合理的装备：
 
-1. 42 OLED * 2 + macbook pro + apple tv + das (itx diy)
+1. 55 OLED + apple tv
+2. A3 printer + mbp + ipad
 2. 27 5K * 4 (viewsonic) + atx diy pc (ubuntu / zfs)
 
 1. elecom
     1. EDC
-        1. 钱包 护照
+        1. 钱包
         1. 布地奈德喷雾 人工眼泪 抗过敏眼药水
-        1. Flip6 & Watch7 & WF1000XM5 / watch & 16e & Airpods max
-    1. SAW
+        1. Watch & 16PM & Airpods Pro 3
+        1. MBP, 1TB SSD, 65W gan, 
     1. 其他: 3M耳塞、眼镜布、N95口罩
-    1. A7CR & 50APO & Loxia25 & F28RM
+    1. A7CR & 50APO & Loxia25 & F28RM, peak design clip
 -->
 
     </div>
@@ -948,7 +996,8 @@ href="https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pc"><span class="nav-text">PC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nas---fractal-design-node-804"><span class="nav-text">NAS - Fractal Design Node
 804</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nas---%E4%B9%94%E6%80%9D%E4%BC%AF-d30"><span class="nav-text">NAS - 乔思伯 D30</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B0%E5%BC%8F%E6%9C%BA---fractal-design-north"><span class="nav-text">台式机 - Fractal Design
-North</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B0%E5%BC%8F%E6%9C%BA---fractal-design-north-1"><span class="nav-text">台式机 - Fractal Design
+North</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%94%E8%AE%B0%E6%9C%AC---apple-macbook-pro-14-2024"><span class="nav-text">笔记本 - Apple Macbook Pro
+14 2024</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B0%E5%BC%8F%E6%9C%BA---fractal-design-north-1"><span class="nav-text">台式机 - Fractal Design
 North</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wfh%E5%8F%B0%E5%BC%8F%E6%9C%BA---%E4%B9%94%E6%80%9D%E4%BC%AF-a9"><span class="nav-text">WFH台式机 - 乔思伯 A9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wfh%E5%8F%B0%E5%BC%8F%E6%9C%BA---%E4%B9%94%E6%80%9D%E4%BC%AF-a9-1"><span class="nav-text">WFH台式机 - 乔思伯 A9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%94%BE%E5%BC%8F%E5%8F%B0%E5%BC%8F%E6%9C%BA"><span class="nav-text">开放式台式机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E6%9C%BA"><span class="nav-text">游戏机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E6%9C%BA%E5%B9%B3%E6%9D%BF%E6%89%8B%E8%A1%A8%E9%99%8D%E5%99%AA"><span class="nav-text">手机&#x2F;平板&#x2F;手表&#x2F;降噪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%83%E7%81%B0%E4%B8%AD"><span class="nav-text">吃灰中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E8%AE%BE"><span class="nav-text">外设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pc%E9%85%8D%E4%BB%B6"><span class="nav-text">PC配件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%9E%83%E5%9C%BE%E4%BD%AC%E4%B8%93%E5%B1%9E"><span class="nav-text">其他垃圾佬专属</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
@@ -965,14 +1014,14 @@ North</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
