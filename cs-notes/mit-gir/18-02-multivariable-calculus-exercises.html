@@ -1,0 +1,2068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="build-commit" content="c659b99">
+  <title>Calculus II (18.02) - Exercises - Jingqi's Interpositive</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/main.css?v=c659b99">
+  <link rel="stylesheet" href="/static/link-preview.css">
+  <link rel="stylesheet" href="/static/sidebar-panel.css">
+  <link rel="stylesheet" href="/static/table-enhance.css">
+  <link rel="stylesheet" href="/static/syllabus-enhance.css">
+  <link rel="stylesheet" href="/static/comments.css">
+  <link rel="stylesheet" href="/static/notebook.css">
+  <link rel="stylesheet" href="/static/themes.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var linkPreviewEmbed=false;
+      try{
+        var previewUrl=new URL(location.href);
+        linkPreviewEmbed=previewUrl.searchParams.get('rprint-preview')==='1'&&window.parent!==window&&window.parent.location.origin===location.origin;
+      }catch(e){}
+      if(linkPreviewEmbed){
+        document.documentElement.classList.add('link-preview-embed');
+        var previewArticleLink=function(target){return target&&target.closest&&target.closest('.article a[href]');};
+        var blockPreviewLink=function(event){if(previewArticleLink(event.target)){event.preventDefault();event.stopImmediatePropagation();}};
+        document.addEventListener('click',blockPreviewLink,true);
+        document.addEventListener('auxclick',blockPreviewLink,true);
+        document.addEventListener('keydown',function(event){if(event.key==='Enter')blockPreviewLink(event);},true);
+        document.addEventListener('dblclick',function(event){if(event.target&&event.target.closest&&event.target.closest('.article')){event.preventDefault();event.stopImmediatePropagation();}},true);
+      }
+      var bc=document.querySelector('meta[name="build-commit"]');
+      var commit=bc?bc.getAttribute('content'):'';
+      if(commit&&commit!=='unknown'){
+        var prev=localStorage.getItem('kb-build-commit');
+        if(prev&&prev!==commit){
+          var keys=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf('kb-')===0)keys.push(k);}
+          keys.forEach(function(k){localStorage.removeItem(k);});
+          localStorage.setItem('kb-build-commit',commit);
+          if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+            navigator.serviceWorker.controller.postMessage('clearCaches');
+          }
+          window.location.reload();
+          return;
+        }
+        localStorage.setItem('kb-build-commit',commit);
+      }
+      // Resume last visited page on PWA/browser launch. PWA launches carry
+      // `?pwa=1`; a normal browser launch is a plain root URL without a same-
+      // origin referrer. `/index.html` is an explicit home navigation, so it
+      // never resumes. Runs before paint to avoid a flash of the home page.
+      // Validates the stored path is a same-origin absolute path (rejects
+      // `//host` / `/\host` open-redirects).
+      var resumeLaunch=/[?&]pwa=1(&|$)/.test(location.search);
+      try{
+        var launchUrl=new URL(location.href);
+        launchUrl.searchParams.delete('pwa');
+        var sameOriginReferrer=false;
+        try{sameOriginReferrer=!!document.referrer&&new URL(document.referrer,location.href).origin===location.origin;}catch(e){}
+        resumeLaunch=resumeLaunch||(launchUrl.pathname==='/'&&!launchUrl.search&&!launchUrl.hash&&!sameOriginReferrer);
+      }catch(e){}
+      if(resumeLaunch){
+        try{
+          var last=localStorage.getItem('kb-last-location');
+          var lastPath=last&&last.split('#')[0].split('?')[0];
+          if(last&&/^\/[^/\\]/.test(last)&&lastPath!=='/'&&lastPath!=='/index.html'){
+            try{sessionStorage.setItem('kb-resume-last-scroll','1');}catch(e){}
+            location.replace(last);return;
+          }
+        }catch(e){}
+      }
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      var mob=window.matchMedia('(max-width:650px)').matches;
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.style.colorScheme=t==='dark'?'dark':'light';
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      var w=p.contentWidth||(mob?'100':'90');
+      document.documentElement.style.setProperty('--content-max-width',w+'%');
+      var edge=p.ignoreCorners!==undefined?p.ignoreCorners==='on':false;
+      if(edge&&w==='100')document.documentElement.setAttribute('data-ignore-corners','on');
+      if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches||window.matchMedia('(display-mode:fullscreen)').matches)document.documentElement.classList.add('pwa-standalone');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'kaiti';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.0};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+      var ht=t==='dark'?'github-dark':'github';
+      var writes='<link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/'+ht+'.min.css">';
+      document.write(writes);
+    })();
+  </script>
+  <style>.math{opacity:0;transition:opacity .15s}.math.rprint-render-failed{opacity:1}</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css" integrity="sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM" crossorigin="anonymous">
+  <script id="rprint-katex" defer src="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.js" integrity="sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI" crossorigin="anonymous"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('katex')}else{document.querySelectorAll('.math').forEach(function(el){var src=el.textContent;el.setAttribute('data-latex',src);katex.render(src,el,{displayMode:el.classList.contains('display'),throwOnError:false,trust:function(ctx){return ctx&&ctx.command==='\\href'&&typeof ctx.url==='string'&&/^#[A-Za-z0-9:._-]+$/.test(ctx.url);}});el.querySelectorAll('mtable[columnspacing=\'\']').forEach(function(t){t.removeAttribute('columnspacing')});el.style.opacity='1';})}"></script>
+  <script>document.getElementById('rprint-katex').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('katex',new Error('KaTeX failed to load'))}else{document.querySelectorAll('.math').forEach(function(el){el.style.opacity='1'})}});</script>
+</head>
+<body data-page-type="markdown">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <button class="banner-toggle" id="left-toggle" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h12v1.5H2V3zm0 4h12v1.5H2V7zm0 4h12v1.5H2V11z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-center">
+        <div class="banner-center-inner">
+          <a href="/index.html" class="site-title" data-short="Interpositive">Jingqi's Interpositive</a>
+          <span class="spa-health-wrap" id="spa-health-wrap">
+            <span class="spa-health-dot" id="spa-health-dot" title="SPA server status"></span>
+            <div class="spa-health-popup" id="spa-health-popup">
+              <div class="shp-header">
+                <span class="shp-title">Server Status</span>
+                <span class="shp-heart" id="shp-heart"></span>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-metrics">
+                <div class="shp-row"><span class="shp-label">Ping</span><span class="shp-value" id="shp-ping">—</span></div>
+                <div class="shp-row"><span class="shp-label">Uptime</span><span class="shp-value" id="shp-uptime">—</span></div>
+                <div class="shp-row"><span class="shp-label">Memory</span><span class="shp-value" id="shp-memory">—</span></div>
+                <div class="shp-row"><span class="shp-label">CPU Time</span><span class="shp-value" id="shp-cpu-time">—</span></div>
+                <div class="shp-row"><span class="shp-label">Load</span><span class="shp-value" id="shp-load">—</span></div>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-modules">
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-watch"></span> Watch</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-jupyter"></span> Jupyter</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-terminal"></span> Terminal</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-proxy"></span> Proxy</div>
+              </div>
+            </div>
+          </span>
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="/cs-notes/" class="nav-link" data-short="CS">CS</a><ul class="nav-dropdown"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li><a href="/cs-notes/mit-gir/index.html">MIT GIR</a></li><li><a href="/cs-notes/cs-math/index.html">CS Math</a></li></ul></li><li class="nav-item"><a href="/not-cs-notes/" class="nav-link" data-short="Not-CS">Not-CS</a><ul class="nav-dropdown"><li><a href="/not-cs-notes/mit-math-requirements.html">MIT Math Syllabus</a></li></ul></li><li class="nav-item"><a href="/notebook/" class="nav-link" data-short="Mixed">Mixed</a><ul class="nav-dropdown"><li><a href="/notebook/mind/index.html">Mind</a></li><li><a href="/notebook/matter/index.html">Matter</a></li><li><a href="/notebook/practice/index.html">Practice</a></li><li><a href="/notebook/toolbox/index.html">Toolbox</a></li></ul></li><li class="nav-item"><a href="/years/" class="nav-link" data-short="Years">Years</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="banner-right">
+        <button class="banner-right-toggle" title="More controls">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="search-wrap" id="search-wrap">
+          <button class="search-btn" id="search-btn" title="Search (Ctrl+K)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-input-wrap" id="search-input-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search…" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+        <div class="comment-wrap" id="comment-wrap">
+          <button class="comment-btn" id="comment-btn" title="Review Comments (A)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <span class="comment-nav-count" id="comment-nav-count"></span>
+          <button class="comment-nav-btn" id="comment-nav-prev" title="Previous comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="comment-nav-btn" id="comment-nav-next" title="Next comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <button class="settings-btn" id="settings-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="settings-panel" id="settings-panel">
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Native Jupyter <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="native-jupyter-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Global Search <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="content-search-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Quick Edit <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="quick-edit-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section resource-pack-setting" id="resource-pack-setting" hidden>
+            <div class="settings-row resource-pack-row">
+              <span class="settings-desc">Offline resources</span>
+              <button type="button" class="settings-action-btn" id="resource-pack-import-btn">Import</button>
+            </div>
+            <input type="file" id="resource-pack-input" accept=".rpack,application/vnd.rprint.resource-pack" hidden>
+            <div class="resource-pack-status" id="resource-pack-status" aria-live="polite"></div>
+            <button type="button" class="settings-link-btn" id="resource-pack-rollback-btn" hidden>Undo last import</button>
+          </div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent link-preview-settings-parent">
+            <label class="style-label" id="link-preview-label">Link Preview <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="link-preview-switch" role="switch" aria-labelledby="link-preview-label" aria-checked="false" aria-expanded="false" aria-controls="link-preview-settings-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children link-preview-settings-children" id="link-preview-settings-children" hidden>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-same-page-only-label">Same-page links only</label>
+              <button class="style-switch style-switch-compact" id="link-preview-same-page-only-switch" role="switch" aria-labelledby="link-preview-same-page-only-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-auto-close-label">Auto-close</label>
+              <button class="style-switch style-switch-compact" id="link-preview-auto-close-switch" role="switch" aria-labelledby="link-preview-auto-close-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-overwrite-jumping-label">Overwrite Link Jumping</label>
+              <button class="style-switch style-switch-compact" id="link-preview-overwrite-jumping-switch" role="switch" aria-labelledby="link-preview-overwrite-jumping-label" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+            </div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-row settings-title-row settings-dependent-parent">
+            <span class="settings-panel-title">Keyboard Shortcuts</span>
+            <button class="style-switch" id="kb-enabled-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children keyboard-shortcuts-children">
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="search"><span class="settings-desc">Search</span><span class="settings-keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="scroll"><span class="settings-desc">Scroll down / up</span><span class="settings-keys"><kbd>J</kbd> <kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="section"><span class="settings-desc">Next / prev section</span><span class="settings-keys"><kbd>U</kbd> <kbd>I</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="sidebar-toc"><span class="settings-desc"><span data-shortcut-part="sidebar">Sidebar / </span>TOC</span><span class="settings-keys"><kbd data-shortcut-part="sidebar">S</kbd> <kbd>T</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="spread"><span class="settings-desc">Next / prev spread</span><span class="settings-keys"><kbd>PgDn</kbd> <kbd>PgUp</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="comments"><span class="settings-desc">Comments</span><span class="settings-keys"><kbd>A</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="fold"><span class="settings-desc">Fold banner</span><span class="settings-keys"><kbd>F</kbd></span></div>
+            
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="dismiss"><span class="settings-desc">Close / Dismiss</span><span class="settings-keys"><kbd>Esc</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="settings"><span class="settings-desc">Show this panel</span><span class="settings-keys"><kbd>?</kbd></span></div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent">
+            <label class="style-label">Debug Mode</label>
+            <button class="style-switch" id="debug-mode-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="debug-children" id="debug-children">
+            <div class="settings-dependent-children">
+              <div class="settings-panel-section settings-dependent-child debug-log-level-setting">
+                <label class="style-label">Client Log Level</label>
+                <div class="style-toggle-group">
+                  <button class="style-toggle-btn debug-level-btn" data-level="error">Error</button>
+                  <button class="style-toggle-btn debug-level-btn" data-level="info">Info</button>
+                  <button class="style-toggle-btn debug-level-btn active" data-level="debug">Debug</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-footer" id="settings-git-version">c659b99</div>
+        </div>
+        <a href="/static/settings.html?v=c659b99" class="theme-btn" id="theme-btn" title="Theme & display">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="13.5" cy="6.5" r=".5"/>
+            <circle cx="17.5" cy="10.5" r=".5"/>
+            <circle cx="8.5" cy="7.5" r=".5"/>
+            <circle cx="6.5" cy="12.5" r=".5"/>
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+          </svg>
+        </a>
+        <div class="style-panel" id="style-panel">
+          <div class="style-panel-section">
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn active" data-theme="light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light
+              </button>
+              <button class="style-toggle-btn" data-theme="dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="style-toggle-btn" data-theme="kindle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                E-Ink
+              </button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn font-btn active" data-font="system">System</button>
+              <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+              <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">字体</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn fontzh-btn active" data-fontzh="default">系统</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="noto-serif">宋体</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+            </div>
+          </div>
+          <div class="style-panel-section bg-picker-section">
+            <label class="style-label">Background</label>
+            <div class="bg-swatch-group" id="bg-swatch-group">
+              <button class="bg-swatch active" data-bg="default" title="Default"></button>
+              <button class="bg-swatch" data-bg="green" title="Green"></button>
+              <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+              <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+              <div class="style-range-ticks">
+                <span class="style-range-tick font-size-tick" data-i="0">12</span>
+                <span class="style-range-tick font-size-tick" data-i="1">14</span>
+                <span class="style-range-tick font-size-tick" data-i="2">16</span>
+                <span class="style-range-tick font-size-tick" data-i="3">18</span>
+                <span class="style-range-tick font-size-tick" data-i="4">24</span>
+                <span class="style-range-tick font-size-tick" data-i="5">32</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+              <div class="style-range-ticks">
+                <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+                <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+                <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+                <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+                <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+                <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Width <span id="width-value">90%</span></label>
+            <div class="style-slider-wrap width-slider-wrap">
+              <input type="range" class="style-range" id="content-width-range" min="0" max="5" step="1" value="3">
+              <div class="style-range-ticks width-ticks">
+                <span class="style-range-tick width-tick" data-i="0">50</span>
+                <span class="style-range-tick width-tick" data-i="1">65</span>
+                <span class="style-range-tick width-tick" data-i="2">80</span>
+                <span class="style-range-tick width-tick" data-i="3">90</span>
+                <span class="style-range-tick width-tick" data-i="4">95</span>
+                <span class="style-range-tick width-tick" data-i="5">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="ignore-corners-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">2 Columns <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+        </div>
+        <button class="banner-toggle" id="fold-banner-btn" title="Fold banner">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4l4 4-4 4zm10 0l-4 4 4 4z"/>
+          </svg>
+        </button>
+        <button class="banner-toggle" id="right-toggle" title="Toggle table of contents">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-right-dropdown"></div>
+    </div>
+  </header>
+
+  <!-- Floating buttons when banner is folded -->
+  <div class="banner-fold-float" id="banner-fold-float">
+    <button class="banner-fold-float-btn" id="unfold-banner-btn" title="Unfold banner">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M7 4L3 8l4 4zm2 0l4 4-4 4z"/>
+      </svg>
+    </button>
+    <button class="banner-fold-float-btn" id="float-toc-btn" title="Toggle table of contents">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout left-collapsed right-collapsed">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar collapsed" id="left-sidebar">
+      <div class="sidebar-content" id="spa-sidebar">
+        <!-- rprint:sidebar:start -->
+        <a class="sidebar-cat-title" href="/cs-notes">CS</a><ul class="sidebar-list"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li class="sidebar-group open" data-priority="0"><span class="sidebar-row"><a class="sidebar-group-title active-group" href="/cs-notes/mit-gir/index.html">MIT GIR</a><span class="sidebar-toggle"></span></span><ul><li><a href="/cs-notes/mit-gir/18-01-single-variable-calculus.html">Calculus I (18.01)</a></li><li><a href="/cs-notes/mit-gir/18-01-single-variable-calculus-exercises.html">Calculus I (18.01) - Exercises</a></li><li><a href="/cs-notes/mit-gir/18-02-multivariable-calculus.html">Calculus II (18.02)</a></li><li class="active"><a href="/cs-notes/mit-gir/18-02-multivariable-calculus-exercises.html">Calculus II (18.02) - Exercises</a></li><li><a href="/cs-notes/mit-gir/8-01-classical-mechanics.html">Physics I (8.01) 🚜</a></li><li><a href="/cs-notes/mit-gir/8-01-classical-mechanics-exercises.html">Physics I (8.01) - Exercises 🚜</a></li><li><a href="/cs-notes/mit-gir/8-02-electricity-magnetism.html">Physics II (8.02) 🚜</a></li></ul></li><li class="sidebar-group" data-priority="0.001"><span class="sidebar-row"><a class="sidebar-group-title" href="/cs-notes/cs-math/index.html">CS Math</a><span class="sidebar-toggle"></span></span><ul><li><a href="/cs-notes/cs-math/18-06-linear-algebra.html">Linear Algebra (18.06)</a></li><li><a href="/cs-notes/cs-math/6-042-discrete-mathematics.html">Discrete Mathematics (6.042)</a></li></ul></li></ul>
+        <!-- rprint:sidebar:end -->
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content" id="content">
+      <article class="article" id="spa-content">
+        <h1 id="calculus-ii-18.02---exercises">Calculus II (18.02) - Exercises</h1>
+<h2 id="vectors-and-matrices" data-sourcepos="3:1-3:1">Vectors and Matrices</h2>
+<h3 id="product" data-sourcepos="5:1-5:1"><strong><em>Product</em></strong></h3>
+<p data-sourcepos="7:1-7:1">Use dot product for length, angle, and projection; use cross product for normal vectors, area, and orientation.</p>
+<h4 id="angle-and-area" data-sourcepos="9:1-9:1">Angle and area</h4>
+<p data-sourcepos="11:1-11:1">Given</p>
+<p data-sourcepos="14:1-14:1"><span class="math display">
+\vec A=\langle 1,2,-1\rangle,\qquad \vec B=\langle 2,0,3\rangle,
+</span></p>
+<p data-sourcepos="17:1-17:1">find the angle between them and the area of the parallelogram they span.</p>
+<p data-sourcepos="20:1-20:1"><span class="math display">
+\vec A\cdot \vec B=1\cdot 2+2\cdot 0+(-1)\cdot 3=-1
+</span></p>
+<p data-sourcepos="24:1-24:1"><span class="math display">
+|\vec A|=\sqrt6,\qquad |\vec B|=\sqrt{13}
+</span></p>
+<p data-sourcepos="27:1-27:1">So</p>
+<p data-sourcepos="30:1-30:1"><span class="math display">
+\cos\theta=\frac{\vec A\cdot\vec B}{|\vec A||\vec B|}=-\frac1{\sqrt{78}}.
+</span></p>
+<p data-sourcepos="33:1-33:1">For the area,</p>
+<p><span class="math display">
+\vec A\times\vec B=
+\begin{vmatrix}
+\hat i &amp; \hat j &amp; \hat k \\
+1 &amp; 2 &amp; -1 \\
+2 &amp; 0 &amp; 3
+\end{vmatrix}
+=\langle 6,-5,-4\rangle.
+</span></p>
+<p data-sourcepos="45:1-45:1">Thus</p>
+<p data-sourcepos="48:1-48:1"><span class="math display">
+|\vec A\times\vec B|=\sqrt{36+25+16}=\sqrt{77}.
+</span></p>
+<h4 id="projection" data-sourcepos="51:1-51:1">Projection</h4>
+<p data-sourcepos="53:1-53:1">Find the projection of <span class="math inline">\vec A=\langle 3,4,0\rangle</span> onto <span class="math inline">\vec B=\langle 1,2,2\rangle</span>.</p>
+<p data-sourcepos="55:1-55:1">The scalar projection is</p>
+<p data-sourcepos="58:1-58:1"><span class="math display">
+\operatorname{comp}_{\vec B}\vec A=\frac{\vec A\cdot\vec B}{|\vec B|}
+=\frac{3+8+0}{3}=\frac{11}{3}.
+</span></p>
+<p data-sourcepos="62:1-62:1">The vector projection is</p>
+<p data-sourcepos="65:1-65:1"><span class="math display">
+\operatorname{proj}_{\vec B}\vec A
+=\frac{\vec A\cdot\vec B}{|\vec B|^2}\vec B
+=\frac{11}{9}\langle 1,2,2\rangle.
+</span></p>
+<h4 id="normal-vector" data-sourcepos="70:1-70:1">Normal vector</h4>
+<p data-sourcepos="72:1-72:1">Find a normal vector to the plane through</p>
+<p data-sourcepos="75:1-75:1"><span class="math display">
+P=(1,0,0),\qquad Q=(0,1,0),\qquad R=(0,0,1).
+</span></p>
+<p data-sourcepos="78:1-78:1">Use two vectors in the plane:</p>
+<p data-sourcepos="81:1-81:1"><span class="math display">
+\overrightarrow{PQ}=\langle -1,1,0\rangle,
+\qquad
+\overrightarrow{PR}=\langle -1,0,1\rangle.
+</span></p>
+<p data-sourcepos="86:1-86:1">Then</p>
+<p data-sourcepos="89:1-89:1"><span class="math display">
+\overrightarrow{PQ}\times\overrightarrow{PR}
+=\langle 1,1,1\rangle.
+</span></p>
+<p data-sourcepos="93:1-93:1">So one normal vector is</p>
+<p data-sourcepos="96:1-96:1"><span class="math display">
+\langle 1,1,1\rangle.
+</span></p>
+<p data-sourcepos="99:1-99:1">If a problem asks for angle, try <span class="math inline">\vec A\cdot\vec B</span>; if it asks for area or a normal vector, try <span class="math inline">\vec A\times\vec B</span>.</p>
+<h3 id="determinant" data-sourcepos="101:1-101:1">Determinant</h3>
+<p>Use a <span class="math inline">2\times2</span> determinant for signed area in the plane, and a scalar triple product for signed volume in space.</p>
+<p data-sourcepos="105:1-105:1">Find the volume of the parallelepiped spanned by</p>
+<p data-sourcepos="108:1-108:1"><span class="math display">
+\vec A=\langle 1,0,2\rangle,\qquad
+\vec B=\langle 2,1,0\rangle,\qquad
+\vec C=\langle 0,3,1\rangle.
+</span></p>
+<p data-sourcepos="113:1-113:1">Compute</p>
+<p><span class="math display">
+\vec B\times\vec C=
+\begin{vmatrix}
+\hat i &amp; \hat j &amp; \hat k \\
+2 &amp; 1 &amp; 0 \\
+0 &amp; 3 &amp; 1
+\end{vmatrix}
+=\langle 1,-2,6\rangle.
+</span></p>
+<p data-sourcepos="125:1-125:1">Then</p>
+<p data-sourcepos="128:1-128:1"><span class="math display">
+\vec A\cdot(\vec B\times\vec C)=\langle 1,0,2\rangle\cdot\langle 1,-2,6\rangle=13.
+</span></p>
+<p data-sourcepos="131:1-131:1">So the volume is</p>
+<p data-sourcepos="134:1-134:1"><span class="math display">
+|\vec A\cdot(\vec B\times\vec C)|=13.
+</span></p>
+<p data-sourcepos="137:1-137:1">The sign records orientation; area and volume use the absolute value.</p>
+<h3 id="inverse-matrix" data-sourcepos="139:1-139:1">Inverse Matrix</h3>
+<p data-sourcepos="141:1-141:1">To solve a small linear system, either row-reduce or use the inverse matrix when the determinant is nonzero.</p>
+<p data-sourcepos="143:1-143:1">Solve</p>
+<p><span class="math display">
+\begin{cases}
+2x+y=5,\\
+x+3y=7.
+\end{cases}
+</span></p>
+<p data-sourcepos="152:1-152:1">Write</p>
+<p data-sourcepos="155:1-155:1"><span class="math display">
+A=\begin{pmatrix}2&amp;1\\1&amp;3\end{pmatrix},\qquad
+\vec b=\begin{pmatrix}5\\7\end{pmatrix}.
+</span></p>
+<p data-sourcepos="159:1-159:1">Since</p>
+<p data-sourcepos="162:1-162:1"><span class="math display">
+\det A=2\cdot3-1\cdot1=5\neq0,
+</span></p>
+<p data-sourcepos="166:1-166:1"><span class="math display">
+A^{-1}=\frac15\begin{pmatrix}3&amp;-1\\-1&amp;2\end{pmatrix}.
+</span></p>
+<p data-sourcepos="169:1-169:1">Thus</p>
+<p data-sourcepos="172:1-172:1"><span class="math display">
+\begin{pmatrix}x\\y\end{pmatrix}
+=A^{-1}\vec b
+=\frac15\begin{pmatrix}3&amp;-1\\-1&amp;2\end{pmatrix}
+\begin{pmatrix}5\\7\end{pmatrix}
+=\frac15\begin{pmatrix}8\\9\end{pmatrix}.
+</span></p>
+<p data-sourcepos="179:1-179:1">So</p>
+<p><span class="math display">
+x=\frac85,
+\qquad
+ y=\frac95.
+</span></p>
+<p data-sourcepos="187:1-187:1">A zero determinant means the inverse method is unavailable; expect no solution or infinitely many solutions.</p>
+<h2 id="partial-derivatives" data-sourcepos="189:1-189:1">Partial Derivatives</h2>
+<h3 id="partial-derivatives-1">Partial Derivatives</h3>
+<p>When taking <span class="math inline">f_x</span>, treat <span class="math inline">y,z,\ldots</span> as constants; when taking <span class="math inline">f_y</span>, treat <span class="math inline">x,z,\ldots</span> as constants.</p>
+<p data-sourcepos="195:1-195:1">For</p>
+<p data-sourcepos="198:1-198:1"><span class="math display">
+f(x,y)=x^2y+e^{xy}+\sin y,
+</span></p>
+<p data-sourcepos="202:1-202:1"><span class="math display">
+f_x=2xy+ye^{xy}.
+</span></p>
+<p>At <span class="math inline">(1,0)</span>,</p>
+<p data-sourcepos="208:1-208:1"><span class="math display">
+f_x(1,0)=0.
+</span></p>
+<p data-sourcepos="211:1-211:1">For the other partial derivative,</p>
+<p data-sourcepos="214:1-214:1"><span class="math display">
+f_y=x^2+xe^{xy}+\cos y.
+</span></p>
+<p>At <span class="math inline">(1,0)</span>,</p>
+<p data-sourcepos="220:1-220:1"><span class="math display">
+f_y(1,0)=1+1+1=3.
+</span></p>
+<p data-sourcepos="223:1-223:1">Partial derivatives are ordinary one-variable derivatives after deciding which variables are frozen.</p>
+<h3 id="least-square" data-sourcepos="225:1-225:1">Least Square</h3>
+<p>Convert “best fit” into minimizing squared error, then set partial derivatives to zero.</p>
+<p>Fit <span class="math inline">y=ax+b</span> through points <span class="math inline">(0,1),(1,2),(2,2)</span> in the least-squares sense.</p>
+<p data-sourcepos="231:1-231:1">The error is</p>
+<p data-sourcepos="234:1-234:1"><span class="math display">
+D(a,b)=(1-b)^2+(2-a-b)^2+(2-2a-b)^2.
+</span></p>
+<p data-sourcepos="237:1-237:1">Set</p>
+<p data-sourcepos="240:1-240:1"><span class="math display">
+\frac{\partial D}{\partial a}=0,
+\qquad
+\frac{\partial D}{\partial b}=0.
+</span></p>
+<p data-sourcepos="245:1-245:1">This gives</p>
+<p><span class="math display">
+\begin{cases}
+5a+3b=6,\\
+3a+3b=5.
+\end{cases}
+</span></p>
+<p data-sourcepos="254:1-254:1">Solving,</p>
+<p><span class="math display">
+a=\frac12,
+\qquad
+b=\frac76.
+</span></p>
+<p data-sourcepos="262:1-262:1">So the fitted line is</p>
+<p data-sourcepos="265:1-265:1"><span class="math display">
+y=\frac12x+\frac76.
+</span></p>
+<p data-sourcepos="268:1-268:1">Least squares is an optimization problem in the unknown parameters, not in the data variables.</p>
+<h3 id="minmax" data-sourcepos="270:1-270:1">Min/Max</h3>
+<p data-sourcepos="272:1-272:1">Find critical points first, then classify them by the second derivative test.</p>
+<p data-sourcepos="274:1-274:1">For</p>
+<p data-sourcepos="277:1-277:1"><span class="math display">
+f(x,y)=x^2+xy+y^2-3x-3y,
+</span></p>
+<p data-sourcepos="280:1-280:1">critical points satisfy</p>
+<p><span class="math display">
+f_x=2x+y-3=0,
+\qquad
+f_y=x+2y-3=0.
+</span></p>
+<p data-sourcepos="288:1-288:1">Solving gives</p>
+<p><span class="math display">
+x=1,
+\qquad
+ y=1.
+</span></p>
+<p data-sourcepos="296:1-296:1">Now</p>
+<p><span class="math display">
+f_{xx}=2,
+\qquad
+f_{xy}=1,
+\qquad
+f_{yy}=2.
+</span></p>
+<p data-sourcepos="306:1-306:1">So</p>
+<p data-sourcepos="309:1-309:1"><span class="math display">
+AC-B^2=2\cdot2-1^2=3&gt;0,
+\qquad
+A=2&gt;0.
+</span></p>
+<p>Thus <span class="math inline">(1,1)</span> is a local minimum.</p>
+<p data-sourcepos="316:1-316:1">The second derivative test only classifies critical points; it does not find them.</p>
+<h3 id="taylors-theorem">Taylor’s Theorem</h3>
+<p data-sourcepos="320:1-320:1">Around a point, approximate a multivariable function using value, gradient, and second derivatives.</p>
+<p data-sourcepos="322:1-322:1">Find the second-order Taylor polynomial of</p>
+<p data-sourcepos="325:1-325:1"><span class="math display">
+f(x,y)=e^{x+y}
+</span></p>
+<p>at <span class="math inline">(0,0)</span>.</p>
+<p data-sourcepos="330:1-330:1">Since every partial derivative of <span class="math inline">e^{x+y}</span> is <span class="math inline">e^{x+y}</span>, all needed derivatives at <span class="math inline">(0,0)</span> are <span class="math inline">1</span>.</p>
+<p data-sourcepos="332:1-332:1">Thus</p>
+<p data-sourcepos="335:1-335:1"><span class="math display">
+T_2(x,y)=1+x+y+\frac12x^2+xy+\frac12y^2.
+</span></p>
+<p>The mixed term <span class="math inline">xy</span> comes from <span class="math inline">f_{xy}xy</span>, not from <span class="math inline">\frac12 f_{xy}xy</span> twice forgotten; the full quadratic form is</p>
+<p data-sourcepos="341:1-341:1"><span class="math display">
+\frac12(f_{xx}x^2+2f_{xy}xy+f_{yy}y^2).
+</span></p>
+<h3 id="total-differential" data-sourcepos="344:1-344:1">Total Differential</h3>
+<p data-sourcepos="346:1-346:1">Use total differential to estimate small changes.</p>
+<p data-sourcepos="348:1-348:1">For</p>
+<p data-sourcepos="351:1-351:1"><span class="math display">
+f(x,y,z)=x^2y+z^3,
+</span></p>
+<p data-sourcepos="355:1-355:1"><span class="math display">
+df=2xy\,dx+x^2\,dy+3z^2\,dz.
+</span></p>
+<p>At <span class="math inline">(1,2,1)</span>, with</p>
+<p><span class="math display">
+dx=0.01,
+\qquad
+ dy=-0.02,
+\qquad
+ dz=0.03,
+</span></p>
+<p data-sourcepos="369:1-369:1"><span class="math display">
+df\approx 4(0.01)+1(-0.02)+3(0.03)=0.11.
+</span></p>
+<p><span class="math inline">df</span> is a linear approximation; it is most useful when all changes are small.</p>
+<h3 id="chain-rule" data-sourcepos="374:1-374:1"><strong><em>Chain Rule</em></strong></h3>
+<p data-sourcepos="376:1-376:1">Draw the dependency tree, then multiply derivatives along each path and add paths that end at the same variable.</p>
+<h4 id="dependency-tree" data-sourcepos="378:1-378:1">Dependency tree</h4>
+<p data-sourcepos="380:1-380:1">Let</p>
+<p><span class="math display">
+w=x^2+y^2,
+\qquad
+x=s+t,
+\qquad
+y=st.
+</span></p>
+<p>Find <span class="math inline">\partial w/\partial s</span>.</p>
+<p data-sourcepos="392:1-392:1">By chain rule,</p>
+<p data-sourcepos="395:1-395:1"><span class="math display">
+\frac{\partial w}{\partial s}=w_xx_s+w_yy_s.
+</span></p>
+<p data-sourcepos="398:1-398:1">Since</p>
+<p><span class="math display">
+w_x=2x,
+\qquad
+w_y=2y,
+\qquad
+x_s=1,
+\qquad
+y_s=t,
+</span></p>
+<p data-sourcepos="411:1-411:1"><span class="math display">
+\frac{\partial w}{\partial s}=2x+2yt.
+</span></p>
+<p>Substitute <span class="math inline">x=s+t</span> and <span class="math inline">y=st</span>:</p>
+<p data-sourcepos="417:1-417:1"><span class="math display">
+\frac{\partial w}{\partial s}=2(s+t)+2st^2.
+</span></p>
+<h4 id="polar-parameters" data-sourcepos="420:1-420:1">Polar parameters</h4>
+<p data-sourcepos="422:1-422:1">Let</p>
+<p><span class="math display">
+z=e^{xy},
+\qquad
+x=r\cos\theta,
+\qquad
+y=r\sin\theta.
+</span></p>
+<p>Find <span class="math inline">\partial z/\partial r</span>.</p>
+<p data-sourcepos="434:1-434:1">By chain rule,</p>
+<p data-sourcepos="437:1-437:1"><span class="math display">
+\frac{\partial z}{\partial r}=z_xx_r+z_yy_r.
+</span></p>
+<p data-sourcepos="440:1-440:1">Since</p>
+<p><span class="math display">
+z_x=ye^{xy},
+\qquad
+z_y=xe^{xy},
+\qquad
+x_r=\cos\theta,
+\qquad
+y_r=\sin\theta,
+</span></p>
+<p data-sourcepos="453:1-453:1"><span class="math display">
+\frac{\partial z}{\partial r}
+=e^{xy}(y\cos\theta+x\sin\theta).
+</span></p>
+<p>Substitute <span class="math inline">x=r\cos\theta</span> and <span class="math inline">y=r\sin\theta</span>:</p>
+<p data-sourcepos="460:1-460:1"><span class="math display">
+\frac{\partial z}{\partial r}
+=2r\sin\theta\cos\theta\,e^{r^2\sin\theta\cos\theta}.
+</span></p>
+<h4 id="single-variable-parameter" data-sourcepos="464:1-464:1">Single-variable parameter</h4>
+<p data-sourcepos="466:1-466:1">Let</p>
+<p><span class="math display">
+w=xy+yz+zx,
+\qquad
+x=t,
+\qquad
+y=t^2,
+\qquad
+z=e^t.
+</span></p>
+<p>Find <span class="math inline">dw/dt</span> at <span class="math inline">t=0</span>.</p>
+<p data-sourcepos="480:1-480:1">Use</p>
+<p data-sourcepos="483:1-483:1"><span class="math display">
+\frac{dw}{dt}=w_x\frac{dx}{dt}+w_y\frac{dy}{dt}+w_z\frac{dz}{dt}.
+</span></p>
+<p data-sourcepos="486:1-486:1">Here</p>
+<p><span class="math display">
+w_x=y+z,
+\qquad
+w_y=x+z,
+\qquad
+w_z=x+y.
+</span></p>
+<p>At <span class="math inline">t=0</span>,</p>
+<p><span class="math display">
+x=0,
+\qquad
+y=0,
+\qquad
+z=1,
+</span></p>
+<p data-sourcepos="506:1-506:1">and</p>
+<p><span class="math display">
+\frac{dx}{dt}=1,
+\qquad
+\frac{dy}{dt}=2t=0,
+\qquad
+\frac{dz}{dt}=e^t=1.
+</span></p>
+<p data-sourcepos="516:1-516:1">Thus</p>
+<p data-sourcepos="519:1-519:1"><span class="math display">
+\frac{dw}{dt}=1\cdot1+1\cdot0+0\cdot1=1.
+</span></p>
+<p data-sourcepos="522:1-522:1">Differentiate first in terms of intermediate variables, then substitute if the answer should use the original variables.</p>
+<h3 id="gradient-vector" data-sourcepos="524:1-524:1"><strong><em>Gradient Vector</em></strong></h3>
+<p data-sourcepos="526:1-526:1">The gradient is normal to level curves and level surfaces.</p>
+<h4 id="normal-vector-1">Normal vector</h4>
+<p data-sourcepos="530:1-530:1">For</p>
+<p data-sourcepos="533:1-533:1"><span class="math display">
+w=x^2+y^2+z^2,
+</span></p>
+<p>the level surface <span class="math inline">w=9</span> is a sphere. At <span class="math inline">P=(1,2,2)</span>,</p>
+<p data-sourcepos="539:1-539:1"><span class="math display">
+\nabla w=\langle 2x,2y,2z\rangle=\langle 2,4,4\rangle.
+</span></p>
+<p data-sourcepos="542:1-542:1">So a normal vector to the sphere at <span class="math inline">P</span> is</p>
+<p data-sourcepos="545:1-545:1"><span class="math display">
+\langle 2,4,4\rangle.
+</span></p>
+<h4 id="intersection-tangent" data-sourcepos="548:1-548:1">Intersection tangent</h4>
+<p data-sourcepos="550:1-550:1">Find a tangent vector to the curve where</p>
+<p data-sourcepos="553:1-553:1"><span class="math display">
+F(x,y,z)=x^2+y^2+z^2=6
+</span></p>
+<p data-sourcepos="556:1-556:1">and</p>
+<p data-sourcepos="559:1-559:1"><span class="math display">
+G(x,y,z)=x+y+z=4
+</span></p>
+<p>intersect at <span class="math inline">P=(1,1,2)</span>.</p>
+<p data-sourcepos="564:1-564:1">The curve lies on both level surfaces, so its tangent vector is perpendicular to both gradients:</p>
+<p data-sourcepos="567:1-567:1"><span class="math display">
+\nabla F(P)=\langle 2,2,4\rangle,
+\qquad
+\nabla G(P)=\langle 1,1,1\rangle.
+</span></p>
+<p data-sourcepos="572:1-572:1">Thus one tangent vector is</p>
+<p data-sourcepos="575:1-575:1"><span class="math display">
+\nabla F(P)\times\nabla G(P)
+=\begin{vmatrix}
+\hat i &amp; \hat j &amp; \hat k \\
+2 &amp; 2 &amp; 4 \\
+1 &amp; 1 &amp; 1
+\end{vmatrix}
+=\langle -2,2,0\rangle.
+</span></p>
+<p data-sourcepos="584:1-584:1">So a simpler tangent vector is</p>
+<p data-sourcepos="587:1-587:1"><span class="math display">
+\langle -1,1,0\rangle.
+</span></p>
+<h4 id="tangent-line" data-sourcepos="590:1-590:1">Tangent line</h4>
+<p data-sourcepos="592:1-592:1">Find the tangent line to the level curve</p>
+<p data-sourcepos="595:1-595:1"><span class="math display">
+F(x,y)=x^2+xy+y^2=7
+</span></p>
+<p>at <span class="math inline">P=(1,2)</span>.</p>
+<p data-sourcepos="600:1-600:1">The gradient is</p>
+<p data-sourcepos="603:1-603:1"><span class="math display">
+\nabla F=\langle 2x+y,x+2y\rangle.
+</span></p>
+<p>At <span class="math inline">P</span>,</p>
+<p data-sourcepos="609:1-609:1"><span class="math display">
+\nabla F(1,2)=\langle 4,5\rangle.
+</span></p>
+<p data-sourcepos="612:1-612:1">The tangent line is perpendicular to the gradient, so</p>
+<p data-sourcepos="615:1-615:1"><span class="math display">
+\langle 4,5\rangle\cdot\langle x-1,y-2\rangle=0.
+</span></p>
+<p data-sourcepos="618:1-618:1">Thus</p>
+<p data-sourcepos="621:1-621:1"><span class="math display">
+4x+5y=14.
+</span></p>
+<p data-sourcepos="624:1-624:1">For an implicit surface <span class="math inline">w(x,y,z)=c</span>, use <span class="math inline">\nabla w</span> as a normal vector.</p>
+<h3 id="rate-of-change-in-an-arbitrary-direction" data-sourcepos="626:1-626:1">Rate of Change in an Arbitrary Direction</h3>
+<p data-sourcepos="628:1-628:1">Normalize the direction vector before taking the dot product with the gradient.</p>
+<p data-sourcepos="630:1-630:1">For</p>
+<p data-sourcepos="633:1-633:1"><span class="math display">
+f(x,y)=x^2y+y^3,
+</span></p>
+<p data-sourcepos="636:1-636:1">find the directional derivative at <span class="math inline">(1,2)</span> in direction <span class="math inline">\vec v=\langle 3,4\rangle</span>.</p>
+<p data-sourcepos="638:1-638:1">First</p>
+<p data-sourcepos="641:1-641:1"><span class="math display">
+\nabla f=\langle 2xy,x^2+3y^2\rangle.
+</span></p>
+<p>At <span class="math inline">(1,2)</span>,</p>
+<p data-sourcepos="647:1-647:1"><span class="math display">
+\nabla f(1,2)=\langle 4,13\rangle.
+</span></p>
+<p data-sourcepos="650:1-650:1">Normalize the direction:</p>
+<p data-sourcepos="653:1-653:1"><span class="math display">
+\hat u=\frac{\langle 3,4\rangle}{5}=\left\langle \frac35,\frac45\right\rangle.
+</span></p>
+<p data-sourcepos="656:1-656:1">Then</p>
+<p data-sourcepos="659:1-659:1"><span class="math display">
+D_{\hat u}f=\nabla f\cdot\hat u
+=4\cdot\frac35+13\cdot\frac45
+=\frac{64}{5}.
+</span></p>
+<p data-sourcepos="664:1-664:1">The maximum directional derivative is <span class="math inline">|\nabla f|</span>, in the direction of <span class="math inline">\nabla f</span>.</p>
+<h3 id="lagrange-multipliers" data-sourcepos="666:1-666:1">Lagrange Multipliers</h3>
+<p data-sourcepos="668:1-668:1">Use Lagrange multipliers for extrema with equality constraints.</p>
+<p data-sourcepos="670:1-670:1">Maximize</p>
+<p data-sourcepos="673:1-673:1"><span class="math display">
+f(x,y)=xy
+</span></p>
+<p data-sourcepos="676:1-676:1">subject to</p>
+<p data-sourcepos="679:1-679:1"><span class="math display">
+x^2+y^2=1.
+</span></p>
+<p data-sourcepos="682:1-682:1">Set</p>
+<p data-sourcepos="685:1-685:1"><span class="math display">
+\nabla f=\lambda\nabla g,
+\qquad
+g=x^2+y^2.
+</span></p>
+<p data-sourcepos="690:1-690:1">So</p>
+<p><span class="math display">
+y=2\lambda x,
+\qquad
+x=2\lambda y,
+\qquad
+x^2+y^2=1.
+</span></p>
+<p>If <span class="math inline">x,y\neq0</span>, multiplying the first two equations gives</p>
+<p><span class="math display">
+xy=4\lambda^2xy
+\implies
+\lambda=\pm\frac12.
+</span></p>
+<p>Then <span class="math inline">y=\pm x</span>. With the constraint,</p>
+<p data-sourcepos="711:1-711:1"><span class="math display">
+x=\pm\frac1{\sqrt2},
+\qquad
+ y=\pm\frac1{\sqrt2}.
+</span></p>
+<p data-sourcepos="716:1-716:1">The maximum is</p>
+<p data-sourcepos="719:1-719:1"><span class="math display">
+\frac12,
+</span></p>
+<p>when <span class="math inline">x</span> and <span class="math inline">y</span> have the same sign.</p>
+<p data-sourcepos="724:1-724:1">After solving the Lagrange equations, evaluate <span class="math inline">f</span> at all candidates; the equations alone do not say which point is max or min.</p>
+<h3 id="partial-derivative-with-non-independent-variables" data-sourcepos="726:1-726:1">Partial Derivative with Non-Independent Variables</h3>
+<p data-sourcepos="728:1-728:1">If variables are constrained, use the differential of the constraint to eliminate the variable that is allowed to change implicitly.</p>
+<p data-sourcepos="730:1-730:1">Let</p>
+<p><span class="math display">
+f(x,y,z)=xz+y,
+\qquad
+g(x,y,z)=x^2+y^2+z^2=1.
+</span></p>
+<p data-sourcepos="738:1-738:1">Find</p>
+<p data-sourcepos="741:1-741:1"><span class="math display">
+\left(\frac{\partial f}{\partial z}\right)_y
+</span></p>
+<p>at <span class="math inline">(x,y,z)=(\frac{\sqrt3}{2},0,\frac12)</span>.</p>
+<p>Since <span class="math inline">y</span> is held constant,</p>
+<p data-sourcepos="749:1-749:1"><span class="math display">
+dy=0.
+</span></p>
+<p data-sourcepos="752:1-752:1">From the constraint,</p>
+<p data-sourcepos="755:1-755:1"><span class="math display">
+dg=2x\,dx+2y\,dy+2z\,dz=0.
+</span></p>
+<p data-sourcepos="758:1-758:1">So</p>
+<p data-sourcepos="761:1-761:1"><span class="math display">
+dx=-\frac zx\,dz.
+</span></p>
+<p data-sourcepos="764:1-764:1">Now</p>
+<p data-sourcepos="767:1-767:1"><span class="math display">
+df=z\,dx+x\,dz+dy.
+</span></p>
+<p>With <span class="math inline">dy=0</span>,</p>
+<p data-sourcepos="773:1-773:1"><span class="math display">
+df=\left(x-\frac{z^2}{x}\right)dz.
+</span></p>
+<p data-sourcepos="776:1-776:1">Therefore</p>
+<p data-sourcepos="779:1-779:1"><span class="math display">
+\left(\frac{\partial f}{\partial z}\right)_y
+=x-\frac{z^2}{x}.
+</span></p>
+<p data-sourcepos="783:1-783:1">At the given point,</p>
+<p><span class="math display">
+x-\frac{z^2}{x}
+=\frac{\sqrt3}{2}-\frac{1/4}{\sqrt3/2}
+=\frac1{\sqrt3}.
+</span></p>
+<p>The subscript in <span class="math inline">\left(\frac{\partial f}{\partial z}\right)_y</span> tells which differential should be set to zero.</p>
+<h2 id="double-integral-in-plane" data-sourcepos="793:1-793:1">Double Integral in Plane</h2>
+<h3 id="double-integral" data-sourcepos="795:1-795:1">Double Integral</h3>
+<p data-sourcepos="797:1-797:1">Choose an order of integration that describes the region with simple bounds, then integrate one variable at a time.</p>
+<p data-sourcepos="799:1-799:1">Find the volume below</p>
+<p data-sourcepos="802:1-802:1"><span class="math display">
+z=x+2y
+</span></p>
+<p data-sourcepos="805:1-805:1">over the rectangle</p>
+<p data-sourcepos="808:1-808:1"><span class="math display">
+R=\{(x,y):0\le x\le 2,\ 0\le y\le 1\}.
+</span></p>
+<p data-sourcepos="811:1-811:1">Set up the double integral:</p>
+<p data-sourcepos="814:1-814:1"><span class="math display">
+\iint_R (x+2y)\mathrm dA
+=\int_0^2\int_0^1 (x+2y)\mathrm dy\mathrm dx.
+</span></p>
+<p data-sourcepos="818:1-818:1">Compute the inner integral first:</p>
+<p data-sourcepos="821:1-821:1"><span class="math display">
+\int_0^1 (x+2y)\mathrm dy=x+y^2\bigg|_0^1=x+1.
+</span></p>
+<p data-sourcepos="824:1-824:1">Then</p>
+<p data-sourcepos="827:1-827:1"><span class="math display">
+\int_0^2 (x+1)\mathrm dx
+=\left(\frac{x^2}{2}+x\right)_0^2=4.
+</span></p>
+<p data-sourcepos="831:1-831:1">For rectangular bounds, the inner integral treats the outer variable as a constant.</p>
+<h3 id="polar-coordinates" data-sourcepos="833:1-833:1">Polar Coordinates</h3>
+<p data-sourcepos="835:1-835:1">Use polar coordinates when the region or integrand is naturally expressed by <span class="math inline">r</span> and <span class="math inline">\theta</span>.</p>
+<p data-sourcepos="837:1-837:1">Evaluate</p>
+<p data-sourcepos="840:1-840:1"><span class="math display">
+\iint_D (x^2+y^2)\mathrm dA
+</span></p>
+<p>where <span class="math inline">D</span> is the disk <span class="math inline">x^2+y^2\le 4</span>.</p>
+<p data-sourcepos="845:1-845:1">In polar coordinates,</p>
+<p><span class="math display">
+x^2+y^2=r^2,
+\qquad
+\mathrm dA=r\mathrm dr\mathrm d\theta.
+</span></p>
+<p data-sourcepos="853:1-853:1">The disk is</p>
+<p><span class="math display">
+0\le r\le 2,
+\qquad
+0\le \theta\le 2\pi.
+</span></p>
+<p data-sourcepos="861:1-861:1">Thus</p>
+<p data-sourcepos="864:1-864:1"><span class="math display">
+\iint_D (x^2+y^2)\mathrm dA
+=\int_0^{2\pi}\int_0^2 r^3\mathrm dr\mathrm d\theta
+=2\pi\cdot\frac{2^4}{4}=8\pi.
+</span></p>
+<p>The factor <span class="math inline">r</span> in <span class="math inline">\mathrm dA=r\mathrm dr\mathrm d\theta</span> is part of the area element, not part of the original integrand.</p>
+<h3 id="area-of-region" data-sourcepos="871:1-871:1">Area of Region</h3>
+<p data-sourcepos="873:1-873:1">Area is the double integral of <span class="math inline">1</span> over the region.</p>
+<p data-sourcepos="875:1-875:1">Find the area between</p>
+<p><span class="math display">
+y=x^2
+\qquad\text{and}\qquad
+y=x
+</span></p>
+<p>for <span class="math inline">0\le x\le 1</span>.</p>
+<p data-sourcepos="885:1-885:1">The region is</p>
+<p><span class="math display">
+0\le x\le 1,
+\qquad
+x^2\le y\le x.
+</span></p>
+<p data-sourcepos="893:1-893:1">So</p>
+<p data-sourcepos="896:1-896:1"><span class="math display">
+\operatorname{Area}(R)
+=\iint_R 1\mathrm dA
+=\int_0^1\int_{x^2}^x 1\mathrm dy\mathrm dx.
+</span></p>
+<p data-sourcepos="901:1-901:1">Compute</p>
+<p data-sourcepos="904:1-904:1"><span class="math display">
+\int_0^1 (x-x^2)\mathrm dx
+=\left(\frac{x^2}{2}-\frac{x^3}{3}\right)_0^1
+=\frac16.
+</span></p>
+<p data-sourcepos="909:1-909:1">Describing the top curve minus the bottom curve is the same as integrating <span class="math inline">1</span> over vertical slices.</p>
+<h3 id="center-of-mass" data-sourcepos="911:1-911:1">Center of Mass</h3>
+<p data-sourcepos="913:1-913:1">For constant density, divide the first moments by the area.</p>
+<p data-sourcepos="915:1-915:1">Find the center of mass of the triangular lamina</p>
+<p data-sourcepos="918:1-918:1"><span class="math display">
+R=\{(x,y):0\le x\le 1,\ 0\le y\le x\}
+</span></p>
+<p data-sourcepos="921:1-921:1">with constant density.</p>
+<p data-sourcepos="923:1-923:1">The area is</p>
+<p data-sourcepos="926:1-926:1"><span class="math display">
+A=\int_0^1\int_0^x 1\mathrm dy\mathrm dx
+=\int_0^1 x\mathrm dx=\frac12.
+</span></p>
+<p>The <span class="math inline">x</span>-coordinate is</p>
+<p data-sourcepos="933:1-933:1"><span class="math display">
+\overline x=\frac1A\int_0^1\int_0^x x\mathrm dy\mathrm dx
+=2\int_0^1 x^2\mathrm dx=\frac23.
+</span></p>
+<p>The <span class="math inline">y</span>-coordinate is</p>
+<p data-sourcepos="940:1-940:1"><span class="math display">
+\overline y=\frac1A\int_0^1\int_0^x y\mathrm dy\mathrm dx
+=2\int_0^1 \frac{x^2}{2}\mathrm dx=\frac13.
+</span></p>
+<p data-sourcepos="944:1-944:1">Thus</p>
+<p data-sourcepos="947:1-947:1"><span class="math display">
+(\overline x,\overline y)=\left(\frac23,\frac13\right).
+</span></p>
+<p data-sourcepos="950:1-950:1">For constant density, density cancels from the quotient, but the area in the denominator still matters.</p>
+<h3 id="rotational-moment-of-inertia" data-sourcepos="952:1-952:1">Rotational Moment of Inertia</h3>
+<p data-sourcepos="954:1-954:1">Square the distance to the axis, then integrate it against density.</p>
+<p data-sourcepos="956:1-956:1">Find the moment of inertia about the <span class="math inline">x</span>-axis for the rectangle</p>
+<p data-sourcepos="959:1-959:1"><span class="math display">
+R=\{(x,y):0\le x\le 2,\ 0\le y\le 1\}
+</span></p>
+<p>with density <span class="math inline">\delta=1</span>.</p>
+<p>Distance to the <span class="math inline">x</span>-axis is <span class="math inline">|y|</span>, so</p>
+<p data-sourcepos="967:1-967:1"><span class="math display">
+I_x=\iint_R y^2\mathrm dA
+=\int_0^2\int_0^1 y^2\mathrm dy\mathrm dx.
+</span></p>
+<p data-sourcepos="971:1-971:1">Compute</p>
+<p data-sourcepos="974:1-974:1"><span class="math display">
+\int_0^2\left(\frac{y^3}{3}\bigg|_0^1\right)\mathrm dx
+=\int_0^2 \frac13\mathrm dx
+=\frac23.
+</span></p>
+<p data-sourcepos="979:1-979:1">The axis determines the distance term: about the <span class="math inline">x</span>-axis use <span class="math inline">y^2</span>, about the <span class="math inline">y</span>-axis use <span class="math inline">x^2</span>.</p>
+<h3 id="jacobian-matrix" data-sourcepos="981:1-981:1">Jacobian Matrix</h3>
+<p data-sourcepos="983:1-983:1">Build the Jacobian by differentiating each output variable with respect to each input variable in order.</p>
+<p data-sourcepos="985:1-985:1">For</p>
+<p><span class="math display">
+u=x+y,
+\qquad
+v=x-y,
+</span></p>
+<p data-sourcepos="993:1-993:1">find</p>
+<p data-sourcepos="996:1-996:1"><span class="math display">
+\frac{\partial(u,v)}{\partial(x,y)}.
+</span></p>
+<p data-sourcepos="999:1-999:1">The Jacobian matrix is</p>
+<p><span class="math display">
+\mathbf J
+=\begin{pmatrix}
+u_x &amp; u_y \\
+v_x &amp; v_y
+\end{pmatrix}
+=\begin{pmatrix}
+1 &amp; 1 \\
+1 &amp; -1
+\end{pmatrix}.
+</span></p>
+<p data-sourcepos="1013:1-1013:1">Therefore</p>
+<p data-sourcepos="1016:1-1016:1"><span class="math display">
+\frac{\partial(u,v)}{\partial(x,y)}
+=\det\mathbf J
+=-2.
+</span></p>
+<p data-sourcepos="1021:1-1021:1">The sign records orientation; area scaling uses the absolute value.</p>
+<h3 id="change-of-variables" data-sourcepos="1023:1-1023:1">Change of Variables</h3>
+<p data-sourcepos="1025:1-1025:1">Convert the region and multiply by the absolute Jacobian determinant for the area element.</p>
+<p data-sourcepos="1027:1-1027:1">Let</p>
+<p><span class="math display">
+x=u+v,
+\qquad
+y=u-v,
+</span></p>
+<p data-sourcepos="1035:1-1035:1">where</p>
+<p><span class="math display">
+0\le u\le 1,
+\qquad
+0\le v\le 2.
+</span></p>
+<p data-sourcepos="1043:1-1043:1">Find the area of the image region in the <span class="math inline">xy</span>-plane.</p>
+<p data-sourcepos="1045:1-1045:1">Compute</p>
+<p data-sourcepos="1048:1-1048:1"><span class="math display">
+\frac{\partial(x,y)}{\partial(u,v)}
+=\det\begin{pmatrix}
+x_u &amp; x_v \\
+y_u &amp; y_v
+\end{pmatrix}
+=\det\begin{pmatrix}
+1 &amp; 1 \\
+1 &amp; -1
+\end{pmatrix}
+=-2.
+</span></p>
+<p data-sourcepos="1060:1-1060:1">Thus</p>
+<p data-sourcepos="1063:1-1063:1"><span class="math display">
+\mathrm dA=\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\mathrm du\mathrm dv
+=2\mathrm du\mathrm dv.
+</span></p>
+<p data-sourcepos="1067:1-1067:1">The area is</p>
+<p data-sourcepos="1070:1-1070:1"><span class="math display">
+\int_0^1\int_0^2 2\mathrm dv\mathrm du=4.
+</span></p>
+<p data-sourcepos="1073:1-1073:1">In a change of variables, use the Jacobian in the direction from new variables to old coordinates for <span class="math inline">\mathrm dA</span>.</p>
+<h2 id="line-integral-in-plane" data-sourcepos="1075:1-1075:1">Line Integral in Plane</h2>
+<h3 id="vector-fields" data-sourcepos="1077:1-1077:1">Vector Fields</h3>
+<p data-sourcepos="1079:1-1079:1">Read a vector field by evaluating its components at the point where the arrow is based.</p>
+<p data-sourcepos="1081:1-1081:1">For</p>
+<p data-sourcepos="1084:1-1084:1"><span class="math display">
+\vec F(x,y)=y\hat i+x\hat j,
+</span></p>
+<p>find the vector at <span class="math inline">(1,2)</span>.</p>
+<p data-sourcepos="1089:1-1089:1">Substitute the point into each component:</p>
+<p data-sourcepos="1092:1-1092:1"><span class="math display">
+\vec F(1,2)=2\hat i+1\hat j.
+</span></p>
+<p data-sourcepos="1095:1-1095:1">So the arrow based at <span class="math inline">(1,2)</span> points in direction</p>
+<p data-sourcepos="1098:1-1098:1"><span class="math display">
+\langle 2,1\rangle.
+</span></p>
+<p>The point <span class="math inline">(x,y)</span> tells where the vector is attached; <span class="math inline">\vec F(x,y)</span> tells which vector is attached there.</p>
+<h3 id="line-integral" data-sourcepos="1103:1-1103:1">Line Integral</h3>
+<p data-sourcepos="1105:1-1105:1">Parametrize the curve, substitute into <span class="math inline">M\mathrm dx+N\mathrm dy</span>, and integrate over the parameter interval.</p>
+<p data-sourcepos="1107:1-1107:1">Evaluate</p>
+<p data-sourcepos="1110:1-1110:1"><span class="math display">
+\int_C y\mathrm dx+x\mathrm dy
+</span></p>
+<p data-sourcepos="1113:1-1113:1">where</p>
+<p data-sourcepos="1116:1-1116:1"><span class="math display">
+C:\vec r(t)=\langle t,t^2\rangle,
+\qquad
+0\le t\le 1.
+</span></p>
+<p data-sourcepos="1121:1-1121:1">Along the curve,</p>
+<p><span class="math display">
+x=t,
+\qquad
+y=t^2,
+\qquad
+\mathrm dx=\mathrm dt,
+\qquad
+\mathrm dy=2t\mathrm dt.
+</span></p>
+<p data-sourcepos="1133:1-1133:1">Therefore</p>
+<p data-sourcepos="1136:1-1136:1"><span class="math display">
+\int_C y\mathrm dx+x\mathrm dy
+=\int_0^1 (t^2\mathrm dt+t\cdot2t\mathrm dt)
+=\int_0^1 3t^2\mathrm dt=1.
+</span></p>
+<p data-sourcepos="1141:1-1141:1">A line integral depends on both the field and the path, so convert every piece to the same parameter.</p>
+<h3 id="gradient-field" data-sourcepos="1143:1-1143:1">Gradient Field</h3>
+<p data-sourcepos="1145:1-1145:1">First check whether the field is a gradient field; if <span class="math inline">\vec F=\nabla f</span>, replace the line integral by the change in the potential function.</p>
+<p data-sourcepos="1147:1-1147:1">Let</p>
+<p data-sourcepos="1150:1-1150:1"><span class="math display">
+\vec F=2xy\hat i+(x^2+2y)\hat j.
+</span></p>
+<p data-sourcepos="1153:1-1153:1">Find</p>
+<p data-sourcepos="1156:1-1156:1"><span class="math display">
+\int_C \vec F\cdot\mathrm d\vec r
+</span></p>
+<p>from <span class="math inline">(0,0)</span> to <span class="math inline">(1,1)</span>.</p>
+<p data-sourcepos="1161:1-1161:1">First check whether <span class="math inline">\vec F</span> can be a gradient field. Here</p>
+<p><span class="math display">
+M=2xy,
+\qquad
+N=x^2+2y.
+</span></p>
+<p data-sourcepos="1169:1-1169:1">Since</p>
+<p><span class="math display">
+M_y=2x,
+\qquad
+N_x=2x,
+</span></p>
+<p data-sourcepos="1177:1-1177:1">and the field is defined on all of <span class="math inline">\mathbb R^2</span>, the condition <span class="math inline">M_y=N_x</span> shows that <span class="math inline">\vec F</span> is a gradient field.</p>
+<p data-sourcepos="1179:1-1179:1">Find a potential function:</p>
+<p><span class="math display">
+f_x=2xy
+\implies
+f=x^2y+g(y).
+</span></p>
+<p data-sourcepos="1187:1-1187:1">Then</p>
+<p data-sourcepos="1190:1-1190:1"><span class="math display">
+f_y=x^2+g&#39;(y)=x^2+2y
+\implies
+g(y)=y^2.
+</span></p>
+<p data-sourcepos="1195:1-1195:1">So</p>
+<p data-sourcepos="1198:1-1198:1"><span class="math display">
+f(x,y)=x^2y+y^2.
+</span></p>
+<p data-sourcepos="1201:1-1201:1">By the fundamental theorem for gradient fields,</p>
+<p data-sourcepos="1204:1-1204:1"><span class="math display">
+\int_C \vec F\cdot\mathrm d\vec r
+=f(1,1)-f(0,0)=2.
+</span></p>
+<p data-sourcepos="1208:1-1208:1">Once a potential function exists on the region, the path no longer matters, only the endpoints.</p>
+<h3 id="curl" data-sourcepos="1210:1-1210:1"><em>Curl</em></h3>
+<p data-sourcepos="1212:1-1212:1">In the plane, interpret curl using circulation around a shrinking positively oriented boundary, and compute it directly as <span class="math inline">N_x-M_y</span> for <span class="math inline">\vec F=M\hat i+N\hat j</span>.</p>
+<h4 id="local-circulation-density" data-sourcepos="1216:1-1216:1">Local circulation density</h4>
+<p data-sourcepos="1218:1-1218:1">Let</p>
+<p data-sourcepos="1221:1-1221:1"><span class="math display">
+\vec F=-y\hat i+x\hat j
+</span></p>
+<p>and let <span class="math inline">C_\varepsilon=\partial R_\varepsilon</span> be the positively oriented boundary of the disk <span class="math inline">R_\varepsilon=\{(x,y):x^2+y^2\leq\varepsilon^2\}</span>. Find the circulation per unit area around the origin.</p>
+<p data-sourcepos="1229:1-1229:1">Parameterize the boundary by</p>
+<p data-sourcepos="1232:1-1232:1"><span class="math display">
+\vec r(t)=\varepsilon\cos t\,\hat i+\varepsilon\sin t\,\hat j,
+\qquad 0\leq t\leq2\pi
+</span></p>
+<p data-sourcepos="1236:1-1236:1">Then</p>
+<p><span class="math display">
+\begin{aligned}
+\vec F(\vec r(t))
+&amp;=-\varepsilon\sin t\,\hat i+\varepsilon\cos t\,\hat j \\
+\mathrm d\vec r
+&amp;=(-\varepsilon\sin t\,\hat i+\varepsilon\cos t\,\hat j)\mathrm dt
+\end{aligned}
+</span></p>
+<p data-sourcepos="1247:1-1247:1">so the circulation is</p>
+<p data-sourcepos="1250:1-1250:1"><span class="math display">
+\oint_{C_\varepsilon}\vec F\cdot\mathrm d\vec r
+=\int_0^{2\pi}\varepsilon^2\mathrm dt
+=2\pi\varepsilon^2
+</span></p>
+<p>Since <span class="math inline">\operatorname{area}(R_\varepsilon)=\pi\varepsilon^2</span>,</p>
+<p data-sourcepos="1258:1-1258:1"><span class="math display">
+\frac{1}{\operatorname{area}(R_\varepsilon)}
+\oint_{C_\varepsilon}\vec F\cdot\mathrm d\vec r
+=2
+</span></p>
+<p data-sourcepos="1263:1-1263:1">This ratio is independent of <span class="math inline">\varepsilon</span>, so its limit as <span class="math inline">\varepsilon\to0</span> is also <span class="math inline">2</span>.</p>
+<p data-sourcepos="1266:1-1266:1">The derivative formula gives the same result:</p>
+<p data-sourcepos="1269:1-1269:1"><span class="math display">
+N_x-M_y=1-(-1)=2
+</span></p>
+<p data-sourcepos="1272:1-1272:1">The positive sign corresponds to counterclockwise local circulation.</p>
+<h4 id="partial-derivative-formula" data-sourcepos="1274:1-1274:1">Partial-derivative formula</h4>
+<p data-sourcepos="1276:1-1276:1">Find the curl of</p>
+<p data-sourcepos="1279:1-1279:1"><span class="math display">
+\vec F=x^2y\hat i+xy^2\hat j
+</span></p>
+<p data-sourcepos="1282:1-1282:1">Here</p>
+<p><span class="math display">
+M=x^2y,
+\qquad
+N=xy^2
+</span></p>
+<p data-sourcepos="1290:1-1290:1">So</p>
+<p><span class="math display">
+N_x=y^2,
+\qquad
+M_y=x^2
+</span></p>
+<p data-sourcepos="1298:1-1298:1">Therefore</p>
+<p data-sourcepos="1301:1-1301:1"><span class="math display">
+\operatorname{curl}\vec F=N_x-M_y=y^2-x^2
+</span></p>
+<p>At <span class="math inline">(1,2)</span>,</p>
+<p data-sourcepos="1307:1-1307:1"><span class="math display">
+\operatorname{curl}\vec F=4-1=3
+</span></p>
+<p>For work form <span class="math inline">M\mathrm dx+N\mathrm dy</span>, Green’s theorem uses <span class="math inline">N_x-M_y</span>.</p>
+<h3 id="greens-theorem"><strong><em>Green’s Theorem</em></strong></h3>
+<p data-sourcepos="1314:1-1314:1">Convert a positively oriented closed line integral for work into a double integral of curl over the enclosed region.</p>
+<h4 id="simple-region-proof" data-sourcepos="1316:1-1316:1">Simple region proof</h4>
+<p>Prove Green’s theorem for a region that is both vertically and horizontally simple:</p>
+<p data-sourcepos="1321:1-1321:1"><span class="math display">
+R=\{(x,y):a\le x\le b,\ g_1(x)\le y\le g_2(x)\}
+=\{(x,y):c\le y\le d,\ h_1(y)\le x\le h_2(y)\}.
+</span></p>
+<p>Let <span class="math inline">C=\partial R</span> be positively oriented. First look at the <span class="math inline">M\mathrm dx</span> part. On vertical sides, <span class="math inline">\mathrm dx=0</span>. The bottom boundary is traversed from left to right, and the top boundary is traversed from right to left, so</p>
+<p><span class="math display">
+\begin{aligned}
+\oint_C M\mathrm dx
+&amp;=\int_a^b M(x,g_1(x))\mathrm dx-\int_a^b M(x,g_2(x))\mathrm dx \\
+&amp;=-\int_a^b\bigl(M(x,g_2(x))-M(x,g_1(x))\bigr)\mathrm dx \\
+&amp;=-\int_a^b\int_{g_1(x)}^{g_2(x)}M_y(x,y)\mathrm dy\mathrm dx \\
+&amp;=\iint_R -M_y\mathrm dA.
+\end{aligned}
+</span></p>
+<p>Now look at the <span class="math inline">N\mathrm dy</span> part. On horizontal sides, <span class="math inline">\mathrm dy=0</span>. The right boundary is traversed upward, and the left boundary is traversed downward, so</p>
+<p><span class="math display">
+\begin{aligned}
+\oint_C N\mathrm dy
+&amp;=\int_c^d N(h_2(y),y)\mathrm dy-\int_c^d N(h_1(y),y)\mathrm dy \\
+&amp;=\int_c^d\bigl(N(h_2(y),y)-N(h_1(y),y)\bigr)\mathrm dy \\
+&amp;=\int_c^d\int_{h_1(y)}^{h_2(y)}N_x(x,y)\mathrm dx\mathrm dy \\
+&amp;=\iint_R N_x\mathrm dA.
+\end{aligned}
+</span></p>
+<p data-sourcepos="1349:1-1349:1">Adding the two identities gives</p>
+<p data-sourcepos="1352:1-1352:1"><span class="math display">
+\oint_C M\mathrm dx+N\mathrm dy
+=\iint_R (N_x-M_y)\mathrm dA.
+</span></p>
+<p data-sourcepos="1356:1-1356:1">For more general regions, split the region into simple pieces; the line integrals on shared internal boundaries cancel.</p>
+<h4 id="unknown-boundary-area" data-sourcepos="1358:1-1358:1">Unknown boundary area</h4>
+<p>Let <span class="math inline">C</span> be any positively oriented simple closed curve enclosing area <span class="math inline">7</span>. Evaluate</p>
+<p data-sourcepos="1363:1-1363:1"><span class="math display">
+\oint_C (e^{x^2}-y)\mathrm dx+(x+\sin(y^2))\mathrm dy.
+</span></p>
+<p data-sourcepos="1366:1-1366:1">Direct parametrization is not available because the curve is not specified. Green’s theorem only needs the curl:</p>
+<p><span class="math display">
+M=e^{x^2}-y,
+\qquad
+N=x+\sin(y^2).
+</span></p>
+<p data-sourcepos="1374:1-1374:1">Thus</p>
+<p><span class="math display">
+N_x=1,
+\qquad
+M_y=-1,
+</span></p>
+<p data-sourcepos="1382:1-1382:1">so</p>
+<p data-sourcepos="1385:1-1385:1"><span class="math display">
+\oint_C M\mathrm dx+N\mathrm dy
+=\iint_R (N_x-M_y)\mathrm dA
+=\iint_R 2\mathrm dA
+=14.
+</span></p>
+<h4 id="annulus-orientation" data-sourcepos="1391:1-1391:1">Annulus orientation</h4>
+<p>Let <span class="math inline">R</span> be the annulus</p>
+<p data-sourcepos="1396:1-1396:1"><span class="math display">
+1\le x^2+y^2\le 4.
+</span></p>
+<p data-sourcepos="1399:1-1399:1">Its positively oriented boundary is</p>
+<p data-sourcepos="1402:1-1402:1"><span class="math display">
+\partial R=C_2-C_1,
+</span></p>
+<p>where <span class="math inline">C_2</span> is the circle <span class="math inline">x^2+y^2=4</span> oriented counterclockwise, and <span class="math inline">C_1</span> is the circle <span class="math inline">x^2+y^2=1</span> oriented counterclockwise. Equivalently, the actual inner boundary of <span class="math inline">R</span> is traversed clockwise.</p>
+<p data-sourcepos="1407:1-1407:1">Evaluate</p>
+<p data-sourcepos="1410:1-1410:1"><span class="math display">
+\oint_{\partial R}-y\mathrm dx+x\mathrm dy
+</span></p>
+<p data-sourcepos="1413:1-1413:1">in two ways.</p>
+<p>Using Green’s theorem on the annulus,</p>
+<p><span class="math display">
+M=-y,
+\qquad
+N=x,
+\qquad
+N_x-M_y=2.
+</span></p>
+<p data-sourcepos="1425:1-1425:1">Thus</p>
+<p data-sourcepos="1428:1-1428:1"><span class="math display">
+\oint_{\partial R}-y\mathrm dx+x\mathrm dy
+=\iint_R2\mathrm dA
+=2\pi(2^2-1^2)
+=6\pi.
+</span></p>
+<p data-sourcepos="1434:1-1434:1">Now compute the two boundary pieces directly. On <span class="math inline">C_2</span>,</p>
+<p><span class="math display">
+x=2\cos t,
+\qquad
+y=2\sin t,
+\qquad
+0\le t\le2\pi,
+</span></p>
+<p data-sourcepos="1444:1-1444:1">so</p>
+<p data-sourcepos="1447:1-1447:1"><span class="math display">
+\int_{C_2}-y\mathrm dx+x\mathrm dy
+=\int_0^{2\pi}4\mathrm dt
+=8\pi.
+</span></p>
+<p data-sourcepos="1452:1-1452:1">For the inner boundary of the annulus, use clockwise orientation:</p>
+<p><span class="math display">
+x=\cos t,
+\qquad
+y=-\sin t,
+\qquad
+0\le t\le2\pi.
+</span></p>
+<p data-sourcepos="1462:1-1462:1">Then</p>
+<p data-sourcepos="1465:1-1465:1"><span class="math display">
+\int_{\text{inner boundary}}-y\mathrm dx+x\mathrm dy
+=\int_0^{2\pi}-1\mathrm dt
+=-2\pi.
+</span></p>
+<p data-sourcepos="1470:1-1470:1">Adding the positively oriented boundary components gives</p>
+<p data-sourcepos="1473:1-1473:1"><span class="math display">
+8\pi-2\pi=6\pi.
+</span></p>
+<p data-sourcepos="1476:1-1476:1">The same result can be written as</p>
+<p data-sourcepos="1479:1-1479:1"><span class="math display">
+\oint_{\partial R}=\oint_{C_2}-\oint_{C_1},
+</span></p>
+<p>where both <span class="math inline">C_2</span> and <span class="math inline">C_1</span> are counterclockwise.</p>
+<h4 id="planimeter" data-sourcepos="1484:1-1484:1">Planimeter</h4>
+<p data-sourcepos="1486:1-1486:1">A planimeter measures area by tracing only the boundary of a region. The Green’s theorem idea is to choose a vector field whose curl is <span class="math inline">1</span>:</p>
+<p data-sourcepos="1489:1-1489:1"><span class="math display">
+\vec F=-\frac y2\hat i+\frac x2\hat j.
+</span></p>
+<p data-sourcepos="1492:1-1492:1">Then</p>
+<p data-sourcepos="1495:1-1495:1"><span class="math display">
+curl(\vec F)=\frac{\partial}{\partial x}\left(\frac x2\right)-\frac{\partial}{\partial y}\left(-\frac y2\right)=1.
+</span></p>
+<p data-sourcepos="1498:1-1498:1">For a positively oriented boundary <span class="math inline">C=\partial R</span>,</p>
+<p data-sourcepos="1501:1-1501:1"><span class="math display">
+\operatorname{Area}(R)
+=\iint_R1\mathrm dA
+=\oint_C\vec F\cdot\mathrm d\vec r
+=\frac12\oint_C x\mathrm dy-y\mathrm dx.
+</span></p>
+<p data-sourcepos="1507:1-1507:1">So the device does not need to know the inside of the shape. It only needs a mechanical way to accumulate the boundary integral <span class="math inline">\frac12\oint_C x\mathrm dy-y\mathrm dx</span> while the tracer moves around <span class="math inline">C</span>.</p>
+<p data-sourcepos="1509:1-1509:1">In a polar planimeter, the tracer point follows the curve, and a linkage constrains a measuring wheel. The wheel rolls only by the component of motion in its rolling direction; sideways slipping does not count. The linkage geometry makes the wheel’s accumulated rolling distance proportional to the line integral above. After calibration, the wheel reading is converted directly to area.</p>
+<p data-sourcepos="1511:1-1511:1">A digital implementation uses the same theorem with a polygon approximation. If the sampled boundary points are</p>
+<p data-sourcepos="1514:1-1514:1"><span class="math display">
+(x_0,y_0),(x_1,y_1),\ldots,(x_{n-1},y_{n-1}),
+</span></p>
+<p>and <span class="math inline">(x_n,y_n)=(x_0,y_0)</span>, then</p>
+<p data-sourcepos="1520:1-1520:1"><span class="math display">
+\operatorname{Area}(R)
+\approx\frac12\sum_{i=0}^{n-1}(x_i y_{i+1}-x_{i+1}y_i).
+</span></p>
+<p data-sourcepos="1524:1-1524:1">Counterclockwise tracing gives positive area; clockwise tracing gives negative signed area. If the coordinates are in pixels, multiply by the area scale for one pixel cell.</p>
+<p>Green’s theorem turns boundary information into area information; in some problems, it removes the need to know the boundary parametrization at all.</p>
+<h3 id="flux" data-sourcepos="1528:1-1528:1">Flux</h3>
+<p data-sourcepos="1530:1-1530:1">For a counterclockwise parametrized curve, use <span class="math inline">\hat n\mathrm ds=\langle \mathrm dy,-\mathrm dx\rangle</span> for outward flux.</p>
+<p data-sourcepos="1532:1-1532:1">Compute the outward flux of</p>
+<p data-sourcepos="1535:1-1535:1"><span class="math display">
+\vec F=x\hat i+y\hat j
+</span></p>
+<p data-sourcepos="1538:1-1538:1">across the unit circle <span class="math inline">C</span> oriented counterclockwise.</p>
+<p data-sourcepos="1540:1-1540:1">Use</p>
+<p data-sourcepos="1543:1-1543:1"><span class="math display">
+\int_C \vec F\cdot\hat n\mathrm ds
+=\int_C -N\mathrm dx+M\mathrm dy.
+</span></p>
+<p>Here <span class="math inline">M=x</span> and <span class="math inline">N=y</span>. Parametrize</p>
+<p><span class="math display">
+x=\cos t,
+\qquad
+y=\sin t,
+\qquad
+0\le t\le 2\pi.
+</span></p>
+<p data-sourcepos="1557:1-1557:1">Then</p>
+<p data-sourcepos="1560:1-1560:1"><span class="math display">
+\mathrm dx=-\sin t\mathrm dt,
+\qquad
+\mathrm dy=\cos t\mathrm dt.
+</span></p>
+<p data-sourcepos="1565:1-1565:1">Thus</p>
+<p data-sourcepos="1568:1-1568:1"><span class="math display">
+\int_C -y\mathrm dx+x\mathrm dy
+=\int_0^{2\pi}(\sin^2t+\cos^2t)\mathrm dt
+=2\pi.
+</span></p>
+<p data-sourcepos="1573:1-1573:1">Work uses the tangent direction; flux uses the normal direction.</p>
+<h3 id="divergence" data-sourcepos="1575:1-1575:1">Divergence</h3>
+<p data-sourcepos="1577:1-1577:1">In the plane, divergence is <span class="math inline">M_x+N_y</span> for <span class="math inline">\vec F=M\hat i+N\hat j</span>.</p>
+<p data-sourcepos="1579:1-1579:1">Find the divergence of</p>
+<p data-sourcepos="1582:1-1582:1"><span class="math display">
+\vec F=x^2\hat i+xy\hat j.
+</span></p>
+<p data-sourcepos="1585:1-1585:1">Here</p>
+<p><span class="math display">
+M=x^2,
+\qquad
+N=xy.
+</span></p>
+<p data-sourcepos="1593:1-1593:1">So</p>
+<p data-sourcepos="1596:1-1596:1"><span class="math display">
+div(\vec F)=M_x+N_y=2x+x=3x.
+</span></p>
+<p>At <span class="math inline">(2,1)</span>,</p>
+<p data-sourcepos="1602:1-1602:1"><span class="math display">
+div(\vec F)=6.
+</span></p>
+<p data-sourcepos="1605:1-1605:1">Divergence measures local source strength and appears in the flux form of Green’s theorem.</p>
+<h3 id="divergence-theorem-in-the-plane" data-sourcepos="1607:1-1607:1">Divergence Theorem in the Plane</h3>
+<p data-sourcepos="1609:1-1609:1">Convert outward flux across a closed curve into a double integral of divergence over the enclosed region.</p>
+<p>Let <span class="math inline">S</span> be the unit disk. Use the divergence theorem in the plane to compute the outward flux of</p>
+<p data-sourcepos="1615:1-1615:1"><span class="math display">
+\vec F=x\hat i+y\hat j
+</span></p>
+<p data-sourcepos="1618:1-1618:1">across its boundary <span class="math inline">\partial S</span>.</p>
+<p data-sourcepos="1620:1-1620:1">Since</p>
+<p data-sourcepos="1623:1-1623:1"><span class="math display">
+div(\vec F)=1+1=2,
+</span></p>
+<p data-sourcepos="1626:1-1626:1">The divergence theorem in the plane gives</p>
+<p data-sourcepos="1629:1-1629:1"><span class="math display">
+\oint_{\partial S}\vec F\cdot\hat n\mathrm ds
+=\iint_S div(\vec F)\mathrm dA
+=\iint_S 2\mathrm dA
+</span></p>
+<p>Since <span class="math inline">S</span> is the unit disk,</p>
+<p data-sourcepos="1637:1-1637:1"><span class="math display">
+\iint_S 2\mathrm dA=2\pi
+</span></p>
+<p data-sourcepos="1640:1-1640:1">The divergence theorem in the plane uses divergence; Green’s theorem for circulation uses curl.</p>
+<h2 id="integrals-in-3d-space" data-sourcepos="1643:1-1643:1">Integrals in 3D Space</h2>
+<h3 id="triple-integrals" data-sourcepos="1645:1-1645:1">Triple Integrals</h3>
+<p data-sourcepos="1647:1-1647:1">Set the bounds by describing the solid one coordinate at a time.</p>
+<p data-sourcepos="1649:1-1649:1">Let</p>
+<p data-sourcepos="1652:1-1652:1"><span class="math display">
+E=\{(x,y,z):x\geq0,\ y\geq0,\ z\geq0,\ x+y+z\leq1\}
+</span></p>
+<p data-sourcepos="1655:1-1655:1">Find the volume and center of mass of <span class="math inline">E</span> with uniform density.</p>
+<p>Figure <a href="#fig:triple-integral-tetrahedron">1</a> shows the first-octant tetrahedron and its triangular projection onto the <span class="math inline">xy</span>-plane.</p>
+<figure id="fig:triple-integral-tetrahedron" class="subfigures">
+<div class="tikz-block" data-tikz-hash="dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c" data-tikz-source="XGJlZ2lue3Rpa3pwaWN0dXJlfVsKICAgIHg9eygxY20sMGNtKX0seT17KC0wLjUyY20sLTAuMzFjbSl9LHo9eygwY20sMWNtKX0sCiAgICA+PXN0ZWFsdGgsbGluZSBjYXA9cm91bmQsbGluZSBqb2luPXJvdW5kCl0KICAgIFxkZWZcaW50ZXJjZXB0ezMuMTV9CiAgICBcY29vcmRpbmF0ZSAoTykgYXQgKDAsMCwwKTsKICAgIFxjb29yZGluYXRlIChYKSBhdCAoXGludGVyY2VwdCwwLDApOwogICAgXGNvb3JkaW5hdGUgKFkpIGF0ICgwLFxpbnRlcmNlcHQsMCk7CiAgICBcY29vcmRpbmF0ZSAoWikgYXQgKDAsMCxcaW50ZXJjZXB0KTsKCiAgICAlIFRoZSB4eS1wcm9qZWN0aW9uIGFuZCB0aGUgb2JsaXF1ZSBib3VuZGluZyBwbGFuZS4KICAgIFxwYXRoW2ZpbGw9Y3lhbiEyNF0gKE8pIC0tIChYKSAtLSAoWSkgLS0gY3ljbGU7CiAgICBccGF0aFtmaWxsPXB1cnBsZSEyMixmaWxsIG9wYWNpdHk9MC43Ml0KICAgICAgICAoWCkgLS0gKFkpIC0tIChaKSAtLSBjeWNsZTsKCiAgICAlIEhpZGRlbiBjb29yZGluYXRlLWF4aXMgc2VnbWVudHMgYW5kIHZpc2libGUgZXh0ZW5zaW9ucy4KICAgIFxkcmF3W3RoaWNrLGRlbnNlbHkgZGFzaGVkLGJsYWNrITYwXSAoTykgLS0gKFgpOwogICAgXGRyYXdbdGhpY2ssZGVuc2VseSBkYXNoZWQsYmxhY2shNjBdIChPKSAtLSAoWSk7CiAgICBcZHJhd1t0aGljayxkZW5zZWx5IGRhc2hlZCxibGFjayE2MF0gKE8pIC0tIChaKTsKICAgIFxkcmF3Wy0+XSAoWCkgLS0gKDQuMTAsMCwwKSBub2RlW3JpZ2h0XSB7JHgkfTsKICAgIFxkcmF3Wy0+XSAoWSkgLS0gKDAsNC4xMCwwKSBub2RlW2xlZnRdIHskeSR9OwogICAgXGRyYXdbLT5dIChaKSAtLSAoMCwwLDQuMDUpIG5vZGVbYWJvdmVdIHskeiR9OwoKICAgICUgVmlzaWJsZSBlZGdlcyBvZiB0aGUgb2JsaXF1ZSBmYWNlLgogICAgXGRyYXdbdGhpY2sscHVycGxlITc1IWJsYWNrXSAoWCkgLS0gKFopIC0tIChZKSAtLSBjeWNsZTsKCiAgICBcbm9kZVtjaXJjbGUsZmlsbD1ibGFjayxpbm5lciBzZXA9MXB0XSBhdCAoTykge307CiAgICBcbm9kZVtiZWxvdyBsZWZ0PTJwdF0gYXQgKE8pIHskTyR9OwogICAgXG5vZGVbY2lyY2xlLGZpbGw9YmxhY2ssaW5uZXIgc2VwPTFwdF0gYXQgKFgpIHt9OwogICAgXG5vZGVbYmVsb3c9M3B0XSBhdCAoWCkgeyQxJH07CiAgICBcbm9kZVtjaXJjbGUsZmlsbD1ibGFjayxpbm5lciBzZXA9MXB0XSBhdCAoWSkge307CiAgICBcbm9kZVtiZWxvdyByaWdodD0ycHRdIGF0IChZKSB7JDEkfTsKICAgIFxub2RlW2NpcmNsZSxmaWxsPWJsYWNrLGlubmVyIHNlcD0xcHRdIGF0IChaKSB7fTsKICAgIFxub2RlW2xlZnQ9M3B0XSBhdCAoWikgeyQxJH07CgogICAgXG5vZGVbZmlsbD1jeWFuITI0LGlubmVyIHNlcD0xLjVwdF0gYXQgKDAuOTAsMC45MCwwKSB7JEQkfTsKICAgIFxub2RlW2ZpbGw9d2hpdGUsZmlsbCBvcGFjaXR5PTAuNzUsdGV4dCBvcGFjaXR5PTEsaW5uZXIgc2VwPTJwdF0KICAgICAgICBhdCAoMC45MCwwLjcwLDEuMzUpIHskeCt5K3o9MSR9OwpcZW5ke3Rpa3pwaWN0dXJlfQ==" data-tikz-id="tikz-1"><svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='20.526em' height='17.285em' viewBox='0 0 205.26 172.85'>
+<defs>
+<path id='tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g1-1' d='M4.07364-2.2908H6.85248C6.99192-2.2908 7.18116-2.2908 7.18116-2.49S6.99192-2.6892 6.85248-2.6892H4.07364V-5.478C4.07364-5.61744 4.07364-5.80668 3.87444-5.80668S3.67524-5.61744 3.67524-5.478V-2.6892H.88644C.747-2.6892 .55776-2.6892 .55776-2.49S.747-2.2908 .88644-2.2908H3.67524V.498C3.67524 .63744 3.67524 .82668 3.87444 .82668S4.07364 .63744 4.07364 .498V-2.2908Z'/>
+<path id='tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g1-2' d='M2.92824-6.3744C2.92824-6.61344 2.92824-6.63336 2.69916-6.63336C2.08164-5.99592 1.20516-5.99592 .88644-5.99592V-5.68716C1.08564-5.68716 1.67328-5.68716 2.1912-5.94612V-.78684C2.1912-.42828 2.16132-.30876 1.26492-.30876H.9462V0C1.2948-.02988 2.16132-.02988 2.55972-.02988S3.82464-.02988 4.17324 0V-.30876H3.85452C2.95812-.30876 2.92824-.41832 2.92824-.78684V-6.3744Z'/>
+<path id='tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g1-3' d='M6.84252-3.25692C6.99192-3.25692 7.18116-3.25692 7.18116-3.45612S6.99192-3.65532 6.85248-3.65532H.88644C.747-3.65532 .55776-3.65532 .55776-3.45612S.747-3.25692 .8964-3.25692H6.84252ZM6.85248-1.32468C6.99192-1.32468 7.18116-1.32468 7.18116-1.52388S6.99192-1.72308 6.84252-1.72308H.8964C.747-1.72308 .55776-1.72308 .55776-1.52388S.747-1.32468 .88644-1.32468H6.85248Z'/>
+<path id='tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g0-1' d='M1.58364-.77688C1.48404-.38844 1.46412-.30876 .67728-.30876C.50796-.30876 .3984-.30876 .3984-.11952C.3984 0 .48804 0 .67728 0H3.97404C6.04572 0 8.00784-2.10156 8.00784-4.2828C8.00784-5.68716 7.16124-6.80268 5.66724-6.80268H2.32068C2.13144-6.80268 2.02188-6.80268 2.02188-6.61344C2.02188-6.49392 2.11152-6.49392 2.31072-6.49392C2.4402-6.49392 2.61948-6.48396 2.739-6.474C2.89836-6.45408 2.95812-6.4242 2.95812-6.31464C2.95812-6.2748 2.94816-6.24492 2.91828-6.1254L1.58364-.77688ZM3.735-6.11544C3.82464-6.46404 3.84456-6.49392 4.27284-6.49392H5.33856C6.31464-6.49392 7.14132-5.96604 7.14132-4.65132C7.14132-4.16328 6.94212-2.52984 6.09552-1.43424C5.80668-1.06572 5.01984-.30876 3.79476-.30876H2.66928C2.52984-.30876 2.50992-.30876 2.45016-.31872C2.35056-.32868 2.32068-.33864 2.32068-.41832C2.32068-.4482 2.32068-.46812 2.37048-.6474L3.735-6.11544Z'/>
+<path id='tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g0-2' d='M7.3704-4.34256C7.3704-5.94612 6.31464-7.0218 4.8306-7.0218C2.67924-7.0218 .48804-4.76088 .48804-2.4402C.48804-.78684 1.60356 .21912 3.0378 .21912C5.14932 .21912 7.3704-1.96212 7.3704-4.34256ZM3.09756-.03984C2.11152-.03984 1.41432-.8466 1.41432-2.16132C1.41432-2.59956 1.55376-4.05372 2.32068-5.21904C3.00792-6.25488 3.984-6.7728 4.77084-6.7728C5.58756-6.7728 6.48396-6.21504 6.48396-4.731C6.48396-4.01388 6.21504-2.46012 5.229-1.23504C4.75092-.62748 3.9342-.03984 3.09756-.03984Z'/>
+<path id='tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g0-3' d='M3.32664-3.00792C3.3864-3.26688 3.61548-4.1832 4.31268-4.1832C4.36248-4.1832 4.60152-4.1832 4.81068-4.05372C4.5318-4.00392 4.3326-3.75492 4.3326-3.51588C4.3326-3.35652 4.44216-3.16728 4.71108-3.16728C4.9302-3.16728 5.24892-3.34656 5.24892-3.74496C5.24892-4.26288 4.66128-4.40232 4.32264-4.40232C3.74496-4.40232 3.39636-3.87444 3.27684-3.64536C3.02784-4.30272 2.49-4.40232 2.20116-4.40232C1.16532-4.40232 .5976-3.11748 .5976-2.86848C.5976-2.76888 .6972-2.76888 .71712-2.76888C.7968-2.76888 .82668-2.7888 .8466-2.87844C1.18524-3.9342 1.8426-4.1832 2.18124-4.1832C2.37048-4.1832 2.71908-4.09356 2.71908-3.51588C2.71908-3.20712 2.54976-2.5398 2.18124-1.1454C2.02188-.52788 1.67328-.10956 1.23504-.10956C1.17528-.10956 .9462-.10956 .73704-.23904C.98604-.28884 1.20516-.498 1.20516-.77688C1.20516-1.0458 .98604-1.12548 .83664-1.12548C.53784-1.12548 .28884-.86652 .28884-.5478C.28884-.08964 .78684 .10956 1.22508 .10956C1.88244 .10956 2.241-.58764 2.27088-.6474C2.3904-.27888 2.74896 .10956 3.34656 .10956C4.37244 .10956 4.94016-1.17528 4.94016-1.42428C4.94016-1.52388 4.85052-1.52388 4.82064-1.52388C4.731-1.52388 4.71108-1.48404 4.69116-1.41432C4.36248-.3486 3.6852-.10956 3.36648-.10956C2.97804-.10956 2.81868-.42828 2.81868-.76692C2.81868-.98604 2.87844-1.20516 2.988-1.6434L3.32664-3.00792Z'/>
+<path id='tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g0-4' d='M4.84056-3.79476C4.8804-3.9342 4.8804-3.95412 4.8804-4.02384C4.8804-4.20312 4.74096-4.29276 4.59156-4.29276C4.49196-4.29276 4.3326-4.233 4.24296-4.0836C4.22304-4.0338 4.14336-3.72504 4.10352-3.54576C4.0338-3.2868 3.96408-3.01788 3.90432-2.74896L3.45612-.95616C3.41628-.80676 2.988-.10956 2.33064-.10956C1.82268-.10956 1.71312-.5478 1.71312-.91632C1.71312-1.37448 1.88244-1.992 2.22108-2.86848C2.38044-3.27684 2.42028-3.3864 2.42028-3.5856C2.42028-4.0338 2.10156-4.40232 1.60356-4.40232C.65736-4.40232 .28884-2.95812 .28884-2.86848C.28884-2.76888 .38844-2.76888 .40836-2.76888C.50796-2.76888 .51792-2.7888 .56772-2.94816C.83664-3.8844 1.23504-4.1832 1.57368-4.1832C1.65336-4.1832 1.82268-4.1832 1.82268-3.86448C1.82268-3.61548 1.72308-3.35652 1.65336-3.16728C1.25496-2.11152 1.07568-1.5438 1.07568-1.07568C1.07568-.18924 1.70316 .10956 2.2908 .10956C2.67924 .10956 3.01788-.05976 3.29676-.33864C3.16728 .17928 3.04776 .66732 2.64936 1.1952C2.3904 1.53384 2.01192 1.82268 1.55376 1.82268C1.41432 1.82268 .96612 1.7928 .7968 1.40436C.95616 1.40436 1.08564 1.40436 1.22508 1.28484C1.32468 1.1952 1.42428 1.06572 1.42428 .87648C1.42428 .56772 1.15536 .52788 1.05576 .52788C.82668 .52788 .498 .68724 .498 1.17528C.498 1.67328 .93624 2.0418 1.55376 2.0418C2.57964 2.0418 3.60552 1.13544 3.8844 .00996L4.84056-3.79476Z'/>
+<path id='tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g0-5' d='M1.32468-.82668C1.86252-1.40436 2.15136-1.65336 2.50992-1.96212C2.50992-1.97208 3.12744-2.49996 3.486-2.85852C4.4322-3.7848 4.65132-4.26288 4.65132-4.30272C4.65132-4.40232 4.56168-4.40232 4.54176-4.40232C4.47204-4.40232 4.44216-4.3824 4.39236-4.29276C4.09356-3.81468 3.8844-3.65532 3.64536-3.65532S3.2868-3.80472 3.1374-3.97404C2.94816-4.20312 2.77884-4.40232 2.45016-4.40232C1.70316-4.40232 1.245-3.47604 1.245-3.26688C1.245-3.21708 1.27488-3.15732 1.36452-3.15732S1.47408-3.20712 1.494-3.26688C1.68324-3.72504 2.26092-3.735 2.3406-3.735C2.54976-3.735 2.739-3.66528 2.96808-3.5856C3.36648-3.4362 3.47604-3.4362 3.735-3.4362C3.37644-3.00792 2.5398-2.2908 2.35056-2.13144L1.45416-1.2948C.77688-.62748 .42828-.05976 .42828 .00996C.42828 .10956 .52788 .10956 .5478 .10956C.62748 .10956 .6474 .08964 .70716-.01992C.93624-.36852 1.23504-.63744 1.55376-.63744C1.78284-.63744 1.88244-.5478 2.13144-.25896C2.30076-.0498 2.48004 .10956 2.76888 .10956C3.75492 .10956 4.3326-1.15536 4.3326-1.42428C4.3326-1.47408 4.29276-1.52388 4.21308-1.52388C4.12344-1.52388 4.10352-1.46412 4.07364-1.3944C3.84456-.747 3.20712-.55776 2.87844-.55776C2.67924-.55776 2.49996-.61752 2.2908-.68724C1.95216-.81672 1.80276-.85656 1.5936-.85656C1.57368-.85656 1.41432-.85656 1.32468-.82668Z'/>
+</defs>
+<g id='tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-page1'>
+<path d='M74.51 127.92401H163.80227L28.07764 155.60438Z' fill='#bce6fa'/>
+<path d='M163.80227 127.92401L28.07764 155.60438L74.51 38.63174Z' fill='#f1c7d5' fill-opacity='.72'/>
+<path d='M74.51 127.92401H163.80227' stroke='#666' fill='none' stroke-width='.79701' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round' stroke-dasharray='2.98883 1.99255'/>
+<path d='M74.51 127.92401L28.07764 155.60438' stroke='#666' fill='none' stroke-width='.79701' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round' stroke-dasharray='2.98883 1.99255'/>
+<path d='M74.51 127.92401V38.63174' stroke='#666' fill='none' stroke-width='.79701' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round' stroke-dasharray='2.98883 1.99255'/>
+<path d='M163.80227 127.92401H188.73955' stroke='#000' fill='none' stroke-width='.3985' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round'/>
+<path d='M190.73209 127.92401L187.54406 126.33L188.73957 127.92401L187.54406 129.51802'/>
+<g transform='matrix(1.000261 0 0 1.000261 191.742 74.144008)'>
+<use x='2.509345' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g0-3'/>
+</g>
+<path d='M28.07764 155.60438L15.78544 162.93231' stroke='#000' fill='none' stroke-width='.3985' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round'/>
+<path d='M14.074039 163.95257L17.628514 163.689266L15.785454 162.9323L15.996089 160.951012'/>
+<g transform='matrix(1.000261 0 0 1.000261 2.802002 109.20401)'>
+<use x='2.509345' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g0-4'/>
+</g>
+<path d='M74.51 38.63174V15.11189' stroke='#000' fill='none' stroke-width='.3985' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round'/>
+<path d='M74.51 13.119373L72.91599 16.307403L74.51 15.111893L76.10401 16.307403'/>
+<g transform='matrix(1.000261 0 0 1.000261 69.464 -46.32499)'>
+<use x='2.509345' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g0-5'/>
+</g>
+<path d='M163.80227 127.92401L74.51 38.63174L28.07764 155.60438Z' stroke='#900030' fill='none' stroke-width='.79701' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round'/>
+<path d='M75.91903 127.92401C75.91903 127.14583 75.28818 126.51498 74.51 126.51498S73.10097 127.14583 73.10097 127.92401S73.73182 129.33304 74.51 129.33304S75.91903 128.70219 75.91903 127.92401Z'/>
+<g transform='matrix(1.000261 0 0 1.000261 58.612 84.31901)'>
+<use x='2.509345' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g0-2'/>
+</g>
+<path d='M165.21131 127.92401C165.21131 127.14583 164.58045 126.51498 163.80227 126.51498C163.02407 126.51498 162.39322 127.14583 162.39322 127.92401S163.02407 129.33304 163.80227 129.33304C164.58045 129.33304 165.21131 128.70219 165.21131 127.92401Z'/>
+<g transform='matrix(1.000261 0 0 1.000261 158.802 84.92801)'>
+<use x='2.509345' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g1-2'/>
+</g>
+<path d='M29.48668 155.60438C29.48668 154.8262 28.85584 154.19534 28.07764 154.19534C27.29946 154.19534 26.6686 154.8262 26.6686 155.60438C26.6686 156.38258 27.29946 157.01343 28.07764 157.01343C28.85584 157.01343 29.48668 156.38258 29.48668 155.60438Z'/>
+<g transform='matrix(1.000261 0 0 1.000261 31.080002 111.61201)'>
+<use x='2.509345' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g1-2'/>
+</g>
+<path d='M75.91903 38.63174C75.91903 37.85356 75.28818 37.2227 74.51 37.2227S73.10097 37.85356 73.10097 38.63174C73.10097 39.40994 73.73182 40.04079 74.51 40.04079S75.91903 39.40994 75.91903 38.63174Z'/>
+<g transform='matrix(1.000261 0 0 1.000261 60.510004 -14.082993)'>
+<use x='2.509345' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g1-2'/>
+</g>
+<path d='M80.99866 140.73099H92.512579V130.9343H80.99866Z' fill='#bce6fa'/>
+<g transform='matrix(1.000261 0 0 1.000261 79.983 83.31201)'>
+<use x='2.509345' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g0-1'/>
+</g>
+<path d='M58.39834 101.97821H121.00901V89.63545H58.39834Z' fill='#fff' fill-opacity='.75'/>
+<g transform='matrix(1.000261 0 0 1.000261 57.881 42.12301)'>
+<use x='2.509345' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g0-3'/>
+<use x='10.415281' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g1-1'/>
+<use x='20.374683' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g0-4'/>
+<use x='27.828735' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g1-1'/>
+<use x='37.789135' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g0-5'/>
+<use x='45.62509' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g1-3'/>
+<use x='56.122929' y='55.910405' xlink:href='#tikz-dcb6e2964898f36da28029559509f9ba8b8bfebc193b51867cbf8fd55b07e38c-g1-2'/>
+</g>
+</g>
+</svg></div>
+<figcaption><p data-sourcepos="1657:1-1657:1">Figure 1: First-octant tetrahedron beneath <span class="math inline">z=1-x-y</span>, with projection <span class="math inline">D</span> in the <span class="math inline">xy</span>-plane. </p></figcaption>
+</figure>
+<p data-sourcepos="1705:1-1705:1">The solid lies below <span class="math inline">z=1-x-y</span> over the triangle <span class="math inline">0\leq x\leq1</span>, <span class="math inline">0\leq y\leq1-x</span>. Thus</p>
+<p><span class="math display">
+\begin{aligned}
+V
+&amp;=\iiint_E1\,\mathrm dV \\
+&amp;=\int_0^1\int_0^{1-x}\int_0^{1-x-y}
+1\,\mathrm dz\,\mathrm dy\,\mathrm dx \\
+&amp;=\frac16
+\end{aligned}
+</span></p>
+<p>By symmetry, <span class="math inline">\bar x=\bar y=\bar z</span>. The first moment in the <span class="math inline">x</span> direction is</p>
+<p><span class="math display">
+\begin{aligned}
+\iiint_E x\,\mathrm dV
+&amp;=\frac12\int_0^1x(1-x)^2\,\mathrm dx \\
+&amp;=\frac1{24}
+\end{aligned}
+</span></p>
+<p data-sourcepos="1728:1-1728:1">Therefore,</p>
+<p data-sourcepos="1731:1-1731:1"><span class="math display">
+\vec r_{\mathrm{cm}}
+=\left\langle\frac14,\frac14,\frac14\right\rangle
+</span></p>
+<h3 id="cylindrical-and-spherical-coordinates" data-sourcepos="1735:1-1735:1"><em>Cylindrical and Spherical Coordinates</em></h3>
+<p data-sourcepos="1737:1-1737:1">Choose coordinates that match the symmetry, and include the Jacobian in <span class="math inline">\mathrm dV</span>.</p>
+<h4 id="cylindrical-coordinates" data-sourcepos="1740:1-1740:1">Cylindrical coordinates</h4>
+<p data-sourcepos="1742:1-1742:1">Find the volume enclosed by the paraboloid <span class="math inline">z=x^2+y^2</span> and the plane <span class="math inline">z=4</span>.</p>
+<p data-sourcepos="1744:1-1744:1">In cylindrical coordinates, <span class="math inline">z=r^2</span>, and the surfaces meet at <span class="math inline">r=2</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+V
+&amp;=\int_0^{2\pi}\int_0^2\int_{r^2}^4
+r\,\mathrm dz\,\mathrm dr\,\mathrm d\theta \\
+&amp;=2\pi\int_0^2(4-r^2)r\,\mathrm dr \\
+&amp;=8\pi
+\end{aligned}
+</span></p>
+<h4 id="spherical-coordinates" data-sourcepos="1756:1-1756:1">Spherical coordinates</h4>
+<p>Let <span class="math inline">B_a</span> be the ball <span class="math inline">x^2+y^2+z^2\leq a^2</span>. Evaluate</p>
+<p data-sourcepos="1761:1-1761:1"><span class="math display">
+\iiint_{B_a}(x^2+y^2+z^2)\,\mathrm dV
+</span></p>
+<p>Since <span class="math inline">x^2+y^2+z^2=\rho^2</span>,</p>
+<p><span class="math display">
+\begin{aligned}
+\iiint_{B_a}\rho^2\,\mathrm dV
+&amp;=\int_0^{2\pi}\int_0^\pi\int_0^a
+\rho^4\sin\phi\,\mathrm d\rho\,\mathrm d\phi\,\mathrm d\theta \\
+&amp;=\frac{4\pi a^5}{5}
+\end{aligned}
+</span></p>
+<h3 id="vector-fields-in-3d-space" data-sourcepos="1775:1-1775:1">Vector Fields in 3D Space</h3>
+<p data-sourcepos="1777:1-1777:1">Evaluate a vector field componentwise before taking its magnitude or a directional component.</p>
+<p data-sourcepos="1780:1-1780:1">For</p>
+<p data-sourcepos="1783:1-1783:1"><span class="math display">
+\vec F(x,y,z)=yz\,\hat i+xz\,\hat j+xy\,\hat k
+</span></p>
+<p>find <span class="math inline">\vec F(1,-1,2)</span>, its magnitude, and its component along <span class="math inline">\hat u=\langle2,-1,2\rangle/3</span>.</p>
+<p data-sourcepos="1789:1-1789:1">Substitution gives</p>
+<p data-sourcepos="1792:1-1792:1"><span class="math display">
+\vec F(1,-1,2)=\langle-2,2,-1\rangle,
+\qquad
+|\vec F(1,-1,2)|=3
+</span></p>
+<p data-sourcepos="1797:1-1797:1">The component along <span class="math inline">\hat u</span> is</p>
+<p data-sourcepos="1800:1-1800:1"><span class="math display">
+\vec F(1,-1,2)\cdot\hat u
+=\frac{-4-2-2}{3}
+=-\frac83
+</span></p>
+<h3 id="surface-integrals-and-flux" data-sourcepos="1805:1-1805:1"><em>Surface Integrals and Flux</em></h3>
+<p data-sourcepos="1807:1-1807:1">Choose an oriented vector area element before computing flux. Use <span class="math inline">\mathrm dS</span> instead when only scalar surface area is needed.</p>
+<h4 id="graph-surface" data-sourcepos="1810:1-1810:1">Graph surface</h4>
+<p>Let <span class="math inline">S</span> be the part of <span class="math inline">z=1-x-y</span> above</p>
+<p data-sourcepos="1815:1-1815:1"><span class="math display">
+D=\{(x,y):x\geq0,\ y\geq0,\ x+y\leq1\}
+</span></p>
+<p data-sourcepos="1818:1-1818:1">with upward orientation. Find the flux of <span class="math inline">\vec F=\langle x,y,z\rangle</span> through <span class="math inline">S</span>.</p>
+<p>For <span class="math inline">f(x,y)=1-x-y</span>,</p>
+<p data-sourcepos="1824:1-1824:1"><span class="math display">
+\mathrm d\vec S_{\mathrm{up}}
+=\langle-f_x,-f_y,1\rangle\,\mathrm dx\,\mathrm dy
+=\langle1,1,1\rangle\,\mathrm dx\,\mathrm dy
+</span></p>
+<p data-sourcepos="1829:1-1829:1">On the surface,</p>
+<p data-sourcepos="1832:1-1832:1"><span class="math display">
+\vec F(x,y,f(x,y))\cdot\langle1,1,1\rangle
+=x+y+(1-x-y)=1
+</span></p>
+<p data-sourcepos="1836:1-1836:1">Therefore,</p>
+<p data-sourcepos="1839:1-1839:1"><span class="math display">
+\iint_S\vec F\cdot\mathrm d\vec S
+=\iint_D1\,\mathrm dA
+=\frac12
+</span></p>
+<h4 id="implicit-surface" data-sourcepos="1844:1-1844:1">Implicit surface</h4>
+<p>Let <span class="math inline">S</span> be the upper hemisphere <span class="math inline">x^2+y^2+z^2=a^2</span>. Use its projection onto the <span class="math inline">xy</span>-plane to find its area and the upward flux of <span class="math inline">\hat k</span>.</p>
+<p>Set <span class="math inline">w=x^2+y^2+z^2</span>. On <span class="math inline">S</span>,</p>
+<p data-sourcepos="1852:1-1852:1"><span class="math display">
+\nabla w=\langle2x,2y,2z\rangle,
+\qquad
+w_z=2z,
+\qquad
+z=\sqrt{a^2-r^2}
+</span></p>
+<p data-sourcepos="1859:1-1859:1">Hence</p>
+<p><span class="math display">
+\mathrm dS
+=\frac{|\nabla w|}{|w_z|}\,\mathrm dA
+=\frac{a}{z}\,\mathrm dA
+</span></p>
+<p data-sourcepos="1867:1-1867:1">and</p>
+<p data-sourcepos="1870:1-1870:1"><span class="math display">
+\mathrm d\vec S_{\mathrm{up}}
+=\frac{\nabla w}{w_z}\,\mathrm dA
+=\left\langle\frac{x}{z},\frac{y}{z},1\right\rangle\mathrm dA
+</span></p>
+<p data-sourcepos="1875:1-1875:1">The surface area is</p>
+<p><span class="math display">
+\begin{aligned}
+\iint_S1\,\mathrm dS
+&amp;=\int_0^{2\pi}\int_0^a
+\frac{a}{\sqrt{a^2-r^2}}r\,\mathrm dr\,\mathrm d\theta \\
+&amp;=2\pi a^2
+\end{aligned}
+</span></p>
+<p>The upward flux of <span class="math inline">\hat k</span> is the area of the projected disk:</p>
+<p data-sourcepos="1889:1-1889:1"><span class="math display">
+\iint_S\hat k\cdot\mathrm d\vec S_{\mathrm{up}}
+=\iint_{x^2+y^2\leq a^2}1\,\mathrm dA
+=\pi a^2
+</span></p>
+<h3 id="divergence-in-3d-space" data-sourcepos="1894:1-1894:1">Divergence in 3D Space</h3>
+<p data-sourcepos="1896:1-1896:1">Compute divergence by differentiating each component in its matching coordinate.</p>
+<p data-sourcepos="1899:1-1899:1">For</p>
+<p data-sourcepos="1902:1-1902:1"><span class="math display">
+\vec F=x^2\hat i+xy\hat j+xz\hat k
+</span></p>
+<p>find <span class="math inline">\operatorname{div}\vec F</span> and interpret its value at <span class="math inline">\mathbf p=(1,-2,3)</span>.</p>
+<p data-sourcepos="1905:1-1905:1"><span class="math display">
+\operatorname{div}\vec F
+=\frac{\partial x^2}{\partial x}
++\frac{\partial(xy)}{\partial y}
++\frac{\partial(xz)}{\partial z}
+=4x
+</span></p>
+<p data-sourcepos="1916:1-1916:1">Thus</p>
+<p data-sourcepos="1919:1-1919:1"><span class="math display">
+\operatorname{div}\vec F(\mathbf p)=4
+</span></p>
+<p>For a small volume <span class="math inline">\Delta V</span> around <span class="math inline">\mathbf p</span>, the outward flux is approximately <span class="math inline">4\Delta V</span>.</p>
+<h3 id="divergence-theorem" data-sourcepos="1925:1-1925:1"><em>Divergence Theorem</em></h3>
+<p data-sourcepos="1927:1-1927:1">Use the divergence theorem when a volume integral is easier than direct flux through every piece of a closed surface.</p>
+<h4 id="closed-surface-flux" data-sourcepos="1930:1-1930:1">Closed-surface flux</h4>
+<p>Let <span class="math inline">E</span> be the ball <span class="math inline">x^2+y^2+z^2\leq a^2</span>, and let</p>
+<p data-sourcepos="1935:1-1935:1"><span class="math display">
+\vec F=x\hat i+y\hat j+z\hat k
+</span></p>
+<p data-sourcepos="1938:1-1938:1">Find the outward flux through <span class="math inline">\partial E</span>.</p>
+<p>Since <span class="math inline">\operatorname{div}\vec F=3</span>,</p>
+<p><span class="math display">
+\begin{aligned}
+\iint_{\partial E}\vec F\cdot\hat n\,\mathrm dS
+&amp;=\iiint_E3\,\mathrm dV \\
+&amp;=3\left(\frac{4\pi a^3}{3}\right) \\
+&amp;=4\pi a^3
+\end{aligned}
+</span></p>
+<p>As a direct check, <span class="math inline">\vec F=a\hat n</span> on <span class="math inline">\partial E</span>, so</p>
+<p data-sourcepos="1944:1-1944:1"><span class="math display">
+\iint_{\partial E}\vec F\cdot\hat n\,\mathrm dS
+=a(4\pi a^2)
+=4\pi a^3
+</span></p>
+<h4 id="diffusion-equation" data-sourcepos="1959:1-1959:1">Diffusion Equation</h4>
+<p data-sourcepos="1961:1-1961:1">Derive the diffusion equation from conservation, then verify a fundamental solution.</p>
+<p>Let <span class="math inline">u(x,y,z,t)</span> be a concentration and <span class="math inline">\vec J</span> its flux density. For a diffusion coefficient <span class="math inline">k&gt;0</span>, Fick’s law is</p>
+<p data-sourcepos="1968:1-1968:1"><span class="math display">
+\vec J=-k\nabla u
+</span></p>
+<p data-sourcepos="1971:1-1971:1">With no internal sources, conservation in every fixed solid <span class="math inline">E</span> gives</p>
+<p data-sourcepos="1974:1-1974:1"><span class="math display">
+\frac{\mathrm d}{\mathrm dt}\iiint_Eu\,\mathrm dV
+=-\iint_{\partial E}\vec J\cdot\hat n\,\mathrm dS
+</span></p>
+<p data-sourcepos="1978:1-1978:1">Apply the divergence theorem and move the time derivative inside the integral:</p>
+<p><span class="math display">
+\iiint_E
+\left(\frac{\partial u}{\partial t}+\nabla\cdot\vec J\right)\mathrm dV
+=0
+</span></p>
+<p data-sourcepos="1987:1-1987:1">Since this holds for every <span class="math inline">E</span>,</p>
+<p data-sourcepos="1990:1-1990:1"><span class="math display">
+\frac{\partial u}{\partial t}
+=-\nabla\cdot\vec J
+=\nabla\cdot(k\nabla u)
+</span></p>
+<p>For constant <span class="math inline">k</span>, this reduces to</p>
+<p data-sourcepos="1998:1-1998:1"><span class="math display">
+\frac{\partial u}{\partial t}=k\nabla^2u
+</span></p>
+<p data-sourcepos="2001:1-2001:1">Verify a proposed solution by comparing its time derivative with its Laplacian.</p>
+<p>For <span class="math inline">k&gt;0</span> and <span class="math inline">t&gt;0</span>, let</p>
+<p><span class="math display">
+u(x,y,z,t)
+=A t^{-3/2}
+\exp\left(-\frac{x^2+y^2+z^2}{4kt}\right)
+</span></p>
+<p>Verify that <span class="math inline">u</span> satisfies <span class="math inline">u_t=k\nabla^2u</span>.</p>
+<p>Write <span class="math inline">r^2=x^2+y^2+z^2</span>. Differentiating with respect to time gives</p>
+<p><span class="math display">
+u_t
+=\left(-\frac{3}{2t}+\frac{r^2}{4kt^2}\right)u
+</span></p>
+<p data-sourcepos="2021:1-2021:1">For each coordinate <span class="math inline">x_i\in\{x,y,z\}</span>,</p>
+<p data-sourcepos="2024:1-2024:1"><span class="math display">
+\frac{\partial u}{\partial x_i}
+=-\frac{x_i}{2kt}u,
+\qquad
+\frac{\partial^2u}{\partial x_i^2}
+=\left(-\frac{1}{2kt}+\frac{x_i^2}{4k^2t^2}\right)u
+</span></p>
+<p data-sourcepos="2031:1-2031:1">Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+k\nabla^2u
+&amp;=k\left(-\frac{3}{2kt}+\frac{r^2}{4k^2t^2}\right)u \\
+&amp;=\left(-\frac{3}{2t}+\frac{r^2}{4kt^2}\right)u \\
+&amp;=u_t
+\end{aligned}
+</span></p>
+<p>The factor <span class="math inline">t^{-3/2}</span> keeps <span class="math inline">\iiint_{\mathbb R^3}u\,\mathrm dV</span> independent of <span class="math inline">t</span> while the Gaussian width grows like <span class="math inline">\sqrt t</span>.</p>
+<h3 id="curl-in-3d-space" data-sourcepos="2045:1-2045:1">Curl in 3D Space</h3>
+<p data-sourcepos="2047:1-2047:1">Compute curl componentwise, then interpret its component along a chosen normal direction.</p>
+<p data-sourcepos="2050:1-2050:1">For</p>
+<p data-sourcepos="2053:1-2053:1"><span class="math display">
+\vec F=-y\hat i+x\hat j+z\hat k
+</span></p>
+<p>find <span class="math inline">\nabla\times\vec F</span> and the local circulation density in a plane normal to <span class="math inline">\hat k</span>.</p>
+<p>With <span class="math inline">P=-y</span>, <span class="math inline">Q=x</span>, and <span class="math inline">R=z</span>,</p>
+<p><span class="math display">
+\begin{aligned}
+\nabla\times\vec F
+&amp;=(R_y-Q_z)\hat i+(P_z-R_x)\hat j+(Q_x-P_y)\hat k \\
+&amp;=2\hat k
+\end{aligned}
+</span></p>
+<p data-sourcepos="2069:1-2069:1">Thus</p>
+<p data-sourcepos="2072:1-2072:1"><span class="math display">
+(\nabla\times\vec F)\cdot\hat k=2
+</span></p>
+<p data-sourcepos="2075:1-2075:1">For a small positively oriented loop enclosing area <span class="math inline">\Delta A</span> in a plane normal to <span class="math inline">\hat k</span>, the circulation is approximately <span class="math inline">2\Delta A</span>.</p>
+<h3 id="stokes-theorem">Stokes’ Theorem</h3>
+<p data-sourcepos="2080:1-2080:1">Use any convenient oriented surface with the required boundary.</p>
+<p>Let <span class="math inline">S</span> be the outward-oriented upper hemisphere <span class="math inline">x^2+y^2+z^2=a^2</span>, and let</p>
+<p data-sourcepos="2086:1-2086:1"><span class="math display">
+\vec F=-\frac y2\hat i+\frac x2\hat j
+</span></p>
+<p data-sourcepos="2089:1-2089:1">Find the circulation around the positively oriented equator <span class="math inline">\partial S</span>. For the outward orientation of the upper hemisphere, <span class="math inline">\partial S</span> is counterclockwise when viewed from the positive <span class="math inline">z</span>-axis.</p>
+<p data-sourcepos="2093:1-2093:1">Since</p>
+<p data-sourcepos="2096:1-2096:1"><span class="math display">
+\nabla\times\vec F=\hat k
+</span></p>
+<p data-sourcepos="2099:1-2099:1">replace the hemisphere by the upward-oriented disk <span class="math inline">D=\{(x,y,0):x^2+y^2\leq a^2\}</span>, which has the same oriented boundary:</p>
+<p><span class="math display">
+\begin{aligned}
+\oint_{\partial S}\vec F\cdot\mathrm d\vec r
+&amp;=\iint_D(\nabla\times\vec F)\cdot\hat k\,\mathrm dA \\
+&amp;=\iint_D1\,\mathrm dA \\
+&amp;=\pi a^2
+\end{aligned}
+</span></p>
+<p data-sourcepos="2111:1-2111:1">Direct parametrization gives the same result. For <span class="math inline">\vec r(t)=\langle a\cos t,a\sin t,0\rangle</span>, <span class="math inline">0\leq t\leq2\pi</span>,</p>
+<p data-sourcepos="2115:1-2115:1"><span class="math display">
+\vec F(\vec r(t))\cdot\vec r&#39;(t)=\frac{a^2}{2}
+</span></p>
+<p data-sourcepos="2118:1-2118:1">and hence</p>
+<p data-sourcepos="2121:1-2121:1"><span class="math display">
+\oint_{\partial S}\vec F\cdot\mathrm d\vec r
+=\int_0^{2\pi}\frac{a^2}{2}\,\mathrm dt
+=\pi a^2
+</span></p>
+
+      </article>
+    </main>
+
+    <!-- Right Sidebar (TOC) -->
+    <aside class="sidebar right-sidebar collapsed" id="right-sidebar">
+      <div class="sidebar-content" id="spa-toc">
+        <!-- <h4 class="toc-title">On this page</h4> -->
+        <ul class="toc-list"><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#vectors-and-matrices">Vectors and Matrices</a></div><ul class="toc-children"><li class="toc-child toc-level-3 toc-range"><a href="#product">Product</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#angle-and-area"><span class="toc-icon">·</span>Angle and area</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#projection"><span class="toc-icon">·</span>Projection</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#normal-vector"><span class="toc-icon">·</span>Normal vector</a></li></ul></li><li class="toc-child toc-level-3"><a href="#determinant">Determinant</a></li><li class="toc-child toc-level-3"><a href="#inverse-matrix">Inverse Matrix</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#partial-derivatives">Partial Derivatives</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#partial-derivatives-1">Partial Derivatives</a></li><li class="toc-child toc-level-3"><a href="#least-square">Least Square</a></li><li class="toc-child toc-level-3"><a href="#minmax">Min/Max</a></li><li class="toc-child toc-level-3"><a href="#taylors-theorem">Taylor’s Theorem</a></li><li class="toc-child toc-level-3"><a href="#total-differential">Total Differential</a></li><li class="toc-child toc-level-3 toc-range"><a href="#chain-rule">Chain Rule</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#dependency-tree"><span class="toc-icon">·</span>Dependency tree</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#polar-parameters"><span class="toc-icon">·</span>Polar parameters</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#single-variable-parameter"><span class="toc-icon">·</span>Single-variable parameter</a></li></ul></li><li class="toc-child toc-level-3 toc-range"><a href="#gradient-vector">Gradient Vector</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#normal-vector-1"><span class="toc-icon">·</span>Normal vector</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#intersection-tangent"><span class="toc-icon">·</span>Intersection tangent</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#tangent-line"><span class="toc-icon">·</span>Tangent line</a></li></ul></li><li class="toc-child toc-level-3"><a href="#rate-of-change-in-an-arbitrary-direction">Rate of Change in an Arbitrary Direction</a></li><li class="toc-child toc-level-3"><a href="#lagrange-multipliers">Lagrange Multipliers</a></li><li class="toc-child toc-level-3"><a href="#partial-derivative-with-non-independent-variables">Partial Derivative with Non-Independent Variables</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#double-integral-in-plane">Double Integral in Plane</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#double-integral">Double Integral</a></li><li class="toc-child toc-level-3"><a href="#polar-coordinates">Polar Coordinates</a></li><li class="toc-child toc-level-3"><a href="#area-of-region">Area of Region</a></li><li class="toc-child toc-level-3"><a href="#center-of-mass">Center of Mass</a></li><li class="toc-child toc-level-3"><a href="#rotational-moment-of-inertia">Rotational Moment of Inertia</a></li><li class="toc-child toc-level-3"><a href="#jacobian-matrix">Jacobian Matrix</a></li><li class="toc-child toc-level-3"><a href="#change-of-variables">Change of Variables</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#line-integral-in-plane">Line Integral in Plane</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#vector-fields">Vector Fields</a></li><li class="toc-child toc-level-3"><a href="#line-integral">Line Integral</a></li><li class="toc-child toc-level-3"><a href="#gradient-field">Gradient Field</a></li><li class="toc-child toc-level-3 toc-range"><a href="#curl">Curl</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#local-circulation-density"><span class="toc-icon">·</span>Local circulation density</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#partial-derivative-formula"><span class="toc-icon">·</span>Partial-derivative formula</a></li></ul></li><li class="toc-child toc-level-3 toc-range"><a href="#greens-theorem">Green’s Theorem</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#simple-region-proof"><span class="toc-icon">·</span>Simple region proof</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#unknown-boundary-area"><span class="toc-icon">·</span>Unknown boundary area</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#annulus-orientation"><span class="toc-icon">·</span>Annulus orientation</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#planimeter"><span class="toc-icon">·</span>Planimeter</a></li></ul></li><li class="toc-child toc-level-3"><a href="#flux">Flux</a></li><li class="toc-child toc-level-3"><a href="#divergence">Divergence</a></li><li class="toc-child toc-level-3"><a href="#divergence-theorem-in-the-plane">Divergence Theorem in the Plane</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#integrals-in-3d-space">Integrals in 3D Space</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#triple-integrals">Triple Integrals</a></li><li class="toc-child toc-level-3 toc-range"><a href="#cylindrical-and-spherical-coordinates">Cylindrical and Spherical Coordinates</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#cylindrical-coordinates"><span class="toc-icon">·</span>Cylindrical coordinates</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#spherical-coordinates"><span class="toc-icon">·</span>Spherical coordinates</a></li></ul></li><li class="toc-child toc-level-3"><a href="#vector-fields-in-3d-space">Vector Fields in 3D Space</a></li><li class="toc-child toc-level-3 toc-range"><a href="#surface-integrals-and-flux">Surface Integrals and Flux</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#graph-surface"><span class="toc-icon">·</span>Graph surface</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#implicit-surface"><span class="toc-icon">·</span>Implicit surface</a></li></ul></li><li class="toc-child toc-level-3"><a href="#divergence-in-3d-space">Divergence in 3D Space</a></li><li class="toc-child toc-level-3 toc-range"><a href="#divergence-theorem">Divergence Theorem</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#closed-surface-flux"><span class="toc-icon">·</span>Closed-surface flux</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#diffusion-equation"><span class="toc-icon">·</span>Diffusion Equation</a></li></ul></li><li class="toc-child toc-level-3"><a href="#curl-in-3d-space">Curl in 3D Space</a></li><li class="toc-child toc-level-3"><a href="#stokes-theorem">Stokes’ Theorem</a></li></ul></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <script src="/static/shell-lifecycle.js"></script>
+  <script src="/static/shell-preferences.js"></script>
+  <script src="/static/scrollbar-visibility.js?v=c659b99"></script>
+  <script src="/static/sidebar-panel.js"></script>
+  <script src="/static/svg-theme.js"></script>
+  <script src="/static/render-on-demand.js"></script>
+  <script src="/static/shell-bootstrap.js"></script>
+  <script src="/static/main.js"></script>
+  <script src="/static/reading-navigation-state.js"></script>
+  <script src="/static/shell-layout.js"></script>
+  <script src="/static/shell-search-settings.js"></script>
+  <script src="/static/shell-router.js"></script>
+  <script src="/static/link-preview.js"></script>
+  <script src="/static/text-anchor.js"></script>
+  <script src="/static/comments.js"></script>
+  <script src="/static/themes.js"></script>
+  <script src="/static/table-enhance.js"></script>
+  <script src="/static/syllabus-enhance.js"></script>
+  <script src="/static/core/ink-stroke-format.js"></script>
+  <script src="/static/drawing-engine-render.js"></script>
+  <script>
+  // highlight.js: on-demand language loader + post-load highlight pass.
+  //
+  // Core (highlight.min.js) bundles ~37 common languages. Pages that use
+  // additional languages from _HLJS_EXTRA trigger an extra CDN fetch only
+  // when the page actually contains a matching code block. The service
+  // worker caches each module after the first fetch, so subsequent pages
+  // pay nothing for already-loaded languages.
+  //
+  // _HLJS_ALIAS maps user-facing class names to module filenames that
+  // differ from the class name. Pure aliases that hljs core already knows
+  // (e.g. ts → typescript, sh → bash) are resolved by hljs.getLanguage()
+  // and don't need entries — only include aliases whose target module is
+  // in _HLJS_EXTRA.
+  window._HLJS_BASE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/languages/';
+  window._HLJS_ALIAS = {
+    tex: 'latex', docker: 'dockerfile', ps: 'powershell', ps1: 'powershell',
+    ml: 'ocaml', hs: 'haskell', clj: 'clojure', cljs: 'clojure',
+    erl: 'erlang', coffee: 'coffeescript', f90: 'fortran', f95: 'fortran',
+    pascal: 'delphi'
+  };
+  window._HLJS_EXTRA = [
+    // Tier 1/2: build/config, scientific, FP, scripting, editor
+    'dockerfile','nginx','cmake','http','latex','julia','matlab','fortran',
+    'haskell','scala','ocaml','fsharp','clojure','elixir','dart','vim','powershell',
+    // Tier 3: FP & academic
+    'erlang','scheme','lisp','prolog',
+    // Tier 3: hardware / assembly
+    'verilog','vhdl','x86asm','armasm',
+    // Tier 3: modern systems
+    'crystal','nim','d','delphi',
+    // Tier 3: build / config
+    'groovy','nix','dts',
+    // Tier 3: markup / templating
+    'asciidoc','handlebars','gherkin',
+    // Tier 3: shell / scripting
+    'awk','tcl','coffeescript',
+    // Tier 3: stats
+    'stan'
+  ];
+  window._hljsLoaded = {};
+
+  // Run the highlight + line-number pass against `root` (defaults to document).
+  window._hljsRun = function(root) {
+    root = root || document;
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (name) {
+        var resolved = hljs.getLanguage(name) ? name : 'plaintext';
+        code.classList.add('language-' + resolved);
+      }
+    });
+    hljs.configure({ cssSelector: 'pre:not(.mermaid) > code' });
+    hljs.highlightAll();
+    root.querySelectorAll('pre:not(.mermaid) > code').forEach(function(code) {
+      if (code.querySelector('.code-line')) return;
+      var html = code.innerHTML;
+      if (html.charAt(html.length - 1) === '\n') html = html.slice(0, -1);
+      var lines = html.split('\n');
+      var openTags = [];
+      code.innerHTML = lines.map(function(line) {
+        var prefix = openTags.join('');
+        var re = /<\/?span[^>]*>/gi, m;
+        while ((m = re.exec(line)) !== null) {
+          if (m[0][1] === '/') openTags.pop();
+          else openTags.push(m[0]);
+        }
+        var suffix = '';
+        for (var i = 0; i < openTags.length; i++) suffix += '</span>';
+        return '<span class="code-line">' + prefix + (line || ' ') + suffix + '</span>';
+      }).join('');
+    });
+  };
+
+  // Scan `root` for code blocks, fetch any missing allowlisted language
+  // modules, then run the highlight pass once they finish loading (or fail).
+  // Called once from the highlight.min.js onload handler, and again from
+  // main.js after each SPA navigation (scoped to #spa-content).
+  window._hljsInit = function(root) {
+    root = root || document;
+    if (typeof hljs === 'undefined') return;
+    var allow = {};
+    for (var i = 0; i < window._HLJS_EXTRA.length; i++) allow[window._HLJS_EXTRA[i]] = true;
+    var need = {};
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (!name || hljs.getLanguage(name)) return;
+      if (allow[name] && !window._hljsLoaded[name]) need[name] = true;
+    });
+    var keys = Object.keys(need);
+    if (!keys.length) { window._hljsRun(root); return; }
+    var pending = keys.length;
+    keys.forEach(function(l) {
+      window._hljsLoaded[l] = true; // mark in-flight to dedupe across SPA nav
+      var s = document.createElement('script');
+      s.src = window._HLJS_BASE + l + '.min.js';
+      s.onload = s.onerror = function() { if (--pending === 0) window._hljsRun(root); };
+      document.head.appendChild(s);
+    });
+  };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    onload="window._hljsInit();"></script>
+  <script id="rprint-mermaid" async src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('mermaid')}else{var t=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'default';mermaid.initialize({startOnLoad:false,theme:t});document.querySelectorAll('pre.mermaid > code').forEach(function(c){var src=c.textContent;c.parentElement.setAttribute('data-mermaid-source',src);c.parentElement.textContent=src;});mermaid.run()}"></script>
+  <script>document.getElementById('rprint-mermaid').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('mermaid',new Error('Mermaid failed to load'))}});</script>
+  
+  
+  
+</body>
+</html>

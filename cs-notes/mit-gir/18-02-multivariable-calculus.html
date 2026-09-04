@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="build-commit" content="c659b99">
+  <title>Calculus II (18.02) - Jingqi's Interpositive</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/main.css?v=c659b99">
+  <link rel="stylesheet" href="/static/link-preview.css">
+  <link rel="stylesheet" href="/static/sidebar-panel.css">
+  <link rel="stylesheet" href="/static/table-enhance.css">
+  <link rel="stylesheet" href="/static/syllabus-enhance.css">
+  <link rel="stylesheet" href="/static/comments.css">
+  <link rel="stylesheet" href="/static/notebook.css">
+  <link rel="stylesheet" href="/static/themes.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var linkPreviewEmbed=false;
+      try{
+        var previewUrl=new URL(location.href);
+        linkPreviewEmbed=previewUrl.searchParams.get('rprint-preview')==='1'&&window.parent!==window&&window.parent.location.origin===location.origin;
+      }catch(e){}
+      if(linkPreviewEmbed){
+        document.documentElement.classList.add('link-preview-embed');
+        var previewArticleLink=function(target){return target&&target.closest&&target.closest('.article a[href]');};
+        var blockPreviewLink=function(event){if(previewArticleLink(event.target)){event.preventDefault();event.stopImmediatePropagation();}};
+        document.addEventListener('click',blockPreviewLink,true);
+        document.addEventListener('auxclick',blockPreviewLink,true);
+        document.addEventListener('keydown',function(event){if(event.key==='Enter')blockPreviewLink(event);},true);
+        document.addEventListener('dblclick',function(event){if(event.target&&event.target.closest&&event.target.closest('.article')){event.preventDefault();event.stopImmediatePropagation();}},true);
+      }
+      var bc=document.querySelector('meta[name="build-commit"]');
+      var commit=bc?bc.getAttribute('content'):'';
+      if(commit&&commit!=='unknown'){
+        var prev=localStorage.getItem('kb-build-commit');
+        if(prev&&prev!==commit){
+          var keys=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf('kb-')===0)keys.push(k);}
+          keys.forEach(function(k){localStorage.removeItem(k);});
+          localStorage.setItem('kb-build-commit',commit);
+          if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+            navigator.serviceWorker.controller.postMessage('clearCaches');
+          }
+          window.location.reload();
+          return;
+        }
+        localStorage.setItem('kb-build-commit',commit);
+      }
+      // Resume last visited page on PWA/browser launch. PWA launches carry
+      // `?pwa=1`; a normal browser launch is a plain root URL without a same-
+      // origin referrer. `/index.html` is an explicit home navigation, so it
+      // never resumes. Runs before paint to avoid a flash of the home page.
+      // Validates the stored path is a same-origin absolute path (rejects
+      // `//host` / `/\host` open-redirects).
+      var resumeLaunch=/[?&]pwa=1(&|$)/.test(location.search);
+      try{
+        var launchUrl=new URL(location.href);
+        launchUrl.searchParams.delete('pwa');
+        var sameOriginReferrer=false;
+        try{sameOriginReferrer=!!document.referrer&&new URL(document.referrer,location.href).origin===location.origin;}catch(e){}
+        resumeLaunch=resumeLaunch||(launchUrl.pathname==='/'&&!launchUrl.search&&!launchUrl.hash&&!sameOriginReferrer);
+      }catch(e){}
+      if(resumeLaunch){
+        try{
+          var last=localStorage.getItem('kb-last-location');
+          var lastPath=last&&last.split('#')[0].split('?')[0];
+          if(last&&/^\/[^/\\]/.test(last)&&lastPath!=='/'&&lastPath!=='/index.html'){
+            try{sessionStorage.setItem('kb-resume-last-scroll','1');}catch(e){}
+            location.replace(last);return;
+          }
+        }catch(e){}
+      }
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      var mob=window.matchMedia('(max-width:650px)').matches;
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.style.colorScheme=t==='dark'?'dark':'light';
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      var w=p.contentWidth||(mob?'100':'90');
+      document.documentElement.style.setProperty('--content-max-width',w+'%');
+      var edge=p.ignoreCorners!==undefined?p.ignoreCorners==='on':false;
+      if(edge&&w==='100')document.documentElement.setAttribute('data-ignore-corners','on');
+      if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches||window.matchMedia('(display-mode:fullscreen)').matches)document.documentElement.classList.add('pwa-standalone');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'kaiti';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.0};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+      var ht=t==='dark'?'github-dark':'github';
+      var writes='<link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/'+ht+'.min.css">';
+      document.write(writes);
+    })();
+  </script>
+  <style>.math{opacity:0;transition:opacity .15s}.math.rprint-render-failed{opacity:1}</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css" integrity="sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM" crossorigin="anonymous">
+  <script id="rprint-katex" defer src="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.js" integrity="sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI" crossorigin="anonymous"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('katex')}else{document.querySelectorAll('.math').forEach(function(el){var src=el.textContent;el.setAttribute('data-latex',src);katex.render(src,el,{displayMode:el.classList.contains('display'),throwOnError:false,trust:function(ctx){return ctx&&ctx.command==='\\href'&&typeof ctx.url==='string'&&/^#[A-Za-z0-9:._-]+$/.test(ctx.url);}});el.querySelectorAll('mtable[columnspacing=\'\']').forEach(function(t){t.removeAttribute('columnspacing')});el.style.opacity='1';})}"></script>
+  <script>document.getElementById('rprint-katex').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('katex',new Error('KaTeX failed to load'))}else{document.querySelectorAll('.math').forEach(function(el){el.style.opacity='1'})}});</script>
+</head>
+<body data-page-type="markdown">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <button class="banner-toggle" id="left-toggle" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h12v1.5H2V3zm0 4h12v1.5H2V7zm0 4h12v1.5H2V11z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-center">
+        <div class="banner-center-inner">
+          <a href="/index.html" class="site-title" data-short="Interpositive">Jingqi's Interpositive</a>
+          <span class="spa-health-wrap" id="spa-health-wrap">
+            <span class="spa-health-dot" id="spa-health-dot" title="SPA server status"></span>
+            <div class="spa-health-popup" id="spa-health-popup">
+              <div class="shp-header">
+                <span class="shp-title">Server Status</span>
+                <span class="shp-heart" id="shp-heart"></span>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-metrics">
+                <div class="shp-row"><span class="shp-label">Ping</span><span class="shp-value" id="shp-ping">—</span></div>
+                <div class="shp-row"><span class="shp-label">Uptime</span><span class="shp-value" id="shp-uptime">—</span></div>
+                <div class="shp-row"><span class="shp-label">Memory</span><span class="shp-value" id="shp-memory">—</span></div>
+                <div class="shp-row"><span class="shp-label">CPU Time</span><span class="shp-value" id="shp-cpu-time">—</span></div>
+                <div class="shp-row"><span class="shp-label">Load</span><span class="shp-value" id="shp-load">—</span></div>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-modules">
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-watch"></span> Watch</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-jupyter"></span> Jupyter</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-terminal"></span> Terminal</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-proxy"></span> Proxy</div>
+              </div>
+            </div>
+          </span>
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="/cs-notes/" class="nav-link" data-short="CS">CS</a><ul class="nav-dropdown"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li><a href="/cs-notes/mit-gir/index.html">MIT GIR</a></li><li><a href="/cs-notes/cs-math/index.html">CS Math</a></li></ul></li><li class="nav-item"><a href="/not-cs-notes/" class="nav-link" data-short="Not-CS">Not-CS</a><ul class="nav-dropdown"><li><a href="/not-cs-notes/mit-math-requirements.html">MIT Math Syllabus</a></li></ul></li><li class="nav-item"><a href="/notebook/" class="nav-link" data-short="Mixed">Mixed</a><ul class="nav-dropdown"><li><a href="/notebook/mind/index.html">Mind</a></li><li><a href="/notebook/matter/index.html">Matter</a></li><li><a href="/notebook/practice/index.html">Practice</a></li><li><a href="/notebook/toolbox/index.html">Toolbox</a></li></ul></li><li class="nav-item"><a href="/years/" class="nav-link" data-short="Years">Years</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="banner-right">
+        <button class="banner-right-toggle" title="More controls">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="search-wrap" id="search-wrap">
+          <button class="search-btn" id="search-btn" title="Search (Ctrl+K)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-input-wrap" id="search-input-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search…" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+        <div class="comment-wrap" id="comment-wrap">
+          <button class="comment-btn" id="comment-btn" title="Review Comments (A)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <span class="comment-nav-count" id="comment-nav-count"></span>
+          <button class="comment-nav-btn" id="comment-nav-prev" title="Previous comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="comment-nav-btn" id="comment-nav-next" title="Next comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <button class="settings-btn" id="settings-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="settings-panel" id="settings-panel">
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Native Jupyter <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="native-jupyter-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Global Search <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="content-search-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Quick Edit <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="quick-edit-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section resource-pack-setting" id="resource-pack-setting" hidden>
+            <div class="settings-row resource-pack-row">
+              <span class="settings-desc">Offline resources</span>
+              <button type="button" class="settings-action-btn" id="resource-pack-import-btn">Import</button>
+            </div>
+            <input type="file" id="resource-pack-input" accept=".rpack,application/vnd.rprint.resource-pack" hidden>
+            <div class="resource-pack-status" id="resource-pack-status" aria-live="polite"></div>
+            <button type="button" class="settings-link-btn" id="resource-pack-rollback-btn" hidden>Undo last import</button>
+          </div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent link-preview-settings-parent">
+            <label class="style-label" id="link-preview-label">Link Preview <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="link-preview-switch" role="switch" aria-labelledby="link-preview-label" aria-checked="false" aria-expanded="false" aria-controls="link-preview-settings-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children link-preview-settings-children" id="link-preview-settings-children" hidden>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-same-page-only-label">Same-page links only</label>
+              <button class="style-switch style-switch-compact" id="link-preview-same-page-only-switch" role="switch" aria-labelledby="link-preview-same-page-only-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-auto-close-label">Auto-close</label>
+              <button class="style-switch style-switch-compact" id="link-preview-auto-close-switch" role="switch" aria-labelledby="link-preview-auto-close-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-overwrite-jumping-label">Overwrite Link Jumping</label>
+              <button class="style-switch style-switch-compact" id="link-preview-overwrite-jumping-switch" role="switch" aria-labelledby="link-preview-overwrite-jumping-label" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+            </div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-row settings-title-row settings-dependent-parent">
+            <span class="settings-panel-title">Keyboard Shortcuts</span>
+            <button class="style-switch" id="kb-enabled-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children keyboard-shortcuts-children">
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="search"><span class="settings-desc">Search</span><span class="settings-keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="scroll"><span class="settings-desc">Scroll down / up</span><span class="settings-keys"><kbd>J</kbd> <kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="section"><span class="settings-desc">Next / prev section</span><span class="settings-keys"><kbd>U</kbd> <kbd>I</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="sidebar-toc"><span class="settings-desc"><span data-shortcut-part="sidebar">Sidebar / </span>TOC</span><span class="settings-keys"><kbd data-shortcut-part="sidebar">S</kbd> <kbd>T</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="spread"><span class="settings-desc">Next / prev spread</span><span class="settings-keys"><kbd>PgDn</kbd> <kbd>PgUp</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="comments"><span class="settings-desc">Comments</span><span class="settings-keys"><kbd>A</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="fold"><span class="settings-desc">Fold banner</span><span class="settings-keys"><kbd>F</kbd></span></div>
+            
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="dismiss"><span class="settings-desc">Close / Dismiss</span><span class="settings-keys"><kbd>Esc</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="settings"><span class="settings-desc">Show this panel</span><span class="settings-keys"><kbd>?</kbd></span></div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent">
+            <label class="style-label">Debug Mode</label>
+            <button class="style-switch" id="debug-mode-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="debug-children" id="debug-children">
+            <div class="settings-dependent-children">
+              <div class="settings-panel-section settings-dependent-child debug-log-level-setting">
+                <label class="style-label">Client Log Level</label>
+                <div class="style-toggle-group">
+                  <button class="style-toggle-btn debug-level-btn" data-level="error">Error</button>
+                  <button class="style-toggle-btn debug-level-btn" data-level="info">Info</button>
+                  <button class="style-toggle-btn debug-level-btn active" data-level="debug">Debug</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-footer" id="settings-git-version">c659b99</div>
+        </div>
+        <a href="/static/settings.html?v=c659b99" class="theme-btn" id="theme-btn" title="Theme & display">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="13.5" cy="6.5" r=".5"/>
+            <circle cx="17.5" cy="10.5" r=".5"/>
+            <circle cx="8.5" cy="7.5" r=".5"/>
+            <circle cx="6.5" cy="12.5" r=".5"/>
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+          </svg>
+        </a>
+        <div class="style-panel" id="style-panel">
+          <div class="style-panel-section">
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn active" data-theme="light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light
+              </button>
+              <button class="style-toggle-btn" data-theme="dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="style-toggle-btn" data-theme="kindle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                E-Ink
+              </button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn font-btn active" data-font="system">System</button>
+              <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+              <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">字体</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn fontzh-btn active" data-fontzh="default">系统</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="noto-serif">宋体</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+            </div>
+          </div>
+          <div class="style-panel-section bg-picker-section">
+            <label class="style-label">Background</label>
+            <div class="bg-swatch-group" id="bg-swatch-group">
+              <button class="bg-swatch active" data-bg="default" title="Default"></button>
+              <button class="bg-swatch" data-bg="green" title="Green"></button>
+              <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+              <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+              <div class="style-range-ticks">
+                <span class="style-range-tick font-size-tick" data-i="0">12</span>
+                <span class="style-range-tick font-size-tick" data-i="1">14</span>
+                <span class="style-range-tick font-size-tick" data-i="2">16</span>
+                <span class="style-range-tick font-size-tick" data-i="3">18</span>
+                <span class="style-range-tick font-size-tick" data-i="4">24</span>
+                <span class="style-range-tick font-size-tick" data-i="5">32</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+              <div class="style-range-ticks">
+                <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+                <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+                <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+                <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+                <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+                <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Width <span id="width-value">90%</span></label>
+            <div class="style-slider-wrap width-slider-wrap">
+              <input type="range" class="style-range" id="content-width-range" min="0" max="5" step="1" value="3">
+              <div class="style-range-ticks width-ticks">
+                <span class="style-range-tick width-tick" data-i="0">50</span>
+                <span class="style-range-tick width-tick" data-i="1">65</span>
+                <span class="style-range-tick width-tick" data-i="2">80</span>
+                <span class="style-range-tick width-tick" data-i="3">90</span>
+                <span class="style-range-tick width-tick" data-i="4">95</span>
+                <span class="style-range-tick width-tick" data-i="5">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="ignore-corners-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">2 Columns <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+        </div>
+        <button class="banner-toggle" id="fold-banner-btn" title="Fold banner">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4l4 4-4 4zm10 0l-4 4 4 4z"/>
+          </svg>
+        </button>
+        <button class="banner-toggle" id="right-toggle" title="Toggle table of contents">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-right-dropdown"></div>
+    </div>
+  </header>
+
+  <!-- Floating buttons when banner is folded -->
+  <div class="banner-fold-float" id="banner-fold-float">
+    <button class="banner-fold-float-btn" id="unfold-banner-btn" title="Unfold banner">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M7 4L3 8l4 4zm2 0l4 4-4 4z"/>
+      </svg>
+    </button>
+    <button class="banner-fold-float-btn" id="float-toc-btn" title="Toggle table of contents">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout left-collapsed right-collapsed">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar collapsed" id="left-sidebar">
+      <div class="sidebar-content" id="spa-sidebar">
+        <!-- rprint:sidebar:start -->
+        <a class="sidebar-cat-title" href="/cs-notes">CS</a><ul class="sidebar-list"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li class="sidebar-group open" data-priority="0"><span class="sidebar-row"><a class="sidebar-group-title active-group" href="/cs-notes/mit-gir/index.html">MIT GIR</a><span class="sidebar-toggle"></span></span><ul><li><a href="/cs-notes/mit-gir/18-01-single-variable-calculus.html">Calculus I (18.01)</a></li><li><a href="/cs-notes/mit-gir/18-01-single-variable-calculus-exercises.html">Calculus I (18.01) - Exercises</a></li><li class="active"><a href="/cs-notes/mit-gir/18-02-multivariable-calculus.html">Calculus II (18.02)</a></li><li><a href="/cs-notes/mit-gir/18-02-multivariable-calculus-exercises.html">Calculus II (18.02) - Exercises</a></li><li><a href="/cs-notes/mit-gir/8-01-classical-mechanics.html">Physics I (8.01) 🚜</a></li><li><a href="/cs-notes/mit-gir/8-01-classical-mechanics-exercises.html">Physics I (8.01) - Exercises 🚜</a></li><li><a href="/cs-notes/mit-gir/8-02-electricity-magnetism.html">Physics II (8.02) 🚜</a></li></ul></li><li class="sidebar-group" data-priority="0.001"><span class="sidebar-row"><a class="sidebar-group-title" href="/cs-notes/cs-math/index.html">CS Math</a><span class="sidebar-toggle"></span></span><ul><li><a href="/cs-notes/cs-math/18-06-linear-algebra.html">Linear Algebra (18.06)</a></li><li><a href="/cs-notes/cs-math/6-042-discrete-mathematics.html">Discrete Mathematics (6.042)</a></li></ul></li></ul>
+        <!-- rprint:sidebar:end -->
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content" id="content">
+      <article class="article" id="spa-content">
+        <h1 id="calculus-ii-18.02">Calculus II (<a href="https://ocw.mit.edu/courses/18-02-multivariable-calculus-fall-2007/pages/calendar/">18.02</a>)</h1>
+<h2 id="vectors-and-matrices" data-sourcepos="3:1-3:1">Vectors and Matrices</h2>
+<h3 id="product" data-sourcepos="5:1-5:1">Product</h3>
+<p><span class="math display">
+\begin{aligned}
+    \vec A \cdot \vec B &amp; = \sum a_ib_i = |\vec A||\vec B| \cos \theta \\
+    \vec A \times \vec B &amp; =
+        \begin{vmatrix}
+            \hat{i} &amp; \hat{j} &amp; \hat{k} \\
+            a_1 &amp; a_2 &amp; a_3 \\
+            b_1 &amp; b_2 &amp; b_3
+        \end{vmatrix} = \hat{i}
+            \begin{vmatrix}
+                a_2 &amp; a_3 \\
+                b_2 &amp; b_3
+            \end{vmatrix}
+        - \hat{j}
+            \begin{vmatrix}
+                a_1 &amp; a_3 \\
+                b_1 &amp; b_3
+            \end{vmatrix}
+        + \hat{k}
+            \begin{vmatrix}
+                a_1 &amp; a_2 \\
+                b_1 &amp; b_2
+            \end{vmatrix} \\
+    |\vec A \times \vec B| &amp; = \text{area of space parallelogram} = |\vec A||\vec B|\sin \theta\\
+    \frac{\vec A \times \vec B}{|\vec A \times \vec B|} &amp;= \hat{n}\text{ perpendicular to plane formed by } \vec A \text{ and } \vec B \\
+\end{aligned}
+</span></p>
+<p>The direction of <span class="math inline">\vec A \times \vec B</span> is determined by the right-hand rule: point the fingers of your right hand in the direction of <span class="math inline">\vec A</span>, curl them toward <span class="math inline">\vec B</span>, and your thumb points in the direction of <span class="math inline">\vec A \times \vec B</span>.</p>
+<p data-sourcepos="39:1-39:1"><span class="math display">
+\frac{\mathrm d}{\mathrm dt}\bigl(\vec{A} \times \vec{B}\bigr) = \frac{\mathrm d\vec{A}}{\mathrm dt} \times \vec{B} \;+\; \vec{A} \times \frac{\mathrm d\vec{B}}{\mathrm dt}
+</span></p>
+<h3 id="determinant" data-sourcepos="42:1-42:1">Determinant</h3>
+<p><span class="math display">
+\begin{aligned}
+    |\det(\vec A, \vec B)| &amp; = \text {area of parallelogram} \\
+    |\det(\vec A, \vec B, \vec C)| &amp; = |\vec A \cdot (\vec B \times \vec C)| = \text {volume of parallelepiped}
+\end{aligned}
+</span></p>
+<h3 id="inverse-matrix" data-sourcepos="51:1-51:1">Inverse Matrix</h3>
+<p data-sourcepos="54:1-54:1"><span class="math display">
+\mathbf{A}^{-1} = \frac{1}{\det({\mathbf{A}})}\text{adj}(\mathbf{A})
+</span></p>
+<h2 id="partial-derivatives" data-sourcepos="57:1-57:1">Partial Derivatives</h2>
+<h3 id="partial-derivatives-1">Partial Derivatives</h3>
+<p data-sourcepos="61:1-61:1">To treat all other variables as constant:</p>
+<p data-sourcepos="64:1-64:1"><span class="math display">
+f_x = \frac{\partial f}{\partial x} = \lim_{\Delta x \to 0} \frac{f(x_0+\Delta x, y_0) - f(x_0, y_0)}{\Delta x}
+</span></p>
+<h3 id="least-square" data-sourcepos="67:1-67:1">Least Square</h3>
+<p data-sourcepos="69:1-69:1">To find the best-fit line <span class="math inline">y = ax + b</span> for <span class="math inline">x_i, y_i</span>:</p>
+<p><span class="math display">
+\text{min } [ D_{a, b} = \sum_i (y_i - (ax_i + b)) ^ 2 ] \iff \frac{\partial D}{\partial a} = \frac {\partial D}{\partial b} = 0
+</span></p>
+<h3 id="minmax" data-sourcepos="75:1-75:1">Min/Max</h3>
+<p data-sourcepos="77:1-77:1">Look at second derivatives, <span class="math inline">f_{xx} = \frac{\partial^2 f}{\partial x^2}, f_{xy}, f_{yx}, f_{yy}</span>, fact(<a href="https://en.wikipedia.org/wiki/Symmetry_of_second_derivatives">Clairaut’s theorem</a>): <span class="math inline">f_{xy} = f_{yx}</span>.</p>
+<p>Given <span class="math inline">f</span> and critical point <span class="math inline">(x_0, y_0)</span>, let <span class="math inline">A = f_{xx}(x_0, y_0), B = f_{xy}(x_0, y_0), C = f_{yy}(x_0, y_0)</span>, then:</p>
+<ul>
+<li><span class="math inline">AC - B^2 &gt; 0</span>: <span class="math inline">A&gt;0</span> local min, <span class="math inline">A&lt;0</span> local max</li>
+<li><span class="math inline">AC - B^2 &lt; 0</span>: saddle</li>
+<li><span class="math inline">AC - B^2 = 0</span>: inconclusive, see higher derivative</li>
+</ul>
+<h3 id="taylors-theorem">Taylor’s Theorem</h3>
+<p>For <span class="math inline">f:\mathbb{R}^n\to\mathbb{R}</span>, which is <span class="math inline">k</span>-times continuously differentiable at <span class="math inline">\mathbf{x_0} \in \mathbb{R}^n</span>, then there exists function <span class="math inline">h_\alpha:\mathbb{R}^n\to\mathbb{R}</span>, where <span class="math inline">|\alpha| = k</span>, such that:</p>
+<p data-sourcepos="90:1-90:1"><span class="math display">
+f(\mathbf{x}) = \sum_{|\alpha| \leq k} \frac {D^\alpha f(\mathbf x_0)}{\alpha!}(\mathbf{x} - \mathbf{x_0})^\alpha + \sum_{|\alpha| = k}h_\alpha(\mathbf x)(\mathbf{x} - \mathbf{x_0})^\alpha \\
+\text{ and } \lim_{\mathbf{x}\to\mathbf{x_0}}h_\alpha(\mathbf{x}) = 0
+</span></p>
+<h3 id="total-differential" data-sourcepos="94:1-94:1">Total Differential</h3>
+<p>For <span class="math inline">f = f(x, y, z)</span>:</p>
+<p data-sourcepos="99:1-99:1"><span class="math display">
+\mathrm d f = f_x \mathrm d x + f_y \mathrm d y + f_z \mathrm d z
+</span></p>
+<h3 id="chain-rule" data-sourcepos="102:1-102:1">Chain Rule</h3>
+<p>For <span class="math inline">f = f(x, y, z), x = x(t), y = y(t), z = z(t)</span>:</p>
+<p data-sourcepos="107:1-107:1"><span class="math display">
+\frac{\mathrm d f}{\mathrm d t} =
+f_x \frac{\mathrm d x}{\mathrm d t} + f_y \frac{\mathrm d y}{\mathrm d t} + f_z \frac{\mathrm d z}{\mathrm d t}
+</span></p>
+<p>For <span class="math inline">w = f(x, y), x = x(u, v), y = y(u, v)</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+    \mathrm d w &amp; = f_x \mathrm d x + f_y \mathrm d y = f_x (x_u \mathrm d u + x_v \mathrm d v) + f_y (y_u \mathrm d u + y_v \mathrm d v) \\
+    \implies \frac{\partial f}{\partial u} &amp; = f_x x_u + f_y y_u = \frac{\partial f}{\partial x}\frac{\partial x}{\partial u} + \frac{\partial f}{\partial y}\frac{\partial y}{\partial u} \\
+\end{aligned}
+</span></p>
+<h3 id="gradient-vector" data-sourcepos="120:1-120:1">Gradient Vector</h3>
+<p>For <span class="math inline">w = w(x, y, z), x = x(t), y = y(t), z = z(t)</span>, to be perpendicular to the level surfaces <span class="math inline">w = c</span>:</p>
+<p data-sourcepos="125:1-125:1"><span class="math display">
+\nabla w = \langle w_x, w_y, w_z \rangle
+</span></p>
+<p data-sourcepos="128:1-128:1">Combine with chain rule, given <span class="math inline">\vec r(t) = \langle x(t), y(t), z(t) \rangle</span>, <span class="math inline">w = w(\vec r(t))</span>:</p>
+<p><span id="eq:gradient-chain-rule"><span class="math display">
+\begin{aligned}
+\frac {\mathrm d} {\mathrm d t} w(\vec r(t)) &amp; = \langle w_x(\vec r(t)), w_y(\vec r (t)), w_z(\vec r (t)) \rangle \cdot \frac {\mathrm d \vec r} {\mathrm d t} \\
+&amp; = \nabla w(\vec r(t)) \cdot \vec r&#39;(t)
+\end{aligned}
+\qquad{(1)}</span></span></p>
+<!-- Level surface of $w = (x, y, z)$ -->
+<h3 id="rate-of-change-in-an-arbitrary-direction" data-sourcepos="139:1-139:1">Rate of Change in an Arbitrary Direction</h3>
+<p>For <span class="math inline">w</span> as move in some direction:</p>
+<p data-sourcepos="144:1-144:1"><span class="math display">
+\frac{\mathrm d w}{\mathrm d s \left.\right| \hat{u}} = \nabla w \cdot \hat{u} = \left|\nabla w\right|\cos \theta
+</span></p>
+<h3 id="lagrange-multipliers" data-sourcepos="147:1-147:1">Lagrange Multipliers</h3>
+<p>To get min/max of <span class="math inline">f = f(x, y, z)</span> given <span class="math inline">g(x, y, z) = c</span>:</p>
+<p data-sourcepos="152:1-152:1"><span class="math display">
+\nabla f = \lambda \nabla g
+</span></p>
+<!-- As the direction $\hat{u}$ of $\Delta s$ from the min/max point $x_0, y_0, z_0$ of $f$ implies $\frac{\mathrm d f}{\mathrm d s | \hat{u}} = 0 = \nabla f \cdot \hat{u} \implies \nabla f \perp \hat{u}$.
+
+And since it is moving on the constraint plain of $g$, which $\nabla g \perp \hat{u}$; so $\nabla f \parallel \nabla g$. -->
+<h3 id="partial-derivative-with-non-independent-variables" data-sourcepos="159:1-159:1">Partial Derivative with Non-Independent Variables</h3>
+<p>If <span class="math inline">f = f(x, y, z), g(x, y, z) = c</span>, ask for <span class="math inline">(\frac{\partial f}{\partial z})_{y}</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+    &amp; \mathrm d g = 0 \to g_x\mathrm d x + g_y\mathrm d y + g_z \mathrm d z = 0 \\
+    &amp; \mathrm d y = 0 \to g_x\mathrm d x + g_z \mathrm d z = 0 \iff dx = -\frac{g_z \mathrm d z}{g_x} \\
+    &amp; \begin{aligned}
+        \mathrm d f &amp;= f_x\mathrm d x + f_y\mathrm d y + f_z \mathrm d z \\
+        &amp; = f_x\mathrm d x + f_z \mathrm d z \\
+        &amp; = f_x(-\frac{g_z \mathrm d z}{g_x}) + f_z \mathrm d z \\
+        &amp; = \frac{f_zg_x-f_xg_z}{g_x}\mathrm d z
+    \end{aligned} \\
+    &amp; \implies (\frac{\partial f}{\partial z})_{y} = \frac{g_xf_z-f_xg_z}{g_x}
+\end{aligned}
+</span></p>
+<h2 id="double-integral-in-plane" data-sourcepos="177:1-177:1">Double Integral in Plane</h2>
+<h3 id="double-integral" data-sourcepos="179:1-179:1">Double Integral</h3>
+<p data-sourcepos="181:1-181:1">For the volume below <span class="math inline">z = f(x, y)</span> over plane region <span class="math inline">R=\{(x,y): a\le x\le b,\ g_1(x)\le y\le g_2(x)\}</span>:</p>
+<p data-sourcepos="184:1-184:1"><span class="math display">
+\iint _{R}f(x, y)\mathrm d A = \int_a^b\int_{g_1(x)}^{g_2(x)} f(x,y)\mathrm dy \mathrm dx
+</span></p>
+<h3 id="polar-coordinates" data-sourcepos="187:1-187:1">Polar Coordinates</h3>
+<p data-sourcepos="190:1-190:1"><span class="math display">
+\mathrm d A = r\mathrm d r \mathrm d \theta
+</span></p>
+<h3 id="area-of-region" data-sourcepos="193:1-193:1">Area of Region</h3>
+<p data-sourcepos="196:1-196:1"><span class="math display">
+\iint_R1\mathrm d A
+</span></p>
+<h3 id="center-of-mass" data-sourcepos="199:1-199:1">Center of Mass</h3>
+<p data-sourcepos="201:1-201:1">With density function <span class="math inline">\delta(x, y)</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+    \overline x = \frac{1}{\iint_R \delta \mathrm d A} \iint_R x\delta \mathrm d A \\
+    \overline y = \frac{1}{\iint_R \delta \mathrm d A} \iint_R y\delta \mathrm d A
+\end{aligned}
+</span></p>
+<h3 id="rotational-moment-of-inertia" data-sourcepos="210:1-210:1">Rotational Moment of Inertia</h3>
+<p data-sourcepos="213:1-213:1"><span class="math display">
+I = \iint_R (\text{distance to axis})^2\delta(x, y) \mathrm d A
+</span></p>
+<h3 id="jacobian-matrix" data-sourcepos="216:1-216:1">Jacobian Matrix</h3>
+<p>For <span class="math inline">u=u(x, y), v = v(x, y)</span>:</p>
+<p data-sourcepos="221:1-221:1"><span class="math display">
+\mathbf{J} = \frac{\partial(u, v)}{\partial(x, y)}=
+    \begin{pmatrix}
+        u_x &amp; u_y \\
+        v_x &amp; v_y
+    \end{pmatrix}
+</span></p>
+<p>More generally for <span class="math inline">\mathbf{f}:\mathbb{R}^n\rightarrow\mathbb{R}^m: \mathbf{x}\in\mathbb{R}^n, \mathbf{f(x)} \in \mathbb{R}^m</span>:</p>
+<p data-sourcepos="231:1-231:1"><span class="math display">
+\mathbf{J}_{ij} = \frac{\partial f_i}{\partial x_j}
+</span></p>
+<h3 id="change-of-variables" data-sourcepos="234:1-234:1">Change of Variables</h3>
+<p>For <span class="math inline">u=u(x, y), v = v(x, y)</span>:</p>
+<p data-sourcepos="239:1-239:1"><span class="math display">
+\mathrm d u \mathrm d v = \left|\mathbf{J}\right| \mathrm d x \mathrm d y
+</span></p>
+<h2 id="line-integral-in-plane" data-sourcepos="242:1-242:1">Line Integral in Plane</h2>
+<h3 id="vector-fields" data-sourcepos="244:1-244:1">Vector Fields</h3>
+<p data-sourcepos="247:1-247:1"><span class="math display">
+\vec{F} = M \hat{i} + N \hat{j}, \quad M = M(x,y), N = N(x, y)
+</span></p>
+<h3 id="line-integral" data-sourcepos="250:1-250:1">Line Integral</h3>
+<p data-sourcepos="252:1-252:1">For work done by a force field, work is the dot product of force and displacement, <span class="math inline">d\vec r = \mathrm d x \hat i +  \mathrm d y \hat j</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+    W
+    &amp;= \lim_{|\Delta \vec r_i|\to 0} \sum_i \vec F \cdot \Delta \vec r_i \\
+    &amp;= \int_C \vec F \cdot d\vec r \\
+    &amp;= \int_C (Mdx + Ndy )
+\end{aligned}
+</span></p>
+<p data-sourcepos="263:1-263:1">Equivalently, since <span class="math inline">\mathrm d\vec r = \hat T\ \mathrm ds</span>, where <span class="math inline">\hat T</span> is the unit tangent vector to the curve:</p>
+<p data-sourcepos="266:1-266:1"><span class="math display">
+W = \int_C \vec F \cdot \hat T \mathrm ds
+</span></p>
+<h3 id="gradient-field" data-sourcepos="269:1-269:1">Gradient Field</h3>
+<p data-sourcepos="271:1-271:1">If there exists a function that <span class="math inline">\vec F = \nabla f</span>, then <span class="math inline">\vec F</span> is called <em>gradient field</em>; <span class="math inline">f</span> is called <em>potential function</em>.</p>
+<p>Given <span class="math inline">C = \vec r(t), t \in [a,b]</span>:</p>
+<p data-sourcepos="276:1-276:1"><span class="math display">
+\int_C \vec F \cdot \mathrm d \vec r = \int_C \nabla f \cdot \mathrm d \vec r \overset{\href{#eq:gradient-chain-rule}{\text{(1)}}}{=} \int_a^b \nabla f(\vec r(t)) \cdot \vec r&#39;(t) \mathrm d t = \int_a^b \frac {\mathrm d} {\mathrm d t} f(\vec r(t)) \mathrm d t = f(\vec r(b)) - f(\vec r(a))
+</span></p>
+<p><span class="math inline">N_x = M_y \overset{*}{\iff} \vec F \text{ is a gradient field } \iff \vec F \text{ is conservative: } \oint_C \vec F \cdot \mathrm d \vec r = 0 \text{ for any closed curve}</span></p>
+<p><span class="math inline">*</span> holds if <span class="math inline">\vec F\in C^1(S)</span> and <span class="math inline">S</span> is simply connected.</p>
+<p data-sourcepos="283:1-283:1"><em>Simply-connected</em> region is a plane region <span class="math inline">S</span> if every closed curve in <span class="math inline">S</span> encloses only points in <span class="math inline">S</span>.</p>
+<h3 id="curl" data-sourcepos="286:1-286:1">Curl</h3>
+<p data-sourcepos="288:1-288:1">Curl measures the limiting circulation per unit area near a point.</p>
+<p data-sourcepos="290:1-290:1">The circulation of a vector field <span class="math inline">\vec F</span> around the positively oriented (counterclockwise) boundary <span class="math inline">\partial S</span> of a plane region <span class="math inline">S</span> is</p>
+<p data-sourcepos="294:1-294:1"><span class="math display">
+\Gamma_{\partial S}=\oint_{\partial S}\vec F\cdot\mathrm d\vec r
+</span></p>
+<p data-sourcepos="297:1-297:1">For a planar vector field <span class="math inline">\vec F=M(x,y)\hat i+N(x,y)\hat j</span>,</p>
+<p><span class="math display">
+\begin{aligned}
+\operatorname{curl}\vec F(\mathbf p)
+&amp;=\lim_{S\to\mathbf p}
+\frac{1}{\operatorname{area}(S)}
+\oint_{\partial S}\vec F\cdot\mathrm d\vec r \\
+&amp;=N_x(\mathbf p)-M_y(\mathbf p)
+\end{aligned}
+</span></p>
+<p>Here, <span class="math inline">S</span> shrinks to <span class="math inline">\mathbf p</span> and <span class="math inline">\partial S</span> is positively oriented. Positive curl corresponds to counterclockwise local circulation.</p>
+<p data-sourcepos="312:1-312:1">For a planar field, this scalar curl is the <span class="math inline">\hat k</span> component of the three-dimensional curl.</p>
+<h3 id="greens-theorem">Green’s Theorem</h3>
+<p>For a plane region <span class="math inline">S</span> with positively oriented boundary <span class="math inline">\partial S</span>, the circulation around <span class="math inline">\partial S</span> equals the double integral of scalar curl over <span class="math inline">S</span>.</p>
+<p><span class="math display">
+\begin{aligned}
+\oint_{\partial S}\vec F\cdot\mathrm d\vec r
+=\iint_S\operatorname{curl}\vec F\,\mathrm dA
+\iff{}&amp;
+\oint_{\partial S}M\,\mathrm dx+N\,\mathrm dy
+=\iint_S(N_x-M_y)\,\mathrm dA \\
+\iff{}&amp;
+\oint_{\partial S}M\,\mathrm dx
+=\iint_S-M_y\,\mathrm dA
+\land
+\oint_{\partial S}N\,\mathrm dy
+=\iint_SN_x\,\mathrm dA
+\end{aligned}
+</span></p>
+<h3 id="flux" data-sourcepos="337:1-337:1">Flux</h3>
+<p>For a plane region <span class="math inline">S</span> with positively oriented boundary <span class="math inline">\partial S</span>, the outward flux is</p>
+<p><span class="math display">
+\begin{aligned}
+    \Phi &amp;= \lim_{\Delta {s_i}\to0}\sum_i{(\vec F \cdot \hat{n}) \Delta {s_i}} \\
+    &amp;= \oint_{\partial S}\vec F\cdot\hat n\,\mathrm ds \\
+    &amp;=\oint_{\partial S}\vec F\cdot\langle\mathrm dy,-\mathrm dx\rangle \\
+    &amp;=\oint_{\partial S}-N\,\mathrm dx+M\,\mathrm dy
+\end{aligned}
+</span></p>
+<h3 id="divergence" data-sourcepos="351:1-351:1">Divergence</h3>
+<p data-sourcepos="353:1-353:1">Divergence measures the limiting outward flux per unit area:</p>
+<p data-sourcepos="356:1-356:1"><span class="math display">
+\operatorname{div}\vec F=M_x+N_y
+</span></p>
+<h3 id="divergence-theorem-in-the-plane" data-sourcepos="359:1-359:1">Divergence Theorem in the Plane</h3>
+<p>Let <span class="math inline">S</span> be a plane region with positively oriented, piecewise smooth boundary <span class="math inline">\partial S</span>. If <span class="math inline">\vec F\in C^1</span> on an open set containing <span class="math inline">S</span>, then</p>
+<p data-sourcepos="366:1-366:1"><span class="math display">
+\oint_{\partial S}\vec F\cdot\hat n\,\mathrm ds
+=\iint_S\operatorname{div}\vec F\,\mathrm dA
+\iff
+\oint_{\partial S}-N\,\mathrm dx+M\,\mathrm dy
+=\iint_S(M_x+N_y)\,\mathrm dA
+</span></p>
+<p>This is Green’s theorem in flux form.</p>
+<h2 id="integrals-in-3d-space" data-sourcepos="375:1-375:1">Integrals in 3D Space</h2>
+<h3 id="triple-integrals" data-sourcepos="377:1-377:1">Triple Integrals</h3>
+<p>For a scalar field <span class="math inline">f</span> over a solid region <span class="math inline">E</span>,</p>
+<p data-sourcepos="382:1-382:1"><span class="math display">
+\iiint_E f\,\mathrm dV
+</span></p>
+<p>If <span class="math inline">E=\{(x,y,z):(x,y)\in D,\ g_1(x,y)\le z\le g_2(x,y)\}</span>, then</p>
+<p data-sourcepos="389:1-389:1"><span class="math display">
+\iiint_E f\,\mathrm dV
+=\iint_D\int_{g_1(x,y)}^{g_2(x,y)}f(x,y,z)\,\mathrm dz\,\mathrm dA
+</span></p>
+<p>Setting <span class="math inline">f=1</span> gives volume. For density <span class="math inline">\delta(x,y,z)</span> and position vector <span class="math inline">\vec r=\langle x,y,z\rangle</span>,</p>
+<p data-sourcepos="397:1-397:1"><span class="math display">
+m=\iiint_E\delta\,\mathrm dV,
+\qquad
+\vec r_{\mathrm{cm}}
+=\frac{1}{m}\iiint_E\vec r\,\delta\,\mathrm dV
+</span></p>
+<h3 id="cylindrical-and-spherical-coordinates" data-sourcepos="403:1-403:1">Cylindrical and Spherical Coordinates</h3>
+<p data-sourcepos="405:1-405:1">Cylindrical coordinates <span class="math inline">(r,\theta,z)</span> satisfy</p>
+<p><span class="math display">
+\begin{aligned}
+x&amp;=r\cos\theta \\
+y&amp;=r\sin\theta
+\end{aligned}
+</span></p>
+<p>Here <span class="math inline">r\ge0</span> and <span class="math inline">0\le\theta&lt;2\pi</span>. The Jacobian gives</p>
+<p data-sourcepos="417:1-417:1"><span class="math display">
+\mathrm dV=r\,\mathrm dr\,\mathrm d\theta\,\mathrm dz
+</span></p>
+<p data-sourcepos="420:1-420:1">Spherical coordinates <span class="math inline">(\rho,\phi,\theta)</span> satisfy</p>
+<p><span class="math display">
+\begin{aligned}
+x&amp;=\rho\sin\phi\cos\theta \\
+y&amp;=\rho\sin\phi\sin\theta \\
+z&amp;=\rho\cos\phi \\
+r&amp;=\rho\sin\phi
+\end{aligned}
+</span></p>
+<p>Here <span class="math inline">\rho\ge0</span>, <span class="math inline">0\le\phi\le\pi</span>, and <span class="math inline">0\le\theta&lt;2\pi</span>.</p>
+<p>Figure <a href="#fig:spherical-coordinates">1</a> defines the radial distance <span class="math inline">\rho</span>, polar angle <span class="math inline">\phi</span>, azimuthal angle <span class="math inline">\theta</span>, and cylindrical radius <span class="math inline">r</span>.</p>
+<figure id="fig:spherical-coordinates" class="subfigures">
+<div class="tikz-block" data-tikz-hash="f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7" data-tikz-source="XGJlZ2lue3Rpa3pwaWN0dXJlfVsKICAgIHg9eygxY20sMGNtKX0seT17KC0wLjUyY20sLTAuMzFjbSl9LHo9eygwY20sMWNtKX0sCiAgICA+PXN0ZWFsdGgsbGluZSBjYXA9cm91bmQsbGluZSBqb2luPXJvdW5kCl0KICAgIFxkZWZccmFkaXVzezMuMTV9CiAgICBcZGVmXHBvbGFyYW5nbGV7NDh9CiAgICBcZGVmXGF6aW11dGh7Mzh9CiAgICBccGdmbWF0aHNldG1hY3Jve1xweH17XHJhZGl1cypzaW4oXHBvbGFyYW5nbGUpKmNvcyhcYXppbXV0aCl9CiAgICBccGdmbWF0aHNldG1hY3Jve1xweX17XHJhZGl1cypzaW4oXHBvbGFyYW5nbGUpKnNpbihcYXppbXV0aCl9CiAgICBccGdmbWF0aHNldG1hY3Jve1xwen17XHJhZGl1cypjb3MoXHBvbGFyYW5nbGUpfQogICAgXGNvb3JkaW5hdGUgKE8pIGF0ICgwLDAsMCk7CiAgICBcY29vcmRpbmF0ZSAoUSkgYXQgKFxweCxccHksMCk7CiAgICBcY29vcmRpbmF0ZSAoWCkgYXQgKFxweCxccHksXHB6KTsKCiAgICAlIENvb3JkaW5hdGUgYXhlcy4KICAgIFxkcmF3Wy0+XSAoTykgLS0gKDQuMDUsMCwwKSBub2RlW3JpZ2h0XSB7JHgkfTsKICAgIFxkcmF3Wy0+XSAoTykgLS0gKDAsMy44NSwwKSBub2RlW2xlZnRdIHskeSR9OwogICAgXGRyYXdbLT5dIChPKSAtLSAoMCwwLDMuODUpIG5vZGVbYWJvdmVdIHskeiR9OwoKICAgICUgUmFkaXVzIHZlY3RvciBhbmQgaXRzIHByb2plY3Rpb24gb250byB0aGUgeHktcGxhbmUuCiAgICBcZHJhd1tncmF5ITgwIWJsYWNrLHRoaWNrXSAoTykgLS0gKFEpCiAgICAgICAgbm9kZVtwb3M9MC42MixiZWxvdz0zcHQsdGV4dD1ncmF5ITg1IWJsYWNrXQogICAgICAgIHskcj1ccmhvXHNpblxwaGkkfTsKICAgIFxkcmF3W2Rhc2hlZCxncmF5ITc1XSAoUSkgLS0gKFgpCiAgICAgICAgbm9kZVtwb3M9MC43MixyaWdodD00cHQsdGV4dD1ncmF5ITg1IWJsYWNrXQogICAgICAgIHskej1ccmhvXGNvc1xwaGkkfTsKICAgIFxkcmF3Wy0+LGJsdWUsdmVyeSB0aGljayxzaG9ydGVuID49MnB0XSAoTykgLS0gKFgpCiAgICAgICAgbm9kZVtwb3M9MC41OCxiZWxvdz00cHQsdGV4dD1ibHVlITc1IWJsYWNrXSB7JFxyaG8kfTsKCiAgICAlIEF6aW11dGhhbCBhbmQgcG9sYXIgYW5nbGVzLgogICAgXGRyYXdbLT4scmVkITc1IWJsYWNrLHRoaWNrXQogICAgICAgIHBsb3RbZG9tYWluPTA6XGF6aW11dGgsc2FtcGxlcz0yNF0KICAgICAgICAoezAuODIqY29zKFx4KX0sezAuODIqc2luKFx4KX0sMCk7CiAgICBcbm9kZVtyZWQhNzUhYmxhY2tdIGF0CiAgICAgICAgKHsxLjAyKmNvcyhcYXppbXV0aC8yKX0sezEuMDIqc2luKFxhemltdXRoLzIpfSwwKSB7JFx0aGV0YSR9OwogICAgXGRyYXdbLT4scHVycGxlITgwIWJsYWNrLHRoaWNrXQogICAgICAgIHBsb3RbZG9tYWluPTA6XHBvbGFyYW5nbGUsc2FtcGxlcz0yOF0KICAgICAgICAoezAuOTIqc2luKFx4KSpjb3MoXGF6aW11dGgpfSwKICAgICAgICAgezAuOTIqc2luKFx4KSpzaW4oXGF6aW11dGgpfSwKICAgICAgICAgezAuOTIqY29zKFx4KX0pOwogICAgXG5vZGVbcHVycGxlITgwIWJsYWNrLGxlZnQ9MnB0XSBhdAogICAgICAgICh7MS4xNSpzaW4oXHBvbGFyYW5nbGUvMikqY29zKFxhemltdXRoKX0sCiAgICAgICAgIHsxLjE1KnNpbihccG9sYXJhbmdsZS8yKSpzaW4oXGF6aW11dGgpfSwKICAgICAgICAgezEuMTUqY29zKFxwb2xhcmFuZ2xlLzIpfSkgeyRccGhpJH07CgogICAgXG5vZGVbY2lyY2xlLGZpbGw9YmxhY2ssaW5uZXIgc2VwPTFwdF0gYXQgKE8pIHt9OwogICAgXG5vZGVbYmVsb3cgbGVmdD0ycHRdIGF0IChPKSB7JE8kfTsKICAgIFxub2RlW2NpcmNsZSxmaWxsPWdyYXkhNzAhYmxhY2ssaW5uZXIgc2VwPTEuMXB0XSBhdCAoUSkge307CiAgICBcbm9kZVtjaXJjbGUsZmlsbD1ibGFjayxpbm5lciBzZXA9MS4zcHRdIGF0IChYKSB7fTsKICAgIFxub2RlW2Fib3ZlIHJpZ2h0PTJwdF0gYXQgKFgpIHskWD0oeCx5LHopJH07ClxlbmR7dGlrenBpY3R1cmV9" data-tikz-id="tikz-1"><svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='20.015em' height='16.451em' viewBox='0 0 200.15 164.51'>
+<defs>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-1' d='M3.29676 2.3904C3.29676 2.36052 3.29676 2.3406 3.12744 2.17128C1.88244 .91632 1.56372-.96612 1.56372-2.49C1.56372-4.22304 1.9422-5.95608 3.16728-7.20108C3.29676-7.3206 3.29676-7.34052 3.29676-7.3704C3.29676-7.44012 3.25692-7.47 3.19716-7.47C3.09756-7.47 2.20116-6.79272 1.61352-5.5278C1.10556-4.4322 .98604-3.32664 .98604-2.49C.98604-1.71312 1.0956-.50796 1.6434 .61752C2.241 1.8426 3.09756 2.49 3.19716 2.49C3.25692 2.49 3.29676 2.46012 3.29676 2.3904Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-2' d='M2.87844-2.49C2.87844-3.26688 2.76888-4.47204 2.22108-5.59752C1.62348-6.8226 .76692-7.47 .66732-7.47C.60756-7.47 .56772-7.43016 .56772-7.3704C.56772-7.34052 .56772-7.3206 .75696-7.14132C1.73304-6.15528 2.30076-4.57164 2.30076-2.49C2.30076-.78684 1.93224 .96612 .6972 2.22108C.56772 2.3406 .56772 2.36052 .56772 2.3904C.56772 2.45016 .60756 2.49 .66732 2.49C.76692 2.49 1.66332 1.81272 2.25096 .5478C2.75892-.5478 2.87844-1.65336 2.87844-2.49Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-3' d='M6.84252-3.25692C6.99192-3.25692 7.18116-3.25692 7.18116-3.45612S6.99192-3.65532 6.85248-3.65532H.88644C.747-3.65532 .55776-3.65532 .55776-3.45612S.747-3.25692 .8964-3.25692H6.84252ZM6.85248-1.32468C6.99192-1.32468 7.18116-1.32468 7.18116-1.52388S6.99192-1.72308 6.84252-1.72308H.8964C.747-1.72308 .55776-1.72308 .55776-1.52388S.747-1.32468 .88644-1.32468H6.85248Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-4' d='M1.16532-2.17128C1.16532-3.79476 1.98204-4.21308 2.50992-4.21308C2.59956-4.21308 3.22704-4.20312 3.57564-3.84456C3.16728-3.81468 3.10752-3.51588 3.10752-3.3864C3.10752-3.12744 3.2868-2.92824 3.56568-2.92824C3.82464-2.92824 4.02384-3.09756 4.02384-3.39636C4.02384-4.07364 3.26688-4.46208 2.49996-4.46208C1.25496-4.46208 .33864-3.3864 .33864-2.15136C.33864-.87648 1.32468 .10956 2.48004 .10956C3.81468 .10956 4.1334-1.08564 4.1334-1.18524S4.0338-1.28484 4.00392-1.28484C3.91428-1.28484 3.89436-1.245 3.87444-1.18524C3.5856-.25896 2.9382-.13944 2.56968-.13944C2.0418-.13944 1.16532-.56772 1.16532-2.17128Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-5' d='M1.76292-4.40232L.36852-4.29276V-3.984C1.01592-3.984 1.10556-3.92424 1.10556-3.4362V-.75696C1.10556-.30876 .996-.30876 .32868-.30876V0C.6474-.00996 1.18524-.02988 1.42428-.02988C1.77288-.02988 2.12148-.00996 2.46012 0V-.30876C1.80276-.30876 1.76292-.35856 1.76292-.747V-4.40232ZM1.80276-6.13536C1.80276-6.45408 1.55376-6.66324 1.27488-6.66324C.96612-6.66324 .747-6.39432 .747-6.13536C.747-5.86644 .96612-5.60748 1.27488-5.60748C1.55376-5.60748 1.80276-5.81664 1.80276-6.13536Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-6' d='M1.0956-3.42624V-.75696C1.0956-.30876 .98604-.30876 .31872-.30876V0C.66732-.00996 1.17528-.02988 1.4442-.02988C1.70316-.02988 2.22108-.00996 2.55972 0V-.30876C1.8924-.30876 1.78284-.30876 1.78284-.75696V-2.5896C1.78284-3.62544 2.49-4.1832 3.12744-4.1832C3.75492-4.1832 3.86448-3.64536 3.86448-3.07764V-.75696C3.86448-.30876 3.75492-.30876 3.0876-.30876V0C3.4362-.00996 3.94416-.02988 4.21308-.02988C4.47204-.02988 4.98996-.00996 5.3286 0V-.30876C4.81068-.30876 4.56168-.30876 4.55172-.60756V-2.50992C4.55172-3.36648 4.55172-3.67524 4.24296-4.0338C4.10352-4.20312 3.77484-4.40232 3.19716-4.40232C2.47008-4.40232 2.00196-3.97404 1.72308-3.35652V-4.40232L.31872-4.29276V-3.984C1.01592-3.984 1.0956-3.91428 1.0956-3.42624Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-7' d='M4.69116-2.13144C4.69116-3.40632 3.69516-4.46208 2.49-4.46208C1.245-4.46208 .27888-3.37644 .27888-2.13144C.27888-.8466 1.31472 .10956 2.48004 .10956C3.6852 .10956 4.69116-.86652 4.69116-2.13144ZM2.49-.13944C2.06172-.13944 1.62348-.3486 1.35456-.80676C1.10556-1.245 1.10556-1.85256 1.10556-2.21112C1.10556-2.59956 1.10556-3.1374 1.3446-3.57564C1.61352-4.0338 2.08164-4.24296 2.48004-4.24296C2.91828-4.24296 3.34656-4.02384 3.60552-3.59556S3.86448-2.5896 3.86448-2.21112C3.86448-1.85256 3.86448-1.31472 3.64536-.87648C3.42624-.42828 2.988-.13944 2.49-.13944Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-8' d='M2.07168-1.93224C2.2908-1.8924 3.10752-1.73304 3.10752-1.01592C3.10752-.50796 2.75892-.10956 1.98204-.10956C1.1454-.10956 .78684-.67728 .5976-1.52388C.56772-1.65336 .55776-1.6932 .45816-1.6932C.32868-1.6932 .32868-1.62348 .32868-1.4442V-.12948C.32868 .03984 .32868 .10956 .43824 .10956C.48804 .10956 .498 .0996 .68724-.08964C.70716-.10956 .70716-.12948 .88644-.31872C1.32468 .0996 1.77288 .10956 1.98204 .10956C3.12744 .10956 3.5856-.55776 3.5856-1.27488C3.5856-1.80276 3.2868-2.10156 3.16728-2.22108C2.8386-2.5398 2.45016-2.61948 2.03184-2.69916C1.47408-2.80872 .80676-2.9382 .80676-3.51588C.80676-3.86448 1.06572-4.27284 1.92228-4.27284C3.01788-4.27284 3.06768-3.37644 3.0876-3.06768C3.09756-2.97804 3.1872-2.97804 3.20712-2.97804C3.3366-2.97804 3.3366-3.02784 3.3366-3.21708V-4.22304C3.3366-4.39236 3.3366-4.46208 3.22704-4.46208C3.17724-4.46208 3.15732-4.46208 3.02784-4.34256C2.99796-4.30272 2.89836-4.21308 2.85852-4.1832C2.48004-4.46208 2.07168-4.46208 1.92228-4.46208C.70716-4.46208 .32868-3.79476 .32868-3.237C.32868-2.8884 .48804-2.60952 .75696-2.3904C1.07568-2.13144 1.35456-2.07168 2.07168-1.93224Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-1' d='M4.5318-4.98C4.5318-5.63736 4.35252-7.0218 3.3366-7.0218C1.95216-7.0218 .41832-4.21308 .41832-1.93224C.41832-.996 .70716 .10956 1.61352 .10956C3.01788 .10956 4.5318-2.74896 4.5318-4.98ZM1.47408-3.61548C1.6434-4.25292 1.8426-5.04972 2.241-5.75688C2.50992-6.24492 2.87844-6.80268 3.32664-6.80268C3.81468-6.80268 3.87444-6.16524 3.87444-5.59752C3.87444-5.10948 3.79476-4.60152 3.55572-3.61548H1.47408ZM3.46608-3.29676C3.35652-2.8386 3.14736-1.992 2.76888-1.27488C2.42028-.5976 2.0418-.10956 1.61352-.10956C1.28484-.10956 1.07568-.3984 1.07568-1.32468C1.07568-1.743 1.13544-2.32068 1.3944-3.29676H3.46608Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-2' d='M.32868 1.72308C.2988 1.8426 .2988 1.86252 .2988 1.88244C.2988 2.03184 .40836 2.15136 .57768 2.15136C.78684 2.15136 .90636 1.97208 .92628 1.9422C.97608 1.85256 1.2948 .51792 1.56372-.55776C1.76292-.15936 2.08164 .10956 2.54976 .10956C3.71508 .10956 4.99992-1.2948 4.99992-2.77884C4.99992-3.8346 4.34256-4.40232 3.61548-4.40232C2.64936-4.40232 1.60356-3.40632 1.30476-2.1912L.32868 1.72308ZM2.5398-.10956C1.8426-.10956 1.68324-.90636 1.68324-.996C1.68324-1.03584 1.73304-1.23504 1.76292-1.36452C2.0418-2.48004 2.1414-2.8386 2.36052-3.237C2.7888-3.96408 3.2868-4.1832 3.59556-4.1832C3.96408-4.1832 4.2828-3.89436 4.2828-3.20712C4.2828-2.65932 3.99396-1.5438 3.72504-1.05576C3.39636-.42828 2.91828-.10956 2.5398-.10956Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-3' d='M4.35252-6.6732C4.35252-6.69312 4.3824-6.80268 4.3824-6.81264S4.3824-6.91224 4.26288-6.91224C4.16328-6.91224 4.15332-6.88236 4.11348-6.71304L3.5358-4.41228C1.95216-4.36248 .48804-3.0378 .48804-1.68324C.48804-.73704 1.18524 .0498 2.40036 .11952C2.32068 .42828 2.25096 .747 2.17128 1.05576C2.05176 1.52388 1.95216 1.90236 1.95216 1.93224C1.95216 2.03184 2.02188 2.0418 2.07168 2.0418S2.1414 2.03184 2.17128 2.00196C2.1912 1.98204 2.25096 1.743 2.28084 1.60356L2.65932 .11952C4.26288 .06972 5.70708-1.27488 5.70708-2.60952C5.70708-3.39636 5.1792-4.31268 3.79476-4.41228L4.35252-6.6732ZM2.45016-.0996C1.85256-.12948 1.13544-.47808 1.13544-1.47408C1.13544-2.66928 1.992-4.06368 3.47604-4.19316L2.45016-.0996ZM3.735-4.19316C4.49196-4.15332 5.05968-3.69516 5.05968-2.81868C5.05968-1.6434 4.20312-.21912 2.70912-.0996L3.735-4.19316Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-4' d='M2.02188-.00996C2.02188-.66732 1.77288-1.05576 1.38444-1.05576C1.05576-1.05576 .85656-.80676 .85656-.52788C.85656-.25896 1.05576 0 1.38444 0C1.50396 0 1.63344-.03984 1.73304-.12948C1.76292-.1494 1.77288-.15936 1.78284-.15936S1.80276-.1494 1.80276-.00996C1.80276 .72708 1.45416 1.32468 1.12548 1.65336C1.01592 1.76292 1.01592 1.78284 1.01592 1.81272C1.01592 1.88244 1.06572 1.92228 1.11552 1.92228C1.22508 1.92228 2.02188 1.15536 2.02188-.00996Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-5' d='M7.3704-4.34256C7.3704-5.94612 6.31464-7.0218 4.8306-7.0218C2.67924-7.0218 .48804-4.76088 .48804-2.4402C.48804-.78684 1.60356 .21912 3.0378 .21912C5.14932 .21912 7.3704-1.96212 7.3704-4.34256ZM3.09756-.03984C2.11152-.03984 1.41432-.8466 1.41432-2.16132C1.41432-2.59956 1.55376-4.05372 2.32068-5.21904C3.00792-6.25488 3.984-6.7728 4.77084-6.7728C5.58756-6.7728 6.48396-6.21504 6.48396-4.731C6.48396-4.01388 6.21504-2.46012 5.229-1.23504C4.75092-.62748 3.9342-.03984 3.09756-.03984Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-6' d='M4.8306-4.09356L3.99396-6.0756C3.96408-6.15528 3.94416-6.19512 3.94416-6.20508C3.94416-6.26484 4.11348-6.45408 4.5318-6.49392C4.6314-6.50388 4.731-6.51384 4.731-6.68316C4.731-6.80268 4.61148-6.80268 4.5816-6.80268C4.17324-6.80268 3.74496-6.7728 3.32664-6.7728C3.07764-6.7728 2.46012-6.80268 2.21112-6.80268C2.15136-6.80268 2.03184-6.80268 2.03184-6.60348C2.03184-6.49392 2.13144-6.49392 2.26092-6.49392C2.85852-6.49392 2.91828-6.39432 3.00792-6.1752L4.1832-3.39636L2.08164-1.13544L1.95216-1.02588C1.46412-.498 .996-.33864 .48804-.30876C.35856-.2988 .26892-.2988 .26892-.10956C.26892-.0996 .26892 0 .3984 0C.6972 0 1.02588-.02988 1.33464-.02988C1.70316-.02988 2.0916 0 2.45016 0C2.50992 0 2.62944 0 2.62944-.1992C2.62944-.2988 2.52984-.30876 2.50992-.30876C2.42028-.31872 2.11152-.33864 2.11152-.61752C2.11152-.77688 2.26092-.93624 2.38044-1.06572L3.39636-2.1414L4.29276-3.11748L5.29872-.73704C5.33856-.62748 5.34852-.61752 5.34852-.5976C5.34852-.51792 5.15928-.3486 4.77084-.30876C4.66128-.2988 4.57164-.28884 4.57164-.11952C4.57164 0 4.6812 0 4.72104 0C4.99992 0 5.69712-.02988 5.976-.02988C6.225-.02988 6.83256 0 7.08156 0C7.15128 0 7.2708 0 7.2708-.18924C7.2708-.30876 7.1712-.30876 7.09152-.30876C6.4242-.31872 6.40428-.3486 6.23496-.747C5.84652-1.67328 5.1792-3.22704 4.95012-3.82464C5.6274-4.52184 6.6732-5.70708 6.99192-5.98596C7.28076-6.225 7.65924-6.46404 8.25684-6.49392C8.38632-6.50388 8.47596-6.50388 8.47596-6.69312C8.47596-6.70308 8.47596-6.80268 8.34648-6.80268C8.04768-6.80268 7.719-6.7728 7.41024-6.7728C7.04172-6.7728 6.66324-6.80268 6.30468-6.80268C6.24492-6.80268 6.11544-6.80268 6.11544-6.60348C6.11544-6.53376 6.16524-6.50388 6.23496-6.49392C6.3246-6.48396 6.63336-6.46404 6.63336-6.18516C6.63336-6.04572 6.5238-5.91624 6.44412-5.8266L4.8306-4.09356Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-7' d='M.87648-.58764C.8466-.43824 .78684-.20916 .78684-.15936C.78684 .01992 .92628 .10956 1.07568 .10956C1.1952 .10956 1.37448 .02988 1.4442-.16932C1.46412-.20916 1.80276-1.56372 1.8426-1.743C1.92228-2.07168 2.10156-2.76888 2.16132-3.0378C2.20116-3.16728 2.48004-3.6354 2.71908-3.85452C2.79876-3.92424 3.0876-4.1832 3.51588-4.1832C3.77484-4.1832 3.92424-4.06368 3.9342-4.06368C3.6354-4.01388 3.41628-3.77484 3.41628-3.51588C3.41628-3.35652 3.52584-3.16728 3.79476-3.16728S4.34256-3.39636 4.34256-3.75492C4.34256-4.10352 4.02384-4.40232 3.51588-4.40232C2.86848-4.40232 2.43024-3.91428 2.241-3.6354C2.16132-4.0836 1.80276-4.40232 1.33464-4.40232C.87648-4.40232 .68724-4.01388 .5976-3.8346C.41832-3.49596 .28884-2.89836 .28884-2.86848C.28884-2.76888 .38844-2.76888 .40836-2.76888C.50796-2.76888 .51792-2.77884 .57768-2.99796C.747-3.70512 .9462-4.1832 1.30476-4.1832C1.47408-4.1832 1.61352-4.10352 1.61352-3.72504C1.61352-3.51588 1.58364-3.40632 1.45416-2.8884L.87648-.58764Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-8' d='M3.32664-3.00792C3.3864-3.26688 3.61548-4.1832 4.31268-4.1832C4.36248-4.1832 4.60152-4.1832 4.81068-4.05372C4.5318-4.00392 4.3326-3.75492 4.3326-3.51588C4.3326-3.35652 4.44216-3.16728 4.71108-3.16728C4.9302-3.16728 5.24892-3.34656 5.24892-3.74496C5.24892-4.26288 4.66128-4.40232 4.32264-4.40232C3.74496-4.40232 3.39636-3.87444 3.27684-3.64536C3.02784-4.30272 2.49-4.40232 2.20116-4.40232C1.16532-4.40232 .5976-3.11748 .5976-2.86848C.5976-2.76888 .6972-2.76888 .71712-2.76888C.7968-2.76888 .82668-2.7888 .8466-2.87844C1.18524-3.9342 1.8426-4.1832 2.18124-4.1832C2.37048-4.1832 2.71908-4.09356 2.71908-3.51588C2.71908-3.20712 2.54976-2.5398 2.18124-1.1454C2.02188-.52788 1.67328-.10956 1.23504-.10956C1.17528-.10956 .9462-.10956 .73704-.23904C.98604-.28884 1.20516-.498 1.20516-.77688C1.20516-1.0458 .98604-1.12548 .83664-1.12548C.53784-1.12548 .28884-.86652 .28884-.5478C.28884-.08964 .78684 .10956 1.22508 .10956C1.88244 .10956 2.241-.58764 2.27088-.6474C2.3904-.27888 2.74896 .10956 3.34656 .10956C4.37244 .10956 4.94016-1.17528 4.94016-1.42428C4.94016-1.52388 4.85052-1.52388 4.82064-1.52388C4.731-1.52388 4.71108-1.48404 4.69116-1.41432C4.36248-.3486 3.6852-.10956 3.36648-.10956C2.97804-.10956 2.81868-.42828 2.81868-.76692C2.81868-.98604 2.87844-1.20516 2.988-1.6434L3.32664-3.00792Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-9' d='M4.84056-3.79476C4.8804-3.9342 4.8804-3.95412 4.8804-4.02384C4.8804-4.20312 4.74096-4.29276 4.59156-4.29276C4.49196-4.29276 4.3326-4.233 4.24296-4.0836C4.22304-4.0338 4.14336-3.72504 4.10352-3.54576C4.0338-3.2868 3.96408-3.01788 3.90432-2.74896L3.45612-.95616C3.41628-.80676 2.988-.10956 2.33064-.10956C1.82268-.10956 1.71312-.5478 1.71312-.91632C1.71312-1.37448 1.88244-1.992 2.22108-2.86848C2.38044-3.27684 2.42028-3.3864 2.42028-3.5856C2.42028-4.0338 2.10156-4.40232 1.60356-4.40232C.65736-4.40232 .28884-2.95812 .28884-2.86848C.28884-2.76888 .38844-2.76888 .40836-2.76888C.50796-2.76888 .51792-2.7888 .56772-2.94816C.83664-3.8844 1.23504-4.1832 1.57368-4.1832C1.65336-4.1832 1.82268-4.1832 1.82268-3.86448C1.82268-3.61548 1.72308-3.35652 1.65336-3.16728C1.25496-2.11152 1.07568-1.5438 1.07568-1.07568C1.07568-.18924 1.70316 .10956 2.2908 .10956C2.67924 .10956 3.01788-.05976 3.29676-.33864C3.16728 .17928 3.04776 .66732 2.64936 1.1952C2.3904 1.53384 2.01192 1.82268 1.55376 1.82268C1.41432 1.82268 .96612 1.7928 .7968 1.40436C.95616 1.40436 1.08564 1.40436 1.22508 1.28484C1.32468 1.1952 1.42428 1.06572 1.42428 .87648C1.42428 .56772 1.15536 .52788 1.05576 .52788C.82668 .52788 .498 .68724 .498 1.17528C.498 1.67328 .93624 2.0418 1.55376 2.0418C2.57964 2.0418 3.60552 1.13544 3.8844 .00996L4.84056-3.79476Z'/>
+<path id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-10' d='M1.32468-.82668C1.86252-1.40436 2.15136-1.65336 2.50992-1.96212C2.50992-1.97208 3.12744-2.49996 3.486-2.85852C4.4322-3.7848 4.65132-4.26288 4.65132-4.30272C4.65132-4.40232 4.56168-4.40232 4.54176-4.40232C4.47204-4.40232 4.44216-4.3824 4.39236-4.29276C4.09356-3.81468 3.8844-3.65532 3.64536-3.65532S3.2868-3.80472 3.1374-3.97404C2.94816-4.20312 2.77884-4.40232 2.45016-4.40232C1.70316-4.40232 1.245-3.47604 1.245-3.26688C1.245-3.21708 1.27488-3.15732 1.36452-3.15732S1.47408-3.20712 1.494-3.26688C1.68324-3.72504 2.26092-3.735 2.3406-3.735C2.54976-3.735 2.739-3.66528 2.96808-3.5856C3.36648-3.4362 3.47604-3.4362 3.735-3.4362C3.37644-3.00792 2.5398-2.2908 2.35056-2.13144L1.45416-1.2948C.77688-.62748 .42828-.05976 .42828 .00996C.42828 .10956 .52788 .10956 .5478 .10956C.62748 .10956 .6474 .08964 .70716-.01992C.93624-.36852 1.23504-.63744 1.55376-.63744C1.78284-.63744 1.88244-.5478 2.13144-.25896C2.30076-.0498 2.48004 .10956 2.76888 .10956C3.75492 .10956 4.3326-1.15536 4.3326-1.42428C4.3326-1.47408 4.29276-1.52388 4.21308-1.52388C4.12344-1.52388 4.10352-1.46412 4.07364-1.3944C3.84456-.747 3.20712-.55776 2.87844-.55776C2.67924-.55776 2.49996-.61752 2.2908-.68724C1.95216-.81672 1.80276-.85656 1.5936-.85656C1.57368-.85656 1.41432-.85656 1.32468-.82668Z'/>
+</defs>
+<g id='tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-page1'>
+<path d='M70.825 122.252H183.63712' stroke='#000' fill='none' stroke-width='.3985' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round'/>
+<path d='M185.62964 122.252L182.44161 120.65799L183.63712 122.252L182.44161 123.84601'/>
+<g transform='matrix(1.000261 0 0 1.000261 190.324 74.141)'>
+<use x='-1.174693' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-8'/>
+</g>
+<path d='M70.825 122.252L15.78556 155.06343' stroke='#000' fill='none' stroke-width='.3985' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round'/>
+<path d='M14.074153 156.08369L17.628628 155.820386L15.785568 155.06342L15.996203 153.082132'/>
+<g transform='matrix(1.000261 0 0 1.000261 6.487 107.004)'>
+<use x='-1.174693' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-9'/>
+</g>
+<path d='M70.825 122.252V15.10915' stroke='#000' fill='none' stroke-width='.3985' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round'/>
+<path d='M70.825 13.116626L69.23099 16.304656L70.825 15.109146L72.41901 16.304656'/>
+<g transform='matrix(1.000261 0 0 1.000261 69.464 -40.658998)'>
+<use x='-1.174693' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-10'/>
+</g>
+<path d='M70.825 122.252L101.87046 134.91625' stroke='#666' fill='none' stroke-width='.79701' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round'/>
+<g fill='#6c6c6c' transform='matrix(1.000261 0 0 1.000261 68.901 93.474)'>
+<use x='-1.174693' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-7'/>
+<use x='6.36234' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-3'/>
+<use x='16.875597' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-2'/>
+<use x='23.684819' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-8'/>
+<use x='27.60906' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-5'/>
+<use x='30.367979' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-6'/>
+<use x='37.573192' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-3'/>
+</g>
+<path d='M101.87046 134.91625V75.1685' stroke='#9f9f9f' fill='none' stroke-width='.3985' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round' stroke-dasharray='2.98883 2.98883'/>
+<g fill='#6c6c6c' transform='matrix(1.000261 0 0 1.000261 110.55 44.133005)'>
+<use x='-1.174693' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-10'/>
+<use x='6.662262' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-3'/>
+<use x='17.175516' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-2'/>
+<use x='23.984741' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-4'/>
+<use x='28.406982' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-7'/>
+<use x='33.386981' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-8'/>
+<use x='38.979825' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-3'/>
+</g>
+<path d='M70.825 122.252L99.01882 79.49326' stroke='#00f' fill='none' stroke-width='1.19553' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round'/>
+<path d='M100.773696 76.83185L95.83677 79.686197L99.018817 79.493259L100.095018 82.493999' fill='#00f'/>
+<g fill='#0000bf' transform='matrix(1.000261 0 0 1.000261 87.431 56.88)'>
+<use x='-1.174693' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-2'/>
+</g>
+<path d='M94.06958 122.252L93.71016 122.45955L93.33321 122.66725L92.9377 122.8744L92.52318 123.08103L92.09053 123.28713L91.6413 123.49228L91.17331 123.69649L90.68961 123.89923L90.18871 124.10089L89.6717 124.30081L89.13939 124.49925L88.59124 124.69583L88.02872 124.89012L87.4525 125.08226L86.86173 125.27226L86.25728 125.45958L85.64133 125.64423L85.0117 125.82617L84.37038 126.00504L83.71845 126.18096L83.05527 126.35326L82.38214 126.5225L84.217 126.07713' stroke='#bf0000' fill='none' stroke-width='.79701' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round'/>
+<path d='M81.699951 126.688085L86.21601 127.724182L84.21701 126.07712L85.23847 123.696903' fill='#bf0000'/>
+<g fill='#bf0000' transform='matrix(1.000261 0 0 1.000261 91.966999 78.373)'>
+<use x='-1.174693' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-1'/>
+</g>
+<path d='M70.825 96.173L71.20304 96.34146L71.58106 96.5333L71.9589 96.75008L72.33504 96.99011L72.70969 97.25586L73.08289 97.54602L73.45397 97.8596L73.8223 98.19621L74.1877 98.55553L74.54993 98.93916L74.90879 99.34454L75.26323 99.77196L75.61408 100.22083L75.95966 100.69063L76.30039 101.18219L76.63587 101.6931L76.96605 102.22408L77.29059 102.77368L77.60814 103.3428L77.91938 103.93086L78.22408 104.53555L78.52143 105.15736L78.81156 105.79567L79.09395 106.4501L79.36765 107.11917L79.63402 107.80348L78.99475 106.07126' stroke='#903' fill='none' stroke-width='.79701' stroke-miterlimit='10' stroke-linejoin='round' stroke-linecap='round'/>
+<path d='M79.891498 108.501183L80.400634 103.895916L78.99475 106.07126L76.512772 105.330708' fill='#903'/>
+<g fill='#903' transform='matrix(1.000261 0 0 1.000261 66.755 47.237)'>
+<use x='-1.174693' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-3'/>
+</g>
+<path d='M72.23403 122.252C72.23403 121.47382 71.60318 120.84297 70.825 120.84297S69.41597 121.47382 69.41597 122.252S70.04682 123.66103 70.825 123.66103S72.23403 123.03018 72.23403 122.252Z'/>
+<g transform='matrix(1.000261 0 0 1.000261 58.612 84.316)'>
+<use x='-1.174693' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-5'/>
+</g>
+<path d='M103.42034 134.91625C103.42034 134.06027 102.72643 133.36636 101.87046 133.36636C101.01448 133.36636 100.32059 134.06027 100.32059 134.91625C100.32059 135.77222 101.01448 136.46611 101.87046 136.46611C102.72643 136.46611 103.42034 135.77222 103.42034 134.91625Z' fill='#595959'/>
+<path d='M103.70223 75.1685C103.70223 74.15685 102.88211 73.33672 101.87046 73.33672C100.8588 73.33672 100.03868 74.15685 100.03868 75.1685C100.03868 76.18016 100.8588 77.00028 101.87046 77.00028C102.88211 77.00028 103.70223 76.18016 103.70223 75.1685Z'/>
+<g transform='matrix(1.000261 0 0 1.000261 108.558 16.909)'>
+<use x='-1.174693' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-6'/>
+<use x='10.625226' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-3'/>
+<use x='21.123066' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-1'/>
+<use x='25.011473' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-8'/>
+<use x='30.698632' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-4'/>
+<use x='35.110915' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-9'/>
+<use x='40.349877' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-4'/>
+<use x='44.772115' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g0-10'/>
+<use x='49.867988' y='50.242884' xlink:href='#tikz-f3c69743e5f905c7303a253655f3ca3d260075996c67557efe0eeb5548a45ee7-g1-2'/>
+</g>
+</g>
+</svg></div>
+<figcaption><p data-sourcepos="491:1-491:1">Figure 1: Spherical coordinates and the projection of <span class="math inline">X</span> onto the <span class="math inline">xy</span>-plane. </p></figcaption>
+</figure>
+<p data-sourcepos="494:1-494:1">The spherical-coordinate Jacobian gives</p>
+<p><span class="math display">
+\mathrm dV
+=\rho^2\sin\phi\,\mathrm d\rho\,\mathrm d\phi\,\mathrm d\theta
+</span></p>
+<p>On the sphere <span class="math inline">\rho=a</span>, the scalar and outward-oriented surface elements are</p>
+<p><span class="math display">
+\begin{aligned}
+\mathrm dS
+&amp;=a^2\sin\phi\,\mathrm d\phi\,\mathrm d\theta \\
+\mathrm d\vec S_{\mathrm{out}}
+&amp;=\hat e_\rho\,a^2\sin\phi\,\mathrm d\phi\,\mathrm d\theta
+\end{aligned}
+</span></p>
+<h3 id="vector-fields-in-3d-space" data-sourcepos="512:1-512:1">Vector Fields in 3D Space</h3>
+<p data-sourcepos="514:1-514:1">A vector field in three-dimensional space has the form</p>
+<p><span class="math display">
+\vec F
+=P(x,y,z)\hat i+Q(x,y,z)\hat j+R(x,y,z)\hat k
+</span></p>
+<h3 id="surface-integrals-and-flux" data-sourcepos="521:1-521:1">Surface Integrals and Flux</h3>
+<p data-sourcepos="523:1-523:1">Let an oriented smooth surface <span class="math inline">S</span> be parametrized by <span class="math inline">\vec r=\vec r(u,v)</span> over a region <span class="math inline">D</span>. If <span class="math inline">\vec r_u\times\vec r_v\ne\vec0</span>, then</p>
+<p><span class="math display">
+\begin{aligned}
+\mathrm dS
+&amp;=|\vec r_u\times\vec r_v|\,\mathrm du\,\mathrm dv \\
+\mathrm d\vec S
+&amp;=(\vec r_u\times\vec r_v)\,\mathrm du\,\mathrm dv
+\end{aligned}
+</span></p>
+<p>The order of <span class="math inline">u,v</span> determines the orientation. Reversing the order reverses <span class="math inline">\mathrm d\vec S</span>. The flux of <span class="math inline">\vec F</span> through <span class="math inline">S</span> is</p>
+<p><span class="math display">
+\begin{aligned}
+\Phi
+&amp;=\iint_S\vec F\cdot\hat n\,\mathrm dS
+=\iint_S\vec F\cdot\mathrm d\vec S \\
+&amp;=\iint_D
+\vec F(\vec r(u,v))\cdot
+(\vec r_u\times\vec r_v)\,\mathrm du\,\mathrm dv
+\end{aligned}
+</span></p>
+<p>For a graph <span class="math inline">z=f(x,y)</span> with upward orientation,</p>
+<p><span class="math display">
+\begin{aligned}
+\mathrm d\vec S_{\mathrm{up}}
+&amp;=\langle-f_x,-f_y,1\rangle\,\mathrm dx\,\mathrm dy \\
+\mathrm dS
+&amp;=\sqrt{1+f_x^2+f_y^2}\,\mathrm dx\,\mathrm dy
+\end{aligned}
+</span></p>
+<p data-sourcepos="561:1-561:1">The downward-oriented area element is <span class="math inline">-\mathrm d\vec S_{\mathrm{up}}</span>.</p>
+<p data-sourcepos="563:1-563:1">For an implicit surface <span class="math inline">w(x,y,z)=c</span> with <span class="math inline">w_z\ne0</span>, projected onto the <span class="math inline">xy</span>-plane, let <span class="math inline">\vec N=\nabla w</span>. A unit normal is</p>
+<p data-sourcepos="567:1-567:1"><span class="math display">
+\hat n=\pm\frac{\vec N}{|\vec N|}
+</span></p>
+<p>If <span class="math inline">\alpha</span> is the angle between <span class="math inline">\hat n</span> and <span class="math inline">\hat k</span>, the projected area element satisfies</p>
+<p data-sourcepos="574:1-574:1"><span class="math display">
+\mathrm dx\,\mathrm dy
+=|\cos\alpha|\,\mathrm dS
+=|\hat n\cdot\hat k|\,\mathrm dS
+</span></p>
+<p data-sourcepos="579:1-579:1">Therefore,</p>
+<p><span class="math display">
+\begin{aligned}
+\mathrm dS
+&amp;=\frac{1}{|\hat n\cdot\hat k|}\,\mathrm dx\,\mathrm dy \\
+&amp;=\frac{|\nabla w|}{|\nabla w\cdot\hat k|}\,\mathrm dx\,\mathrm dy \\
+&amp;=\frac{|\nabla w|}{|w_z|}\,\mathrm dx\,\mathrm dy
+\end{aligned}
+</span></p>
+<p data-sourcepos="590:1-590:1">For the upward orientation,</p>
+<p><span class="math display">
+\begin{aligned}
+\hat n_{\mathrm{up}}
+&amp;=\frac{w_z}{|w_z|}\frac{\nabla w}{|\nabla w|} \\
+\mathrm d\vec S_{\mathrm{up}}
+&amp;=\hat n_{\mathrm{up}}\,\mathrm dS
+=\frac{\nabla w}{w_z}\,\mathrm dx\,\mathrm dy
+\end{aligned}
+</span></p>
+<p data-sourcepos="602:1-602:1">The downward-oriented vector area element is <span class="math inline">-\mathrm d\vec S_{\mathrm{up}}</span>. Projection onto the <span class="math inline">yz</span>- or <span class="math inline">xz</span>-plane uses <span class="math inline">w_x</span> or <span class="math inline">w_y</span> respectively.</p>
+<h3 id="divergence-in-3d-space" data-sourcepos="605:1-605:1">Divergence in 3D Space</h3>
+<p data-sourcepos="607:1-607:1">Divergence measures the limiting outward flux per unit volume:</p>
+<p data-sourcepos="610:1-610:1"><span class="math display">
+\operatorname{div}\vec F
+=\nabla\cdot\vec F
+=P_x+Q_y+R_z
+</span></p>
+<h3 id="divergence-theorem" data-sourcepos="615:1-615:1">Divergence Theorem</h3>
+<p>Let <span class="math inline">E</span> be a bounded solid whose piecewise smooth boundary <span class="math inline">\partial E</span> is oriented outward. If <span class="math inline">\vec F\in C^1</span> on an open set containing <span class="math inline">\overline E</span>, then</p>
+<p data-sourcepos="622:1-622:1"><span class="math display">
+\iint_{\partial E}\vec F\cdot\hat n\,\mathrm dS
+=\iiint_E\nabla\cdot\vec F\,\mathrm dV
+</span></p>
+<p data-sourcepos="626:1-626:1">This is the three-dimensional analogue of the divergence theorem in the plane.</p>
+<h3 id="curl-in-3d-space" data-sourcepos="629:1-629:1">Curl in 3D Space</h3>
+<p>The component <span class="math inline">(\nabla\times\vec F)\cdot\hat n</span> measures the limiting circulation per unit area in a plane normal to <span class="math inline">\hat n</span>:</p>
+<p data-sourcepos="635:1-635:1"><span class="math display">
+\operatorname{curl}\vec F
+=\nabla\times\vec F
+=
+\begin{vmatrix}
+\hat i &amp; \hat j &amp; \hat k \\
+\frac{\partial}{\partial x} &amp; \frac{\partial}{\partial y} &amp; \frac{\partial}{\partial z} \\
+P &amp; Q &amp; R
+\end{vmatrix}
+=(R_y-Q_z)\hat i+(P_z-R_x)\hat j+(Q_x-P_y)\hat k
+</span></p>
+<p>For a planar field <span class="math inline">\vec F=M(x,y)\hat i+N(x,y)\hat j</span>, viewed as a three-dimensional field with zero <span class="math inline">\hat k</span> component, this reduces to</p>
+<p data-sourcepos="650:1-650:1"><span class="math display">
+\nabla\times\vec F=(N_x-M_y)\hat k
+</span></p>
+<h3 id="stokes-theorem">Stokes’ Theorem</h3>
+<p>Let <span class="math inline">S</span> be an oriented piecewise smooth surface whose boundary <span class="math inline">\partial S</span> is positively oriented, so that <span class="math inline">\partial S</span> and the chosen normal <span class="math inline">\hat n</span> obey the right-hand rule. If <span class="math inline">\vec F\in C^1</span> on an open set containing <span class="math inline">S</span>, then</p>
+<p data-sourcepos="661:1-661:1"><span class="math display">
+\oint_{\partial S}\vec F\cdot\mathrm d\vec r
+=\iint_S(\nabla\times\vec F)\cdot\hat n\,\mathrm dS
+</span></p>
+<p data-sourcepos="665:1-665:1">This is the three-dimensional analogue of Green’s theorem for circulation.</p>
+
+      </article>
+    </main>
+
+    <!-- Right Sidebar (TOC) -->
+    <aside class="sidebar right-sidebar collapsed" id="right-sidebar">
+      <div class="sidebar-content" id="spa-toc">
+        <!-- <h4 class="toc-title">On this page</h4> -->
+        <ul class="toc-list"><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#vectors-and-matrices">Vectors and Matrices</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#product">Product</a></li><li class="toc-child toc-level-3"><a href="#determinant">Determinant</a></li><li class="toc-child toc-level-3"><a href="#inverse-matrix">Inverse Matrix</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#partial-derivatives">Partial Derivatives</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#partial-derivatives-1">Partial Derivatives</a></li><li class="toc-child toc-level-3"><a href="#least-square">Least Square</a></li><li class="toc-child toc-level-3"><a href="#minmax">Min/Max</a></li><li class="toc-child toc-level-3"><a href="#taylors-theorem">Taylor’s Theorem</a></li><li class="toc-child toc-level-3"><a href="#total-differential">Total Differential</a></li><li class="toc-child toc-level-3"><a href="#chain-rule">Chain Rule</a></li><li class="toc-child toc-level-3"><a href="#gradient-vector">Gradient Vector</a></li><li class="toc-child toc-level-3"><a href="#rate-of-change-in-an-arbitrary-direction">Rate of Change in an Arbitrary Direction</a></li><li class="toc-child toc-level-3"><a href="#lagrange-multipliers">Lagrange Multipliers</a></li><li class="toc-child toc-level-3"><a href="#partial-derivative-with-non-independent-variables">Partial Derivative with Non-Independent Variables</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#double-integral-in-plane">Double Integral in Plane</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#double-integral">Double Integral</a></li><li class="toc-child toc-level-3"><a href="#polar-coordinates">Polar Coordinates</a></li><li class="toc-child toc-level-3"><a href="#area-of-region">Area of Region</a></li><li class="toc-child toc-level-3"><a href="#center-of-mass">Center of Mass</a></li><li class="toc-child toc-level-3"><a href="#rotational-moment-of-inertia">Rotational Moment of Inertia</a></li><li class="toc-child toc-level-3"><a href="#jacobian-matrix">Jacobian Matrix</a></li><li class="toc-child toc-level-3"><a href="#change-of-variables">Change of Variables</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#line-integral-in-plane">Line Integral in Plane</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#vector-fields">Vector Fields</a></li><li class="toc-child toc-level-3"><a href="#line-integral">Line Integral</a></li><li class="toc-child toc-level-3"><a href="#gradient-field">Gradient Field</a></li><li class="toc-child toc-level-3"><a href="#curl">Curl</a></li><li class="toc-child toc-level-3"><a href="#greens-theorem">Green’s Theorem</a></li><li class="toc-child toc-level-3"><a href="#flux">Flux</a></li><li class="toc-child toc-level-3"><a href="#divergence">Divergence</a></li><li class="toc-child toc-level-3"><a href="#divergence-theorem-in-the-plane">Divergence Theorem in the Plane</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#integrals-in-3d-space">Integrals in 3D Space</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#triple-integrals">Triple Integrals</a></li><li class="toc-child toc-level-3"><a href="#cylindrical-and-spherical-coordinates">Cylindrical and Spherical Coordinates</a></li><li class="toc-child toc-level-3"><a href="#vector-fields-in-3d-space">Vector Fields in 3D Space</a></li><li class="toc-child toc-level-3"><a href="#surface-integrals-and-flux">Surface Integrals and Flux</a></li><li class="toc-child toc-level-3"><a href="#divergence-in-3d-space">Divergence in 3D Space</a></li><li class="toc-child toc-level-3"><a href="#divergence-theorem">Divergence Theorem</a></li><li class="toc-child toc-level-3"><a href="#curl-in-3d-space">Curl in 3D Space</a></li><li class="toc-child toc-level-3"><a href="#stokes-theorem">Stokes’ Theorem</a></li></ul></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <script src="/static/shell-lifecycle.js"></script>
+  <script src="/static/shell-preferences.js"></script>
+  <script src="/static/scrollbar-visibility.js?v=c659b99"></script>
+  <script src="/static/sidebar-panel.js"></script>
+  <script src="/static/svg-theme.js"></script>
+  <script src="/static/render-on-demand.js"></script>
+  <script src="/static/shell-bootstrap.js"></script>
+  <script src="/static/main.js"></script>
+  <script src="/static/reading-navigation-state.js"></script>
+  <script src="/static/shell-layout.js"></script>
+  <script src="/static/shell-search-settings.js"></script>
+  <script src="/static/shell-router.js"></script>
+  <script src="/static/link-preview.js"></script>
+  <script src="/static/text-anchor.js"></script>
+  <script src="/static/comments.js"></script>
+  <script src="/static/themes.js"></script>
+  <script src="/static/table-enhance.js"></script>
+  <script src="/static/syllabus-enhance.js"></script>
+  <script src="/static/core/ink-stroke-format.js"></script>
+  <script src="/static/drawing-engine-render.js"></script>
+  <script>
+  // highlight.js: on-demand language loader + post-load highlight pass.
+  //
+  // Core (highlight.min.js) bundles ~37 common languages. Pages that use
+  // additional languages from _HLJS_EXTRA trigger an extra CDN fetch only
+  // when the page actually contains a matching code block. The service
+  // worker caches each module after the first fetch, so subsequent pages
+  // pay nothing for already-loaded languages.
+  //
+  // _HLJS_ALIAS maps user-facing class names to module filenames that
+  // differ from the class name. Pure aliases that hljs core already knows
+  // (e.g. ts → typescript, sh → bash) are resolved by hljs.getLanguage()
+  // and don't need entries — only include aliases whose target module is
+  // in _HLJS_EXTRA.
+  window._HLJS_BASE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/languages/';
+  window._HLJS_ALIAS = {
+    tex: 'latex', docker: 'dockerfile', ps: 'powershell', ps1: 'powershell',
+    ml: 'ocaml', hs: 'haskell', clj: 'clojure', cljs: 'clojure',
+    erl: 'erlang', coffee: 'coffeescript', f90: 'fortran', f95: 'fortran',
+    pascal: 'delphi'
+  };
+  window._HLJS_EXTRA = [
+    // Tier 1/2: build/config, scientific, FP, scripting, editor
+    'dockerfile','nginx','cmake','http','latex','julia','matlab','fortran',
+    'haskell','scala','ocaml','fsharp','clojure','elixir','dart','vim','powershell',
+    // Tier 3: FP & academic
+    'erlang','scheme','lisp','prolog',
+    // Tier 3: hardware / assembly
+    'verilog','vhdl','x86asm','armasm',
+    // Tier 3: modern systems
+    'crystal','nim','d','delphi',
+    // Tier 3: build / config
+    'groovy','nix','dts',
+    // Tier 3: markup / templating
+    'asciidoc','handlebars','gherkin',
+    // Tier 3: shell / scripting
+    'awk','tcl','coffeescript',
+    // Tier 3: stats
+    'stan'
+  ];
+  window._hljsLoaded = {};
+
+  // Run the highlight + line-number pass against `root` (defaults to document).
+  window._hljsRun = function(root) {
+    root = root || document;
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (name) {
+        var resolved = hljs.getLanguage(name) ? name : 'plaintext';
+        code.classList.add('language-' + resolved);
+      }
+    });
+    hljs.configure({ cssSelector: 'pre:not(.mermaid) > code' });
+    hljs.highlightAll();
+    root.querySelectorAll('pre:not(.mermaid) > code').forEach(function(code) {
+      if (code.querySelector('.code-line')) return;
+      var html = code.innerHTML;
+      if (html.charAt(html.length - 1) === '\n') html = html.slice(0, -1);
+      var lines = html.split('\n');
+      var openTags = [];
+      code.innerHTML = lines.map(function(line) {
+        var prefix = openTags.join('');
+        var re = /<\/?span[^>]*>/gi, m;
+        while ((m = re.exec(line)) !== null) {
+          if (m[0][1] === '/') openTags.pop();
+          else openTags.push(m[0]);
+        }
+        var suffix = '';
+        for (var i = 0; i < openTags.length; i++) suffix += '</span>';
+        return '<span class="code-line">' + prefix + (line || ' ') + suffix + '</span>';
+      }).join('');
+    });
+  };
+
+  // Scan `root` for code blocks, fetch any missing allowlisted language
+  // modules, then run the highlight pass once they finish loading (or fail).
+  // Called once from the highlight.min.js onload handler, and again from
+  // main.js after each SPA navigation (scoped to #spa-content).
+  window._hljsInit = function(root) {
+    root = root || document;
+    if (typeof hljs === 'undefined') return;
+    var allow = {};
+    for (var i = 0; i < window._HLJS_EXTRA.length; i++) allow[window._HLJS_EXTRA[i]] = true;
+    var need = {};
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (!name || hljs.getLanguage(name)) return;
+      if (allow[name] && !window._hljsLoaded[name]) need[name] = true;
+    });
+    var keys = Object.keys(need);
+    if (!keys.length) { window._hljsRun(root); return; }
+    var pending = keys.length;
+    keys.forEach(function(l) {
+      window._hljsLoaded[l] = true; // mark in-flight to dedupe across SPA nav
+      var s = document.createElement('script');
+      s.src = window._HLJS_BASE + l + '.min.js';
+      s.onload = s.onerror = function() { if (--pending === 0) window._hljsRun(root); };
+      document.head.appendChild(s);
+    });
+  };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    onload="window._hljsInit();"></script>
+  <script id="rprint-mermaid" async src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('mermaid')}else{var t=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'default';mermaid.initialize({startOnLoad:false,theme:t});document.querySelectorAll('pre.mermaid > code').forEach(function(c){var src=c.textContent;c.parentElement.setAttribute('data-mermaid-source',src);c.parentElement.textContent=src;});mermaid.run()}"></script>
+  <script>document.getElementById('rprint-mermaid').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('mermaid',new Error('Mermaid failed to load'))}});</script>
+  
+  
+  
+</body>
+</html>

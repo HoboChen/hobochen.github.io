@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="build-commit" content="c659b99">
+  <title>Linear Algebra (18.06) - Jingqi's Interpositive</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/main.css?v=c659b99">
+  <link rel="stylesheet" href="/static/link-preview.css">
+  <link rel="stylesheet" href="/static/sidebar-panel.css">
+  <link rel="stylesheet" href="/static/table-enhance.css">
+  <link rel="stylesheet" href="/static/syllabus-enhance.css">
+  <link rel="stylesheet" href="/static/comments.css">
+  <link rel="stylesheet" href="/static/notebook.css">
+  <link rel="stylesheet" href="/static/themes.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var linkPreviewEmbed=false;
+      try{
+        var previewUrl=new URL(location.href);
+        linkPreviewEmbed=previewUrl.searchParams.get('rprint-preview')==='1'&&window.parent!==window&&window.parent.location.origin===location.origin;
+      }catch(e){}
+      if(linkPreviewEmbed){
+        document.documentElement.classList.add('link-preview-embed');
+        var previewArticleLink=function(target){return target&&target.closest&&target.closest('.article a[href]');};
+        var blockPreviewLink=function(event){if(previewArticleLink(event.target)){event.preventDefault();event.stopImmediatePropagation();}};
+        document.addEventListener('click',blockPreviewLink,true);
+        document.addEventListener('auxclick',blockPreviewLink,true);
+        document.addEventListener('keydown',function(event){if(event.key==='Enter')blockPreviewLink(event);},true);
+        document.addEventListener('dblclick',function(event){if(event.target&&event.target.closest&&event.target.closest('.article')){event.preventDefault();event.stopImmediatePropagation();}},true);
+      }
+      var bc=document.querySelector('meta[name="build-commit"]');
+      var commit=bc?bc.getAttribute('content'):'';
+      if(commit&&commit!=='unknown'){
+        var prev=localStorage.getItem('kb-build-commit');
+        if(prev&&prev!==commit){
+          var keys=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf('kb-')===0)keys.push(k);}
+          keys.forEach(function(k){localStorage.removeItem(k);});
+          localStorage.setItem('kb-build-commit',commit);
+          if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+            navigator.serviceWorker.controller.postMessage('clearCaches');
+          }
+          window.location.reload();
+          return;
+        }
+        localStorage.setItem('kb-build-commit',commit);
+      }
+      // Resume last visited page on PWA/browser launch. PWA launches carry
+      // `?pwa=1`; a normal browser launch is a plain root URL without a same-
+      // origin referrer. `/index.html` is an explicit home navigation, so it
+      // never resumes. Runs before paint to avoid a flash of the home page.
+      // Validates the stored path is a same-origin absolute path (rejects
+      // `//host` / `/\host` open-redirects).
+      var resumeLaunch=/[?&]pwa=1(&|$)/.test(location.search);
+      try{
+        var launchUrl=new URL(location.href);
+        launchUrl.searchParams.delete('pwa');
+        var sameOriginReferrer=false;
+        try{sameOriginReferrer=!!document.referrer&&new URL(document.referrer,location.href).origin===location.origin;}catch(e){}
+        resumeLaunch=resumeLaunch||(launchUrl.pathname==='/'&&!launchUrl.search&&!launchUrl.hash&&!sameOriginReferrer);
+      }catch(e){}
+      if(resumeLaunch){
+        try{
+          var last=localStorage.getItem('kb-last-location');
+          var lastPath=last&&last.split('#')[0].split('?')[0];
+          if(last&&/^\/[^/\\]/.test(last)&&lastPath!=='/'&&lastPath!=='/index.html'){
+            try{sessionStorage.setItem('kb-resume-last-scroll','1');}catch(e){}
+            location.replace(last);return;
+          }
+        }catch(e){}
+      }
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      var mob=window.matchMedia('(max-width:650px)').matches;
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.style.colorScheme=t==='dark'?'dark':'light';
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      var w=p.contentWidth||(mob?'100':'90');
+      document.documentElement.style.setProperty('--content-max-width',w+'%');
+      var edge=p.ignoreCorners!==undefined?p.ignoreCorners==='on':false;
+      if(edge&&w==='100')document.documentElement.setAttribute('data-ignore-corners','on');
+      if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches||window.matchMedia('(display-mode:fullscreen)').matches)document.documentElement.classList.add('pwa-standalone');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'kaiti';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.0};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+      var ht=t==='dark'?'github-dark':'github';
+      var writes='<link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/'+ht+'.min.css">';
+      document.write(writes);
+    })();
+  </script>
+  <style>.math{opacity:0;transition:opacity .15s}.math.rprint-render-failed{opacity:1}</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css" integrity="sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM" crossorigin="anonymous">
+  <script id="rprint-katex" defer src="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.js" integrity="sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI" crossorigin="anonymous"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('katex')}else{document.querySelectorAll('.math').forEach(function(el){var src=el.textContent;el.setAttribute('data-latex',src);katex.render(src,el,{displayMode:el.classList.contains('display'),throwOnError:false,trust:function(ctx){return ctx&&ctx.command==='\\href'&&typeof ctx.url==='string'&&/^#[A-Za-z0-9:._-]+$/.test(ctx.url);}});el.querySelectorAll('mtable[columnspacing=\'\']').forEach(function(t){t.removeAttribute('columnspacing')});el.style.opacity='1';})}"></script>
+  <script>document.getElementById('rprint-katex').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('katex',new Error('KaTeX failed to load'))}else{document.querySelectorAll('.math').forEach(function(el){el.style.opacity='1'})}});</script>
+</head>
+<body data-page-type="markdown">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <button class="banner-toggle" id="left-toggle" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h12v1.5H2V3zm0 4h12v1.5H2V7zm0 4h12v1.5H2V11z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-center">
+        <div class="banner-center-inner">
+          <a href="/index.html" class="site-title" data-short="Interpositive">Jingqi's Interpositive</a>
+          <span class="spa-health-wrap" id="spa-health-wrap">
+            <span class="spa-health-dot" id="spa-health-dot" title="SPA server status"></span>
+            <div class="spa-health-popup" id="spa-health-popup">
+              <div class="shp-header">
+                <span class="shp-title">Server Status</span>
+                <span class="shp-heart" id="shp-heart"></span>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-metrics">
+                <div class="shp-row"><span class="shp-label">Ping</span><span class="shp-value" id="shp-ping">—</span></div>
+                <div class="shp-row"><span class="shp-label">Uptime</span><span class="shp-value" id="shp-uptime">—</span></div>
+                <div class="shp-row"><span class="shp-label">Memory</span><span class="shp-value" id="shp-memory">—</span></div>
+                <div class="shp-row"><span class="shp-label">CPU Time</span><span class="shp-value" id="shp-cpu-time">—</span></div>
+                <div class="shp-row"><span class="shp-label">Load</span><span class="shp-value" id="shp-load">—</span></div>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-modules">
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-watch"></span> Watch</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-jupyter"></span> Jupyter</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-terminal"></span> Terminal</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-proxy"></span> Proxy</div>
+              </div>
+            </div>
+          </span>
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="/cs-notes/" class="nav-link" data-short="CS">CS</a><ul class="nav-dropdown"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li><a href="/cs-notes/mit-gir/index.html">MIT GIR</a></li><li><a href="/cs-notes/cs-math/index.html">CS Math</a></li></ul></li><li class="nav-item"><a href="/not-cs-notes/" class="nav-link" data-short="Not-CS">Not-CS</a><ul class="nav-dropdown"><li><a href="/not-cs-notes/mit-math-requirements.html">MIT Math Syllabus</a></li></ul></li><li class="nav-item"><a href="/notebook/" class="nav-link" data-short="Mixed">Mixed</a><ul class="nav-dropdown"><li><a href="/notebook/mind/index.html">Mind</a></li><li><a href="/notebook/matter/index.html">Matter</a></li><li><a href="/notebook/practice/index.html">Practice</a></li><li><a href="/notebook/toolbox/index.html">Toolbox</a></li></ul></li><li class="nav-item"><a href="/years/" class="nav-link" data-short="Years">Years</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="banner-right">
+        <button class="banner-right-toggle" title="More controls">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="search-wrap" id="search-wrap">
+          <button class="search-btn" id="search-btn" title="Search (Ctrl+K)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-input-wrap" id="search-input-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search…" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+        <div class="comment-wrap" id="comment-wrap">
+          <button class="comment-btn" id="comment-btn" title="Review Comments (A)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <span class="comment-nav-count" id="comment-nav-count"></span>
+          <button class="comment-nav-btn" id="comment-nav-prev" title="Previous comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="comment-nav-btn" id="comment-nav-next" title="Next comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <button class="settings-btn" id="settings-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="settings-panel" id="settings-panel">
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Native Jupyter <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="native-jupyter-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Global Search <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="content-search-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Quick Edit <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="quick-edit-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section resource-pack-setting" id="resource-pack-setting" hidden>
+            <div class="settings-row resource-pack-row">
+              <span class="settings-desc">Offline resources</span>
+              <button type="button" class="settings-action-btn" id="resource-pack-import-btn">Import</button>
+            </div>
+            <input type="file" id="resource-pack-input" accept=".rpack,application/vnd.rprint.resource-pack" hidden>
+            <div class="resource-pack-status" id="resource-pack-status" aria-live="polite"></div>
+            <button type="button" class="settings-link-btn" id="resource-pack-rollback-btn" hidden>Undo last import</button>
+          </div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent link-preview-settings-parent">
+            <label class="style-label" id="link-preview-label">Link Preview <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="link-preview-switch" role="switch" aria-labelledby="link-preview-label" aria-checked="false" aria-expanded="false" aria-controls="link-preview-settings-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children link-preview-settings-children" id="link-preview-settings-children" hidden>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-same-page-only-label">Same-page links only</label>
+              <button class="style-switch style-switch-compact" id="link-preview-same-page-only-switch" role="switch" aria-labelledby="link-preview-same-page-only-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-auto-close-label">Auto-close</label>
+              <button class="style-switch style-switch-compact" id="link-preview-auto-close-switch" role="switch" aria-labelledby="link-preview-auto-close-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-overwrite-jumping-label">Overwrite Link Jumping</label>
+              <button class="style-switch style-switch-compact" id="link-preview-overwrite-jumping-switch" role="switch" aria-labelledby="link-preview-overwrite-jumping-label" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+            </div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-row settings-title-row settings-dependent-parent">
+            <span class="settings-panel-title">Keyboard Shortcuts</span>
+            <button class="style-switch" id="kb-enabled-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children keyboard-shortcuts-children">
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="search"><span class="settings-desc">Search</span><span class="settings-keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="scroll"><span class="settings-desc">Scroll down / up</span><span class="settings-keys"><kbd>J</kbd> <kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="section"><span class="settings-desc">Next / prev section</span><span class="settings-keys"><kbd>U</kbd> <kbd>I</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="sidebar-toc"><span class="settings-desc"><span data-shortcut-part="sidebar">Sidebar / </span>TOC</span><span class="settings-keys"><kbd data-shortcut-part="sidebar">S</kbd> <kbd>T</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="spread"><span class="settings-desc">Next / prev spread</span><span class="settings-keys"><kbd>PgDn</kbd> <kbd>PgUp</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="comments"><span class="settings-desc">Comments</span><span class="settings-keys"><kbd>A</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="fold"><span class="settings-desc">Fold banner</span><span class="settings-keys"><kbd>F</kbd></span></div>
+            
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="dismiss"><span class="settings-desc">Close / Dismiss</span><span class="settings-keys"><kbd>Esc</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="settings"><span class="settings-desc">Show this panel</span><span class="settings-keys"><kbd>?</kbd></span></div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent">
+            <label class="style-label">Debug Mode</label>
+            <button class="style-switch" id="debug-mode-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="debug-children" id="debug-children">
+            <div class="settings-dependent-children">
+              <div class="settings-panel-section settings-dependent-child debug-log-level-setting">
+                <label class="style-label">Client Log Level</label>
+                <div class="style-toggle-group">
+                  <button class="style-toggle-btn debug-level-btn" data-level="error">Error</button>
+                  <button class="style-toggle-btn debug-level-btn" data-level="info">Info</button>
+                  <button class="style-toggle-btn debug-level-btn active" data-level="debug">Debug</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-footer" id="settings-git-version">c659b99</div>
+        </div>
+        <a href="/static/settings.html?v=c659b99" class="theme-btn" id="theme-btn" title="Theme & display">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="13.5" cy="6.5" r=".5"/>
+            <circle cx="17.5" cy="10.5" r=".5"/>
+            <circle cx="8.5" cy="7.5" r=".5"/>
+            <circle cx="6.5" cy="12.5" r=".5"/>
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+          </svg>
+        </a>
+        <div class="style-panel" id="style-panel">
+          <div class="style-panel-section">
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn active" data-theme="light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light
+              </button>
+              <button class="style-toggle-btn" data-theme="dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="style-toggle-btn" data-theme="kindle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                E-Ink
+              </button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn font-btn active" data-font="system">System</button>
+              <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+              <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">字体</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn fontzh-btn active" data-fontzh="default">系统</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="noto-serif">宋体</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+            </div>
+          </div>
+          <div class="style-panel-section bg-picker-section">
+            <label class="style-label">Background</label>
+            <div class="bg-swatch-group" id="bg-swatch-group">
+              <button class="bg-swatch active" data-bg="default" title="Default"></button>
+              <button class="bg-swatch" data-bg="green" title="Green"></button>
+              <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+              <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+              <div class="style-range-ticks">
+                <span class="style-range-tick font-size-tick" data-i="0">12</span>
+                <span class="style-range-tick font-size-tick" data-i="1">14</span>
+                <span class="style-range-tick font-size-tick" data-i="2">16</span>
+                <span class="style-range-tick font-size-tick" data-i="3">18</span>
+                <span class="style-range-tick font-size-tick" data-i="4">24</span>
+                <span class="style-range-tick font-size-tick" data-i="5">32</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+              <div class="style-range-ticks">
+                <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+                <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+                <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+                <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+                <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+                <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Width <span id="width-value">90%</span></label>
+            <div class="style-slider-wrap width-slider-wrap">
+              <input type="range" class="style-range" id="content-width-range" min="0" max="5" step="1" value="3">
+              <div class="style-range-ticks width-ticks">
+                <span class="style-range-tick width-tick" data-i="0">50</span>
+                <span class="style-range-tick width-tick" data-i="1">65</span>
+                <span class="style-range-tick width-tick" data-i="2">80</span>
+                <span class="style-range-tick width-tick" data-i="3">90</span>
+                <span class="style-range-tick width-tick" data-i="4">95</span>
+                <span class="style-range-tick width-tick" data-i="5">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="ignore-corners-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">2 Columns <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+        </div>
+        <button class="banner-toggle" id="fold-banner-btn" title="Fold banner">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4l4 4-4 4zm10 0l-4 4 4 4z"/>
+          </svg>
+        </button>
+        <button class="banner-toggle" id="right-toggle" title="Toggle table of contents">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-right-dropdown"></div>
+    </div>
+  </header>
+
+  <!-- Floating buttons when banner is folded -->
+  <div class="banner-fold-float" id="banner-fold-float">
+    <button class="banner-fold-float-btn" id="unfold-banner-btn" title="Unfold banner">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M7 4L3 8l4 4zm2 0l4 4-4 4z"/>
+      </svg>
+    </button>
+    <button class="banner-fold-float-btn" id="float-toc-btn" title="Toggle table of contents">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout left-collapsed right-collapsed">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar collapsed" id="left-sidebar">
+      <div class="sidebar-content" id="spa-sidebar">
+        <!-- rprint:sidebar:start -->
+        <a class="sidebar-cat-title" href="/cs-notes">CS</a><ul class="sidebar-list"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li class="sidebar-group" data-priority="0"><span class="sidebar-row"><a class="sidebar-group-title" href="/cs-notes/mit-gir/index.html">MIT GIR</a><span class="sidebar-toggle"></span></span><ul><li><a href="/cs-notes/mit-gir/18-01-single-variable-calculus.html">Calculus I (18.01)</a></li><li><a href="/cs-notes/mit-gir/18-01-single-variable-calculus-exercises.html">Calculus I (18.01) - Exercises</a></li><li><a href="/cs-notes/mit-gir/18-02-multivariable-calculus.html">Calculus II (18.02)</a></li><li><a href="/cs-notes/mit-gir/18-02-multivariable-calculus-exercises.html">Calculus II (18.02) - Exercises</a></li><li><a href="/cs-notes/mit-gir/8-01-classical-mechanics.html">Physics I (8.01) 🚜</a></li><li><a href="/cs-notes/mit-gir/8-01-classical-mechanics-exercises.html">Physics I (8.01) - Exercises 🚜</a></li><li><a href="/cs-notes/mit-gir/8-02-electricity-magnetism.html">Physics II (8.02) 🚜</a></li></ul></li><li class="sidebar-group open" data-priority="0.001"><span class="sidebar-row"><a class="sidebar-group-title active-group" href="/cs-notes/cs-math/index.html">CS Math</a><span class="sidebar-toggle"></span></span><ul><li class="active"><a href="/cs-notes/cs-math/18-06-linear-algebra.html">Linear Algebra (18.06)</a></li><li><a href="/cs-notes/cs-math/6-042-discrete-mathematics.html">Discrete Mathematics (6.042)</a></li></ul></li></ul>
+        <!-- rprint:sidebar:end -->
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content" id="content">
+      <article class="article" id="spa-content">
+        <h1 id="linear-algebra-18.06">Linear Algebra (<a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/">18.06</a>)</h1>
+<h2 id="vectors" data-sourcepos="3:1-3:1">Vectors</h2>
+<h3 id="notation" data-sourcepos="5:1-5:1">Notation</h3>
+<p>2 separate numbers <span class="math inline">v_1</span> and <span class="math inline">v_2</span> produces a <em>two-dimensional vector</em> <span class="math inline">\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \end{bmatrix}</span>; it can be written as <span class="math inline">\mathbf{v} = (v_1, v_2)</span>.</p>
+<!-- If the $\mathbf{v}_k$ is not the linear combination of the $\mathbf{v}_1,\cdots,\mathbf{v}_{k-1}$ in $k$ dimension space, then the 1..k fill the k-dimension space in n-dimension space. -->
+<h3 id="dot-product" data-sourcepos="11:1-11:1">Dot Product</h3>
+<p data-sourcepos="14:1-14:1"><span class="math display">
+\mathbf{v}\cdot \mathbf{w} = \sum_i v_iw_i
+</span></p>
+<h3 id="length" data-sourcepos="17:1-17:1">Length</h3>
+<p data-sourcepos="20:1-20:1"><span class="math display">
+\lVert \mathbf{v}\rVert = \sqrt{\mathbf{v}\cdot\mathbf{v}}
+</span></p>
+<h3 id="angle" data-sourcepos="23:1-23:1">Angle</h3>
+<p data-sourcepos="26:1-26:1"><span class="math display">
+\cos \theta = \frac{\mathbf{v}\cdot\mathbf{w}}{\lVert\mathbf{v}\rVert \lVert\mathbf{w}\rVert}
+</span></p>
+<h2 id="matrices" data-sourcepos="29:1-29:1">Matrices</h2>
+<h3 id="multiplication" data-sourcepos="31:1-31:1">Multiplication</h3>
+<p><span class="math display">
+\begin{aligned}
+    \mathbf C &amp;= \mathbf{AB} \\
+    \mathbf C_{ij} &amp;= \sum_{k} \mathbf{A}_{ik}\mathbf B_{kj}
+\end{aligned}
+</span></p>
+<p data-sourcepos="40:1-40:1">Fundamental law of matrix multiplication:</p>
+<p data-sourcepos="43:1-43:1"><span class="math display">
+(\mathbf{AB})\mathbf C = \mathbf{A} (\mathbf{BC})
+</span></p>
+<h3 id="matrix-elementary-transformations" data-sourcepos="46:1-46:1">Matrix Elementary Transformations</h3>
+<ol type="1">
+<li>Row interchange, <span class="math inline">R_i \leftrightarrow R_j</span> ;</li>
+<li>Row scale, <span class="math inline">R_i \rightarrow kR_i</span> ;</li>
+<li>Row addition, <span class="math inline">R_i \rightarrow R_i + kR_j</span> .</li>
+</ol>
+<h3 id="gauss-elimination-for-mathbfax-mathbf-b" data-sourcepos="52:1-52:1">Gauss Elimination (for <span class="math inline">\mathbf{Ax} = \mathbf b</span>)</h3>
+<p data-sourcepos="54:1-54:1">To use the elementary transformations to make the matrix a upper triangular matrix. Each single step of transformation can be expressed as one matrix, <span class="math inline">\Pi_{i} \mathbf{E_i} \cdot \mathbf A = \mathbf U</span>.</p>
+<p><span class="math display">
+\mathbf E \left[ \mathbf{Ax}, \mathbf b \right] = \left[ \mathbf {Ux}, \mathbf{Eb} \right]
+</span></p>
+<h3 id="gauss-jordan-elimination-for-mathbfa-1" data-sourcepos="61:1-61:1">Gauss-Jordan Elimination (for <span class="math inline">\mathbf{A^{-1}}</span>)</h3>
+<p data-sourcepos="63:1-63:1">To use the elementary transformations to make the matrix an identity matrix. Again, transformation can be expressed as one matrix, <span class="math inline">\Pi_{i} \mathbf{E_i} \cdot \mathbf A = \mathbf I \iff \Pi_{i} \mathbf{E_i} = \mathbf{A^{-1}}</span>.</p>
+<p><span class="math display">
+\mathbf E \left[ \mathbf{A}, \mathbf I \right] = \left[ \mathbf{I}, \mathbf A^{-1} \right]
+</span></p>
+<h3 id="mathbf-pa-mathbflu-factorization" data-sourcepos="70:1-70:1"><span class="math inline">\mathbf {PA} = \mathbf{LU}</span> Factorization</h3>
+<p data-sourcepos="72:1-72:1">All non-singular square matrices can be factorized to <span class="math inline">\mathbf {PA} = \mathbf{LU}</span> format. <span class="math inline">\mathbf P</span> is the permutation matrix.</p>
+<h2 id="vector-space-and-subspace" data-sourcepos="74:1-74:1">Vector Space and Subspace</h2>
+<h3 id="space-of-vectors" data-sourcepos="76:1-76:1">Space of Vectors</h3>
+<p>The vector space <span class="math inline">\mathbb{R}^n</span> consists of all column vectors <span class="math inline">\mathbf{v}</span> with <span class="math inline">n</span> components.</p>
+<p data-sourcepos="80:1-80:1">Linear combinations of vectors of space <span class="math inline">\mathbf S</span> must be in <span class="math inline">\mathbf S</span>.</p>
+<h3 id="subspaces" data-sourcepos="82:1-82:1">Subspaces</h3>
+<p data-sourcepos="84:1-84:1">A <em>subspace</em> of a vector space is a set of vectors (including <span class="math inline">\mathbf 0</span>) that satisfies two requirements: <em>If <span class="math inline">\mathbf{v}</span> and <span class="math inline">\mathbf{w}</span> are vectors in the subspace and <span class="math inline">c</span> is any scalar, then</em></p>
+<ul data-sourcepos="86:1-86:1">
+<li><span class="math inline">\mathbf{v} + \mathbf{w}</span> is in the subspace</li>
+<li><span class="math inline">c\mathbf{v}</span> is in the subspace.</li>
+</ul>
+<p>A <em>subspace</em> of <span class="math inline">\mathbf R ^n</span> is a vector space inside <span class="math inline">\mathbf R ^n</span>.</p>
+<p data-sourcepos="91:1-91:1">Intersection of subspaces is a subspace.</p>
+<h3 id="column-space" data-sourcepos="93:1-93:1">Column Space</h3>
+<p>The <em>column space</em> <span class="math inline">C(\mathbf{A})</span> contain all combinations of the columns of <span class="math inline">\mathbf A</span>: a subspace of <span class="math inline">\mathbf R ^ m</span>.</p>
+<p>The system <span class="math inline">\mathbf{A}\mathbf{x} = \mathbf{b}</span> is solvable <span class="math inline">\iff</span> <span class="math inline">\mathbf{b}</span> is in the column space of <span class="math inline">\mathbf{A}</span>.</p>
+<h3 id="null-space" data-sourcepos="99:1-99:1">Null Space</h3>
+<p>The <em>null space</em> <span class="math inline">N(\mathbf{A})</span> contains all solutions <span class="math inline">\mathbf{x}</span> to <span class="math inline">\mathbf A\mathbf{x}=\mathbf{0}</span>, which contains <span class="math inline">\mathbf{x}=\mathbf{0}</span>.</p>
+<h3 id="echelon-matrix-mathbfr">Echelon Matrix <span class="math inline">\mathbf{R}</span></h3>
+<p><span class="math display">
+R = \begin{bmatrix}
+1 &amp; 0 &amp; a &amp; 0 &amp; c \\
+0 &amp; 1 &amp; b &amp; 0 &amp; d \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; e \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{bmatrix}
+\quad
+s_1 = \begin{bmatrix}
+-a \\
+-b \\
+1 \\
+0 \\
+0
+\end{bmatrix}
+\quad
+s_2 = \begin{bmatrix}
+-c \\
+-d \\
+0 \\
+-e \\
+1
+\end{bmatrix}
+</span></p>
+<p data-sourcepos="130:1-130:1">The <em>reduced row echelon form</em> <span class="math inline">\mathbf{R} = \mathbf{rref}(A)</span> has all pivots as <span class="math inline">1</span>, with <span class="math inline">0</span> above and below.</p>
+<p>If column <span class="math inline">j</span> of <span class="math inline">\mathbf{R}</span> is free, there is a <em>particular solution</em> to <span class="math inline">A\mathbf{x}=\mathbf{0}</span> with <span class="math inline">x_j = 1</span>; as above.</p>
+<p data-sourcepos="134:1-134:1">Number of pivots = nonzero rows in <span class="math inline">\mathbf R</span> = <em>rank</em> <span class="math inline">r</span>, then there is <span class="math inline">n-r</span> free columns.</p>
+<h3 id="mathbf-amathbfxmathbfb" data-sourcepos="136:1-136:1"><span class="math inline">\mathbf A\mathbf{x}=\mathbf{b}</span></h3>
+<p data-sourcepos="138:1-138:1"><span class="math display">x_p\text{ (one particular solution)}+\text{ linear combinations of } x_n \text{ (in the null space)}</span></p>
+<p><span class="math inline">\mathbf E \left[ \mathbf{A}, \mathbf x \right] = \left[ \mathbf{R}, \mathbf d\right]</span>: <span class="math inline">\mathbf{A}/\mathbf{R}</span> is solvable <span class="math inline">\iff</span> all zero rows of <span class="math inline">\mathbf{R}</span> have zeros in <span class="math inline">\mathbf d</span>.</p>
+<h3 id="cases-for-mathbf-amathbfxmathbfb">Cases for <span class="math inline">\mathbf A\mathbf{x}=\mathbf{b}</span></h3>
+<div class="table-wrap"><table data-sourcepos="145:1-145:1">
+<thead>
+<tr>
+<th style="text-align: left;">Symbol</th>
+<th style="text-align: left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">\mathbf{I}</span></td>
+<td style="text-align: left;">Invertible matrix</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\mathbf{P}</span></td>
+<td style="text-align: left;">Column permutation matrix</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\mathbf F</span></td>
+<td style="text-align: left;">Free columns</td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-wrap"><table data-sourcepos="146:1-157:1">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Condition</th>
+<th style="text-align: left;"><span class="math inline">\mathbf R</span></th>
+<th style="text-align: left;">Solution</th>
+<th style="text-align: left;">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">n = m = r</span></td>
+<td style="text-align: left;"><span class="math inline">\left[ \mathbf{I} \right]</span></td>
+<td style="text-align: left;"><span class="math inline">1</span></td>
+<td style="text-align: left;">square, invertible</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">r = m, r &lt; n</span></td>
+<td style="text-align: left;"><span class="math inline">\left[ \mathbf{I} \quad \mathbf{F} \right]\mathbf{P}</span></td>
+<td style="text-align: left;"><span class="math inline">\infty</span></td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">r &lt; m, r = n</span></td>
+<td style="text-align: left;"><span class="math inline">\left[ \begin{array}{c} \mathbf{I} \\ \mathbf{0} \end{array} \right]</span></td>
+<td style="text-align: left;"><span class="math inline">0/1</span></td>
+<td style="text-align: left;">1 <span class="math inline">\iff</span> all zero rows of <span class="math inline">\mathbf{R}</span> have zeros in <span class="math inline">\mathbf d</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">r &lt; m, r &lt; n</span></td>
+<td style="text-align: left;"><span class="math inline">\left[ \begin{array}{cc} \mathbf{I} &amp; \mathbf{F} \\ \mathbf{0} &amp; \mathbf{0} \end{array} \right]\mathbf{P}</span></td>
+<td style="text-align: left;"><span class="math inline">0/\infty</span></td>
+<td style="text-align: left;"><span class="math inline">\infty</span> <span class="math inline">\iff</span> all zero rows of <span class="math inline">\mathbf{R}</span> have zeros in <span class="math inline">\mathbf d</span></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="independence-basis-dimension" data-sourcepos="158:1-158:1">Independence, Basis, Dimension</h3>
+<h4 id="independence" data-sourcepos="160:1-160:1">Independence</h4>
+<p data-sourcepos="162:1-162:1"><em>Independent columns</em> of <span class="math inline">\mathbf A</span> : The only solution to <span class="math inline">\mathbf A\mathbf x = \mathbf 0</span> is <span class="math inline">\mathbf x = \mathbf 0</span> <span class="math inline">\iff</span> <span class="math inline">r= n</span>. The nullspace is <span class="math inline">\mathbb{Z}</span>.</p>
+<p data-sourcepos="164:1-164:1"><em>Independent vectors</em>: The only zero combination <span class="math inline">\sum c_i \mathbf v_i = \mathbf 0</span> has all <span class="math inline">c</span>’s = 0.</p>
+<h4 id="basis" data-sourcepos="166:1-166:1">Basis</h4>
+<p>The vectors <span class="math inline">\mathbf v_1, \ldots, \mathbf v_k</span> <strong>span the space</strong> <span class="math inline">\mathbf S</span> if <span class="math inline">\mathbf S</span> = all combinations of the <span class="math inline">\mathbf v</span> ’s.</p>
+<p>The vectors <span class="math inline">\mathbf v_1, \ldots, \mathbf v_k</span> are a <em>basis</em> for <span class="math inline">\mathbf S</span> if they are independent and they span <span class="math inline">\mathbf S</span> .</p>
+<h4 id="dimension" data-sourcepos="172:1-172:1">Dimension</h4>
+<p data-sourcepos="174:1-174:1">The <em>dimension</em> of a space <span class="math inline">\mathbf S</span> is the number of vectors in every basis for <span class="math inline">\mathbf S</span>, which is the rank of the matrix.</p>
+<h3 id="dimensions-of-the-four-subspaces" data-sourcepos="176:1-176:1">Dimensions of the Four Subspaces</h3>
+<div class="table-wrap"><table data-sourcepos="178:1-184:1">
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Notation</th>
+<th style="text-align: left;">Subspace of</th>
+<th style="text-align: left;">Dimension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Column space</td>
+<td style="text-align: left;"><span class="math inline">C(\mathbf{A})</span></td>
+<td style="text-align: left;"><span class="math inline">\mathbb{R}^n</span></td>
+<td style="text-align: left;"><span class="math inline">r</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Row space</td>
+<td style="text-align: left;"><span class="math inline">C(\mathbf{A}^\mathtt{T})</span></td>
+<td style="text-align: left;"><span class="math inline">\mathbb{R}^m</span></td>
+<td style="text-align: left;"><span class="math inline">r</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Null space</td>
+<td style="text-align: left;"><span class="math inline">N(\mathbf{A})</span></td>
+<td style="text-align: left;"><span class="math inline">\mathbb{R}^n</span></td>
+<td style="text-align: left;"><span class="math inline">n - r</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Left null space</td>
+<td style="text-align: left;"><span class="math inline">N(\mathbf{A}^\mathtt{T})</span></td>
+<td style="text-align: left;"><span class="math inline">\mathbb{R}^m</span></td>
+<td style="text-align: left;"><span class="math inline">m-r</span></td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="185:1-185:1">Elimination produces bases for the row space and nullspace of <span class="math inline">\mathbf{A}</span>: They are the same as for <span class="math inline">\mathbf{R}</span>.</p>
+<p data-sourcepos="187:1-187:1">Elimination often changes the column space and left nullspace (but dimensions don’t change).</p>
+<h3 id="rank-1-matrices" data-sourcepos="189:1-189:1">Rank 1 Matrices</h3>
+<p>Rank one matrices: <span class="math inline">\mathbf{A} = \mathbf{u}\mathbf{v}^\mathtt{T} = \text{column times row}</span>: <span class="math inline">C(\mathbf{A})</span> has basis <span class="math inline">\mathbf{u}</span>, <span class="math inline">C(\mathbf{A}^\mathtt{T})</span> has basis <span class="math inline">\mathbf{v}</span>.</p>
+<h2 id="orthogonality" data-sourcepos="193:1-193:1">Orthogonality</h2>
+<h3 id="vector" data-sourcepos="195:1-195:1">Vector</h3>
+<p data-sourcepos="198:1-198:1"><span class="math display">
+\mathbf v ^\mathtt{T} \mathbf w = 0 \iff \lVert \mathbf{v} \rVert^2 + \lVert \mathbf{w} \rVert^2 = \lVert \mathbf{v} + \mathbf{w} \rVert^2
+</span></p>
+<h3 id="subspace" data-sourcepos="201:1-201:1">Subspace</h3>
+<p>Subspaces <span class="math inline">\mathbf{V}</span> and <span class="math inline">\mathbf{W}</span> are orthogonal when <span class="math inline">\mathbf{v}^\mathtt{T} \mathbf{w} = 0</span> for every <span class="math inline">\mathbf{v}</span> in <span class="math inline">\mathbf{V}</span> and every <span class="math inline">\mathbf{w}</span> in <span class="math inline">\mathbf{W}</span>.</p>
+<p>The row space of <span class="math inline">\mathbf{A}</span> is orthogonal to the nullspace, as:</p>
+<p><span class="math display">
+\begin{bmatrix}
+    \mathbf{r}_1 \\
+    \mathbf{r}_2 \\
+    \mathbf{r}_3 \\
+    \vdots \\
+    \mathbf{r}_m
+\end{bmatrix}
+\mathbf{x} =
+    \begin{bmatrix}
+        0 \\
+        0 \\
+        0 \\
+        \vdots \\
+        0
+    \end{bmatrix}
+</span></p>
+<p data-sourcepos="225:1-225:1">Similarily, the column space is orthogonal to <span class="math inline">N(\mathbf{A}^\mathtt{T})</span>.</p>
+<p data-sourcepos="227:1-227:1">Nullspace and row space are orthogonal <em>complements</em> in <span class="math inline">\mathbb{R}^n</span>.</p>
+<h3 id="project-to-vector" data-sourcepos="229:1-229:1">Project to Vector</h3>
+<p>To project <span class="math inline">\mathbf b</span> to <span class="math inline">\mathbf a</span>, assume the projection is <span class="math inline">\mathbf p = p\mathbf a</span>, then:</p>
+<p data-sourcepos="234:1-234:1"><span class="math display">
+\mathbf a ^\mathtt{T} (\mathbf b - \mathbf p) = \mathbf 0 \iff p = \frac{\mathbf a ^\mathtt{T}\mathbf b}{\mathbf a^\mathtt{T} \mathbf a} \iff \mathbf p = \mathbf a \frac{\mathbf a ^\mathtt{T}\mathbf b}{\mathbf a^\mathtt{T} \mathbf a}
+</span></p>
+<p data-sourcepos="237:1-237:1">Then the projection matrix: <span class="math display">
+\mathbf P = \frac{\mathbf a \mathbf a ^\mathtt{T}}{\mathbf a^\mathtt{T} \mathbf a}, \quad r(\mathbf P) = 1, \mathbf P^\mathtt{T} = \mathbf P, \mathbf P^n = \mathbf P
+</span></p>
+<h3 id="project-to-subspace" data-sourcepos="242:1-242:1">Project to Subspace</h3>
+<p data-sourcepos="244:1-244:1">This is a super set of projecting to vector.</p>
+<p>To project <span class="math inline">\mathbf b</span> to subspace <span class="math inline">\mathbf A</span> with basis <span class="math inline">\mathbf a_{1\dots m}</span>, assume the projection is <span class="math inline">\mathbf p</span>, then:</p>
+<p data-sourcepos="249:1-249:1"><span class="math display">
+\mathbf p = \sum_{i = 1}^{m}x_i\mathbf a _i = \mathbf A \mathbf{\hat x}
+</span></p>
+<p data-sourcepos="253:1-253:1"><span class="math display">
+\mathbf a_i^\mathtt{T}(\mathbf b - \mathbf p) = 0, \forall i \in [1..m] \iff \begin{bmatrix}
+    \mathbf{a}_1^\mathtt{T} \\
+    \mathbf{a}_2^\mathtt{T} \\
+    \mathbf{a}_3^\mathtt{T} \\
+    \vdots \\
+    \mathbf{a}_m^\mathtt{T}
+\end{bmatrix}
+(\mathbf b - \mathbf p) =
+    \begin{bmatrix}
+        0 \\
+        0 \\
+        0 \\
+        \vdots \\
+        0
+    \end{bmatrix} \iff \mathbf A^\mathtt{T}(\mathbf b - \mathbf p) = \mathbf 0
+</span></p>
+<p><span class="math display">
+\begin{aligned}
+\implies &amp; \mathbf A^\mathtt{T}(\mathbf b - \mathbf A \mathbf{\hat x}) = \mathbf 0 \iff \mathbf{\hat x} = (\mathbf A ^\mathtt{T} \mathbf A) ^ {-1} \mathbf A ^\mathtt{T} \mathbf b \\
+\implies &amp; \mathbf p = \mathbf A (\mathbf A ^\mathtt{T} \mathbf A) ^ {-1} \mathbf A ^\mathtt{T} \mathbf b \\
+\implies &amp; \mathbf P = \mathbf A (\mathbf A ^\mathtt{T} \mathbf A) ^ {-1} \mathbf A ^\mathtt{T}
+\end{aligned}
+</span></p>
+<h3 id="invertibility-of-mathbfamathttt-mathbfa">Invertibility of <span class="math inline">\mathbf{A}^\mathtt{T} \mathbf{A}</span></h3>
+<p><span class="math inline">\mathbf{A}</span> has independent columns or <span class="math inline">\text{r}(A) = n</span> <span class="math inline">\implies</span> <span class="math inline">\mathbf{A}^\mathtt{T} \mathbf{A}</span> is invertible:</p>
+<p><span class="math display">
+\begin{aligned}
+&amp; \mathbf{A}^\mathtt{T} \mathbf{A} \text{ is invertible } \iff  (\mathbf{A}^\mathtt{T} \mathbf{A} \mathbf x = \mathbf 0 \implies \mathbf x = \mathbf 0 ) \\
+&amp; \mathbf{A}^\mathtt{T} \mathbf{A} \mathbf x = \mathbf 0 \implies \mathbf x ^\mathtt{T} \mathbf{A}^\mathtt{T} \mathbf{A} \mathbf x = 0 \implies (\mathbf{A} \mathbf x)^\mathtt{T} \mathbf{A} \mathbf x = 0 \implies \mathbf{A} \mathbf x = \mathbf 0 \overset{\text{r}(A) = n} \implies \mathbf x = \mathbf 0\\
+\end{aligned}
+</span></p>
+<h3 id="least-squares-approximations" data-sourcepos="289:1-289:1">Least Squares Approximations</h3>
+<p data-sourcepos="292:1-292:1"><span class="math display">
+\text {if } \mathbf {Ax} = \mathbf{b} \text{ cannot be solved, } \text{min} \lVert \mathbf {A \hat x} - \mathbf{b} \rVert \iff \mathbf A \mathbf{ \hat x } = \mathbf {p} \implies \mathbf{ \hat x } = (\mathbf A ^\mathtt{T} \mathbf A) ^ {-1} \mathbf A ^\mathtt{T} \mathbf b
+</span></p>
+<h3 id="orthogonal-matrices" data-sourcepos="295:1-295:1">Orthogonal Matrices</h3>
+<p>The columns <span class="math inline">\textbf q_{1 \dots n}</span> are orthonormal if <span class="math inline">\mathbf q_i^\mathtt{T}\mathbf q _j = \begin{cases}
+0,\quad i \ne j \\
+1,\quad i = j
+\end{cases}</span>. Then <span class="math inline">\mathbf Q ^ \mathtt T \mathbf Q = \mathbf I</span>, <span class="math inline">\lVert \mathbf Q \mathbf x \rVert = \lVert \mathbf x \rVert</span>, and the matrix <span class="math inline">\mathbf P</span> projecting <span class="math inline">\mathbf b</span> to subspace <span class="math inline">\mathbf Q</span> is <span class="math inline">\mathbf Q \mathbf Q ^\mathtt{T}</span>.</p>
+<p data-sourcepos="302:1-302:1">If Q is also square, then <span class="math inline">\mathbf Q ^ \mathtt T \mathbf Q = \mathbf I</span> and <span class="math inline">\mathbf{Q}^\mathtt T = \mathbf{Q}^{-1}</span>.</p>
+<h3 id="mathbf-a-mathbf-q-mathbf-r-decomposition" data-sourcepos="304:1-304:1"><span class="math inline">\mathbf A = \mathbf Q \mathbf R</span> Decomposition</h3>
+<p data-sourcepos="306:1-306:1">Gram-Schmidt decomposition can transform any column independent matrix to <span class="math inline">\mathbf Q</span> as <span class="math inline">\mathbf Q ^ \mathtt T \mathbf Q = \mathbf I</span>.</p>
+<p><span class="math display">
+\begin{aligned}
+&amp; \mathbf{A} =
+    \begin{bmatrix}
+        \mathbf{a}_1 &amp; \mathbf{a}_2 &amp; \cdots &amp; \mathbf{a}_{n}
+    \end{bmatrix}, 
+\mathbf{Q} =
+    \begin{bmatrix}
+        \mathbf{q}_1 &amp; \mathbf{q}_2 &amp; \cdots &amp; \mathbf{q}_{n}
+    \end{bmatrix} \\
+&amp; \mathbf q_i = \mathbf q_i - \sum_{j = 1}^{n-1}\frac{\mathbf q_j^\mathtt T \mathbf q_i}{\mathbf q_j^\mathtt T \mathbf q_j}\mathbf q_j = \mathbf q_i -  \sum_{j = 1}^{n-1}\mathbf q_j^\mathtt T \mathbf q_i \mathbf q_j, \mathbf q_i = \frac{\mathbf q_i}{\lVert \mathbf q_i \rVert}
+\end{aligned}
+</span></p>
+<p data-sourcepos="323:1-323:1"><span class="math display">
+\mathbf A \mathbf{ \hat x } = \mathbf {p} \implies \mathbf{ \hat x } = (\mathbf A ^\mathtt{T} \mathbf A) ^ {-1} \mathbf A ^\mathtt{T} \mathbf b, \quad \mathbf A = \mathbf Q \mathbf R \implies \mathbf{ \hat x } = \mathbf R ^{-1} \mathbf Q ^ \mathtt {T} \mathbf b
+</span></p>
+<p data-sourcepos="326:1-326:1"><span class="math inline">\mathbf A = \mathbf Q \mathbf R</span> decomposition is also the method of finding the eigen values numerically, which is covered in chapter 11.3.</p>
+<h2 id="determinants" data-sourcepos="328:1-328:1">Determinants</h2>
+<h3 id="basic-properties" data-sourcepos="330:1-330:1">Basic Properties</h3>
+<ol type="1" data-sourcepos="332:1-334:1">
+<li>The determinant of the <span class="math inline">n</span> by <span class="math inline">n</span> identity matrix is 1.</li>
+<li>The sign of determinant reverses when two rows are exchanged.</li>
+<li>The determinant is a linear function of each row separately, with all other rows stay fixed:</li>
+</ol>
+<p><span class="math display">
+\begin{vmatrix}
+ta &amp; tb \\
+c &amp; d
+\end{vmatrix}
+= t \begin{vmatrix}
+a &amp; b \\
+c &amp; d
+\end{vmatrix}
+, \quad
+\begin{vmatrix} a + a&#39; &amp; b + b&#39; \\ c &amp; d \end{vmatrix} = \begin{vmatrix} a &amp; b \\ c &amp; d \end{vmatrix} + \begin{vmatrix} a&#39; &amp; b&#39; \\ c &amp; d \end{vmatrix}
+</span></p>
+<h3 id="derived-properties" data-sourcepos="349:1-349:1">Derived Properties</h3>
+<ol type="1">
+<li>If two rows of <span class="math inline">\mathbf{A}</span> are equal, then <span class="math inline">\det \mathbf{A} = 0</span>.</li>
+<li>Subtracting a multiple of one row from another row leaves <span class="math inline">\det \mathbf{A}</span> unchanged.</li>
+<li>A matrix with a row of zeros has <span class="math inline">\det \mathbf{A} = 0</span>.</li>
+<li>If <span class="math inline">\mathbf{A}</span> is triangular then <span class="math inline">\det \mathbf{A} = a_{11}a_{22}\cdots a_{nn} = \text{product of diagonal entries}</span>.</li>
+<li>If <span class="math inline">\mathbf{A}</span> is singular then <span class="math inline">\det \mathbf{A} = 0</span>. If <span class="math inline">\mathbf{A}</span> is invertible then <span class="math inline">\det \mathbf{A} \neq 0</span>.</li>
+<li>The determinant of <span class="math inline">\mathbf{AB}</span> is <span class="math inline">\det \mathbf{A}</span> times <span class="math inline">\det \mathbf{B}</span>: <span class="math inline">\lvert \mathbf{AB} \rvert = \lvert \mathbf{A} \rvert \lvert \mathbf{B} \rvert</span>.</li>
+<li>The transpose <span class="math inline">\mathbf{A}^\text T</span> has the same determinant as <span class="math inline">\mathbf{A}</span>.</li>
+</ol>
+<h3 id="big-formula" data-sourcepos="359:1-359:1">Big Formula</h3>
+<p><span class="math display">
+\begin{aligned}
+    \det \mathbf{A} &amp; = \text{sum over all } n! \text{ column permutations } P = (\alpha, \beta, \dots, \omega) \\ &amp;= \sum (\det P) a_{1\alpha} a_{2\beta} \cdots a_{n\omega}
+\end{aligned}
+</span></p>
+<p><span class="math inline">(\det P)</span> is the sign.</p>
+<h3 id="cofactor" data-sourcepos="369:1-369:1">Cofactor</h3>
+<p data-sourcepos="371:1-371:1"><span class="math display">C_{ij} = (-1)^{i+j} \det \mathbf M_{ij}</span> <span class="math display">\det \mathbf{A} = a_{i1}C_{i1} + a_{i2}C_{i2} + \cdots + a_{in}C_{in}</span></p>
+<p><span class="math inline">\mathbf M_{ij}</span> is the matrix deleting row i and column j.</p>
+<h3 id="cramers-rule">Cramer’s Rule</h3>
+<p>To solve <span class="math inline">\mathbf A \mathbf x = \mathbf b</span>:</p>
+<p data-sourcepos="381:1-381:1"><span class="math display">
+\mathbf{A} \begin{bmatrix} x_1 &amp; 0 &amp; 0 \\ x_2 &amp; 1 &amp; 0 \\ x_3 &amp; 0 &amp; 1 \end{bmatrix} =
+\begin{bmatrix}
+b_1 &amp; a_{12} &amp; a_{13} \\
+b_2 &amp; a_{22} &amp; a_{23} \\
+b_3 &amp; a_{32} &amp; a_{33}
+\end{bmatrix}
+= \mathbf{B}_1 \implies x_1 = \frac {|\mathbf B _1|}{|\mathbf A|} \implies x_i = \frac {|\mathbf B _i|}{|\mathbf A|}
+</span></p>
+<p>Let <span class="math inline">\mathbf b</span> be one column of <span class="math inline">\mathbf I</span>:</p>
+<p data-sourcepos="393:1-393:1"><span class="math display">
+(\mathbf A^{-1})_{ij} = \frac{C_{ji}}{\det \mathbf{A}}
+</span></p>
+<h3 id="area" data-sourcepos="396:1-396:1">Area</h3>
+<p>A is a <span class="math inline">n \times n</span> matrix, rows/columns are the vectors formed an area; <span class="math inline">|\det \mathbf A|</span> is the area.</p>
+<h2 id="eigen" data-sourcepos="400:1-400:1">Eigen</h2>
+<h3 id="eigen-vector-and-eigen-value" data-sourcepos="402:1-402:1">Eigen Vector and Eigen Value</h3>
+<p data-sourcepos="405:1-405:1"><span class="math display">
+\mathbf A \mathbf x = \lambda \mathbf x
+</span></p>
+<p><span class="math inline">\mathbf x</span> is the eigen vector, <span class="math inline">\lambda</span> is the eigen value.</p>
+<p data-sourcepos="411:1-411:1"><span class="math display">
+\mathbf A \mathbf x = \lambda \mathbf x \implies (\mathbf A - \lambda \mathbf I)\mathbf x = \mathbf 0 \implies \mathbf x = \mathbf 0 \lor \det (\mathbf A - \lambda \mathbf I) = 0
+</span></p>
+<h3 id="texttr-and-textdet"><span class="math inline">\text{tr}</span> and <span class="math inline">\text{det}</span></h3>
+<p><span class="math display">
+\begin{aligned}
+\text{tr} &amp; \mathbf A = \sum_i\mathbf A_{ii} = \sum_i \lambda i \\
+\det &amp; \mathbf A = \prod_i \lambda i
+\end{aligned}
+</span></p>
+<h3 id="diagonalization" data-sourcepos="423:1-423:1">Diagonalization</h3>
+<p><span class="math inline">\mathbf S</span> is the column matrix of eigen vectors of <span class="math inline">\mathbf A</span>:</p>
+<p data-sourcepos="428:1-428:1"><span class="math display">
+\mathbf A \mathbf S = \mathbf S \mathbf{\Lambda} \implies \mathbf A = \mathbf S \mathbf{\Lambda} \mathbf S ^{-1}, \mathbf{\Lambda} = \mathbf S ^{-1} \mathbf A \mathbf S
+</span></p>
+<p>If <span class="math inline">\mathbf A</span> has <span class="math inline">n</span> non-equal eigen values, then <span class="math inline">\mathbf A</span> must be digonalizable. If not, <span class="math inline">\mathbf A</span> might be digonlizable.</p>
+<h3 id="symmetric-matrices" data-sourcepos="433:1-433:1">Symmetric Matrices</h3>
+<p data-sourcepos="435:1-435:1">The eigen values are real, and the eigen vectors can be chosen as perpendicular, and:</p>
+<p data-sourcepos="438:1-438:1"><span class="math display">
+\mathbf A = \mathbf Q \mathbf{\Lambda} \mathbf Q ^{-1} = \mathbf Q \mathbf{\Lambda} \mathbf Q ^{\text T}
+</span></p>
+<p data-sourcepos="441:1-441:1">Proof of real eigen values, given <span class="math inline">\textbf A</span> is real and symmetric:</p>
+<p><span class="math display">
+\begin{aligned}
+    &amp; \mathbf A \mathbf x = \lambda \mathbf x \\
+    {\text{take conjugate, multiply }\mathbf {\overline x^{\text T}}} \quad \implies &amp; \mathbf A \mathbf {\overline x} = \overline \lambda \mathbf {\overline x}, \quad \mathbf {\overline x^{\text T}} \mathbf A \mathbf x = \lambda \mathbf {\overline x^{\text T}} \mathbf x \\
+    {\text{use symmetry, multiply } \mathbf x} \quad \implies &amp; \mathbf {\overline x ^{\text T}} \mathbf A = \mathbf {\overline x ^{\text T}} \overline \lambda, \quad \mathbf {\overline x^{\text T}} \mathbf A \mathbf x = \overline \lambda \mathbf {\overline x ^{\text T}} \mathbf x \\
+    {\text{left are same}} \quad \implies &amp; \overline \lambda = \lambda \implies \lambda \in \mathbb{R}
+\end{aligned}
+</span></p>
+<p data-sourcepos="452:1-452:1">Proof of perpendicular, given <span class="math inline">\mathbf S\mathbf x=\lambda_1\mathbf x, \mathbf S\mathbf y=\lambda_2\mathbf y</span>:</p>
+<p data-sourcepos="455:1-455:1"><span class="math display">
+\lambda_1\mathbf x^\text T \mathbf y = (\lambda_1\mathbf x)^\text T \mathbf y = (\mathbf S \mathbf x) ^ \text T \mathbf y = \mathbf x ^ \text T \mathbf S \mathbf y = \mathbf x ^ \text T\lambda_2\mathbf y = \lambda_2 \mathbf x ^ \text T \mathbf y
+ \implies \mathbf x ^ \text T \mathbf y = \mathbf 0
+</span></p>
+<p data-sourcepos="459:1-459:1">For repeated eigenvalues, picking any basis of that eigenspace, whose dimension is equal to the repeated times of the eigenvalue, and then doing the Gram-Schmidt decomposition would find the perpendicular eigenvectors.</p>
+<h3 id="positive-definite-matrices" data-sourcepos="461:1-461:1">Positive Definite Matrices</h3>
+<p data-sourcepos="463:1-463:1">Positive definite matrices are symmetric matrices with:</p>
+<ol type="1" data-sourcepos="465:1-469:1">
+<li>all eigen values &gt; 0; or</li>
+<li>all pivots &gt; 0; or</li>
+<li>all upper left determinants &gt; 0; or</li>
+<li><span class="math inline">\textbf x ^ \text T \mathbf S \mathbf x &gt; 0, \forall x \neq \textbf 0</span>.</li>
+<li><span class="math inline">\mathbf A ^ \text T \mathbf A</span>, if <span class="math inline">\mathbf A</span> is column independent.</li>
+</ol>
+<p data-sourcepos="471:1-471:1">Application for positive definite matrices:</p>
+<p><span class="math inline">f(x_i)</span> has a minimum at <span class="math inline">x=x_0</span> if <span class="math inline">\left. \frac{\partial f}{\partial x_i} \right|_{x_0} = 0</span> and matrix <span class="math inline">\textbf S(x_0)</span>, which is <span class="math inline">\left. S_{ij}(x_0) = \frac{\partial ^2f}{\partial x_i\partial x_j}\right|_{x_0}</span>, is positive definite.</p>
+<h3 id="similar-matrices" data-sourcepos="475:1-475:1">Similar Matrices</h3>
+<p>For <span class="math inline">n\times n</span> matrix <span class="math inline">\mathbf A, \mathbf B</span>, if there is <span class="math inline">\mathbf M</span> which <span class="math inline">\mathbf B = \mathbf M ^ {-1} \mathbf A \mathbf M</span>, then <span class="math inline">\mathbf A, \mathbf B</span> are similar. They have same eigen values.</p>
+<h3 id="jordan-form" data-sourcepos="479:1-479:1">Jordan Form</h3>
+<p data-sourcepos="481:1-481:1">If there is repeated eigen values, then there are 2 kinds of sets of similar matrices. E.g., for <span class="math inline">2 \times 2</span> matrics with eigen values <span class="math inline">4, 4</span>:</p>
+<p data-sourcepos="484:1-484:1"><span class="math display">
+\begin{bmatrix} 4 &amp; 0 \\ 0 &amp; 4 \end{bmatrix}, \begin{bmatrix} 4 &amp; 1 \\ 0 &amp; 4 \end{bmatrix}
+</span></p>
+<p data-sourcepos="487:1-487:1"><span class="math inline">\begin{bmatrix} 4 &amp; 0 \\ 0 &amp; 4 \end{bmatrix}</span> is only similar to itself. The size of the set is <span class="math inline">1</span>.</p>
+<p data-sourcepos="489:1-489:1"><span class="math inline">\begin{bmatrix} 4 &amp; 1 \\ 0 &amp; 4 \end{bmatrix}</span> is similar to many other matrices; it is called the <em>jordan form</em>.</p>
+<p data-sourcepos="491:1-491:1">Jordan block:</p>
+<p><span class="math display">
+J_i = 
+\begin{bmatrix}
+\lambda &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; \lambda &amp; 1 &amp; \cdots &amp; 0 \\
+0 &amp; 0 &amp; \lambda &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; 1 \\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp; \lambda
+\end{bmatrix}
+</span></p>
+<p data-sourcepos="504:1-504:1">Every square matrix <span class="math inline">\mathbf{A}</span> is similar to a Jordan matrix <span class="math inline">\mathbf{J}</span>.</p>
+<h2 id="linear-transformation" data-sourcepos="506:1-506:1">Linear Transformation</h2>
+<h3 id="linear" data-sourcepos="508:1-508:1">Linear</h3>
+<p>A transformation <span class="math inline">T</span> is <strong>linear</strong> if:</p>
+<p data-sourcepos="513:1-513:1"><span class="math display">
+T(\mathbf{v} + \mathbf{w}) = T(\mathbf{v}) + T(\mathbf{w})
+\land
+T(c\mathbf{v}) = cT(\mathbf{v})
+</span></p>
+<p>If we wish to know <span class="math inline">T(\mathbf{v})</span> for all vectors <span class="math inline">\mathbf{v}</span> in <span class="math inline">\mathbb{R}^n</span>, we just need to know <span class="math inline">T(\mathbf{v}_1), T(\mathbf{v}_2), ..., T(\mathbf{v}_n)</span> for any basis <span class="math inline">\mathbf{v}_1, \mathbf{v}_2, ..., \mathbf{v}_n</span> of the input space:</p>
+<p><span class="math display">
+\begin{aligned}
+\mathbf{v} &amp;= c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \cdots + c_n\mathbf{v}_n \\
+T(\mathbf{v}) &amp;= c_1T(\mathbf{v}_1) + c_2T(\mathbf{v}_2) + \cdots + c_nT(\mathbf{v}_n)
+\end{aligned}
+</span></p>
+<p><span class="math inline">c_i</span> are the coordinates.</p>
+<h3 id="matrix-for-linear-transformation" data-sourcepos="529:1-529:1">Matrix for Linear Transformation</h3>
+<p>For the matrix <span class="math inline">\mathbf A_{m\times n}</span> of the transformation <span class="math inline">T: \mathbb{R}^n\to\mathbb{R}^m</span>, <span class="math inline">\mathbf v_i, \mathbf w_i</span> are bases for <span class="math inline">\mathbb{R}^n,\mathbb{R}^m</span>:</p>
+<p data-sourcepos="534:1-534:1"><span class="math display">
+T(\mathbf v_i) = \sum_{j=1}^{m}\mathbf{A}_{ji}\mathbf w_j
+</span></p>
+<p data-sourcepos="537:1-537:1"><span class="math inline">\mathbf A_{m \times n}\mathbf {c}_{1..n} = \mathbf{c&#39;}_{1..m}</span>.</p>
+<h3 id="change-of-basis" data-sourcepos="539:1-539:1">Change of Basis</h3>
+<p data-sourcepos="541:1-541:1">Let the columns of matrix <span class="math inline">\mathbf{W}</span> be the basis vectors of the new basis. Then if <span class="math inline">\mathbf{x}</span> is a vector in the old basis, we can convert it to a vector <span class="math inline">\mathbf{c}</span> in the new basis using the relation:</p>
+<p data-sourcepos="544:1-544:1"><span class="math display">
+\mathbf{x} = \mathbf{W} \mathbf{c}.
+</span></p>
+<p>If transformation <span class="math inline">T</span> has the matrix <span class="math inline">\mathbf{A}</span> when working with the basis <span class="math inline">\mathbf{v}_1, \mathbf{v}_2, ..., \mathbf{v}_8</span> and <span class="math inline">T</span> has the matrix <span class="math inline">\mathbf{B}</span> when working with the basis <span class="math inline">\mathbf{w}_1, \mathbf{w}_2, ..., \mathbf{w}_8</span>, it turns out that <span class="math inline">\mathbf{A}</span> and <span class="math inline">\mathbf{B}</span> must be similar matrices. In other words:</p>
+<p data-sourcepos="550:1-550:1"><span class="math display">
+\mathbf{B} = \mathbf{W}^{-1} \mathbf{A} \mathbf{W}
+</span></p>
+<p data-sourcepos="553:1-553:1">for some change of basis matrix <span class="math inline">\mathbf{W}</span>.</p>
+<p data-sourcepos="555:1-555:1">Note: basis could be chosen as eigenvectors, then the matrix would be the eigenvalue diagonal matrix.</p>
+<h2 id="svd" data-sourcepos="557:1-557:1">SVD</h2>
+<p data-sourcepos="559:1-559:1">SVD is a generalization of the diagonalization process, but it applies to all <span class="math inline">m \times n</span> matrices, regardless of whether they are square or non-square, symmetric or non-symmetric.</p>
+<p>For any <span class="math inline">m \times n</span> matrix <span class="math inline">\mathbf{A}</span>, the SVD theorem guarantees that <span class="math inline">\mathbf{A}</span> can be decomposed as: <span class="math display">
+\mathbf{A} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^T
+</span> where:</p>
+<ul>
+<li><span class="math inline">\mathbf{U}</span> is an <span class="math inline">m \times m</span> orthogonal (or unitary) matrix,</li>
+<li><span class="math inline">\mathbf{\Sigma}</span> is an <span class="math inline">m \times n</span> diagonal matrix with non-negative real numbers (the singular values),</li>
+<li><span class="math inline">\mathbf{V}</span> is an <span class="math inline">n \times n</span> orthogonal (or unitary) matrix.</li>
+</ul>
+<p>We can use <span class="math inline">\mathbf{A}^\text{T} \mathbf{A}</span> and <span class="math inline">\mathbf{A}\mathbf{A}^\text{T}</span> to find <span class="math inline">\mathbf V</span> and <span class="math inline">\mathbf U</span>.</p>
+<h3 id="pseudo-inverse" data-sourcepos="573:1-573:1">Pseudo Inverse</h3>
+<p data-sourcepos="575:1-575:1">2 side inverse for a full rank square matrix <span class="math inline">\mathbf A</span> (<span class="math inline">m = n = r</span>):</p>
+<p data-sourcepos="578:1-578:1"><span class="math display">
+\mathbf A ^{-1}\mathbf A = \mathbf A \mathbf A ^ {-1} = \mathbf I
+</span></p>
+<p data-sourcepos="581:1-581:1">Left inverse for rectangular matrix <span class="math inline">\mathbf A</span> (<span class="math inline">r = n &lt; m</span>):</p>
+<p data-sourcepos="584:1-584:1"><span class="math display">
+\mathbf A ^{-1}_\text{left} \mathbf A = \mathbf I _ {n\times n}
+</span></p>
+<p>Since <span class="math inline">\mathbf A ^ \text T \mathbf A</span> is <span class="math inline">n \times n</span> and full rank:</p>
+<p data-sourcepos="590:1-590:1"><span class="math display">
+\mathbf A ^{-1}_\text{left} = (\mathbf A ^ \text T \mathbf A)^{-1}\textbf{A}^\text T
+</span></p>
+<p data-sourcepos="593:1-593:1">Similarily:</p>
+<p data-sourcepos="596:1-596:1"><span class="math display">
+\mathbf A ^{-1}_\text{right} = \textbf{A}^\text T (\mathbf A \mathbf A ^ \text T)^{-1}
+</span></p>
+<p>If <span class="math inline">\mathbf{x} \neq \mathbf{y}</span> are vectors in the row space of <span class="math inline">\mathbf{A}</span>, then <span class="math inline">\mathbf{A}\mathbf{x} \neq \mathbf{A}\mathbf{y}</span> in the column space of <span class="math inline">\mathbf{A}</span>.</p>
+<p>The pseudoinverse <span class="math inline">\mathbf{A}^+</span> of <span class="math inline">\mathbf{A}</span> is the matrix for which <span class="math inline">\mathbf{x} = \mathbf{A}^+ \mathbf{A} \mathbf{x}</span> for all <span class="math inline">\mathbf{x}</span> in the row space of <span class="math inline">\mathbf{A}</span>:</p>
+<p data-sourcepos="604:1-604:1"><span class="math display">
+\mathbf{A}^+ = \mathbf{V} \mathbf{\Sigma}^+ \mathbf{U}^\text T
+</span></p>
+<h2 id="complex-matrices" data-sourcepos="607:1-607:1">Complex Matrices</h2>
+<p data-sourcepos="609:1-609:1">Length:</p>
+<p data-sourcepos="612:1-612:1"><span class="math display">
+\lVert \mathbf z \rVert ^ 2 = \overline {\mathbf z} ^ \text T \mathbf{z} = \mathbf z ^ \text H \mathbf z
+</span></p>
+<p data-sourcepos="615:1-615:1">Inner product:</p>
+<p data-sourcepos="618:1-618:1"><span class="math display">
+\mathbf x ^ \text H \mathbf y = \sum \overline x_i y_i
+</span></p>
+<h3 id="unit-root" data-sourcepos="621:1-621:1">Unit Root</h3>
+<p data-sourcepos="624:1-624:1"><span class="math display">
+\omega^n=1 \implies \omega_k = \mathrm{e}^{\mathrm i\cdot2\pi\cdot\frac{k}{n}}, 0 \leq k \leq n - 1, k\in \mathbb Z
+</span></p>
+<h3 id="hermitian-matrices-mathbf-s-mathbf-s-text-h">Hermitian Matrices <span class="math inline">\mathbf S = \mathbf S ^ \text H</span></h3>
+<p data-sourcepos="629:1-629:1">The eigen values are real, and the eigen vectors can be chosen as perpendicular.</p>
+<h3 id="unitary-matrices" data-sourcepos="631:1-631:1">Unitary Matrices</h3>
+<p data-sourcepos="633:1-633:1">A unitary matrix is a complex square matrix that has orthonormal columns.</p>
+<p data-sourcepos="636:1-636:1"><span class="math display">
+\mathbf Q ^ \text H = \mathbf Q ^ {-1}
+</span></p>
+<h3 id="fourier-matrix" data-sourcepos="639:1-639:1">Fourier Matrix</h3>
+<p data-sourcepos="641:1-641:1">Fourier matrix is like:</p>
+<p data-sourcepos="644:1-644:1"><span class="math display">
+\mathbf F_n = \frac{1}{\sqrt{n}} \begin{pmatrix}
+1 &amp; 1 &amp; 1 &amp; \dots &amp; 1 \\
+1 &amp; \omega &amp; \omega^2 &amp; \dots &amp; \omega^{n-1} \\
+1 &amp; \omega^2 &amp; \omega^4 &amp; \dots &amp; \omega^{2(n-1)} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; \omega^{n-1} &amp; \omega^{2(n-1)} &amp; \dots &amp; \omega^{(n-1)(n-1)}
+\end{pmatrix}, \omega = \mathrm{e}^{\mathrm i\cdot2\pi\cdot\frac{1}{n}}
+</span></p>
+<p data-sourcepos="653:1-653:1">Or:</p>
+<p data-sourcepos="656:1-656:1"><span class="math display">
+F^{-1}_{xy} = \frac{1}{\sqrt{n}} \omega^{xy}
+</span></p>
+<p data-sourcepos="659:1-659:1">Fourier matrix is unitary matrix as, for column <span class="math inline">0\leq p, q\leq n -1</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+    &amp; \mathbf F_p ^ \text H \mathbf F_q = \frac 1 n \sum_{k=0}^{n-1}\overline{\omega ^ {pk}}\omega ^{qk}, \quad
+    \overline{\omega ^ {pk}} = \mathrm{e}^{\mathrm -i\cdot2\pi\cdot\frac{pk}{n}} = \omega^{-pk} \\
+    \implies &amp; \mathbf F_p ^ \text H \mathbf F_q = \frac 1 n \sum_{k=0}^{n-1}\omega^{-pk}\omega ^{qk} = \frac 1 n\sum_{k=0}^{n-1}\omega^{(q-p)k} \\
+    \implies &amp; \mathbf F_p ^ \text H \mathbf F_q =
+    \begin{cases}
+        \frac 1 n \sum_{k=0}^{n-1} \omega ^0 = 1, \quad p = q \\
+        \frac 1 n \sum_{k=0}^{n-1} \omega ^ {(q - p)k} = \frac 1 n \frac{1 - \omega^{(q-p)n}}{1 - \omega^{q-p}} = 0, \quad p \neq q \\
+    \end{cases}
+\end{aligned}
+</span></p>
+<p data-sourcepos="674:1-674:1">So,</p>
+<p data-sourcepos="677:1-677:1"><span class="math display">
+\mathbf F_n^{-1} = \mathbf{F}^\text H \iff F^{-1}_{xy} = \frac{1}{\sqrt{n}} \omega^{-xy}
+</span></p>
+<h3 id="fft" data-sourcepos="680:1-680:1">FFT</h3>
+<p>For <span class="math inline">\textbf y = \mathbf F_n\textbf a</span> (point-value representation to coefficient representation):</p>
+<p><span class="math display">
+\begin{aligned}
+\sqrt{n} \cdot \textbf y_j &amp; = \sum_{k=0}^{n-1} \omega_n^{jk}\cdot \textbf a_k \\
+    &amp; = \sum_{k = 0}^{\frac n 2 -1}\omega^{2jk}_{n}\textbf a_{2k} + \omega_n^j\sum_{k = 0}^{\frac n 2 -1}\omega^{2jk}_{n}\textbf a_{2k+1} \\
+    &amp; = \sum_{k = 0}^{\frac n 2 -1}\omega^{jk}_{\frac n 2}\textbf a_{2k} + \omega_n^j \sum_{k = 0}^{\frac n 2 -1}\omega^{jk}_{\frac n 2}\textbf a_{2k+1}, \quad 0 \leq j \leq n - 1\\
+\end{aligned}
+</span></p>
+<p>Let <span class="math inline">j = j+\frac n 2</span> to last line of above:</p>
+<p><span class="math display">
+\begin{aligned}
+\sqrt{n} \cdot \textbf y _{j+\frac n 2} &amp; = \sum_{k = 0}^{\frac n 2 -1}\omega^{(j+\frac n 2)k}_{\frac n 2}\textbf a_{2k} + \omega_n^{j+\frac n 2} \sum_{k = 0}^{\frac n 2 -1}\omega^{(j+\frac n 2)k}_{\frac n 2}\textbf a_{2k+1}, \quad 0 \leq j \leq \frac n 2 - 1\\
+\end{aligned}
+</span></p>
+<p>And there is <span class="math inline">\omega^{(j+\frac n 2)k}_{\frac n 2} = \omega_{\frac n 2}^{jk +\frac n 2 k} =  \omega_{\frac n 2}^{jk}\cdot(\omega_{\frac n 2}^{\frac n 2})^k = \omega_{\frac n 2}^{jk}</span> and <span class="math inline">\omega_n^{j+\frac n 2}= \omega_n^{j}\cdot\omega^{\frac n 2}_n = -\omega_n^j</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+\sqrt{n} \cdot \textbf y _{j+\frac n 2} &amp; = \sum_{k = 0}^{\frac n 2 -1}\omega^{jk}_{\frac n 2}\textbf a_{2k} -\omega_n^j \sum_{k = 0}^{\frac n 2 -1}\omega^{jk}_{\frac n 2}\textbf a_{2k+1}, \quad 0 \leq j \leq \frac n 2 - 1\\
+\end{aligned}
+</span></p>
+<p data-sourcepos="708:1-708:1">So:</p>
+<p><span class="math display">
+\begin{aligned}
+\sqrt{n} \cdot\textbf y _j &amp; = \sum_{k = 0}^{\frac n 2 -1}\omega^{jk}_{\frac n 2}\textbf a_{2k} + \omega_n^j \sum_{k = 0}^{\frac n 2 -1}\omega^{jk}_{\frac n 2}\textbf a_{2k+1} = [\textbf F_{\frac n 2}a&#39;]_j + \omega_n^j[ F_{\frac n 2}a&#39;&#39;]_j = \textbf{y}&#39;_j + \omega_n^j \textbf{y}&#39;&#39;_j, 0 \leq j \leq \frac n 2 - 1 \\
+\sqrt{n} \cdot \textbf y _{j+\frac n 2} &amp; = \sum_{k = 0}^{\frac n 2 -1}\omega^{jk}_{\frac n 2}\textbf a_{2k} -\omega_n^j \sum_{k = 0}^{\frac n 2 -1}\omega^{jk}_{\frac n 2}\textbf a_{2k+1} = [\textbf F_{\frac n 2}a&#39;]_j - \omega_n^j[ F_{\frac n 2}a&#39;&#39;]_j = \textbf{y}&#39;_j - \omega_n^j\textbf{y}&#39;&#39;_j, 0 \leq j \leq \frac n 2 - 1\\
+\end{aligned}
+</span></p>
+
+      </article>
+    </main>
+
+    <!-- Right Sidebar (TOC) -->
+    <aside class="sidebar right-sidebar collapsed" id="right-sidebar">
+      <div class="sidebar-content" id="spa-toc">
+        <!-- <h4 class="toc-title">On this page</h4> -->
+        <ul class="toc-list"><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#vectors">Vectors</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#notation">Notation</a></li><li class="toc-child toc-level-3"><a href="#dot-product">Dot Product</a></li><li class="toc-child toc-level-3"><a href="#length">Length</a></li><li class="toc-child toc-level-3"><a href="#angle">Angle</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#matrices">Matrices</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#multiplication">Multiplication</a></li><li class="toc-child toc-level-3"><a href="#matrix-elementary-transformations">Matrix Elementary Transformations</a></li><li class="toc-child toc-level-3"><a href="#gauss-elimination-for-mathbfax-mathbf-b">Gauss Elimination (for \mathbf{Ax} = \mathbf b)</a></li><li class="toc-child toc-level-3"><a href="#gauss-jordan-elimination-for-mathbfa-1">Gauss-Jordan Elimination (for \mathbf{A^{-1}})</a></li><li class="toc-child toc-level-3"><a href="#mathbf-pa-mathbflu-factorization">\mathbf {PA} = \mathbf{LU} Factorization</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#vector-space-and-subspace">Vector Space and Subspace</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#space-of-vectors">Space of Vectors</a></li><li class="toc-child toc-level-3"><a href="#subspaces">Subspaces</a></li><li class="toc-child toc-level-3"><a href="#column-space">Column Space</a></li><li class="toc-child toc-level-3"><a href="#null-space">Null Space</a></li><li class="toc-child toc-level-3"><a href="#echelon-matrix-mathbfr">Echelon Matrix \mathbf{R}</a></li><li class="toc-child toc-level-3"><a href="#mathbf-amathbfxmathbfb">\mathbf A\mathbf{x}=\mathbf{b}</a></li><li class="toc-child toc-level-3"><a href="#cases-for-mathbf-amathbfxmathbfb">Cases for \mathbf A\mathbf{x}=\mathbf{b}</a></li><li class="toc-child toc-level-3 toc-range"><a href="#independence-basis-dimension">Independence, Basis, Dimension</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#independence"><span class="toc-icon">·</span>Independence</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#basis"><span class="toc-icon">·</span>Basis</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#dimension"><span class="toc-icon">·</span>Dimension</a></li></ul></li><li class="toc-child toc-level-3"><a href="#dimensions-of-the-four-subspaces">Dimensions of the Four Subspaces</a></li><li class="toc-child toc-level-3"><a href="#rank-1-matrices">Rank 1 Matrices</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#orthogonality">Orthogonality</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#vector">Vector</a></li><li class="toc-child toc-level-3"><a href="#subspace">Subspace</a></li><li class="toc-child toc-level-3"><a href="#project-to-vector">Project to Vector</a></li><li class="toc-child toc-level-3"><a href="#project-to-subspace">Project to Subspace</a></li><li class="toc-child toc-level-3"><a href="#invertibility-of-mathbfamathttt-mathbfa">Invertibility of \mathbf{A}^\mathtt{T} \mathbf{A}</a></li><li class="toc-child toc-level-3"><a href="#least-squares-approximations">Least Squares Approximations</a></li><li class="toc-child toc-level-3"><a href="#orthogonal-matrices">Orthogonal Matrices</a></li><li class="toc-child toc-level-3"><a href="#mathbf-a-mathbf-q-mathbf-r-decomposition">\mathbf A = \mathbf Q \mathbf R Decomposition</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#determinants">Determinants</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#basic-properties">Basic Properties</a></li><li class="toc-child toc-level-3"><a href="#derived-properties">Derived Properties</a></li><li class="toc-child toc-level-3"><a href="#big-formula">Big Formula</a></li><li class="toc-child toc-level-3"><a href="#cofactor">Cofactor</a></li><li class="toc-child toc-level-3"><a href="#cramers-rule">Cramer’s Rule</a></li><li class="toc-child toc-level-3"><a href="#area">Area</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#eigen">Eigen</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#eigen-vector-and-eigen-value">Eigen Vector and Eigen Value</a></li><li class="toc-child toc-level-3"><a href="#texttr-and-textdet">\text{tr} and \text{det}</a></li><li class="toc-child toc-level-3"><a href="#diagonalization">Diagonalization</a></li><li class="toc-child toc-level-3"><a href="#symmetric-matrices">Symmetric Matrices</a></li><li class="toc-child toc-level-3"><a href="#positive-definite-matrices">Positive Definite Matrices</a></li><li class="toc-child toc-level-3"><a href="#similar-matrices">Similar Matrices</a></li><li class="toc-child toc-level-3"><a href="#jordan-form">Jordan Form</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#linear-transformation">Linear Transformation</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#linear">Linear</a></li><li class="toc-child toc-level-3"><a href="#matrix-for-linear-transformation">Matrix for Linear Transformation</a></li><li class="toc-child toc-level-3"><a href="#change-of-basis">Change of Basis</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#svd">SVD</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#pseudo-inverse">Pseudo Inverse</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#complex-matrices">Complex Matrices</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#unit-root">Unit Root</a></li><li class="toc-child toc-level-3"><a href="#hermitian-matrices-mathbf-s-mathbf-s-text-h">Hermitian Matrices \mathbf S = \mathbf S ^ \text H</a></li><li class="toc-child toc-level-3"><a href="#unitary-matrices">Unitary Matrices</a></li><li class="toc-child toc-level-3"><a href="#fourier-matrix">Fourier Matrix</a></li><li class="toc-child toc-level-3"><a href="#fft">FFT</a></li></ul></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <script src="/static/shell-lifecycle.js"></script>
+  <script src="/static/shell-preferences.js"></script>
+  <script src="/static/scrollbar-visibility.js?v=c659b99"></script>
+  <script src="/static/sidebar-panel.js"></script>
+  <script src="/static/svg-theme.js"></script>
+  <script src="/static/render-on-demand.js"></script>
+  <script src="/static/shell-bootstrap.js"></script>
+  <script src="/static/main.js"></script>
+  <script src="/static/reading-navigation-state.js"></script>
+  <script src="/static/shell-layout.js"></script>
+  <script src="/static/shell-search-settings.js"></script>
+  <script src="/static/shell-router.js"></script>
+  <script src="/static/link-preview.js"></script>
+  <script src="/static/text-anchor.js"></script>
+  <script src="/static/comments.js"></script>
+  <script src="/static/themes.js"></script>
+  <script src="/static/table-enhance.js"></script>
+  <script src="/static/syllabus-enhance.js"></script>
+  <script src="/static/core/ink-stroke-format.js"></script>
+  <script src="/static/drawing-engine-render.js"></script>
+  <script>
+  // highlight.js: on-demand language loader + post-load highlight pass.
+  //
+  // Core (highlight.min.js) bundles ~37 common languages. Pages that use
+  // additional languages from _HLJS_EXTRA trigger an extra CDN fetch only
+  // when the page actually contains a matching code block. The service
+  // worker caches each module after the first fetch, so subsequent pages
+  // pay nothing for already-loaded languages.
+  //
+  // _HLJS_ALIAS maps user-facing class names to module filenames that
+  // differ from the class name. Pure aliases that hljs core already knows
+  // (e.g. ts → typescript, sh → bash) are resolved by hljs.getLanguage()
+  // and don't need entries — only include aliases whose target module is
+  // in _HLJS_EXTRA.
+  window._HLJS_BASE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/languages/';
+  window._HLJS_ALIAS = {
+    tex: 'latex', docker: 'dockerfile', ps: 'powershell', ps1: 'powershell',
+    ml: 'ocaml', hs: 'haskell', clj: 'clojure', cljs: 'clojure',
+    erl: 'erlang', coffee: 'coffeescript', f90: 'fortran', f95: 'fortran',
+    pascal: 'delphi'
+  };
+  window._HLJS_EXTRA = [
+    // Tier 1/2: build/config, scientific, FP, scripting, editor
+    'dockerfile','nginx','cmake','http','latex','julia','matlab','fortran',
+    'haskell','scala','ocaml','fsharp','clojure','elixir','dart','vim','powershell',
+    // Tier 3: FP & academic
+    'erlang','scheme','lisp','prolog',
+    // Tier 3: hardware / assembly
+    'verilog','vhdl','x86asm','armasm',
+    // Tier 3: modern systems
+    'crystal','nim','d','delphi',
+    // Tier 3: build / config
+    'groovy','nix','dts',
+    // Tier 3: markup / templating
+    'asciidoc','handlebars','gherkin',
+    // Tier 3: shell / scripting
+    'awk','tcl','coffeescript',
+    // Tier 3: stats
+    'stan'
+  ];
+  window._hljsLoaded = {};
+
+  // Run the highlight + line-number pass against `root` (defaults to document).
+  window._hljsRun = function(root) {
+    root = root || document;
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (name) {
+        var resolved = hljs.getLanguage(name) ? name : 'plaintext';
+        code.classList.add('language-' + resolved);
+      }
+    });
+    hljs.configure({ cssSelector: 'pre:not(.mermaid) > code' });
+    hljs.highlightAll();
+    root.querySelectorAll('pre:not(.mermaid) > code').forEach(function(code) {
+      if (code.querySelector('.code-line')) return;
+      var html = code.innerHTML;
+      if (html.charAt(html.length - 1) === '\n') html = html.slice(0, -1);
+      var lines = html.split('\n');
+      var openTags = [];
+      code.innerHTML = lines.map(function(line) {
+        var prefix = openTags.join('');
+        var re = /<\/?span[^>]*>/gi, m;
+        while ((m = re.exec(line)) !== null) {
+          if (m[0][1] === '/') openTags.pop();
+          else openTags.push(m[0]);
+        }
+        var suffix = '';
+        for (var i = 0; i < openTags.length; i++) suffix += '</span>';
+        return '<span class="code-line">' + prefix + (line || ' ') + suffix + '</span>';
+      }).join('');
+    });
+  };
+
+  // Scan `root` for code blocks, fetch any missing allowlisted language
+  // modules, then run the highlight pass once they finish loading (or fail).
+  // Called once from the highlight.min.js onload handler, and again from
+  // main.js after each SPA navigation (scoped to #spa-content).
+  window._hljsInit = function(root) {
+    root = root || document;
+    if (typeof hljs === 'undefined') return;
+    var allow = {};
+    for (var i = 0; i < window._HLJS_EXTRA.length; i++) allow[window._HLJS_EXTRA[i]] = true;
+    var need = {};
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (!name || hljs.getLanguage(name)) return;
+      if (allow[name] && !window._hljsLoaded[name]) need[name] = true;
+    });
+    var keys = Object.keys(need);
+    if (!keys.length) { window._hljsRun(root); return; }
+    var pending = keys.length;
+    keys.forEach(function(l) {
+      window._hljsLoaded[l] = true; // mark in-flight to dedupe across SPA nav
+      var s = document.createElement('script');
+      s.src = window._HLJS_BASE + l + '.min.js';
+      s.onload = s.onerror = function() { if (--pending === 0) window._hljsRun(root); };
+      document.head.appendChild(s);
+    });
+  };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    onload="window._hljsInit();"></script>
+  <script id="rprint-mermaid" async src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('mermaid')}else{var t=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'default';mermaid.initialize({startOnLoad:false,theme:t});document.querySelectorAll('pre.mermaid > code').forEach(function(c){var src=c.textContent;c.parentElement.setAttribute('data-mermaid-source',src);c.parentElement.textContent=src;});mermaid.run()}"></script>
+  <script>document.getElementById('rprint-mermaid').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('mermaid',new Error('Mermaid failed to load'))}});</script>
+  
+  
+  
+</body>
+</html>

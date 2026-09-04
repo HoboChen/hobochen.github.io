@@ -1,0 +1,144 @@
+/* ---- Embedded Whiteboard ---- */
+
+.embedded-whiteboard {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-border, #d0d7de);
+  border-radius: 8px;
+  margin: 1.5em 0;
+  max-width: 100%;
+  background: var(--color-canvas-default, #fff);
+  transition: height 0.3s ease;
+}
+
+[data-theme="dark"] .embedded-whiteboard {
+  border-color: var(--color-border, #444c56);
+  background: var(--color-canvas-default, #1c2128);
+}
+
+.ewb-canvas-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg, #fff);
+}
+
+[data-theme="dark"] .ewb-canvas-wrap {
+  background: var(--color-bg, #0d1117);
+}
+
+[data-theme="kindle"] .ewb-canvas-wrap {
+  background: #fff;
+}
+
+.ewb-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Loading / empty state ---- */
+
+.ewb-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-fg-muted, #656d76);
+  font-size: 14px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.ewb-loading.ewb-empty {
+  color: var(--color-fg-muted, #8b949e);
+}
+
+.ewb-loading.ewb-error {
+  color: var(--color-danger-fg, #cf222e);
+}
+
+/* ---- Edit button ---- */
+
+.ewb-edit-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-border, #d0d7de);
+  border-radius: 6px;
+  background: var(--color-canvas-default, #fff);
+  color: var(--color-fg-muted, #656d76);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.embedded-whiteboard:hover .ewb-edit-btn,
+.embedded-whiteboard:focus-within .ewb-edit-btn {
+  opacity: 1;
+}
+
+.ewb-edit-btn:hover {
+  background: var(--color-canvas-subtle, #f6f8fa);
+  color: var(--color-fg-default, #1f2328);
+  border-color: var(--color-border, #b0b8c1);
+}
+
+[data-theme="dark"] .ewb-edit-btn {
+  background: var(--color-canvas-default, #1c2128);
+  border-color: var(--color-border, #444c56);
+  color: var(--color-fg-muted, #8b949e);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .ewb-edit-btn:hover {
+  background: var(--color-canvas-subtle, #272e37);
+  color: var(--color-fg-default, #e6edf3);
+}
+
+/* ---- Done button ---- */
+
+.ewb-done-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  padding: 4px 14px;
+  border: 1px solid var(--color-border, #d0d7de);
+  border-radius: 6px;
+  background: var(--color-canvas-default, #fff);
+  color: var(--color-fg-default, #1f2328);
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.15s ease;
+}
+
+.ewb-done-btn:hover {
+  background: var(--color-canvas-subtle, #f6f8fa);
+}
+
+[data-theme="dark"] .ewb-done-btn {
+  background: var(--color-canvas-default, #1c2128);
+  border-color: var(--color-border, #444c56);
+  color: var(--color-fg-default, #e6edf3);
+}
+
+[data-theme="dark"] .ewb-done-btn:hover {
+  background: var(--color-canvas-subtle, #272e37);
+}
+
+/* ---- Edit mode: ink-container fills the embedded container ---- */
+
+.embedded-whiteboard.ewb-edit-mode > .ink-container {
+  width: 100%;
+  height: 100%;
+}

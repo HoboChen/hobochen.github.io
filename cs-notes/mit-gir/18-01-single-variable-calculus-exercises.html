@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="build-commit" content="c659b99">
+  <title>Calculus I (18.01) - Exercises - Jingqi's Interpositive</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/main.css?v=c659b99">
+  <link rel="stylesheet" href="/static/link-preview.css">
+  <link rel="stylesheet" href="/static/sidebar-panel.css">
+  <link rel="stylesheet" href="/static/table-enhance.css">
+  <link rel="stylesheet" href="/static/syllabus-enhance.css">
+  <link rel="stylesheet" href="/static/comments.css">
+  <link rel="stylesheet" href="/static/notebook.css">
+  <link rel="stylesheet" href="/static/themes.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var linkPreviewEmbed=false;
+      try{
+        var previewUrl=new URL(location.href);
+        linkPreviewEmbed=previewUrl.searchParams.get('rprint-preview')==='1'&&window.parent!==window&&window.parent.location.origin===location.origin;
+      }catch(e){}
+      if(linkPreviewEmbed){
+        document.documentElement.classList.add('link-preview-embed');
+        var previewArticleLink=function(target){return target&&target.closest&&target.closest('.article a[href]');};
+        var blockPreviewLink=function(event){if(previewArticleLink(event.target)){event.preventDefault();event.stopImmediatePropagation();}};
+        document.addEventListener('click',blockPreviewLink,true);
+        document.addEventListener('auxclick',blockPreviewLink,true);
+        document.addEventListener('keydown',function(event){if(event.key==='Enter')blockPreviewLink(event);},true);
+        document.addEventListener('dblclick',function(event){if(event.target&&event.target.closest&&event.target.closest('.article')){event.preventDefault();event.stopImmediatePropagation();}},true);
+      }
+      var bc=document.querySelector('meta[name="build-commit"]');
+      var commit=bc?bc.getAttribute('content'):'';
+      if(commit&&commit!=='unknown'){
+        var prev=localStorage.getItem('kb-build-commit');
+        if(prev&&prev!==commit){
+          var keys=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf('kb-')===0)keys.push(k);}
+          keys.forEach(function(k){localStorage.removeItem(k);});
+          localStorage.setItem('kb-build-commit',commit);
+          if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+            navigator.serviceWorker.controller.postMessage('clearCaches');
+          }
+          window.location.reload();
+          return;
+        }
+        localStorage.setItem('kb-build-commit',commit);
+      }
+      // Resume last visited page on PWA/browser launch. PWA launches carry
+      // `?pwa=1`; a normal browser launch is a plain root URL without a same-
+      // origin referrer. `/index.html` is an explicit home navigation, so it
+      // never resumes. Runs before paint to avoid a flash of the home page.
+      // Validates the stored path is a same-origin absolute path (rejects
+      // `//host` / `/\host` open-redirects).
+      var resumeLaunch=/[?&]pwa=1(&|$)/.test(location.search);
+      try{
+        var launchUrl=new URL(location.href);
+        launchUrl.searchParams.delete('pwa');
+        var sameOriginReferrer=false;
+        try{sameOriginReferrer=!!document.referrer&&new URL(document.referrer,location.href).origin===location.origin;}catch(e){}
+        resumeLaunch=resumeLaunch||(launchUrl.pathname==='/'&&!launchUrl.search&&!launchUrl.hash&&!sameOriginReferrer);
+      }catch(e){}
+      if(resumeLaunch){
+        try{
+          var last=localStorage.getItem('kb-last-location');
+          var lastPath=last&&last.split('#')[0].split('?')[0];
+          if(last&&/^\/[^/\\]/.test(last)&&lastPath!=='/'&&lastPath!=='/index.html'){
+            try{sessionStorage.setItem('kb-resume-last-scroll','1');}catch(e){}
+            location.replace(last);return;
+          }
+        }catch(e){}
+      }
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      var mob=window.matchMedia('(max-width:650px)').matches;
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.style.colorScheme=t==='dark'?'dark':'light';
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      var w=p.contentWidth||(mob?'100':'90');
+      document.documentElement.style.setProperty('--content-max-width',w+'%');
+      var edge=p.ignoreCorners!==undefined?p.ignoreCorners==='on':false;
+      if(edge&&w==='100')document.documentElement.setAttribute('data-ignore-corners','on');
+      if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches||window.matchMedia('(display-mode:fullscreen)').matches)document.documentElement.classList.add('pwa-standalone');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'kaiti';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.0};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+      var ht=t==='dark'?'github-dark':'github';
+      var writes='<link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/'+ht+'.min.css">';
+      document.write(writes);
+    })();
+  </script>
+  <style>.math{opacity:0;transition:opacity .15s}.math.rprint-render-failed{opacity:1}</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css" integrity="sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM" crossorigin="anonymous">
+  <script id="rprint-katex" defer src="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.js" integrity="sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI" crossorigin="anonymous"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('katex')}else{document.querySelectorAll('.math').forEach(function(el){var src=el.textContent;el.setAttribute('data-latex',src);katex.render(src,el,{displayMode:el.classList.contains('display'),throwOnError:false,trust:function(ctx){return ctx&&ctx.command==='\\href'&&typeof ctx.url==='string'&&/^#[A-Za-z0-9:._-]+$/.test(ctx.url);}});el.querySelectorAll('mtable[columnspacing=\'\']').forEach(function(t){t.removeAttribute('columnspacing')});el.style.opacity='1';})}"></script>
+  <script>document.getElementById('rprint-katex').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('katex',new Error('KaTeX failed to load'))}else{document.querySelectorAll('.math').forEach(function(el){el.style.opacity='1'})}});</script>
+</head>
+<body data-page-type="markdown">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <button class="banner-toggle" id="left-toggle" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h12v1.5H2V3zm0 4h12v1.5H2V7zm0 4h12v1.5H2V11z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-center">
+        <div class="banner-center-inner">
+          <a href="/index.html" class="site-title" data-short="Interpositive">Jingqi's Interpositive</a>
+          <span class="spa-health-wrap" id="spa-health-wrap">
+            <span class="spa-health-dot" id="spa-health-dot" title="SPA server status"></span>
+            <div class="spa-health-popup" id="spa-health-popup">
+              <div class="shp-header">
+                <span class="shp-title">Server Status</span>
+                <span class="shp-heart" id="shp-heart"></span>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-metrics">
+                <div class="shp-row"><span class="shp-label">Ping</span><span class="shp-value" id="shp-ping">—</span></div>
+                <div class="shp-row"><span class="shp-label">Uptime</span><span class="shp-value" id="shp-uptime">—</span></div>
+                <div class="shp-row"><span class="shp-label">Memory</span><span class="shp-value" id="shp-memory">—</span></div>
+                <div class="shp-row"><span class="shp-label">CPU Time</span><span class="shp-value" id="shp-cpu-time">—</span></div>
+                <div class="shp-row"><span class="shp-label">Load</span><span class="shp-value" id="shp-load">—</span></div>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-modules">
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-watch"></span> Watch</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-jupyter"></span> Jupyter</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-terminal"></span> Terminal</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-proxy"></span> Proxy</div>
+              </div>
+            </div>
+          </span>
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="/cs-notes/" class="nav-link" data-short="CS">CS</a><ul class="nav-dropdown"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li><a href="/cs-notes/mit-gir/index.html">MIT GIR</a></li><li><a href="/cs-notes/cs-math/index.html">CS Math</a></li></ul></li><li class="nav-item"><a href="/not-cs-notes/" class="nav-link" data-short="Not-CS">Not-CS</a><ul class="nav-dropdown"><li><a href="/not-cs-notes/mit-math-requirements.html">MIT Math Syllabus</a></li></ul></li><li class="nav-item"><a href="/notebook/" class="nav-link" data-short="Mixed">Mixed</a><ul class="nav-dropdown"><li><a href="/notebook/mind/index.html">Mind</a></li><li><a href="/notebook/matter/index.html">Matter</a></li><li><a href="/notebook/practice/index.html">Practice</a></li><li><a href="/notebook/toolbox/index.html">Toolbox</a></li></ul></li><li class="nav-item"><a href="/years/" class="nav-link" data-short="Years">Years</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="banner-right">
+        <button class="banner-right-toggle" title="More controls">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="search-wrap" id="search-wrap">
+          <button class="search-btn" id="search-btn" title="Search (Ctrl+K)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-input-wrap" id="search-input-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search…" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+        <div class="comment-wrap" id="comment-wrap">
+          <button class="comment-btn" id="comment-btn" title="Review Comments (A)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <span class="comment-nav-count" id="comment-nav-count"></span>
+          <button class="comment-nav-btn" id="comment-nav-prev" title="Previous comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="comment-nav-btn" id="comment-nav-next" title="Next comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <button class="settings-btn" id="settings-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="settings-panel" id="settings-panel">
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Native Jupyter <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="native-jupyter-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Global Search <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="content-search-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Quick Edit <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="quick-edit-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section resource-pack-setting" id="resource-pack-setting" hidden>
+            <div class="settings-row resource-pack-row">
+              <span class="settings-desc">Offline resources</span>
+              <button type="button" class="settings-action-btn" id="resource-pack-import-btn">Import</button>
+            </div>
+            <input type="file" id="resource-pack-input" accept=".rpack,application/vnd.rprint.resource-pack" hidden>
+            <div class="resource-pack-status" id="resource-pack-status" aria-live="polite"></div>
+            <button type="button" class="settings-link-btn" id="resource-pack-rollback-btn" hidden>Undo last import</button>
+          </div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent link-preview-settings-parent">
+            <label class="style-label" id="link-preview-label">Link Preview <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="link-preview-switch" role="switch" aria-labelledby="link-preview-label" aria-checked="false" aria-expanded="false" aria-controls="link-preview-settings-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children link-preview-settings-children" id="link-preview-settings-children" hidden>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-same-page-only-label">Same-page links only</label>
+              <button class="style-switch style-switch-compact" id="link-preview-same-page-only-switch" role="switch" aria-labelledby="link-preview-same-page-only-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-auto-close-label">Auto-close</label>
+              <button class="style-switch style-switch-compact" id="link-preview-auto-close-switch" role="switch" aria-labelledby="link-preview-auto-close-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-overwrite-jumping-label">Overwrite Link Jumping</label>
+              <button class="style-switch style-switch-compact" id="link-preview-overwrite-jumping-switch" role="switch" aria-labelledby="link-preview-overwrite-jumping-label" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+            </div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-row settings-title-row settings-dependent-parent">
+            <span class="settings-panel-title">Keyboard Shortcuts</span>
+            <button class="style-switch" id="kb-enabled-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children keyboard-shortcuts-children">
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="search"><span class="settings-desc">Search</span><span class="settings-keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="scroll"><span class="settings-desc">Scroll down / up</span><span class="settings-keys"><kbd>J</kbd> <kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="section"><span class="settings-desc">Next / prev section</span><span class="settings-keys"><kbd>U</kbd> <kbd>I</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="sidebar-toc"><span class="settings-desc"><span data-shortcut-part="sidebar">Sidebar / </span>TOC</span><span class="settings-keys"><kbd data-shortcut-part="sidebar">S</kbd> <kbd>T</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="spread"><span class="settings-desc">Next / prev spread</span><span class="settings-keys"><kbd>PgDn</kbd> <kbd>PgUp</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="comments"><span class="settings-desc">Comments</span><span class="settings-keys"><kbd>A</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="fold"><span class="settings-desc">Fold banner</span><span class="settings-keys"><kbd>F</kbd></span></div>
+            
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="dismiss"><span class="settings-desc">Close / Dismiss</span><span class="settings-keys"><kbd>Esc</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="settings"><span class="settings-desc">Show this panel</span><span class="settings-keys"><kbd>?</kbd></span></div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent">
+            <label class="style-label">Debug Mode</label>
+            <button class="style-switch" id="debug-mode-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="debug-children" id="debug-children">
+            <div class="settings-dependent-children">
+              <div class="settings-panel-section settings-dependent-child debug-log-level-setting">
+                <label class="style-label">Client Log Level</label>
+                <div class="style-toggle-group">
+                  <button class="style-toggle-btn debug-level-btn" data-level="error">Error</button>
+                  <button class="style-toggle-btn debug-level-btn" data-level="info">Info</button>
+                  <button class="style-toggle-btn debug-level-btn active" data-level="debug">Debug</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-footer" id="settings-git-version">c659b99</div>
+        </div>
+        <a href="/static/settings.html?v=c659b99" class="theme-btn" id="theme-btn" title="Theme & display">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="13.5" cy="6.5" r=".5"/>
+            <circle cx="17.5" cy="10.5" r=".5"/>
+            <circle cx="8.5" cy="7.5" r=".5"/>
+            <circle cx="6.5" cy="12.5" r=".5"/>
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+          </svg>
+        </a>
+        <div class="style-panel" id="style-panel">
+          <div class="style-panel-section">
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn active" data-theme="light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light
+              </button>
+              <button class="style-toggle-btn" data-theme="dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="style-toggle-btn" data-theme="kindle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                E-Ink
+              </button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn font-btn active" data-font="system">System</button>
+              <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+              <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">字体</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn fontzh-btn active" data-fontzh="default">系统</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="noto-serif">宋体</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+            </div>
+          </div>
+          <div class="style-panel-section bg-picker-section">
+            <label class="style-label">Background</label>
+            <div class="bg-swatch-group" id="bg-swatch-group">
+              <button class="bg-swatch active" data-bg="default" title="Default"></button>
+              <button class="bg-swatch" data-bg="green" title="Green"></button>
+              <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+              <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+              <div class="style-range-ticks">
+                <span class="style-range-tick font-size-tick" data-i="0">12</span>
+                <span class="style-range-tick font-size-tick" data-i="1">14</span>
+                <span class="style-range-tick font-size-tick" data-i="2">16</span>
+                <span class="style-range-tick font-size-tick" data-i="3">18</span>
+                <span class="style-range-tick font-size-tick" data-i="4">24</span>
+                <span class="style-range-tick font-size-tick" data-i="5">32</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+              <div class="style-range-ticks">
+                <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+                <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+                <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+                <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+                <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+                <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Width <span id="width-value">90%</span></label>
+            <div class="style-slider-wrap width-slider-wrap">
+              <input type="range" class="style-range" id="content-width-range" min="0" max="5" step="1" value="3">
+              <div class="style-range-ticks width-ticks">
+                <span class="style-range-tick width-tick" data-i="0">50</span>
+                <span class="style-range-tick width-tick" data-i="1">65</span>
+                <span class="style-range-tick width-tick" data-i="2">80</span>
+                <span class="style-range-tick width-tick" data-i="3">90</span>
+                <span class="style-range-tick width-tick" data-i="4">95</span>
+                <span class="style-range-tick width-tick" data-i="5">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="ignore-corners-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">2 Columns <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+        </div>
+        <button class="banner-toggle" id="fold-banner-btn" title="Fold banner">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4l4 4-4 4zm10 0l-4 4 4 4z"/>
+          </svg>
+        </button>
+        <button class="banner-toggle" id="right-toggle" title="Toggle table of contents">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-right-dropdown"></div>
+    </div>
+  </header>
+
+  <!-- Floating buttons when banner is folded -->
+  <div class="banner-fold-float" id="banner-fold-float">
+    <button class="banner-fold-float-btn" id="unfold-banner-btn" title="Unfold banner">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M7 4L3 8l4 4zm2 0l4 4-4 4z"/>
+      </svg>
+    </button>
+    <button class="banner-fold-float-btn" id="float-toc-btn" title="Toggle table of contents">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout left-collapsed right-collapsed">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar collapsed" id="left-sidebar">
+      <div class="sidebar-content" id="spa-sidebar">
+        <!-- rprint:sidebar:start -->
+        <a class="sidebar-cat-title" href="/cs-notes">CS</a><ul class="sidebar-list"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li class="sidebar-group open" data-priority="0"><span class="sidebar-row"><a class="sidebar-group-title active-group" href="/cs-notes/mit-gir/index.html">MIT GIR</a><span class="sidebar-toggle"></span></span><ul><li><a href="/cs-notes/mit-gir/18-01-single-variable-calculus.html">Calculus I (18.01)</a></li><li class="active"><a href="/cs-notes/mit-gir/18-01-single-variable-calculus-exercises.html">Calculus I (18.01) - Exercises</a></li><li><a href="/cs-notes/mit-gir/18-02-multivariable-calculus.html">Calculus II (18.02)</a></li><li><a href="/cs-notes/mit-gir/18-02-multivariable-calculus-exercises.html">Calculus II (18.02) - Exercises</a></li><li><a href="/cs-notes/mit-gir/8-01-classical-mechanics.html">Physics I (8.01) 🚜</a></li><li><a href="/cs-notes/mit-gir/8-01-classical-mechanics-exercises.html">Physics I (8.01) - Exercises 🚜</a></li><li><a href="/cs-notes/mit-gir/8-02-electricity-magnetism.html">Physics II (8.02) 🚜</a></li></ul></li><li class="sidebar-group" data-priority="0.001"><span class="sidebar-row"><a class="sidebar-group-title" href="/cs-notes/cs-math/index.html">CS Math</a><span class="sidebar-toggle"></span></span><ul><li><a href="/cs-notes/cs-math/18-06-linear-algebra.html">Linear Algebra (18.06)</a></li><li><a href="/cs-notes/cs-math/6-042-discrete-mathematics.html">Discrete Mathematics (6.042)</a></li></ul></li></ul>
+        <!-- rprint:sidebar:end -->
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content" id="content">
+      <article class="article" id="spa-content">
+        <h1 id="calculus-i-18.01---exercises">Calculus I (18.01) - Exercises</h1>
+<h2 id="differentiation" data-sourcepos="3:1-3:1">Differentiation</h2>
+<h3 id="limit" data-sourcepos="5:1-5:1">Limit</h3>
+<p data-sourcepos="7:1-7:1">Start with algebraic simplification before using derivative-based shortcuts.</p>
+<p data-sourcepos="9:1-9:1">Compute</p>
+<p data-sourcepos="12:1-12:1"><span class="math display">
+\lim_{x\to2}\frac{x^2-4}{x-2}.
+</span></p>
+<p data-sourcepos="15:1-15:1">Factor the numerator:</p>
+<p data-sourcepos="18:1-18:1"><span class="math display">
+\frac{x^2-4}{x-2}=\frac{(x-2)(x+2)}{x-2}=x+2,
+\qquad x\neq2.
+</span></p>
+<p data-sourcepos="22:1-22:1">Thus</p>
+<p data-sourcepos="25:1-25:1"><span class="math display">
+\lim_{x\to2}\frac{x^2-4}{x-2}=4.
+</span></p>
+<p data-sourcepos="28:1-28:1">A limit may exist even when the original expression is undefined at the limit point.</p>
+<h3 id="derivative" data-sourcepos="30:1-30:1">Derivative</h3>
+<p data-sourcepos="32:1-32:1">Use the difference quotient when the problem asks for the derivative from first principles.</p>
+<p>Find <span class="math inline">f&#39;(x)</span> for <span class="math inline">f(x)=x^2</span> from the definition.</p>
+<p data-sourcepos="37:1-37:1"><span class="math display">
+f&#39;(x)=\lim_{h\to0}\frac{(x+h)^2-x^2}{h}
+=\lim_{h\to0}\frac{2xh+h^2}{h}
+=\lim_{h\to0}(2x+h)=2x.
+</span></p>
+<p data-sourcepos="42:1-42:1">The derivative is the limiting slope of secant lines.</p>
+<h3 id="differential-notation" data-sourcepos="44:1-44:1">Differential Notation</h3>
+<p data-sourcepos="46:1-46:1">Use differentials to estimate a small change without recomputing the function exactly.</p>
+<p data-sourcepos="48:1-48:1">Estimate the change in <span class="math inline">y=\sqrt{x}</span> when <span class="math inline">x</span> changes from <span class="math inline">100</span> to <span class="math inline">101</span>.</p>
+<p data-sourcepos="51:1-51:1"><span class="math display">
+dy=f&#39;(x)dx=\frac1{2\sqrt{x}}dx.
+</span></p>
+<p>At <span class="math inline">x=100</span> and <span class="math inline">dx=1</span>,</p>
+<p data-sourcepos="57:1-57:1"><span class="math display">
+dy\approx \frac1{20}.
+</span></p>
+<p data-sourcepos="60:1-60:1">So</p>
+<p data-sourcepos="63:1-63:1"><span class="math display">
+\sqrt{101}\approx10.05.
+</span></p>
+<p data-sourcepos="66:1-66:1">Differential notation turns local linear approximation into a compact calculation.</p>
+<h3 id="continuity" data-sourcepos="68:1-68:1">Continuity</h3>
+<p data-sourcepos="70:1-70:1">Check whether the two-sided limit equals the function value.</p>
+<p>Choose <span class="math inline">a</span> so that</p>
+<p><span class="math display">
+f(x)=\begin{cases}
+x^2+1,&amp;x\neq2,\\
+a,&amp;x=2
+\end{cases}
+</span></p>
+<p>is continuous at <span class="math inline">x=2</span>.</p>
+<p data-sourcepos="83:1-83:1">Continuity requires</p>
+<p data-sourcepos="86:1-86:1"><span class="math display">
+a=\lim_{x\to2}(x^2+1)=5.
+</span></p>
+<p data-sourcepos="89:1-89:1">Removable discontinuities are fixed by setting the point value equal to the limit.</p>
+<h3 id="computations-of-derivatives" data-sourcepos="91:1-91:1">Computations of Derivatives</h3>
+<p data-sourcepos="93:1-93:1">Break an expression into product, quotient, and chain rule pieces.</p>
+<p data-sourcepos="95:1-95:1">Differentiate</p>
+<p data-sourcepos="98:1-98:1"><span class="math display">
+y=x^2\sin(3x).
+</span></p>
+<p data-sourcepos="101:1-101:1">Use product rule and chain rule:</p>
+<p data-sourcepos="104:1-104:1"><span class="math display">
+y&#39;=2x\sin(3x)+x^2\cdot3\cos(3x).
+</span></p>
+<p data-sourcepos="107:1-107:1">The chain rule is usually the hidden step inside product or quotient rule problems.</p>
+<h3 id="higher-derivative-notation" data-sourcepos="109:1-109:1">Higher Derivative Notation</h3>
+<p data-sourcepos="111:1-111:1">Higher derivatives repeat the same derivative operation and often describe curvature or acceleration.</p>
+<p data-sourcepos="113:1-113:1">For</p>
+<p data-sourcepos="116:1-116:1"><span class="math display">
+s(t)=t^3-6t^2+9t,
+</span></p>
+<p data-sourcepos="119:1-119:1">find velocity and acceleration.</p>
+<p data-sourcepos="122:1-122:1"><span class="math display">
+v(t)=s&#39;(t)=3t^2-12t+9,
+\qquad
+a(t)=s&#39;&#39;(t)=6t-12.
+</span></p>
+<p>At <span class="math inline">t=2</span>,</p>
+<p data-sourcepos="130:1-130:1"><span class="math display">
+a(2)=0.
+</span></p>
+<p data-sourcepos="133:1-133:1">In motion problems, first derivative is velocity and second derivative is acceleration.</p>
+<h3 id="implicit-differentiation" data-sourcepos="135:1-135:1">Implicit Differentiation</h3>
+<p data-sourcepos="137:1-137:1">Differentiate both sides with respect to <span class="math inline">x</span>, treating <span class="math inline">y</span> as a function of <span class="math inline">x</span>.</p>
+<p>Find <span class="math inline">dy/dx</span> if</p>
+<p data-sourcepos="142:1-142:1"><span class="math display">
+x^2+y^2=25.
+</span></p>
+<p data-sourcepos="145:1-145:1">Differentiate:</p>
+<p data-sourcepos="148:1-148:1"><span class="math display">
+2x+2y\frac{dy}{dx}=0.
+</span></p>
+<p data-sourcepos="151:1-151:1">Thus</p>
+<p data-sourcepos="154:1-154:1"><span class="math display">
+\frac{dy}{dx}=-\frac{x}{y}.
+</span></p>
+<p data-sourcepos="157:1-157:1">Every derivative of a <span class="math inline">y</span>-term picks up a factor of <span class="math inline">dy/dx</span>.</p>
+<h3 id="derivative-table" data-sourcepos="159:1-159:1">Derivative Table</h3>
+<p data-sourcepos="161:1-161:1">Use the derivative table as lookup, then combine entries with algebraic rules.</p>
+<p data-sourcepos="163:1-163:1">Differentiate</p>
+<p data-sourcepos="166:1-166:1"><span class="math display">
+f(x)=e^x+\ln x+\arctan x.
+</span></p>
+<p>For <span class="math inline">x&gt;0</span>,</p>
+<p data-sourcepos="172:1-172:1"><span class="math display">
+f&#39;(x)=e^x+\frac1x+\frac1{1+x^2}.
+</span></p>
+<p data-sourcepos="175:1-175:1">Always keep the domain conditions attached to table formulas.</p>
+<h3 id="lhospitals-rule-todo">L’Hospital’s Rule TODO</h3>
+<p>Use L’Hospital’s rule only after confirming an indeterminate form such as <span class="math inline">0/0</span> or <span class="math inline">\infty/\infty</span>.</p>
+<p data-sourcepos="181:1-181:1">Compute</p>
+<p data-sourcepos="184:1-184:1"><span class="math display">
+\lim_{x\to0}\frac{\sin x}{x}.
+</span></p>
+<p>This has form <span class="math inline">0/0</span>, so</p>
+<p data-sourcepos="190:1-190:1"><span class="math display">
+\lim_{x\to0}\frac{\sin x}{x}
+=\lim_{x\to0}\frac{\cos x}{1}=1.
+</span></p>
+<p>Do not use L’Hospital’s rule before checking the form of the limit.</p>
+<h2 id="applications-of-differentiation" data-sourcepos="196:1-196:1">Applications of Differentiation</h2>
+<h3 id="linear-approximation" data-sourcepos="198:1-198:1">Linear Approximation</h3>
+<p data-sourcepos="200:1-200:1">Approximate near a base point with the tangent line.</p>
+<p>Estimate <span class="math inline">\sqrt{4.1}</span>.</p>
+<p>Let <span class="math inline">f(x)=\sqrt{x}</span> and use <span class="math inline">x_0=4</span>:</p>
+<p><span class="math display">
+f(4)=2,
+\qquad
+f&#39;(4)=\frac14.
+</span></p>
+<p data-sourcepos="212:1-212:1">Thus</p>
+<p data-sourcepos="215:1-215:1"><span class="math display">
+\sqrt{4.1}\approx2+\frac14(0.1)=2.025.
+</span></p>
+<p data-sourcepos="218:1-218:1">Pick a nearby point where the function and derivative are easy.</p>
+<h3 id="newtons-method">Newton’s Method</h3>
+<p>Use Newton’s method to turn a root-finding problem into repeated tangent-line corrections.</p>
+<p data-sourcepos="224:1-224:1">Use one Newton step to approximate <span class="math inline">\sqrt2</span> from <span class="math inline">x_0=1.5</span>.</p>
+<p>Solve <span class="math inline">f(x)=x^2-2=0</span>:</p>
+<p data-sourcepos="229:1-229:1"><span class="math display">
+x_1=x_0-\frac{x_0^2-2}{2x_0}
+=1.5-\frac{0.25}{3}=\frac{17}{12}.
+</span></p>
+<p data-sourcepos="233:1-233:1">A good initial guess often makes Newton’s method converge very quickly.</p>
+<h3 id="mean-value-theorem" data-sourcepos="235:1-235:1">Mean Value Theorem</h3>
+<p data-sourcepos="237:1-237:1">If the function is continuous on <span class="math inline">[a,b]</span> and differentiable on <span class="math inline">(a,b)</span>, match average slope to instantaneous slope.</p>
+<p>For <span class="math inline">f(x)=x^2</span> on <span class="math inline">[1,3]</span>, find <span class="math inline">c</span> from the mean value theorem.</p>
+<p data-sourcepos="241:1-241:1">The average slope is</p>
+<p data-sourcepos="244:1-244:1"><span class="math display">
+\frac{f(3)-f(1)}{3-1}=\frac{9-1}{2}=4.
+</span></p>
+<p>Since <span class="math inline">f&#39;(x)=2x</span>,</p>
+<p data-sourcepos="250:1-250:1"><span class="math display">
+2c=4\implies c=2.
+</span></p>
+<p data-sourcepos="253:1-253:1">The theorem guarantees existence; solving <span class="math inline">f&#39;(c)</span> gives the point when possible.</p>
+<h3 id="anti-derivative-table" data-sourcepos="255:1-255:1">Anti-Derivative Table</h3>
+<p data-sourcepos="257:1-257:1">Use anti-derivative table entries before considering heavier techniques.</p>
+<p data-sourcepos="259:1-259:1">Find</p>
+<p data-sourcepos="262:1-262:1"><span class="math display">
+\int\left(3x^2+\sec^2x\right)dx.
+</span></p>
+<p data-sourcepos="265:1-265:1">Using table entries,</p>
+<p data-sourcepos="268:1-268:1"><span class="math display">
+\int\left(3x^2+\sec^2x\right)dx=x^3+\tan x+C.
+</span></p>
+<p data-sourcepos="271:1-271:1">Include the constant <span class="math inline">C</span> for indefinite integrals.</p>
+<h3 id="differential-in-economics" data-sourcepos="273:1-273:1"><em>Differential in Economics</em></h3>
+<p data-sourcepos="275:1-275:1">Translate optimization statements into derivative equations.</p>
+<h4 id="margin" data-sourcepos="277:1-277:1">Margin</h4>
+<p data-sourcepos="279:1-279:1">If</p>
+<p data-sourcepos="282:1-282:1"><span class="math display">
+C(x)=x^2+16,
+</span></p>
+<p data-sourcepos="285:1-285:1">find the production level where average cost is minimized.</p>
+<p data-sourcepos="287:1-287:1">Average cost is</p>
+<p data-sourcepos="290:1-290:1"><span class="math display">
+A(x)=\frac{C(x)}x=x+\frac{16}{x}.
+</span></p>
+<p data-sourcepos="293:1-293:1">Set</p>
+<p data-sourcepos="296:1-296:1"><span class="math display">
+A&#39;(x)=1-\frac{16}{x^2}=0
+\implies
+x=4.
+</span></p>
+<p data-sourcepos="301:1-301:1">At this point,</p>
+<p><span class="math display">
+C&#39;(4)=8,
+\qquad
+\frac{C(4)}4=8.
+</span></p>
+<p data-sourcepos="309:1-309:1">Minimum average cost occurs where marginal cost equals average cost.</p>
+<h4 id="elasticity" data-sourcepos="311:1-311:1">Elasticity</h4>
+<p data-sourcepos="313:1-313:1">Let demand be</p>
+<p data-sourcepos="316:1-316:1"><span class="math display">
+x(p)=100-2p.
+</span></p>
+<p data-sourcepos="319:1-319:1">Compute elasticity at <span class="math inline">p=20</span>.</p>
+<p>Since <span class="math inline">x&#39;(p)=-2</span>,</p>
+<p data-sourcepos="324:1-324:1"><span class="math display">
+E(p)=-\frac{p x&#39;(p)}{x(p)}=\frac{2p}{100-2p}.
+</span></p>
+<p data-sourcepos="327:1-327:1">Thus</p>
+<p data-sourcepos="330:1-330:1"><span class="math display">
+E(20)=\frac{40}{60}=\frac23.
+</span></p>
+<p>If <span class="math inline">0&lt;E&lt;1</span>, demand is inelastic and raising price increases revenue locally.</p>
+<h2 id="integration" data-sourcepos="335:1-335:1">Integration</h2>
+<h3 id="riemann-sum" data-sourcepos="337:1-337:1">Riemann Sum</h3>
+<p data-sourcepos="339:1-339:1">A definite integral is the limit of area sums over finer partitions.</p>
+<p data-sourcepos="341:1-341:1">Write the right-endpoint Riemann sum for <span class="math inline">f(x)=x^2</span> on <span class="math inline">[0,1]</span>.</p>
+<p>Here <span class="math inline">\Delta x=1/n</span> and <span class="math inline">x_i=i/n</span>, so</p>
+<p data-sourcepos="346:1-346:1"><span class="math display">
+\sum_{i=1}^{n}\left(\frac{i}{n}\right)^2\frac1n.
+</span></p>
+<p>Identify <span class="math inline">\Delta x</span> and the sample points before simplifying.</p>
+<h3 id="definite-integral" data-sourcepos="351:1-351:1">Definite Integral</h3>
+<p data-sourcepos="353:1-353:1">Interpret a definite integral as signed area or accumulated quantity.</p>
+<p data-sourcepos="355:1-355:1">Evaluate</p>
+<p data-sourcepos="358:1-358:1"><span class="math display">
+\int_0^2 3x^2 dx.
+</span></p>
+<p data-sourcepos="361:1-361:1">An antiderivative is <span class="math inline">x^3</span>, so</p>
+<p data-sourcepos="364:1-364:1"><span class="math display">
+\int_0^2 3x^2 dx=2^3-0=8.
+</span></p>
+<p data-sourcepos="367:1-367:1">Definite integrals return numbers, not functions.</p>
+<h3 id="first-fundamental-theorem-of-calculus" data-sourcepos="369:1-369:1">First Fundamental Theorem of Calculus</h3>
+<p data-sourcepos="371:1-371:1">Use an antiderivative to evaluate a definite integral.</p>
+<p data-sourcepos="373:1-373:1">Compute</p>
+<p data-sourcepos="376:1-376:1"><span class="math display">
+\int_1^e\frac1x dx.
+</span></p>
+<p data-sourcepos="379:1-379:1">Since an antiderivative is <span class="math inline">\ln x</span>,</p>
+<p data-sourcepos="382:1-382:1"><span class="math display">
+\int_1^e\frac1x dx=\ln e-\ln1=1.
+</span></p>
+<p data-sourcepos="385:1-385:1">The first fundamental theorem turns accumulation into endpoint subtraction.</p>
+<h3 id="second-fundamental-theorem-of-calculus" data-sourcepos="387:1-387:1">Second Fundamental Theorem of Calculus</h3>
+<p data-sourcepos="389:1-389:1">Differentiate an integral whose upper limit is the variable.</p>
+<p data-sourcepos="391:1-391:1">If</p>
+<p data-sourcepos="394:1-394:1"><span class="math display">
+F(x)=\int_0^x\cos(t^2)dt,
+</span></p>
+<p data-sourcepos="397:1-397:1">then</p>
+<p data-sourcepos="400:1-400:1"><span class="math display">
+F&#39;(x)=\cos(x^2).
+</span></p>
+<p data-sourcepos="403:1-403:1">Substitute the upper limit into the integrand.</p>
+<h3 id="substitution" data-sourcepos="405:1-405:1">Substitution</h3>
+<p data-sourcepos="407:1-407:1">Substitute when the integrand contains a function and its derivative.</p>
+<p data-sourcepos="409:1-409:1">Evaluate</p>
+<p data-sourcepos="412:1-412:1"><span class="math display">
+\int 2x\cos(x^2)dx.
+</span></p>
+<p>Let <span class="math inline">u=x^2</span>, so <span class="math inline">du=2x dx</span>:</p>
+<p data-sourcepos="418:1-418:1"><span class="math display">
+\int 2x\cos(x^2)dx=\int\cos u\,du=\sin u+C=\sin(x^2)+C.
+</span></p>
+<p data-sourcepos="421:1-421:1">The best substitution makes the remaining integral simpler, not merely different.</p>
+<h3 id="trigonometric-function-integration" data-sourcepos="423:1-423:1">Trigonometric Function Integration</h3>
+<p data-sourcepos="425:1-425:1">Save one odd factor, then convert the rest using <span class="math inline">\sin^2x+\cos^2x=1</span>.</p>
+<p data-sourcepos="427:1-427:1">Compute</p>
+<p data-sourcepos="430:1-430:1"><span class="math display">
+\int \sin^3x\cos^2x\,dx.
+</span></p>
+<p>Write <span class="math inline">\sin^3x=(1-\cos^2x)\sin x</span> and let <span class="math inline">u=\cos x</span>, <span class="math inline">du=-\sin x dx</span>:</p>
+<p data-sourcepos="436:1-436:1"><span class="math display">
+\int \sin^3x\cos^2x\,dx
+=-\int(1-u^2)u^2du
+=-\frac{u^3}{3}+\frac{u^5}{5}+C.
+</span></p>
+<p data-sourcepos="441:1-441:1">Thus</p>
+<p data-sourcepos="444:1-444:1"><span class="math display">
+-\frac{\cos^3x}{3}+\frac{\cos^5x}{5}+C.
+</span></p>
+<p data-sourcepos="447:1-447:1">Odd powers usually tell which trig function to reserve for <span class="math inline">du</span>.</p>
+<h3 id="partial-fraction-integration" data-sourcepos="449:1-449:1">Partial Fraction Integration</h3>
+<p data-sourcepos="451:1-451:1">Decompose rational functions before integrating.</p>
+<p data-sourcepos="453:1-453:1">Compute</p>
+<p data-sourcepos="456:1-456:1"><span class="math display">
+\int\frac{3x+5}{(x+1)(x+2)}dx.
+</span></p>
+<p data-sourcepos="459:1-459:1">Set</p>
+<p data-sourcepos="462:1-462:1"><span class="math display">
+\frac{3x+5}{(x+1)(x+2)}=\frac{A}{x+1}+\frac{B}{x+2}.
+</span></p>
+<p data-sourcepos="465:1-465:1">Then</p>
+<p data-sourcepos="468:1-468:1"><span class="math display">
+3x+5=A(x+2)+B(x+1),
+</span></p>
+<p>so <span class="math inline">A=2</span> and <span class="math inline">B=1</span>. Therefore</p>
+<p data-sourcepos="474:1-474:1"><span class="math display">
+\int\frac{3x+5}{(x+1)(x+2)}dx=2\ln|x+1|+\ln|x+2|+C.
+</span></p>
+<p data-sourcepos="477:1-477:1">Factor the denominator before choosing the partial fraction form.</p>
+<h3 id="improper-integral" data-sourcepos="479:1-479:1">Improper Integral</h3>
+<p data-sourcepos="481:1-481:1">Replace an infinite endpoint or vertical asymptote with a limit.</p>
+<p data-sourcepos="483:1-483:1">Determine whether</p>
+<p data-sourcepos="486:1-486:1"><span class="math display">
+\int_1^\infty\frac1{x^2}dx
+</span></p>
+<p data-sourcepos="489:1-489:1">converges.</p>
+<p data-sourcepos="492:1-492:1"><span class="math display">
+\int_1^b x^{-2}dx=\left[-\frac1x\right]_1^b=1-\frac1b.
+</span></p>
+<p>Taking <span class="math inline">b\to\infty</span> gives <span class="math inline">1</span>, so the integral converges.</p>
+<p data-sourcepos="497:1-497:1">An improper integral converges only if the defining limit is finite.</p>
+<h2 id="applications-of-integral" data-sourcepos="499:1-499:1">Applications of Integral</h2>
+<h3 id="area-between-2-curves" data-sourcepos="501:1-501:1">Area between 2 Curves</h3>
+<p data-sourcepos="503:1-503:1">Integrate top minus bottom, or use absolute value when the order changes.</p>
+<p data-sourcepos="505:1-505:1">Find the area between <span class="math inline">y=x</span> and <span class="math inline">y=x^2</span> on <span class="math inline">[0,1]</span>.</p>
+<p data-sourcepos="508:1-508:1"><span class="math display">
+A=\int_0^1(x-x^2)dx=\left[\frac{x^2}{2}-\frac{x^3}{3}\right]_0^1=\frac16.
+</span></p>
+<p data-sourcepos="511:1-511:1">Sketch or compare functions to decide which curve is above.</p>
+<h3 id="volume-by-slice-method" data-sourcepos="513:1-513:1">Volume by Slice Method</h3>
+<p data-sourcepos="515:1-515:1">Compute volume by integrating cross-sectional area.</p>
+<p data-sourcepos="517:1-517:1">A solid has square cross sections perpendicular to the <span class="math inline">x</span>-axis with side length <span class="math inline">x</span> for <span class="math inline">0\le x\le2</span>. Find its volume.</p>
+<p data-sourcepos="520:1-520:1"><span class="math display">
+V=\int_0^2 x^2dx=\frac83.
+</span></p>
+<p data-sourcepos="523:1-523:1">Slice method starts by writing area as a function of the slicing variable.</p>
+<h3 id="volume-by-disk-method" data-sourcepos="525:1-525:1">Volume by Disk Method</h3>
+<p data-sourcepos="527:1-527:1">Use disks or washers when slices perpendicular to the axis of rotation are natural.</p>
+<p>Rotate <span class="math inline">y=x</span> on <span class="math inline">[0,1]</span> about the <span class="math inline">x</span>-axis.</p>
+<p data-sourcepos="532:1-532:1"><span class="math display">
+V=\int_0^1\pi x^2dx=\frac{\pi}{3}.
+</span></p>
+<p data-sourcepos="535:1-535:1">Disk radius is the distance from the curve to the axis of rotation.</p>
+<h3 id="volume-by-cylinder-method" data-sourcepos="537:1-537:1">Volume by Cylinder Method</h3>
+<p data-sourcepos="539:1-539:1">Use cylindrical shells when slices parallel to the axis of rotation are simpler.</p>
+<p data-sourcepos="541:1-541:1">Rotate the region under <span class="math inline">y=x</span> on <span class="math inline">[0,1]</span> about the <span class="math inline">y</span>-axis.</p>
+<p data-sourcepos="544:1-544:1"><span class="math display">
+V=\int_0^1 2\pi x\cdot x\,dx=\frac{2\pi}{3}.
+</span></p>
+<p data-sourcepos="547:1-547:1">Shell volume is circumference times height times thickness.</p>
+<h3 id="weighted-average" data-sourcepos="549:1-549:1">Weighted Average</h3>
+<p data-sourcepos="551:1-551:1">Weighted average equals weighted total divided by total weight.</p>
+<p data-sourcepos="553:1-553:1">Find the average value of <span class="math inline">f(x)=x^2</span> on <span class="math inline">[0,1]</span>.</p>
+<p data-sourcepos="556:1-556:1"><span class="math display">
+\bar f=\frac{\int_0^1x^2dx}{\int_0^1 1dx}=\frac13.
+</span></p>
+<p data-sourcepos="559:1-559:1">Ordinary average value is the weighted average with weight <span class="math inline">1</span>.</p>
+<h3 id="simpsons-method">Simpson’s Method</h3>
+<p data-sourcepos="563:1-563:1">Approximate an integral with endpoint and midpoint values.</p>
+<p data-sourcepos="565:1-565:1">Approximate</p>
+<p data-sourcepos="568:1-568:1"><span class="math display">
+\int_0^2 x^2dx
+</span></p>
+<p data-sourcepos="571:1-571:1">with one Simpson step.</p>
+<p><span class="math display">
+\frac{2-0}{6}\left[f(0)+4f(1)+f(2)\right]
+=\frac13(0+4+4)=\frac83.
+</span></p>
+<p>Simpson’s rule is exact for polynomials up to degree <span class="math inline">3</span>.</p>
+<h3 id="arc-length" data-sourcepos="580:1-580:1">Arc Length</h3>
+<p data-sourcepos="582:1-582:1">Convert a curve into a sum of small hypotenuses.</p>
+<p>Find the length of <span class="math inline">y=x</span> on <span class="math inline">[0,1]</span>.</p>
+<p data-sourcepos="587:1-587:1"><span class="math display">
+L=\int_0^1\sqrt{1+(y&#39;)^2}dx
+=\int_0^1\sqrt2\,dx=\sqrt2.
+</span></p>
+<p data-sourcepos="591:1-591:1">Arc length often produces integrals that are harder than the original curve looks.</p>
+<h3 id="surface-area-of-a-function-revolved-about-x-axis" data-sourcepos="593:1-593:1">Surface Area of a Function Revolved about <span class="math inline">x</span>-Axis</h3>
+<p data-sourcepos="595:1-595:1">Surface area is circumference times arc-length element.</p>
+<p>Revolve <span class="math inline">y=x</span> on <span class="math inline">[0,1]</span> about the <span class="math inline">x</span>-axis.</p>
+<p data-sourcepos="600:1-600:1"><span class="math display">
+S=\int_0^1 2\pi y\sqrt{1+(y&#39;)^2}dx
+=\int_0^1 2\pi x\sqrt2\,dx
+=\pi\sqrt2.
+</span></p>
+<p>Use <span class="math inline">2\pi y</span> for rotation about the <span class="math inline">x</span>-axis.</p>
+<h3 id="area-in-polar-coordinates" data-sourcepos="607:1-607:1">Area in Polar Coordinates</h3>
+<p>Polar area uses <span class="math inline">\frac12r^2d\theta</span>.</p>
+<p data-sourcepos="611:1-611:1">Find the area inside <span class="math inline">r=2</span>.</p>
+<p data-sourcepos="614:1-614:1"><span class="math display">
+A=\int_0^{2\pi}\frac12(2)^2d\theta=4\pi.
+</span></p>
+<p>The factor <span class="math inline">1/2</span> belongs to polar area, not to polar double integrals in general.</p>
+<h2 id="series" data-sourcepos="619:1-619:1">Series</h2>
+<h3 id="sequence" data-sourcepos="621:1-621:1">Sequence</h3>
+<p data-sourcepos="623:1-623:1">For monotone sequences, boundedness decides convergence.</p>
+<p data-sourcepos="625:1-625:1">Determine whether</p>
+<p data-sourcepos="628:1-628:1"><span class="math display">
+a_n=1-\frac1n
+</span></p>
+<p data-sourcepos="631:1-631:1">converges.</p>
+<p>Since <span class="math inline">a_n</span> increases and is bounded above by <span class="math inline">1</span>,</p>
+<p data-sourcepos="636:1-636:1"><span class="math display">
+\lim_{n\to\infty}a_n=1.
+</span></p>
+<p data-sourcepos="639:1-639:1">Bounded monotone sequences converge.</p>
+<h3 id="series-1">Series</h3>
+<p data-sourcepos="643:1-643:1">A series converges if its partial sums converge.</p>
+<p data-sourcepos="645:1-645:1">Determine whether</p>
+<p data-sourcepos="648:1-648:1"><span class="math display">
+\sum_{n=0}^{\infty}\left(\frac12\right)^n
+</span></p>
+<p data-sourcepos="651:1-651:1">converges.</p>
+<p data-sourcepos="653:1-653:1">It is geometric with ratio <span class="math inline">1/2</span>, so</p>
+<p data-sourcepos="656:1-656:1"><span class="math display">
+\sum_{n=0}^{\infty}\left(\frac12\right)^n=\frac1{1-1/2}=2.
+</span></p>
+<p data-sourcepos="659:1-659:1">Geometric series converge exactly when <span class="math inline">|r|&lt;1</span>.</p>
+<h3 id="ratio-test-and-root-test" data-sourcepos="661:1-661:1">Ratio Test and Root Test</h3>
+<p data-sourcepos="663:1-663:1">Use ratio test when factorials or powers of <span class="math inline">n</span> shift cleanly.</p>
+<p data-sourcepos="665:1-665:1">Test</p>
+<p data-sourcepos="668:1-668:1"><span class="math display">
+\sum_{n=1}^{\infty}\frac{n}{2^n}.
+</span></p>
+<p data-sourcepos="672:1-672:1"><span class="math display">
+L=\lim_{n\to\infty}\frac{(n+1)/2^{n+1}}{n/2^n}
+=\lim_{n\to\infty}\frac{n+1}{2n}=\frac12&lt;1.
+</span></p>
+<p data-sourcepos="676:1-676:1">So the series converges.</p>
+<p data-sourcepos="678:1-678:1">If the ratio-test limit is <span class="math inline">1</span>, choose another test.</p>
+<h3 id="alternating-series-test" data-sourcepos="680:1-680:1">Alternating Series Test</h3>
+<p data-sourcepos="682:1-682:1">Check decreasing magnitude and limit <span class="math inline">0</span>.</p>
+<p data-sourcepos="684:1-684:1">Determine whether</p>
+<p data-sourcepos="687:1-687:1"><span class="math display">
+\sum_{n=1}^{\infty}(-1)^{n+1}\frac1n
+</span></p>
+<p data-sourcepos="690:1-690:1">converges.</p>
+<p>The terms <span class="math inline">1/n</span> decrease to <span class="math inline">0</span>, so the alternating series test gives convergence.</p>
+<p data-sourcepos="694:1-694:1">Alternating convergence does not imply absolute convergence.</p>
+<h3 id="power-series" data-sourcepos="696:1-696:1">Power Series</h3>
+<p data-sourcepos="698:1-698:1">Use ratio test to find radius of convergence.</p>
+<p data-sourcepos="700:1-700:1">Find the radius of convergence of</p>
+<p data-sourcepos="703:1-703:1"><span class="math display">
+\sum_{n=0}^{\infty}\frac{x^n}{n!}.
+</span></p>
+<p data-sourcepos="707:1-707:1"><span class="math display">
+L=\lim_{n\to\infty}\left|\frac{x^{n+1}/(n+1)!}{x^n/n!}\right|
+=\lim_{n\to\infty}\frac{|x|}{n+1}=0.
+</span></p>
+<p data-sourcepos="711:1-711:1">So the series converges for all <span class="math inline">x</span>, and <span class="math inline">R=\infty</span>.</p>
+<p data-sourcepos="713:1-713:1">Infinite radius means there are no finite endpoint checks.</p>
+<h3 id="integral-comparison" data-sourcepos="715:1-715:1">Integral Comparison</h3>
+<p data-sourcepos="717:1-717:1">Compare a positive decreasing series with the matching improper integral.</p>
+<p data-sourcepos="719:1-719:1">Test</p>
+<p data-sourcepos="722:1-722:1"><span class="math display">
+\sum_{n=1}^{\infty}\frac1{n^2}.
+</span></p>
+<p data-sourcepos="725:1-725:1">Since</p>
+<p data-sourcepos="728:1-728:1"><span class="math display">
+\int_1^\infty\frac1{x^2}dx=1,
+</span></p>
+<p data-sourcepos="731:1-731:1">the series converges by integral comparison.</p>
+<p data-sourcepos="733:1-733:1">Integral comparison works best for positive decreasing terms that come from simple functions.</p>
+<h3 id="eulers-constant">Euler’s Constant</h3>
+<p data-sourcepos="737:1-737:1">Compare a harmonic partial sum with the logarithmic integral.</p>
+<p data-sourcepos="739:1-739:1">Write the finite approximation behind Euler’s constant.</p>
+<p data-sourcepos="742:1-742:1"><span class="math display">
+\gamma_n=\sum_{k=1}^{n}\frac1k-\int_1^n\frac1x dx
+=\sum_{k=1}^{n}\frac1k-\ln n.
+</span></p>
+<p data-sourcepos="746:1-746:1">Then</p>
+<p data-sourcepos="749:1-749:1"><span class="math display">
+\gamma=\lim_{n\to\infty}\gamma_n.
+</span></p>
+<p>Euler’s constant measures the limiting gap between harmonic sums and logarithmic area.</p>
+<h3 id="taylors-series"><strong><em>Taylor’s Series</em></strong></h3>
+<p data-sourcepos="756:1-756:1">Build a polynomial from derivatives at the expansion point.</p>
+<h4 id="taylor-polynomial" data-sourcepos="758:1-758:1">Taylor polynomial</h4>
+<p data-sourcepos="760:1-760:1">Find the Taylor polynomial of degree <span class="math inline">3</span> for <span class="math inline">e^x</span> at <span class="math inline">0</span>.</p>
+<p>All derivatives of <span class="math inline">e^x</span> at <span class="math inline">0</span> are <span class="math inline">1</span>, so</p>
+<p data-sourcepos="765:1-765:1"><span class="math display">
+T_3(x)=1+x+\frac{x^2}{2}+\frac{x^3}{6}.
+</span></p>
+<h4 id="eulers-formula">Euler’s formula</h4>
+<p>Derive Euler’s formula from the Taylor series of <span class="math inline">e^x</span>, <span class="math inline">\sin x</span>, and <span class="math inline">\cos x</span>.</p>
+<p data-sourcepos="772:1-772:1">Start with</p>
+<p data-sourcepos="775:1-775:1"><span class="math display">
+e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots.
+</span></p>
+<p>Substitute <span class="math inline">x</span> by <span class="math inline">ix</span>:</p>
+<p data-sourcepos="781:1-781:1"><span class="math display">
+e^{ix}=1+ix+\frac{(ix)^2}{2!}+\frac{(ix)^3}{3!}+\frac{(ix)^4}{4!}+\cdots.
+</span></p>
+<p>Since <span class="math inline">i^2=-1</span>, group the real and imaginary terms:</p>
+<p data-sourcepos="787:1-787:1"><span class="math display">
+e^{ix}=\left(1-\frac{x^2}{2!}+\frac{x^4}{4!}-\cdots\right)
++i\left(x-\frac{x^3}{3!}+\frac{x^5}{5!}-\cdots\right).
+</span></p>
+<p data-sourcepos="791:1-791:1">Recognize the Taylor series of <span class="math inline">\cos x</span> and <span class="math inline">\sin x</span>:</p>
+<p data-sourcepos="794:1-794:1"><span class="math display">
+e^{ix}=\cos x+i\sin x.
+</span></p>
+<p>At <span class="math inline">x=\pi</span>,</p>
+<p data-sourcepos="800:1-800:1"><span class="math display">
+e^{i\pi}=\cos\pi+i\sin\pi=-1,
+</span></p>
+<p data-sourcepos="803:1-803:1">so</p>
+<p data-sourcepos="806:1-806:1"><span class="math display">
+e^{i\pi}+1=0.
+</span></p>
+<h4 id="substitution-in-a-series" data-sourcepos="809:1-809:1">Substitution in a series</h4>
+<p data-sourcepos="811:1-811:1">Find the first four nonzero terms of <span class="math inline">e^{-x^2}</span> from the Taylor series of <span class="math inline">e^x</span>.</p>
+<p data-sourcepos="813:1-813:1">Start with</p>
+<p data-sourcepos="816:1-816:1"><span class="math display">
+e^u=1+u+\frac{u^2}{2!}+\frac{u^3}{3!}+\cdots.
+</span></p>
+<p>Substitute <span class="math inline">u=-x^2</span>:</p>
+<p data-sourcepos="822:1-822:1"><span class="math display">
+e^{-x^2}=1-x^2+\frac{x^4}{2!}-\frac{x^6}{3!}+\cdots.
+</span></p>
+<p data-sourcepos="825:1-825:1">Thus the first four nonzero terms are</p>
+<p data-sourcepos="828:1-828:1"><span class="math display">
+1-x^2+\frac{x^4}{2}-\frac{x^6}{6}.
+</span></p>
+<h4 id="approximation-and-error" data-sourcepos="831:1-831:1">Approximation and error</h4>
+<p>Approximate <span class="math inline">\sin(0.1)</span> using terms through degree <span class="math inline">3</span>, and bound the error.</p>
+<p data-sourcepos="835:1-835:1">Use</p>
+<p data-sourcepos="838:1-838:1"><span class="math display">
+\sin x=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\cdots.
+</span></p>
+<p data-sourcepos="841:1-841:1">Then</p>
+<p data-sourcepos="844:1-844:1"><span class="math display">
+\sin(0.1)\approx0.1-\frac{0.1^3}{6}=0.0998333\ldots.
+</span></p>
+<p data-sourcepos="847:1-847:1">The next omitted term has size</p>
+<p data-sourcepos="850:1-850:1"><span class="math display">
+\frac{0.1^5}{5!}=\frac{10^{-5}}{120}&lt;10^{-7},
+</span></p>
+<p data-sourcepos="853:1-853:1">so the approximation is accurate to at least <span class="math inline">6</span> decimal places.</p>
+<h4 id="arctangent-series" data-sourcepos="855:1-855:1">Arctangent series</h4>
+<p data-sourcepos="857:1-857:1">Derive the Taylor series for <span class="math inline">\arctan x</span>, determine its interval of convergence, and estimate the endpoint error.</p>
+<p data-sourcepos="859:1-859:1">Start from the geometric series</p>
+<p data-sourcepos="862:1-862:1"><span class="math display">
+\frac1{1-r}=1+r+r^2+\cdots,
+\qquad |r|&lt;1.
+</span></p>
+<p>Let <span class="math inline">r=-t^2</span>:</p>
+<p data-sourcepos="869:1-869:1"><span class="math display">
+\frac1{1+t^2}=1-t^2+t^4-t^6+\cdots,
+\qquad |t|&lt;1.
+</span></p>
+<p>Integrate from <span class="math inline">0</span> to <span class="math inline">x</span>:</p>
+<p data-sourcepos="876:1-876:1"><span class="math display">
+\arctan x=\int_0^x\frac1{1+t^2}dt
+=x-\frac{x^3}{3}+\frac{x^5}{5}-\frac{x^7}{7}+\cdots.
+</span></p>
+<p data-sourcepos="880:1-880:1">The power series has radius <span class="math inline">1</span>. At <span class="math inline">x=1</span> and <span class="math inline">x=-1</span>, the endpoint series are alternating with terms decreasing to <span class="math inline">0</span>, so they converge. Thus the interval of convergence is</p>
+<p><span class="math display">
+[-1,1].
+</span></p>
+<p>At <span class="math inline">x=1</span>,</p>
+<p data-sourcepos="889:1-889:1"><span class="math display">
+\frac\pi4=1-\frac13+\frac15-\frac17+\cdots.
+</span></p>
+<p data-sourcepos="892:1-892:1">After stopping at</p>
+<p data-sourcepos="895:1-895:1"><span class="math display">
+1-\frac13+\frac15-\cdots+\frac{(-1)^N}{2N+1},
+</span></p>
+<p data-sourcepos="898:1-898:1">the alternating-series error is at most</p>
+<p data-sourcepos="901:1-901:1"><span class="math display">
+\frac1{2N+3}.
+</span></p>
+<p data-sourcepos="904:1-904:1">Taylor series are local models; convergence to the function depends on the remainder.</p>
+<h2 id="misc" data-sourcepos="906:1-906:1">Misc</h2>
+<h3 id="mathrme-todo"><span class="math inline">\mathrm{e}</span> TODO</h3>
+<p>Recognize <span class="math inline">e</span> through growth, series, or compound interest limits.</p>
+<p data-sourcepos="912:1-912:1">Use the compound interest limit to approximate <span class="math inline">e</span> with <span class="math inline">n=4</span>.</p>
+<p data-sourcepos="915:1-915:1"><span class="math display">
+\left(1+\frac14\right)^4=\left(\frac54\right)^4=\frac{625}{256}\approx2.441.
+</span></p>
+<p>Larger <span class="math inline">n</span> gives a better approximation to continuous compounding.</p>
+<h3 id="int_-inftyinftye-x2mathrm-d-x-todo" data-sourcepos="920:1-920:1"><span class="math inline">\int_{-\infty}^{\infty}e^{-x^2}\mathrm d x</span> TODO</h3>
+<p data-sourcepos="922:1-922:1">Square the integral and switch to polar coordinates.</p>
+<p data-sourcepos="924:1-924:1">If</p>
+<p data-sourcepos="927:1-927:1"><span class="math display">
+I=\int_{-\infty}^{\infty}e^{-x^2}dx,
+</span></p>
+<p data-sourcepos="930:1-930:1">then</p>
+<p data-sourcepos="933:1-933:1"><span class="math display">
+I^2=\iint_{\mathbb R^2}e^{-(x^2+y^2)}dA.
+</span></p>
+<p data-sourcepos="936:1-936:1">In polar coordinates,</p>
+<p data-sourcepos="939:1-939:1"><span class="math display">
+I^2=\int_0^{2\pi}\int_0^\infty e^{-r^2}r\,dr\,d\theta=\pi.
+</span></p>
+<p data-sourcepos="942:1-942:1">Thus</p>
+<p data-sourcepos="945:1-945:1"><span class="math display">
+I=\sqrt\pi.
+</span></p>
+<p data-sourcepos="948:1-948:1">The Gaussian integral becomes elementary only after moving to two dimensions.</p>
+<h3 id="maximum-overhung" data-sourcepos="950:1-950:1">Maximum Overhung</h3>
+<p data-sourcepos="952:1-952:1">Model balance by keeping each center of mass above the supporting edge.</p>
+<p data-sourcepos="954:1-954:1">For two identical blocks of length <span class="math inline">1</span>, find the maximum overhang.</p>
+<p data-sourcepos="956:1-956:1">The top block can overhang the second by <span class="math inline">1/2</span>. The center of mass of both blocks together can overhang the table by another <span class="math inline">1/4</span>.</p>
+<p data-sourcepos="958:1-958:1">So the total overhang is</p>
+<p data-sourcepos="961:1-961:1"><span class="math display">
+\frac12+\frac14=\frac34.
+</span></p>
+<p>The <span class="math inline">n</span>-block ideal overhang uses the harmonic sum <span class="math inline">\frac12\sum_{k=1}^{n}1/k</span>.</p>
+<h3 id="real-number-system" data-sourcepos="966:1-966:1">Real Number System</h3>
+<p data-sourcepos="968:1-968:1">Use axioms to justify algebraic transformations when a proof needs foundations.</p>
+<p data-sourcepos="970:1-970:1">Prove cancellation for addition: if <span class="math inline">a+c=b+c</span>, then <span class="math inline">a=b</span>.</p>
+<p data-sourcepos="972:1-972:1">Add the additive inverse of <span class="math inline">c</span> to both sides:</p>
+<p data-sourcepos="975:1-975:1"><span class="math display">
+(a+c)+(-c)=(b+c)+(-c).
+</span></p>
+<p data-sourcepos="978:1-978:1">By associativity and inverse laws,</p>
+<p data-sourcepos="981:1-981:1"><span class="math display">
+a+(c+(-c))=b+(c+(-c))
+\implies
+a+0=b+0
+\implies
+a=b.
+</span></p>
+<p data-sourcepos="988:1-988:1">Basic algebraic cancellation is a theorem from group axioms, not an extra rule.</p>
+
+      </article>
+    </main>
+
+    <!-- Right Sidebar (TOC) -->
+    <aside class="sidebar right-sidebar collapsed" id="right-sidebar">
+      <div class="sidebar-content" id="spa-toc">
+        <!-- <h4 class="toc-title">On this page</h4> -->
+        <ul class="toc-list"><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#differentiation">Differentiation</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#limit">Limit</a></li><li class="toc-child toc-level-3"><a href="#derivative">Derivative</a></li><li class="toc-child toc-level-3"><a href="#differential-notation">Differential Notation</a></li><li class="toc-child toc-level-3"><a href="#continuity">Continuity</a></li><li class="toc-child toc-level-3"><a href="#computations-of-derivatives">Computations of Derivatives</a></li><li class="toc-child toc-level-3"><a href="#higher-derivative-notation">Higher Derivative Notation</a></li><li class="toc-child toc-level-3"><a href="#implicit-differentiation">Implicit Differentiation</a></li><li class="toc-child toc-level-3"><a href="#derivative-table">Derivative Table</a></li><li class="toc-child toc-level-3"><a href="#lhospitals-rule-todo">L’Hospital’s Rule TODO</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#applications-of-differentiation">Applications of Differentiation</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#linear-approximation">Linear Approximation</a></li><li class="toc-child toc-level-3"><a href="#newtons-method">Newton’s Method</a></li><li class="toc-child toc-level-3"><a href="#mean-value-theorem">Mean Value Theorem</a></li><li class="toc-child toc-level-3"><a href="#anti-derivative-table">Anti-Derivative Table</a></li><li class="toc-child toc-level-3 toc-range"><a href="#differential-in-economics">Differential in Economics</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#margin"><span class="toc-icon">·</span>Margin</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#elasticity"><span class="toc-icon">·</span>Elasticity</a></li></ul></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#integration">Integration</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#riemann-sum">Riemann Sum</a></li><li class="toc-child toc-level-3"><a href="#definite-integral">Definite Integral</a></li><li class="toc-child toc-level-3"><a href="#first-fundamental-theorem-of-calculus">First Fundamental Theorem of Calculus</a></li><li class="toc-child toc-level-3"><a href="#second-fundamental-theorem-of-calculus">Second Fundamental Theorem of Calculus</a></li><li class="toc-child toc-level-3"><a href="#substitution">Substitution</a></li><li class="toc-child toc-level-3"><a href="#trigonometric-function-integration">Trigonometric Function Integration</a></li><li class="toc-child toc-level-3"><a href="#partial-fraction-integration">Partial Fraction Integration</a></li><li class="toc-child toc-level-3"><a href="#improper-integral">Improper Integral</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#applications-of-integral">Applications of Integral</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#area-between-2-curves">Area between 2 Curves</a></li><li class="toc-child toc-level-3"><a href="#volume-by-slice-method">Volume by Slice Method</a></li><li class="toc-child toc-level-3"><a href="#volume-by-disk-method">Volume by Disk Method</a></li><li class="toc-child toc-level-3"><a href="#volume-by-cylinder-method">Volume by Cylinder Method</a></li><li class="toc-child toc-level-3"><a href="#weighted-average">Weighted Average</a></li><li class="toc-child toc-level-3"><a href="#simpsons-method">Simpson’s Method</a></li><li class="toc-child toc-level-3"><a href="#arc-length">Arc Length</a></li><li class="toc-child toc-level-3"><a href="#surface-area-of-a-function-revolved-about-x-axis">Surface Area of a Function Revolved about x-Axis</a></li><li class="toc-child toc-level-3"><a href="#area-in-polar-coordinates">Area in Polar Coordinates</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#series">Series</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#sequence">Sequence</a></li><li class="toc-child toc-level-3"><a href="#series-1">Series</a></li><li class="toc-child toc-level-3"><a href="#ratio-test-and-root-test">Ratio Test and Root Test</a></li><li class="toc-child toc-level-3"><a href="#alternating-series-test">Alternating Series Test</a></li><li class="toc-child toc-level-3"><a href="#power-series">Power Series</a></li><li class="toc-child toc-level-3"><a href="#integral-comparison">Integral Comparison</a></li><li class="toc-child toc-level-3"><a href="#eulers-constant">Euler’s Constant</a></li><li class="toc-child toc-level-3 toc-range"><a href="#taylors-series">Taylor’s Series</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#taylor-polynomial"><span class="toc-icon">·</span>Taylor polynomial</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#eulers-formula"><span class="toc-icon">·</span>Euler’s formula</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#substitution-in-a-series"><span class="toc-icon">·</span>Substitution in a series</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#approximation-and-error"><span class="toc-icon">·</span>Approximation and error</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#arctangent-series"><span class="toc-icon">·</span>Arctangent series</a></li></ul></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#misc">Misc</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#mathrme-todo">\mathrm{e} TODO</a></li><li class="toc-child toc-level-3"><a href="#int_-inftyinftye-x2mathrm-d-x-todo">\int_{-\infty}^{\infty}e^{-x^2}\mathrm d x TODO</a></li><li class="toc-child toc-level-3"><a href="#maximum-overhung">Maximum Overhung</a></li><li class="toc-child toc-level-3"><a href="#real-number-system">Real Number System</a></li></ul></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <script src="/static/shell-lifecycle.js"></script>
+  <script src="/static/shell-preferences.js"></script>
+  <script src="/static/scrollbar-visibility.js?v=c659b99"></script>
+  <script src="/static/sidebar-panel.js"></script>
+  <script src="/static/svg-theme.js"></script>
+  <script src="/static/render-on-demand.js"></script>
+  <script src="/static/shell-bootstrap.js"></script>
+  <script src="/static/main.js"></script>
+  <script src="/static/reading-navigation-state.js"></script>
+  <script src="/static/shell-layout.js"></script>
+  <script src="/static/shell-search-settings.js"></script>
+  <script src="/static/shell-router.js"></script>
+  <script src="/static/link-preview.js"></script>
+  <script src="/static/text-anchor.js"></script>
+  <script src="/static/comments.js"></script>
+  <script src="/static/themes.js"></script>
+  <script src="/static/table-enhance.js"></script>
+  <script src="/static/syllabus-enhance.js"></script>
+  <script src="/static/core/ink-stroke-format.js"></script>
+  <script src="/static/drawing-engine-render.js"></script>
+  <script>
+  // highlight.js: on-demand language loader + post-load highlight pass.
+  //
+  // Core (highlight.min.js) bundles ~37 common languages. Pages that use
+  // additional languages from _HLJS_EXTRA trigger an extra CDN fetch only
+  // when the page actually contains a matching code block. The service
+  // worker caches each module after the first fetch, so subsequent pages
+  // pay nothing for already-loaded languages.
+  //
+  // _HLJS_ALIAS maps user-facing class names to module filenames that
+  // differ from the class name. Pure aliases that hljs core already knows
+  // (e.g. ts → typescript, sh → bash) are resolved by hljs.getLanguage()
+  // and don't need entries — only include aliases whose target module is
+  // in _HLJS_EXTRA.
+  window._HLJS_BASE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/languages/';
+  window._HLJS_ALIAS = {
+    tex: 'latex', docker: 'dockerfile', ps: 'powershell', ps1: 'powershell',
+    ml: 'ocaml', hs: 'haskell', clj: 'clojure', cljs: 'clojure',
+    erl: 'erlang', coffee: 'coffeescript', f90: 'fortran', f95: 'fortran',
+    pascal: 'delphi'
+  };
+  window._HLJS_EXTRA = [
+    // Tier 1/2: build/config, scientific, FP, scripting, editor
+    'dockerfile','nginx','cmake','http','latex','julia','matlab','fortran',
+    'haskell','scala','ocaml','fsharp','clojure','elixir','dart','vim','powershell',
+    // Tier 3: FP & academic
+    'erlang','scheme','lisp','prolog',
+    // Tier 3: hardware / assembly
+    'verilog','vhdl','x86asm','armasm',
+    // Tier 3: modern systems
+    'crystal','nim','d','delphi',
+    // Tier 3: build / config
+    'groovy','nix','dts',
+    // Tier 3: markup / templating
+    'asciidoc','handlebars','gherkin',
+    // Tier 3: shell / scripting
+    'awk','tcl','coffeescript',
+    // Tier 3: stats
+    'stan'
+  ];
+  window._hljsLoaded = {};
+
+  // Run the highlight + line-number pass against `root` (defaults to document).
+  window._hljsRun = function(root) {
+    root = root || document;
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (name) {
+        var resolved = hljs.getLanguage(name) ? name : 'plaintext';
+        code.classList.add('language-' + resolved);
+      }
+    });
+    hljs.configure({ cssSelector: 'pre:not(.mermaid) > code' });
+    hljs.highlightAll();
+    root.querySelectorAll('pre:not(.mermaid) > code').forEach(function(code) {
+      if (code.querySelector('.code-line')) return;
+      var html = code.innerHTML;
+      if (html.charAt(html.length - 1) === '\n') html = html.slice(0, -1);
+      var lines = html.split('\n');
+      var openTags = [];
+      code.innerHTML = lines.map(function(line) {
+        var prefix = openTags.join('');
+        var re = /<\/?span[^>]*>/gi, m;
+        while ((m = re.exec(line)) !== null) {
+          if (m[0][1] === '/') openTags.pop();
+          else openTags.push(m[0]);
+        }
+        var suffix = '';
+        for (var i = 0; i < openTags.length; i++) suffix += '</span>';
+        return '<span class="code-line">' + prefix + (line || ' ') + suffix + '</span>';
+      }).join('');
+    });
+  };
+
+  // Scan `root` for code blocks, fetch any missing allowlisted language
+  // modules, then run the highlight pass once they finish loading (or fail).
+  // Called once from the highlight.min.js onload handler, and again from
+  // main.js after each SPA navigation (scoped to #spa-content).
+  window._hljsInit = function(root) {
+    root = root || document;
+    if (typeof hljs === 'undefined') return;
+    var allow = {};
+    for (var i = 0; i < window._HLJS_EXTRA.length; i++) allow[window._HLJS_EXTRA[i]] = true;
+    var need = {};
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (!name || hljs.getLanguage(name)) return;
+      if (allow[name] && !window._hljsLoaded[name]) need[name] = true;
+    });
+    var keys = Object.keys(need);
+    if (!keys.length) { window._hljsRun(root); return; }
+    var pending = keys.length;
+    keys.forEach(function(l) {
+      window._hljsLoaded[l] = true; // mark in-flight to dedupe across SPA nav
+      var s = document.createElement('script');
+      s.src = window._HLJS_BASE + l + '.min.js';
+      s.onload = s.onerror = function() { if (--pending === 0) window._hljsRun(root); };
+      document.head.appendChild(s);
+    });
+  };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    onload="window._hljsInit();"></script>
+  <script id="rprint-mermaid" async src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('mermaid')}else{var t=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'default';mermaid.initialize({startOnLoad:false,theme:t});document.querySelectorAll('pre.mermaid > code').forEach(function(c){var src=c.textContent;c.parentElement.setAttribute('data-mermaid-source',src);c.parentElement.textContent=src;});mermaid.run()}"></script>
+  <script>document.getElementById('rprint-mermaid').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('mermaid',new Error('Mermaid failed to load'))}});</script>
+  
+  
+  
+</body>
+</html>

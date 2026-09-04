@@ -1,0 +1,2820 @@
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --banner-height: 56px;
+  --sidebar-width: 260px;
+  --right-sidebar-width: 260px;
+  --color-bg: #ffffff;
+  --color-bg-alt: #f6f8fa;
+  --color-border: #e1e4e8;
+  --color-text: #24292e;
+  --color-text-muted: #586069;
+  --color-primary: #0366d6;
+  --color-primary-hover: #0249a6;
+  --color-banner-bg: #24292e;
+  --color-banner-text: #ffffff;
+  --color-dropdown-bg: #ffffff;
+  --color-active-bg: #f3f4f6;
+  --color-scrollbar: #c8c8c8;
+  --color-scrollbar-hover: #a0a0a0;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --font-latin: var(--font-sans);
+  --font-zh: "Noto Sans SC", "PingFang SC", "Microsoft YaHei";
+
+  /* ===== Status colors (light defaults) =====
+     Use these for danger/success/warning/info instead of literal hex.
+     -fg = on light bg | -subtle = tinted bg | -muted = soft border. */
+  --color-danger: #cf222e;
+  --color-danger-hover: #a40e26;
+  --color-danger-fg: #d1242f;
+  --color-danger-subtle: #ffebe9;
+  --color-danger-muted: #ff8182;
+
+  --color-success: #1a7f37;
+  --color-success-hover: #116329;
+  --color-success-fg: #1a7f37;
+  --color-success-subtle: #dafbe1;
+
+  --color-warning: #9a6700;
+  --color-warning-hover: #7d5300;
+  --color-warning-fg: #9a6700;
+  --color-warning-subtle: #fff8c5;
+  --color-warning-muted: #d4a72c;
+
+  --color-info: #0969da;
+  --color-info-hover: #0550ae;
+  --color-info-subtle: #ddf4ff;
+
+  /* Aliases so existing var(--color-attention-*, …) and var(--color-accent*, …)
+     references resolve from a token instead of the literal fallback. */
+  --color-attention-fg: var(--color-warning-fg);
+  --color-attention-subtle: var(--color-warning-subtle);
+  --color-attention-muted: var(--color-warning-muted);
+  --color-accent-fg: var(--color-info);
+  --color-accent: var(--color-info);
+  --color-text-secondary: var(--color-text-muted);
+  --color-border-default: var(--color-border);
+
+  /* ===== Elevation (popover/dropdown/dialog) =====
+     Pick by surface type, not by depth. Theme overrides darken. */
+  --shadow-popover: 0 8px 30px rgba(0,0,0,0.15);
+  --shadow-dropdown: 0 4px 16px rgba(0,0,0,0.12);
+  --shadow-dialog: 0 16px 48px rgba(0,0,0,0.20);
+
+  /* ===== Z-index tiers =====
+     Documented stacking order. Use these instead of magic numbers.
+       content   1  : in-flow content stacking
+       overlay 100  : in-content overlays (text editor, hover cursor, sidebars)
+       toolbar 200  : page-level toolbars + status badges
+       terminal 900 : terminal panel (over content, below banner)
+       banner 1000  : fixed top banner
+       popover 1100 : dropdowns/popovers anchored to banner
+       comment 1200 : inline comment popups + add button
+       toast 10000  : ephemeral toasts and small popups
+       modal 10100  : full-screen modal overlays */
+  --z-content: 1;
+  --z-overlay: 100;
+  --z-toolbar: 200;
+  --z-terminal: 900;
+  --z-banner: 1000;
+  --z-popover: 1100;
+  --z-comment: 1200;
+  --z-toast: 10000;
+  --z-modal: 10100;
+
+  /* ===== Transitions =====
+     Use base for almost all hover/state changes; fast for tight
+     popups; slow for layout shifts. */
+  --transition-fast: 0.12s ease;
+  --transition-base: 0.15s ease;
+  --transition-slow: 0.25s ease;
+
+  /* ===== Always-light surface palette =====
+     For UI that intentionally stays light on dark pages — currently the
+     PDF chrome (find/view/more/props/crop panels) and `.ink-force-light`
+     ink toolbar.  NEVER override these in a `[data-theme="dark"]` block;
+     they are meant to stay light no matter the page theme.  Use these
+     instead of literal hex when adding a new always-light surface. */
+  --surface-light-bg: #ffffff;
+  --surface-light-bg-alt: #f6f8fa;
+  --surface-light-bg-hover: #eaeef2;
+  --surface-light-border: #d0d7de;
+  --surface-light-text: #1f2328;
+  --surface-light-text-muted: #57606a;
+  --surface-light-text-subtle: #656d76;
+  --surface-light-accent: #0550ae;
+  --surface-light-accent-hover: #0969da;
+  --surface-light-success: #1a7f37;
+  --surface-light-warning: #9a6700;
+  --surface-light-danger: #cf222e;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--banner-height) + 16px);
+}
+
+/* Thin, theme-aware scrollbars are the application baseline. Firefox keeps
+   only the root viewport native so macOS can auto-hide it; nested components
+   retain the compact transparent style. Chromium/WebKit use exact dimensions. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar) transparent;
+}
+
+@supports (-moz-appearance: none) {
+  html {
+    scrollbar-width: auto !important;
+    scrollbar-color: auto !important;
+  }
+
+  html.scrollbar-edge-managed:not(.right-sidebar-scrollbar-active) .right-sidebar,
+  html.scrollbar-edge-managed.right-sidebar-scrollbar-active {
+    scrollbar-color: transparent transparent !important;
+  }
+  html.scrollbar-edge-managed.right-sidebar-scrollbar-active .right-sidebar {
+    scrollbar-width: thin !important;
+    scrollbar-color: var(--color-scrollbar) transparent !important;
+  }
+}
+
+/* Firefox 154 parses the outer scrollbar pseudo-element but not its parts. */
+@supports selector(::-webkit-scrollbar-thumb) {
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  *::-webkit-scrollbar-track,
+  *::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--color-scrollbar);
+    border-radius: 3px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--color-scrollbar-hover);
+  }
+
+  html.scrollbar-edge-managed:not(.right-sidebar-scrollbar-active) .right-sidebar::-webkit-scrollbar-thumb,
+  html.scrollbar-edge-managed.right-sidebar-scrollbar-active::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+  html.scrollbar-edge-managed.right-sidebar-scrollbar-active .right-sidebar::-webkit-scrollbar-thumb {
+    background: var(--color-scrollbar);
+  }
+  html.scrollbar-edge-managed.right-sidebar-scrollbar-active .right-sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--color-scrollbar-hover);
+  }
+}
+
+body {
+  font-family: var(--font-latin), var(--font-zh), sans-serif;
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-size: var(--page-font-size, 18px);
+  line-height: var(--page-line-height, 1.8);
+  overscroll-behavior: none;
+}
+
+/* Line height overrides */
+[data-font-size="normal"] body { --page-font-size: 16px; }
+[data-font-size="large"] body { --page-font-size: 18px; }
+[data-font-size="larger"] body { --page-font-size: 24px; }
+[data-line-height="normal"] body { --page-line-height: 1.6; }
+[data-line-height="relaxed"] body { --page-line-height: 1.8; }
+[data-line-height="airy"] body { --page-line-height: 2.2; }
+
+/* Font preview in style panel */
+.font-preview {
+  display: block;
+  font-size: 20px;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  pointer-events: none;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+  color: var(--color-primary-hover);
+}
+
+/* ===== Safe Area (PWA standalone/fullscreen) ===== */
+:root.pwa-standalone {
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --banner-height: calc(56px + var(--safe-area-top));
+  background: var(--color-bg);
+}
+.pwa-standalone .top-banner {
+  box-sizing: content-box;
+  height: 56px;
+  padding-top: var(--safe-area-top);
+}
+.pwa-standalone .nav-list,
+.pwa-standalone .nav-item {
+  height: 56px;
+}
+:root.electron-notch-fullscreen {
+  --safe-area-top: 0px;
+}
+:root.electron-notch-fullscreen.pwa-standalone .top-banner {
+  padding-top: 0;
+}
+
+/* ===== Round Corner Padding Override ===== */
+[data-ignore-corners="on"] .top-banner {
+  padding-left: max(1px, env(safe-area-inset-left));
+  padding-right: max(1px, env(safe-area-inset-right));
+}
+[data-ignore-corners="on"] .article {
+  padding-left: max(1px, env(safe-area-inset-left));
+  padding-right: max(1px, env(safe-area-inset-right));
+}
+[data-ignore-corners="on"] .banner-left {
+  left: max(1px, env(safe-area-inset-left));
+}
+[data-ignore-corners="on"] .banner-right {
+  right: max(1px, env(safe-area-inset-right));
+}
+
+/* ===== Top Banner ===== */
+.top-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: var(--banner-height);
+  background: var(--color-banner-bg);
+  color: var(--color-banner-text);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition: transform 0.3s ease;
+  transform-origin: right center;
+  /* No will-change here — it creates a containing block that traps
+     dropdown panel z-indices, making them render behind page content.
+     The fold/unfold JS adds will-change transiently during animation. */
+}
+
+.banner-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.banner-left {
+  position: absolute;
+  left: 16px;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+.banner-center {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.banner-center-inner {
+  width: 100%;
+  max-width: var(--content-max-width, 90%);
+  /* Reserve at least the measured left-toggle width (+ small gap) so the
+     center column never slides under .banner-left. JS sets --banner-left-w
+     on load / resize; the 52px fallback covers the first paint before JS
+     runs and the no-JS case. */
+  margin-left: max(
+    calc(var(--banner-left-w, 36px) + 16px),
+    calc((100% - var(--content-max-width, 90%)) / 2)
+  );
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+:root.electron-notch-fullscreen .banner-center-inner {
+  width: calc(var(--electron-notch-left) - var(--banner-left-w, 36px) - 40px);
+  max-width: none;
+  margin-left: calc(var(--banner-left-w, 36px) + 16px);
+  margin-right: 0;
+}
+
+.banner-right {
+  position: absolute;
+  right: 16px;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
+}
+
+.site-title {
+  color: var(--color-banner-text);
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: -0.3px;
+}
+.site-title:hover {
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+/* Non-public site title highlight */
+.site-title[data-level="secret"] { --banner-bg: #d32f2f; }
+.site-title[data-level="private"] { --banner-bg: #e65100; }
+.site-title[data-level="internal"] { --banner-bg: #1565c0; }
+.site-title[data-level] {
+  background: var(--banner-bg);
+  padding: 0 8px;
+  border-radius: 4px;
+}
+
+/* Non-public article indicator in auto-generated index */
+a[data-tag="secret"] { text-decoration: underline; text-decoration-color: #d32f2f; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a[data-tag="private"] { text-decoration: underline; text-decoration-color: #e65100; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a[data-tag="internal"] { text-decoration: underline; text-decoration-color: #1565c0; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+/* SPA health indicator - hidden by default (static site) */
+.spa-health-wrap {
+  display: none;
+  position: relative;
+  flex-shrink: 0;
+}
+body[data-spa="true"] .spa-health-wrap {
+  display: inline-block;
+}
+.spa-health-dot {
+  display: block;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* SPA health status popup */
+.spa-health-popup {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 210px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  padding: 12px 14px;
+  z-index: 1002;
+  font-size: 12px;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+.spa-health-popup.open {
+  display: block;
+}
+.shp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+.shp-title {
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  color: var(--color-text-muted);
+}
+.shp-heart {
+  font-size: 13px;
+}
+.shp-divider {
+  border-top: 1px solid var(--color-border);
+  margin: 6px 0;
+}
+.shp-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.shp-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1px 0;
+}
+.shp-label {
+  color: var(--color-text-muted);
+}
+.shp-value {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+}
+.shp-modules {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px 12px;
+  justify-items: start;
+}
+.shp-mod {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+}
+.shp-mod-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+  opacity: 0.35;
+  flex-shrink: 0;
+}
+.shp-mod-dot.on {
+  background: #22c55e;
+  opacity: 1;
+}
+.banner-label {
+  font-size: 0.7em;
+  opacity: 0.8;
+  margin-left: 8px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.main-nav {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ===== Banner icon buttons (shared base) =====
+   36×36 chrome button on the dark banner. Used by:
+     .banner-toggle (sidebar / TOC fold)
+     .banner-right-toggle (compact-mode actions toggle)
+     .theme-btn (style panel)
+     .settings-btn (settings panel)
+     .search-btn (search collapser)
+     .comment-btn (inline comment toggle)
+   Per-button extras live below; kindle theme overrides live in themes.css.
+   Keep the kindle selector list in sync with this group selector. */
+.banner-toggle,
+.banner-right-toggle,
+.theme-btn,
+.settings-btn,
+.search-btn,
+.comment-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.8);
+  cursor: pointer;
+  flex-shrink: 0;
+  text-decoration: none;
+  transition: background var(--transition-base), border-color var(--transition-base), color var(--transition-base);
+}
+.banner-toggle:hover,
+.banner-right-toggle:hover,
+.banner-right-toggle.active,
+.theme-btn:hover, .theme-btn.open,
+.settings-btn:hover, .settings-btn.open,
+.search-btn:hover,
+.comment-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.3);
+  color: #fff;
+}
+
+/* --- .banner-toggle extras --- */
+/* Slightly muted resting color (the fold/TOC toggle is a chrome
+   affordance, not a primary action). */
+.banner-toggle {
+  color: rgba(255,255,255,0.7);
+}
+.banner-toggle.active {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+.banner-toggle.disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ===== Fold Banner (floating buttons when banner is hidden) ===== */
+.banner-fold-float {
+  position: fixed;
+  top: 12px;
+  right: 16px;
+  z-index: 1001;
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+body.banner-folded .banner-fold-float {
+  display: flex;
+}
+/* Push fold-float below ink toolbar on whiteboard / PDF annotator pages */
+body.banner-folded:has(.ink-container) .banner-fold-float {
+  top: 50px;
+}
+body.banner-folded:has(#pdf-annotator-container) .banner-fold-float {
+  top: 60px;
+}
+/* Notebook pages: adjust for toolbar presence */
+body.banner-folded[data-native-jupyter="on"]:has(.jupyter-viewer) .banner-fold-float {
+  top: 6px;
+}
+body.banner-folded[data-native-jupyter="off"]:has(.jupyter-viewer) .banner-fold-float {
+  top: 80px;
+}
+.banner-fold-float-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid rgba(30, 30, 30, 0.75);
+  border-radius: 8px;
+  color: rgba(30, 30, 30, 0.75);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.banner-fold-float-btn:hover {
+  border-color: rgba(50, 50, 50, 0.85);
+  color: rgba(50, 50, 50, 0.85);
+}
+/* Distinct from :hover so the user can tell at a glance which button
+ * represents the current mode. Uses the same primary-blue overlay as
+ * the unfold trigger (`#unfold-banner-btn` below) so the "active"
+ * affordance reads as a single colour family across the float bar. */
+.banner-fold-float-btn.active {
+  border-color: rgba(30, 100, 220, 0.8);
+  color: rgba(30, 100, 220, 0.8);
+}
+.banner-fold-float-btn.disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+#unfold-banner-btn {
+  border-color: rgba(30, 100, 220, 0.8);
+  color: rgba(30, 100, 220, 0.8);
+}
+#unfold-banner-btn:hover {
+  border-color: rgba(40, 110, 240, 0.9);
+  color: rgba(40, 110, 240, 0.9);
+}
+
+/* Disable clicks on banner content during fold/unfold animation */
+.top-banner.banner-no-click {
+  pointer-events: none;
+}
+
+/* Banner-folded layout adjustments */
+body.banner-folded .top-banner {
+  transform: scaleX(0);
+}
+body.banner-folded .main-layout {
+  margin-top: 0;
+  min-height: 100dvh;
+}
+body.banner-folded .sidebar {
+  top: 0;
+  height: 100dvh;
+}
+html:has(body.banner-folded) {
+  scroll-padding-top: 16px;
+}
+body.banner-fold-edge .article {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+/* PWA standalone: preserve safe-area when banner is folded */
+html.pwa-standalone:has(body.banner-folded)::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--safe-area-top);
+  background: var(--color-bg);
+  z-index: 999;
+  pointer-events: none;
+}
+.pwa-standalone body.banner-folded .main-layout {
+  margin-top: var(--safe-area-top);
+  min-height: calc(100dvh - var(--safe-area-top));
+}
+.pwa-standalone body.banner-folded .sidebar {
+  top: var(--safe-area-top);
+  height: calc(100dvh - var(--safe-area-top));
+}
+html.pwa-standalone:has(body.banner-folded) {
+  scroll-padding-top: calc(16px + var(--safe-area-top));
+}
+.pwa-standalone body.banner-folded .banner-fold-float {
+  top: calc(12px + var(--safe-area-top));
+}
+.pwa-standalone body.banner-folded:has(.ink-container) .banner-fold-float {
+  top: calc(50px + var(--safe-area-top));
+}
+.pwa-standalone body.banner-folded:has(#pdf-annotator-container) .banner-fold-float {
+  top: calc(60px + var(--safe-area-top));
+}
+.pwa-standalone body.banner-folded[data-native-jupyter="on"]:has(.jupyter-viewer) .banner-fold-float {
+  top: calc(6px + var(--safe-area-top));
+}
+.pwa-standalone body.banner-folded[data-native-jupyter="off"]:has(.jupyter-viewer) .banner-fold-float {
+  top: calc(80px + var(--safe-area-top));
+}
+
+/* Banner actions (style panel wrapper) */
+.banner-actions {
+  position: relative;
+}
+
+/* .theme-btn base lives in the shared .banner-icon-btn group above. */
+
+/* Style Panel */
+.style-panel {
+  --panel-tick-count: 6;
+  --panel-tick-width: 50px;
+  --panel-theme-count: 3;
+  --panel-theme-min: 90px;
+  --panel-pad: 32px;
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: calc(
+    max(
+      var(--panel-tick-count) * var(--panel-tick-width),
+      var(--panel-theme-count) * (var(--panel-theme-min) + 6px)
+    ) + var(--panel-pad)
+  );
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 16px;
+  z-index: 1002;
+}
+.style-panel.open {
+  display: block;
+}
+
+.style-panel-section {
+  margin-bottom: 16px;
+}
+.style-panel-section:last-child {
+  margin-bottom: 0;
+}
+
+.style-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+.style-label span {
+  float: right;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--color-primary);
+}
+.style-lab-tag {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  opacity: 0.6;
+  letter-spacing: 0;
+  margin-left: 4px;
+}
+.style-label .style-spa-tag {
+  float: none;
+  font-size: 10px;
+  font-weight: 500;
+  color: #f5a623;
+  opacity: 0.85;
+  letter-spacing: 0;
+  margin-left: 4px;
+}
+.style-label .style-lab-tag {
+  float: none;
+  font-size: 10px;
+  font-weight: 500;
+  color: #4a90d9;
+  opacity: 0.85;
+  letter-spacing: 0;
+  margin-left: 4px;
+}
+
+/* Switch row layout */
+.style-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.style-switch-row .style-label {
+  margin-bottom: 0;
+}
+
+/* Switch toggle */
+.style-switch {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  background: var(--color-border);
+  border: none;
+  border-radius: 11px;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.style-switch[aria-checked="true"] {
+  background: var(--color-primary);
+}
+.style-switch-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: var(--color-bg);
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.style-switch[aria-checked="true"] .style-switch-knob {
+  transform: translateX(18px);
+}
+.style-switch:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+/* Disabled feature row */
+.feature-disabled .style-label {
+  opacity: 0.5;
+}
+
+.style-toggle-group {
+  display: flex;
+  gap: 6px;
+}
+
+.style-toggle-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.style-toggle-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-text);
+}
+.style-toggle-btn.active {
+  background: var(--color-active-bg);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Theme buttons show their own theme colors */
+.style-toggle-btn[data-theme="light"] {
+  background: #ffffff;
+  color: #586069;
+  border-color: #e1e4e8;
+}
+.style-toggle-btn[data-theme="light"]:hover {
+  border-color: #0366d6;
+  color: #24292e;
+}
+.style-toggle-btn[data-theme="light"].active {
+  background: #e8f0fe;
+  border-color: #0366d6;
+  color: #0366d6;
+}
+
+.style-toggle-btn[data-theme="dark"] {
+  background: #0d0e17;
+  color: #8b949e;
+  border-color: #30363d;
+}
+.style-toggle-btn[data-theme="dark"]:hover {
+  border-color: #58a6ff;
+  color: #c9d1d9;
+}
+.style-toggle-btn[data-theme="dark"].active {
+  background: #1f2937;
+  border-color: #58a6ff;
+  color: #58a6ff;
+}
+
+.style-toggle-btn[data-theme="kindle"] {
+  background: #ffffff;
+  color: #000000;
+  border-color: #000000;
+  font-weight: 700;
+}
+.style-toggle-btn[data-theme="kindle"]:hover {
+  border-color: #000000;
+  color: #000000;
+}
+.style-toggle-btn[data-theme="kindle"].active {
+  background: #ffffff;
+  border-color: #000000;
+  color: #000000;
+  font-weight: 700;
+}
+
+.style-slider-wrap {
+  position: relative;
+  padding-bottom: 0;
+}
+.style-range-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 9px 0;
+  padding: 0;
+}
+.style-range-tick {
+  flex: 0 0 0px;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+  font-size: 11px;
+  line-height: 1.2;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color 0.15s, font-weight 0.15s;
+  user-select: none;
+}
+.style-range-tick.active {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+.style-range {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  margin: 0;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-border);
+  outline: none;
+  cursor: pointer;
+}
+.style-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid var(--color-bg);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+.style-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid var(--color-bg);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+/* ===== Navigation ===== */
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 4px;
+  height: var(--banner-height);
+  align-items: stretch;
+}
+
+.nav-item {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  height: var(--banner-height);
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  color: rgba(255,255,255,0.85);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+  border-radius: 6px 6px 0 0;
+}
+.nav-link:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+  text-decoration: none;
+}
+
+/* Dropdown */
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0px);
+  left: 0;
+  min-width: 100%;
+  width: max-content;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  list-style: none;
+  padding: 6px 0;
+  z-index: 1001;
+  white-space: nowrap;
+}
+
+@media (hover: hover) {
+  .nav-item:hover .nav-dropdown {
+    display: block;
+  }
+}
+
+.nav-item.open .nav-dropdown {
+  display: block;
+}
+
+.nav-dropdown li a {
+  display: block;
+  padding: 8px 14px;
+  color: var(--color-text);
+  font-size: 13px;
+  transition: background 0.1s;
+}
+.nav-dropdown li a:hover {
+  background: var(--color-active-bg);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* ===== Main Layout ===== */
+.main-layout {
+  margin-top: var(--banner-height);
+  min-height: calc(100dvh - var(--banner-height));
+}
+
+/* ===== Sidebars ===== */
+.sidebar {
+  position: fixed;
+  top: var(--banner-height);
+  height: calc(100dvh - var(--banner-height));
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--color-bg-alt);
+  z-index: 100;
+  transition: top 0.3s ease, height 0.3s ease;
+}
+
+/* Transitions only enabled after JS init */
+.sidebar.animated {
+  transition: transform 0.25s ease, opacity 0.2s ease, top 0.3s ease, height 0.3s ease;
+}
+.sidebar.animated .sidebar-content {
+  transition: opacity 0.2s ease;
+}
+
+.left-sidebar {
+  left: 0;
+  width: var(--sidebar-width);
+  border-right: 1px solid var(--color-border);
+}
+
+.right-sidebar {
+  right: 0;
+  width: var(--right-sidebar-width);
+  border-left: 1px solid var(--color-border);
+}
+
+.sidebar.collapsed {
+  transform: translateX(0);
+}
+.left-sidebar.collapsed {
+  transform: translateX(calc(-1 * var(--sidebar-width)));
+}
+.right-sidebar.collapsed {
+  transform: translateX(var(--right-sidebar-width));
+}
+.sidebar.collapsed .sidebar-content {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar-content {
+  padding: 20px 16px;
+  opacity: 1;
+}
+
+/* Left sidebar list */
+.sidebar-cat-title {
+  display: block;
+  padding: 12px 12px 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: 0.2px;
+  text-decoration: none;
+}
+.sidebar-cat-title:hover {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.sidebar-list {
+  list-style: none;
+}
+.sidebar-list li {
+  margin: 1px 0;
+}
+.sidebar-list li a {
+  display: block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: var(--color-text);
+  font-size: 13px;
+  transition: background 0.1s;
+}
+.sidebar-list li a:hover {
+  background: var(--color-border);
+  text-decoration: none;
+}
+.sidebar-list li.active > a {
+  background: var(--color-active-bg);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Dynamic greeting animation in content */
+.greeting-cycle {
+  display: inline-block;
+  font-weight: 700;
+  min-height: 1.2em;
+  vertical-align: baseline;
+}
+
+/* Sidebar row: flex container for link + toggle */
+.sidebar-row {
+  display: flex !important;
+  align-items: center;
+  width: 100%;
+}
+.sidebar-row > a {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.sidebar-row > .sidebar-toggle {
+  flex: 0 0 auto;
+}
+
+/* Shared sidebar toggle (+/−) button */
+.sidebar-toggle {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  margin-right: 4px;
+}
+.sidebar-toggle::before {
+  content: '+';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-text-muted);
+  opacity: 0.5;
+}
+.sidebar-toggle:hover {
+  border-color: var(--color-border);
+  background: var(--color-border);
+}
+.sidebar-toggle:hover::before {
+  opacity: 0.9;
+}
+.open > .sidebar-row > .sidebar-toggle::before {
+  content: '\2212';
+}
+
+.sidebar-group-title {
+  display: block;
+  padding: 10px 12px 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.sidebar-group-title:hover {
+  color: var(--color-primary);
+  border-color: var(--color-border);
+  text-decoration: none;
+}
+
+.sidebar-group > ul {
+  list-style: none;
+  padding-left: 8px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+}
+.sidebar-group.open > ul {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+/* Nested sub-pages in sidebar */
+.sidebar-subpages {
+  list-style: none;
+  padding-left: 12px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+}
+.sidebar-list li.has-children.open > .sidebar-subpages {
+  max-height: 2000px;
+  opacity: 1;
+}
+.sidebar-list li.has-children > .sidebar-row > a {
+  padding-right: 4px;
+}
+.sidebar-subpages li a {
+  font-size: 12px;
+  padding: 4px 10px;
+  color: var(--color-text-muted);
+}
+.sidebar-subpages li a:hover {
+  color: var(--color-text);
+}
+.sidebar-subpages li.active a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* TOC styles are in sidebar-panel.css */
+
+/* ===== Content Area ===== */
+.content {
+  max-width: 100%;
+  padding: 16px 0 calc(80px + env(safe-area-inset-bottom, 0px));
+}
+
+.article {
+  max-width: var(--content-max-width, 90%);
+  margin-left: calc((100% - var(--content-max-width, 90%)) / 2);
+  margin-right: auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.article.animated {
+  transition: margin 0.25s ease;
+}
+
+.main-layout:not(.left-collapsed) .article {
+  margin-left: max(calc((100% - var(--content-max-width, 90%)) / 2), var(--sidebar-width));
+}
+
+.main-layout:not(.right-collapsed) .article {
+  margin-right: max(calc((100% - var(--content-max-width, 90%)) / 2), var(--right-sidebar-width));
+}
+
+/* ===== Two-column mode (stacked viewport-tall spreads) =====
+   The article is chunked by themes.js into <div class="spread"> blocks. Each
+   spread is at most ~viewport tall and lays its children out as a balanced
+   2-column box. Reading flow within a spread: top-to-bottom in the left
+   column, then top-to-bottom in the right column; scroll vertically to the
+   next spread. See doc/development/modules/browser-shell.md. */
+.article.two-columns {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.article.two-columns .spread {
+  position: relative;
+  columns: 2;
+  column-gap: 32px;
+  column-fill: balance;
+  /* Falls back to a sensible default if --spread-max-height is not set */
+  max-height: var(--spread-max-height, calc(100dvh - var(--banner-height) - 32px));
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  /* Subtle frame so the chunked-spread structure is visually obvious. */
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+/* Vertical divider between left and right columns */
+.article.two-columns .spread::after {
+  content: '';
+  position: absolute;
+  top: 16px;
+  bottom: 16px;
+  left: 50%;
+  width: 1px;
+  background: var(--color-border);
+  pointer-events: none;
+}
+.article.two-columns .spread > * {
+  break-inside: avoid;
+  max-width: 100%;
+}
+/* KaTeX internals use position:relative and negative margins for stacking
+   (fractions, limits, superscripts). CSS columns can miscompute these
+   positions. Isolate KaTeX from the column fragmentation context. */
+.article.two-columns .katex-display,
+.article.two-columns .math.display {
+  break-inside: avoid;
+}
+.article.two-columns .katex {
+  isolation: isolate;
+}
+/* Escape hatch: a single block taller than the spread max-height. Allow it
+   to break across columns and let oversized children scroll horizontally
+   inside the column, instead of being cropped by overflow:hidden. */
+.article.two-columns .spread.spread-overflow {
+  max-height: none;
+  overflow: visible;
+}
+.article.two-columns .spread.spread-overflow > * {
+  break-inside: auto;
+  overflow-x: auto;
+}
+/* Scroll-snap on the page scroll container, but only while 2-col is active.
+   The viewport scroller is the html element (body has overflow:visible), so
+   scroll-snap-type must be on html, not body. */
+html:has(body.has-two-columns) {
+  scroll-snap-type: y proximity;
+}
+@media print {
+  .article.two-columns {
+    display: block;
+    gap: 0;
+  }
+  .article.two-columns .spread {
+    display: block;
+    columns: 1;
+    max-height: none;
+    overflow: visible;
+  }
+  html:has(body.has-two-columns) {
+    scroll-snap-type: none;
+  }
+}
+/* Hide the toggle row entirely on non-markdown pages (notebook, pdf,
+   whiteboard, library, terminal, index). When data-page-type is absent
+   (static-built markdown pages), the row remains visible. */
+body[data-page-type]:not([data-page-type="markdown"]) .style-panel-section:has(#two-columns-switch) {
+  display: none;
+}
+
+/* Article typography */
+.article h1 {
+  font-size: 1.75em;
+  font-weight: 700;
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+  letter-spacing: -0.3px;
+}
+.article h2 {
+  font-size: 1.35em;
+  font-weight: 600;
+  margin: 28px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+  letter-spacing: -0.2px;
+}
+.article h3 {
+  font-size: 1.15em;
+  font-weight: 600;
+  margin: 24px 0 12px;
+}
+.article h4 {
+  font-size: 1em;
+  font-weight: 600;
+  margin: 16px 0 8px;
+}
+
+.article p {
+  margin: 0 0 16px;
+}
+
+.article ul, .article ol {
+  margin: 0 0 16px;
+  padding-left: 24px;
+}
+.article li {
+  margin: 4px 0;
+}
+
+.article code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--color-bg-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+}
+
+.article pre {
+  padding: 16px 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0 0 16px;
+  font-size: 0.875em;
+  line-height: 1.5;
+  counter-reset: line-number;
+  position: relative;
+}
+.article pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+.article pre code .code-line {
+  display: block;
+}
+.article pre code .code-line::before {
+  counter-increment: line-number;
+  content: counter(line-number);
+  display: inline-block;
+  width: 1em;
+  margin-right: 1em;
+  text-align: right;
+  color: var(--color-text-muted);
+  opacity: 0.5;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.tikz-block {
+  display: block;
+  max-width: 100%;
+  margin: 20px auto 24px;
+  overflow-x: auto;
+  text-align: center;
+}
+
+.rprint-render-pending {
+  visibility: hidden;
+}
+
+.math.rprint-render-pending {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.math.display.rprint-render-pending {
+  display: block;
+  width: 100%;
+  min-height: 1.5em;
+}
+
+.rprint-render-failed {
+  visibility: visible;
+}
+
+@media print {
+  .rprint-render-pending {
+    visibility: visible !important;
+  }
+
+  .math.rprint-render-pending {
+    opacity: 1 !important;
+  }
+}
+
+.article figure:has(.tikz-block) {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 16px;
+  text-align: center;
+}
+
+.article figure:has(.tikz-block) .tikz-block {
+  margin: 0 auto 6px;
+}
+
+.article figure:has(.tikz-block) figcaption {
+  color: var(--color-text-muted);
+  font-size: 0.75em;
+  line-height: 1.4;
+}
+
+.tikz-block svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  color: #000;
+}
+
+/* Floating "copy code" button on code blocks.
+   Positioned inside the visible code area: `<pre>` has 16px/20px padding and
+   no background of its own — the dark box is `<code class="hljs">`. The
+   offsets below put the button ~8px inside both edges of that inner area
+   (8 + 16 top, 8 + 20 right). */
+.code-copy-btn {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+  -webkit-user-select: none;
+  user-select: none;
+  z-index: 1;
+}
+.code-copy-btn svg {
+  display: block;
+  pointer-events: none;
+}
+.code-copy-btn .code-copy-icon-check {
+  display: none;
+}
+/* Hovering the code block reveals the button — strong enough to spot easily.
+   Note: we deliberately do NOT use `pre:focus-within` here, because clicking
+   the button leaves it focused, which would keep `pre:focus-within` true and
+   lock the button visible after the mouse moves away. The button's own
+   `:focus-visible` rule below handles the keyboard case. */
+.article pre:hover .code-copy-btn {
+  opacity: 0.85;
+  border-color: var(--color-text-muted);
+}
+/* Hovering / focusing the button itself: filled accent background, white icon,
+   lift. The whole button visibly "lights up".
+   Use :focus-visible (keyboard only) — :focus would keep the button in the
+   "lit" state after a mouse click since the click leaves it focused. */
+.code-copy-btn:hover,
+.code-copy-btn:focus-visible {
+  opacity: 1;
+  color: #fff;
+  background: var(--color-primary, var(--color-text));
+  border-color: var(--color-primary, var(--color-text));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  outline: none;
+}
+/* Pressed state: a touch darker than hover, plus the 1px down translate. */
+.code-copy-btn:active {
+  background: var(--color-primary, var(--color-text));
+  filter: brightness(0.85);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transform: translateY(1px);
+}
+.code-copy-btn.copied {
+  opacity: 1;
+  color: #fff;
+  background: #2da44e;
+  border-color: #2da44e;
+}
+.code-copy-btn.copied .code-copy-icon-copy {
+  display: none;
+}
+.code-copy-btn.copied .code-copy-icon-check {
+  display: block;
+}
+.code-copy-btn.failed {
+  opacity: 1;
+  color: #fff;
+  background: #cf222e;
+  border-color: #cf222e;
+}
+/* Touch / no-hover devices: always visible (no hover to reveal it).
+   Also enlarge the tap target a bit so it's comfortable on phones. */
+@media (hover: none) {
+  .code-copy-btn {
+    opacity: 0.85;
+    width: 36px;
+    height: 36px;
+    top: 22px;
+    right: 26px;
+    border-color: var(--color-text-muted);
+  }
+}
+/* Hide on print */
+@media print {
+  .code-copy-btn {
+    display: none;
+  }
+}
+
+.article blockquote {
+  border-left: 4px solid var(--color-primary);
+  padding: 8px 16px;
+  margin: 0 0 16px;
+  color: var(--color-text-muted);
+  background: var(--color-bg-alt);
+  border-radius: 0 6px 6px 0;
+}
+
+.content:has(.pdf-embed) {
+  padding: 0;
+}
+.pdf-embed {
+  display: block;
+  width: 100%;
+  height: calc(100vh - var(--banner-height));
+  border: none;
+}
+
+.article .table-wrap {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 0 0 16px;
+}
+.article .table-wrap::-webkit-scrollbar { height: 4px; }
+.article .table-wrap::-webkit-scrollbar-track { background: transparent; }
+.article .table-wrap::-webkit-scrollbar-thumb { background: var(--color-scrollbar); border-radius: 2px; }
+
+.article table {
+  border-collapse: collapse;
+  width: auto;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.8em;
+}
+.article th, .article td {
+  border: 1px solid var(--color-border);
+  padding: 8px 12px;
+  text-align: left;
+  white-space: nowrap;
+}
+.article th {
+  background: var(--color-bg-alt);
+  font-weight: 600;
+}
+
+.article img {
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+/* Wide formula horizontal scroll */
+.article .math.display,
+.article .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding: 2px 0 6px;
+}
+.article .math.display::-webkit-scrollbar,
+.article .katex-display::-webkit-scrollbar {
+  height: 2px;
+}
+.article .math.display::-webkit-scrollbar-track,
+.article .katex-display::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 2px;
+}
+.article .math.display::-webkit-scrollbar-thumb,
+.article .katex-display::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+  border-radius: 2px;
+}
+.article .math.display::-webkit-scrollbar-thumb:hover,
+.article .katex-display::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbar-hover);
+}
+
+/* KaTeX right-click context menu */
+.katex-context-menu {
+  position: fixed;
+  z-index: 10000;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  padding: 4px;
+  min-width: 160px;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.96);
+  transition: opacity 0.12s, transform 0.12s;
+}
+.katex-context-menu.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+.katex-context-menu button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.1s;
+}
+.katex-context-menu button:hover {
+  background: var(--color-bg-alt);
+}
+.katex-context-menu button:active {
+  background: var(--color-border);
+}
+.katex-context-menu button svg {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+/* KaTeX copy toast */
+.katex-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: var(--color-text);
+  color: var(--color-bg);
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10001;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.katex-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.article hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 32px 0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1100px) {
+  .left-sidebar,
+  .right-sidebar {
+    position: fixed;
+    background: var(--color-bg);
+    box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+    z-index: 200;
+  }
+  .left-sidebar {
+    box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+  }
+  .main-layout:not(.left-collapsed) .article {
+    margin-left: calc((100% - var(--content-max-width, 90%)) / 2);
+  }
+  .main-layout:not(.right-collapsed) .article {
+    margin-right: auto;
+  }
+  .article {
+    padding: 0 16px;
+  }
+  .banner-center-inner {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 650px) {
+  .banner-left {
+    left: 8px;
+  }
+  .banner-right {
+    right: 8px;
+  }
+  .banner-center-inner {
+    padding: 0 8px;
+  }
+
+  .left-sidebar {
+    width: 280px;
+  }
+  .left-sidebar.collapsed {
+    transform: translateX(-280px);
+  }
+  .content {
+    padding: 12px 0 60px;
+  }
+  .article {
+    max-width: 100% !important;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0 8px;
+  }
+  .article h1,
+  .article h2,
+  .article h3,
+  .article h4,
+  .article h5,
+  .article h6 {
+    overflow-wrap: anywhere;
+  }
+  .style-panel-section:has(#content-width-range) {
+    display: none;
+  }
+  .main-layout:not(.left-collapsed) .article {
+    margin-left: 0;
+  }
+}
+
+/* Disable two-column mode below the second responsive breakpoint (1100px).
+   The chunker (themes.js) may still wrap children in `.spread` divs (e.g. if
+   the user opened a wide window with 2-col on, then narrowed it before a
+   re-chunk runs); these rules make the wrappers behave as plain blocks so
+   the article reads as a single column. */
+@media (max-width: 1100px) {
+  .article.two-columns {
+    display: block;
+    gap: 0;
+  }
+  .article.two-columns .spread {
+    display: block;
+    columns: 1 !important;
+    max-height: none;
+    overflow: visible;
+    scroll-snap-align: none;
+  }
+  body.has-two-columns {
+    scroll-snap-type: none;
+  }
+  .style-panel-section:has(#two-columns-switch) {
+    display: none;
+  }
+}
+
+/* ===== Smart banner: abbreviated nav names ===== */
+.nav-abbreviated .nav-link {
+  font-size: 0;
+  padding: 0 8px;
+}
+.nav-abbreviated .nav-link::after {
+  content: attr(data-short);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ===== Smart banner: shortened site title (independent of line mode) =====
+   Applied to .top-banner alongside (or without) .banner-two-lines /
+   .banner-compact. Kept orthogonal so the cascade can compose the
+   line-count, title-short, and nav-short states symmetrically. */
+.title-short .site-title {
+  font-size: 0;
+  min-width: 0;
+}
+.title-short .site-title[data-level] {
+  background: none;
+  padding: 0;
+}
+.title-short .site-title::before {
+  content: attr(data-short);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+.title-short .site-title[data-level]::before {
+  background: var(--banner-bg);
+  padding: 0 8px;
+  border-radius: 4px;
+}
+.title-short .banner-label {
+  font-size: 0;
+}
+.title-short .banner-label::after {
+  content: attr(data-short);
+  font-size: 13px;
+  opacity: 0.8;
+  margin-left: 4px;
+}
+
+/* ===== Smart banner: 2-line layout ===== */
+.banner-two-lines {
+  --banner-height: calc(86px + var(--safe-area-top, 0px));
+}
+:root:has(.banner-two-lines) {
+  --banner-height: calc(86px + var(--safe-area-top, 0px));
+}
+.pwa-standalone .top-banner.banner-two-lines {
+  height: 86px;
+}
+.banner-two-lines .banner-inner {
+  height: 86px;
+}
+.banner-two-lines .banner-left {
+  height: 50px;
+}
+.banner-two-lines .banner-center {
+  height: 50px;
+}
+.banner-two-lines .banner-center-inner {
+  /* Match the measured left-toggle width + gap (see .banner-center-inner). */
+  margin-left: calc(var(--banner-left-w, 36px) + 16px);
+  max-width: none;
+}
+.banner-two-lines .banner-right {
+  height: 50px;
+}
+.banner-two-lines .main-nav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50px;
+  height: 36px;
+  overflow: visible;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.banner-two-lines .nav-list {
+  height: 36px;
+  gap: 0;
+  padding: 0 8px;
+  flex-wrap: nowrap;
+}
+.banner-two-lines .nav-item {
+  height: 36px;
+  flex-shrink: 0;
+}
+.banner-two-lines .nav-link {
+  padding: 0 10px;
+  white-space: nowrap;
+  font-size: 13px;
+}
+.banner-two-lines .nav-abbreviated .nav-link {
+  font-size: 0;
+}
+.banner-two-lines .nav-abbreviated .nav-link::after {
+  content: attr(data-short);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ===== Smart banner: compact layout (replaces 3-line) ===== */
+/* Same 86px height as 2-line, but .banner-right is hidden behind a toggle. */
+.banner-compact {
+  --banner-height: calc(86px + var(--safe-area-top, 0px));
+}
+:root:has(.banner-compact) {
+  --banner-height: calc(86px + var(--safe-area-top, 0px));
+}
+.pwa-standalone .top-banner.banner-compact {
+  height: 86px;
+}
+.banner-compact .banner-inner {
+  height: 86px;
+}
+.banner-compact .banner-left {
+  height: 50px;
+}
+.banner-compact .banner-center {
+  height: 50px;
+}
+.banner-compact .banner-center-inner {
+  margin-left: calc(var(--banner-left-w, 36px) + 16px);
+  max-width: none;
+}
+/* In compact mode, hide non-essential .banner-right children but keep
+   fold/TOC visible in the corner.  The dots toggle sits to their left. */
+.banner-compact .banner-right {
+  height: 50px;
+}
+.banner-compact .banner-right > *:not(.banner-toggle):not(.banner-right-toggle) {
+  display: none;
+}
+.banner-compact .banner-right-toggle {
+  display: flex;
+}
+/* Dropdown container for compact-mode controls.  JS moves items from
+   .banner-right into this element on toggle-open, and back on close.
+   This avoids repositioning .banner-right itself (which would drag the
+   dots/fold/TOC buttons off row 1). */
+.banner-right-dropdown {
+  display: none;
+}
+.banner-compact.banner-right-open .banner-right-dropdown {
+  display: flex;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50px;
+  height: 36px;
+  overflow: visible; /* panels (settings, theme) must overflow downward */
+  background: var(--color-banner-bg);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 0 8px;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  z-index: 1;
+}
+/* Shrink direct-child buttons inside the compact dropdown row.
+   Use > child combinator to avoid resizing nested buttons inside
+   .comment-wrap / .search-wrap (those have their own layout).
+   Also size the first button inside wrapper divs (search, comment). */
+.banner-right-dropdown > button,
+.banner-right-dropdown > a,
+.banner-right-dropdown > div > button:first-child,
+.banner-right-dropdown > div > a:first-child {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  padding: 0;
+}
+.banner-right-dropdown > div:not(.style-panel):not(.settings-panel):not(.search-wrap) {
+  height: 28px;
+  flex-shrink: 0;
+}
+.banner-right-dropdown .search-wrap {
+  height: 36px;
+}
+/* In compact mode, let .search-wrap.open consume the leftover row space
+   after the fixed-width sibling buttons (which have flex-shrink: 0).
+   This keeps siblings (comment, settings, theme) on-screen and makes the
+   .search-results dropdown automatically match the input width via its
+   width: 100% rule. */
+.banner-right-dropdown .search-wrap.open {
+  flex: 1;
+  min-width: 0;
+}
+/* The dropdown rule below sets min-width: 28px on the first button inside
+   each child div, which would keep .search-btn occupying 28 px even when
+   .search-wrap is open. That offset would shove .search-input-wrap to the
+   right while .search-results (absolute, left: 0) stays flush with the
+   wrap, making results appear ~28 px wider than the input. Override here. */
+.banner-right-dropdown .search-wrap.open .search-btn {
+  min-width: 0;
+  width: 0;
+  padding: 0;
+  border: none;
+}
+.banner-right-dropdown .search-wrap .search-input-wrap {
+  height: 28px;
+}
+/* Override the global .search-wrap.open .search-input-wrap width var so
+   the input fills the flexed wrap instead of using the var fallback. */
+.banner-right-dropdown .search-wrap.open .search-input-wrap {
+  width: 100%;
+}
+.banner-right-dropdown > div:not(.style-panel):not(.settings-panel):not(.search-wrap) svg,
+.banner-right-dropdown > button svg,
+.banner-right-dropdown > a svg {
+  width: 14px;
+  height: 14px;
+}
+/* Nav row — identical to 2-line */
+.banner-compact .main-nav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50px;
+  height: 36px;
+  overflow: visible;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.banner-compact .nav-list {
+  height: 36px;
+  gap: 0;
+  padding: 0 8px;
+  flex-wrap: nowrap;
+}
+.banner-compact .nav-item {
+  height: 36px;
+  flex-shrink: 0;
+}
+.banner-compact .nav-link {
+  padding: 0 10px;
+  white-space: nowrap;
+  font-size: 13px;
+}
+.banner-compact .nav-abbreviated .nav-link {
+  font-size: 0;
+}
+.banner-compact .nav-abbreviated .nav-link::after {
+  content: attr(data-short);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Toggle button for .banner-right — hidden in non-compact modes.
+   Base styling lives in the shared .banner-icon-btn group above.
+   This block keeps only the hidden-by-default + svg-size overrides. */
+.banner-right-toggle {
+  display: none;
+  padding: 0;
+}
+.banner-right-toggle svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Scrollbar styling */
+.sidebar::-webkit-scrollbar {
+  width: 3px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+  border-radius: 4px;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbar-hover);
+}
+/* PDF viewer */
+.pdf-viewer { display: flex; flex-direction: column; }
+.pdf-frame {
+  width: 100%;
+  height: calc(100dvh - var(--banner-height) - 64px);
+  border: none;
+  border-radius: 4px;
+}
+/* When pdf viewer is shown, prevent page scroll */
+.article:has(.pdf-viewer) {
+  height: calc(100dvh - var(--banner-height));
+  overflow: hidden;
+}
+.content:has(.pdf-viewer) {
+  padding: 0;
+  height: calc(100dvh - var(--banner-height));
+  overflow: hidden;
+}
+
+/* Jupyter viewer (iframe embed) */
+.jupyter-viewer {
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - var(--banner-height) - 8px);
+  overflow: hidden;
+}
+.jupyter-frame {
+  width: 100%;
+  flex: 1;
+  border: none;
+  border-radius: 4px;
+}
+/* When jupyter viewer is shown, prevent page scroll */
+.article:has(.jupyter-viewer) {
+  height: calc(100dvh - var(--banner-height));
+  overflow: hidden;
+}
+.content:has(.jupyter-viewer) {
+  padding: 0;
+  height: calc(100dvh - var(--banner-height));
+  overflow: hidden;
+}
+
+/* Banner-folded: jupyter viewer uses full height */
+body.banner-folded .jupyter-viewer {
+  height: calc(100dvh - 8px);
+}
+body.banner-folded .article:has(.jupyter-viewer),
+body.banner-folded .content:has(.jupyter-viewer) {
+  height: 100dvh;
+}
+.pwa-standalone body.banner-folded .jupyter-viewer {
+  height: calc(100dvh - var(--safe-area-top) - 8px);
+}
+.pwa-standalone body.banner-folded .article:has(.jupyter-viewer),
+.pwa-standalone body.banner-folded .content:has(.jupyter-viewer) {
+  height: calc(100dvh - var(--safe-area-top));
+}
+
+/* Notebook mode switching (Native Jupyter vs Pyodide) */
+/* Default: hide both, show jupyter only when attribute is on or unset */
+.notebook-pyodide-container {
+  display: none;
+}
+.notebook-jupyter-container {
+  display: none;
+}
+/* When native jupyter is ON, show jupyter */
+body[data-native-jupyter="on"] .notebook-jupyter-container {
+  display: block;
+}
+/* When native jupyter is OFF, show pyodide */
+body[data-native-jupyter="off"] .notebook-pyodide-container {
+  display: block;
+}
+/* Override jupyter-viewer height constraints when using pyodide */
+body[data-native-jupyter="off"] .article:has(.jupyter-viewer),
+body[data-native-jupyter="off"] .content:has(.jupyter-viewer) {
+  height: auto;
+  overflow: visible;
+}
+
+/* ===== Search ===== */
+.search-wrap {
+  position: relative;
+  z-index: 1003;
+  height: var(--banner-height);
+  display: flex;
+  align-items: center;
+}
+
+/* Base styling lives in the shared .banner-icon-btn group above.
+   This block keeps only the collapse-animation transition + hidden state
+   used when the search input expands inside the banner. */
+.search-btn {
+  overflow: hidden;
+  transition: width 0.1s ease, background 0.1s, border-color 0.1s, color 0.1s, opacity 0.1s, margin 0.1s ease;
+}
+.search-wrap.open .search-btn {
+  width: 0;
+  opacity: 0;
+  border: none;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* Inline search input in banner */
+.search-input-wrap {
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  display: flex;
+  transition: width 0.1s ease, opacity 0.1s ease, padding 0.1s ease, border-color 0.1s ease;
+}
+.search-wrap.open .search-input-wrap {
+  width: var(--search-max-w, min(400px, calc(100vw - 120px)));
+  opacity: 1;
+  padding: 0 10px;
+  border-color: rgba(255,255,255,0.3);
+}
+/* When the inner input is focused, brighten the wrapper border so the
+ * search box gets a visible focus indicator without a competing outline
+ * around the bare <input> (which has `outline: none` so the parent pill
+ * is the canonical focus surface). Mirrors the comment textarea idiom
+ * (`.comment-popup-body textarea:focus { border-color: --color-primary }`). */
+.search-input-wrap:focus-within {
+  border-color: var(--color-primary);
+}
+
+.search-icon {
+  flex-shrink: 0;
+  color: rgba(255,255,255,0.5);
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  font-family: inherit;
+  color: #fff;
+}
+.search-input::placeholder {
+  color: rgba(255,255,255,0.45);
+}
+
+/* Search results dropdown */
+.search-results {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0px);
+  left: 0;
+  width: 100%;
+  max-height: min(60dvh, 480px);
+  overflow-y: auto;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  z-index: 1002;
+  opacity: 1;
+  transition: opacity 0.1s ease;
+}
+.search-results.has-results {
+  display: block;
+}
+.search-results.hiding {
+  opacity: 0;
+}
+
+.search-result-item {
+  display: block;
+  padding: 8px 14px;
+  color: var(--color-text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-border);
+  transition: background 0.1s;
+}
+.search-result-item:last-child {
+  border-bottom: none;
+}
+.search-result-item:hover {
+  background: var(--color-active-bg);
+  text-decoration: none;
+  color: var(--color-text);
+}
+/* Keyboard-focused result (arrow-key navigation in the search dropdown).
+ * Same tinted background as :hover plus a left rail in --color-primary so
+ * the user can tell which result Enter will commit even after the mouse
+ * has hovered another row. */
+.search-result-item.active {
+  background: var(--color-active-bg);
+  text-decoration: none;
+  color: var(--color-text);
+  box-shadow: inset 3px 0 0 var(--color-primary);
+}
+
+.search-result-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 1px;
+}
+.search-result-title mark {
+  background: none;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.search-result-path {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.search-result-snippet {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  margin-top: 4px;
+  max-height: 2.8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.search-result-snippet mark {
+  background: rgba(var(--color-primary-rgb), 0.15);
+  color: var(--color-primary);
+  font-weight: 500;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+.search-empty {
+  padding: 16px 14px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.search-results::-webkit-scrollbar { width: 4px; }
+.search-results::-webkit-scrollbar-track { background: transparent; }
+.search-results::-webkit-scrollbar-thumb { background: var(--color-scrollbar); border-radius: 2px; }
+
+/* ===== Settings Panel ===== */
+/* .settings-btn base lives in the shared .banner-icon-btn group above. */
+
+.settings-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 260px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 14px 16px;
+  z-index: 1002;
+}
+.settings-panel.open {
+  display: block;
+}
+
+.settings-panel-section {
+  margin-bottom: 10px;
+}
+.settings-panel-section:last-child {
+  margin-bottom: 0;
+}
+
+.settings-panel-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+
+.settings-title-row .settings-panel-title {
+  margin-bottom: 0;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.resource-pack-row {
+  gap: 10px;
+}
+
+.settings-action-btn {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 4px 10px;
+  color: var(--color-text);
+  background: var(--color-bg-alt);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.settings-action-btn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.settings-action-btn:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.resource-pack-status {
+  min-height: 0;
+  margin-top: 5px;
+  color: var(--color-text-muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.resource-pack-status:empty {
+  display: none;
+}
+
+.resource-pack-status.is-error {
+  color: #c33;
+}
+
+.settings-link-btn {
+  margin-top: 5px;
+  padding: 0;
+  border: 0;
+  color: var(--color-primary);
+  background: transparent;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.settings-link-btn.confirm {
+  color: #c33;
+  font-weight: 600;
+}
+
+.settings-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settings-dependent-parent {
+  margin-bottom: 6px;
+}
+
+.settings-dependent-children {
+  margin: 0 0 10px 10px;
+  padding: 2px 0 2px 12px;
+  border-left: 1px solid var(--color-border);
+}
+
+.settings-dependent-child {
+  min-height: 20px;
+  margin-bottom: 7px;
+}
+
+.settings-dependent-child:last-child {
+  margin-bottom: 0;
+}
+
+.settings-dependent-child .style-label,
+.settings-dependent-child .settings-desc {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.style-switch-compact {
+  width: 32px;
+  height: 18px;
+  border-radius: 9px;
+}
+
+.style-switch-compact .style-switch-knob {
+  width: 14px;
+  height: 14px;
+}
+
+.style-switch-compact[aria-checked="true"] .style-switch-knob {
+  transform: translateX(14px);
+}
+
+.settings-desc {
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+.settings-keys {
+  display: flex;
+  gap: 4px;
+}
+
+.settings-keys kbd {
+  display: inline-block;
+  min-width: 22px;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  text-align: center;
+  color: var(--color-text);
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  line-height: 1.4;
+}
+
+.keyboard-shortcuts-children {
+  margin-bottom: 0;
+}
+
+.keyboard-shortcuts-children > .settings-row {
+  min-height: 0;
+  margin-bottom: 0;
+  padding: 3px 0;
+}
+
+.keyboard-shortcuts-children .settings-desc {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.keyboard-shortcuts-children .settings-keys kbd {
+  min-width: 20px;
+  padding: 2px 5px;
+  font-size: 10px;
+}
+
+.settings-divider {
+  border-top: 1px solid var(--color-border);
+  margin: 8px 0;
+}
+
+/* ===== Debug mode children (collapsible) ===== */
+.debug-children {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.25s ease, opacity 0.2s ease, margin 0.25s ease;
+  margin-top: 0;
+}
+.debug-children.open {
+  max-height: 120px;
+  opacity: 1;
+  margin-top: 0;
+}
+.debug-children .settings-dependent-child .style-label {
+  margin-bottom: 6px;
+}
+.debug-children .style-toggle-group {
+  gap: 4px;
+}
+.debug-children .style-toggle-btn {
+  font-size: 11px;
+  padding: 4px 8px;
+}
+
+/* ===== Settings panel version footer ===== */
+.settings-footer {
+  text-align: center;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-top: 10px;
+  opacity: 0.5;
+  letter-spacing: 0.3px;
+}
+.settings-footer.is-dirty {
+  color: #f5a623;
+  opacity: 0.85;
+}
+
+/* ===== Keyboard jump flash ===== */
+@keyframes kb-flash {
+  0%   { background-color: var(--color-primary); color: #fff; }
+  100% { background-color: transparent; color: inherit; }
+}
+.kb-flash {
+  animation: kb-flash 0.6s ease-out;
+  border-radius: 4px;
+}
+
+/* ===== SPA transitions (only active with data-spa) ===== */
+[data-spa] .spa-loading {
+  opacity: 0;
+  transition: opacity 0.12s ease-out;
+}
+[data-spa] #spa-content,
+[data-spa] #spa-toc,
+[data-spa] #spa-sidebar {
+  transition: opacity 0.15s ease-in;
+}
+
+/* SPA progress bar */
+.spa-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary, #0366d6);
+  z-index: 10002;
+  transition: none;
+  opacity: 0;
+  pointer-events: none;
+}
+.spa-progress.active {
+  opacity: 1;
+  width: 70%;
+  transition: width 1.2s cubic-bezier(0.1, 0.5, 0.3, 1);
+}
+.spa-progress.done {
+  width: 100%;
+  transition: width 0.15s ease-out, opacity 0.3s ease-out 0.15s;
+  opacity: 0;
+}
+
+/* ===== Quick Edit Popup (SPA-only) ===== */
+.quick-edit-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10003;
+  backdrop-filter: blur(2px);
+}
+.quick-edit-overlay.visible {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.quick-edit-popup {
+  position: absolute;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  min-width: 400px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 32px);
+}
+
+.quick-edit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--color-bg-alt);
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 9px 9px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: move;
+  user-select: none;
+}
+
+.quick-edit-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.quick-edit-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.1s, color 0.1s;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+.quick-edit-close:hover {
+  background: var(--color-border);
+  color: var(--color-text);
+}
+
+.quick-edit-editor {
+  min-height: 200px;
+  overflow: hidden;
+}
+
+.quick-edit-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--color-bg-alt);
+  border-top: 1px solid var(--color-border);
+  border-radius: 0 0 9px 9px;
+}
+
+.quick-edit-btn {
+  padding: 6px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.quick-edit-btn:hover {
+  background: var(--color-bg-alt);
+  border-color: var(--color-text-muted);
+}
+.quick-edit-btn.primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+.quick-edit-btn.primary:hover {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+.quick-edit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quick-edit-status {
+  flex: 1;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+.quick-edit-status.error {
+  color: #d73a49;
+}
+.quick-edit-status.success {
+  color: #22863a;
+}
+
+/* Loading state */
+.quick-edit-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80ch;
+  height: calc(24 * 1.5em + 16px);
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+/* Side-by-side authored SVG theme specimens. The SVG paint translation itself
+   is handled by svg-theme.js; these containers make both targets visible
+   regardless of the page's active theme. */
+.svg-theme-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 1.5rem 0;
+}
+.svg-theme-preview {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #d0d7de;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #24292f;
+}
+.svg-theme-preview[data-svg-theme="dark"] {
+  border-color: #30363d;
+  background: #0d1117;
+  color: #f0f6fc;
+}
+.svg-theme-preview > strong {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.svg-theme-preview svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 520px) {
+  .svg-theme-comparison {
+    grid-template-columns: 1fr;
+  }
+}

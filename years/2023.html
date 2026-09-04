@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="build-commit" content="c659b99">
+  <title>2023 - Jingqi's Interpositive</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/main.css?v=c659b99">
+  <link rel="stylesheet" href="/static/link-preview.css">
+  <link rel="stylesheet" href="/static/sidebar-panel.css">
+  <link rel="stylesheet" href="/static/table-enhance.css">
+  <link rel="stylesheet" href="/static/syllabus-enhance.css">
+  <link rel="stylesheet" href="/static/comments.css">
+  <link rel="stylesheet" href="/static/notebook.css">
+  <link rel="stylesheet" href="/static/themes.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var linkPreviewEmbed=false;
+      try{
+        var previewUrl=new URL(location.href);
+        linkPreviewEmbed=previewUrl.searchParams.get('rprint-preview')==='1'&&window.parent!==window&&window.parent.location.origin===location.origin;
+      }catch(e){}
+      if(linkPreviewEmbed){
+        document.documentElement.classList.add('link-preview-embed');
+        var previewArticleLink=function(target){return target&&target.closest&&target.closest('.article a[href]');};
+        var blockPreviewLink=function(event){if(previewArticleLink(event.target)){event.preventDefault();event.stopImmediatePropagation();}};
+        document.addEventListener('click',blockPreviewLink,true);
+        document.addEventListener('auxclick',blockPreviewLink,true);
+        document.addEventListener('keydown',function(event){if(event.key==='Enter')blockPreviewLink(event);},true);
+        document.addEventListener('dblclick',function(event){if(event.target&&event.target.closest&&event.target.closest('.article')){event.preventDefault();event.stopImmediatePropagation();}},true);
+      }
+      var bc=document.querySelector('meta[name="build-commit"]');
+      var commit=bc?bc.getAttribute('content'):'';
+      if(commit&&commit!=='unknown'){
+        var prev=localStorage.getItem('kb-build-commit');
+        if(prev&&prev!==commit){
+          var keys=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf('kb-')===0)keys.push(k);}
+          keys.forEach(function(k){localStorage.removeItem(k);});
+          localStorage.setItem('kb-build-commit',commit);
+          if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+            navigator.serviceWorker.controller.postMessage('clearCaches');
+          }
+          window.location.reload();
+          return;
+        }
+        localStorage.setItem('kb-build-commit',commit);
+      }
+      // Resume last visited page on PWA/browser launch. PWA launches carry
+      // `?pwa=1`; a normal browser launch is a plain root URL without a same-
+      // origin referrer. `/index.html` is an explicit home navigation, so it
+      // never resumes. Runs before paint to avoid a flash of the home page.
+      // Validates the stored path is a same-origin absolute path (rejects
+      // `//host` / `/\host` open-redirects).
+      var resumeLaunch=/[?&]pwa=1(&|$)/.test(location.search);
+      try{
+        var launchUrl=new URL(location.href);
+        launchUrl.searchParams.delete('pwa');
+        var sameOriginReferrer=false;
+        try{sameOriginReferrer=!!document.referrer&&new URL(document.referrer,location.href).origin===location.origin;}catch(e){}
+        resumeLaunch=resumeLaunch||(launchUrl.pathname==='/'&&!launchUrl.search&&!launchUrl.hash&&!sameOriginReferrer);
+      }catch(e){}
+      if(resumeLaunch){
+        try{
+          var last=localStorage.getItem('kb-last-location');
+          var lastPath=last&&last.split('#')[0].split('?')[0];
+          if(last&&/^\/[^/\\]/.test(last)&&lastPath!=='/'&&lastPath!=='/index.html'){
+            try{sessionStorage.setItem('kb-resume-last-scroll','1');}catch(e){}
+            location.replace(last);return;
+          }
+        }catch(e){}
+      }
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      var mob=window.matchMedia('(max-width:650px)').matches;
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.style.colorScheme=t==='dark'?'dark':'light';
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      var w=p.contentWidth||(mob?'100':'90');
+      document.documentElement.style.setProperty('--content-max-width',w+'%');
+      var edge=p.ignoreCorners!==undefined?p.ignoreCorners==='on':false;
+      if(edge&&w==='100')document.documentElement.setAttribute('data-ignore-corners','on');
+      if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches||window.matchMedia('(display-mode:fullscreen)').matches)document.documentElement.classList.add('pwa-standalone');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'kaiti';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.0};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+      var ht=t==='dark'?'github-dark':'github';
+      var writes='<link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/'+ht+'.min.css">';
+      document.write(writes);
+    })();
+  </script>
+  <style>.math{opacity:0;transition:opacity .15s}.math.rprint-render-failed{opacity:1}</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css" integrity="sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM" crossorigin="anonymous">
+  <script id="rprint-katex" defer src="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.js" integrity="sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI" crossorigin="anonymous"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('katex')}else{document.querySelectorAll('.math').forEach(function(el){var src=el.textContent;el.setAttribute('data-latex',src);katex.render(src,el,{displayMode:el.classList.contains('display'),throwOnError:false,trust:function(ctx){return ctx&&ctx.command==='\\href'&&typeof ctx.url==='string'&&/^#[A-Za-z0-9:._-]+$/.test(ctx.url);}});el.querySelectorAll('mtable[columnspacing=\'\']').forEach(function(t){t.removeAttribute('columnspacing')});el.style.opacity='1';})}"></script>
+  <script>document.getElementById('rprint-katex').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('katex',new Error('KaTeX failed to load'))}else{document.querySelectorAll('.math').forEach(function(el){el.style.opacity='1'})}});</script>
+</head>
+<body data-page-type="markdown">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <button class="banner-toggle" id="left-toggle" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h12v1.5H2V3zm0 4h12v1.5H2V7zm0 4h12v1.5H2V11z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-center">
+        <div class="banner-center-inner">
+          <a href="/index.html" class="site-title" data-short="Interpositive">Jingqi's Interpositive</a>
+          <span class="spa-health-wrap" id="spa-health-wrap">
+            <span class="spa-health-dot" id="spa-health-dot" title="SPA server status"></span>
+            <div class="spa-health-popup" id="spa-health-popup">
+              <div class="shp-header">
+                <span class="shp-title">Server Status</span>
+                <span class="shp-heart" id="shp-heart"></span>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-metrics">
+                <div class="shp-row"><span class="shp-label">Ping</span><span class="shp-value" id="shp-ping">—</span></div>
+                <div class="shp-row"><span class="shp-label">Uptime</span><span class="shp-value" id="shp-uptime">—</span></div>
+                <div class="shp-row"><span class="shp-label">Memory</span><span class="shp-value" id="shp-memory">—</span></div>
+                <div class="shp-row"><span class="shp-label">CPU Time</span><span class="shp-value" id="shp-cpu-time">—</span></div>
+                <div class="shp-row"><span class="shp-label">Load</span><span class="shp-value" id="shp-load">—</span></div>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-modules">
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-watch"></span> Watch</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-jupyter"></span> Jupyter</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-terminal"></span> Terminal</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-proxy"></span> Proxy</div>
+              </div>
+            </div>
+          </span>
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="/cs-notes/" class="nav-link" data-short="CS">CS</a><ul class="nav-dropdown"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li><a href="/cs-notes/mit-gir/index.html">MIT GIR</a></li><li><a href="/cs-notes/cs-math/index.html">CS Math</a></li></ul></li><li class="nav-item"><a href="/not-cs-notes/" class="nav-link" data-short="Not-CS">Not-CS</a><ul class="nav-dropdown"><li><a href="/not-cs-notes/mit-math-requirements.html">MIT Math Syllabus</a></li></ul></li><li class="nav-item"><a href="/notebook/" class="nav-link" data-short="Mixed">Mixed</a><ul class="nav-dropdown"><li><a href="/notebook/mind/index.html">Mind</a></li><li><a href="/notebook/matter/index.html">Matter</a></li><li><a href="/notebook/practice/index.html">Practice</a></li><li><a href="/notebook/toolbox/index.html">Toolbox</a></li></ul></li><li class="nav-item"><a href="/years/" class="nav-link" data-short="Years">Years</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="banner-right">
+        <button class="banner-right-toggle" title="More controls">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="search-wrap" id="search-wrap">
+          <button class="search-btn" id="search-btn" title="Search (Ctrl+K)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-input-wrap" id="search-input-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search…" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+        <div class="comment-wrap" id="comment-wrap">
+          <button class="comment-btn" id="comment-btn" title="Review Comments (A)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <span class="comment-nav-count" id="comment-nav-count"></span>
+          <button class="comment-nav-btn" id="comment-nav-prev" title="Previous comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="comment-nav-btn" id="comment-nav-next" title="Next comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <button class="settings-btn" id="settings-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="settings-panel" id="settings-panel">
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Native Jupyter <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="native-jupyter-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Global Search <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="content-search-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Quick Edit <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="quick-edit-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section resource-pack-setting" id="resource-pack-setting" hidden>
+            <div class="settings-row resource-pack-row">
+              <span class="settings-desc">Offline resources</span>
+              <button type="button" class="settings-action-btn" id="resource-pack-import-btn">Import</button>
+            </div>
+            <input type="file" id="resource-pack-input" accept=".rpack,application/vnd.rprint.resource-pack" hidden>
+            <div class="resource-pack-status" id="resource-pack-status" aria-live="polite"></div>
+            <button type="button" class="settings-link-btn" id="resource-pack-rollback-btn" hidden>Undo last import</button>
+          </div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent link-preview-settings-parent">
+            <label class="style-label" id="link-preview-label">Link Preview <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="link-preview-switch" role="switch" aria-labelledby="link-preview-label" aria-checked="false" aria-expanded="false" aria-controls="link-preview-settings-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children link-preview-settings-children" id="link-preview-settings-children" hidden>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-same-page-only-label">Same-page links only</label>
+              <button class="style-switch style-switch-compact" id="link-preview-same-page-only-switch" role="switch" aria-labelledby="link-preview-same-page-only-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-auto-close-label">Auto-close</label>
+              <button class="style-switch style-switch-compact" id="link-preview-auto-close-switch" role="switch" aria-labelledby="link-preview-auto-close-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-overwrite-jumping-label">Overwrite Link Jumping</label>
+              <button class="style-switch style-switch-compact" id="link-preview-overwrite-jumping-switch" role="switch" aria-labelledby="link-preview-overwrite-jumping-label" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+            </div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-row settings-title-row settings-dependent-parent">
+            <span class="settings-panel-title">Keyboard Shortcuts</span>
+            <button class="style-switch" id="kb-enabled-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children keyboard-shortcuts-children">
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="search"><span class="settings-desc">Search</span><span class="settings-keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="scroll"><span class="settings-desc">Scroll down / up</span><span class="settings-keys"><kbd>J</kbd> <kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="section"><span class="settings-desc">Next / prev section</span><span class="settings-keys"><kbd>U</kbd> <kbd>I</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="sidebar-toc"><span class="settings-desc"><span data-shortcut-part="sidebar">Sidebar / </span>TOC</span><span class="settings-keys"><kbd data-shortcut-part="sidebar">S</kbd> <kbd>T</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="spread"><span class="settings-desc">Next / prev spread</span><span class="settings-keys"><kbd>PgDn</kbd> <kbd>PgUp</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="comments"><span class="settings-desc">Comments</span><span class="settings-keys"><kbd>A</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="fold"><span class="settings-desc">Fold banner</span><span class="settings-keys"><kbd>F</kbd></span></div>
+            
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="dismiss"><span class="settings-desc">Close / Dismiss</span><span class="settings-keys"><kbd>Esc</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="settings"><span class="settings-desc">Show this panel</span><span class="settings-keys"><kbd>?</kbd></span></div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent">
+            <label class="style-label">Debug Mode</label>
+            <button class="style-switch" id="debug-mode-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="debug-children" id="debug-children">
+            <div class="settings-dependent-children">
+              <div class="settings-panel-section settings-dependent-child debug-log-level-setting">
+                <label class="style-label">Client Log Level</label>
+                <div class="style-toggle-group">
+                  <button class="style-toggle-btn debug-level-btn" data-level="error">Error</button>
+                  <button class="style-toggle-btn debug-level-btn" data-level="info">Info</button>
+                  <button class="style-toggle-btn debug-level-btn active" data-level="debug">Debug</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-footer" id="settings-git-version">c659b99</div>
+        </div>
+        <a href="/static/settings.html?v=c659b99" class="theme-btn" id="theme-btn" title="Theme & display">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="13.5" cy="6.5" r=".5"/>
+            <circle cx="17.5" cy="10.5" r=".5"/>
+            <circle cx="8.5" cy="7.5" r=".5"/>
+            <circle cx="6.5" cy="12.5" r=".5"/>
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+          </svg>
+        </a>
+        <div class="style-panel" id="style-panel">
+          <div class="style-panel-section">
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn active" data-theme="light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light
+              </button>
+              <button class="style-toggle-btn" data-theme="dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="style-toggle-btn" data-theme="kindle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                E-Ink
+              </button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn font-btn active" data-font="system">System</button>
+              <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+              <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">字体</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn fontzh-btn active" data-fontzh="default">系统</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="noto-serif">宋体</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+            </div>
+          </div>
+          <div class="style-panel-section bg-picker-section">
+            <label class="style-label">Background</label>
+            <div class="bg-swatch-group" id="bg-swatch-group">
+              <button class="bg-swatch active" data-bg="default" title="Default"></button>
+              <button class="bg-swatch" data-bg="green" title="Green"></button>
+              <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+              <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+              <div class="style-range-ticks">
+                <span class="style-range-tick font-size-tick" data-i="0">12</span>
+                <span class="style-range-tick font-size-tick" data-i="1">14</span>
+                <span class="style-range-tick font-size-tick" data-i="2">16</span>
+                <span class="style-range-tick font-size-tick" data-i="3">18</span>
+                <span class="style-range-tick font-size-tick" data-i="4">24</span>
+                <span class="style-range-tick font-size-tick" data-i="5">32</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+              <div class="style-range-ticks">
+                <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+                <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+                <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+                <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+                <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+                <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Width <span id="width-value">90%</span></label>
+            <div class="style-slider-wrap width-slider-wrap">
+              <input type="range" class="style-range" id="content-width-range" min="0" max="5" step="1" value="3">
+              <div class="style-range-ticks width-ticks">
+                <span class="style-range-tick width-tick" data-i="0">50</span>
+                <span class="style-range-tick width-tick" data-i="1">65</span>
+                <span class="style-range-tick width-tick" data-i="2">80</span>
+                <span class="style-range-tick width-tick" data-i="3">90</span>
+                <span class="style-range-tick width-tick" data-i="4">95</span>
+                <span class="style-range-tick width-tick" data-i="5">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="ignore-corners-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">2 Columns <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+        </div>
+        <button class="banner-toggle" id="fold-banner-btn" title="Fold banner">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4l4 4-4 4zm10 0l-4 4 4 4z"/>
+          </svg>
+        </button>
+        <button class="banner-toggle" id="right-toggle" title="Toggle table of contents">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-right-dropdown"></div>
+    </div>
+  </header>
+
+  <!-- Floating buttons when banner is folded -->
+  <div class="banner-fold-float" id="banner-fold-float">
+    <button class="banner-fold-float-btn" id="unfold-banner-btn" title="Unfold banner">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M7 4L3 8l4 4zm2 0l4 4-4 4z"/>
+      </svg>
+    </button>
+    <button class="banner-fold-float-btn" id="float-toc-btn" title="Toggle table of contents">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout left-collapsed right-collapsed">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar collapsed" id="left-sidebar">
+      <div class="sidebar-content" id="spa-sidebar">
+        <!-- rprint:sidebar:start -->
+        <a class="sidebar-cat-title" href="/years">Years</a><ul class="sidebar-list"><li><a href="/years/2019.html">2019</a></li><li><a href="/years/2020.html">2020</a></li><li><a href="/years/2021.html">2021</a></li><li><a href="/years/2022.html">2022</a></li><li class="active"><a href="/years/2023.html">2023</a></li><li><a href="/years/2024.html">2024</a></li><li><a href="/years/2025.html">2025</a></li><li><a href="/years/2026.html">2026 🚜</a></li></ul>
+        <!-- rprint:sidebar:end -->
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content" id="content">
+      <article class="article" id="spa-content">
+        <blockquote data-sourcepos="1:1-1:1">
+<p data-sourcepos="1:1-1:1">本文由我家会做饭、挣钱、拍河狸的大猫猫独家赞助发布。</p>
+</blockquote>
+<p data-sourcepos="3:1-3:1">那么按照之前的想法，之后会努力每季度写一点——如何又蹉跎了三个月。</p>
+<!-- more -->
+<h2 id="q1" data-sourcepos="7:1-7:1">Q1</h2>
+<p data-sourcepos="9:1-9:1">重新看了<a href="https://missing.csail.mit.edu/">Missing Semester of Your CS Education</a>, 去年的某个时间草草看过一次。</p>
+<p data-sourcepos="11:1-11:1">读了<a href="https://web.mit.edu/kerberos/dialogue.html">Designing an Authentication System: a Dialogue in Four Scenes</a>, 这个就是Kerberos的最早实现 – 推荐一读。</p>
+<p data-sourcepos="13:1-13:1">玩了玩<a href="https://openai.com/blog/chatgpt/">ChatGPT</a>，挺好玩 &amp; 感觉非常适合用做CS学习小助手。</p>
+<p data-sourcepos="15:1-15:1">去了三次Franklin Fall，终于在最后一次成功了。这里冬天四点多就天黑了，然后冬天的franklin fall因为入口积雪，需要先走3 miles。</p>
+<p data-sourcepos="17:1-17:1">去了Mount Storm King，最后一段就是十分难。</p>
+<h2 id="q2" data-sourcepos="19:1-19:1">Q2</h2>
+<p data-sourcepos="21:1-21:1">写了几行代码，能自动用whisper生成英语播客的lrc文件；感觉以后会多听一些。 花了一些时间整理了MIT CS本科的培养计划，简单来说，除了6.1900（原6.0004）这门课，其他的所有课至少有OCW级别的公开课。</p>
+<p data-sourcepos="24:1-24:1">华州在地理上其实比哈尔滨还要北一些，所以在夏天的时候，晚上九点半天还有些迷迷糊糊的亮。</p>
+<p data-sourcepos="26:1-26:1">肚子痛去了一趟ER，体验了一下灯塔国的急诊。</p>
+<p data-sourcepos="28:1-28:1">去了Skagit Valley看郁金香，去了好几次Cape Flattery，还去了Olympic Game Farm喂熊。</p>
+<p data-sourcepos="30:1-30:1">六月初去了Kalaloch露营，在101公路上开科迈罗、木柴烤土豆、肉眼看到银河、听着海浪声睡觉都是很棒的回忆！ 从Kalaloch回来就得了新冠，躺了两周才完全康复。</p>
+<p data-sourcepos="33:1-33:1">买了一个comma 3，马自达CX-5终于也有可用的LKA了。</p>
+<p data-sourcepos="35:1-35:1">看了《银河护卫队》、《盟约》。</p>
+<h2 id="q3" data-sourcepos="37:1-37:1">Q3</h2>
+<p data-sourcepos="39:1-39:1">花了一些时间整理了一些离线的词典和百科；暂时还没有找到离线的简体中文的维基百科（<a href="https://github.com/openzim/mwoffliner/issues/840">github issue of openzim</a>，以及<a href="https://github.com/openzim/mwoffliner/issues?q=is%3Aissue+is%3Aopen+simplified">openzim和简体中文有关的issue列表</a>）。 按着Oxford 5000整理出了一本单词书，打算重新读一遍。</p>
+<p data-sourcepos="42:1-42:1">七月初去了Rainier露营，八月又去paradise住了一晚。</p>
+<p data-sourcepos="44:1-44:1">买了新相机、新镜头和一些配件，存款-5%。拍到了流星、大蓝鹭、土拨鼠、河狸。</p>
+<p data-sourcepos="46:1-46:1">买了三星手机、手表和平板，Android还挺有意思的；还买了两支望远镜。</p>
+<p data-sourcepos="48:1-48:1">养成了每天晚饭后出门走走的习惯。走了Mailbox。</p>
+<p data-sourcepos="50:1-50:1">升到了Senior，每年涨的工资税后勉勉强强够买一支600/6.3。</p>
+<p data-sourcepos="52:1-52:1">第一次打过了《文明5》的天神难度（虽然说刷了图&amp;SL了）。</p>
+<p data-sourcepos="54:1-54:1">看了《慕尼黑》、《贫民窟的百万富翁》，打算闲下来把奥斯卡最佳影片都补一补。</p>
+<h2 id="q4" data-sourcepos="56:1-56:1">Q4</h2>
+<p data-sourcepos="58:1-58:1">回国住了三周；走的时候还是一片肃杀，回去的时候已经一切照常了。家里真好啊。</p>
+<p data-sourcepos="60:1-60:1">新荣记真好吃！还去吃了四季酒店金沙厅，菜一般般，但是吃过饭去西湖走了走，西湖很好看。</p>
+<p data-sourcepos="62:1-62:1">原来住的公寓漏水了，迫不得已搬到了楼里的另一套去，每月便宜了364块钱。</p>
+<p data-sourcepos="64:1-64:1">家旁边的亚超开门了，从家里走过去比从Costco的停车场走进Costco还近，四舍五入就是家里有了一个超大且永远新鲜的食物仓库 —— 除了需要给一点点钱。 大概的感觉和之前在飞天园区的时候楼里就有全家是一样的。</p>
+<p data-sourcepos="67:1-67:1">办了Chase银行的储蓄卡和信用卡，四舍五入就是Chase给发了压岁钱。</p>
+<p data-sourcepos="69:1-69:1">终于抽中了一枚不显著歪轴的20G，还买了pocket 3（剪视频真的是个累活）。</p>
+<figure>
+<img src="/blog/attachments/pictures/2023-1.jpg" alt="sunrise" />
+<figcaption aria-hidden="true">sunrise</figcaption>
+</figure>
+
+      </article>
+    </main>
+
+    <!-- Right Sidebar (TOC) -->
+    <aside class="sidebar right-sidebar collapsed" id="right-sidebar">
+      <div class="sidebar-content" id="spa-toc">
+        <!-- <h4 class="toc-title">On this page</h4> -->
+        <ul class="toc-list"><li class="toc-section"><div class="toc-heading"><a href="#q1">Q1</a></div></li><li class="toc-section"><div class="toc-heading"><a href="#q2">Q2</a></div></li><li class="toc-section"><div class="toc-heading"><a href="#q3">Q3</a></div></li><li class="toc-section"><div class="toc-heading"><a href="#q4">Q4</a></div></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <script src="/static/shell-lifecycle.js"></script>
+  <script src="/static/shell-preferences.js"></script>
+  <script src="/static/scrollbar-visibility.js?v=c659b99"></script>
+  <script src="/static/sidebar-panel.js"></script>
+  <script src="/static/svg-theme.js"></script>
+  <script src="/static/render-on-demand.js"></script>
+  <script src="/static/shell-bootstrap.js"></script>
+  <script src="/static/main.js"></script>
+  <script src="/static/reading-navigation-state.js"></script>
+  <script src="/static/shell-layout.js"></script>
+  <script src="/static/shell-search-settings.js"></script>
+  <script src="/static/shell-router.js"></script>
+  <script src="/static/link-preview.js"></script>
+  <script src="/static/text-anchor.js"></script>
+  <script src="/static/comments.js"></script>
+  <script src="/static/themes.js"></script>
+  <script src="/static/table-enhance.js"></script>
+  <script src="/static/syllabus-enhance.js"></script>
+  <script src="/static/core/ink-stroke-format.js"></script>
+  <script src="/static/drawing-engine-render.js"></script>
+  <script>
+  // highlight.js: on-demand language loader + post-load highlight pass.
+  //
+  // Core (highlight.min.js) bundles ~37 common languages. Pages that use
+  // additional languages from _HLJS_EXTRA trigger an extra CDN fetch only
+  // when the page actually contains a matching code block. The service
+  // worker caches each module after the first fetch, so subsequent pages
+  // pay nothing for already-loaded languages.
+  //
+  // _HLJS_ALIAS maps user-facing class names to module filenames that
+  // differ from the class name. Pure aliases that hljs core already knows
+  // (e.g. ts → typescript, sh → bash) are resolved by hljs.getLanguage()
+  // and don't need entries — only include aliases whose target module is
+  // in _HLJS_EXTRA.
+  window._HLJS_BASE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/languages/';
+  window._HLJS_ALIAS = {
+    tex: 'latex', docker: 'dockerfile', ps: 'powershell', ps1: 'powershell',
+    ml: 'ocaml', hs: 'haskell', clj: 'clojure', cljs: 'clojure',
+    erl: 'erlang', coffee: 'coffeescript', f90: 'fortran', f95: 'fortran',
+    pascal: 'delphi'
+  };
+  window._HLJS_EXTRA = [
+    // Tier 1/2: build/config, scientific, FP, scripting, editor
+    'dockerfile','nginx','cmake','http','latex','julia','matlab','fortran',
+    'haskell','scala','ocaml','fsharp','clojure','elixir','dart','vim','powershell',
+    // Tier 3: FP & academic
+    'erlang','scheme','lisp','prolog',
+    // Tier 3: hardware / assembly
+    'verilog','vhdl','x86asm','armasm',
+    // Tier 3: modern systems
+    'crystal','nim','d','delphi',
+    // Tier 3: build / config
+    'groovy','nix','dts',
+    // Tier 3: markup / templating
+    'asciidoc','handlebars','gherkin',
+    // Tier 3: shell / scripting
+    'awk','tcl','coffeescript',
+    // Tier 3: stats
+    'stan'
+  ];
+  window._hljsLoaded = {};
+
+  // Run the highlight + line-number pass against `root` (defaults to document).
+  window._hljsRun = function(root) {
+    root = root || document;
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (name) {
+        var resolved = hljs.getLanguage(name) ? name : 'plaintext';
+        code.classList.add('language-' + resolved);
+      }
+    });
+    hljs.configure({ cssSelector: 'pre:not(.mermaid) > code' });
+    hljs.highlightAll();
+    root.querySelectorAll('pre:not(.mermaid) > code').forEach(function(code) {
+      if (code.querySelector('.code-line')) return;
+      var html = code.innerHTML;
+      if (html.charAt(html.length - 1) === '\n') html = html.slice(0, -1);
+      var lines = html.split('\n');
+      var openTags = [];
+      code.innerHTML = lines.map(function(line) {
+        var prefix = openTags.join('');
+        var re = /<\/?span[^>]*>/gi, m;
+        while ((m = re.exec(line)) !== null) {
+          if (m[0][1] === '/') openTags.pop();
+          else openTags.push(m[0]);
+        }
+        var suffix = '';
+        for (var i = 0; i < openTags.length; i++) suffix += '</span>';
+        return '<span class="code-line">' + prefix + (line || ' ') + suffix + '</span>';
+      }).join('');
+    });
+  };
+
+  // Scan `root` for code blocks, fetch any missing allowlisted language
+  // modules, then run the highlight pass once they finish loading (or fail).
+  // Called once from the highlight.min.js onload handler, and again from
+  // main.js after each SPA navigation (scoped to #spa-content).
+  window._hljsInit = function(root) {
+    root = root || document;
+    if (typeof hljs === 'undefined') return;
+    var allow = {};
+    for (var i = 0; i < window._HLJS_EXTRA.length; i++) allow[window._HLJS_EXTRA[i]] = true;
+    var need = {};
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (!name || hljs.getLanguage(name)) return;
+      if (allow[name] && !window._hljsLoaded[name]) need[name] = true;
+    });
+    var keys = Object.keys(need);
+    if (!keys.length) { window._hljsRun(root); return; }
+    var pending = keys.length;
+    keys.forEach(function(l) {
+      window._hljsLoaded[l] = true; // mark in-flight to dedupe across SPA nav
+      var s = document.createElement('script');
+      s.src = window._HLJS_BASE + l + '.min.js';
+      s.onload = s.onerror = function() { if (--pending === 0) window._hljsRun(root); };
+      document.head.appendChild(s);
+    });
+  };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    onload="window._hljsInit();"></script>
+  <script id="rprint-mermaid" async src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('mermaid')}else{var t=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'default';mermaid.initialize({startOnLoad:false,theme:t});document.querySelectorAll('pre.mermaid > code').forEach(function(c){var src=c.textContent;c.parentElement.setAttribute('data-mermaid-source',src);c.parentElement.textContent=src;});mermaid.run()}"></script>
+  <script>document.getElementById('rprint-mermaid').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('mermaid',new Error('Mermaid failed to load'))}});</script>
+  
+  
+  
+</body>
+</html>

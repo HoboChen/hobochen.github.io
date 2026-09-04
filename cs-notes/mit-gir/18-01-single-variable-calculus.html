@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="build-commit" content="c659b99">
+  <title>Calculus I (18.01) - Jingqi's Interpositive</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/main.css?v=c659b99">
+  <link rel="stylesheet" href="/static/link-preview.css">
+  <link rel="stylesheet" href="/static/sidebar-panel.css">
+  <link rel="stylesheet" href="/static/table-enhance.css">
+  <link rel="stylesheet" href="/static/syllabus-enhance.css">
+  <link rel="stylesheet" href="/static/comments.css">
+  <link rel="stylesheet" href="/static/notebook.css">
+  <link rel="stylesheet" href="/static/themes.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var linkPreviewEmbed=false;
+      try{
+        var previewUrl=new URL(location.href);
+        linkPreviewEmbed=previewUrl.searchParams.get('rprint-preview')==='1'&&window.parent!==window&&window.parent.location.origin===location.origin;
+      }catch(e){}
+      if(linkPreviewEmbed){
+        document.documentElement.classList.add('link-preview-embed');
+        var previewArticleLink=function(target){return target&&target.closest&&target.closest('.article a[href]');};
+        var blockPreviewLink=function(event){if(previewArticleLink(event.target)){event.preventDefault();event.stopImmediatePropagation();}};
+        document.addEventListener('click',blockPreviewLink,true);
+        document.addEventListener('auxclick',blockPreviewLink,true);
+        document.addEventListener('keydown',function(event){if(event.key==='Enter')blockPreviewLink(event);},true);
+        document.addEventListener('dblclick',function(event){if(event.target&&event.target.closest&&event.target.closest('.article')){event.preventDefault();event.stopImmediatePropagation();}},true);
+      }
+      var bc=document.querySelector('meta[name="build-commit"]');
+      var commit=bc?bc.getAttribute('content'):'';
+      if(commit&&commit!=='unknown'){
+        var prev=localStorage.getItem('kb-build-commit');
+        if(prev&&prev!==commit){
+          var keys=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf('kb-')===0)keys.push(k);}
+          keys.forEach(function(k){localStorage.removeItem(k);});
+          localStorage.setItem('kb-build-commit',commit);
+          if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+            navigator.serviceWorker.controller.postMessage('clearCaches');
+          }
+          window.location.reload();
+          return;
+        }
+        localStorage.setItem('kb-build-commit',commit);
+      }
+      // Resume last visited page on PWA/browser launch. PWA launches carry
+      // `?pwa=1`; a normal browser launch is a plain root URL without a same-
+      // origin referrer. `/index.html` is an explicit home navigation, so it
+      // never resumes. Runs before paint to avoid a flash of the home page.
+      // Validates the stored path is a same-origin absolute path (rejects
+      // `//host` / `/\host` open-redirects).
+      var resumeLaunch=/[?&]pwa=1(&|$)/.test(location.search);
+      try{
+        var launchUrl=new URL(location.href);
+        launchUrl.searchParams.delete('pwa');
+        var sameOriginReferrer=false;
+        try{sameOriginReferrer=!!document.referrer&&new URL(document.referrer,location.href).origin===location.origin;}catch(e){}
+        resumeLaunch=resumeLaunch||(launchUrl.pathname==='/'&&!launchUrl.search&&!launchUrl.hash&&!sameOriginReferrer);
+      }catch(e){}
+      if(resumeLaunch){
+        try{
+          var last=localStorage.getItem('kb-last-location');
+          var lastPath=last&&last.split('#')[0].split('?')[0];
+          if(last&&/^\/[^/\\]/.test(last)&&lastPath!=='/'&&lastPath!=='/index.html'){
+            try{sessionStorage.setItem('kb-resume-last-scroll','1');}catch(e){}
+            location.replace(last);return;
+          }
+        }catch(e){}
+      }
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      var mob=window.matchMedia('(max-width:650px)').matches;
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.style.colorScheme=t==='dark'?'dark':'light';
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      var w=p.contentWidth||(mob?'100':'90');
+      document.documentElement.style.setProperty('--content-max-width',w+'%');
+      var edge=p.ignoreCorners!==undefined?p.ignoreCorners==='on':false;
+      if(edge&&w==='100')document.documentElement.setAttribute('data-ignore-corners','on');
+      if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches||window.matchMedia('(display-mode:fullscreen)').matches)document.documentElement.classList.add('pwa-standalone');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'kaiti';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.0};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+      var ht=t==='dark'?'github-dark':'github';
+      var writes='<link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/'+ht+'.min.css">';
+      document.write(writes);
+    })();
+  </script>
+  <style>.math{opacity:0;transition:opacity .15s}.math.rprint-render-failed{opacity:1}</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css" integrity="sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM" crossorigin="anonymous">
+  <script id="rprint-katex" defer src="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.js" integrity="sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI" crossorigin="anonymous"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('katex')}else{document.querySelectorAll('.math').forEach(function(el){var src=el.textContent;el.setAttribute('data-latex',src);katex.render(src,el,{displayMode:el.classList.contains('display'),throwOnError:false,trust:function(ctx){return ctx&&ctx.command==='\\href'&&typeof ctx.url==='string'&&/^#[A-Za-z0-9:._-]+$/.test(ctx.url);}});el.querySelectorAll('mtable[columnspacing=\'\']').forEach(function(t){t.removeAttribute('columnspacing')});el.style.opacity='1';})}"></script>
+  <script>document.getElementById('rprint-katex').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('katex',new Error('KaTeX failed to load'))}else{document.querySelectorAll('.math').forEach(function(el){el.style.opacity='1'})}});</script>
+</head>
+<body data-page-type="markdown">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <button class="banner-toggle" id="left-toggle" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h12v1.5H2V3zm0 4h12v1.5H2V7zm0 4h12v1.5H2V11z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-center">
+        <div class="banner-center-inner">
+          <a href="/index.html" class="site-title" data-short="Interpositive">Jingqi's Interpositive</a>
+          <span class="spa-health-wrap" id="spa-health-wrap">
+            <span class="spa-health-dot" id="spa-health-dot" title="SPA server status"></span>
+            <div class="spa-health-popup" id="spa-health-popup">
+              <div class="shp-header">
+                <span class="shp-title">Server Status</span>
+                <span class="shp-heart" id="shp-heart"></span>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-metrics">
+                <div class="shp-row"><span class="shp-label">Ping</span><span class="shp-value" id="shp-ping">—</span></div>
+                <div class="shp-row"><span class="shp-label">Uptime</span><span class="shp-value" id="shp-uptime">—</span></div>
+                <div class="shp-row"><span class="shp-label">Memory</span><span class="shp-value" id="shp-memory">—</span></div>
+                <div class="shp-row"><span class="shp-label">CPU Time</span><span class="shp-value" id="shp-cpu-time">—</span></div>
+                <div class="shp-row"><span class="shp-label">Load</span><span class="shp-value" id="shp-load">—</span></div>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-modules">
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-watch"></span> Watch</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-jupyter"></span> Jupyter</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-terminal"></span> Terminal</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-proxy"></span> Proxy</div>
+              </div>
+            </div>
+          </span>
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="/cs-notes/" class="nav-link" data-short="CS">CS</a><ul class="nav-dropdown"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li><a href="/cs-notes/mit-gir/index.html">MIT GIR</a></li><li><a href="/cs-notes/cs-math/index.html">CS Math</a></li></ul></li><li class="nav-item"><a href="/not-cs-notes/" class="nav-link" data-short="Not-CS">Not-CS</a><ul class="nav-dropdown"><li><a href="/not-cs-notes/mit-math-requirements.html">MIT Math Syllabus</a></li></ul></li><li class="nav-item"><a href="/notebook/" class="nav-link" data-short="Mixed">Mixed</a><ul class="nav-dropdown"><li><a href="/notebook/mind/index.html">Mind</a></li><li><a href="/notebook/matter/index.html">Matter</a></li><li><a href="/notebook/practice/index.html">Practice</a></li><li><a href="/notebook/toolbox/index.html">Toolbox</a></li></ul></li><li class="nav-item"><a href="/years/" class="nav-link" data-short="Years">Years</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="banner-right">
+        <button class="banner-right-toggle" title="More controls">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="search-wrap" id="search-wrap">
+          <button class="search-btn" id="search-btn" title="Search (Ctrl+K)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-input-wrap" id="search-input-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search…" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+        <div class="comment-wrap" id="comment-wrap">
+          <button class="comment-btn" id="comment-btn" title="Review Comments (A)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <span class="comment-nav-count" id="comment-nav-count"></span>
+          <button class="comment-nav-btn" id="comment-nav-prev" title="Previous comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="comment-nav-btn" id="comment-nav-next" title="Next comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <button class="settings-btn" id="settings-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="settings-panel" id="settings-panel">
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Native Jupyter <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="native-jupyter-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Global Search <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="content-search-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Quick Edit <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="quick-edit-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section resource-pack-setting" id="resource-pack-setting" hidden>
+            <div class="settings-row resource-pack-row">
+              <span class="settings-desc">Offline resources</span>
+              <button type="button" class="settings-action-btn" id="resource-pack-import-btn">Import</button>
+            </div>
+            <input type="file" id="resource-pack-input" accept=".rpack,application/vnd.rprint.resource-pack" hidden>
+            <div class="resource-pack-status" id="resource-pack-status" aria-live="polite"></div>
+            <button type="button" class="settings-link-btn" id="resource-pack-rollback-btn" hidden>Undo last import</button>
+          </div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent link-preview-settings-parent">
+            <label class="style-label" id="link-preview-label">Link Preview <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="link-preview-switch" role="switch" aria-labelledby="link-preview-label" aria-checked="false" aria-expanded="false" aria-controls="link-preview-settings-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children link-preview-settings-children" id="link-preview-settings-children" hidden>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-same-page-only-label">Same-page links only</label>
+              <button class="style-switch style-switch-compact" id="link-preview-same-page-only-switch" role="switch" aria-labelledby="link-preview-same-page-only-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-auto-close-label">Auto-close</label>
+              <button class="style-switch style-switch-compact" id="link-preview-auto-close-switch" role="switch" aria-labelledby="link-preview-auto-close-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-overwrite-jumping-label">Overwrite Link Jumping</label>
+              <button class="style-switch style-switch-compact" id="link-preview-overwrite-jumping-switch" role="switch" aria-labelledby="link-preview-overwrite-jumping-label" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+            </div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-row settings-title-row settings-dependent-parent">
+            <span class="settings-panel-title">Keyboard Shortcuts</span>
+            <button class="style-switch" id="kb-enabled-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children keyboard-shortcuts-children">
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="search"><span class="settings-desc">Search</span><span class="settings-keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="scroll"><span class="settings-desc">Scroll down / up</span><span class="settings-keys"><kbd>J</kbd> <kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="section"><span class="settings-desc">Next / prev section</span><span class="settings-keys"><kbd>U</kbd> <kbd>I</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="sidebar-toc"><span class="settings-desc"><span data-shortcut-part="sidebar">Sidebar / </span>TOC</span><span class="settings-keys"><kbd data-shortcut-part="sidebar">S</kbd> <kbd>T</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="spread"><span class="settings-desc">Next / prev spread</span><span class="settings-keys"><kbd>PgDn</kbd> <kbd>PgUp</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="comments"><span class="settings-desc">Comments</span><span class="settings-keys"><kbd>A</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="fold"><span class="settings-desc">Fold banner</span><span class="settings-keys"><kbd>F</kbd></span></div>
+            
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="dismiss"><span class="settings-desc">Close / Dismiss</span><span class="settings-keys"><kbd>Esc</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="settings"><span class="settings-desc">Show this panel</span><span class="settings-keys"><kbd>?</kbd></span></div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent">
+            <label class="style-label">Debug Mode</label>
+            <button class="style-switch" id="debug-mode-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="debug-children" id="debug-children">
+            <div class="settings-dependent-children">
+              <div class="settings-panel-section settings-dependent-child debug-log-level-setting">
+                <label class="style-label">Client Log Level</label>
+                <div class="style-toggle-group">
+                  <button class="style-toggle-btn debug-level-btn" data-level="error">Error</button>
+                  <button class="style-toggle-btn debug-level-btn" data-level="info">Info</button>
+                  <button class="style-toggle-btn debug-level-btn active" data-level="debug">Debug</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-footer" id="settings-git-version">c659b99</div>
+        </div>
+        <a href="/static/settings.html?v=c659b99" class="theme-btn" id="theme-btn" title="Theme & display">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="13.5" cy="6.5" r=".5"/>
+            <circle cx="17.5" cy="10.5" r=".5"/>
+            <circle cx="8.5" cy="7.5" r=".5"/>
+            <circle cx="6.5" cy="12.5" r=".5"/>
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+          </svg>
+        </a>
+        <div class="style-panel" id="style-panel">
+          <div class="style-panel-section">
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn active" data-theme="light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light
+              </button>
+              <button class="style-toggle-btn" data-theme="dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="style-toggle-btn" data-theme="kindle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                E-Ink
+              </button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn font-btn active" data-font="system">System</button>
+              <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+              <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">字体</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn fontzh-btn active" data-fontzh="default">系统</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="noto-serif">宋体</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+            </div>
+          </div>
+          <div class="style-panel-section bg-picker-section">
+            <label class="style-label">Background</label>
+            <div class="bg-swatch-group" id="bg-swatch-group">
+              <button class="bg-swatch active" data-bg="default" title="Default"></button>
+              <button class="bg-swatch" data-bg="green" title="Green"></button>
+              <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+              <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+              <div class="style-range-ticks">
+                <span class="style-range-tick font-size-tick" data-i="0">12</span>
+                <span class="style-range-tick font-size-tick" data-i="1">14</span>
+                <span class="style-range-tick font-size-tick" data-i="2">16</span>
+                <span class="style-range-tick font-size-tick" data-i="3">18</span>
+                <span class="style-range-tick font-size-tick" data-i="4">24</span>
+                <span class="style-range-tick font-size-tick" data-i="5">32</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+              <div class="style-range-ticks">
+                <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+                <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+                <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+                <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+                <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+                <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Width <span id="width-value">90%</span></label>
+            <div class="style-slider-wrap width-slider-wrap">
+              <input type="range" class="style-range" id="content-width-range" min="0" max="5" step="1" value="3">
+              <div class="style-range-ticks width-ticks">
+                <span class="style-range-tick width-tick" data-i="0">50</span>
+                <span class="style-range-tick width-tick" data-i="1">65</span>
+                <span class="style-range-tick width-tick" data-i="2">80</span>
+                <span class="style-range-tick width-tick" data-i="3">90</span>
+                <span class="style-range-tick width-tick" data-i="4">95</span>
+                <span class="style-range-tick width-tick" data-i="5">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="ignore-corners-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">2 Columns <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+        </div>
+        <button class="banner-toggle" id="fold-banner-btn" title="Fold banner">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4l4 4-4 4zm10 0l-4 4 4 4z"/>
+          </svg>
+        </button>
+        <button class="banner-toggle" id="right-toggle" title="Toggle table of contents">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-right-dropdown"></div>
+    </div>
+  </header>
+
+  <!-- Floating buttons when banner is folded -->
+  <div class="banner-fold-float" id="banner-fold-float">
+    <button class="banner-fold-float-btn" id="unfold-banner-btn" title="Unfold banner">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M7 4L3 8l4 4zm2 0l4 4-4 4z"/>
+      </svg>
+    </button>
+    <button class="banner-fold-float-btn" id="float-toc-btn" title="Toggle table of contents">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout left-collapsed right-collapsed">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar collapsed" id="left-sidebar">
+      <div class="sidebar-content" id="spa-sidebar">
+        <!-- rprint:sidebar:start -->
+        <a class="sidebar-cat-title" href="/cs-notes">CS</a><ul class="sidebar-list"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li class="sidebar-group open" data-priority="0"><span class="sidebar-row"><a class="sidebar-group-title active-group" href="/cs-notes/mit-gir/index.html">MIT GIR</a><span class="sidebar-toggle"></span></span><ul><li class="active"><a href="/cs-notes/mit-gir/18-01-single-variable-calculus.html">Calculus I (18.01)</a></li><li><a href="/cs-notes/mit-gir/18-01-single-variable-calculus-exercises.html">Calculus I (18.01) - Exercises</a></li><li><a href="/cs-notes/mit-gir/18-02-multivariable-calculus.html">Calculus II (18.02)</a></li><li><a href="/cs-notes/mit-gir/18-02-multivariable-calculus-exercises.html">Calculus II (18.02) - Exercises</a></li><li><a href="/cs-notes/mit-gir/8-01-classical-mechanics.html">Physics I (8.01) 🚜</a></li><li><a href="/cs-notes/mit-gir/8-01-classical-mechanics-exercises.html">Physics I (8.01) - Exercises 🚜</a></li><li><a href="/cs-notes/mit-gir/8-02-electricity-magnetism.html">Physics II (8.02) 🚜</a></li></ul></li><li class="sidebar-group" data-priority="0.001"><span class="sidebar-row"><a class="sidebar-group-title" href="/cs-notes/cs-math/index.html">CS Math</a><span class="sidebar-toggle"></span></span><ul><li><a href="/cs-notes/cs-math/18-06-linear-algebra.html">Linear Algebra (18.06)</a></li><li><a href="/cs-notes/cs-math/6-042-discrete-mathematics.html">Discrete Mathematics (6.042)</a></li></ul></li></ul>
+        <!-- rprint:sidebar:end -->
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content" id="content">
+      <article class="article" id="spa-content">
+        <h1 id="calculus-i-18.01">Calculus I (<a href="https://ocw.mit.edu/courses/18-01-single-variable-calculus-fall-2006">18.01</a>)</h1>
+<h2 id="differentiation" data-sourcepos="3:1-3:1">Differentiation</h2>
+<h3 id="limit" data-sourcepos="5:1-5:1">Limit</h3>
+<p data-sourcepos="8:1-8:1"><span class="math display">
+\lim_{x\to a}f(x) = L \iff \forall \epsilon&gt;0, \exists \delta &gt; 0: \lvert f(x) - L\rvert &lt; \epsilon , \forall x\in(a-\delta, a)\cup(a, a+\delta)
+</span></p>
+<h3 id="derivative" data-sourcepos="11:1-11:1">Derivative</h3>
+<p data-sourcepos="13:1-13:1">The derivative is the slope of the line tangent to the graph of <span class="math inline">f(x)</span>.</p>
+<p data-sourcepos="15:1-15:1">Tangent line is the <em>limit</em> of the secant line, as the distance between the 2 points goes to zero.</p>
+<p data-sourcepos="18:1-18:1"><span class="math display">
+ \lim_{\Delta x \to 0} \frac{\Delta f}{\Delta x} = \lim_{\Delta x \to 0} \frac{f(x_0+\Delta x) - f(x_0)}{\Delta x} = f&#39;(x_0)
+</span></p>
+<p data-sourcepos="21:1-21:1">Equivalent notations:</p>
+<p data-sourcepos="24:1-24:1"><span class="math display">
+\frac{\mathrm{d}f(x)}{\mathrm{d}x}, \frac {\mathrm{d}}{\mathrm{d}x} f(x), f&#39;, Df
+</span></p>
+<h3 id="differential-notation" data-sourcepos="27:1-27:1">Differential Notation</h3>
+<p data-sourcepos="30:1-30:1"><span class="math display">
+\mathrm{d}y = f&#39;(x)\mathrm{d}x \quad (y = f(x))
+</span></p>
+<p>Both <span class="math inline">\mathrm{d}y</span> and <span class="math inline">f&#39;(x)\mathrm{d}x</span> are called differentials.</p>
+<h3 id="continuity" data-sourcepos="35:1-35:1">Continuity</h3>
+<p data-sourcepos="38:1-38:1"><span class="math display">
+\lim_{x\to x_0} f(x) = f(x_0) \iff f(x) \text{ is continuous at } x_0
+</span></p>
+<p data-sourcepos="41:1-41:1">Different kinds of discontinuity:</p>
+<ul data-sourcepos="43:1-46:1">
+<li>Removable: the left-hand limit and right-hand limit are equal, but either <span class="math inline">f(x_0)</span> is undefined or <span class="math inline">f(x_0)</span> is not equal to the limit.</li>
+<li>Jump: both one-sided limits exist, but they are not equal.</li>
+<li>Infinite: at least one one-sided limit is infinite.</li>
+<li>Other: at least one one-sided limit does not exist, for example oscillatory discontinuity.</li>
+</ul>
+<!-- Differentiable implies continuous as:
+
+$
+\begin{aligned}
+& \lim_{\Delta x \to 0}  f(a+\Delta x) = f(a) \\
+\iff &
+x = a + \Delta x, \lim_{\Delta x \to 0} \Delta y = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x} \Delta x = (\lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x}) (\lim_{\Delta x \to 0} \Delta x) = \frac{\mathrm{d}y}{\mathrm{d}x} \cdot0=0
+\end{aligned}
+$ -->
+<p>If <span class="math inline">f</span> is differentiable at <span class="math inline">a</span>, then</p>
+<p data-sourcepos="62:1-62:1"><span class="math display">
+\Delta y = f(a+\Delta x)-f(a)
+=
+\frac{\Delta y}{\Delta x}\Delta x.
+</span></p>
+<p data-sourcepos="67:1-67:1">Since</p>
+<p data-sourcepos="70:1-70:1"><span class="math display">
+\lim_{\Delta x\to 0}\frac{\Delta y}{\Delta x}=f&#39;(a)
+</span></p>
+<p data-sourcepos="73:1-73:1">exists and is finite, we have</p>
+<p data-sourcepos="76:1-76:1"><span class="math display">
+\lim_{\Delta x\to 0}\Delta y
+=
+\left(\lim_{\Delta x\to 0}\frac{\Delta y}{\Delta x}\right)
+\left(\lim_{\Delta x\to 0}\Delta x\right)
+=
+f&#39;(a)\cdot 0=0.
+</span></p>
+<p data-sourcepos="84:1-84:1">Therefore,</p>
+<p data-sourcepos="87:1-87:1"><span class="math display">
+\lim_{\Delta x\to 0} f(a+\Delta x)=f(a).
+</span></p>
+<p data-sourcepos="90:1-90:1">So differentiability implies continuity.</p>
+<p data-sourcepos="92:1-92:1">For single-variable functions, being differentiable at a point is equivalent to the derivative existing at that point.</p>
+<h3 id="computations-of-derivatives" data-sourcepos="94:1-94:1">Computations of Derivatives</h3>
+<p data-sourcepos="96:1-96:1">basic:</p>
+<p><span class="math display">
+\begin{aligned}
+    \mathrm{d}Cu &amp; = C \mathrm{d}u \\
+    \mathrm{d}(u+v) &amp;= \mathrm{d}u + \mathrm{d}v \\
+    \mathrm{d}(uv) &amp;= u \mathrm{d}v + v \mathrm{d}u \\
+    \mathrm{d}\frac uv &amp;=\frac{v \mathrm{d}u-u\mathrm{d}v}{v^2}
+\end{aligned}
+</span></p>
+<p data-sourcepos="107:1-107:1">chain:</p>
+<p data-sourcepos="110:1-110:1"><span class="math display">
+\frac{\mathrm{d}y}{\mathrm{d}x}=\frac{\mathrm{d}y}{\mathrm{d}u}\cdot\frac{\mathrm{d}u}{\mathrm{d}x} \quad y=f(u) \text{ and } u = g(x)
+</span></p>
+<p data-sourcepos="113:1-113:1">or in the form:</p>
+<p><span class="math display">
+[f(g(x))]&#39; = (f\circ g)&#39;(x) = f&#39;(g(x)) \cdot g&#39;(x)
+</span></p>
+<h3 id="higher-derivative-notation" data-sourcepos="119:1-119:1">Higher Derivative Notation</h3>
+<p><span class="math display">
+\begin{aligned}
+    f^{&#39;&#39;}(x)  &amp; \quad y^{&#39;&#39;} &amp; \quad \frac{\mathrm{d}^2y}{\mathrm{d} x^2} &amp; \quad \frac {\mathrm{d}^2}{\mathrm{d} x ^ 2} f(x) \\
+    f^{(n)}(x) &amp; \quad y^{(n)}  &amp; \quad \frac{\mathrm{d}^ny}{\mathrm{d} x^n} &amp; \quad \frac {\mathrm{d}^n}{\mathrm{d} x ^ n} f(x)
+\end{aligned}
+</span></p>
+<h3 id="implicit-differentiation" data-sourcepos="128:1-128:1">Implicit Differentiation</h3>
+<p data-sourcepos="130:1-130:1">Use the chain rule and treat the response variable cautiously.</p>
+<p>Example: <span class="math inline">\mathrm{d}\tan^{-1}x</span>.</p>
+<p data-sourcepos="135:1-135:1"><span class="math display">
+\frac{f&#39;(t)}{f(t)} = \frac{\mathrm{d}}{\mathrm{d}t}\ln \lvert f(t)\rvert
+</span></p>
+<h3 id="derivative-table" data-sourcepos="138:1-138:1">Derivative Table</h3>
+<div class="table-wrap"><table data-sourcepos="140:1-140:1">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Func</th>
+<th style="text-align: left;">Derivative</th>
+<th style="text-align: left;">Conditions / derivative domain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">C</span></td>
+<td style="text-align: left;"><span class="math inline">0</span></td>
+<td style="text-align: left;"><span class="math inline">x \in \mathbb{R}</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">x^n</span></td>
+<td style="text-align: left;"><span class="math inline">nx^{n-1}</span></td>
+<td style="text-align: left;">If <span class="math inline">n\in\mathbb{Z}_{\ge 1}</span>, <span class="math inline">x\in\mathbb{R}</span>; if <span class="math inline">n\in\mathbb{R}</span>, usually <span class="math inline">x&gt;0</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">a^x</span></td>
+<td style="text-align: left;"><span class="math inline">\ln a\cdot a^x</span></td>
+<td style="text-align: left;"><span class="math inline">a&gt;0</span>, usually <span class="math inline">a\neq 1</span>, <span class="math inline">x\in\mathbb{R}</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\log_ax</span></td>
+<td style="text-align: left;"><span class="math inline">1 / (x\ln a)</span></td>
+<td style="text-align: left;"><span class="math inline">a&gt;0</span>, <span class="math inline">a\neq 1</span>, <span class="math inline">x&gt;0</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\sin x</span></td>
+<td style="text-align: left;"><span class="math inline">\cos x</span></td>
+<td style="text-align: left;"><span class="math inline">x \in \mathbb{R}</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\cos x</span></td>
+<td style="text-align: left;"><span class="math inline">-\sin x</span></td>
+<td style="text-align: left;"><span class="math inline">x \in \mathbb{R}</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\tan x</span></td>
+<td style="text-align: left;"><span class="math inline">1 / (\cos^2x)=\sec^2x</span></td>
+<td style="text-align: left;"><span class="math inline">x\neq \pi / 2+k\pi, k\in\mathbb{Z}</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\sec x</span></td>
+<td style="text-align: left;"><span class="math inline">\sec x \tan x</span></td>
+<td style="text-align: left;"><span class="math inline">x\neq \pi / 2+k\pi, k\in\mathbb{Z}</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\arcsin x</span></td>
+<td style="text-align: left;"><span class="math inline">1 / (\sqrt{1-x^2})</span></td>
+<td style="text-align: left;"><span class="math inline">-1&lt;x&lt;1</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\arctan x</span></td>
+<td style="text-align: left;"><span class="math inline">1 / (1+x^2)</span></td>
+<td style="text-align: left;"><span class="math inline">x \in \mathbb{R}</span></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="lhospitals-rule-todo">L’Hospital’s Rule TODO</h3>
+<p>If <span class="math inline">f(a) = g(a) = 0</span>, have derivatives for <span class="math inline">x=a</span>, and <span class="math inline">g&#39;(a) \neq 0</span>, then:</p>
+<p data-sourcepos="158:1-158:1"><span class="math display">
+\lim_{x\to a}\frac{f(x)}{g(x)} = \lim_{x\to a} \frac{\frac{f(x)}{x-a}}{\frac{g(x)}{x-a}} =  \frac{\lim_{x\to a}\frac{f(x) - f(a)}{x-a}}{\lim_{x\to a}\frac{g(x) - g(a)}{x-a}} =\frac{f&#39;(a)}{g&#39;(a)}
+</span></p>
+<p data-sourcepos="161:1-161:1">It is also ok to use L’Hospital’s rule on limits of the form <span class="math inline">\frac{\infty}{\infty}</span> or <span class="math inline">x\to\pm\infty</span>.</p>
+<!-- ### L'Hospital's rule
+
+L'Hospital's rule applies to limits of the indeterminate forms
+
+$
+\frac{0}{0}
+\quad \text{or} \quad
+\frac{\infty}{\infty}.
+$
+
+Suppose $f$ and $g$ are differentiable near $a$, except possibly at $a$, and $g'(x)\neq 0$ near $a$. If
+
+$
+\lim_{x\to a}\frac{f'(x)}{g'(x)}
+$
+
+exists, and
+
+$
+\lim_{x\to a}f(x)=\lim_{x\to a}g(x)=0
+$
+
+or
+
+$
+\lim_{x\to a}|f(x)|=\lim_{x\to a}|g(x)|=\infty,
+$
+
+then
+
+$
+\lim_{x\to a}\frac{f'(x)}{g'(x)}.
+$
+
+This also works for one-sided limits and limits as $x\to\pm\infty$, if the same conditions hold.
+
+If the result is still of type $0/0$ or $\infty/\infty$, the rule may be applied repeatedly. -->
+<h2 id="applications-of-differentiation" data-sourcepos="202:1-202:1">Applications of Differentiation</h2>
+<h3 id="linear-approximation" data-sourcepos="204:1-204:1">Linear Approximation</h3>
+<p data-sourcepos="207:1-207:1"><span class="math display">
+f(x) \approx f(x_0) + f&#39;(x_0)(x-x_0), \quad x\approx x_0
+</span></p>
+<h3 id="newtons-method">Newton’s Method</h3>
+<p>To solve <span class="math inline">f(x)=0</span>:</p>
+<p data-sourcepos="215:1-215:1"><span class="math display">
+x_{n+1} = x_n - \frac{f(x_n)}{f&#39;(x_n)}
+</span></p>
+<!-- C implementation is `MIT-6.0001/3-newton.c`. -->
+<p data-sourcepos="220:1-220:1">The mathematical theory providing conditions under which Newton’s method is guaranteed to succeed can be found in numerical analysis.</p>
+<h3 id="mean-value-theorem" data-sourcepos="222:1-222:1">Mean Value Theorem</h3>
+<p>If <span class="math inline">f</span> is continuous on <span class="math inline">[a, b]</span> and differentiable on <span class="math inline">(a, b)</span>, then:</p>
+<p data-sourcepos="227:1-227:1"><span class="math display">
+\exists c \in (a, b), \quad f&#39;(c)=\frac{f(b) - f(a)}{b-a}
+</span></p>
+<h3 id="anti-derivative-table" data-sourcepos="230:1-230:1">Anti-Derivative Table</h3>
+<div class="table-wrap"><table data-sourcepos="232:1-242:1">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Func</th>
+<th style="text-align: left;">Anti-derivative</th>
+<th style="text-align: left;">Domain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">x^n</span></td>
+<td style="text-align: left;"><span class="math inline">x^{n+1} / (n+1)+C</span></td>
+<td style="text-align: left;"><span class="math inline">n\neq -1</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">1 / x</span></td>
+<td style="text-align: left;"><span class="math inline">\ln\lvert x\rvert+C</span></td>
+<td style="text-align: left;"><span class="math inline">x\neq 0</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\sin x</span></td>
+<td style="text-align: left;"><span class="math inline">-\cos x+C</span></td>
+<td style="text-align: left;"><span class="math inline">x\in\mathbb{R}</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\tan x</span></td>
+<td style="text-align: left;"><span class="math inline">-\ln\lvert\cos x\rvert+C</span></td>
+<td style="text-align: left;"><span class="math inline">x\neq \pi / 2+k\pi,\ k\in\mathbb{Z}</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\sec x</span></td>
+<td style="text-align: left;"><span class="math inline">\ln\lvert\sec x+\tan x\rvert+C</span></td>
+<td style="text-align: left;"><span class="math inline">x\neq \pi / 2+k\pi,\ k\in\mathbb{Z}</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">1 / \cos^2x,\ \sec^2x</span></td>
+<td style="text-align: left;"><span class="math inline">\tan x+C</span></td>
+<td style="text-align: left;"><span class="math inline">x\neq \pi / 2+k\pi,\ k\in\mathbb{Z}</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">1 / \sqrt{1-x^2}</span></td>
+<td style="text-align: left;"><span class="math inline">\arcsin x+C</span></td>
+<td style="text-align: left;"><span class="math inline">-1&lt;x&lt;1</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">1 / (1+x^2)</span></td>
+<td style="text-align: left;"><span class="math inline">\arctan x+C</span></td>
+<td style="text-align: left;"><span class="math inline">x\in\mathbb{R}</span></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="differential-in-economics" data-sourcepos="243:1-243:1">Differential in Economics</h3>
+<h4 id="margin" data-sourcepos="245:1-245:1">Margin</h4>
+<p data-sourcepos="247:1-247:1">Let C(x) be the total cost function:</p>
+<p data-sourcepos="250:1-250:1"><span class="math display">
+\frac{\mathrm{d}}{\mathrm{d}x}\frac{C(x)}{x} = 0 \iff C&#39;(x)=\frac{C(x)}{x}
+</span></p>
+<p data-sourcepos="253:1-253:1">Aka, if average cost reaches minimum, then marginal cost = average cost.</p>
+<p data-sourcepos="255:1-255:1">And, if profit reaches maximum, then marginal revenue = marginal cost.</p>
+<h4 id="elasticity" data-sourcepos="257:1-257:1">Elasticity</h4>
+<p>Let <span class="math inline">x=x(p)</span> be demand as a function of price <span class="math inline">p</span>.</p>
+<p data-sourcepos="262:1-262:1"><span class="math display">
+E(p)=-\frac{p}{x}\frac{\mathrm{d}x}{\mathrm{d}p}
+= -\frac{p x&#39;(p)}{x(p)}
+</span></p>
+<p>where <span class="math inline">p&gt;0</span> and <span class="math inline">x(p)&gt;0</span>.</p>
+<p data-sourcepos="268:1-268:1">The minus sign makes <span class="math inline">E(p)</span> positive when demand decreases as price increases.</p>
+<p data-sourcepos="270:1-270:1">Interpretation:</p>
+<p data-sourcepos="273:1-273:1"><span class="math display">
+E(p)\approx -\frac{\Delta x/x}{\Delta p/p}
+</span></p>
+<p>So <span class="math inline">E(p)</span> measures how sensitive demand is to price changes.</p>
+<p data-sourcepos="278:1-278:1">If revenue is</p>
+<p data-sourcepos="281:1-281:1"><span class="math display">
+R(p)=px(p)
+</span></p>
+<p data-sourcepos="284:1-284:1">then</p>
+<p data-sourcepos="287:1-287:1"><span class="math display">
+R&#39;(p)=x(p)(1-E(p)).
+</span></p>
+<div class="table-wrap"><table data-sourcepos="290:1-295:1">
+<thead>
+<tr>
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">Meaning</th>
+<th style="text-align: left;">Effect of increasing price on revenue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">E(p)&gt;1</span></td>
+<td style="text-align: left;">Elastic demand</td>
+<td style="text-align: left;">Revenue decreases</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">E(p)=1</span></td>
+<td style="text-align: left;">Unit elastic demand</td>
+<td style="text-align: left;">Revenue is stationary</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">0&lt;E(p)&lt;1</span></td>
+<td style="text-align: left;">Inelastic demand</td>
+<td style="text-align: left;">Revenue increases</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="integration" data-sourcepos="296:1-296:1">Integration</h2>
+<h3 id="riemann-sum" data-sourcepos="298:1-298:1">Riemann Sum</h3>
+<p data-sourcepos="301:1-301:1"><span class="math display">
+\sum_{i=1}^{n}f(c_i)\Delta x, \quad c_i \in [x_{i - 1}, x_i], x_i = a + \frac{b-a} n i
+</span></p>
+<h3 id="definite-integral" data-sourcepos="304:1-304:1">Definite Integral</h3>
+<p data-sourcepos="307:1-307:1"><span class="math display">
+\lim_{n\to \infty}\sum_{i=1}^{n}f(c_i)\Delta x = \int^b_af(x) \mathrm d x
+</span></p>
+<h3 id="first-fundamental-theorem-of-calculus" data-sourcepos="310:1-310:1">First Fundamental Theorem of Calculus</h3>
+<p data-sourcepos="313:1-313:1"><span class="math display">
+F&#39;(x) = f(x) \land f(x) \text{ is continuous} \implies
+\int^b_af(x) \mathrm d x=F(b)-F(a)
+</span></p>
+<h3 id="second-fundamental-theorem-of-calculus" data-sourcepos="317:1-317:1">Second Fundamental Theorem of Calculus</h3>
+<p data-sourcepos="320:1-320:1"><span class="math display">
+F(x) = \int_a^x f(t)\mathrm d t \land f(x) \text{ is continuous} \implies
+F&#39;(x) = f(x)
+</span></p>
+<h3 id="substitution" data-sourcepos="324:1-324:1">Substitution</h3>
+<p>Given <span class="math inline">f(x) = g(u(x))</span>:</p>
+<p data-sourcepos="329:1-329:1"><span class="math display">
+\int g(u) \mathrm{d} u = \int g(u(x))u&#39;(x)\mathrm{d}x = \int f(x)u&#39;(x) \mathrm{d}x
+</span></p>
+<p data-sourcepos="332:1-332:1">For definite:</p>
+<p data-sourcepos="335:1-335:1"><span class="math display">
+\int_{x_1}^{x_2} f(x)u&#39;(x) \mathrm{d}x = \int_{u(x_1)}^{u(x_2)} g(u) \mathrm{d} u
+</span></p>
+<h3 id="trigonometric-function-integration" data-sourcepos="338:1-338:1">Trigonometric Function Integration</h3>
+<p data-sourcepos="341:1-341:1"><span class="math display">
+\int \sin^n(x)\cos^m(x) \mathrm d x
+</span></p>
+<ol type="1">
+<li>Either <span class="math inline">n</span> or <span class="math inline">m</span> is odd; <span class="math inline">u = \text{odd\_func}(x)</span>.</li>
+<li><span class="math inline">n</span> and <span class="math inline">m</span> are all even; use double angle formula until 1 applies.</li>
+</ol>
+<p data-sourcepos="348:1-348:1"><span class="math display">
+\int \sec^n(x)\tan^m(x) \mathrm d x
+</span></p>
+<ol type="1">
+<li><span class="math inline">n</span> is even, <span class="math inline">u = \tan x</span>.</li>
+<li><span class="math inline">m</span> is odd, <span class="math inline">u = \sec x</span>.</li>
+<li><span class="math inline">n</span> is odd, <span class="math inline">m</span> is even: a. <span class="math inline">\tan^2 x + 1 = \sec^2 x</span> b. use the result for <span class="math inline">\int \sec ^n x \mathrm d x</span>.</li>
+</ol>
+<h3 id="partial-fraction-integration" data-sourcepos="355:1-355:1">Partial Fraction Integration</h3>
+<p><span class="math inline">\frac{P(x)}{Q(x)}</span> can be splitted in a systematic way.</p>
+<p data-sourcepos="359:1-359:1">Integration by parts:</p>
+<p data-sourcepos="362:1-362:1"><span class="math display">
+(uv)&#39; = u&#39;v+uv&#39; \iff uv&#39;= (uv)&#39; - u&#39;v \iff \int uv&#39; \mathrm d x = uv - \int u&#39;v \mathrm d x
+</span></p>
+<p data-sourcepos="365:1-365:1">Examples:</p>
+<ol type="1" data-sourcepos="367:1-371:1">
+<li><span class="math inline">\int (\ln x)^n \mathrm d x</span></li>
+<li><span class="math inline">\int x^n \mathrm e ^ x \mathrm d x</span></li>
+<li><span class="math inline">\int \sin x \mathrm e ^ x \mathrm d x</span></li>
+<li><span class="math inline">\int \cos x \mathrm e ^ x \mathrm d x</span></li>
+<li><span class="math inline">\int \sec ^n x \mathrm d x</span></li>
+</ol>
+<h3 id="improper-integral" data-sourcepos="373:1-373:1">Improper Integral</h3>
+<p data-sourcepos="376:1-376:1"><span class="math display">
+\int_{a}^{\infty} f(x) \mathrm d x = \lim_{b\to\infty}[F(b) - F(a)]
+</span></p>
+<p data-sourcepos="379:1-379:1">is said to converge if the limit exists and is finite.</p>
+<h2 id="applications-of-integral" data-sourcepos="381:1-381:1">Applications of Integral</h2>
+<h3 id="area-between-2-curves" data-sourcepos="383:1-383:1">Area between 2 Curves</h3>
+<p data-sourcepos="386:1-386:1"><span class="math display">
+A = \int_a^b\lvert f(x)-g(x) \rvert \mathrm d x
+</span></p>
+<h3 id="volume-by-slice-method" data-sourcepos="389:1-389:1">Volume by Slice Method</h3>
+<p data-sourcepos="391:1-391:1">To get the volume of a function revolved about <span class="math inline">x</span>-axis:</p>
+<p data-sourcepos="394:1-394:1"><span class="math display">
+\mathrm d V = \pi f(x)^2 \mathrm d x
+</span></p>
+<h3 id="volume-by-disk-method" data-sourcepos="397:1-397:1">Volume by Disk Method</h3>
+<p data-sourcepos="399:1-399:1">To get the volume of a function revolved about <span class="math inline">y</span>-axis:</p>
+<p data-sourcepos="402:1-402:1"><span class="math display">
+\mathrm d V = \pi x(y)^2 \mathrm dy
+</span></p>
+<h3 id="volume-by-cylinder-method" data-sourcepos="405:1-405:1">Volume by Cylinder Method</h3>
+<p data-sourcepos="407:1-407:1">To get the volume of a function revolved about <span class="math inline">y</span>-axis:</p>
+<p data-sourcepos="410:1-410:1"><span class="math display">
+\mathrm d V = 2\pi x y \mathrm dx
+</span></p>
+<h3 id="weighted-average" data-sourcepos="413:1-413:1">Weighted Average</h3>
+<p data-sourcepos="416:1-416:1"><span class="math display">
+\frac{\int_a^bf(x)w(x)\mathrm d x}{\int_a^bw(x)\mathrm d x}
+</span></p>
+<h3 id="simpsons-method">Simpson’s Method</h3>
+<p data-sourcepos="421:1-421:1">For numerical integration:</p>
+<p data-sourcepos="424:1-424:1"><span class="math display">
+\int_{a}^{b} f(x) \mathrm d x = \frac{b - a}{6}[f(a) + 4f(\frac{a+b}{2}) + f(b)] + \mathcal{O}((b-a)^5)
+</span></p>
+<!-- C implementation is `MIT-6.0001/18.01-simpson-integral.c`. -->
+<p>For <span class="math inline">\mathcal{O}((b-a)^4)</span>: <a href="https://www.jstor.org/stable/2300068?seq=1">Formulas for the Error in Simpson’s Rule</a>.</p>
+<h3 id="arc-length" data-sourcepos="431:1-431:1">Arc Length</h3>
+<p data-sourcepos="434:1-434:1"><span class="math display">
+L = \int \mathrm d s =\int_{x_0}^{x_1}\sqrt{1+(\frac{dy}{dx})^2}\mathrm d x
+</span></p>
+<h3 id="surface-area-of-a-function-revolved-about-x-axis" data-sourcepos="437:1-437:1">Surface Area of a Function Revolved about <span class="math inline">x</span>-Axis</h3>
+<p data-sourcepos="440:1-440:1"><span class="math display">
+S = \int 2\pi y \mathrm d s
+</span></p>
+<h3 id="area-in-polar-coordinates" data-sourcepos="443:1-443:1">Area in Polar Coordinates</h3>
+<p data-sourcepos="446:1-446:1"><span class="math display">
+S = \int^{\theta_2}_{\theta_1}\frac 1 2 r^2 \mathrm d \theta
+</span></p>
+<h2 id="series" data-sourcepos="449:1-449:1">Series</h2>
+<h3 id="sequence" data-sourcepos="451:1-451:1">Sequence</h3>
+<p data-sourcepos="453:1-453:1">A sequence is said to be <em>bounded</em> if there are 2 numbers <span class="math inline">A, B</span> such that <span class="math inline">A\leq x_n \leq B</span> for every <span class="math inline">n</span>.</p>
+<p data-sourcepos="455:1-455:1">A sequence is said to be <em>convergent</em> if it has a limit, aka, <span class="math inline">\forall \epsilon&gt;0, \exists n_0: |x_n-L|&lt;\epsilon, \forall n&gt;n_0</span>.</p>
+<p data-sourcepos="458:1-458:1"><span class="math display">
+\mathrm{convergent} \implies \mathrm{bounded}
+</span></p>
+<p data-sourcepos="461:1-461:1">An increasing sequence converges if and only if it is bounded.</p>
+<h3 id="series-1">Series</h3>
+<p data-sourcepos="465:1-465:1"><span class="math inline">\sum_{i=1}^\infty a_i</span> is called <em>infinite series</em>, or simply <em>series</em>. <span class="math inline">a_i</span> is called terms.</p>
+<p>For <span class="math inline">n</span>, the partial sum is:</p>
+<p data-sourcepos="470:1-470:1"><span class="math display">
+s_n = \sum_{i=1}^n a_i
+</span></p>
+<p>If the sequence <span class="math inline">\{s_n\}</span> converges, then the <span class="math inline">\sum_{i=1}^\infty a_i</span> converges.</p>
+<p data-sourcepos="475:1-475:1">Geometric series:</p>
+<p><span class="math display">
+\begin{aligned}
+a_n  &amp; = x ^n \\
+s_n &amp; = \sum_{i = 0}^n a_i =  \frac{1-x^{n+1}}{1-x}
+\end{aligned}
+</span></p>
+<p>It converges for <span class="math inline">|x| &lt; 1</span>.</p>
+<h3 id="ratio-test-and-root-test" data-sourcepos="486:1-486:1">Ratio Test and Root Test</h3>
+<p>If <span class="math inline">\sum a_n</span> is a series of positive terms, given <span class="math inline">L = \lim_{n\to \infty} \lvert \frac {a_{n+1}}{a_n} \rvert</span>, then:</p>
+<ul data-sourcepos="490:1-492:1">
+<li><span class="math inline">L &lt; 1 \to \text{converge}</span></li>
+<li><span class="math inline">L &gt; 1 \to \text{diverge}</span></li>
+<li><span class="math inline">L=1 \to \text{inconclusive}</span>: e.g. <span class="math inline">a_n= 1 / {n^p}</span></li>
+</ul>
+<p data-sourcepos="494:1-494:1">Given sum of geometric series converges for <span class="math inline">r\in (0,1)</span>, given <span class="math inline">L = \lim_{n\to \infty} \sqrt[n] a_n</span>, then:</p>
+<ul data-sourcepos="496:1-498:1">
+<li><span class="math inline">L &lt; 1 \to \text{converge}</span></li>
+<li><span class="math inline">L &gt; 1 \to \text{diverge}</span></li>
+<li><span class="math inline">L=1 \to \text{inconclusive}</span></li>
+</ul>
+<h3 id="alternating-series-test" data-sourcepos="500:1-500:1">Alternating Series Test</h3>
+<p>For <span class="math inline">\sum_{n=1}^{\infty}(-1)^{n+1}a_n</span>:</p>
+<ul>
+<li><span class="math inline">a_n</span> is not increasing</li>
+<li><span class="math inline">a_n \to 0</span></li>
+</ul>
+<p>A series <span class="math inline">\sum a_n</span> is said to be <em>absolutely convergent</em> if <span class="math inline">\sum |a_n|</span> converges.</p>
+<p data-sourcepos="510:1-510:1"><span class="math display">
+\text{absolute convergence} \to \text{convergence}
+</span></p>
+<h3 id="power-series" data-sourcepos="513:1-513:1">Power Series</h3>
+<p data-sourcepos="516:1-516:1"><span class="math display">
+s_n = \sum_{n=0}^{\infty}a_nx^n
+</span></p>
+<p>where the <span class="math inline">a_n</span> are constants and <span class="math inline">x</span> is variable. Geometric series is the simplest power series.</p>
+<!-- If a power series $\sum a_nx^n$ converges at $x_1$, $x_1 \neq 0$, then it converges absolutely for all  $|x| < |x_1|$; and if it diverges at $x_1$, then it diverges for all $|x| > |x_1|$. -->
+<p>Every power series <span class="math inline">\sum a_nx^n</span> has a radius of convergence <span class="math inline">R</span>, where <span class="math inline">0 \leq R \leq \infty</span>, with the property that the series converges absolutely if <span class="math inline">|x| &lt; R</span> and diverges if <span class="math inline">|x| &gt; R</span>:</p>
+<p data-sourcepos="526:1-526:1"><span class="math display">
+R = \lim_{n\to\infty}|\frac{a_n}{a_{n+1}}|
+</span></p>
+<p data-sourcepos="529:1-529:1">Within the radius of convergence, <span class="math inline">|x| &lt; R</span>, the powerseries is <em>continuous</em>, <em>differentiable</em> and <em>integrable</em>.</p>
+<h3 id="integral-comparison" data-sourcepos="531:1-531:1">Integral Comparison</h3>
+<p data-sourcepos="533:1-533:1">Consider a positive, non-increasing function <span class="math inline">f(x) &gt; 0</span>:</p>
+<p>Let <span class="math inline">s_n=\sum_{i=1}^n f(i), I_n=\int_{1}^{n} f(x)\mathrm dx</span>:</p>
+<p data-sourcepos="537:1-537:1">As decreasing:</p>
+<p data-sourcepos="540:1-540:1"><span class="math display">
+f(i+1) \leq f(x) \leq f(i), x\in[i, i+1] \implies \sum_{i=2}^{n} f(i)\ \leq \ \int_{1}^{n} f(x)\,dx\ \leq \ \sum_{i=1}^{n-1} f(i)
+</span></p>
+<p data-sourcepos="543:1-543:1">Equivalently:</p>
+<p data-sourcepos="546:1-546:1"><span class="math display">
+s_n - f(1) \leq  I_n  \leq  s_{n-1} \iff f(n) \leq s_n - I_n \leq f(1)
+</span></p>
+<p data-sourcepos="549:1-549:1">Similarily for increasing function <span class="math inline">f</span>:</p>
+<p data-sourcepos="552:1-552:1"><span class="math display">
+f(1) \leq s_n - I_n \leq f(n)
+</span></p>
+<!-- For remainder $r_n = s_n - I_n$:
+
+$
+r_{n+1} - r_n = f(n+1)-\int_{n}^{n+1} f(x)\mathrm dx\ <\ 0
+$ -->
+<p>So, for <span class="math inline">s_n = \sum_i f(i)</span> and <span class="math inline">\int_1^\infty f(x)\mathrm d x</span>, either both converge or both diverge.</p>
+<h3 id="eulers-constant">Euler’s Constant</h3>
+<p data-sourcepos="565:1-565:1">As in integral comparison, <span class="math inline">a_n =f(n)</span>, the difference between the sum and the integral is:</p>
+<p data-sourcepos="568:1-568:1"><span class="math display">
+F(n) = \sum_{i=1}^n a_i - \int_1^nf(x) \mathrm d x
+</span></p>
+<p>Assume <span class="math inline">f(x)</span> is positive decreasing:</p>
+<p><span class="math display">
+\begin{aligned}
+&amp; \int_n^{n+1} f(x) \mathrm d x \geq f(n+1)\\
+\implies &amp; F_{n+1} - F_{n} \leq 0
+\end{aligned}
+</span></p>
+<p>Thus, <span class="math inline">\{F_n\}</span> is decreasing and bounded, the <span class="math inline">\lim_{n\to \infty} F_n</span> exists.</p>
+<p data-sourcepos="582:1-582:1">The application is:</p>
+<p data-sourcepos="585:1-585:1"><span class="math display">
+\text{Euler&#39;s constant } \gamma = \lim_{n\to\infty} (\sum_{i=1}^{n} \frac 1 i - \int_{1}^{n}\frac 1 x \mathrm d x)
+</span></p>
+<h3 id="taylors-series">Taylor’s Series</h3>
+<p>At <span class="math inline">x=0</span>:</p>
+<p data-sourcepos="593:1-593:1"><span class="math display">
+f(x)=\sum_{i=0}^{n}\frac{f^{(i)}(0)}{i!}x^i +R_n(x), \quad R_n(x) = \frac{f^{(n+1)}(c)}{(n+1)!}x^{n+1}, c \in(0,x)
+</span></p>
+<p>Or <span class="math inline">x=x_0</span>:</p>
+<p><span class="math display">
+f(x)
+=
+\sum_{i=0}^{n}\frac{f^{(i)}(x_0)}{i!}(x-x_0)^i
++
+R_n(x),
+\quad
+R_n(x)
+=
+\frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}
+</span></p>
+<p>The Taylor’s series converges to <span class="math inline">f(x)</span> if and only if:</p>
+<p data-sourcepos="614:1-614:1"><span class="math display">
+\lim_{n\to\infty}R_n(x)=0
+</span></p>
+<p data-sourcepos="617:1-617:1">The taylor series at <span class="math inline">x=0</span> for <span class="math inline">f(x) = 1 / (1 - x)</span> is <span class="math inline">\sum x^i</span>; it holds when <span class="math inline">\lvert x \rvert &lt; 1</span>.</p>
+<p data-sourcepos="619:1-619:1">After operations of Taylor’s series of <span class="math inline">\sin x, \cos x, \mathrm e^x</span>:</p>
+<p data-sourcepos="622:1-622:1"><span class="math display">
+\mathrm e ^ {ix}=\cos x + i \sin x \implies \mathrm e ^ {i\pi} + 1 = 0
+</span></p>
+<h2 id="misc" data-sourcepos="625:1-625:1">Misc</h2>
+<h3 id="mathrme-todo"><span class="math inline">\mathrm{e}</span> TODO</h3>
+<!-- $\mathrm e$ is the unit-time growth factor of natural exponential growth. It is characterized by
+
+$
+y'=y, \quad y(0)=1
+$
+
+with
+
+$
+y(1)=\mathrm e.
+$
+
+#### Definition
+
+Define
+
+$
+\exp(x)=\sum_{k=0}^{\infty}\frac{x^k}{k!}
+$
+
+and
+
+$
+\mathrm e=\exp(1)=\sum_{k=0}^{\infty}\frac1{k!}=1+1+\frac1{2!}+\frac1{3!}+\frac1{4!}+\cdots
+$
+
+This series converges by the ratio test:
+
+$
+\lim_{k\to\infty}\frac{\frac1{(k+1)!}}{\frac1{k!}}=
+\lim_{k\to\infty}\frac1{k+1}=0<1
+$
+
+Thus $\mathrm e$ is a well-defined real number:
+
+$
+\mathrm e\approx 2.718281828459045\cdots
+$
+
+#### Differential property
+
+The power series definition gives
+
+$
+\frac{\mathrm d}{\mathrm dx}\exp(x)=\exp(x).
+$
+
+Indeed,
+
+$
+\begin{aligned}
+\frac{\mathrm d}{\mathrm dx}\exp(x)
+&=\frac{\mathrm d}{\mathrm dx}\sum_{k=0}^{\infty}\frac{x^k}{k!} \\
+&=\sum_{k=1}^{\infty}\frac{kx^{k-1}}{k!} \\
+&=\sum_{k=1}^{\infty}\frac{x^{k-1}}{(k-1)!} \\
+&=\sum_{m=0}^{\infty}\frac{x^m}{m!} \\
+&=\exp(x).
+\end{aligned}
+$
+
+Termwise differentiation is valid because the series has infinite radius of convergence. Hence $\exp(x)$ solves
+
+$
+y'=y, \quad y(0)=1,
+$
+
+so $\mathrm e=\exp(1)$ is the value of this solution at $x=1$.
+
+#### Compound interest limit
+
+With annual rate $100\%$ compounded $n$ times per year, a unit principal becomes
+
+$
+\left(1+\frac1n\right)^n.
+$
+
+Continuous compounding gives
+
+$
+\mathrm e=\lim_{n\to\infty}\left(1+\frac1n\right)^n.
+$
+
+Proof:
+
+$
+\left(1+\frac1n\right)^n
+=\sum_{k=0}^{n}\binom nk\frac1{n^k},
+$
+
+where
+
+$
+\binom nk\frac1{n^k}
+=\frac1{k!}
+\left(1-\frac0n\right)
+\left(1-\frac1n\right)
+\left(1-\frac2n\right)
+\cdots
+\left(1-\frac{k-1}{n}\right).
+$
+
+For fixed $k$, as $n\to\infty$,
+
+$
+\binom nk\frac1{n^k}\to\frac1{k!}.
+$
+
+Moreover,
+
+$
+0\leq \binom nk\frac1{n^k}\leq \frac1{k!},
+$
+
+and $\sum_{k=0}^{\infty}1/k!$ converges. By dominated convergence, or by splitting finitely many initial terms from the tail,
+
+$
+\lim_{n\to\infty}\sum_{k=0}^{n}\binom nk\frac1{n^k}
+=\sum_{k=0}^{\infty}\frac1{k!}.
+$
+
+Therefore:
+
+$
+\boxed{\mathrm e=\lim_{n\to\infty}\left(1+\frac1n\right)^n}
+$
+
+#### Unique base
+
+For $a>0$,
+
+$
+\frac{\mathrm d}{\mathrm dx}a^x=(\ln a)a^x.
+$
+
+Thus $a^x$ is its own derivative iff $\ln a=1$, i.e. $a=\mathrm e$:
+
+$
+\frac{\mathrm d}{\mathrm dx}\mathrm e^x=\mathrm e^x.
+$
+
+More generally, the nonzero solutions of $f'(x)=f(x)$ are
+
+$
+f(x)=C\mathrm e^x.
+$ -->
+<h3 id="int_-inftyinftye-x2mathrm-d-x-todo" data-sourcepos="775:1-775:1"><span class="math inline">\int_{-\infty}^{\infty}e^{-x^2}\mathrm d x</span> TODO</h3>
+<p data-sourcepos="777:1-777:1">Volume by slice method for</p>
+<ol type="1">
+<li>V = volume under <span class="math inline">e^{-r^2} (r = \sqrt{x^2+y^2}</span> = <span class="math inline">\pi</span></li>
+<li>To prove <span class="math inline">V = (\int_{-\infty}^{\infty}e^{-x^2}\mathrm d x)^2</span> using slice.</li>
+</ol>
+<h3 id="maximum-overhung" data-sourcepos="782:1-782:1">Maximum Overhung</h3>
+<p data-sourcepos="784:1-784:1"><a href="https://math.dartmouth.edu/~pw/papers/maxover.pdf">Paterson et al. (2007)</a></p>
+<h3 id="real-number-system" data-sourcepos="786:1-786:1">Real Number System</h3>
+<p data-sourcepos="788:1-788:1">The axiomatic approach (I prefer this <a href="https://www.quora.com/What-are-the-axioms-of-real-numbers-and-their-properties">quora answer</a>):</p>
+<p data-sourcepos="790:1-790:1">They are an Abelian Group under addition:</p>
+<ul>
+<li>Commutative <span class="math inline">x+y=y+x</span></li>
+<li>Associative <span class="math inline">(x+y)+z=x+(y+z)</span></li>
+<li>Identity <span class="math inline">x+0=0+x=x</span></li>
+<li>Inverse <span class="math inline">\forall x \exists y:x+y=0</span></li>
+</ul>
+<p data-sourcepos="797:1-797:1">Excluding zero they are an Abelian Group under multiplication:</p>
+<ul>
+<li>Commutative <span class="math inline">x\cdot y=y\cdot x</span></li>
+<li>Associative <span class="math inline">(x\cdot y)\cdot z=x\cdot (y\cdot z)</span></li>
+<li>Identity <span class="math inline">x\cdot1=1\cdot x=x</span></li>
+<li>Inverse <span class="math inline">\forall x\neq0\exists y:x\cdot y=1</span></li>
+</ul>
+<p data-sourcepos="804:1-804:1">Multiplication distributes over addition:</p>
+<ul data-sourcepos="806:1-807:1">
+<li><span class="math inline">x\cdot (y+z)=(x\cdot y)+(x\cdot z)</span></li>
+<li><span class="math inline">(x+y)\cdot z=(x\cdot z)+(y\cdot z)</span></li>
+</ul>
+<p data-sourcepos="809:1-809:1">They are totally ordered:</p>
+<ul>
+<li><span class="math inline">x&lt;y</span> or <span class="math inline">y&lt;x</span> or <span class="math inline">x=y</span></li>
+<li><span class="math inline">x&lt;y\to x+z&lt;y+z</span></li>
+<li><span class="math inline">x\geq 0\land y\geq 0\to xy\geq 0</span></li>
+</ul>
+<p data-sourcepos="815:1-815:1">They are dedekind-complete (have the least-upper-bound property):</p>
+<ul data-sourcepos="817:1-818:1">
+<li>Every non-empty bounded subset has a least upper bound.</li>
+</ul>
+<p data-sourcepos="819:1-819:1">It turns out that any structure satisfying these axioms is isomorphic, so we call any such structure <em>the</em> Real numbers, <span class="math inline">(\mathbb{R},+,\cdot )</span>. In short <span class="math inline">\mathbb{R}</span> is the dedekind-complete ordered Field.</p>
+
+      </article>
+    </main>
+
+    <!-- Right Sidebar (TOC) -->
+    <aside class="sidebar right-sidebar collapsed" id="right-sidebar">
+      <div class="sidebar-content" id="spa-toc">
+        <!-- <h4 class="toc-title">On this page</h4> -->
+        <ul class="toc-list"><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#differentiation">Differentiation</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#limit">Limit</a></li><li class="toc-child toc-level-3"><a href="#derivative">Derivative</a></li><li class="toc-child toc-level-3"><a href="#differential-notation">Differential Notation</a></li><li class="toc-child toc-level-3"><a href="#continuity">Continuity</a></li><li class="toc-child toc-level-3"><a href="#computations-of-derivatives">Computations of Derivatives</a></li><li class="toc-child toc-level-3"><a href="#higher-derivative-notation">Higher Derivative Notation</a></li><li class="toc-child toc-level-3"><a href="#implicit-differentiation">Implicit Differentiation</a></li><li class="toc-child toc-level-3"><a href="#derivative-table">Derivative Table</a></li><li class="toc-child toc-level-3"><a href="#lhospitals-rule-todo">L’Hospital’s Rule TODO</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#applications-of-differentiation">Applications of Differentiation</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#linear-approximation">Linear Approximation</a></li><li class="toc-child toc-level-3"><a href="#newtons-method">Newton’s Method</a></li><li class="toc-child toc-level-3"><a href="#mean-value-theorem">Mean Value Theorem</a></li><li class="toc-child toc-level-3"><a href="#anti-derivative-table">Anti-Derivative Table</a></li><li class="toc-child toc-level-3 toc-range"><a href="#differential-in-economics">Differential in Economics</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#margin"><span class="toc-icon">·</span>Margin</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#elasticity"><span class="toc-icon">·</span>Elasticity</a></li></ul></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#integration">Integration</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#riemann-sum">Riemann Sum</a></li><li class="toc-child toc-level-3"><a href="#definite-integral">Definite Integral</a></li><li class="toc-child toc-level-3"><a href="#first-fundamental-theorem-of-calculus">First Fundamental Theorem of Calculus</a></li><li class="toc-child toc-level-3"><a href="#second-fundamental-theorem-of-calculus">Second Fundamental Theorem of Calculus</a></li><li class="toc-child toc-level-3"><a href="#substitution">Substitution</a></li><li class="toc-child toc-level-3"><a href="#trigonometric-function-integration">Trigonometric Function Integration</a></li><li class="toc-child toc-level-3"><a href="#partial-fraction-integration">Partial Fraction Integration</a></li><li class="toc-child toc-level-3"><a href="#improper-integral">Improper Integral</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#applications-of-integral">Applications of Integral</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#area-between-2-curves">Area between 2 Curves</a></li><li class="toc-child toc-level-3"><a href="#volume-by-slice-method">Volume by Slice Method</a></li><li class="toc-child toc-level-3"><a href="#volume-by-disk-method">Volume by Disk Method</a></li><li class="toc-child toc-level-3"><a href="#volume-by-cylinder-method">Volume by Cylinder Method</a></li><li class="toc-child toc-level-3"><a href="#weighted-average">Weighted Average</a></li><li class="toc-child toc-level-3"><a href="#simpsons-method">Simpson’s Method</a></li><li class="toc-child toc-level-3"><a href="#arc-length">Arc Length</a></li><li class="toc-child toc-level-3"><a href="#surface-area-of-a-function-revolved-about-x-axis">Surface Area of a Function Revolved about x-Axis</a></li><li class="toc-child toc-level-3"><a href="#area-in-polar-coordinates">Area in Polar Coordinates</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#series">Series</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#sequence">Sequence</a></li><li class="toc-child toc-level-3"><a href="#series-1">Series</a></li><li class="toc-child toc-level-3"><a href="#ratio-test-and-root-test">Ratio Test and Root Test</a></li><li class="toc-child toc-level-3"><a href="#alternating-series-test">Alternating Series Test</a></li><li class="toc-child toc-level-3"><a href="#power-series">Power Series</a></li><li class="toc-child toc-level-3"><a href="#integral-comparison">Integral Comparison</a></li><li class="toc-child toc-level-3"><a href="#eulers-constant">Euler’s Constant</a></li><li class="toc-child toc-level-3"><a href="#taylors-series">Taylor’s Series</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#misc">Misc</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#mathrme-todo">\mathrm{e} TODO</a></li><li class="toc-child toc-level-3"><a href="#int_-inftyinftye-x2mathrm-d-x-todo">\int_{-\infty}^{\infty}e^{-x^2}\mathrm d x TODO</a></li><li class="toc-child toc-level-3"><a href="#maximum-overhung">Maximum Overhung</a></li><li class="toc-child toc-level-3"><a href="#real-number-system">Real Number System</a></li></ul></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <script src="/static/shell-lifecycle.js"></script>
+  <script src="/static/shell-preferences.js"></script>
+  <script src="/static/scrollbar-visibility.js?v=c659b99"></script>
+  <script src="/static/sidebar-panel.js"></script>
+  <script src="/static/svg-theme.js"></script>
+  <script src="/static/render-on-demand.js"></script>
+  <script src="/static/shell-bootstrap.js"></script>
+  <script src="/static/main.js"></script>
+  <script src="/static/reading-navigation-state.js"></script>
+  <script src="/static/shell-layout.js"></script>
+  <script src="/static/shell-search-settings.js"></script>
+  <script src="/static/shell-router.js"></script>
+  <script src="/static/link-preview.js"></script>
+  <script src="/static/text-anchor.js"></script>
+  <script src="/static/comments.js"></script>
+  <script src="/static/themes.js"></script>
+  <script src="/static/table-enhance.js"></script>
+  <script src="/static/syllabus-enhance.js"></script>
+  <script src="/static/core/ink-stroke-format.js"></script>
+  <script src="/static/drawing-engine-render.js"></script>
+  <script>
+  // highlight.js: on-demand language loader + post-load highlight pass.
+  //
+  // Core (highlight.min.js) bundles ~37 common languages. Pages that use
+  // additional languages from _HLJS_EXTRA trigger an extra CDN fetch only
+  // when the page actually contains a matching code block. The service
+  // worker caches each module after the first fetch, so subsequent pages
+  // pay nothing for already-loaded languages.
+  //
+  // _HLJS_ALIAS maps user-facing class names to module filenames that
+  // differ from the class name. Pure aliases that hljs core already knows
+  // (e.g. ts → typescript, sh → bash) are resolved by hljs.getLanguage()
+  // and don't need entries — only include aliases whose target module is
+  // in _HLJS_EXTRA.
+  window._HLJS_BASE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/languages/';
+  window._HLJS_ALIAS = {
+    tex: 'latex', docker: 'dockerfile', ps: 'powershell', ps1: 'powershell',
+    ml: 'ocaml', hs: 'haskell', clj: 'clojure', cljs: 'clojure',
+    erl: 'erlang', coffee: 'coffeescript', f90: 'fortran', f95: 'fortran',
+    pascal: 'delphi'
+  };
+  window._HLJS_EXTRA = [
+    // Tier 1/2: build/config, scientific, FP, scripting, editor
+    'dockerfile','nginx','cmake','http','latex','julia','matlab','fortran',
+    'haskell','scala','ocaml','fsharp','clojure','elixir','dart','vim','powershell',
+    // Tier 3: FP & academic
+    'erlang','scheme','lisp','prolog',
+    // Tier 3: hardware / assembly
+    'verilog','vhdl','x86asm','armasm',
+    // Tier 3: modern systems
+    'crystal','nim','d','delphi',
+    // Tier 3: build / config
+    'groovy','nix','dts',
+    // Tier 3: markup / templating
+    'asciidoc','handlebars','gherkin',
+    // Tier 3: shell / scripting
+    'awk','tcl','coffeescript',
+    // Tier 3: stats
+    'stan'
+  ];
+  window._hljsLoaded = {};
+
+  // Run the highlight + line-number pass against `root` (defaults to document).
+  window._hljsRun = function(root) {
+    root = root || document;
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (name) {
+        var resolved = hljs.getLanguage(name) ? name : 'plaintext';
+        code.classList.add('language-' + resolved);
+      }
+    });
+    hljs.configure({ cssSelector: 'pre:not(.mermaid) > code' });
+    hljs.highlightAll();
+    root.querySelectorAll('pre:not(.mermaid) > code').forEach(function(code) {
+      if (code.querySelector('.code-line')) return;
+      var html = code.innerHTML;
+      if (html.charAt(html.length - 1) === '\n') html = html.slice(0, -1);
+      var lines = html.split('\n');
+      var openTags = [];
+      code.innerHTML = lines.map(function(line) {
+        var prefix = openTags.join('');
+        var re = /<\/?span[^>]*>/gi, m;
+        while ((m = re.exec(line)) !== null) {
+          if (m[0][1] === '/') openTags.pop();
+          else openTags.push(m[0]);
+        }
+        var suffix = '';
+        for (var i = 0; i < openTags.length; i++) suffix += '</span>';
+        return '<span class="code-line">' + prefix + (line || ' ') + suffix + '</span>';
+      }).join('');
+    });
+  };
+
+  // Scan `root` for code blocks, fetch any missing allowlisted language
+  // modules, then run the highlight pass once they finish loading (or fail).
+  // Called once from the highlight.min.js onload handler, and again from
+  // main.js after each SPA navigation (scoped to #spa-content).
+  window._hljsInit = function(root) {
+    root = root || document;
+    if (typeof hljs === 'undefined') return;
+    var allow = {};
+    for (var i = 0; i < window._HLJS_EXTRA.length; i++) allow[window._HLJS_EXTRA[i]] = true;
+    var need = {};
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (!name || hljs.getLanguage(name)) return;
+      if (allow[name] && !window._hljsLoaded[name]) need[name] = true;
+    });
+    var keys = Object.keys(need);
+    if (!keys.length) { window._hljsRun(root); return; }
+    var pending = keys.length;
+    keys.forEach(function(l) {
+      window._hljsLoaded[l] = true; // mark in-flight to dedupe across SPA nav
+      var s = document.createElement('script');
+      s.src = window._HLJS_BASE + l + '.min.js';
+      s.onload = s.onerror = function() { if (--pending === 0) window._hljsRun(root); };
+      document.head.appendChild(s);
+    });
+  };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    onload="window._hljsInit();"></script>
+  <script id="rprint-mermaid" async src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('mermaid')}else{var t=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'default';mermaid.initialize({startOnLoad:false,theme:t});document.querySelectorAll('pre.mermaid > code').forEach(function(c){var src=c.textContent;c.parentElement.setAttribute('data-mermaid-source',src);c.parentElement.textContent=src;});mermaid.run()}"></script>
+  <script>document.getElementById('rprint-mermaid').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('mermaid',new Error('Mermaid failed to load'))}});</script>
+  
+  
+  
+</body>
+</html>

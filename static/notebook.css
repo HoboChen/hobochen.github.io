@@ -1,0 +1,549 @@
+/* ===== Notebook ===== */
+.nb-container {}
+
+.nb-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  margin-bottom: 16px;
+  background: var(--color-bg-secondary, #f6f8fa);
+  border: 1px solid var(--color-border, #d0d7de);
+  border-radius: 8px;
+  min-height: 36px;
+}
+
+[data-theme="dark"] .nb-toolbar {
+  background: var(--color-bg-secondary, #161b22);
+  border-color: var(--color-border, #30363d);
+}
+
+/* Icon buttons (Run All, Reset, Download) */
+.nb-toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--color-border, #d0d7de);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+}
+.nb-toolbar-btn:hover {
+  background: var(--color-bg-alt, #eaeef2);
+  color: var(--color-text);
+  border-color: var(--color-text-muted);
+}
+[data-theme="dark"] .nb-toolbar-btn {
+  border-color: var(--color-border, #30363d);
+}
+[data-theme="dark"] .nb-toolbar-btn:hover {
+  background: var(--color-bg-tertiary, #21262d);
+}
+.nb-toolbar-btn.active {
+  background: var(--color-primary, #0550ae);
+  color: #fff;
+  border-color: var(--color-primary, #0550ae);
+}
+.nb-toolbar-btn.active:hover {
+  background: var(--color-primary-hover, #0969da);
+}
+[data-theme="dark"] .nb-toolbar-btn.active {
+  background: var(--color-primary, #58a6ff);
+  color: #0d1117;
+}
+[data-theme="dark"] .nb-toolbar-btn.active:hover {
+  background: #79c0ff;
+}
+.nb-toolbar-btn svg { width: 16px; height: 16px; }
+
+/* Status dot */
+.nb-status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+.nb-status-dot.idle       { background: #8b949e; }
+.nb-status-dot.loading    { background: var(--color-primary, #0550ae); animation: nb-blink 1s ease-in-out infinite; }
+.nb-status-dot.ready      { background: #2ea043; }
+.nb-status-dot.running    { background: #2ea043; animation: nb-blink 1s ease-in-out infinite; }
+
+@keyframes nb-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.25; }
+}
+
+.nb-toolbar-right {
+  margin-left: auto;
+  display: flex;
+  gap: 2px;
+}
+
+/* Cells */
+.nb-cell { margin-bottom: 12px; }
+
+/* Collapser bars (JupyterLab-style fold toggles)
+   - .nb-input-collapser is a flex item inside .nb-input (flex layout already established).
+   - .nb-output-collapser and .nb-md-collapser are absolutely positioned so the parent
+     stays a regular block element — avoids any layout regression on cells with rich
+     pandoc/Plotly/HTML content. */
+/* Collapser: a thin clickable strip. The painted bar lives in a ::before
+   pseudo-element inset top/bottom so back-to-back folded sections (e.g.
+   code-fold + output-fold inside the same cell, which have NO margin between
+   them) render as two visibly distinct rounded pills with a clear gap. The
+   clickable box itself still fills the parent's full height. */
+.nb-collapser {
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+.nb-collapser::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 6px;
+  bottom: 6px;
+  background: var(--color-text-muted);
+  opacity: 0.35;
+  border-radius: 3px;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+.nb-collapser:hover::before,
+.nb-collapser:focus-visible::before {
+  background: var(--color-primary);
+  opacity: 1;
+}
+.nb-collapser:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -1px;
+}
+/* Hidden-state visual: solid blue pill so the user knows something is folded
+   (matches the .comment-wrap.active accent color — distinct from the muted
+   gray default and the primary-color hover state). */
+.nb-input-hidden > .nb-input-collapser::before,
+.nb-output-hidden > .nb-output-collapser::before,
+.nb-md-hidden > .nb-md-collapser::before {
+  background: #3b82f6;
+  opacity: 1;
+}
+.nb-input-hidden > .nb-input-collapser:hover::before,
+.nb-input-hidden > .nb-input-collapser:focus-visible::before,
+.nb-output-hidden > .nb-output-collapser:hover::before,
+.nb-output-hidden > .nb-output-collapser:focus-visible::before,
+.nb-md-hidden > .nb-md-collapser:hover::before,
+.nb-md-hidden > .nb-md-collapser:focus-visible::before {
+  background: #60a5fa;
+}
+
+/* Input collapser: flex item (.nb-input is already display:flex).
+   `position: relative` makes the ::before pseudo a positioned descendant. */
+.nb-input-collapser {
+  position: relative;
+  width: 6px;
+  flex-shrink: 0;
+  align-self: stretch;
+  min-height: 32px;
+}
+/* Output and markdown collapsers: absolutely positioned, parent stays block.
+   Already a containing block for ::before. */
+.nb-output-collapser,
+.nb-md-collapser {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  min-height: 32px;
+}
+
+.nb-input {
+  display: flex;
+  align-items: stretch;
+  background: var(--color-bg-alt);
+}
+/* When code is folded, hide the source area but keep the gutter (run button +
+   prompt) visible so the user can still click ▶ to run a folded cell. */
+.nb-input-hidden > .nb-source-wrap {
+  display: none;
+}
+
+/* One-line preview shown only when the section is folded. */
+.nb-input-preview,
+.nb-md-preview {
+  display: none;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+  user-select: none;
+}
+.nb-input-preview {
+  flex: 1;
+  min-width: 0;
+  align-self: center;
+  padding: 8px 12px;
+}
+.nb-md-preview {
+  font-family: inherit;
+  padding: 4px 0;
+}
+.nb-input-hidden > .nb-input-preview {
+  display: block;
+}
+.nb-md-hidden > .nb-md-content {
+  display: none;
+}
+.nb-md-hidden > .nb-md-preview {
+  display: block;
+}
+.nb-gutter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 40px;
+  flex-shrink: 0;
+  padding: 4px 0;
+  gap: 2px;
+  cursor: default;
+}
+.nb-prompt {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  user-select: none;
+  text-align: center;
+  padding: 2px 4px;
+  margin-top: auto;
+}
+.nb-code-cell {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.nb-source-wrap {
+  flex: 1;
+  min-width: 0;
+}
+.nb-source {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  resize: none;
+  outline: none;
+  overflow: hidden;
+  box-sizing: border-box;
+  tab-size: 4;
+}
+
+/* CodeMirror overrides */
+.nb-source-wrap .CodeMirror {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  height: auto;
+  background: transparent;
+  border: none;
+  padding: 4px 0;
+}
+.nb-source-wrap .CodeMirror-scroll {
+  min-height: 0;
+}
+.nb-source-wrap .CodeMirror-gutters {
+  background: transparent;
+  border: none;
+}
+[data-theme="dark"] .nb-source-wrap .CodeMirror {
+  color: #e1e4e8;
+}
+[data-theme="dark"] .nb-source-wrap .cm-keyword { color: #ff7b72; }
+[data-theme="dark"] .nb-source-wrap .cm-def { color: #d2a8ff; }
+[data-theme="dark"] .nb-source-wrap .cm-variable { color: #e1e4e8; }
+[data-theme="dark"] .nb-source-wrap .cm-variable-2 { color: #79c0ff; }
+[data-theme="dark"] .nb-source-wrap .cm-string { color: #a5d6ff; }
+[data-theme="dark"] .nb-source-wrap .cm-number { color: #79c0ff; }
+[data-theme="dark"] .nb-source-wrap .cm-comment { color: #8b949e; }
+[data-theme="dark"] .nb-source-wrap .cm-builtin { color: #ffa657; }
+[data-theme="dark"] .nb-source-wrap .cm-operator { color: #ff7b72; }
+[data-theme="dark"] .nb-source-wrap .cm-meta { color: #ffa657; }
+[data-theme="dark"] .nb-source-wrap .CodeMirror-cursor { border-left-color: #e1e4e8; }
+.nb-run-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 14px;
+}
+.nb-run-btn:hover {
+  background: var(--color-border);
+  color: var(--color-primary);
+}
+.nb-run-btn.nb-stopping {
+  color: #d73a49;
+}
+.nb-run-btn.nb-stopping:hover {
+  background: rgba(215, 58, 73, 0.1);
+  color: #cb2431;
+}
+.nb-run-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Outputs — keep block layout; collapser is absolutely positioned on the left.
+   The 6px bar at left:0 simply overlays the empty space inside the existing
+   48px left padding on .nb-output pre / .nb-img / etc. */
+.nb-output {
+  position: relative;
+  min-height: 0;
+}
+.nb-output:empty { display: none; }
+.nb-output-content {
+  /* default block flow */
+}
+.nb-output-hidden > .nb-output-content {
+  display: none;
+}
+/* Folded output still needs visible height so its bar is clickable
+   (matches .nb-collapser min-height incl. 12px vertical inset). */
+.nb-output.nb-output-hidden {
+  min-height: 32px;
+}
+
+/* Markdown cells — keep block layout; collapser absolutely positioned. */
+.nb-md-cell {
+  position: relative;
+  padding-left: 14px;
+}
+.nb-md-content {
+  /* default block flow */
+}
+/* Folded markdown still needs visible height so its bar is clickable
+   (matches .nb-collapser min-height incl. 12px vertical inset). */
+.nb-md-cell.nb-md-hidden {
+  min-height: 32px;
+}
+
+.nb-output pre {
+  margin: 0;
+  padding: 10px 12px 10px 48px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: transparent;
+  color: var(--color-text);
+  border-radius: 0;
+}
+.nb-stream.nb-stderr {
+  color: #d73a49;
+  background: rgba(215, 58, 73, 0.06);
+}
+.nb-error {
+  color: #d73a49;
+  background: rgba(215, 58, 73, 0.06);
+}
+.nb-img {
+  display: block;
+  max-width: 100%;
+  padding: 8px 12px 8px 48px;
+}
+.nb-svg { padding: 8px 12px 8px 48px; }
+.nb-svg svg { max-width: 100%; }
+.nb-html { padding: 8px 12px 8px 48px; overflow-x: auto; }
+.nb-html table {
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 4px 0;
+}
+.nb-html table th,
+.nb-html table td {
+  border: 1px solid var(--color-border);
+  padding: 4px 8px;
+  text-align: left;
+  white-space: nowrap;
+}
+.nb-html table th {
+  background: rgba(128, 128, 128, 0.08);
+  font-weight: 600;
+}
+.nb-html table tbody tr:nth-child(even) {
+  background: rgba(128, 128, 128, 0.04);
+}
+.nb-latex { padding: 8px 12px 8px 48px; }
+.nb-md-output { padding: 8px 12px 8px 48px; }
+.nb-plotly { padding: 8px 0; }
+.nb-plotly .plotly-graph-div { width: 100% !important; }
+.nb-running {
+  padding: 10px 12px 10px 48px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+.nb-timeout-warning {
+  padding: 10px 12px 10px 48px;
+  font-size: 13px;
+  color: #9a6700;
+  background: rgba(154, 103, 0, 0.08);
+  border-top: 1px solid rgba(154, 103, 0, 0.2);
+  margin-top: 4px;
+}
+.nb-timeout-warning .nb-timeout-reset {
+  margin-left: 8px;
+  padding: 2px 10px;
+  font-size: 12px;
+  border: 1px solid rgba(154, 103, 0, 0.3);
+  border-radius: 4px;
+  background: transparent;
+  color: #9a6700;
+  cursor: pointer;
+}
+.nb-timeout-warning .nb-timeout-reset:hover {
+  background: rgba(154, 103, 0, 0.12);
+}
+
+/* ipywidgets */
+.nb-widget-interact, .nb-widget-display {
+  padding: 12px 12px 12px 48px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  margin: 8px 0;
+}
+.nb-widget-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.nb-widget-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nb-widget-label {
+  min-width: 80px;
+  font-size: 13px;
+  color: var(--color-text);
+  text-align: right;
+  flex-shrink: 0;
+}
+.nb-widget-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+.nb-widget-input input[type="range"] {
+  flex: 1;
+  accent-color: var(--color-primary);
+}
+.nb-widget-value {
+  min-width: 48px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-align: right;
+}
+.nb-widget-input input[type="text"],
+.nb-widget-input input[type="number"],
+.nb-widget-input textarea {
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 13px;
+  font-family: inherit;
+}
+.nb-widget-input select {
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 13px;
+}
+.nb-widget-input input[type="checkbox"] {
+  accent-color: var(--color-primary);
+}
+.nb-widget-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.nb-widget-toggle-group {
+  display: flex;
+}
+.nb-widget-toggle-btn {
+  padding: 4px 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 13px;
+  cursor: pointer;
+}
+.nb-widget-toggle-btn:first-child { border-radius: 4px 0 0 4px; }
+.nb-widget-toggle-btn:last-child { border-radius: 0 4px 4px 0; }
+.nb-widget-toggle-btn + .nb-widget-toggle-btn { border-left: none; }
+.nb-widget-toggle-btn.active {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+.nb-widget-output {
+  border-top: 1px solid var(--color-border);
+  padding-top: 8px;
+}
+.nb-widget-output:empty { display: none; border-top: none; padding-top: 0; }
+.nb-widget-output .nb-img { padding-left: 0; }
+.nb-widget-output pre { padding-left: 0; }
+.nb-widget-unsupported {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+/* Layout containers */
+.nb-widget-hbox {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.nb-widget-hbox > * { flex: 1; min-width: 200px; }
+.nb-widget-vbox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.nb-widget-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

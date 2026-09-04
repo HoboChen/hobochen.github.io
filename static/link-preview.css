@@ -1,0 +1,154 @@
+.link-preview-popover {
+  position: fixed;
+  z-index: var(--z-popover);
+  display: grid;
+  grid-template-rows: 36px minmax(0, 1fr);
+  height: min(60dvh, 640px);
+  box-sizing: border-box;
+  overflow: hidden;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-popover);
+}
+
+.link-preview-popover[hidden] {
+  display: none;
+}
+
+.link-preview-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 0 4px 0 12px;
+  background: var(--color-bg-alt);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.link-preview-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.link-preview-close {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.link-preview-close:hover,
+.link-preview-close:focus-visible {
+  color: var(--color-text);
+  background: var(--color-active-bg);
+  outline: none;
+}
+
+.link-preview-close span {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.link-preview-frame-wrap {
+  position: relative;
+  min-height: 0;
+  background: var(--color-bg);
+}
+
+.link-preview-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg);
+  border: 0;
+}
+
+.link-preview-status {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  font-size: 13px;
+  text-align: center;
+}
+
+.link-preview-status[hidden] {
+  display: none;
+}
+
+.link-preview-status.error {
+  color: var(--color-danger);
+}
+
+html.link-preview-embed {
+  scroll-padding-top: 16px;
+  overscroll-behavior: contain;
+}
+
+html.link-preview-embed .top-banner,
+html.link-preview-embed .sidebar,
+html.link-preview-embed .banner-fold-float,
+html.link-preview-embed .terminal-panel,
+html.link-preview-embed .spa-progress,
+html.link-preview-embed .katex-context-menu,
+html.link-preview-embed .settings-panel,
+html.link-preview-embed .style-panel {
+  display: none !important;
+}
+
+html.link-preview-embed .main-layout,
+html.link-preview-embed body.banner-folded .main-layout {
+  min-height: 100dvh;
+  margin-top: 0;
+}
+
+html.link-preview-embed .content {
+  max-width: none;
+  padding: 16px 0 32px;
+}
+
+html.link-preview-embed .article,
+html.link-preview-embed .main-layout:not(.left-collapsed) .article,
+html.link-preview-embed .main-layout:not(.right-collapsed) .article {
+  display: block;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 24px 32px;
+}
+
+html.link-preview-embed .article a {
+  cursor: default;
+  pointer-events: none;
+}
+
+html.link-preview-embed .article.two-columns,
+html.link-preview-embed .article.two-columns .spread {
+  display: block;
+  columns: 1;
+  max-height: none;
+  overflow: visible;
+}
+
+@media print {
+  .link-preview-popover {
+    display: none !important;
+  }
+}

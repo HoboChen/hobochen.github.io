@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="build-commit" content="c659b99">
+  <title>桌面操作系统比较 - Jingqi's Interpositive</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/main.css?v=c659b99">
+  <link rel="stylesheet" href="/static/link-preview.css">
+  <link rel="stylesheet" href="/static/sidebar-panel.css">
+  <link rel="stylesheet" href="/static/table-enhance.css">
+  <link rel="stylesheet" href="/static/syllabus-enhance.css">
+  <link rel="stylesheet" href="/static/comments.css">
+  <link rel="stylesheet" href="/static/notebook.css">
+  <link rel="stylesheet" href="/static/themes.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var linkPreviewEmbed=false;
+      try{
+        var previewUrl=new URL(location.href);
+        linkPreviewEmbed=previewUrl.searchParams.get('rprint-preview')==='1'&&window.parent!==window&&window.parent.location.origin===location.origin;
+      }catch(e){}
+      if(linkPreviewEmbed){
+        document.documentElement.classList.add('link-preview-embed');
+        var previewArticleLink=function(target){return target&&target.closest&&target.closest('.article a[href]');};
+        var blockPreviewLink=function(event){if(previewArticleLink(event.target)){event.preventDefault();event.stopImmediatePropagation();}};
+        document.addEventListener('click',blockPreviewLink,true);
+        document.addEventListener('auxclick',blockPreviewLink,true);
+        document.addEventListener('keydown',function(event){if(event.key==='Enter')blockPreviewLink(event);},true);
+        document.addEventListener('dblclick',function(event){if(event.target&&event.target.closest&&event.target.closest('.article')){event.preventDefault();event.stopImmediatePropagation();}},true);
+      }
+      var bc=document.querySelector('meta[name="build-commit"]');
+      var commit=bc?bc.getAttribute('content'):'';
+      if(commit&&commit!=='unknown'){
+        var prev=localStorage.getItem('kb-build-commit');
+        if(prev&&prev!==commit){
+          var keys=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf('kb-')===0)keys.push(k);}
+          keys.forEach(function(k){localStorage.removeItem(k);});
+          localStorage.setItem('kb-build-commit',commit);
+          if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+            navigator.serviceWorker.controller.postMessage('clearCaches');
+          }
+          window.location.reload();
+          return;
+        }
+        localStorage.setItem('kb-build-commit',commit);
+      }
+      // Resume last visited page on PWA/browser launch. PWA launches carry
+      // `?pwa=1`; a normal browser launch is a plain root URL without a same-
+      // origin referrer. `/index.html` is an explicit home navigation, so it
+      // never resumes. Runs before paint to avoid a flash of the home page.
+      // Validates the stored path is a same-origin absolute path (rejects
+      // `//host` / `/\host` open-redirects).
+      var resumeLaunch=/[?&]pwa=1(&|$)/.test(location.search);
+      try{
+        var launchUrl=new URL(location.href);
+        launchUrl.searchParams.delete('pwa');
+        var sameOriginReferrer=false;
+        try{sameOriginReferrer=!!document.referrer&&new URL(document.referrer,location.href).origin===location.origin;}catch(e){}
+        resumeLaunch=resumeLaunch||(launchUrl.pathname==='/'&&!launchUrl.search&&!launchUrl.hash&&!sameOriginReferrer);
+      }catch(e){}
+      if(resumeLaunch){
+        try{
+          var last=localStorage.getItem('kb-last-location');
+          var lastPath=last&&last.split('#')[0].split('?')[0];
+          if(last&&/^\/[^/\\]/.test(last)&&lastPath!=='/'&&lastPath!=='/index.html'){
+            try{sessionStorage.setItem('kb-resume-last-scroll','1');}catch(e){}
+            location.replace(last);return;
+          }
+        }catch(e){}
+      }
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      var mob=window.matchMedia('(max-width:650px)').matches;
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.style.colorScheme=t==='dark'?'dark':'light';
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      var w=p.contentWidth||(mob?'100':'90');
+      document.documentElement.style.setProperty('--content-max-width',w+'%');
+      var edge=p.ignoreCorners!==undefined?p.ignoreCorners==='on':false;
+      if(edge&&w==='100')document.documentElement.setAttribute('data-ignore-corners','on');
+      if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches||window.matchMedia('(display-mode:fullscreen)').matches)document.documentElement.classList.add('pwa-standalone');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'kaiti';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.0};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+      var ht=t==='dark'?'github-dark':'github';
+      var writes='<link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/'+ht+'.min.css">';
+      document.write(writes);
+    })();
+  </script>
+  <style>.math{opacity:0;transition:opacity .15s}.math.rprint-render-failed{opacity:1}</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css" integrity="sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM" crossorigin="anonymous">
+  <script id="rprint-katex" defer src="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.js" integrity="sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI" crossorigin="anonymous"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('katex')}else{document.querySelectorAll('.math').forEach(function(el){var src=el.textContent;el.setAttribute('data-latex',src);katex.render(src,el,{displayMode:el.classList.contains('display'),throwOnError:false,trust:function(ctx){return ctx&&ctx.command==='\\href'&&typeof ctx.url==='string'&&/^#[A-Za-z0-9:._-]+$/.test(ctx.url);}});el.querySelectorAll('mtable[columnspacing=\'\']').forEach(function(t){t.removeAttribute('columnspacing')});el.style.opacity='1';})}"></script>
+  <script>document.getElementById('rprint-katex').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('katex',new Error('KaTeX failed to load'))}else{document.querySelectorAll('.math').forEach(function(el){el.style.opacity='1'})}});</script>
+</head>
+<body data-page-type="markdown">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <button class="banner-toggle" id="left-toggle" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h12v1.5H2V3zm0 4h12v1.5H2V7zm0 4h12v1.5H2V11z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-center">
+        <div class="banner-center-inner">
+          <a href="/index.html" class="site-title" data-short="Interpositive">Jingqi's Interpositive</a>
+          <span class="spa-health-wrap" id="spa-health-wrap">
+            <span class="spa-health-dot" id="spa-health-dot" title="SPA server status"></span>
+            <div class="spa-health-popup" id="spa-health-popup">
+              <div class="shp-header">
+                <span class="shp-title">Server Status</span>
+                <span class="shp-heart" id="shp-heart"></span>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-metrics">
+                <div class="shp-row"><span class="shp-label">Ping</span><span class="shp-value" id="shp-ping">—</span></div>
+                <div class="shp-row"><span class="shp-label">Uptime</span><span class="shp-value" id="shp-uptime">—</span></div>
+                <div class="shp-row"><span class="shp-label">Memory</span><span class="shp-value" id="shp-memory">—</span></div>
+                <div class="shp-row"><span class="shp-label">CPU Time</span><span class="shp-value" id="shp-cpu-time">—</span></div>
+                <div class="shp-row"><span class="shp-label">Load</span><span class="shp-value" id="shp-load">—</span></div>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-modules">
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-watch"></span> Watch</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-jupyter"></span> Jupyter</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-terminal"></span> Terminal</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-proxy"></span> Proxy</div>
+              </div>
+            </div>
+          </span>
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="/cs-notes/" class="nav-link" data-short="CS">CS</a><ul class="nav-dropdown"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li><a href="/cs-notes/mit-gir/index.html">MIT GIR</a></li><li><a href="/cs-notes/cs-math/index.html">CS Math</a></li></ul></li><li class="nav-item"><a href="/not-cs-notes/" class="nav-link" data-short="Not-CS">Not-CS</a><ul class="nav-dropdown"><li><a href="/not-cs-notes/mit-math-requirements.html">MIT Math Syllabus</a></li></ul></li><li class="nav-item"><a href="/notebook/" class="nav-link" data-short="Mixed">Mixed</a><ul class="nav-dropdown"><li><a href="/notebook/mind/index.html">Mind</a></li><li><a href="/notebook/matter/index.html">Matter</a></li><li><a href="/notebook/practice/index.html">Practice</a></li><li><a href="/notebook/toolbox/index.html">Toolbox</a></li></ul></li><li class="nav-item"><a href="/years/" class="nav-link" data-short="Years">Years</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="banner-right">
+        <button class="banner-right-toggle" title="More controls">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="search-wrap" id="search-wrap">
+          <button class="search-btn" id="search-btn" title="Search (Ctrl+K)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-input-wrap" id="search-input-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search…" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+        <div class="comment-wrap" id="comment-wrap">
+          <button class="comment-btn" id="comment-btn" title="Review Comments (A)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <span class="comment-nav-count" id="comment-nav-count"></span>
+          <button class="comment-nav-btn" id="comment-nav-prev" title="Previous comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="comment-nav-btn" id="comment-nav-next" title="Next comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <button class="settings-btn" id="settings-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="settings-panel" id="settings-panel">
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Native Jupyter <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="native-jupyter-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Global Search <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="content-search-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Quick Edit <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="quick-edit-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section resource-pack-setting" id="resource-pack-setting" hidden>
+            <div class="settings-row resource-pack-row">
+              <span class="settings-desc">Offline resources</span>
+              <button type="button" class="settings-action-btn" id="resource-pack-import-btn">Import</button>
+            </div>
+            <input type="file" id="resource-pack-input" accept=".rpack,application/vnd.rprint.resource-pack" hidden>
+            <div class="resource-pack-status" id="resource-pack-status" aria-live="polite"></div>
+            <button type="button" class="settings-link-btn" id="resource-pack-rollback-btn" hidden>Undo last import</button>
+          </div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent link-preview-settings-parent">
+            <label class="style-label" id="link-preview-label">Link Preview <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="link-preview-switch" role="switch" aria-labelledby="link-preview-label" aria-checked="false" aria-expanded="false" aria-controls="link-preview-settings-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children link-preview-settings-children" id="link-preview-settings-children" hidden>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-same-page-only-label">Same-page links only</label>
+              <button class="style-switch style-switch-compact" id="link-preview-same-page-only-switch" role="switch" aria-labelledby="link-preview-same-page-only-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-auto-close-label">Auto-close</label>
+              <button class="style-switch style-switch-compact" id="link-preview-auto-close-switch" role="switch" aria-labelledby="link-preview-auto-close-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-overwrite-jumping-label">Overwrite Link Jumping</label>
+              <button class="style-switch style-switch-compact" id="link-preview-overwrite-jumping-switch" role="switch" aria-labelledby="link-preview-overwrite-jumping-label" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+            </div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-row settings-title-row settings-dependent-parent">
+            <span class="settings-panel-title">Keyboard Shortcuts</span>
+            <button class="style-switch" id="kb-enabled-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children keyboard-shortcuts-children">
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="search"><span class="settings-desc">Search</span><span class="settings-keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="scroll"><span class="settings-desc">Scroll down / up</span><span class="settings-keys"><kbd>J</kbd> <kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="section"><span class="settings-desc">Next / prev section</span><span class="settings-keys"><kbd>U</kbd> <kbd>I</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="sidebar-toc"><span class="settings-desc"><span data-shortcut-part="sidebar">Sidebar / </span>TOC</span><span class="settings-keys"><kbd data-shortcut-part="sidebar">S</kbd> <kbd>T</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="spread"><span class="settings-desc">Next / prev spread</span><span class="settings-keys"><kbd>PgDn</kbd> <kbd>PgUp</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="comments"><span class="settings-desc">Comments</span><span class="settings-keys"><kbd>A</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="fold"><span class="settings-desc">Fold banner</span><span class="settings-keys"><kbd>F</kbd></span></div>
+            
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="dismiss"><span class="settings-desc">Close / Dismiss</span><span class="settings-keys"><kbd>Esc</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="settings"><span class="settings-desc">Show this panel</span><span class="settings-keys"><kbd>?</kbd></span></div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent">
+            <label class="style-label">Debug Mode</label>
+            <button class="style-switch" id="debug-mode-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="debug-children" id="debug-children">
+            <div class="settings-dependent-children">
+              <div class="settings-panel-section settings-dependent-child debug-log-level-setting">
+                <label class="style-label">Client Log Level</label>
+                <div class="style-toggle-group">
+                  <button class="style-toggle-btn debug-level-btn" data-level="error">Error</button>
+                  <button class="style-toggle-btn debug-level-btn" data-level="info">Info</button>
+                  <button class="style-toggle-btn debug-level-btn active" data-level="debug">Debug</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-footer" id="settings-git-version">c659b99</div>
+        </div>
+        <a href="/static/settings.html?v=c659b99" class="theme-btn" id="theme-btn" title="Theme & display">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="13.5" cy="6.5" r=".5"/>
+            <circle cx="17.5" cy="10.5" r=".5"/>
+            <circle cx="8.5" cy="7.5" r=".5"/>
+            <circle cx="6.5" cy="12.5" r=".5"/>
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+          </svg>
+        </a>
+        <div class="style-panel" id="style-panel">
+          <div class="style-panel-section">
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn active" data-theme="light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light
+              </button>
+              <button class="style-toggle-btn" data-theme="dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="style-toggle-btn" data-theme="kindle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                E-Ink
+              </button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn font-btn active" data-font="system">System</button>
+              <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+              <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">字体</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn fontzh-btn active" data-fontzh="default">系统</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="noto-serif">宋体</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+            </div>
+          </div>
+          <div class="style-panel-section bg-picker-section">
+            <label class="style-label">Background</label>
+            <div class="bg-swatch-group" id="bg-swatch-group">
+              <button class="bg-swatch active" data-bg="default" title="Default"></button>
+              <button class="bg-swatch" data-bg="green" title="Green"></button>
+              <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+              <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+              <div class="style-range-ticks">
+                <span class="style-range-tick font-size-tick" data-i="0">12</span>
+                <span class="style-range-tick font-size-tick" data-i="1">14</span>
+                <span class="style-range-tick font-size-tick" data-i="2">16</span>
+                <span class="style-range-tick font-size-tick" data-i="3">18</span>
+                <span class="style-range-tick font-size-tick" data-i="4">24</span>
+                <span class="style-range-tick font-size-tick" data-i="5">32</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+              <div class="style-range-ticks">
+                <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+                <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+                <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+                <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+                <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+                <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Width <span id="width-value">90%</span></label>
+            <div class="style-slider-wrap width-slider-wrap">
+              <input type="range" class="style-range" id="content-width-range" min="0" max="5" step="1" value="3">
+              <div class="style-range-ticks width-ticks">
+                <span class="style-range-tick width-tick" data-i="0">50</span>
+                <span class="style-range-tick width-tick" data-i="1">65</span>
+                <span class="style-range-tick width-tick" data-i="2">80</span>
+                <span class="style-range-tick width-tick" data-i="3">90</span>
+                <span class="style-range-tick width-tick" data-i="4">95</span>
+                <span class="style-range-tick width-tick" data-i="5">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="ignore-corners-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">2 Columns <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+        </div>
+        <button class="banner-toggle" id="fold-banner-btn" title="Fold banner">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4l4 4-4 4zm10 0l-4 4 4 4z"/>
+          </svg>
+        </button>
+        <button class="banner-toggle" id="right-toggle" title="Toggle table of contents">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-right-dropdown"></div>
+    </div>
+  </header>
+
+  <!-- Floating buttons when banner is folded -->
+  <div class="banner-fold-float" id="banner-fold-float">
+    <button class="banner-fold-float-btn" id="unfold-banner-btn" title="Unfold banner">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M7 4L3 8l4 4zm2 0l4 4-4 4z"/>
+      </svg>
+    </button>
+    <button class="banner-fold-float-btn" id="float-toc-btn" title="Toggle table of contents">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout left-collapsed right-collapsed">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar collapsed" id="left-sidebar">
+      <div class="sidebar-content" id="spa-sidebar">
+        <!-- rprint:sidebar:start -->
+        <a class="sidebar-cat-title" href="/notebook">Mixed</a><ul class="sidebar-list"><li class="sidebar-group" data-priority="0"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/mind/index.html">Mind</a><span class="sidebar-toggle"></span></span><ul><li><a href="/notebook/mind/ideas.html">脑洞</a></li></ul></li><li class="sidebar-group" data-priority="0.001"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/matter/index.html">Matter</a><span class="sidebar-toggle"></span></span><ul><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/matter/vehicle.html">车</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/matter/vehicle/camaro-manual.html">Camaro Manual 📄</a></li><li><a href="/notebook/matter/vehicle/camaro-quickstart.html">Camaro Quick Start 📄</a></li><li><a href="/notebook/matter/vehicle/camaro-hp.html">Camaro High Performance Manual 📄</a></li><li><a href="/notebook/matter/vehicle/r-maintenance.html">Golf R Maintenance Guide 📄</a></li><li><a href="/notebook/matter/vehicle/ct4-us-manual.html">CT4 US Manual 📄</a></li><li><a href="/notebook/matter/vehicle/ct4-maintenance.html">CT4 Maintenance Guide 📄</a></li></ul></li><li><a href="/notebook/matter/optics.html">光学</a></li></ul></li><li class="sidebar-group open" data-priority="0.002"><span class="sidebar-row"><a class="sidebar-group-title active-group" href="/notebook/practice/index.html">Practice</a><span class="sidebar-toggle"></span></span><ul><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/lab.html">玩具间 🚜</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/lab/cloudflare.html">CF 白嫖指南 🚜</a></li><li><a href="/notebook/practice/lab/openwrt-router.html">OpenWrt 软路由 🚜</a></li><li><a href="/notebook/practice/lab/git.html">GitLab https OAuth 配置 🚜</a></li></ul></li><li class="active"><a href="/notebook/practice/desktop-os-comparison.html">桌面操作系统比较 🚜</a></li><li><a href="/notebook/practice/linux.html">Linux 101 🚜</a></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/windows.html">Windows 101 🚜</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/windows/disable-telemetry.html">关闭 Windows 遥测 🚜</a></li><li><a href="/notebook/practice/windows/disable-residual.html">关闭 Windows 其他组件 🚜</a></li><li><a href="/notebook/practice/windows/disable-defender.html">关闭 Windows Defender 🚜</a></li></ul></li></ul></li><li class="sidebar-group" data-priority="0.003"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/toolbox/index.html">Toolbox</a><span class="sidebar-toggle"></span></span><ul><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/toolbox/financial.html">Financial 1001</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/toolbox/financial/tax-us-redmond.html">Simple Income Tax Calc (Redmond) 🐍</a></li><li><a href="/notebook/toolbox/financial/tax-china-suzhou.html">简易个人所得税计算器（苏州） 🐍</a></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/toolbox/hardware.html">Hardware 1001</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/toolbox/hardware/ppi.html">PPI Calculator 🐍</a></li><li><a href="/notebook/toolbox/hardware/disk_array_survival_rate.html">Disk Array Survival Rate 🐍</a></li></ul></li></ul></li></ul>
+        <!-- rprint:sidebar:end -->
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content" id="content">
+      <article class="article" id="spa-content">
+        <h1 id="桌面操作系统比较" data-sourcepos="1:1-1:1">桌面操作系统比较</h1>
+<p data-sourcepos="3:1-3:1">在2026年，预算受限/不限，对于普通人/专业用户来说，桌面操作系统的选择有哪些？</p>
+<p data-sourcepos="5:1-5:1">写在前面：</p>
+<ol type="1" data-sourcepos="7:1-8:1">
+<li>打分是非常主观的事情；不同的人对于项目权重的观点差别很大。</li>
+<li>桌面的工作流的差异似乎越来越大了。</li>
+</ol>
+<h2 id="可靠性" data-sourcepos="10:1-10:1">可靠性</h2>
+<h3 id="windows" data-sourcepos="12:1-12:1">Windows</h3>
+<ul data-sourcepos="14:1-16:1">
+<li>启动 3/5：Windows Update 可能导致启动失败，24H2 后尤为明显。</li>
+<li>数据 2/5：NTFS 无校验。<a href="https://learn.microsoft.com/en-us/windows-server/storage/refs/refs-overview">ReFS</a> 有校验和快照，但<a href="https://learn.microsoft.com/en-us/windows-server/storage/refs/refs-overview#features-unavailable-on-refs">不能做启动盘</a>且仅限 Workstations / Enterprise / Server。</li>
+<li>运行 2/5：内核可靠，系统组件一般，应用软件不可靠。Hyper-V / Sandbox 可缓解。</li>
+</ul>
+<h3 id="macos" data-sourcepos="18:1-18:1">macOS</h3>
+<ul data-sourcepos="20:1-22:1">
+<li>启动 4/5：正常情况稳定。</li>
+<li>数据 3/5：APFS 元数据有校验和，用户数据无校验和。Apple Silicon Mac 均不支持 ECC。</li>
+<li>运行 2/5：XNU 内核稳定性不如 Linux。并且大版本升级后 homebrew / kext 常需重新适配。</li>
+</ul>
+<h3 id="linux" data-sourcepos="24:1-24:1">Linux</h3>
+<ul data-sourcepos="26:1-28:1">
+<li>启动 4/5：内核 panic 罕见，但内核和驱动需要匹配。</li>
+<li>数据 4/5：ZFS（scrub + snapshot + ECC）最可靠。Btrfs 有校验和。</li>
+<li>运行 4/5：极少需要重启。包管理统一依赖，升级很少破坏现有功能。</li>
+</ul>
+<h2 id="安全性" data-sourcepos="30:1-30:1">安全性</h2>
+<h3 id="windows-1">Windows</h3>
+<ul data-sourcepos="34:1-37:1">
+<li>沙箱 1/5：UWP/MSIX 有沙箱，但大多数 Win32 桌面应用仍以完整用户权限运行。</li>
+<li>漏洞 2/5：CVE 数量最多。Patch Tuesday 修复及时，但 0day 利用窗口期最长。</li>
+<li>恶意软件 2/5：Defender 内置。</li>
+<li>硬件安全 5/5：TPM 2.0 + Secure Boot + VBS/HVCI 默认启用。BitLocker 开箱即用。</li>
+</ul>
+<h3 id="macos-1">macOS</h3>
+<ul data-sourcepos="41:1-44:1">
+<li>沙箱 4/5：App Sandbox 三者中最成熟，App Store 应用默认隔离文件系统和网络。</li>
+<li>漏洞 3/5：SIP 保护系统文件，root 也不能改。CVE 少于 Windows，WebKit 漏洞链是主要攻击面。</li>
+<li>恶意软件 4/5：Gatekeeper + 公证机制防护效果好。</li>
+<li>硬件安全 4/5：Secure Enclave + FileVault。依赖 Apple 私有实现，第三方审计受限。</li>
+</ul>
+<h3 id="linux-1">Linux</h3>
+<ul data-sourcepos="48:1-51:1">
+<li>沙箱 2/5：Flatpak/Snap 逐步推广。</li>
+<li>漏洞 4/5：开源可审计，修复快。SELinux/AppArmor 提供强制访问控制。</li>
+<li>恶意软件 4/5：权限模型好（用户/root 分离），但随着桌面份额增长攻击面在扩大。</li>
+<li>硬件安全 3/5：配置良好时能力与 Windows 一致（TPM + Secure Boot + LUKS），但无统一开箱体验。</li>
+</ul>
+<h2 id="硬件兼容性" data-sourcepos="53:1-53:1">硬件兼容性</h2>
+<h3 id="windows-2">Windows</h3>
+<ul data-sourcepos="57:1-59:1">
+<li>桌面 5/5：DIY 友好，驱动生态最完善。外设如打印机、扫描仪、绘图板、音频接口优先提供 Windows 驱动。</li>
+<li>笔记本 4/5：OEM 选择最多，价格区间最广。续航不如 Apple Silicon，Modern Standby 不够可靠。</li>
+<li>显示 4/5：多显示器和混合 DPI 支持最好。</li>
+</ul>
+<h3 id="macos-2">macOS</h3>
+<ul data-sourcepos="63:1-65:1">
+<li>桌面 1/5：仅限 Apple 硬件。</li>
+<li>笔记本 3/5：Apple Silicon 续航和能效比最好，软硬件一体。</li>
+<li>显示 3/5：Retina 原生体验好。但仅支持 1x 或 2x 原生渲染，“非整数缩放”实质是 2x 渲染后缩放。</li>
+</ul>
+<h3 id="linux-2">Linux</h3>
+<ul data-sourcepos="69:1-71:1">
+<li>桌面 4/5：NVIDIA、部分 Wi-Fi、部分打印机和蓝牙设备不够开箱即用。</li>
+<li>笔记本 3/5：ThinkPad / Framework 支持好，其他未知。</li>
+<li>显示 3/5：GNOME fractional scaling 49+ 可用，混合 DPI 仍弱，仍然可能有兼容性问题。</li>
+</ul>
+<h2 id="生命周期" data-sourcepos="73:1-73:1">生命周期</h2>
+<h3 id="定义" data-sourcepos="75:1-75:1">定义</h3>
+<p data-sourcepos="77:1-77:1">打分衡量硬件生命周期，而不是单个 OS 版本寿命：向后看，是最老多老的硬件仍能完成这一层任务；向前看，是现在买符合这一层要求的硬件，预计还能主流使用多久。</p>
+<ul data-sourcepos="79:1-82:1">
+<li>离线可用：能安装可运行的系统，能打开本地文件和旧软件。不要求安全更新，也不要求现代 TLS。衡量机器作为离线工具、旧软件运行环境或资料读取设备还能不能活着。</li>
+<li>基础联网：仍支持现代 TLS，至少 SSH / Git / 包管理可用。不一定适合浏览网页，但要能安全地远程管理、同步代码、拉取软件包。系统无安全更新时，只能算临时或低风险用途。</li>
+<li>现代 Web：系统本身仍受支持，并且有仍维护的现代浏览器， Chrome / Firefox / Safari。</li>
+<li>流畅主力：系统占用、GPU 驱动、内存、SSD 和后台服务能支撑日常高频使用。系统和浏览器仍受支持只是前提；真正决定主力体验的是资源占用、驱动质量和现代应用负载。</li>
+</ul>
+<h3 id="分析" data-sourcepos="84:1-84:1">分析</h3>
+<h4 id="windows-3">Windows</h4>
+<ul data-sourcepos="88:1-91:1">
+<li>离线可用 4/5：XP 可在 Pentium I/II、Pentium 4 / Core Duo 上长期离线运行。XP EOL 2014，Firefox ESR 52.9 EOL 2018。</li>
+<li>基础联网 3/5：Win7 EOL 2020，ESU / Chrome 109 EOL 2023，Firefox 115 ESR EOL 2026。</li>
+<li>现代 Web 3/5：Win10 是 Core 2 / Haswell / Skylake 的最后官方现代 Windows，Home/Pro EOL 2025-10。</li>
+<li>流畅主力 2/5：Win11 要 TPM 2.0 + CPU 白名单（8th Gen / Ryzen 2000+）。</li>
+</ul>
+<h4 id="macos-3">macOS</h4>
+<ul data-sourcepos="95:1-98:1">
+<li>离线可用 1/5：PowerPC 停在 10.5，2011 年 10.7 移除 PPC Rosetta 。x86 停在 macOS 26；Rosetta 2 支持到 macOS 27。</li>
+<li>基础联网 2/5：2006–2007 Mac 多为 32-bit EFI，只能停在 10.7 或更低；2008–2011 Mac 又卡在非 Metal GPU。10.13/10.15 后系统证书、TLS 库和浏览器陆续停止维护，SSH / Git / Homebrew 也需要绕路。</li>
+<li>现代 Web 2/5：10.15 于 2022、macOS 12 于 2024、macOS 13 于 2025 后陆续退出现代 Web。</li>
+<li>流畅主力 4/5：Apple Silicon 能效、睡眠唤醒和媒体 / GPU 加速优势明显，日常主力体验好于x86。Apple Intelligence 把新功能门槛抬到 M1+。</li>
+</ul>
+<h4 id="linux-3">Linux</h4>
+<ul data-sourcepos="102:1-105:1">
+<li>离线可用 5/5：不设统一硬件白名单，老 x86 仍可用轻量发行版或纯 CLI。</li>
+<li>基础联网 5/5：Debian 12 仍支持 i386；SSH / Git / 包管理最容易长期维持。</li>
+<li>现代 Web 5/5：由发行版安全支持 + 浏览器共同决定。Chrome 要 64-bit Ubuntu 18.04+ / Debian 10+ / Fedora 39+，Firefox 要 glibc 2.17+ / GTK 3.14+。</li>
+<li>流畅主力 4/5：系统本体轻，可换轻量桌面；扣 1 分在桌面栈。GNOME/KDE、Electron、NVIDIA 驱动、视频硬解、睡眠唤醒和混合 DPI 仍依赖硬件与发行版调教。</li>
+</ul>
+<h2 id="软件与生态" data-sourcepos="107:1-107:1">软件与生态</h2>
+<h3 id="windows-4">Windows</h3>
+<ul data-sourcepos="111:1-120:1">
+<li>API 稳定性 5/5：Win32 向后兼容几十年，老 exe 在新 Windows 上通常能跑（带 compatibility 模式）。.NET Framework / runtime 长期共存，驱动模型有断代但很罕见。</li>
+<li>行业软件 5/5：一些例子：
+<ul data-sourcepos="113:1-117:1">
+<li><strong>CAD / BIM / CAM</strong>：Autodesk（Revit / Civil 3D / Inventor / AutoCAD 专业工具集 MEP / Plant 3D）、Dassault Systèmes（SOLIDWORKS / CATIA）、PTC Creo、Siemens NX、Mastercam。</li>
+<li><strong>工厂自动化 / PLC / SCADA</strong>：Rockwell Studio 5000、Schneider AVEVA / Wonderware、Siemens TIA Portal、ABB System 800xA。</li>
+<li><strong>工程 / 基础设施 / BIM</strong>：Bentley MicroStation / OpenRoads / OpenRail、Tekla、Nemetschek（Archicad / Allplan / Vectorworks）。</li>
+<li><strong>测绘 / GIS</strong>：Esri ArcGIS Pro、Hexagon（Intergraph / Leica Cyclone / ERDAS）、Trimble Business Center。</li>
+<li><strong>设备厂商配套</strong>：仪器 / 机床 / 医疗 / 电气 / 汽车诊断软件几乎默认只出 Windows 版。</li>
+</ul></li>
+<li>创意工作 4/5：创意软件全覆盖（Adobe 全家桶、DaVinci、Blender、Maya、Cinema 4D、Substance）。NVIDIA CUDA + 大显存对 AI / Stable Diffusion / LLM 训练推理优势最大，本地 AI 工作流（ComfyUI / SD WebUI / Ollama 走 CUDA）部署最广。LR / DaVinci 实时性能不如 M 系列。</li>
+<li>游戏 5/5：PC 游戏首选平台，DirectX 12 + 驱动 + 反作弊 + 厂商认证全部 Windows-first。VR / 高刷 / HDR 生态最完整。</li>
+<li>协同性 2/5：Phone Link 与 Android / iOS 协同体验远不如 macOS，只能做基本通知 / 短信 / 文件中转。OneDrive 跨设备同步可用。</li>
+</ul>
+<h3 id="macos-4">macOS</h3>
+<ul data-sourcepos="124:1-128:1">
+<li>API 稳定性 1/5：大版本升级是 Apple 主动 break 用户空间的常态。5 年内的断代：Catalina 砍 32-bit、处理 PPC 的 Rosetta 1 早已移除、Rosetta 2 将在 macOS 27 退役、kext 持续 deprecated 被迫改 DriverKit、多个 Framework 接口被迭代。Homebrew / Xcode 大版本后常需重装适配。</li>
+<li>行业软件 1/5：CAD / BIM / CAM / PLC / SCADA / 工程设计 / GIS / 设备厂商工具几乎全部不支持。SOLIDWORKS 仅有 eDrawings；Revit / Civil 3D / Mastercam / ArcGIS Pro / AutoCAD 专业工具集 / Studio 5000 / AVEVA / TIA Portal / MicroStation / Tekla 均无。跨平台例外只有少数偏创意的产品（Maya、Cinema 4D、Fusion 360 轻量版）。</li>
+<li>创意工作 4/5：Apple Silicon 媒体引擎 + 统一内存对 LR / DaVinci / Final Cut / Logic / Photoshop 体验最好。Apple Intelligence、MLX、Core ML 让本地 AI 推理流畅且省电；Ollama 在 M3 Max / M4 Pro 上跑 70B 模型可用。但 CUDA 独占的部分模型 / 训练框架需绕，本地可用显存受 SoC 上限限制。</li>
+<li>游戏 1/5：游戏最弱。GPTK2 兼容性远不如 Proton，3A 大作原生稀少。Apple 推 Game Porting Toolkit 推动有限。</li>
+<li>协同性 4/5：内部生态协同最强——AirDrop / Handoff / Universal Clipboard / Sidecar / iPhone Mirroring / Continuity Camera / Touch ID sudo。Thunderbolt 生态最成熟。代价是生态锁定，跨平台协作差（iPhone Mirroring 在欧盟因 DMA 不可用）。</li>
+</ul>
+<h3 id="linux-4">Linux</h3>
+<ul>
+<li>API 稳定性 3/5：内核坚守 “don’t break userspace”，syscall ABI 极稳，老二进制能跑几十年。但用户空间（glibc / GTK / Qt / OpenSSL）随发行版升级容易撞库版本，二进制分发难。Flatpak / AppImage / Snap 缓解但增加体积；源码重编几乎总能跑。</li>
+<li>行业软件 2/5：主流传统行业软件（CAD / BIM / CAM / PLC / SCADA / 工程设计 / 测绘 / 设备厂商工具）几乎全部不支持。唯一原生主场是 <strong>EDA</strong>：Synopsys、Cadence、Mentor / Siemens EDA 的芯片设计工具链以 RHEL / CentOS 为参考平台。</li>
+<li>创意工作 2/5：Adobe 零支持、Lightroom 无替代——传统创意工作流的硬伤。DaVinci Resolve 官方支持 Rocky Linux（仍受 AAC / H.264 限制）。Blender / Krita / Darktable / RawTherapee 原生最好。AI / ML 工作站首选：CUDA + Docker 原生，HuggingFace / PyTorch / vLLM / Triton 全工具链一等公民。</li>
+<li>游戏 3/5：Proton + SteamOS 大幅缩小差距，部分游戏（SteamOS 掌机）帧率超过 Win11 达 32%。反作弊（EAC / BattlEye 内核态）仍是硬伤，《Valorant》《Apex》《Destiny 2》等竞技游戏不支持。</li>
+<li>协同性 2/5：无成熟设备间协同。KDE Connect / GSConnect 可与 Android 部分对接。Unix 标准协议（SSH / SMB / NFS）跨平台互通最干净，但需手动配置。</li>
+</ul>
+<h3 id="不被-os-锁定的软件" data-sourcepos="138:1-138:1">不被 OS 锁定的软件</h3>
+<ul data-sourcepos="140:1-142:1">
+<li><strong>企业 IT / 管理软件</strong>（Microsoft 365 / Power BI / Dynamics 365、Oracle Fusion ERP、SAP S/4HANA、Salesforce、ServiceNow、Workday、IBM Maximo）随 SaaS 化后以浏览器为入口，三平台均可用。</li>
+<li><strong>开发 / DevOps / 容器 / AI</strong>：VS Code / JetBrains / Docker / K8s / Git / Conda 全跨平台；Windows 靠 WSL2 补齐 Unix，macOS / Linux 原生。</li>
+<li><strong>创意跨平台</strong>：Blender、Krita、DaVinci Resolve、Maya、Cinema 4D、Unity / Unreal Editor 三平台都有。</li>
+</ul>
+<h2 id="隐私" data-sourcepos="144:1-144:1">隐私</h2>
+<h3 id="windows-5">Windows</h3>
+<ul data-sourcepos="148:1-151:1">
+<li>遥测 0/5：默认启用且持续上传，Pro / Home 最多降到 Basic 级别，仅 Enterprise / Education 可降到 Security。Update 经常重置策略。</li>
+<li>账户 0/5：Win11 Pro 22H2 起安装强制 Microsoft 账号 + 联网，<code>bypassnro</code> 已被移除，OOBE 绕过路径持续被封堵。</li>
+<li>本地化 / 云化 0/5：Recall 在 Copilot+ PC 上以系统服务持续截屏。Copilot / Bing / OneDrive 默认接管搜索、文档、剪贴板等入口，云依赖度最高。Start Menu / Widgets / Explorer 内置广告，强制 Edge 弹窗（欧盟 DMA 下可卸载）。</li>
+<li>应用权限 1/5：UWP / MSIX 有 capability prompt 和权限面板，但占绝大多数的 Win32 应用绕过权限模型，文件 / 摄像头 / 麦克风 / 键盘访问无强制约束。</li>
+</ul>
+<p data-sourcepos="153:1-153:1"><a href="https://blogs.windows.com/windows-insider/2026/03/20/our-commitment-to-windows-quality/">Windows EVP Davuluri 2026 公开信</a>承诺减少 Copilot 入口、改善 Update / Explorer / WSL 体验。对广告、遥测、强制账号、Recall 未回应。</p>
+<h3 id="macos-5">macOS</h3>
+<ul data-sourcepos="157:1-160:1">
+<li>遥测 3/5：匿名诊断默认开启但可关闭，Spotlight Suggestions、广告 ID 可禁用。崩溃 / 分析报告做去标识。不推广告。</li>
+<li>账户 4/5：Apple ID 可在安装时跳过，纯本地账户可用。但 App Store / iMessage / FaceTime / Find My 仍需 Apple ID，系统体验偏向云登录。</li>
+<li>本地化 / 云化 4/5：Apple Intelligence 在 M1+ 设备端运行，Private Cloud Compute 用可验证 TEE 承接超出端侧能力的请求。Siri 大部分设备端处理。iCloud 不默认端到端加密，Advanced Data Protection 需手动开启。</li>
+<li>应用权限 5/5：TCC 最严格——文件夹、摄像头、麦克风、屏幕录制、键盘监听、辅助功能均需显式授权，可在系统设置随时撤销。Mac App Store 应用强制 App Sandbox。</li>
+</ul>
+<h3 id="linux-5">Linux</h3>
+<ul data-sourcepos="164:1-167:1">
+<li>遥测 5/5：大多数发行版无遥测。Ubuntu / Fedora 的匿名安装统计可关闭，且不持续上传。不推广告、不强制账号。</li>
+<li>账户 5/5：账户完全本地，无云账户概念。home 可加密。</li>
+<li>本地化 / 云化 5/5：系统不内置 AI 服务、不内置云存储。AI 工具按需自装，全部可走纯本地（llama.cpp / Ollama）。</li>
+<li>应用权限 2/5：传统 Unix 权限模型对 GUI 应用几乎无沙箱，X11 下任何应用可截屏 / 截键。Wayland + xdg-desktop-portal 改善摄像头 / 屏幕 / 麦克风访问；Flatpak / Snap 有 portal 权限提示，但 distro 原生包仍无强制。</li>
+</ul>
+<h2 id="得分汇总" data-sourcepos="169:1-169:1">得分汇总</h2>
+<div class="table-wrap"><table data-sourcepos="171:1-181:1">
+<thead>
+<tr>
+<th>类别</th>
+<th style="text-align: right;">权重</th>
+<th style="text-align: right;">加权满分</th>
+<th style="text-align: right;">Windows</th>
+<th style="text-align: right;">macOS</th>
+<th style="text-align: right;">Linux</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可靠性</td>
+<td style="text-align: right;">×2</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">24</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td style="text-align: right;">×2</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr>
+<td>硬件兼容性</td>
+<td style="text-align: right;">×1</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr>
+<td>生命周期</td>
+<td style="text-align: right;">×1</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr>
+<td>软件与生态</td>
+<td style="text-align: right;">×1</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>隐私</td>
+<td style="text-align: right;">×1</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr>
+<td><strong>加权合计</strong></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"><strong>150</strong></td>
+<td style="text-align: right;"><strong>81</strong></td>
+<td style="text-align: right;"><strong>91</strong></td>
+<td style="text-align: right;"><strong>108</strong></td>
+</tr>
+<tr>
+<td><strong>归一化 / 100</strong></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"><strong>54.0</strong></td>
+<td style="text-align: right;"><strong>60.7</strong></td>
+<td style="text-align: right;"><strong>72.0</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="我的设备" data-sourcepos="182:1-182:1">我的设备</h2>
+<h3 id="windows-6">Windows</h3>
+<ul data-sourcepos="186:1-206:1">
+<li>台式机: Fractal Design North
+<ul data-sourcepos="187:1-190:1">
+<li>Ryzen 9 9950X, Gigabyte RTX 5070 Ti Windforce</li>
+<li>ASRock X870E Taichi Lite, DDR5 32 GiB ECC UDIMM × 2</li>
+<li>Noctua D15G2, 长城 G13, 风扇若干</li>
+<li>5 GbE, Wi-Fi 7, USB4 * 2</li>
+</ul></li>
+<li>存储：
+<ul data-sourcepos="192:1-192:1">
+<li>Intel 905P 960 GiB</li>
+<li>WD SN640 7.68 TiB * 2, ReFS mirror</li>
+</ul></li>
+<li>外设：
+<ul>
+<li>Sony A90K 42’</li>
+<li>HHKB Hybrid</li>
+<li>Razer DeathAdder V3</li>
+<li>谷粒 金刚3 Pro</li>
+<li>Fiio K19 + Susvara</li>
+</ul></li>
+<li>生态
+<ul data-sourcepos="201:1-204:1">
+<li>Samsung</li>
+<li>Samsung S26+</li>
+<li>性能测量
+<ul data-sourcepos="204:1-205:1">
+<li>speedometer 3.1, chrome, 148.0.7778, 39.0</li>
+</ul></li>
+</ul></li>
+<li>性能测量
+<ul data-sourcepos="206:1-207:1">
+<li>speedometer 3.1, chrome-avx512, 149.0.7785, 46.8</li>
+</ul></li>
+</ul>
+<p data-sourcepos="208:1-208:1">想法：</p>
+<ul data-sourcepos="210:1-212:1">
+<li>ECC内存 + ReFS mirror，用起来非常放心。</li>
+<li>9950X + Optane，非常愉悦的使用体验。计划每代更新非X3D的旗舰。</li>
+<li>RTX 5070 Ti 在打开 DLSS 的情况下，光追可以开一点；计划换成 5090 / 6090。</li>
+</ul>
+<h3 id="macos-6">macOS</h3>
+<ul data-sourcepos="216:1-233:1">
+<li>笔记本: MacBook Pro 14 2024
+<ul data-sourcepos="217:1-219:1">
+<li>M4 Pro (8P4E), 48 GiB, 1 TiB</li>
+</ul></li>
+<li>存储： <!-- - Terra Master D4 (ASM2464PD): USB4 $\to$ M.2 * 4; ZFS z2: 990 Evo Plus 4 TB * 4 -->
+<ul data-sourcepos="220:1-221:1">
+<li>OWC Express 4M2 Ultra(JHL9480): Thunderbolt 5 <span class="math inline">\to</span> M.2 * 4; ZFS z2: 990 Evo Plus 4 TB * 4</li>
+</ul></li>
+<li>外设：
+<ul data-sourcepos="222:1-223:1">
+<li>Magic Trackpad 3</li>
+</ul></li>
+<li>生态：
+<ul data-sourcepos="224:1-231:1">
+<li>iPad Pro 12.9 2022; 4G, 256G
+<ul data-sourcepos="225:1-226:1">
+<li>Pencil, Magic Keyboard, Smart Folio</li>
+</ul></li>
+<li>iPad Pro 11 2022; 4G, 256G
+<ul data-sourcepos="227:1-232:1">
+<li>Pencil, Smart Folio</li>
+</ul></li>
+<li>iPhone 16 Pro Max</li>
+<li>Watch 8 45mm</li>
+<li>Airpods Pro Gen 3</li>
+<li>Airpods Max Gen 2</li>
+</ul></li>
+<li>性能测量
+<ul data-sourcepos="233:1-234:1">
+<li>speedometer 3.1, chrome, 148.0.7778, 56.9</li>
+</ul></li>
+</ul>
+<p data-sourcepos="235:1-235:1">想法：</p>
+<ul data-sourcepos="237:1-243:1">
+<li>MBP14是妥协之后的选择：它比Air 15还重（但是又没有MBP16那么重），但是提供了更大的内存、更好的性能、更好的屏幕。</li>
+<li>对于普通人来说，苹果全家桶是个舒服省心的选择。</li>
+<li>待更新到新的MBP：
+<ul data-sourcepos="240:1-243:1">
+<li>192/256 GiB Memory; Or</li>
+<li>挖孔屏; Or</li>
+<li>16 inch &amp; &lt; 1.8kg; Or</li>
+<li>CPU Perf &gt; 1.5x</li>
+</ul></li>
+</ul>
+<h3 id="linux-6">Linux</h3>
+<ul data-sourcepos="247:1-254:1">
+<li>开放式机箱：
+<ul data-sourcepos="248:1-252:1">
+<li>Intel 265K</li>
+<li>ASRock Z890M Riptide, DDR5 16 GiB * 2</li>
+<li>Thermalright TA120 EX, RM750x Shift</li>
+<li>2.5 GbE, Wi-Fi 7, USB4 * 2</li>
+<li>Samsung 983ZET 480 GiB</li>
+</ul></li>
+<li>性能测量
+<ul data-sourcepos="254:1-255:1">
+<li>speedometer 3.1, chrome 148.0.7778, 45.4</li>
+</ul></li>
+</ul>
+<p data-sourcepos="256:1-256:1">想法：</p>
+<ul data-sourcepos="258:1-260:1">
+<li>SLC + 265K，非常愉悦的使用体验。</li>
+<li>如果一个工作流能放到Linux，那一定是最好的选择。</li>
+<li>RM750x在任何负载下都是不转的，可以考虑把它变成一个无风扇系统。</li>
+</ul>
+
+      </article>
+    </main>
+
+    <!-- Right Sidebar (TOC) -->
+    <aside class="sidebar right-sidebar collapsed" id="right-sidebar">
+      <div class="sidebar-content" id="spa-toc">
+        <!-- <h4 class="toc-title">On this page</h4> -->
+        <ul class="toc-list"><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#可靠性">可靠性</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#windows">Windows</a></li><li class="toc-child toc-level-3"><a href="#macos">macOS</a></li><li class="toc-child toc-level-3"><a href="#linux">Linux</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#安全性">安全性</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#windows-1">Windows</a></li><li class="toc-child toc-level-3"><a href="#macos-1">macOS</a></li><li class="toc-child toc-level-3"><a href="#linux-1">Linux</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#硬件兼容性">硬件兼容性</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#windows-2">Windows</a></li><li class="toc-child toc-level-3"><a href="#macos-2">macOS</a></li><li class="toc-child toc-level-3"><a href="#linux-2">Linux</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#生命周期">生命周期</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#定义">定义</a></li><li class="toc-child toc-level-3 toc-range"><a href="#分析">分析</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#windows-3"><span class="toc-icon">·</span>Windows</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#macos-3"><span class="toc-icon">·</span>macOS</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#linux-3"><span class="toc-icon">·</span>Linux</a></li></ul></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#软件与生态">软件与生态</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#windows-4">Windows</a></li><li class="toc-child toc-level-3"><a href="#macos-4">macOS</a></li><li class="toc-child toc-level-3"><a href="#linux-4">Linux</a></li><li class="toc-child toc-level-3"><a href="#不被-os-锁定的软件">不被 OS 锁定的软件</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#隐私">隐私</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#windows-5">Windows</a></li><li class="toc-child toc-level-3"><a href="#macos-5">macOS</a></li><li class="toc-child toc-level-3"><a href="#linux-5">Linux</a></li></ul></li><li class="toc-section"><div class="toc-heading"><a href="#得分汇总">得分汇总</a></div></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#我的设备">我的设备</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#windows-6">Windows</a></li><li class="toc-child toc-level-3"><a href="#macos-6">macOS</a></li><li class="toc-child toc-level-3"><a href="#linux-6">Linux</a></li></ul></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <script src="/static/shell-lifecycle.js"></script>
+  <script src="/static/shell-preferences.js"></script>
+  <script src="/static/scrollbar-visibility.js?v=c659b99"></script>
+  <script src="/static/sidebar-panel.js"></script>
+  <script src="/static/svg-theme.js"></script>
+  <script src="/static/render-on-demand.js"></script>
+  <script src="/static/shell-bootstrap.js"></script>
+  <script src="/static/main.js"></script>
+  <script src="/static/reading-navigation-state.js"></script>
+  <script src="/static/shell-layout.js"></script>
+  <script src="/static/shell-search-settings.js"></script>
+  <script src="/static/shell-router.js"></script>
+  <script src="/static/link-preview.js"></script>
+  <script src="/static/text-anchor.js"></script>
+  <script src="/static/comments.js"></script>
+  <script src="/static/themes.js"></script>
+  <script src="/static/table-enhance.js"></script>
+  <script src="/static/syllabus-enhance.js"></script>
+  <script src="/static/core/ink-stroke-format.js"></script>
+  <script src="/static/drawing-engine-render.js"></script>
+  <script>
+  // highlight.js: on-demand language loader + post-load highlight pass.
+  //
+  // Core (highlight.min.js) bundles ~37 common languages. Pages that use
+  // additional languages from _HLJS_EXTRA trigger an extra CDN fetch only
+  // when the page actually contains a matching code block. The service
+  // worker caches each module after the first fetch, so subsequent pages
+  // pay nothing for already-loaded languages.
+  //
+  // _HLJS_ALIAS maps user-facing class names to module filenames that
+  // differ from the class name. Pure aliases that hljs core already knows
+  // (e.g. ts → typescript, sh → bash) are resolved by hljs.getLanguage()
+  // and don't need entries — only include aliases whose target module is
+  // in _HLJS_EXTRA.
+  window._HLJS_BASE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/languages/';
+  window._HLJS_ALIAS = {
+    tex: 'latex', docker: 'dockerfile', ps: 'powershell', ps1: 'powershell',
+    ml: 'ocaml', hs: 'haskell', clj: 'clojure', cljs: 'clojure',
+    erl: 'erlang', coffee: 'coffeescript', f90: 'fortran', f95: 'fortran',
+    pascal: 'delphi'
+  };
+  window._HLJS_EXTRA = [
+    // Tier 1/2: build/config, scientific, FP, scripting, editor
+    'dockerfile','nginx','cmake','http','latex','julia','matlab','fortran',
+    'haskell','scala','ocaml','fsharp','clojure','elixir','dart','vim','powershell',
+    // Tier 3: FP & academic
+    'erlang','scheme','lisp','prolog',
+    // Tier 3: hardware / assembly
+    'verilog','vhdl','x86asm','armasm',
+    // Tier 3: modern systems
+    'crystal','nim','d','delphi',
+    // Tier 3: build / config
+    'groovy','nix','dts',
+    // Tier 3: markup / templating
+    'asciidoc','handlebars','gherkin',
+    // Tier 3: shell / scripting
+    'awk','tcl','coffeescript',
+    // Tier 3: stats
+    'stan'
+  ];
+  window._hljsLoaded = {};
+
+  // Run the highlight + line-number pass against `root` (defaults to document).
+  window._hljsRun = function(root) {
+    root = root || document;
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (name) {
+        var resolved = hljs.getLanguage(name) ? name : 'plaintext';
+        code.classList.add('language-' + resolved);
+      }
+    });
+    hljs.configure({ cssSelector: 'pre:not(.mermaid) > code' });
+    hljs.highlightAll();
+    root.querySelectorAll('pre:not(.mermaid) > code').forEach(function(code) {
+      if (code.querySelector('.code-line')) return;
+      var html = code.innerHTML;
+      if (html.charAt(html.length - 1) === '\n') html = html.slice(0, -1);
+      var lines = html.split('\n');
+      var openTags = [];
+      code.innerHTML = lines.map(function(line) {
+        var prefix = openTags.join('');
+        var re = /<\/?span[^>]*>/gi, m;
+        while ((m = re.exec(line)) !== null) {
+          if (m[0][1] === '/') openTags.pop();
+          else openTags.push(m[0]);
+        }
+        var suffix = '';
+        for (var i = 0; i < openTags.length; i++) suffix += '</span>';
+        return '<span class="code-line">' + prefix + (line || ' ') + suffix + '</span>';
+      }).join('');
+    });
+  };
+
+  // Scan `root` for code blocks, fetch any missing allowlisted language
+  // modules, then run the highlight pass once they finish loading (or fail).
+  // Called once from the highlight.min.js onload handler, and again from
+  // main.js after each SPA navigation (scoped to #spa-content).
+  window._hljsInit = function(root) {
+    root = root || document;
+    if (typeof hljs === 'undefined') return;
+    var allow = {};
+    for (var i = 0; i < window._HLJS_EXTRA.length; i++) allow[window._HLJS_EXTRA[i]] = true;
+    var need = {};
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (!name || hljs.getLanguage(name)) return;
+      if (allow[name] && !window._hljsLoaded[name]) need[name] = true;
+    });
+    var keys = Object.keys(need);
+    if (!keys.length) { window._hljsRun(root); return; }
+    var pending = keys.length;
+    keys.forEach(function(l) {
+      window._hljsLoaded[l] = true; // mark in-flight to dedupe across SPA nav
+      var s = document.createElement('script');
+      s.src = window._HLJS_BASE + l + '.min.js';
+      s.onload = s.onerror = function() { if (--pending === 0) window._hljsRun(root); };
+      document.head.appendChild(s);
+    });
+  };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    onload="window._hljsInit();"></script>
+  <script id="rprint-mermaid" async src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('mermaid')}else{var t=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'default';mermaid.initialize({startOnLoad:false,theme:t});document.querySelectorAll('pre.mermaid > code').forEach(function(c){var src=c.textContent;c.parentElement.setAttribute('data-mermaid-source',src);c.parentElement.textContent=src;});mermaid.run()}"></script>
+  <script>document.getElementById('rprint-mermaid').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('mermaid',new Error('Mermaid failed to load'))}});</script>
+  
+  
+  
+</body>
+</html>

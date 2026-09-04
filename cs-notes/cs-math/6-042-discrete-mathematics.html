@@ -1,0 +1,2852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="build-commit" content="c659b99">
+  <title>Discrete Mathematics (6.042) - Jingqi's Interpositive</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/main.css?v=c659b99">
+  <link rel="stylesheet" href="/static/link-preview.css">
+  <link rel="stylesheet" href="/static/sidebar-panel.css">
+  <link rel="stylesheet" href="/static/table-enhance.css">
+  <link rel="stylesheet" href="/static/syllabus-enhance.css">
+  <link rel="stylesheet" href="/static/comments.css">
+  <link rel="stylesheet" href="/static/notebook.css">
+  <link rel="stylesheet" href="/static/themes.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var linkPreviewEmbed=false;
+      try{
+        var previewUrl=new URL(location.href);
+        linkPreviewEmbed=previewUrl.searchParams.get('rprint-preview')==='1'&&window.parent!==window&&window.parent.location.origin===location.origin;
+      }catch(e){}
+      if(linkPreviewEmbed){
+        document.documentElement.classList.add('link-preview-embed');
+        var previewArticleLink=function(target){return target&&target.closest&&target.closest('.article a[href]');};
+        var blockPreviewLink=function(event){if(previewArticleLink(event.target)){event.preventDefault();event.stopImmediatePropagation();}};
+        document.addEventListener('click',blockPreviewLink,true);
+        document.addEventListener('auxclick',blockPreviewLink,true);
+        document.addEventListener('keydown',function(event){if(event.key==='Enter')blockPreviewLink(event);},true);
+        document.addEventListener('dblclick',function(event){if(event.target&&event.target.closest&&event.target.closest('.article')){event.preventDefault();event.stopImmediatePropagation();}},true);
+      }
+      var bc=document.querySelector('meta[name="build-commit"]');
+      var commit=bc?bc.getAttribute('content'):'';
+      if(commit&&commit!=='unknown'){
+        var prev=localStorage.getItem('kb-build-commit');
+        if(prev&&prev!==commit){
+          var keys=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf('kb-')===0)keys.push(k);}
+          keys.forEach(function(k){localStorage.removeItem(k);});
+          localStorage.setItem('kb-build-commit',commit);
+          if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+            navigator.serviceWorker.controller.postMessage('clearCaches');
+          }
+          window.location.reload();
+          return;
+        }
+        localStorage.setItem('kb-build-commit',commit);
+      }
+      // Resume last visited page on PWA/browser launch. PWA launches carry
+      // `?pwa=1`; a normal browser launch is a plain root URL without a same-
+      // origin referrer. `/index.html` is an explicit home navigation, so it
+      // never resumes. Runs before paint to avoid a flash of the home page.
+      // Validates the stored path is a same-origin absolute path (rejects
+      // `//host` / `/\host` open-redirects).
+      var resumeLaunch=/[?&]pwa=1(&|$)/.test(location.search);
+      try{
+        var launchUrl=new URL(location.href);
+        launchUrl.searchParams.delete('pwa');
+        var sameOriginReferrer=false;
+        try{sameOriginReferrer=!!document.referrer&&new URL(document.referrer,location.href).origin===location.origin;}catch(e){}
+        resumeLaunch=resumeLaunch||(launchUrl.pathname==='/'&&!launchUrl.search&&!launchUrl.hash&&!sameOriginReferrer);
+      }catch(e){}
+      if(resumeLaunch){
+        try{
+          var last=localStorage.getItem('kb-last-location');
+          var lastPath=last&&last.split('#')[0].split('?')[0];
+          if(last&&/^\/[^/\\]/.test(last)&&lastPath!=='/'&&lastPath!=='/index.html'){
+            try{sessionStorage.setItem('kb-resume-last-scroll','1');}catch(e){}
+            location.replace(last);return;
+          }
+        }catch(e){}
+      }
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      var mob=window.matchMedia('(max-width:650px)').matches;
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.style.colorScheme=t==='dark'?'dark':'light';
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      var w=p.contentWidth||(mob?'100':'90');
+      document.documentElement.style.setProperty('--content-max-width',w+'%');
+      var edge=p.ignoreCorners!==undefined?p.ignoreCorners==='on':false;
+      if(edge&&w==='100')document.documentElement.setAttribute('data-ignore-corners','on');
+      if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches||window.matchMedia('(display-mode:fullscreen)').matches)document.documentElement.classList.add('pwa-standalone');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'kaiti';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.0};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+      var ht=t==='dark'?'github-dark':'github';
+      var writes='<link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/'+ht+'.min.css">';
+      document.write(writes);
+    })();
+  </script>
+  <style>.math{opacity:0;transition:opacity .15s}.math.rprint-render-failed{opacity:1}</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css" integrity="sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM" crossorigin="anonymous">
+  <script id="rprint-katex" defer src="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.js" integrity="sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI" crossorigin="anonymous"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('katex')}else{document.querySelectorAll('.math').forEach(function(el){var src=el.textContent;el.setAttribute('data-latex',src);katex.render(src,el,{displayMode:el.classList.contains('display'),throwOnError:false,trust:function(ctx){return ctx&&ctx.command==='\\href'&&typeof ctx.url==='string'&&/^#[A-Za-z0-9:._-]+$/.test(ctx.url);}});el.querySelectorAll('mtable[columnspacing=\'\']').forEach(function(t){t.removeAttribute('columnspacing')});el.style.opacity='1';})}"></script>
+  <script>document.getElementById('rprint-katex').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('katex',new Error('KaTeX failed to load'))}else{document.querySelectorAll('.math').forEach(function(el){el.style.opacity='1'})}});</script>
+</head>
+<body data-page-type="markdown">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <button class="banner-toggle" id="left-toggle" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h12v1.5H2V3zm0 4h12v1.5H2V7zm0 4h12v1.5H2V11z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-center">
+        <div class="banner-center-inner">
+          <a href="/index.html" class="site-title" data-short="Interpositive">Jingqi's Interpositive</a>
+          <span class="spa-health-wrap" id="spa-health-wrap">
+            <span class="spa-health-dot" id="spa-health-dot" title="SPA server status"></span>
+            <div class="spa-health-popup" id="spa-health-popup">
+              <div class="shp-header">
+                <span class="shp-title">Server Status</span>
+                <span class="shp-heart" id="shp-heart"></span>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-metrics">
+                <div class="shp-row"><span class="shp-label">Ping</span><span class="shp-value" id="shp-ping">—</span></div>
+                <div class="shp-row"><span class="shp-label">Uptime</span><span class="shp-value" id="shp-uptime">—</span></div>
+                <div class="shp-row"><span class="shp-label">Memory</span><span class="shp-value" id="shp-memory">—</span></div>
+                <div class="shp-row"><span class="shp-label">CPU Time</span><span class="shp-value" id="shp-cpu-time">—</span></div>
+                <div class="shp-row"><span class="shp-label">Load</span><span class="shp-value" id="shp-load">—</span></div>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-modules">
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-watch"></span> Watch</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-jupyter"></span> Jupyter</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-terminal"></span> Terminal</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-proxy"></span> Proxy</div>
+              </div>
+            </div>
+          </span>
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="/cs-notes/" class="nav-link" data-short="CS">CS</a><ul class="nav-dropdown"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li><a href="/cs-notes/mit-gir/index.html">MIT GIR</a></li><li><a href="/cs-notes/cs-math/index.html">CS Math</a></li></ul></li><li class="nav-item"><a href="/not-cs-notes/" class="nav-link" data-short="Not-CS">Not-CS</a><ul class="nav-dropdown"><li><a href="/not-cs-notes/mit-math-requirements.html">MIT Math Syllabus</a></li></ul></li><li class="nav-item"><a href="/notebook/" class="nav-link" data-short="Mixed">Mixed</a><ul class="nav-dropdown"><li><a href="/notebook/mind/index.html">Mind</a></li><li><a href="/notebook/matter/index.html">Matter</a></li><li><a href="/notebook/practice/index.html">Practice</a></li><li><a href="/notebook/toolbox/index.html">Toolbox</a></li></ul></li><li class="nav-item"><a href="/years/" class="nav-link" data-short="Years">Years</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="banner-right">
+        <button class="banner-right-toggle" title="More controls">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="search-wrap" id="search-wrap">
+          <button class="search-btn" id="search-btn" title="Search (Ctrl+K)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-input-wrap" id="search-input-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search…" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+        <div class="comment-wrap" id="comment-wrap">
+          <button class="comment-btn" id="comment-btn" title="Review Comments (A)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <span class="comment-nav-count" id="comment-nav-count"></span>
+          <button class="comment-nav-btn" id="comment-nav-prev" title="Previous comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="comment-nav-btn" id="comment-nav-next" title="Next comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <button class="settings-btn" id="settings-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="settings-panel" id="settings-panel">
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Native Jupyter <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="native-jupyter-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Global Search <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="content-search-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Quick Edit <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="quick-edit-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section resource-pack-setting" id="resource-pack-setting" hidden>
+            <div class="settings-row resource-pack-row">
+              <span class="settings-desc">Offline resources</span>
+              <button type="button" class="settings-action-btn" id="resource-pack-import-btn">Import</button>
+            </div>
+            <input type="file" id="resource-pack-input" accept=".rpack,application/vnd.rprint.resource-pack" hidden>
+            <div class="resource-pack-status" id="resource-pack-status" aria-live="polite"></div>
+            <button type="button" class="settings-link-btn" id="resource-pack-rollback-btn" hidden>Undo last import</button>
+          </div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent link-preview-settings-parent">
+            <label class="style-label" id="link-preview-label">Link Preview <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="link-preview-switch" role="switch" aria-labelledby="link-preview-label" aria-checked="false" aria-expanded="false" aria-controls="link-preview-settings-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children link-preview-settings-children" id="link-preview-settings-children" hidden>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-same-page-only-label">Same-page links only</label>
+              <button class="style-switch style-switch-compact" id="link-preview-same-page-only-switch" role="switch" aria-labelledby="link-preview-same-page-only-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-auto-close-label">Auto-close</label>
+              <button class="style-switch style-switch-compact" id="link-preview-auto-close-switch" role="switch" aria-labelledby="link-preview-auto-close-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-overwrite-jumping-label">Overwrite Link Jumping</label>
+              <button class="style-switch style-switch-compact" id="link-preview-overwrite-jumping-switch" role="switch" aria-labelledby="link-preview-overwrite-jumping-label" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+            </div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-row settings-title-row settings-dependent-parent">
+            <span class="settings-panel-title">Keyboard Shortcuts</span>
+            <button class="style-switch" id="kb-enabled-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children keyboard-shortcuts-children">
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="search"><span class="settings-desc">Search</span><span class="settings-keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="scroll"><span class="settings-desc">Scroll down / up</span><span class="settings-keys"><kbd>J</kbd> <kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="section"><span class="settings-desc">Next / prev section</span><span class="settings-keys"><kbd>U</kbd> <kbd>I</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="sidebar-toc"><span class="settings-desc"><span data-shortcut-part="sidebar">Sidebar / </span>TOC</span><span class="settings-keys"><kbd data-shortcut-part="sidebar">S</kbd> <kbd>T</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="spread"><span class="settings-desc">Next / prev spread</span><span class="settings-keys"><kbd>PgDn</kbd> <kbd>PgUp</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="comments"><span class="settings-desc">Comments</span><span class="settings-keys"><kbd>A</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="fold"><span class="settings-desc">Fold banner</span><span class="settings-keys"><kbd>F</kbd></span></div>
+            
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="dismiss"><span class="settings-desc">Close / Dismiss</span><span class="settings-keys"><kbd>Esc</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="settings"><span class="settings-desc">Show this panel</span><span class="settings-keys"><kbd>?</kbd></span></div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent">
+            <label class="style-label">Debug Mode</label>
+            <button class="style-switch" id="debug-mode-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="debug-children" id="debug-children">
+            <div class="settings-dependent-children">
+              <div class="settings-panel-section settings-dependent-child debug-log-level-setting">
+                <label class="style-label">Client Log Level</label>
+                <div class="style-toggle-group">
+                  <button class="style-toggle-btn debug-level-btn" data-level="error">Error</button>
+                  <button class="style-toggle-btn debug-level-btn" data-level="info">Info</button>
+                  <button class="style-toggle-btn debug-level-btn active" data-level="debug">Debug</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-footer" id="settings-git-version">c659b99</div>
+        </div>
+        <a href="/static/settings.html?v=c659b99" class="theme-btn" id="theme-btn" title="Theme & display">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="13.5" cy="6.5" r=".5"/>
+            <circle cx="17.5" cy="10.5" r=".5"/>
+            <circle cx="8.5" cy="7.5" r=".5"/>
+            <circle cx="6.5" cy="12.5" r=".5"/>
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+          </svg>
+        </a>
+        <div class="style-panel" id="style-panel">
+          <div class="style-panel-section">
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn active" data-theme="light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light
+              </button>
+              <button class="style-toggle-btn" data-theme="dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="style-toggle-btn" data-theme="kindle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                E-Ink
+              </button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn font-btn active" data-font="system">System</button>
+              <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+              <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">字体</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn fontzh-btn active" data-fontzh="default">系统</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="noto-serif">宋体</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+            </div>
+          </div>
+          <div class="style-panel-section bg-picker-section">
+            <label class="style-label">Background</label>
+            <div class="bg-swatch-group" id="bg-swatch-group">
+              <button class="bg-swatch active" data-bg="default" title="Default"></button>
+              <button class="bg-swatch" data-bg="green" title="Green"></button>
+              <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+              <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+              <div class="style-range-ticks">
+                <span class="style-range-tick font-size-tick" data-i="0">12</span>
+                <span class="style-range-tick font-size-tick" data-i="1">14</span>
+                <span class="style-range-tick font-size-tick" data-i="2">16</span>
+                <span class="style-range-tick font-size-tick" data-i="3">18</span>
+                <span class="style-range-tick font-size-tick" data-i="4">24</span>
+                <span class="style-range-tick font-size-tick" data-i="5">32</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+              <div class="style-range-ticks">
+                <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+                <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+                <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+                <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+                <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+                <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Width <span id="width-value">90%</span></label>
+            <div class="style-slider-wrap width-slider-wrap">
+              <input type="range" class="style-range" id="content-width-range" min="0" max="5" step="1" value="3">
+              <div class="style-range-ticks width-ticks">
+                <span class="style-range-tick width-tick" data-i="0">50</span>
+                <span class="style-range-tick width-tick" data-i="1">65</span>
+                <span class="style-range-tick width-tick" data-i="2">80</span>
+                <span class="style-range-tick width-tick" data-i="3">90</span>
+                <span class="style-range-tick width-tick" data-i="4">95</span>
+                <span class="style-range-tick width-tick" data-i="5">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="ignore-corners-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">2 Columns <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+        </div>
+        <button class="banner-toggle" id="fold-banner-btn" title="Fold banner">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4l4 4-4 4zm10 0l-4 4 4 4z"/>
+          </svg>
+        </button>
+        <button class="banner-toggle" id="right-toggle" title="Toggle table of contents">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-right-dropdown"></div>
+    </div>
+  </header>
+
+  <!-- Floating buttons when banner is folded -->
+  <div class="banner-fold-float" id="banner-fold-float">
+    <button class="banner-fold-float-btn" id="unfold-banner-btn" title="Unfold banner">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M7 4L3 8l4 4zm2 0l4 4-4 4z"/>
+      </svg>
+    </button>
+    <button class="banner-fold-float-btn" id="float-toc-btn" title="Toggle table of contents">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout left-collapsed right-collapsed">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar collapsed" id="left-sidebar">
+      <div class="sidebar-content" id="spa-sidebar">
+        <!-- rprint:sidebar:start -->
+        <a class="sidebar-cat-title" href="/cs-notes">CS</a><ul class="sidebar-list"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li class="sidebar-group" data-priority="0"><span class="sidebar-row"><a class="sidebar-group-title" href="/cs-notes/mit-gir/index.html">MIT GIR</a><span class="sidebar-toggle"></span></span><ul><li><a href="/cs-notes/mit-gir/18-01-single-variable-calculus.html">Calculus I (18.01)</a></li><li><a href="/cs-notes/mit-gir/18-01-single-variable-calculus-exercises.html">Calculus I (18.01) - Exercises</a></li><li><a href="/cs-notes/mit-gir/18-02-multivariable-calculus.html">Calculus II (18.02)</a></li><li><a href="/cs-notes/mit-gir/18-02-multivariable-calculus-exercises.html">Calculus II (18.02) - Exercises</a></li><li><a href="/cs-notes/mit-gir/8-01-classical-mechanics.html">Physics I (8.01) 🚜</a></li><li><a href="/cs-notes/mit-gir/8-01-classical-mechanics-exercises.html">Physics I (8.01) - Exercises 🚜</a></li><li><a href="/cs-notes/mit-gir/8-02-electricity-magnetism.html">Physics II (8.02) 🚜</a></li></ul></li><li class="sidebar-group open" data-priority="0.001"><span class="sidebar-row"><a class="sidebar-group-title active-group" href="/cs-notes/cs-math/index.html">CS Math</a><span class="sidebar-toggle"></span></span><ul><li><a href="/cs-notes/cs-math/18-06-linear-algebra.html">Linear Algebra (18.06)</a></li><li class="active"><a href="/cs-notes/cs-math/6-042-discrete-mathematics.html">Discrete Mathematics (6.042)</a></li></ul></li></ul>
+        <!-- rprint:sidebar:end -->
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content" id="content">
+      <article class="article" id="spa-content">
+        <h1 id="discrete-mathematics-6.042">Discrete Mathematics (<a href="https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/">6.042</a>)</h1>
+<h2 id="proofs" data-sourcepos="3:1-3:1">Proofs</h2>
+<h3 id="propositions" data-sourcepos="5:1-5:1">Propositions</h3>
+<p data-sourcepos="7:1-7:1">A <em>proposition</em> is a statement that is either true or false.</p>
+<p data-sourcepos="9:1-9:1">A <em>predicate</em> is a proposition whose truth depends on the value of variable(s).</p>
+<!-- A proof is a method for ascertaining the truth. -->
+<p data-sourcepos="13:1-13:1">A mathematical <em>proof</em> of a <em>proposition</em> is a chain of <em>logical deductions</em> leading to the proposition from a base set of <em>axioms</em>.</p>
+<p data-sourcepos="15:1-15:1">Axioms should be complete and consistent, but see <a href="https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems">Gödel’s incompleteness theorems</a>.</p>
+<h4 id="notations" data-sourcepos="17:1-17:1">Notations</h4>
+<div class="table-wrap"><table data-sourcepos="19:1-28:1">
+<thead>
+<tr>
+<th>English</th>
+<th>Symbolic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NOT(<span class="math inline">P</span>)</td>
+<td><span class="math inline">\neg P</span> (alternatively, <span class="math inline">\overline{P}</span>)</td>
+</tr>
+<tr>
+<td><span class="math inline">P</span> AND <span class="math inline">Q</span></td>
+<td><span class="math inline">P \wedge Q</span></td>
+</tr>
+<tr>
+<td><span class="math inline">P</span> OR <span class="math inline">Q</span></td>
+<td><span class="math inline">P \vee Q</span></td>
+</tr>
+<tr>
+<td><span class="math inline">P</span> IMPLIES <span class="math inline">Q</span></td>
+<td><span class="math inline">P \rightarrow Q</span></td>
+</tr>
+<tr>
+<td>if <span class="math inline">P</span> then <span class="math inline">Q</span></td>
+<td><span class="math inline">P \rightarrow Q</span></td>
+</tr>
+<tr>
+<td><span class="math inline">P</span> IFF <span class="math inline">Q</span></td>
+<td><span class="math inline">P \leftrightarrow Q</span></td>
+</tr>
+<tr>
+<td><span class="math inline">P</span> XOR <span class="math inline">Q</span></td>
+<td><span class="math inline">P \oplus Q</span></td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="29:1-29:1">A proposition is valid is all settings of the variables makes the proposition true.</p>
+<p data-sourcepos="31:1-31:1">A proposition is satisfiable is some setting of the variables makes the proposition true. The general problem of deciding whether a proposition is satisfiable is called <strong>SAT</strong>.</p>
+<p data-sourcepos="33:1-33:1">A function-like notation is used to denote a predicate suppied with specific variable values:</p>
+<p data-sourcepos="36:1-36:1"><span class="math display">
+P(n)::= n\text{ is a perfect square}
+</span></p>
+<!-- #### Case study
+
+$
+\text{prove: }\exists x \forall y. P(x, y) \implies \forall y \exists x. P(x, y).
+$
+
+In order to prove $P \implies Q$, you can assume P is true and then prove Q is true subject to that assumption. -->
+<h4 id="algebra" data-sourcepos="47:1-47:1">Algebra</h4>
+<p data-sourcepos="49:1-49:1">Commutative:</p>
+<p><span class="math display">
+\begin{aligned}
+&amp; A \lor B = B \lor A \\
+&amp; A \land B = B \land A
+\end{aligned}
+</span></p>
+<p data-sourcepos="58:1-58:1">Associative:</p>
+<p><span class="math display">
+\begin{aligned}
+&amp; (A \lor B) \lor C = A \lor (B \lor C) \\
+&amp; (A \land B) \land C = A \land (B \land C)
+\end{aligned}
+</span></p>
+<p data-sourcepos="67:1-67:1">Distributive:</p>
+<p><span class="math display">
+\begin{aligned}
+&amp; A \land (B \lor C) = (A \land B) \lor (A \land C) \\
+&amp; A \lor (B \land C) = (A \lor B) \land (A \lor C)
+\end{aligned}
+</span></p>
+<p>De Morgan’s:</p>
+<p><span class="math display">
+\begin{aligned}
+&amp; \neg (A \land B) = \neg A \lor \neg B \\
+&amp; \neg (A \lor B) = \neg A \land \neg B
+\end{aligned}
+</span></p>
+<h4 id="dnf-and-cnf" data-sourcepos="85:1-85:1">DNF and CNF</h4>
+<p data-sourcepos="87:1-87:1">Every proposition is equavalent to <em>conjunctive normal form (CNF)</em> or <em>disjunctive normal form (DNF)</em>.</p>
+<p><em>DNF</em> is like <span class="math inline">(A \land B) \lor C</span>, <span class="math inline">\text{OR}</span> of <span class="math inline">\text{AND}</span>.</p>
+<p data-sourcepos="91:1-91:1">A <em>full DNF</em> is a DNF where every minterm(connected by <span class="math inline">\land</span>) contains all the variables. It can be implied by the true table of the formula.</p>
+<p data-sourcepos="93:1-93:1">To convert a proposition to full DNF:</p>
+<ol type="1" data-sourcepos="95:1-97:1">
+<li>Expand the proposition to DNF, using algebra above.</li>
+<li>Add missing variables, e.g. <span class="math inline">A\land B = A \land B \land (C \lor \neg C) = (A \land B \land C) \lor (A \land B \land \neg C)</span>. Or in other notation, <span class="math inline">AB = AB(C + \overline C) = ABC + AB\overline C</span>.</li>
+<li>Remove the duplicates.</li>
+</ol>
+<h3 id="patterns-of-proof" data-sourcepos="99:1-99:1">Patterns of Proof</h3>
+<p data-sourcepos="101:1-101:1">Logical deductions or <em>inference rules</em>, are used to prove new propositions using previously proved ones:</p>
+<p><span class="math display">
+\begin{aligned}
+&amp; \text{Rule.} \quad \frac{P, \quad P \rightarrow  Q}{Q} \\
+&amp; \text{Rule.} \quad \frac{\quad P \rightarrow  Q, \quad Q  \rightarrow  R}{\quad P  \rightarrow  R} \\
+&amp; \text{Rule.} \quad \frac{\text{NOT}(P)  \rightarrow  \text{NOT}(Q)}{\quad Q  \rightarrow  P}
+\end{aligned}
+</span></p>
+<h4 id="methods" data-sourcepos="111:1-111:1">Methods</h4>
+<ul data-sourcepos="113:1-120:1">
+<li>By cases</li>
+<li>For <span class="math inline">P\implies Q</span>:
+<ul data-sourcepos="115:1-116:1">
+<li>assume P is true, then prove Q with that assumption</li>
+<li>prove the contrapositive</li>
+</ul></li>
+<li>For <span class="math inline">P \iff Q</span>:
+<ul>
+<li>prove <span class="math inline">P \implies Q \land Q \implies P</span></li>
+<li>contruct <span class="math inline">\iff</span> chains</li>
+</ul></li>
+<li>By contradiction</li>
+</ul>
+<h4 id="set" data-sourcepos="122:1-122:1">Set</h4>
+<p data-sourcepos="124:1-124:1">Unique, unordered.</p>
+<ul>
+<li>Complement: <span class="math inline">A^c = C - A</span></li>
+<li>Power: <span class="math inline">\mathcal P(A)</span></li>
+<li>Empty: <span class="math inline">\emptyset</span></li>
+</ul>
+<p>Commutative Laws: <span class="math display">
+\begin{aligned}
+&amp; A \cup B = B \cup A \\
+&amp; A \cap B = B \cap A
+\end{aligned}
+</span></p>
+<p>Associative Laws: <span class="math display">
+\begin{aligned}
+&amp; (A \cup B) \cup C = A \cup (B \cup C) \\
+&amp; (A \cap B) \cap C = A \cap (B \cap C)
+\end{aligned}
+</span></p>
+<p>Distributive Laws: <span class="math display">
+\begin{aligned}
+&amp; A \cap (B \cup C) = (A \cap B) \cup (A \cap C) \\
+&amp; A \cup (B \cap C) = (A \cup B) \cap (A \cup C)
+\end{aligned}
+</span></p>
+<p>De Morgan’s Laws: <span class="math display">
+\begin{aligned}
+&amp; (A \cap B)^c = A^c \cup B^c \\
+&amp; (A \cup B)^c = A^c \cap B^c
+\end{aligned}
+</span></p>
+<h4 id="sequence" data-sourcepos="162:1-162:1">Sequence</h4>
+<p data-sourcepos="164:1-164:1">Ordered.</p>
+<ul>
+<li>Empty: <span class="math inline">\lambda</span></li>
+</ul>
+<p data-sourcepos="168:1-168:1">Sequence can be generated by cross product of sets:</p>
+<p><span class="math display">
+\begin{aligned}
+    \mathop{\Large\times}_{i=1}^{n} A_i &amp;= \{(a_1, a_2, \dots, a_n) \mid a_i \in A_i, \text{ for } i = 1, 2, \dots, n \} \\
+    \lvert \mathop{\Large\times}_{i=1}^{n} A_i \rvert &amp;= \prod_{i=1}^{n} \left| A_i \right|
+\end{aligned}
+</span></p>
+<h3 id="induction" data-sourcepos="177:1-177:1">Induction</h3>
+<p><span class="math display">
+\begin{aligned}
+\text{Induction Rule} &amp; \quad \frac{\text P(0), \quad \forall n \in \mathbb{N}.\text P(n)\rightarrow \text P(n+1)} {\forall m \in \mathbb{N}. \text P(m)} \\
+\text{Strong Induction Rule} &amp; \quad \frac{\text P(0), \quad [\forall k \leq n \in \mathbb{N}. \text P(k) ]\rightarrow \text P(n+1)} {\forall m \in \mathbb{N}. \text P(m)}
+\end{aligned}
+</span></p>
+<h4 id="well-ordering-principle" data-sourcepos="186:1-186:1">Well ordering principle</h4>
+<p data-sourcepos="188:1-188:1">A set is well-ordered if every non-empty subset has a least element under a given ordering.</p>
+<p><span class="math inline">\mathbb N</span> is well-ordered.</p>
+<p>To prove that <span class="math inline">P(n)</span> is true for all <span class="math inline">n \in \mathbb{N}</span> using WOP:</p>
+<ul>
+<li>Define the set of <span class="math inline">C</span> of counter examples that <span class="math inline">P</span> is true, <span class="math inline">C ::= \{n \in \mathbb N \mid P(n) \text{ is false}\}</span>.</li>
+<li>Per proof by contradiction, assume <span class="math inline">C</span> is nonempty.</li>
+<li>By WOP, there will be a smallest element <span class="math inline">n</span> in <span class="math inline">C</span>.</li>
+<li>Reach a contradiction, that <span class="math inline">P(n)</span> is actually true or there must be another element smaller than <span class="math inline">n</span>.</li>
+<li>Conclude that <span class="math inline">C</span> must be empty.</li>
+</ul>
+<h4 id="invariant" data-sourcepos="200:1-200:1">Invariant</h4>
+<p data-sourcepos="202:1-202:1">To prove that some property <em>X</em> holds for every step of a process:</p>
+<ul>
+<li>Define <span class="math inline">P(t)</span> to be the predicate that <em>X</em> holds immediately after step <span class="math inline">t</span>.</li>
+<li>Show that <span class="math inline">P(0)</span> is true, namely that <em>X</em> holds for the start state.</li>
+<li>Show that <span class="math display">
+\forall t \in \mathbb{N}. \ P(t) \implies P(t + 1),
+</span> namely, that for any <span class="math inline">t \geq 0</span>, if <em>X</em> holds immediately after step <span class="math inline">t</span>, it must also hold after the following step.</li>
+</ul>
+<!-- #### Structural induction
+
+TODO -->
+<h2 id="number-theory" data-sourcepos="216:1-216:1">Number Theory</h2>
+<h3 id="basic" data-sourcepos="218:1-218:1">Basic</h3>
+<p><span class="math display">
+\begin{aligned}
+&amp; a \mid b \iff k\cdot a=b, k \in \mathbb Z\\ 
+&amp; a \mid b \land a \mid c \iff a \mid sb+tc, s,t\in\mathbb Z \\
+&amp; \text{rem}(a, b) = a - \lfloor a/b \rfloor b \\
+&amp; a \equiv b \mod n \iff \text{rem}(a, n) = \text{rem}(b, n)
+\end{aligned}
+</span></p>
+<h3 id="gcd" data-sourcepos="229:1-229:1">GCD</h3>
+<p data-sourcepos="232:1-232:1"><span class="math display">
+\gcd(a, b) = \gcd(b, r), r = \text{rem}(a, b)
+</span></p>
+<p data-sourcepos="235:1-235:1">Proof:</p>
+<p><span class="math display">
+\begin{aligned}
+    &amp; \text{let } A = \{x \mid (x \mid a \land x \mid b)\}, B = \{x \mid (x \mid b \land x \mid r)\}, g \in A \\
+    \implies &amp; g \mid a \land g \mid b \\
+    \implies &amp; g \mid sa+tb, s,t\in \mathbb Z \\
+    \implies &amp; s = 1, t = -\lfloor a/b \rfloor, g\mid r \\
+    \implies &amp; A \subseteq B \\
+    \text{similarily, } &amp; B \subseteq A \\
+    \implies &amp; \gcd(a, b) = \gcd(b, r)
+\end{aligned}
+</span></p>
+<h3 id="bézouts-identity">Bézout’s Identity</h3>
+<p data-sourcepos="252:1-252:1"><span class="math display">
+\exists s, t \in \mathbb{Z}, sa + tb = k \iff \gcd(a, b) \mid k
+</span></p>
+<h4 id="proof" data-sourcepos="255:1-255:1">Proof</h4>
+<ol type="1" data-sourcepos="257:1-257:1">
+<li><span class="math inline">\exists s, t \in \mathbb{Z}, sa + tb = k \implies \gcd(a, b) \mid k</span>:</li>
+</ol>
+<p><span class="math display">
+\begin{aligned}
+    &amp; \text{let } g = \gcd(a, b) \\
+    \implies &amp; a = a&#39;g, b = b&#39;g \\
+    \implies &amp; sa&#39;g + tb&#39;g = g(sa&#39; + tb&#39;) = k \\
+    \implies &amp; g \mid k
+\end{aligned}
+</span></p>
+<ol start="2" type="1" data-sourcepos="268:1-268:1">
+<li><span class="math inline">\gcd(a, b) \mid k \implies \exists s, t \in \mathbb{Z}, sa + tb = k</span>:</li>
+</ol>
+<p><span class="math display">
+\begin{aligned}
+    &amp; \text{let } A = \{x \mid x = sa + tb, s, t \in \mathbb{Z}\} \\
+    \implies &amp; \{a, b\} \subseteq A \\
+    &amp; \text{let } d_0 = \min A_+ ; d_0 = x_0a+y_0b\\
+    &amp; \text{consider } a = q d_0 + r, r \in [0, d_0) \\
+    \implies &amp; r = a - qd_0 \\
+    \implies &amp; r \in A \\
+    &amp; \text{as either } r &gt; 0 \text{ or } r = 0; \text{ but } d_0 = \min A_+, r &lt; d_0 \\
+    \implies &amp; r = 0 \\
+    \implies &amp; d_0 \mid a \\
+    &amp; \text{similarily, } d_0 \mid b \\
+    \implies &amp; \gcd(a, b) \geq d_0 \\
+    &amp; \text{consider } d \mid a, d \mid b \\
+    \implies &amp; d_0 = x_0a&#39;d + y_0b&#39;d \\
+    \implies &amp; d \mid d_0 \\
+    \implies &amp; \gcd(a, b) \leq d_0 \\
+    \implies &amp; d_0 = \gcd(a, b) \\
+    \implies &amp; \exists s, t \in \mathbb{Z}, sa + tb = \gcd(a, b)
+\end{aligned}
+</span></p>
+<h4 id="calc" data-sourcepos="292:1-292:1">Calc</h4>
+<p>The extended euclid’s algorithm can find the <span class="math inline">s, t</span>.</p>
+<ol type="1">
+<li><span class="math inline">b\neq 0</span>, let <span class="math inline">q = \lfloor a/b \rfloor</span>:</li>
+</ol>
+<p><span class="math display">
+\begin{aligned}
+    s&#39; b + t&#39; r = \gcd(b, r), r = a - q b \\
+    s&#39; b + t&#39; (a - qb) = \gcd(b, r) \\
+    t&#39;a + (s&#39; - t&#39; q)b=\gcd(b, r) 
+\end{aligned} \implies
+\begin{cases}
+s = t&#39; \\
+t = s&#39;-t&#39; \lfloor a/b \rfloor
+\end{cases}
+</span></p>
+<ol start="2" type="1" data-sourcepos="310:1-311:1">
+<li><span class="math inline">b = 0 \implies s = 1, t = 0</span>.</li>
+</ol>
+<h3 id="inverse" data-sourcepos="312:1-312:1">Inverse</h3>
+<p data-sourcepos="315:1-315:1"><span class="math display">
+\gcd(k, n) = 1 \implies \exists s, t\in \mathbb Z, sk + tn = 1 \implies sk \equiv 1 \mod n
+</span></p>
+<h3 id="eulers-theorem">Euler’s Theorem</h3>
+<p data-sourcepos="320:1-320:1">Totient func:</p>
+<p data-sourcepos="323:1-323:1"><span class="math display">
+\phi (n) = \lvert \{ k \mid 1 \leq k \leq n, k\in \mathbb Z \land \gcd(k, n) = 1\} \rvert
+</span></p>
+<p>Euler’s theroem:</p>
+<p data-sourcepos="329:1-329:1"><span class="math display">
+\gcd(k,n) = 1 \implies k^{\phi(n)} \equiv 1 \mod n
+</span></p>
+<p>Lemma: <span class="math inline">\gcd(k, n) = 1 \implies a \equiv b \mod n \iff ak \equiv bk \mod n</span></p>
+<p data-sourcepos="334:1-334:1">Reduced residue system is closed under multiplication:</p>
+<p><span class="math display">
+\begin{aligned}
+    &amp; \text{let } \mathbb Z_n^* = \{x \mid \gcd(x, n) = 1, x &lt; n\} \\
+    &amp; \text{consider } z_i \in \mathbb Z_n^* \\
+    \implies &amp; \gcd(z_i, n) = 1, \gcd(k, n) = 1 \\
+    \implies &amp; \gcd(kz_i, n) = 1 \\
+    \implies &amp; \text{rem}(kz_i, n) \in Z_n^* \\
+    &amp; \text{consider lemma above} \\
+    \implies &amp; Z_n^* = \{\text{rem}(kz, n) \mid z\in Z_n^*\}
+\end{aligned}
+</span></p>
+<p data-sourcepos="348:1-348:1">Proof:</p>
+<p><span class="math display">
+\begin{aligned}
+&amp; Z_n^* = \{\text{rem}(kz, n) \mid z\in Z_n^*\} \\
+\implies &amp; \prod_{z_i \in Z_n^*} z_i \equiv \prod_{z_i \in Z_n^*} kz_i \mod n \\
+\text{consider } &amp; \prod_{z_i \in Z_n^*} kz_i \equiv k^{\phi(n)} \prod_{z_i \in Z_n^*} z_i \mod n \\
+\text{consider } &amp; \gcd(z_i, n) = 1 \\
+\implies &amp; \gcd (\prod_{z_i \in Z_n^*} z_i, n) = 1 \\
+\implies &amp; k^{\phi(n)}\equiv 1 \mod n
+\end{aligned}
+</span></p>
+<h3 id="fermats-little-theorem">Fermat’s Little Theorem</h3>
+<p>For prime <span class="math inline">p</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+    &amp; \phi(p) = p-1 \\
+    &amp; p \nmid k \implies
+    \begin{cases}
+        &amp; k^{p-1} \equiv 1 \mod p \\
+        &amp; k^{-1} = k^{p-2}
+    \end{cases} \\
+    &amp; \phi(pq) = (p-1)(q-1), \quad p, q\text{ are prime}
+\end{aligned}
+</span></p>
+<h3 id="chinese-remainder-theorem" data-sourcepos="377:1-377:1">Chinese Remainder Theorem</h3>
+<p data-sourcepos="379:1-379:1">There are n integers, <span class="math inline">\forall i, j, m_i \perp m_j</span>, <span class="math inline">M = \prod m_i</span>. For</p>
+<p><span class="math display">
+\begin{cases}
+x \equiv a_1 \pmod{m_1} \\
+x \equiv a_2 \pmod{m_2} \\
+\vdots \\
+x \equiv a_n \pmod{m_n}
+\end{cases}
+</span></p>
+<p data-sourcepos="390:1-390:1">There exists unique <span class="math inline">x \pmod M</span>.</p>
+<p data-sourcepos="392:1-392:1">Lemma:</p>
+<p data-sourcepos="395:1-395:1"><span class="math display">
+\forall i, x \equiv y \mod m_i \implies \forall i, m_i \mid (x - y) \implies M \mid (x - y) \implies x \equiv y \mod M
+</span></p>
+<p>Solution, <span class="math inline">M_i = \frac M {m_i}</span>:</p>
+<p data-sourcepos="401:1-401:1"><span class="math display">
+x \equiv \sum_i a_i M_i y_i \mod M, \quad {M_i} {y_i} \equiv 1 \mod m_i
+</span></p>
+<h3 id="rsa" data-sourcepos="404:1-404:1">RSA</h3>
+<p><span class="math inline">p, q</span> are 2 primes; <span class="math inline">n = pq</span>.</p>
+<p><span class="math display">
+\begin{aligned}
+    \text{public key } &amp; (e, n), e \perp \phi(n), e &lt; \phi(n) \\
+    \text{private key } &amp; (d, n), ed \equiv 1 \mod \phi(n)
+\end{aligned}
+</span></p>
+<p>For message <span class="math inline">m, m &lt; n</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+    &amp; c \equiv m ^ e \mod n \\
+    &amp; m = c ^ d \mod n
+\end{aligned}
+</span></p>
+<p>Proof for <span class="math inline">m \perp n</span>:</p>
+<p><span class="math display">
+\begin{cases}
+ed \equiv 1 \mod \phi(n) \implies ed = 1 + k\phi(n) \\
+m ^ {\phi(n)} \equiv 1 \mod n \implies m^{k\phi(n)} \equiv 1 \mod n
+\end{cases}
+\implies
+m ^ {ed} = m ^{1 + k\phi(n)} \equiv m \mod n
+</span></p>
+<p>For <span class="math inline">m \not\perp n</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+    &amp; n = pq \\
+    \text{consider } &amp; m = kp, m &lt; n \\
+    \implies &amp;
+    \begin{cases}
+        m \equiv 0 \mod p \\
+        m \perp q
+    \end{cases} \\
+    &amp; m \equiv 0 \mod p \\ 
+    \implies &amp; m^{ed} \equiv m \mod p \\
+    &amp; m \perp q \\
+    \implies &amp; m ^ {\phi(q)} \equiv 1 \mod q \\
+    \implies &amp; m ^{q-1} \equiv 1 \mod q \\
+    \implies &amp; m^{ed} \equiv m^{1 + k\phi(n)} \equiv m \cdot m^{(q-1)\cdot(p-1)k} \equiv m \cdot \left( m^{q-1}\right)^{(p-1)k} \equiv m \mod q \\
+    \text{consider }&amp;\text{lemma of CRT} \\
+    \implies &amp; m^{ed} \equiv m \mod n
+\end{aligned}
+</span></p>
+<h2 id="graph" data-sourcepos="457:1-457:1">Graph</h2>
+<h3 id="introduction" data-sourcepos="459:1-459:1">Introduction</h3>
+<p>Undirected graph <span class="math inline">G = (V, E)</span> consists of a non-empty set <span class="math inline">V</span> and a set <span class="math inline">E</span> of unordered pairs from <span class="math inline">V</span>.</p>
+<p data-sourcepos="463:1-463:1">Simple graph is a graph without self-loop and duplicate edges.</p>
+<h3 id="isomorphism" data-sourcepos="465:1-465:1">Isomorphism</h3>
+<p>Two graphs <span class="math inline">G=(V_G,E_G)</span> and <span class="math inline">H=(V_H,E_H)</span> are <em>isomorphic</em> if there exists a bijection <span class="math inline">f:V_G\to V_H</span> such that for all <span class="math inline">u,v\in V_G</span>:</p>
+<p data-sourcepos="470:1-470:1"><span class="math display">
+(u,v)\in E_G \iff (f(u),f(v))\in E_H
+</span></p>
+<!-- Intuitively: same structure, just vertex labels renamed. -->
+<p data-sourcepos="475:1-475:1">Ref: <a href="https://arxiv.org/abs/1512.03547">Graph Isomorphism in Quasipolynomial Time</a>.</p>
+<h3 id="coloring" data-sourcepos="477:1-477:1">Coloring</h3>
+<p data-sourcepos="479:1-479:1">Coloring is to assign colors to vertices so adjacent vertices have different colors.</p>
+<p><span class="math inline">\chi(G)</span> is the minimum number of colors needed.</p>
+<p><span class="math inline">\forall k \geq 3</span>, deciding whether <span class="math inline">\chi (G) \leq k</span> is NP-complete.</p>
+<h4 id="dsatur-algorithm" data-sourcepos="485:1-485:1">DSATUR algorithm</h4>
+<p data-sourcepos="487:1-487:1">Saturation is defined as <em>the number of distinct colors present in its neighborhood</em>.</p>
+<ul data-sourcepos="489:1-490:1">
+<li>At each step selects the uncolored vertex with the highest saturation, and choose higher degree if there are saturation ties.</li>
+<li>Once a vertex is selected, it is assigned the smallest available color not used by its colored neighbors.</li>
+</ul>
+<h4 id="upper-bound" data-sourcepos="492:1-492:1">Upper bound</h4>
+<div class="table-wrap"><table data-sourcepos="494:1-495:1">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Graph Class</th>
+<th><span class="math inline">\chi</span></th>
+<th>Key Theorem / Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>trees &amp; bipartite graphs</td>
+<td><span class="math inline">\chi = 2</span></td>
+<td>BFS, Linear-time</td>
+</tr>
+<tr>
+<td>planar graphs</td>
+<td><span class="math inline">\chi \leq 4</span></td>
+<td><em>Four-Color Theorem</em>, 3-colorability is NP-C</td>
+</tr>
+<tr>
+<td>graphs with max degree <span class="math inline">\Delta + 1</span></td>
+<td><span class="math inline">\chi \leq \Delta + 1</span></td>
+<td>-</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="bipartite">Bipartite</h3>
+<p data-sourcepos="502:1-502:1">A biparitite graph is a graph that the vertices can be partitioned to 2 sets <span class="math inline">L, R</span>, and the vertices of every edge are among 2 sets.</p>
+<p data-sourcepos="504:1-504:1">If there is no odd-length circle, then the graph is bipartite.</p>
+<h3 id="matching" data-sourcepos="506:1-506:1">Matching</h3>
+<p data-sourcepos="508:1-508:1">A matching is a set of edges don’t share common vertices.</p>
+<p data-sourcepos="510:1-510:1">Perfect matching is the matching covers all vertices of <span class="math inline">L</span>.</p>
+<h4 id="halls-theorem"><em>Hall’s theorem</em></h4>
+<!-- The necessary and sufficient condition of existence of perfect matching: -->
+<p>A bipartite graph <span class="math inline">G = (X, Y, E)</span> has a matching that covers <span class="math inline">X</span> if and only if for every subset <span class="math inline">S \subseteq X</span>:</p>
+<p data-sourcepos="519:1-519:1"><span class="math display">
+|N(S)| \;\ge\; |S|
+</span></p>
+<p><span class="math inline">N(S)</span> is the neighborhood of <span class="math inline">S</span> in <span class="math inline">Y</span>:</p>
+<p data-sourcepos="525:1-525:1"><span class="math display">
+N(S) = \{\,y \in Y : \exists\,x \in S \text{ with }(x,y)\in E\}
+</span></p>
+<!-- #### Proof of *Hall's Theorem* 
+
+* **Base case**: If $\lvert X\rvert=0$, there is nothing to match and the empty matching trivially covers $X$.
+
+* **Inductive step**: Assume the statement holds for all bipartite graphs whose left side has fewer than $\lvert X\rvert$ vertices.  We prove it for $(X,Y,E)$.
+
+  Since $\lvert X\rvert>0$, pick any vertex $x_0\in X$.  Two cases arise:
+
+##### strict
+
+$
+|N(S)| \;\ge\; |S| + 1
+\quad
+\text{for every nonempty }S\subseteq X.
+$
+
+In particular, $x_0$ has at least one neighbor; choose any $y_0\in N(\{x_0\})$.
+
+Form a smaller graph
+
+$
+G' = \bigl(X' = X\setminus\{x_0\},\; Y' = Y\setminus\{y_0\},\; E' = E\setminus\{\text{edges incident to }x_0\text{ or }y_0\}\bigr).
+$
+
+We claim $G'$ still satisfies Hall's condition on $X'$.  Indeed, for any $S'\subseteq X'$,
+
+$
+N_{G'}(S') = N_G(S') \setminus\{y_0\},
+$
+
+and since $|N_G(S')|\ge|S'|+1$ and at most one vertex ($y_0$) is removed,
+
+$
+|N_{G'}(S')|\;\ge\;|N_G(S')| - 1\;\ge\;|S'|.
+$
+
+By the induction hypothesis $G'$ admits a matching covering $X'$; adding the edge $(x_0,y_0)$ yields a matching covering all of $X$.
+
+##### tight
+
+There exists nonempty $S\subseteq X$ with
+
+$
+|N(S)| \;=\; |S|.
+$
+
+And still:
+$
+|N(S)| \;\ge\; |S|
+\quad
+\text{for every nonempty }S\subseteq X.
+$.
+
+Let
+
+$
+Y_S = N(S),
+\quad
+X_S = S,
+\quad
+G_1 = G\bigl[X_S \cup Y_S\bigr]
+$
+
+be the subgraph induced by $S$ and its neighbors.  Because $|N_{G_1}(T)| \ge |T|$ still holds for every $T\subseteq S$, by induction $G_1$ has a matching $M_1$ saturating $S$.
+
+Now consider the “residual” graph on the remaining vertices
+
+$
+X' = X\setminus S,
+\quad
+Y' = Y\setminus Y_S,
+\quad
+G_2 = G\bigl[X'\cup Y'\bigr].
+$
+
+We check Hall for $G_2$.  Take any $T\subseteq X'$.  In the original graph,
+
+$
+N_G(S\cup T) \;\subseteq\; N_G(S)\;\cup\;N_G(T),
+$
+
+so
+
+$
+|N_G(T)| \;\ge\; |N_G(S\cup T)| - |N_G(S)|
+\;\ge\; |S| + |T| - |S|
+\;=\; |T|.
+$
+
+Moreover, none of these neighbors of $T$ lie in $Y_S$, so in $G_2$ itself
+$\;|N_{G_2}(T)| = |N_G(T)|\ge|T|$.  By induction again, $G_2$ has a matching $M_2$ covering $X'$.
+
+Finally, $M_1$ and $M_2$ live on disjoint vertex‐sets, so their union is a matching in $G$ saturating all of $X$. -->
+<h4 id="stable-matching" data-sourcepos="622:1-622:1">Stable matching</h4>
+<p data-sourcepos="624:1-624:1">Given two groups of agents (commonly called men and women), where each agent ranks members of the opposite group by preference. The stable matching problem asks for a pairing (a matching) between the two groups so that no pair of agents would both rather be with each other than with their assigned partners. If such a pair exists, it’s called a blocking pair and the matching is unstable.</p>
+<p data-sourcepos="627:1-627:1">Gale Shapley algorithm is used to solve it.</p>
+<p data-sourcepos="629:1-629:1">Initialization:</p>
+<ul data-sourcepos="631:1-632:1">
+<li>Mark every man and woman as free</li>
+<li>Each man keeps a pointer to the next woman on his list (initially the first).</li>
+</ul>
+<p data-sourcepos="634:1-634:1">Main Loop (while some man is free), for each currently free man <span class="math inline">m</span>:</p>
+<ul>
+<li>Let <span class="math inline">w</span> be the highest-ranked woman on <span class="math inline">m</span>’s list he has not yet proposed to.</li>
+<li><span class="math inline">m</span> proposes to <span class="math inline">w</span> and advances his pointer.
+<ul>
+<li>If <span class="math inline">w</span> is free, she accepts;</li>
+<li>If <span class="math inline">w</span> is engaged to man <span class="math inline">m&#39;</span>, compare <span class="math inline">w</span>’s preferences for <span class="math inline">m</span> vs. <span class="math inline">m&#39;</span>.
+<ul>
+<li>If she prefers <span class="math inline">m</span>: She breaks off with <span class="math inline">m&#39;</span> and becomes engaged to <span class="math inline">m</span>; <span class="math inline">m&#39;</span> becomes free again.</li>
+<li>Otherwise, she rejects <span class="math inline">m</span>, and <span class="math inline">m</span> remains free to try his next choice.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p data-sourcepos="643:1-643:1">Important properties:</p>
+<ol type="1">
+<li><span class="math inline">O(n^2)</span>, in the worst case each man proposes to every woman once.</li>
+<li>Stable, no man-woman pair who both prefer each other to their current partners in result.</li>
+<li>Proposer optimal, every man receives his best achievable partner among all stable matchings.</li>
+</ol>
+<!-- Proof of proposers' optimality:
+
+Lemma: If at some step, a woman $w$ rejects a man $m$, then in every stable matching $m$ can never be paired with $w$.
+
+It can be proved via contradiction, let the result pair of $w$ be $m^\star$, assume there exists a stable matching $M$ where $m, w$ is the pair.
+
+1. $m^{\star}\succ_w m$
+2. $w \succ_{m^\star}M(m^\star)$ (the proposal order)
+
+Then $m^\star, w$ is the blocking pair.
+
+Proposers' optimality can be proved via contradiction as well, let the result pair of $m$ be $w^\star$, assume there exists a stable matching $M$ where $m, w$ is the pair.
+
+1. If $m$ is never rejected by $m$, then the $w$ is $w^\star$.
+2. If rejected, $m, w$ cannot exist in any stable matching (lemma). -->
+<h4 id="other-matching-problems" data-sourcepos="665:1-665:1">Other matching problems</h4>
+<div class="table-wrap"><table data-sourcepos="667:1-673:1">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Solution</th>
+<th>Time Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maxium cardinality</td>
+<td>Edmonds’ Blossom</td>
+<td><span class="math inline">O(V^3)</span></td>
+</tr>
+<tr>
+<td>Maxium cardinality (bipartite)</td>
+<td>Hopcroft-Karp (Dinic)</td>
+<td><span class="math inline">O(\sqrt{V}\,E)</span></td>
+</tr>
+<tr>
+<td>Maximum weight (bipartite)</td>
+<td>MCMF</td>
+<td><span class="math inline">O(VE\log V)</span></td>
+</tr>
+<tr>
+<td>Maximum weight (complete bipartite)</td>
+<td>Hungarian</td>
+<td><span class="math inline">O(V^3)</span></td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="674:1-674:1">To use MCMF to solve maximum weight matching (bipartite <span class="math inline">G = (L \cup R, E )</span>), constructing graph like:</p>
+<div class="table-wrap"><table data-sourcepos="677:1-682:1">
+<thead>
+<tr>
+<th>Edge</th>
+<th>Capacity</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">S \rightarrow l, \quad l \in L</span></td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td><span class="math inline">l \rightarrow r, \quad (l, r) \in E</span></td>
+<td>1</td>
+<td><span class="math inline">C-w(l, r)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">l \rightarrow T, \quad l \in L</span></td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td><span class="math inline">r \rightarrow T, \quad r \in R</span></td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="selected-problems" data-sourcepos="683:1-683:1">Selected Problems</h3>
+<p data-sourcepos="685:1-685:1">Walk is a sequence of vertices.</p>
+<p data-sourcepos="687:1-687:1">Path is a walk without duplicate vertices.</p>
+<p data-sourcepos="689:1-689:1">Number of walks between <span class="math inline">i, j</span> with length k for undirected grath in the Matrix <span class="math inline">G</span> representation is <span class="math inline">G_{i, j}^{(k)}</span>.</p>
+<p data-sourcepos="691:1-691:1">A directed graph is strongly connected if all the pairs <span class="math inline">u, v</span> are connected.</p>
+<p data-sourcepos="693:1-693:1">DAG is a directed graph without any directed cycles.</p>
+<p data-sourcepos="695:1-695:1">An euler walk is a walk that traverses every edge in a graph exactly once.</p>
+<p data-sourcepos="697:1-697:1">An euler tour is a euler walk starts and ends at the same vertex.</p>
+<p data-sourcepos="699:1-699:1">A connected graph has an euler tour if and only if every vertex has even degree.</p>
+<p data-sourcepos="701:1-701:1">A hamiltonian cycle in a graph G is a cycle that visits every node in G exactly once. There is always hailtonian path in tournament graph.</p>
+<p data-sourcepos="703:1-703:1">For a weighted graph, to find the hamiltonian cycle with minimum sum of weights is called <em>the travelling salesperson problem</em>.</p>
+<p data-sourcepos="705:1-705:1">Euclidean TSP in fixed dimension <span class="math inline">d</span> with <span class="math inline">1+\epsilon</span> times of optimal is P: <a href="https://graphics.stanford.edu/courses/cs468-06-winter/Papers/arora-tsp.pdf">A Polynomial-Time Approximation Scheme (PTAS) for Euclidean TSP</a>.</p>
+<h3 id="tournament-graph" data-sourcepos="707:1-707:1">Tournament Graph</h3>
+<p data-sourcepos="709:1-709:1">Tournament graph is completed graph that for every pair of <span class="math inline">u,v</span>, exactly one of the directed edge <span class="math inline">u \to v</span> or <span class="math inline">v \to u</span> exists.</p>
+<p data-sourcepos="711:1-711:1">Every tournament graph contains a hamiltonian path.</p>
+<p data-sourcepos="713:1-713:1">Base: trivial case.</p>
+<p data-sourcepos="715:1-715:1">Induction:</p>
+<p>For <span class="math inline">T_{n+1}</span>, delete any node <span class="math inline">v</span>; then there is hamiltonian path <span class="math inline">u_1 \to u_2 \to \cdots u_n</span> for <span class="math inline">T_{n+1} - v</span>. Then, either:</p>
+<ol type="1">
+<li><span class="math inline">v</span> beats all <span class="math inline">u</span></li>
+<li>all <span class="math inline">u</span> beats <span class="math inline">v</span></li>
+<li><span class="math inline">\exists i, \, u_i \to v \land v \to u_{i+1}</span></li>
+</ol>
+<p data-sourcepos="723:1-723:1">Hamiltonian path can be contructed for all those 3.</p>
+<h3 id="planar-graph" data-sourcepos="725:1-725:1">Planar Graph</h3>
+<p data-sourcepos="727:1-727:1">In graph theory, a planar graph is a graph that can be embedded in the plane, i.e., it can be drawn on the plane in such a way that its edges intersect only at their endpoints.</p>
+<!-- #### Recursive definition of planar graphs
+
+TODO -->
+<p>Euler’s formula:</p>
+<p data-sourcepos="735:1-735:1">If a connected graph has a planar embedding, then:</p>
+<p data-sourcepos="738:1-738:1"><span class="math display">
+v - e + f = 2
+</span></p>
+<!-- #### Boundings of planar graphs
+
+TODO
+
+#### Coloring planar graphs
+
+TODO
+
+#### Polyhedra
+
+TODO -->
+<h3 id="minimum-panning-tree" data-sourcepos="753:1-753:1">Minimum Panning Tree</h3>
+<p data-sourcepos="755:1-755:1">A connected and acylic graph is a tree. A leaf is degree one node in a tree.</p>
+<p data-sourcepos="757:1-757:1">A MST is a spanning tree with the smallest sum of edge weights.</p>
+<p data-sourcepos="759:1-759:1">Algorithm:</p>
+<ol type="1" data-sourcepos="761:1-762:1">
+<li>Start with empty set <span class="math inline">E</span>.</li>
+<li>Repeatedly add the minimum-weight edge that doesn’t form a cycle with <span class="math inline">E</span>.</li>
+</ol>
+<h4 id="lemma-of-cut" data-sourcepos="764:1-764:1">Lemma of cut</h4>
+<p data-sourcepos="766:1-766:1">A <em>cut</em> partitions the vertex set <span class="math inline">V</span> to 2 non-empty sets. Among the edges crossing the cut, any minimum-weight edge is called a <em>light edge</em>.</p>
+<p data-sourcepos="768:1-768:1">Cut property: for every cut, any of its light edges belongs to some MST.</p>
+<ul>
+<li>Let <span class="math inline">T</span> be an MST and an edge <span class="math inline">e \notin T</span>.</li>
+<li>Add <span class="math inline">e</span> to <span class="math inline">T</span> forms a unique cycle <span class="math inline">C</span>.</li>
+<li>If edge <span class="math inline">e&#39; \in C \land w(e&#39;) \geq w(e)</span>, then <span class="math inline">T&#39; = T - e&#39; + e</span> is also a MST.</li>
+</ul>
+<h4 id="proof-1">Proof</h4>
+<p data-sourcepos="776:1-776:1">Invariant: at the n-th step of loop, there exists a MST <span class="math inline">T^\star_{n}</span> that the edge set <span class="math inline">E \subseteq T^\star_n</span>.</p>
+<p>Base: <span class="math inline">\emptyset \subseteq T^\star</span>.</p>
+<p data-sourcepos="780:1-780:1">Induction:</p>
+<ol type="1">
+<li>If new edge <span class="math inline">e \in T^\star_{n+1}</span>, done.</li>
+<li>If new edge <span class="math inline">e \notin T^\star_{n+1}</span>, add <span class="math inline">e</span> to <span class="math inline">T^{\star}_{n+1}</span> to form a cycle. As e must be the light edge, so there exists some edge <span class="math inline">e&#39;</span> in the cycle to make <span class="math inline">T^\star_{n+1} - e&#39; + e</span> a MST.</li>
+</ol>
+<h3 id="communication-networks" data-sourcepos="785:1-785:1">Communication Networks</h3>
+<p data-sourcepos="787:1-787:1">For circuit switching, the goal of the network is to get data from input to output considering switch size / switch count / diameter and congestion.</p>
+<p data-sourcepos="789:1-789:1">The congestion is defined as the the largest number of paths passing a single switch for any routing pattern in the most optimized way.</p>
+<h4 id="butterfly-network" data-sourcepos="791:1-791:1">Butterfly network</h4>
+<p data-sourcepos="793:1-793:1">The butterfly network is a communication network with <span class="math inline">N = 2^m</span> input/output.</p>
+<p>It has <span class="math inline">2^m</span> rows and <span class="math inline">m+1</span> columns.</p>
+<p data-sourcepos="797:1-797:1">Connection pattern:</p>
+<p data-sourcepos="800:1-800:1"><span class="math display">
+b_1\cdots b_{j+1}\cdots b_m, \, j \to
+    \begin{cases}
+        b_1\cdots b_{j+1}\cdots b_m, \, j + 1 \\
+        b_1\cdots \overline{b_{j+1}}\cdots b_m, \, j + 1 
+    \end{cases}
+</span></p>
+<p data-sourcepos="807:1-807:1">Routing method from <span class="math inline">(x_i)_2</span> to <span class="math inline">(y_i)_2</span>:</p>
+<p data-sourcepos="810:1-810:1"><span class="math display">
+(x_i, \,0) \to (y_1x_2\cdots x_m, \, 1)\to(y_1y_2\cdots x_m, \, 2) \to(y_i, m)
+</span></p>
+<h4 id="comparison" data-sourcepos="813:1-813:1">Comparison</h4>
+<div class="table-wrap"><table data-sourcepos="815:1-825:1">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 19%" />
+<col style="width: 11%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr>
+<th>Network for N nodes</th>
+<th>Diameter</th>
+<th>Switch Size</th>
+<th>Switches</th>
+<th>Congestion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Complete binary tree</td>
+<td><span class="math inline">2\log N + 2</span></td>
+<td><span class="math inline">3\times3</span></td>
+<td><span class="math inline">2N - 1</span></td>
+<td><span class="math inline">N</span></td>
+</tr>
+<tr>
+<td>2-D array</td>
+<td><span class="math inline">2N</span></td>
+<td><span class="math inline">2\times2</span></td>
+<td><span class="math inline">N^2</span></td>
+<td><span class="math inline">2</span></td>
+</tr>
+<tr>
+<td>Butterfly</td>
+<td><span class="math inline">\log N + 2</span></td>
+<td><span class="math inline">2\times2</span></td>
+<td><span class="math inline">N(\log N + 1)</span></td>
+<td><span class="math inline">\sqrt{N}</span> or <span class="math inline">\tfrac{\sqrt{N}}{2}</span></td>
+</tr>
+<tr>
+<td>Benes</td>
+<td><span class="math inline">2\log N + 1</span></td>
+<td><span class="math inline">2\times2</span></td>
+<td><span class="math inline">2N\log N</span></td>
+<td><span class="math inline">1</span></td>
+</tr>
+</tbody>
+</table></div>
+<!-- #### Congestion of benes
+
+TODO -->
+<h2 id="relation" data-sourcepos="826:1-826:1">Relation</h2>
+<h3 id="definition" data-sourcepos="828:1-828:1">Definition</h3>
+<p>Given sets <span class="math inline">A</span> and <span class="math inline">B</span>, a binary relation <span class="math inline">R: A \to B</span> from <span class="math inline">A</span> to <span class="math inline">B</span> is a subset of <span class="math inline">A \times B</span>. The sets <span class="math inline">A</span> and <span class="math inline">B</span> are called the <em>domain</em> and <em>codomain</em> of <span class="math inline">R</span>.</p>
+<p><span class="math inline">aRb</span> or <span class="math inline">a \sim_R b</span> can be used for <span class="math inline">(a,b) \in R</span>.</p>
+<div class="table-wrap"><table data-sourcepos="834:1-841:1">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 38%" />
+<col style="width: 22%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Symbol</th>
+<th>Cardinality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total</td>
+<td>every element of <span class="math inline">A</span> maps to some element of <span class="math inline">B</span></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Surjective</td>
+<td>every element of <span class="math inline">B</span> is mapped to some element of <span class="math inline">A</span></td>
+<td><span class="math inline">A \twoheadrightarrow B</span></td>
+<td><span class="math inline">\mid A \mid \ge \mid B \mid</span></td>
+</tr>
+<tr>
+<td>Injective</td>
+<td>every element of <span class="math inline">B</span> is mapped to <em>at most once</em></td>
+<td><span class="math inline">A \hookrightarrow B</span></td>
+<td><span class="math inline">\mid A \mid \le \mid B \mid</span></td>
+</tr>
+<tr>
+<td>Function</td>
+<td>every element of <span class="math inline">A</span> maps to <em>at most one</em> element of <span class="math inline">B</span></td>
+<td><span class="math inline">A \to B</span></td>
+<td>-</td>
+</tr>
+<tr>
+<td>Bijective</td>
+<td>total, surjective, injective, and function</td>
+<td><span class="math inline">A \xrightarrow{\sim} B</span></td>
+<td><span class="math inline">\mid A \mid = \mid B \mid</span></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="relations-on-a-single-set" data-sourcepos="842:1-842:1">Relations on a Single Set</h3>
+<div class="table-wrap"><table data-sourcepos="844:1-852:1">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 39%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr>
+<th>Property</th>
+<th>Formal Condition</th>
+<th>Graph Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reflexive</td>
+<td><span class="math inline">\forall x \in A,\; xRx</span></td>
+<td>Every node has a self-loop</td>
+</tr>
+<tr>
+<td>Irreflexive</td>
+<td><span class="math inline">\neg \exists x \in A,\; xRx</span></td>
+<td>No self-loops</td>
+</tr>
+<tr>
+<td>Symmetric</td>
+<td><span class="math inline">\forall x,y \in A,\; xRy \implies yRx</span></td>
+<td>Each <span class="math inline">x \to y</span> is paired with <span class="math inline">y \to x</span></td>
+</tr>
+<tr>
+<td>Antisymmetric</td>
+<td><span class="math inline">\forall x,y \in A,\; (xRy \land yRx) \implies x = y</span></td>
+<td>No two distinct nodes are connected both ways</td>
+</tr>
+<tr>
+<td>Asymmetric</td>
+<td><span class="math inline">\neg \exists x,y \in A:\; xRy \land yRx</span></td>
+<td>No self-loops or two-way edges</td>
+</tr>
+<tr>
+<td>Transitive</td>
+<td><span class="math inline">\forall x,y,z \in A,\; (xRy \land yRz) \implies xRz</span></td>
+<td><span class="math inline">v_i \leadsto v_k</span> implies <span class="math inline">v_i \to v_k</span></td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="853:1-853:1">Note: Irreflexive + Antisymmetric = Asymmetric.</p>
+<h3 id="equivalence-relations" data-sourcepos="855:1-855:1">Equivalence Relations</h3>
+<p data-sourcepos="857:1-857:1">A relation is an <em>equivalence relation</em> if it is reflexive, symmetric, and transitive.</p>
+<p data-sourcepos="859:1-859:1">Given an equivalence relation <span class="math inline">R : A \to A</span>, the <em>equivalence class</em> of an element <span class="math inline">x \in A</span> is the set of all elements of <span class="math inline">A</span> related to <span class="math inline">x</span> by <span class="math inline">R</span>. It is denoted as <span class="math inline">[x]</span>:</p>
+<p><span class="math display">
+[x] = \{ y \mid xRy \}.
+</span></p>
+<p data-sourcepos="865:1-865:1">A <em>partition</em> of a finite set <span class="math inline">A</span> is a collection of disjoint, nonempty subsets <span class="math inline">A_1, A_2, \ldots, A_n</span> whose union is all of <span class="math inline">A</span>. The subsets are usually called the <em>blocks</em> of the partition.</p>
+<p data-sourcepos="867:1-867:1">The equivalence classes of an equivalence relation on a set A form a partition of A.</p>
+<h3 id="partial-orders" data-sourcepos="869:1-869:1">Partial Orders</h3>
+<p>A relation <span class="math inline">R</span> on a set <span class="math inline">A</span> is a <em>weak partial order</em>, noted as <span class="math inline">\preceq</span>, if it is transitive, antisymmetric, and reflexive, e.g. <span class="math inline">\leq</span>.</p>
+<p>Relation <span class="math inline">R</span> is a <em>strong partial order</em> if it is transitive, asymmetric, noted as <span class="math inline">\prec</span>, e.g. <span class="math inline">&lt;</span>.</p>
+<p data-sourcepos="875:1-875:1">A <em>total order</em> is a partial order in which every pair of distinct elements is comparable.</p>
+<h3 id="dag" data-sourcepos="877:1-877:1">DAG</h3>
+<p data-sourcepos="879:1-879:1">Given a partial order <span class="math inline">\preceq</span> on a set <span class="math inline">A</span>, the pair <span class="math inline">(A, \preceq)</span> is called a <em>partially ordered set</em> or <em>poset</em>.</p>
+<p data-sourcepos="881:1-881:1">Poset is acyclic.</p>
+<p>Given a digraph <span class="math inline">G = (V, E)</span>, the <em>transitive closure</em> of <span class="math inline">G</span> is the digraph <span class="math inline">G^+ = (V, E^+)</span> where</p>
+<p data-sourcepos="886:1-886:1"><span class="math display">
+E^+ = \{ u \to v \mid \text{there is a directed path from } u \text{ to } v \text{ in } G \}.
+</span></p>
+<h3 id="topological-sort" data-sourcepos="889:1-889:1">Topological Sort</h3>
+<p data-sourcepos="891:1-891:1">A <em>topological sort</em> of a poset <span class="math inline">(A, \preceq)</span> is a total order <span class="math inline">(A, \preceq_T)</span> such that:</p>
+<p data-sourcepos="894:1-894:1"><span class="math display">
+(A, \preceq) \implies (A, \preceq_T)
+</span></p>
+<p data-sourcepos="897:1-897:1">Every finite poset has a topological sort.</p>
+<h3 id="parallel-task-scheduling" data-sourcepos="899:1-899:1">Parallel Task Scheduling</h3>
+<p data-sourcepos="901:1-901:1">A chain in a poset is a total order sequence of elements.</p>
+<p data-sourcepos="903:1-903:1">For any finite poset <span class="math inline">(A, \preceq)</span> whose longest chain has length <span class="math inline">t</span>, it is possible to partition <span class="math inline">A</span> to <span class="math inline">t</span> subsets such that <span class="math inline">\forall a \in A_i, i=1,2,\dots,t</span> that <span class="math inline">b \preceq a</span> are in set <span class="math inline">\cup_1^{i-1}A_i</span>.</p>
+<p data-sourcepos="905:1-905:1">Constructive proof is to partition via rank: <span class="math inline">r(a)\;=\;\bigl(\text{length of the longest chain ending at }a\bigr)</span>:</p>
+<p data-sourcepos="908:1-908:1"><span class="math display">
+A_i \;:=\; \{\,a\in A : r(a)=i\},   \qquad i=1,2,\dots,t
+</span></p>
+<p data-sourcepos="911:1-911:1">An <em>antichain</em> in a oset is a set of elements such that any two elements in the set are incomparable.</p>
+<p><span class="math inline">A_i</span> are antichains.</p>
+<p>For all <span class="math inline">t &gt; 0</span>, every poset with <span class="math inline">n</span> elements has either a chain of size greater than <span class="math inline">t</span> or an antichain of size at least <span class="math inline">n / t</span>.</p>
+<h2 id="sum-and-asymptotics" data-sourcepos="917:1-917:1">Sum and Asymptotics</h2>
+<h3 id="basics" data-sourcepos="919:1-919:1">Basics</h3>
+<p data-sourcepos="921:1-921:1">By <em>closed form</em>, that is an expression that does not make use of summation or product symbols.</p>
+<h3 id="harmonic-number" data-sourcepos="923:1-923:1">Harmonic Number</h3>
+<p data-sourcepos="926:1-926:1"><span class="math display">
+H_n = \sum_{i = 1}^{n} \frac 1 i
+</span></p>
+<p data-sourcepos="929:1-929:1">By <a href="#integral-comparison">integral comparison</a>, <span class="math inline">H_n \sim \ln n</span>.</p>
+<h3 id="n" data-sourcepos="931:1-931:1"><span class="math inline">n!</span></h3>
+<h4 id="trivial" data-sourcepos="933:1-933:1">Trivial</h4>
+<p data-sourcepos="935:1-935:1">By <a href="#integral-comparison">integral comparison</a>:</p>
+<p><span class="math display">
+\begin{aligned}
+&amp; \ln(n!) = \sum\ln(i), \; \int_1^n \ln(d) \mathrm d x = n\ln(n) - n + 1 \\ 
+\implies &amp; n\ln(n) - n + 1 \leq \sum\ln(i)\leq n\ln(n) - n + 1 + \ln(n) \\
+\implies &amp; \frac{n^n}{\mathrm e ^ {n - 1}} \leq n! \leq \frac{n^{n+1}}{\mathrm e^{n-1}}
+\end{aligned}
+</span></p>
+<h4 id="stirlings-formula">Stirling’s formula</h4>
+<p>For all <span class="math inline">n \ge 1</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+    &amp; n! \;=\; \sqrt{2\pi n}\,\Bigl(\frac{n}{e}\Bigr)^{\!n}\,e^{\epsilon(n)}, \;\;
+    \frac{1}{12n + 1} \;\le\; \epsilon(n) \;\le\; \frac{1}{12n} \\
+    \iff &amp; \ln(n!) = n \ln n - n + \frac 1 2 \ln(2\pi n) + \frac 1 {12n} + \mathcal{O}(\frac 1 {n^3})
+\end{aligned}
+</span></p>
+<h3 id="asymptotic-notation" data-sourcepos="957:1-957:1">Asymptotic Notation</h3>
+<div class="table-wrap"><table data-sourcepos="959:1-967:1">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 30%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Notation</th>
+<th style="text-align: left;">Read as</th>
+<th style="text-align: left;">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="math inline">O</span></td>
+<td style="text-align: left;">big oh</td>
+<td style="text-align: left;"><span class="math inline">f(x)=O(g(x))\iff\exists\,C&gt;0,x_0\text{ s.t. }\forall x&gt;x_0,\lvert f(x)\rvert\le C\lvert g(x)\rvert</span>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">o</span></td>
+<td style="text-align: left;">little oh</td>
+<td style="text-align: left;"><span class="math inline">f(x)=o(g(x))\iff\displaystyle\lim_{x\to\infty}\frac{f(x)}{g(x)}=0</span>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\Omega</span></td>
+<td style="text-align: left;">big omega</td>
+<td style="text-align: left;"><span class="math inline">f(x)=\Omega(g(x))\iff\exists\,C&gt;0,x_0\text{ s.t. }\forall x&gt;x_0,\lvert f(x)\rvert\ge C\lvert g(x)\rvert</span>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\omega</span></td>
+<td style="text-align: left;">little omega</td>
+<td style="text-align: left;"><span class="math inline">f(x)=\omega(g(x))\iff\displaystyle\lim_{x\to\infty}\frac{f(x)}{g(x)}=\infty</span>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\Theta</span></td>
+<td style="text-align: left;">theta</td>
+<td style="text-align: left;"><span class="math inline">f(x)=\Theta(g(x))\iff f(x)=O(g(x)) \land f(x)=\Omega(g(x))</span>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="math inline">\sim</span></td>
+<td style="text-align: left;">asymptotically equivalent</td>
+<td style="text-align: left;"><span class="math inline">f(x)\sim g(x)\iff\displaystyle\lim_{x\to\infty}\frac{f(x)}{g(x)}=1</span>.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="recurrence" data-sourcepos="968:1-968:1">Recurrence</h2>
+<h3 id="linear-recurrence" data-sourcepos="970:1-970:1">Linear Recurrence</h3>
+<p data-sourcepos="972:1-972:1">Homogeneous linear recurrences are like:</p>
+<p data-sourcepos="975:1-975:1"><span class="math display">
+f(n) = \sum_{i=1}^{d}a_if(n - i)
+</span></p>
+<p data-sourcepos="978:1-978:1">The characteristic equation:</p>
+<p data-sourcepos="981:1-981:1"><span class="math display">
+P(r)=r^d-a_1 r^{d-1}-a_2 r^{d-2}-\cdots-a_{d-1} r-a_d=0
+</span></p>
+<p>If <span class="math inline">r_1,\dots,r_s</span> are the distinct roots with multiplicities <span class="math inline">m_1,\dots,m_s</span> (<span class="math inline">\sum m_j=d</span>), then</p>
+<p data-sourcepos="987:1-987:1"><span class="math display">
+f(n)=\sum_{j=1}^s \Big(\sum_{k=0}^{m_j-1} c_{j,k}\, n^{k}\Big)\, r_j^{\,n}
+</span></p>
+<p>with constants <span class="math inline">c_{j,k}</span> determined by the <span class="math inline">d</span> initial values.</p>
+<h4 id="numerical-solution" data-sourcepos="992:1-992:1">Numerical solution</h4>
+<p data-sourcepos="994:1-994:1">To find the roots numerically:</p>
+<p><span class="math display">
+s_n=\begin{bmatrix}
+f(n)\\ f(n-1)\\ \vdots\\ f(n-d+1)
+\end{bmatrix},\quad
+s_{d-1}=\begin{bmatrix}f(d-1)\\ \vdots\\ f(0)\end{bmatrix}, \quad
+C=\begin{bmatrix}
+a_1 &amp; a_2 &amp; \cdots &amp; a_{d-1} &amp; a_d\\
+1 &amp; 0 &amp; \cdots &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; \cdots &amp; 0 &amp; 0\\
+\vdots &amp; &amp; \ddots &amp; &amp; \vdots\\
+0 &amp; 0 &amp; \cdots &amp; 1 &amp; 0
+\end{bmatrix}
+</span></p>
+<p data-sourcepos="1011:1-1011:1">Then:</p>
+<p><span class="math display">
+\begin{aligned}
+    &amp; s_{n+1}=C\,s_n \\
+    \implies &amp; s_n=C^{\,n-(d-1)}\,s_{d-1}\ \ (n\ge d-1) \\
+    \implies &amp; f(n)=e_1^\top\,C^{\,n-(d-1)}\,s_{d-1},\qquad e_1=[1,0,\dots,0]^\top
+\end{aligned}
+</span></p>
+<!-- If C is diagonalizable: -->
+<p data-sourcepos="1023:1-1023:1">If there is no repeated root:</p>
+<p data-sourcepos="1026:1-1026:1"><span class="math display">
+C=V\Lambda V^{-1},\quad \Lambda=\mathrm{diag}(r_1,\dots,r_d)
+</span></p>
+<p data-sourcepos="1029:1-1029:1">Then</p>
+<p data-sourcepos="1032:1-1032:1"><span class="math display">
+C^m=V\Lambda^m V^{-1}=V\,\mathrm{diag}(r_1^m,\dots,r_d^m)\,V^{-1}
+</span></p>
+<p>With state <span class="math inline">s_n=[f(n),f(n-1),\dots,f(n-d+1)]^\top</span> and <span class="math inline">s_{d-1}</span> fixed by the initial values,</p>
+<p data-sourcepos="1038:1-1038:1"><span class="math display">
+s_n=C^{\,n-(d-1)} s_{d-1}=V\Lambda^{\,n-(d-1)} V^{-1}s_{d-1}
+</span></p>
+<p data-sourcepos="1041:1-1041:1">Taking the first coordinate gives</p>
+<p data-sourcepos="1044:1-1044:1"><span class="math display">
+f(n)=\sum_{j=1}^{d} A_j\, r_j^{\,n}, \quad A = V^{-1}s_{d-1}, \quad V = \begin{bmatrix}
+    r_1^{d-1}&amp;\cdots&amp;r_d^{d-1}\\
+    r_1^{d-2}&amp;\cdots&amp;r_d^{d-2}\\
+    \vdots&amp;&amp;\vdots\\
+    1&amp;\cdots&amp;1
+    \end{bmatrix}
+</span></p>
+<!-- If $C$ is not diagonalizable, use **Jordan form**:
+
+$
+C=VJV^{-1},\quad J=\mathrm{diag}(J_1,\dots,J_t),\quad
+J_\ell = r_\ell I + N_\ell,
+$
+
+where each $J_\ell$ is a Jordan block for eigenvalue $r_\ell$ of size $m_\ell$, and $N_\ell$ is nilpotent with $N_\ell^{m_\ell}=0$.
+
+Key identity (binomial for matrices):
+
+$
+J_\ell^{\,m}=(r_\ell I + N_\ell)^{m}
+=\sum_{j=0}^{m_\ell-1}\binom{m}{j}\, r_\ell^{\,m-j} N_\ell^{\,j}.
+$
+
+Therefore
+
+$
+C^{\,m}=VJ^{\,m}V^{-1}
+\quad\Rightarrow\quad
+f(n)=\sum_{\ell}\sum_{j=0}^{m_\ell-1} P_{\ell,j}(n)\, r_\ell^{\,n-j},
+$
+
+and, after reindexing constants, the standard closed form is
+
+$
+\boxed{\,f(n)=\sum_{\ell}\Big(\,B_{\ell,0}+B_{\ell,1}n+\cdots+B_{\ell,m_\ell-1}n^{m_\ell-1}\Big)\, r_\ell^{\,n}\, }.
+$ -->
+<h4 id="non-homogeneous" data-sourcepos="1082:1-1082:1">Non-homogeneous</h4>
+<p>For <span class="math inline">f(n) = \sum_{i=1}^{d}a_if(n - i) + g(n)</span>:</p>
+<p data-sourcepos="1086:1-1086:1">Like homogeneous, solve:</p>
+<p data-sourcepos="1089:1-1089:1"><span class="math display">
+P(r)=r^d-a_1r^{d-1}-a_2r^{d-2}-\cdots-a_d=0.
+</span></p>
+<p>If <span class="math inline">r_1,\dots,r_s</span> are the distinct roots with multiplicities <span class="math inline">m_1,\dots,m_s</span> (<span class="math inline">\sum m_j=d</span>), then</p>
+<p data-sourcepos="1095:1-1095:1"><span class="math display">
+f_h(n)=\sum_{j=1}^s \Big(\sum_{k=0}^{m_j-1} c_{j,k}\, n^{k}\Big)\, r_j^{\,n}
+</span></p>
+<p>Guess <span class="math inline">g(n)</span>:</p>
+<div class="table-wrap"><table data-sourcepos="1100:1-1107:1">
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr>
+<th><span class="math inline">g(n)</span></th>
+<th>Try <span class="math inline">f_p(n)</span> of the form</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>constant <span class="math inline">C</span></td>
+<td><span class="math inline">A</span></td>
+</tr>
+<tr>
+<td>polynomial <span class="math inline">n^p</span></td>
+<td>degree-<span class="math inline">p</span> polynomial in <span class="math inline">n</span></td>
+</tr>
+<tr>
+<td><span class="math inline">r^n</span></td>
+<td><span class="math inline">A\,r^n</span></td>
+</tr>
+<tr>
+<td><span class="math inline">n^p r^n</span></td>
+<td>(degree-<span class="math inline">p</span> polynomial)<span class="math inline">\cdot r^n</span></td>
+</tr>
+<tr>
+<td><span class="math inline">A\cos(\omega n)+B\sin(\omega n)</span></td>
+<td><span class="math inline">A&#39;\cos(\omega n)+B&#39;\sin(\omega n)</span></td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="1108:1-1108:1">Resonance rule: if the base (e.g., <span class="math inline">r</span> or <span class="math inline">e^{\pm i\omega}</span>) is a root of <span class="math inline">P</span> with multiplicity <span class="math inline">m</span>, multiply the whole trial form by <span class="math inline">n^{m}</span>.</p>
+<p data-sourcepos="1111:1-1111:1"><span class="math display">
+f(n)=f_h(n)+f_p(n)
+</span></p>
+<!-- Yes—there are fully **systematic** (no guesswork) ways. Here are three that are standard and mechanical.
+
+# 1) Generating functions (a.k.a. $z$-transform)
+
+Works for any constant-coefficient recurrence and most “nice” $g(n)$ (poly/exponential/trig).
+
+**Setup**
+For
+
+$
+f(n)=\sum_{i=1}^{d} a_i f(n-i)+g(n),\quad n\ge d,
+$
+
+let the ordinary generating function be $F(x)=\sum_{n\ge0} f(n)x^n$ and $G(x)=\sum_{n\ge0} g(n)x^n$.
+A standard manipulation gives
+
+$
+\bigl(1-a_1x-a_2x^2-\cdots-a_d x^d\bigr)\,F(x)=\underbrace{R(x)}_{\text{depends only on initials}}+G(x),
+$
+
+so
+
+$
+F(x)=\frac{R(x)+G(x)}{1-a_1x-\cdots-a_d x^d}.
+$
+
+**Algorithm**
+
+1. Compute $R(x)$ from the $d$ initial values (purely mechanical).
+2. Do partial fractions of $F(x)$.
+3. Read off $f(n)$ from known expansions (each term corresponds to $r_j^n$, $n r_j^n$, etc.).
+
+This yields $f(n)=f_h(n)+f_p(n)$ directly—no trial.
+
+---
+
+# 2) Annihilator (operator) method — fully algorithmic
+
+Let $P(E)=E^d-a_1E^{d-1}-\cdots-a_d$ and find a **minimal** polynomial $Q$ with $Q(E)g=0$ (the “annihilator” of $g$):
+
+* If $g(n)=n^p$, then $Q(E)=(E-1)^{p+1}$.
+* If $g(n)=n^p r^n$, then $Q(E)=(E-r)^{p+1}$.
+* If $g(n)=A\cos \omega n+B\sin \omega n$, then $Q(E)=E^2-2(\cos\omega)E+1$.
+
+Apply $Q(E)$ to both sides:
+
+$
+Q(E)P(E)f=0.
+$
+
+Now you have a **homogeneous** equation with characteristic polynomial $P(r)Q(r)$. Its general solution is
+
+$
+f(n)=\sum \Big(\sum_{k=0}^{m_j'-1} c_{j,k}\,n^k\Big)\,r_j^{\,n},
+$
+
+where $r_j$ run over all roots of $P\cdot Q$ with multiplicities $m_j'$.
+Finally, determine the constants by imposing the **original** equation $P(E)f=g$ at enough consecutive $n$ (or by using the $d$ initials plus another $\deg Q$ conditions). This is linear algebra—no guessing the form.
+
+---
+
+# 3) Green's function / Convolution (closed form; fully formal)
+
+Define the **impulse response** $h$ by $P(E)h=\delta$ (Kronecker delta). Then
+
+$
+f(n)=f_h(n)+\sum_{k=0}^{n} h(k)\,g(n-k)\quad(\text{discrete convolution}).
+$
+
+* If $P$ has **distinct** roots $r_1,\dots,r_d$,
+
+  $
+  h(n)=\sum_{j=1}^{d}\frac{r_j^{\,n-1}}{P'(r_j)}\;\;\;(n\ge1),\quad h(0)=0,
+  $
+
+  and the formula above gives $f_p$ exactly.
+* For repeated roots, $h(n)$ includes the expected $n^k r^n$ factors (obtained via residues/partial fractions).
+
+This is entirely formula-driven; the only work is evaluating residues or partial fractions.
+
+---
+
+## Mini example via generating functions
+
+Solve $a_n=3a_{n-1}-2a_{n-2}+n2^n,\ a_0=0,\ a_1=1$.
+
+Let $A(x)=\sum a_n x^n$, $G(x)=\sum n2^n x^n = \frac{2x}{(1-2x)^2}$.
+One computes
+
+$
+(1-3x+2x^2)A(x)=R(x)+\frac{2x}{(1-2x)^2},
+$
+
+where $R(x)=a_0+(a_1-3a_0)x=\;x$.
+Thus
+
+$
+A(x)=\frac{x}{1-3x+2x^2}+\frac{2x}{(1-3x+2x^2)(1-2x)^2}.
+$
+
+Partial fractions give
+
+$
+a_n=-1+2^n(n^2-n+1),
+$
+
+with no trial steps.
+
+---
+
+### When to use which
+
+* Want a guaranteed path and you're comfortable with algebra? **Generating functions**.
+* Want a basis that tells you *exactly* what shapes can appear? **Annihilator method**.
+* Want a closed convolution expression (and insight from systems theory)? **Green's function**.
+
+If you share a specific recurrence and $g(n)$, I'll run one of these methods end-to-end. -->
+<h3 id="arka-bazzi-method" data-sourcepos="1232:1-1232:1">Arka-Bazzi Method</h3>
+<p data-sourcepos="1234:1-1234:1">Ref:</p>
+<ol type="1" data-sourcepos="1236:1-1237:1">
+<li><a href="https://courses.csail.mit.edu/6.046/fall02/handouts/akrabazzi.pdf">Notes on Better Master Theorems for Divide-and-Conquer Recurrences</a></li>
+<li><a href="https://rohitvaish.in/data/Papers/%5BAkra,Bazzi%5D%20On%20the%20Solution%20of%20Linear%20Recurrence%20Equations.pdf">On the Solution of Linear Recurrence Equations</a></li>
+</ol>
+<p data-sourcepos="1239:1-1239:1">Suppose that the function <span class="math inline">T : \mathbb{R} \to \mathbb{R}</span> satisfies the recurrence</p>
+<p><span class="math display">
+T(x) \;=\;
+\begin{cases}
+    \text{nonnegative and bounded}, &amp; 0 \le x \le x_0\\[6pt]
+    \displaystyle \sum_{i=1}^k a_i\,T\bigl(b_i x + h_i(x)\bigr) \;+\; g(x), &amp; x &gt; x_0
+\end{cases}
+</span></p>
+<p data-sourcepos="1249:1-1249:1">where</p>
+<ol type="1">
+<li><span class="math inline">a_1,\dots,a_k</span> are positive constants.</li>
+<li><span class="math inline">b_1,\dots,b_k</span> are constants in the interval <span class="math inline">[0,1]</span>.</li>
+<li><span class="math inline">x_0</span> is large enough so that <span class="math inline">T</span> is well-defined.</li>
+<li><span class="math inline">g(x)</span> is nonnegative and <span class="math inline">\lvert g&#39;(x)\rvert</span> is bounded by a polynomial.</li>
+<li><span class="math inline">\lvert h_i(x)\rvert = O\bigl(x/\log^2 x\bigr)</span> for each <span class="math inline">i</span>.</li>
+</ol>
+<p data-sourcepos="1257:1-1257:1">Then</p>
+<p data-sourcepos="1260:1-1260:1"><span class="math display">
+T(x) \;=\; \Theta\!\Bigl(x^p\Bigl(1 + \int_{1}^{x} \frac{g(u)}{u^{p+1}} \,du\Bigr)\Bigr), \; \text{s.t. } \sum_{i=1}^k a_i\,b_i^p \;=\; 1
+</span></p>
+<div class="table-wrap"><table data-sourcepos="1263:1-1273:1">
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 35%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr>
+<th><span class="math inline">g(x)</span></th>
+<th><span class="math inline">\displaystyle \int_{1}^{x}\frac{g(u)}{u^{p+1}}du</span></th>
+<th><span class="math inline">T(x)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">O\big(x^{p-\varepsilon}\big)</span>, <span class="math inline">\varepsilon&gt;0</span></td>
+<td><span class="math inline">O(1)</span></td>
+<td><span class="math inline">\Theta\big(x^{p}\big)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\Theta\Big(\dfrac{x^{p}}{\log^{1+\delta}x}\Big)</span>, <span class="math inline">\delta&gt;0</span></td>
+<td><span class="math inline">\Theta(1)</span></td>
+<td><span class="math inline">\Theta\big(x^{p}\big)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\Theta\Big(\dfrac{x^{p}}{\log x}\Big)</span></td>
+<td><span class="math inline">\Theta(\log\log x)</span></td>
+<td><span class="math inline">\Theta\big(x^{p}\log\log x\big)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\Theta\Big(\dfrac{x^{p}}{\log^{c}x}\Big)</span>, <span class="math inline">0&lt;c&lt;1</span></td>
+<td><span class="math inline">\Theta\big(\log^{1-c}x\big)</span></td>
+<td><span class="math inline">\Theta\big(x^{p}\log^{1-c}x\big)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\Theta\big(x^{p}\big)</span></td>
+<td><span class="math inline">\Theta(\log x)</span></td>
+<td><span class="math inline">\Theta\big(x^{p}\log x\big)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\Theta\big(x^{p}(\log x)^k\big)</span>, <span class="math inline">k&gt;-1</span></td>
+<td><span class="math inline">\Theta\big((\log x)^{k+1}\big)</span></td>
+<td><span class="math inline">\Theta\big(x^{p}(\log x)^{k+1}\big)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\Theta\big(x^{p}(\log x)^k(\log\log x)^m\big)</span> , <span class="math inline">k&gt;-1</span></td>
+<td><span class="math inline">\Theta\big((\log x)^{k+1}(\log\log x)^m\big)</span></td>
+<td><span class="math inline">\Theta\big(x^{p}(\log x)^{k+1}(\log\log x)^m\big)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\Theta\big(x^{p+\varepsilon}\big)</span>, <span class="math inline">\varepsilon&gt;0</span></td>
+<td><span class="math inline">\Theta\big(x^{\varepsilon}\big)</span></td>
+<td><span class="math inline">\Theta\big(x^{p+\varepsilon}\big)</span></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="master-theorem" data-sourcepos="1274:1-1274:1">Master Theorem</h3>
+<p data-sourcepos="1276:1-1276:1">T is a recurrence of the form:</p>
+<p data-sourcepos="1279:1-1279:1"><span class="math display">
+T(n) = a \, T\left(\frac{n}{b}\right) + f(n)
+</span></p>
+<!-- | Case                        | Condition for $f(n)$ | $T(n)$                                 |
+| --------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------- | 
+| polynomially smaller    | $O\!\left(n^{\log_b a-\epsilon}\right)$ for some $\epsilon>0$      | $\Theta\!\left(n^{\log_b a}\right)$               |
+| same order with polylog | $\Theta\!\left(n^{\log_b a}\,\log^{k} n\right)$ for some $k\ge 0$  | $\Theta\!\left(n^{\log_b a}\,\log^{k+1} n\right)$ |
+| polynomially larger     | $\Omega\!\left(n^{\log_b a+\epsilon}\right)$ for some $\epsilon>0$; $af(n/b)\le cf(n)$ for some $c<1$ and large $n$ | $\Theta\!\left(f(n)\right)$                       | -->
+<div class="table-wrap"><table data-sourcepos="1283:1-1293:1">
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 47%" />
+</colgroup>
+<thead>
+<tr>
+<th>Condition for <span class="math inline">f(n)</span></th>
+<th><span class="math inline">T(n)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">O\!\left(n^{\log_b a-\epsilon}\right)</span> for some <span class="math inline">\epsilon&gt;0</span></td>
+<td><span class="math inline">\Theta\!\left(n^{\log_b a}\right)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\Theta\!\left(n^{\log_b a}\,\log^{k} n\right)</span> for some <span class="math inline">k\ge 0</span></td>
+<td><span class="math inline">\Theta\!\left(n^{\log_b a}\,\log^{k+1} n\right)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\Omega\!\left(n^{\log_b a+\epsilon}\right)</span> for some <span class="math inline">\epsilon&gt;0</span>; <span class="math inline">af(n/b)\le cf(n)</span> for some <span class="math inline">c&lt;1</span> and large <span class="math inline">n</span></td>
+<td><span class="math inline">\Theta\!\left(f(n)\right)</span></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="counting" data-sourcepos="1294:1-1294:1">Counting</h2>
+<h3 id="rules" data-sourcepos="1296:1-1296:1">Rules</h3>
+<h4 id="productive" data-sourcepos="1298:1-1298:1">Productive</h4>
+<p data-sourcepos="1301:1-1301:1"><span class="math display">
+|\mathop{\Large\times}_{i}P_i| = \prod_i|P_i|
+</span></p>
+<h4 id="sum" data-sourcepos="1304:1-1304:1">Sum</h4>
+<p data-sourcepos="1307:1-1307:1"><span class="math display">
+\left| \bigcup_{i=1}^n P_i \right|
+= \sum_{\emptyset \neq I \subseteq \{1,\dots,n\}} (-1)^{|I|+1}
+\left| \bigcap_{i \in I} P_i \right|
+</span></p>
+<p data-sourcepos="1312:1-1312:1">The above inclusion-exclusion identity holds for any finitely additive measure <span class="math inline">\mu</span> (e.g., counting measure, probability).</p>
+<p data-sourcepos="1314:1-1314:1">Application (euler function):</p>
+<p>Let <span class="math inline">S_i</span> be the set of integers <span class="math inline">\le n</span> that are divisible by the prime <span class="math inline">p_i</span>, <span class="math inline">|S_i|=\frac{n}{p_i},|S_i\cap S_j|=\frac{n}{p_i p_j}</span>:</p>
+<p data-sourcepos="1320:1-1320:1"><span class="math display">
+|S|=n\Bigl(\sum_i\frac1{p_i}-\sum_{i&lt;j}\frac1{p_i p_j}+\cdots+(-1)^{m-1}\frac1{p_1\cdots p_m}\Bigr)
+</span></p>
+<p><span class="math display">
+\phi(n)=n-|S|
+= n\Bigl(1-\sum_i\frac1{p_i}+\sum_{i&lt;j}\frac1{p_i p_j}-\cdots+(-1)^m\frac1{p_1\cdots p_m}\Bigr)=n\prod_{i=1}^m\Bigl(1-\frac1{p_i}\Bigr)
+</span></p>
+<h4 id="division" data-sourcepos="1328:1-1328:1">Division</h4>
+<p>If <span class="math inline">f : A \to B</span> is k-to-1, then:</p>
+<p data-sourcepos="1333:1-1333:1"><span class="math display">
+|A| = k \cdot |B|
+</span></p>
+<p data-sourcepos="1336:1-1336:1">E.g.:</p>
+<ol type="1" data-sourcepos="1338:1-1339:1">
+<li>n-objects permutation on a ring is <span class="math inline">\frac{n!}n = (n-1)!</span></li>
+<li>k-objects subsets over n-objects is <span class="math inline">\frac{n!}{k!(n-k)!}</span></li>
+<li>the <span class="math inline">(k_1, k_2, \dots, k_m)</span>-split of A is a sequence <span class="math inline">(A_1, A_2, \dots, A_m)</span> where <span class="math inline">A_i\cap A_j = \emptyset \land |A_i| = k_i \land \sum k_i = n</span>; the number of splits is <span class="math inline">{n!} / {\prod k_i !}</span></li>
+</ol>
+<h4 id="bookkeeper" data-sourcepos="1342:1-1342:1">Bookkeeper</h4>
+<p>Let <span class="math inline">l_1, l_2, \dots, l_m</span> be distinct symbols. Suppose we form sequences (or arrangements) of length <span class="math inline">k_1 + k_2 + \cdots + k_m</span>, where:</p>
+<ul>
+<li>symbol <span class="math inline">l_1</span> occurs exactly <span class="math inline">k_1</span> times,</li>
+<li>symbol <span class="math inline">l_2</span> occurs exactly <span class="math inline">k_2</span> times,</li>
+<li><span class="math inline">\dots</span></li>
+<li>symbol <span class="math inline">l_m</span> occurs exactly <span class="math inline">k_m</span> times.</li>
+</ul>
+<p data-sourcepos="1351:1-1351:1">Then the number of distinct sequences is given by:</p>
+<p data-sourcepos="1354:1-1354:1"><span class="math display">
+\binom{n}{k_1, k_2, \dots, k_m} = \frac{n!}{k_1! k_2! \cdots k_m!}
+</span></p>
+<h4 id="binomial-and-multinomial" data-sourcepos="1357:1-1357:1">Binomial and multinomial</h4>
+<p data-sourcepos="1359:1-1359:1">Binomial:</p>
+<p>For all <span class="math inline">n \in \mathbb{N}</span> and <span class="math inline">a, b \in \mathbb{R}</span>:</p>
+<p data-sourcepos="1364:1-1364:1"><span class="math display">
+(a+b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{\,n-k} b^{\,k}
+</span></p>
+<p data-sourcepos="1367:1-1367:1">Multinomial:</p>
+<p data-sourcepos="1370:1-1370:1"><span class="math display">
+(x_1 + x_2 + \cdots + x_m)^n
+= \sum_{k_1+k_2+\cdots+k_m=n}
+\binom{n}{k_1, k_2, \dots, k_m}
+x_1^{k_1} x_2^{k_2} \cdots x_m^{k_m}
+</span></p>
+<h4 id="pascals-identity">Pascal’s identity</h4>
+<p data-sourcepos="1379:1-1379:1"><span class="math display">
+\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}
+</span></p>
+<!-- #### Dirichlet's box principle
+
+For finite sets $X, Y$ and $Y$ and total function $f : X \to Y$:
+
+$
+|X| > k \cdot |Y| \implies \exists y \in Y, |f^{-1}(y)| \geq k+1
+$ -->
+<h4 id="pigeonhole-principle" data-sourcepos="1390:1-1390:1">Pigeonhole principle</h4>
+<p data-sourcepos="1393:1-1393:1"><span class="math display">
+\text{If } n \text{ pigeons are placed into } m \text{ holes, then some hole contains at least } \left\lceil \frac{n}{m} \right\rceil \text{ pigeons.}
+</span></p>
+<h3 id="generating-functions" data-sourcepos="1396:1-1396:1">Generating Functions</h3>
+<p data-sourcepos="1398:1-1398:1">Generating functions transform sequences to functions:</p>
+<p data-sourcepos="1401:1-1401:1"><span class="math display">
+\langle g_0, g_1, g_2, g_3, \dots \rangle 
+\;\longleftrightarrow\; g_0 + g_1x + g_2x^2 + g_3x^3 + \cdots
+</span></p>
+<p data-sourcepos="1405:1-1405:1">Some examples:</p>
+<p><span class="math display">
+\begin{aligned}
+    \langle 1, 1, 1, 1, \dots \rangle 
+    \;&amp; \longleftrightarrow\; 1 + x + x^2 + x^3 + x^4 + \cdots 
+    = \frac{1}{1-x} \\
+    \langle 1, -1, 1, -1, \dots \rangle 
+    \;&amp; \longleftrightarrow\; 1 - x + x^2 - x^3 + x^4 - \cdots 
+    = \frac{1}{1+ x} \\ 
+    \langle 1, 0, 1, 0, 1, 0, \dots \rangle 
+    \;&amp; \longleftrightarrow\; 1 + x^2 + x^4 + x^6 + x^8 + \cdots 
+    = \frac{1}{1-x^2} \\
+    \langle 1, a, a^2, a^3, \dots \rangle 
+    \;&amp; \longleftrightarrow\; 1 + ax + a^2x^2 + a^3x^3 + \cdots 
+    = \frac{1}{1-ax} \\
+\end{aligned}
+</span></p>
+<h4 id="rules-1">Rules</h4>
+<p data-sourcepos="1426:1-1426:1">Scaling:</p>
+<p data-sourcepos="1429:1-1429:1"><span class="math display">
+\langle s_0, s_1, s_2, \dots \rangle = F(x) \iff \langle cs_0, cs_1, cs_2, \dots \rangle = cF(x)
+</span></p>
+<p data-sourcepos="1432:1-1432:1">Addition:</p>
+<p><span class="math display">
+\begin{aligned}
+    &amp; \langle s_0, s_1, s_2, \dots \rangle = F(x), \; \langle t_0, t_1, t_2, \dots \rangle = G(x) \\
+    \iff &amp; \langle s_0 + t_0, s_1 + t_1, s_2 + t_2, \dots \rangle = F(x) + G(x)
+\end{aligned}
+</span></p>
+<p data-sourcepos="1441:1-1441:1">Right shifting by k leading zeros:</p>
+<p><span class="math display">
+\begin{aligned}
+    &amp; \langle f_0, f_1, f_2, \dots \rangle \longleftrightarrow F(x) \\
+    \iff &amp; \langle \underbrace{0,0,\ldots,0}_{k \ \text{zeroes}}, f_0, f_1, f_2, \ldots \rangle 
+\;\longleftrightarrow\; x^k \cdot F(x)
+\end{aligned}
+</span></p>
+<p data-sourcepos="1452:1-1452:1">Differentiation:</p>
+<p><span class="math display">
+\begin{aligned}
+    \langle f_n \rangle \;\longleftrightarrow\; F(x)
+    \iff
+    \langle (n+1)f_{n+1} \rangle \;\longleftrightarrow\; F&#39;(x)
+\end{aligned}
+</span></p>
+<p data-sourcepos="1462:1-1462:1">Product:</p>
+<p><span class="math display">
+\begin{aligned}
+        &amp; \langle a_n \rangle \, \longleftrightarrow\, A(x), \, \langle b_n \rangle \, \longleftrightarrow\, B(x) \\
+        \iff &amp; \langle c_n \rangle \longleftrightarrow A(x)\cdot B(x), \, c_n = \sum_{k = 0}^{n}a_k\cdot b_{n-k}
+    \end{aligned} \\
+</span></p>
+<p data-sourcepos="1471:1-1471:1">Summation is a special case of product, <span class="math inline">b_n = 1, B(x) = \frac 1 {1 - x}</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+    &amp; \langle a_n \rangle \, \longleftrightarrow\, A(x) \\
+    \iff &amp; \langle s_n \rangle \longleftrightarrow \frac {A(x)}{1-x}, \; s_n = \sum_{k = 0}^{n} a_k
+\end{aligned}
+</span></p>
+<h4 id="from-generating-function-to-sequence" data-sourcepos="1480:1-1480:1">From generating function to sequence</h4>
+<p>The sequence <span class="math inline">f_n</span> for function <span class="math inline">F(x)</span> is:</p>
+<p data-sourcepos="1485:1-1485:1"><span class="math display">
+f_n = \frac{F^{(n)}(0)}{n!}
+</span></p>
+<p data-sourcepos="1488:1-1488:1">which is from <a href="#taylors-series">Taylor’s series</a>.</p>
+<p data-sourcepos="1490:1-1490:1">Partial functions:</p>
+<p><span class="math display">
+[x^n]\frac{c x^a}{(1-\alpha x)^b} = \frac{c \,(n-a+b-1)!}{(n-a)! \,(b-1)!} \, \alpha^{\,n-a}
+</span></p>
+<p data-sourcepos="1496:1-1496:1">General linear recurrence: <span class="math display">
+\begin{aligned}
+    &amp; f_n = a_1 f_{n-1} + a_2 f_{n-2} + \cdots + a_d f_{n-d} + g_n, \; n \geq d \\
+    \implies &amp; F(x) = \frac{h(x) + G(x)}{1 - a_1 x - a_2 x^2 - \cdots - a_d x^d}, \; G(x) = \sum_{n=d}^\infty g_n x^n , \; h(x) = \sum_{i=0}^{d-1} h_i x^i
+\end{aligned}
+</span></p>
+<h3 id="sets" data-sourcepos="1504:1-1504:1">Sets</h3>
+<p>Set <span class="math inline">A</span> is infinite <span class="math inline">\iff</span> <span class="math inline">A</span> bij <span class="math inline">A \cup \{B\}</span>.</p>
+<p>Set <span class="math inline">C</span> is countable <span class="math inline">\iff</span> it is finite <span class="math inline">\lor</span> <span class="math inline">\mathbb N \xrightarrow{\sim} C</span></p>
+<p>Sets <span class="math inline">A, B</span> are countable, then <span class="math inline">A \cup B, A \times B</span> are countable <span class="math inline">\implies</span> <span class="math inline">\mathbb Q</span> is countable.</p>
+<h3 id="cantors-theorem">Cantor’s Theorem</h3>
+<p>For any set <span class="math inline">A</span>, the power set <span class="math inline">\mathcal P(A)</span> has strictly larger cardinality than <span class="math inline">A</span> itself.</p>
+<p><span class="math inline">\mathcal P(A)</span> is <em>at least</em> as big as <span class="math inline">A</span>: there is injection <span class="math inline">f: A \;\longrightarrow\; \mathcal P(A)</span> by <span class="math inline">f(a) = \{a\}</span>.</p>
+<p><span class="math inline">\mathcal P(A)</span> is <em>strictly</em> bigger:</p>
+<p data-sourcepos="1520:1-1520:1">Assume there <em>was</em> a surjection: <span class="math inline">g: A \;\longrightarrow\; \mathcal P(A)</span>:</p>
+<p>Define: <span class="math inline">A_g \;=\;\{\,a\in A : a\notin g(a)\}\;\subseteq A</span>.</p>
+<!-- In words, $A_g$ collects exactly those elements of $A$ that are *not* members of their own image under $g$. -->
+<p data-sourcepos="1526:1-1526:1">By surjectivity, pick <span class="math inline">a_0\in A</span> with <span class="math inline">g(a_0)=A_g</span>.</p>
+<p><strong><span class="math inline">a_0\in A_g</span>.</strong> By the definition of <span class="math inline">A_g</span>, <span class="math inline">a_0\notin g(a_0)</span>. But <span class="math inline">g(a_0)=A_g</span>, so this says <span class="math inline">a_0\notin A_g</span>. Contradiction.</p>
+<p><strong><span class="math inline">a_0\notin A_g</span>.</strong> By the definition of <span class="math inline">A_g</span>, <span class="math inline">a_0\in g(a_0)</span>. With <span class="math inline">g(a_0)=A_g</span>, this gives <span class="math inline">a_0\in A_g</span>. Contradiction.</p>
+<p data-sourcepos="1534:1-1534:1">Both branches contradict, so no such surjective <span class="math inline">g</span> exists. Therefore <span class="math inline">|\mathcal P(A)|&gt;|A|</span>.</p>
+<h2 id="probability" data-sourcepos="1536:1-1536:1">Probability</h2>
+<h3 id="basic-1">Basic</h3>
+<p data-sourcepos="1540:1-1540:1">A <em>countable sample space</em> <span class="math inline">S</span> is a nonempty <a href="#sets">countable set</a>.</p>
+<ul>
+<li>An element <span class="math inline">w \in S</span> is called an <em>outcome</em>,</li>
+<li>A subset <span class="math inline">E \subseteq S</span> is called an <em>event</em>.</li>
+</ul>
+<p data-sourcepos="1545:1-1545:1">A <em>probability function</em> on a sample space <span class="math inline">S</span> is a total function <span class="math inline">\Pr : S \to \mathbb{R}</span></p>
+<p data-sourcepos="1547:1-1547:1">such that:</p>
+<ul>
+<li><span class="math inline">\Pr[w] \geq 0 \quad \forall w \in S</span></li>
+<li><span class="math inline">\sum_{w \in S} \Pr[w] = 1</span></li>
+</ul>
+<p data-sourcepos="1552:1-1552:1">A <em>sample space</em> with a <em>probability function</em>, <span class="math inline">(S, \Pr)</span>, is a <em>probability space</em>.</p>
+<p data-sourcepos="1554:1-1554:1">Rules:</p>
+<p><span class="math display">
+\begin{aligned}
+    &amp; \Pr [E] = \sum_{w \in E} \Pr[w] \\
+    &amp; \Pr[\bar A] = 1 - \Pr[A] \\
+\end{aligned}
+</span></p>
+<p>Ref: <a href="#sum"><span class="math inline">\cup_i S_i</span></a>.</p>
+<h3 id="conditional" data-sourcepos="1565:1-1565:1">Conditional</h3>
+<p><span class="math display">
+\begin{aligned}
+    \Pr[A \mid B] &amp; = \frac{\Pr[A \cap B]}{\Pr[B]} \\
+    \Pr\!\left[\bigcap_{i=1}^n E_i\right] &amp; = \prod_{k=1}^n \Pr\!\left[E_k \;\middle|\; \bigcap_{i=1}^{k-1} E_i\right]
+\end{aligned}
+</span></p>
+<p>Bayes’ rule:</p>
+<p><span class="math display">
+    \Pr[B \mid A] = \frac{\Pr[A \mid B] \cdot \Pr[B]}{\Pr[A]}
+</span></p>
+<p>If <span class="math inline">E_1, E_2, \dots, E_n</span> are <em>disjoint events</em> whose union is the entire sample space <span class="math inline">S</span> (that is, they form a <em>partition</em> of <span class="math inline">S</span>), then for any event <span class="math inline">A</span>:</p>
+<p><span class="math display">
+\Pr[A] = \sum_{i=1}^n \Pr[A \mid E_i] \cdot \Pr[E_i]
+</span></p>
+<h3 id="independence" data-sourcepos="1586:1-1586:1">Independence</h3>
+<p>Events <span class="math inline">A</span> and <span class="math inline">B</span> are <em>independent</em> if either:</p>
+<ol type="1">
+<li><span class="math inline">\Pr[B] = 0</span>, or</li>
+<li><span class="math inline">\Pr[A \mid B] = \Pr[A]</span>.</li>
+</ol>
+<p data-sourcepos="1593:1-1593:1">Or:</p>
+<p>Events <span class="math inline">A</span> and <span class="math inline">B</span> are <em>independent</em> <span class="math inline">\iff</span> <span class="math inline">\Pr[A \cap B] = \Pr[A] \cdot \Pr[B]</span> .</p>
+<h4 id="mutual-independence" data-sourcepos="1597:1-1597:1">Mutual independence</h4>
+<p>A set of events <span class="math inline">E_1, E_2, \dots, E_n</span> is <em>mutually independent</em> if for every subset <span class="math inline">S \subseteq \{1,2,\dots,n\}</span>:</p>
+<p><span class="math display">
+\Pr\!\left[\bigcap_{j \in S} E_j \right] \;=\; \prod_{j \in S} \Pr[E_j]
+</span></p>
+<p data-sourcepos="1605:1-1605:1">Or, for every subset <span class="math inline">S \subseteq \{1,\dots,n\} \setminus \{i\}</span>:</p>
+<p><span class="math display">
+\Pr[E_i \mid \bigcap_{j \in S} E_j] = \Pr[E_i]
+</span></p>
+<h3 id="random-variables" data-sourcepos="1611:1-1611:1">Random Variables</h3>
+<p>A <em>random variable</em> <span class="math inline">R</span> on a <a href="#basic-1">probability space</a> <span class="math inline">(S, \Pr)</span> is a <em>total function</em> <span class="math inline">R : S \;\to\; \mathbb{R}</span>,</p>
+<p data-sourcepos="1615:1-1615:1">where:</p>
+<ul>
+<li><span class="math inline">S</span> = the <em>sample space</em> (the set of all possible outcomes),</li>
+<li><span class="math inline">\Pr</span> = the probability function on <span class="math inline">S</span>,</li>
+<li><span class="math inline">\mathbb{R}</span> = the <em>real number</em>.</li>
+</ul>
+<p>Thus, each outcome <span class="math inline">w \in S</span> is assigned a real number <span class="math inline">R(w)</span>.</p>
+<h4 id="independence-1">Independence</h4>
+<!-- * The **general form** you wrote is the correct definition:
+
+  $
+  \Pr[R_1\in A_1,\dots,R_n\in A_n]=\prod_{i=1}^n \Pr[R_i\in A_i]
+  \quad\text{for all measurable }A_i.
+  $
+
+  (Equivalently: the σ-algebras $\sigma(R_i)$ are independent.)
+
+* The **singleton version**
+
+  $
+  \Pr[R_1=x_1,\dots,R_n=x_n]=\prod_{i=1}^n \Pr[R_i=x_i]
+  $
+
+  is only sufficient in the **purely discrete** case (countable support).
+  For continuous or mixed variables it's not enough—e.g., if $R\sim\mathrm{Unif}(0,1)$ and $S=R$, then
+  $\Pr[R=x,S=y]=0=\Pr[R=x]\Pr[S=y]$ for all $x,y$, yet $R$ and $S$ are totally dependent.
+
+Useful equivalents:
+
+* $R_1,\dots,R_n$ independent ⇔
+  $F_{R_1,\dots,R_n}(x_1,\dots,x_n)=\prod_i F_{R_i}(x_i)$ for all $x_i$.
+* If densities exist: $f_{R_1,\dots,R_n}(x_1,\dots,x_n)=\prod_i f_{R_i}(x_i)$.
+
+So: keep the “for all measurable sets” version (or those equivalents); don't rely on the singleton formula unless everything is discrete. -->
+<p>If each <span class="math inline">R_i</span> is discrete with countable range <span class="math inline">S_i</span>, then the following are equivalent:</p>
+<ol type="1">
+<li><span class="math inline">R_1,\dots,R_n</span> are mutually independent.</li>
+<li>For all <span class="math inline">x_i\in S_i</span>,</li>
+</ol>
+<p><span class="math display">
+\Pr[R_1=x_1,\dots,R_n=x_n]=\prod_{i=1}^n \Pr[R_i=x_i]
+</span></p>
+<!-- 
+$(1\Rightarrow2)$ Take $A_i=\{x_i\}$.
+$(2\Rightarrow1)$ For any subsets $A_i\subseteq S_i$ (all countable),
+
+$
+\Pr[R_1\in A_1,\dots,R_n\in A_n]
+=\sum_{x_1\in A_1}\!\cdots\!\sum_{x_n\in A_n}\Pr[R_1=x_1,\dots,R_n=x_n]
+$
+
+$
+=\sum_{x_1\in A_1}\!\cdots\!\sum_{x_n\in A_n}\prod_i \Pr[R_i=x_i]
+=\prod_{i=1}^n\sum_{x_i\in A_i}\Pr[R_i=x_i]
+=\prod_{i=1}^n \Pr[R_i\in A_i],
+$
+
+using countable additivity (Tonelli) and distributivity. Hence independence. -->
+<h4 id="distribution-functions" data-sourcepos="1678:1-1678:1">Distribution functions</h4>
+<p>Let <span class="math inline">R</span> be a random variable with codomain <span class="math inline">V</span>. The <em>probability density function (pdf)</em> of <span class="math inline">R</span> is a function <span class="math inline">\text{PDF}_R : V \;\to\; [0,1]</span>:</p>
+<!-- Note: it is actually PMF, but it is not necessary to differienciate them without formal probability knowledge. -->
+<p><span class="math display">
+\text{PDF}_R(x) =
+\begin{cases}
+    \Pr[R = x], &amp; \text{if } x \in \operatorname{range}(R) \\
+    0, &amp; \text{if } x \notin \operatorname{range}(R)
+\end{cases}
+</span></p>
+<ul>
+<li>Non-negativity: <span class="math inline">\text{PDF}_R(x) \geq 0 \quad \forall x \in V</span> ,</li>
+<li>Normalization: <span class="math inline">\sum_{x \in \operatorname{range}(R)} \text{PDF}_R(x) = 1</span> .</li>
+</ul>
+<p data-sourcepos="1696:1-1696:1">The <em>cummulative distribution function (cdf)</em> is:</p>
+<p><span class="math display">
+\text{CDF}_R(x)=\Pr[R\le x] = \sum_{y\le x} \Pr[R = y]=\sum_{y\le x}\text{PDF}_R(y)
+</span></p>
+<h4 id="binomial-distribution" data-sourcepos="1702:1-1702:1">Binomial distribution</h4>
+<p>Think of <span class="math inline">n</span> repeated, identical trials with only two outcomes each (success/failure). Let <span class="math inline">X</span> be the number of successes in the <span class="math inline">n</span> trials. Then <span class="math inline">X\sim\mathrm{Binomial}(n,p)</span>.</p>
+<p><span class="math display">
+\Pr[X=k]=\binom{n}{k}p^{k}(1-p)^{n-k}, \quad k=0,1,\dots,n
+</span></p>
+<h5 id="aproximation" data-sourcepos="1711:1-1711:1">aproximation</h5>
+<p>For <span class="math inline">k=\alpha n</span> with <span class="math inline">0&lt;\alpha&lt;1</span>:</p>
+<p data-sourcepos="1716:1-1716:1"><span class="math display">
+\binom{n}{\alpha n}\ \lesssim \frac{2^{\,nH(\alpha)}}{\sqrt{2\pi\,\alpha(1-\alpha)\,n}}
+</span></p>
+<p data-sourcepos="1719:1-1719:1"><span class="math inline">H(\alpha)=\alpha\log_2\!\frac{1}{\alpha}+(1-\alpha)\log_2\!\frac{1}{1-\alpha}</span> is the <em>binary entropy</em> function.</p>
+<p data-sourcepos="1721:1-1721:1">So:</p>
+<p><span class="math display">
+\begin{aligned}
+    f_{n,p}(\alpha n)\ &amp; \lesssim
+    \frac{2^{\,n\big(\alpha\log_2\frac{p}{\alpha}+(1-\alpha)\log_2\frac{1-p}{1-\alpha}\big)}}
+    {\sqrt{2\pi\,\alpha(1-\alpha)\,n}}\ \\
+\end{aligned}
+</span></p>
+<h5 id="sampling" data-sourcepos="1731:1-1731:1">sampling</h5>
+<p>Let <span class="math inline">X_1,\dots,X_n \stackrel{\text{i.i.d.}}{\sim}\mathrm{Bernoulli}(p)</span> with unknown <span class="math inline">p\in(0,1)</span>. Define <span class="math inline">\hat p=\frac1n\sum_{i=1}^n X_i</span>.</p>
+<p>Given accuracy <span class="math inline">\varepsilon\in(0,\tfrac12)</span> and confidence level <span class="math inline">1-\alpha</span>, find the smallest <span class="math inline">n</span> such that</p>
+<p data-sourcepos="1739:1-1739:1"><span class="math display">
+\sup_{p\in(0,1)} \Pr\big[|\hat p-p|&gt;\varepsilon\big]\ \le\ \alpha 
+</span></p>
+<p data-sourcepos="1742:1-1742:1">Non-asymptotic (guaranteed) choice via Hoeffding:</p>
+<p>For any <span class="math inline">p\in(0,1)</span>,</p>
+<p><span class="math display">
+\Pr\!\big[|\hat p-p|&gt;\varepsilon\big]\ \le\ 2e^{-2n\varepsilon^2}
+</span></p>
+<p data-sourcepos="1750:1-1750:1">So it suffices to make <span class="math inline">2e^{-2n\varepsilon^2}\le \alpha</span>, i.e.</p>
+<p data-sourcepos="1753:1-1753:1"><span class="math display">
+\boxed{\quad n \;\ge\; \frac{1}{2\varepsilon^2}\,\ln\frac{2}{\alpha}\quad}
+</span></p>
+<p data-sourcepos="1756:1-1756:1">A concrete integer choice is <span class="math inline">n=\left\lceil \frac{1}{2\varepsilon^2}\ln\frac{2}{\alpha}\right\rceil</span>. This bound is uniform in <span class="math inline">p</span> and needs no approximations.</p>
+<p data-sourcepos="1759:1-1759:1">Chebyshev (very conservative):</p>
+<p><span class="math inline">\operatorname{Var}[\hat p]=\tfrac{p(1-p)}{n}\le \tfrac{1}{4n}</span>, hence</p>
+<p><span class="math display">
+  \Pr\!\big[|\hat p-p|&gt;\varepsilon\big]\ \le\ \frac{1}{4n\varepsilon^2}
+  \quad\Rightarrow\quad
+  n \;\ge\; \frac{1}{4\alpha\varepsilon^2}
+  </span></p>
+<p data-sourcepos="1769:1-1769:1">Normal/CLT heuristic (often near-minimal):</p>
+<p data-sourcepos="1771:1-1771:1">Worst variance occurs near <span class="math inline">p=\tfrac12</span>, so</p>
+<p><span class="math display">
+\Pr\!\big[|\hat p-p|&gt;\varepsilon\big]\ \approx\ 2\Phi\!\big[-2\varepsilon\sqrt n\big]\ \le\ \alpha
+\;\Rightarrow\;
+\boxed{\; n \approx \frac{z_{1-\alpha/2}^2}{4\varepsilon^2}\;}
+</span></p>
+<p>where <span class="math inline">z_{1-\alpha/2}</span> is the standard normal quantile.</p>
+<h3 id="expectation" data-sourcepos="1781:1-1781:1">Expectation</h3>
+<p><span class="math display">
+\mathbb{E}_X[R] = \sum_{w\in\mathcal{S}} R[w]\,\Pr[w]
+</span></p>
+<h4 id="geometric-distribution" data-sourcepos="1787:1-1787:1">Geometric distribution</h4>
+<p>Let <span class="math inline">X \sim \mathrm{Bernoulli}(p)</span> trials, <span class="math inline">T\in\{1,2,\dots\}</span> = index of the first success:</p>
+<p><span class="math display">
+\Pr[T=t]=p(1-p)^{t-1},\quad
+\mathbb{E}[T]=\frac1p
+</span></p>
+<p data-sourcepos="1796:1-1796:1">Memorylessness (discrete, unique to geometric):</p>
+<p><span class="math display">
+\Pr[T&gt;m+n\mid T&gt;m]=\Pr[T&gt;n],\qquad
+\Pr[T&gt;n]=(1-p)^n
+</span></p>
+<p data-sourcepos="1803:1-1803:1">For a non-repairable item that, in each discrete time step, fails independently with probability <span class="math inline">p</span>, the time-to-failure (in steps) is <span class="math inline">T\sim\mathrm{Geom}(p)</span> as above. The <em>Mean Time To Failure (MTTF)</em> equals the expectation:</p>
+<p data-sourcepos="1806:1-1806:1"><span class="math display">
+\mathrm{MTTF}=\mathbb{E}[T]=\frac1p \text{ steps}
+</span></p>
+<h4 id="rules-2">Rules</h4>
+<p data-sourcepos="1811:1-1811:1">Conditional:</p>
+<p>Let <span class="math inline">R</span> be a discrete random variable, and let <span class="math inline">A</span> be an event with <span class="math inline">\Pr[A] &gt; 0</span>. The <em>conditional expectation</em> of <span class="math inline">R</span> given <span class="math inline">A</span> is:</p>
+<p><span class="math display">
+\mathbb{E}[R \mid A] \;=\; \sum_{r \in \operatorname{range}(R)} r \cdot \Pr[R = r \mid A]
+</span></p>
+<!-- Suppose $R$ is the outcome of rolling a fair die ($\{1,2,3,4,5,6\}$).
+Let $A = \{R \text{ is even}\}$.
+
+* First compute conditional probabilities:
+
+  $
+  \Pr[R = r \mid A] = 
+  \begin{cases}
+  \tfrac{1}{3}, & r \in \{2,4,6\}, \\[6pt]
+  0, & \text{otherwise}.
+  \end{cases}
+  $
+
+* Then the conditional expectation:
+
+  $
+  \mathbb{E}[R \mid A] = 2 \cdot \tfrac{1}{3} + 4 \cdot \tfrac{1}{3} + 6 \cdot \tfrac{1}{3} 
+  = \frac{12}{3} = 4.
+  $
+
+So if we know the die roll is even, the expected value is 4. -->
+<p data-sourcepos="1842:1-1842:1">Total:</p>
+<p>Let <span class="math inline">R</span> be a random variable on a sample space <span class="math inline">S</span>, and let <span class="math inline">\{A_1, A_2, \dots\}</span> be a <em>partition</em> of <span class="math inline">S</span>:</p>
+<p><span class="math display">
+\mathbb{E}[R] \;=\; \sum_i \mathbb{E}[R \mid A_i] \, \Pr[A_i]
+</span></p>
+<!-- Suppose we toss a fair coin:
+
+* If heads, roll a fair 6-sided die.
+* If tails, roll a fair 4-sided die.
+  Let $R$ = outcome of the roll.
+
+Partition:
+
+* $A_1$ = coin shows heads, $\Pr[A_1] = \tfrac{1}{2}$.
+* $A_2$ = coin shows tails, $\Pr[A_2] = \tfrac{1}{2}$.
+
+Conditional expectations:
+
+* $\mathbb{E}[R \mid A_1] = \frac{1+2+3+4+5+6}{6} = 3.5$.
+* $\mathbb{E}[R \mid A_2] = \frac{1+2+3+4}{4} = 2.5$.
+
+By the law of total expectation:
+
+$
+\mathbb{E}[R] = 3.5 \cdot \tfrac{1}{2} + 2.5 \cdot \tfrac{1}{2} = 3.
+$ -->
+<p data-sourcepos="1872:1-1872:1">Linearity:</p>
+<p data-sourcepos="1874:1-1874:1">For any random variables <span class="math inline">R_1, R_2, \dots, R_k</span> and constants <span class="math inline">a_1, a_2, \dots, a_k \in \mathbb{R}</span>:</p>
+<p><span class="math display">
+\mathbb{E}\!\left[\sum_{i=1}^k a_i R_i \right]
+\;=\; \sum_{i=1}^k a_i \, \mathbb{E}[R_i]
+</span></p>
+<p data-sourcepos="1881:1-1881:1">Linearity works even if the <span class="math inline">R_i</span>’s are dependent.</p>
+<p data-sourcepos="1883:1-1883:1">Products:</p>
+<p>If <span class="math inline">R_1,\dots,R_k</span> are <em>mutually independent</em> (and have finite means), then</p>
+<p><span class="math display">
+\mathbb{E}\!\left[\prod_{i=1}^k R_i\right]=\prod_{i=1}^k \mathbb{E}[R_i]
+</span></p>
+<p data-sourcepos="1891:1-1891:1">Function:</p>
+<p data-sourcepos="1893:1-1893:1">For linear function <span class="math inline">f</span>:</p>
+<p><span class="math display">
+\mathbb{E}[f(T)] = f(\mathbb{E}[T])
+</span></p>
+<h3 id="deviation" data-sourcepos="1899:1-1899:1">Deviation</h3>
+<p data-sourcepos="1901:1-1901:1">The <em>variance</em> of a random variable <span class="math inline">R</span>:</p>
+<p><span class="math display">
+\operatorname{Var}[R] \;=\; \mathbb{E}\!\big[(R - \mathbb{E}[R])^2\big] = \mathbb{E}[R^2] - (\mathbb{E}[R])^2
+</span></p>
+<p data-sourcepos="1907:1-1907:1">The <em>standdard deviation</em> <span class="math inline">\sigma_R</span> of a random variable <span class="math inline">R</span>:</p>
+<p data-sourcepos="1910:1-1910:1"><span class="math display">
+\sigma_R = \sqrt{\mathrm{Var}[R]} 
+</span></p>
+<h4 id="rules-3">Rules</h4>
+<p data-sourcepos="1915:1-1915:1">Linear Transformations:</p>
+<p><span class="math display">
+\mathrm{Var}[aR + b] = a^2 \, \mathrm{Var}[R]
+</span></p>
+<p>If <span class="math inline">R_1</span> and <span class="math inline">R_2</span> are independent random variables:</p>
+<p><span class="math display">
+\mathrm{Var}[R_1 + R_2] \;=\; \mathrm{Var}[R_1] + \mathrm{Var}[R_2]
+</span></p>
+<p>If <span class="math inline">R_1, R_2, \dots, R_n</span> are <em>pairwise independent</em> random variables:</p>
+<p><span class="math display">
+\mathrm{Var}[\sum_i R_i] 
+= \sum_i \mathrm{Var}[R_i]
+</span></p>
+<!-- The above is a special case of, for any random variables:
+
+$
+\mathrm{Var}\!\left[\sum_{i=1}^n R_i\right] 
+= \sum_{i=1}^n \mathrm{Var}[R_i] + 2 \sum_{1 \leq i < j \leq n} \mathrm{Cov}(R_i, R_j).
+$ -->
+<h4 id="markovs-theorem">Markov’s theorem</h4>
+<p>If <span class="math inline">R</span> is a <em>nonnegative random variable</em>, then for all <span class="math inline">x &gt; 0</span>:</p>
+<p><span class="math display">
+\Pr[R \geq x] \;\leq\; \frac{\mathbb{E}[R]}{x}
+</span></p>
+<!-- Proof:
+
+$
+\begin{aligned}
+    & \mathbb{E}[R] 
+    = \mathbb{E}[R \cdot \mathbf{1}_{\{R < x\}}] + \mathbb{E}[R \cdot \mathbf{1}_{\{R \geq x\}}] \\
+    & R \geq x\ \implies \mathbb{E}[R \cdot \mathbf{1}_{\{R \geq x\}}] \geq x \cdot \Pr[R \geq x] \\
+    \implies & \mathbb{E}[R] \;\geq\; x \cdot \Pr[R \geq x] \\
+    \implies & \Pr[R \geq x] \;\leq\; \frac{\mathbb{E}[R]}{x}
+\end{aligned}
+$ -->
+<!-- Or: 
+
+If $R$ is a nonnegative random variable, then for all $c \geq 1$:
+
+$
+\Pr\!\big[R \;\geq\; c \cdot \mathbb{E}[R]\big] \;\leq\; \frac{1}{c}.
+$
+
+Or:
+
+Let $R$ be a random variable for which $R \geq l$ for some $l \in \mathbb{R}$.
+Then for all $x \geq l$:
+
+$
+\Pr[R \geq x] \;\leq\; \frac{\mathbb{E}[R] - l}{x - l}.
+$
+
+Or:
+
+If $R\le u$ a.s. for some $u\in\mathbb{R}$, then for all $x<u$:
+
+$
+\Pr[R\le x]\;\le\; \frac{u-\mathbb{E}[R]}{\,u-x\,}.
+$ -->
+<h4 id="chebyshevs-theorem">Chebyshev’s theorem</h4>
+<p data-sourcepos="1934:1-1934:1">For any random variable <span class="math inline">R</span>, any <span class="math inline">\alpha&gt;0</span>, and <span class="math inline">x&gt;0</span>:</p>
+<p><span class="math display">
+\Pr\big[|R|\ge x\big]
+=\Pr\big[|R|^\alpha \ge x^\alpha\big]
+\le \frac{\mathbb{E}[|R|^\alpha]}{x^\alpha}
+</span></p>
+<p>Let <span class="math inline">C = R - \mathbb E [R], \; \alpha = 2</span>, and recall the <a href="#deviation">variance</a>:</p>
+<p><span class="math display">
+\Pr[|C|\ge x] = \Pr[|R-\mathbb{E}[R]|\ge x] \le \frac{\operatorname{Var}[R]}{x^2}
+</span></p>
+<p>Let <span class="math inline">x = c \sigma_R</span>:</p>
+<p><span class="math display">
+\Pr\big[|R-\mathbb{E}R|\ge c\,\sigma_R\big]
+\;\le\;\frac{\mathrm{Var}[R]}{(c\,\sigma_R)^2}
+=\frac{\sigma_R^2}{c^2\,\sigma_R^2}
+=\frac{1}{c^2}
+</span></p>
+<h4 id="cantellis-inequality">Cantelli’s inequality</h4>
+<p>Let <span class="math inline">\mu=\mathbb{E}[R]</span> and <span class="math inline">\sigma^2=\mathrm{Var}[R]</span>. Let <span class="math inline">Z=R-\mu</span>.</p>
+<p>For any <span class="math inline">a\ge 0</span> and any <span class="math inline">t&gt;0</span>:</p>
+<p data-sourcepos="2018:1-2018:1"><span class="math display">
+\{Z\ge t\}\subseteq \{Z+a\ge t+a\}\subseteq \{(Z+a)^2\ge (t+a)^2\}
+</span></p>
+<p data-sourcepos="2021:1-2021:1">By Markov:</p>
+<p><span class="math display">
+\Pr[Z\ge t]\le
+\frac{\mathbb{E}[(Z+a)^2]}{(t+a)^2}
+= \frac{\sigma^2+a^2}{(t+a)^2}
+</span></p>
+<p data-sourcepos="2029:1-2029:1">Minimize the RHS over <span class="math inline">a\ge 0</span>: <span class="math inline">f(a)=(\sigma^2+a^2)/(t+a)^2</span> has minimum at <span class="math inline">a^*=\sigma^2/t</span>, giving:</p>
+<p><span class="math display">
+\Pr[Z\ge t]\le \frac{\sigma^2}{t^2+\sigma^2}
+</span></p>
+<p>With <span class="math inline">t=c\,\sigma</span>:</p>
+<p><span class="math display">
+\Pr\big[R-\mathbb{E}[R] \ge c\,\sigma_R\big]\le \frac{1}{1+c^2}
+</span></p>
+<p>Same to <span class="math inline">-Z</span>:</p>
+<p><span class="math display">
+\Pr\big[R-\mathbb{E}[R] \le -c\,\sigma_R\big]\le \frac{1}{1+c^2}
+</span></p>
+<h4 id="chernoff-bound" data-sourcepos="2048:1-2048:1">Chernoff bound</h4>
+<p>Let <span class="math inline">T_1,\dots,T_n</span> be mutually independent with <span class="math inline">0\le T_i\le1</span>, and set <span class="math inline">\mu=\sum_i \mathbb{E}[T_i]</span>. For any <span class="math inline">c\ge1</span>:</p>
+<p><span class="math display">
+\Pr[T\ge c\mu]\;\le\;e^{-k\mu}\quad
+\text{where }k=c\ln c-c+1
+</span></p>
+<p data-sourcepos="2058:1-2058:1">Proof:</p>
+<p>For any <span class="math inline">\lambda&gt;0</span>, by Markov on <span class="math inline">e^{\lambda T}</span>:</p>
+<p><span class="math display">
+\Pr[T\ge c\mu]=\Pr[e^{\lambda T}\ge e^{\lambda c\mu}]
+\le \frac{\mathbb{E}[e^{\lambda T}]}{e^{\lambda c\mu}}
+</span></p>
+<p data-sourcepos="2067:1-2067:1">Mutual independence gives <span class="math inline">\mathbb{E}[e^{\lambda T}]=\prod_i \mathbb{E}[e^{\lambda T_i}]</span>.</p>
+<p>For <span class="math inline">x\in[0,1]</span>, convexity of <span class="math inline">e^{\lambda x}</span> yields:</p>
+<!-- The statement
+
+$
+f\big((1-\theta)u+\theta v\big)\;\le\;(1-\theta)f(u)+\theta f(v)\quad(\theta\in[0,1])
+$
+
+is *the definition* of convexity on an interval.
+
+If you prefer a proof from calculus (using $f''\ge0$), here is a derivation.
+
+Let $u<v$ and $x=(1-\theta)u+\theta v\in(u,v)$. By the Mean Value Theorem there exist
+
+$
+c\in(u,x),\qquad d\in(x,v)
+$
+
+such that
+
+$
+\frac{f(x)-f(u)}{x-u}=f'(c),\qquad \frac{f(v)-f(x)}{v-x}=f'(d).
+$
+
+If $f''\ge0$ on $[u,v]$, then $f'$ is increasing, so $f'(c)\le f'(d)$. Hence
+
+$
+\frac{f(x)-f(u)}{x-u}\le \frac{f(v)-f(x)}{v-x}.
+$
+
+Multiply by the positive denominators and rearrange:
+
+$
+(v-x)\,f(x)-(v-x)\,f(u)\le (x-u)\,f(v)-(x-u)\,f(x).
+$
+
+Bring the $f(x)$-terms together:
+
+$
+(v-u)\,f(x)\le (x-u)\,f(v)+(v-x)\,f(u).
+$
+
+Divide by $v-u$ and recall $x-u=\theta(v-u)$, $v-x=(1-\theta)(v-u)$:
+
+$
+f(x)\le (1-\theta)f(u)+\theta f(v).
+$
+
+Thus any twice-differentiable $f$ with $f''\ge0$ is convex in the sense of the inequality.
+
+Since $e^{\lambda x}$ satisfies $(e^{\lambda x})''=\lambda^2 e^{\lambda x}\ge0$, it is convex on $\mathbb{R}$, and the inequality applies with $f(t)=e^{\lambda t}$, $u=0$, $v=1$, $\theta=x\in[0,1]$:
+
+$
+e^{\lambda x}\le (1-x)e^{0}+x e^{\lambda}=1+x\,(e^{\lambda}-1).
+$ -->
+<p data-sourcepos="2122:1-2122:1"><span class="math display">
+e^{\lambda x}\le (1-x)e^{0}+x e^{\lambda}=1+x\,(e^{\lambda}-1)
+</span></p>
+<p>With <span class="math inline">\mu_i=\mathbb{E}[T_i]</span>, <span class="math inline">1+x \le \exp(x)</span>:</p>
+<p><span class="math display">
+\mathbb{E}[e^{\lambda T_i}] \le 1+\mu_i\,(e^{\lambda}-1)
+\le \exp\!\big(\mu_i (e^{\lambda}-1)\big)
+</span></p>
+<p data-sourcepos="2137:1-2137:1">Multiplying,</p>
+<p><span class="math display">
+\mathbb{E}[e^{\lambda T}] \le
+\exp\!\Big((e^{\lambda}-1)\sum_i \mu_i\Big)=\exp\!\big((e^{\lambda}-1)\mu\big)
+</span></p>
+<p data-sourcepos="2144:1-2144:1">Therefore</p>
+<p><span class="math display">
+\Pr[T\ge c\mu]\le
+\exp\!\big((e^{\lambda}-1)\mu-\lambda c\mu\big)
+</span></p>
+<p>For <span class="math inline">\lambda\ge0</span>: <span class="math inline">f(\lambda)=(e^{\lambda}-1)\mu-\lambda c\mu</span> is minimized at <span class="math inline">\lambda=\ln c</span>:</p>
+<p><span class="math display">
+\Pr[T\ge c\mu]\le
+\exp\!\big(-(c\ln c-c+1)\mu\big)=e^{-k\mu}
+</span></p>
+<!-- Writing $c=1+\delta$ gives the common form:
+
+$
+\Pr[T\ge(1+\delta)\mu]\le
+\exp\!\big(-\mu\big[(1+\delta)\ln(1+\delta)-\delta\big]\big).
+$
+
+* Useful simplifications: for $\delta\in[0,1]$,
+$\Pr[T\ge(1+\delta)\mu]\le \exp\!\big(-\mu\delta^2/3\big)$.
+* A matching lower-tail bound also holds:
+$\Pr[T\le(1-\delta)\mu]\le \exp(-\mu\delta^2/2)$ for $\delta\in[0,1]$. -->
+<h4 id="murphya-law">Murphy’a law</h4>
+<p>Let <span class="math inline">A_1,\dots,A_n</span> be <em>mutually independent</em> events and let <span class="math inline">T=\sum_{i=1}^n \mathbf{1}_{A_i}</span> be the number that occur. Let <span class="math inline">\mu=\mathbb{E}[T]=\sum_{i=1}^n \Pr[A_i]</span>:</p>
+<p><span class="math display">
+\Pr[T=0]=\Pr\!\Big[\bigcap_{i=1}^n \overline{A_i}\Big]
+=\prod_{i=1}^n (1-\Pr[A_i])
+\;\le\; \prod_{i=1}^n e^{-\Pr[A_i]}
+= e^{-\sum_i \Pr[A_i]}
+= e^{-\mu}
+</span></p>
+<p>Given <span class="math inline">1-x\le e^{-x}</span> for all <span class="math inline">x</span>.</p>
+<h3 id="random-walk" data-sourcepos="2187:1-2187:1">Random Walk</h3>
+<p data-sourcepos="2189:1-2189:1">We consider a one-dimensional Markov chain (simple random walk with absorbing boundaries) on the finite state space</p>
+<p data-sourcepos="2192:1-2192:1"><span class="math display">
+\{0,1,\dots,w\}, \quad w\ge 2
+</span></p>
+<p data-sourcepos="2195:1-2195:1">The process starts at some initial state <span class="math inline">n\in\{1,\dots,w-1\}</span>. At each step:</p>
+<ul>
+<li>with probability <span class="math inline">p\in(0,1)</span>, the position increases by <span class="math inline">+1</span>;</li>
+<li>with probability <span class="math inline">q:=1-p</span>, the position decreases by <span class="math inline">-1</span>.</li>
+</ul>
+<p data-sourcepos="2200:1-2200:1">We are interested in the absorption probabilities at the two boundaries. Define</p>
+<p><span class="math display">
+\begin{aligned}
+a_n &amp; = \Pr\!\bigl[\text{hit }w\text{ before }0 \,\big|\, X_0=n\bigr] \\
+b_n &amp; = \Pr\!\bigl[\text{hit }0\text{ before }w \,\big|\, X_0=n\bigr] \\
+c_n &amp; = \Pr\!\bigl[\text{never hit } \{0,w\} \,\big|\, X_0=n\bigr]
+\end{aligned}
+</span></p>
+<!-- Clearly,
+
+$
+a_n+b_n+c_n=1.
+$ -->
+<h4 id="recurrence-1">Recurrence</h4>
+<p data-sourcepos="2218:1-2218:1">By conditioning on the first step from state <span class="math inline">n</span>,</p>
+<p data-sourcepos="2221:1-2221:1"><span class="math display">
+a_n = p\,a_{n+1} + q\,a_{n-1}, \quad 1\le n \le w-1 ; \quad a_0=0,  a_w=1
+</span></p>
+<h5 id="p-neq-q" data-sourcepos="2224:1-2224:1"><span class="math inline">p \neq q</span></h5>
+<p>Try <span class="math inline">a_n=\lambda^n</span>. Substituting yields the characteristic equation</p>
+<p data-sourcepos="2229:1-2229:1"><span class="math display">
+p\lambda^2 - \lambda + q = 0 \implies
+    \begin{cases}
+        \lambda_1  = 1\\
+        \lambda_2  = \frac{q}{p}
+    \end{cases}
+    \implies \boxed{\,a_n = \frac{1-\left(\tfrac{q}{p}\right)^n}{1-\left(\tfrac{q}{p}\right)^w}\,}
+</span></p>
+<h5 id="p-q" data-sourcepos="2237:1-2237:1"><span class="math inline">p = q</span></h5>
+<p data-sourcepos="2239:1-2239:1">The characteristic equation has a repeated root <span class="math inline">\lambda=1</span>:</p>
+<p data-sourcepos="2242:1-2242:1"><span class="math display">
+\boxed{\,a_n = \frac{n}{w}\,}
+</span></p>
+<h4 id="destiny" data-sourcepos="2245:1-2245:1">Destiny</h4>
+<p>From any state <span class="math inline">1\le i \le w-1</span>, there exists a path to an absorbing boundary in at most <span class="math inline">w-1</span> steps (e.g., always step left or always step right). The probability of such a path is at least</p>
+<p data-sourcepos="2250:1-2250:1"><span class="math display">
+\rho := \min\{p^{\,w-1},\,q^{\,w-1}\} &gt; 0
+</span></p>
+<p data-sourcepos="2253:1-2253:1">Therefore, the probability of not being absorbed within the next <span class="math inline">w-1</span> steps is at most <span class="math inline">1-\rho</span>. Repeating over independent blocks of length <span class="math inline">w-1</span>,</p>
+<p><span class="math display">
+\Pr[\text{not absorbed after }k(w-1)\text{ steps}] \le (1-\rho)^k \xrightarrow{k\to\infty} 0
+</span></p>
+<p data-sourcepos="2259:1-2259:1">Thus absorption occurs with probability one, so <span class="math inline">c_n=0</span>:</p>
+<p data-sourcepos="2262:1-2262:1"><span class="math display">
+\boxed{\,b_n=1-a_n\,}
+</span></p>
+<h4 id="lifespan" data-sourcepos="2265:1-2265:1">Lifespan</h4>
+<p>Let <span class="math inline">T_n=\mathbb E[T\mid X_0=n]</span>. By conditioning on the first step,</p>
+<p data-sourcepos="2270:1-2270:1"><span class="math display">
+T_n=1+p\,T_{n+1}+q\,T_{n-1},\qquad 1\le n\le w-1,\quad(q=1-p)
+</span></p>
+<p data-sourcepos="2273:1-2273:1">with boundary conditions <span class="math inline">T_0=0,\;T_w=0</span>.</p>
+<h5 id="p-neq-q-1"><span class="math inline">p \neq q</span></h5>
+<p>Let <span class="math inline">r = \frac q p</span>, homogeneous part is <span class="math inline">T_n^{(h)}=A+B\,r^n</span>.</p>
+<p data-sourcepos="2279:1-2279:1">For particular part, try linear <span class="math inline">Cn</span>:</p>
+<p data-sourcepos="2282:1-2282:1"><span class="math display">
+Cn=1+pC(n+1)+qC(n-1)=1+Cn+(p-q)C
+\Rightarrow C=\frac{1}{q-p}
+</span></p>
+<p>Thus <span class="math inline">T_n=A+B r^n+\dfrac{n}{q-p}</span>.</p>
+<p data-sourcepos="2288:1-2288:1">Use the boundaries to get A/B:</p>
+<p data-sourcepos="2291:1-2291:1"><span class="math display">
+\boxed{\,T_n=\frac{1}{q-p}\left(n-\;w\,\frac{1-(q/p)^n}{1-(q/p)^w}\right)\,},\qquad (p\neq q).
+</span></p>
+<h5 id="p-q-1"><span class="math inline">p = q</span></h5>
+<p data-sourcepos="2296:1-2296:1">The homogeneous solution is <span class="math inline">A+Bn</span>. Try a quadratic particular solution <span class="math inline">Cn^2</span>:</p>
+<p data-sourcepos="2299:1-2299:1"><span class="math display">
+(T_{n+1}-2T_n+T_{n-1})=2C=-2\;\Rightarrow\;C=-1
+</span></p>
+<p>So <span class="math inline">T_n=A+Bn-n^2</span>. Apply <span class="math inline">T_0=0\Rightarrow A=0</span> and <span class="math inline">T_w=0\Rightarrow Bw-w^2=0\Rightarrow B=w</span>:</p>
+<p data-sourcepos="2305:1-2305:1"><span class="math display">
+\boxed{\,T_n=n(w-n)\,}
+</span></p>
+<h3 id="applications" data-sourcepos="2308:1-2308:1">Applications</h3>
+<h4 id="birthday-paradox-and-hash-collision" data-sourcepos="2310:1-2310:1">Birthday paradox and hash collision</h4>
+<p>Let <span class="math inline">N</span> be the number of possible “birthdays” (e.g., <span class="math inline">N=365</span>), and let <span class="math inline">k</span> samples be drawn uniformly and independently from <span class="math inline">\{1,\dots,N\}</span>, then:</p>
+<p><span class="math display">
+\Pr[\text{no-coll}]
+=\frac{(N)_k}{N^k}
+=\frac{N!}{(N-k)!\,N^k}
+</span></p>
+<!-- $
+\begin{aligned}
+\ln P_{\text{no-coll}}
+&\approx\big[N\ln N-N+\tfrac12\ln(2\pi N)+\tfrac{1}{12N}\big] \\
+&\quad-\big[(N-k)\ln(N-k)-(N-k)+\tfrac12\ln(2\pi(N-k))+\tfrac{1}{12(N-k)}\big]
+-k\ln N.
+\end{aligned}
+$
+
+Simplify (the $\tfrac12\ln(2\pi\cdot)$ terms combine to $\tfrac12\ln\frac{N}{N-k}$):
+
+$
+\ln P_{\text{no-coll}}
+\approx (N-k)\ln\!\frac{N}{N-k}-k+\tfrac12\ln\!\frac{N}{N-k}
++\frac{1}{12}\!\left(\frac{1}{N}-\frac{1}{N-k}\right).
+$
+
+Let $x:=k/N$. Use $\ln\frac{1}{1-x}=x+\tfrac{x^2}{2}+\tfrac{x^3}{3}+\cdots$ and expand to cubic order:
+
+$
+\begin{aligned}
+(N-k)\ln\!\frac{N}{N-k}
+&=N(1-x)\Big(x+\tfrac{x^2}{2}+\tfrac{x^3}{3}+\cdots\Big)\\
+&=k-\frac{k^2}{2N}-\frac{k^3}{6N^2}+O\!\left(\frac{k^4}{N^3}\right).
+\end{aligned}
+$
+
+Also
+
+$
+\tfrac12\ln\!\frac{N}{N-k}
+=\tfrac12\Big(x+\tfrac{x^2}{2}+\tfrac{x^3}{3}+\cdots\Big)
+=\frac{k}{2N}+\frac{k^2}{4N^2}+\frac{k^3}{6N^3}+\cdots,
+$
+
+and
+
+$
+\frac{1}{12}\!\left(\frac{1}{N}-\frac{1}{N-k}\right)
+=-\,\frac{k}{12N^2}+O\!\left(\frac{k^2}{N^3}\right).
+$
+
+Collect terms; the leading $k$ cancels with the $-k$:
+
+$
+\boxed{\;
+\ln P_{\text{no-coll}}
+\approx -\frac{k(k-1)}{2N}\;-\;\frac{k(k-1)(2k-1)}{12N^2}
+\;+\;O\!\left(\frac{k^4}{N^3}\right)
+\;}
+$
+
+so
+
+$
+P_{\text{no-coll}}
+\approx \exp\!\left(
+-\frac{k(k-1)}{2N}-\frac{k(k-1)(2k-1)}{12N^2}
+\right).
+$
+
+Dropping the $N^{-2}$ correction yields the familiar
+
+$
+\boxed{\;P_{\text{no-coll}}\approx \exp\!\left(-\frac{k(k-1)}{2N}\right)\;}
+$ -->
+<p data-sourcepos="2388:1-2388:1">Take logs and apply <a href="#stirlings-formula">Stirling’s formula</a>:</p>
+<p><span class="math display">
+\begin{aligned}
+    \ln \Pr_{\text{no-coll}}
+    &amp;\approx\big[N\ln N-N+\tfrac12\ln(2\pi N)+\tfrac{1}{12N}\big] \\
+    &amp;\quad-\big[(N-k)\ln(N-k)-(N-k)+\tfrac12\ln(2\pi(N-k))+\tfrac{1}{12(N-k)}\big]
+    -k\ln N \\
+    &amp; \approx -\frac{k(k-1)}{2N}\;-\;\frac{k(k-1)(2k-1)}{12N^2}
+    \;+\;\mathcal O\!\left(\frac{k^4}{N^3}\right)
+\end{aligned}
+</span></p>
+<p>So, <span class="math inline">\Pr_{\text{coll}}\approx 1-\exp\!\left(-\frac{k(k-1)}{2N}\right), \;\; k=o (\sqrt n)</span>.</p>
+<p data-sourcepos="2403:1-2403:1">For hashing function with range size <span class="math inline">N</span>, collision existence probability <span class="math inline">\Pr</span>, the evaluation times <span class="math inline">k</span>:</p>
+<p data-sourcepos="2406:1-2406:1"><span class="math display">
+k \;\approx\; \sqrt{\,2\ln\!\frac{1}{1-\Pr} }\sqrt N
+</span></p>
+<p data-sourcepos="2409:1-2409:1"><span class="math inline">\Pr = 10^{-6} \implies k \approx 0.0014 \sqrt N</span>.</p>
+<h4 id="nontransitive-dice" data-sourcepos="2411:1-2411:1">Nontransitive dice</h4>
+<p>Let each die <span class="math inline">D = \{d_1,\dots,d_m\}</span> be a multiset of integers with uniform distribution.</p>
+<p>For two dice <span class="math inline">D_i, D_j</span>:</p>
+<p><span class="math display">
+P[D_i \succ D_j] = \frac{1}{m^2}\sum_{a=1}^m \sum_{b=1}^m \mathbf{1}[d_{ia} &gt; d_{jb}]
+</span></p>
+<p data-sourcepos="2421:1-2421:1">There is a collection of dice <span class="math inline">\{D_1, \dots, D_k\}</span> is <em>nontransitive</em> if there exists a cycle such that:</p>
+<p><span class="math display">
+P[D_1 \succ D_2] &gt; \tfrac{1}{2}, \quad
+P[D_2 \succ D_3] &gt; \tfrac{1}{2}, \quad \dots, \quad
+P[D_k \succ D_1] &gt; \tfrac{1}{2}
+</span></p>
+<p>And for <span class="math inline">k \geq 3</span>, there exist nontransitive <span class="math inline">{D_k}</span>, Ref: <a href="https://mathweb.ucsd.edu/~ronspubs/pre_nontransitive.pdf">Maximally Nontransitive Dice</a> .</p>
+<h4 id="coupon-collector-problem" data-sourcepos="2431:1-2431:1">Coupon collector problem</h4>
+<p>To collect all <span class="math inline">n</span> distinct coupons. Each draw gives a random coupon, each type equally likely and independent. What is the expection of number of draws to collect all the coupons?</p>
+<ul data-sourcepos="2435:1-2437:1">
+<li>Think of collecting as stages. After you’ve already seen <span class="math inline">k</span> distinct types, there are <span class="math inline">n-k</span> unseen types left.</li>
+<li>On the next draw, the chance of getting a <em>new</em> type is <span class="math inline">\frac{n-k}{n}</span>.</li>
+<li>The number of draws to succeed with probability <span class="math inline">p</span> is <a href="#geometric-distribution">geometric</a> with expectation <span class="math inline">1/p</span>. So the expected extra draws to go from <span class="math inline">k</span> types to <span class="math inline">k+1</span> types is</li>
+</ul>
+<p><span class="math display">
+\mathbb{E}[X_k]=\frac{1}{(n-k)/n}=\frac{n}{\,n-k\,}
+</span></p>
+<p data-sourcepos="2443:1-2443:1">Then:</p>
+<p><span class="math display">
+\mathbb{E}[T] = \sum_{i = 0}^{n - 1} \mathbb E [X_i] = n H_n \sim n\ln n
+</span></p>
+<h4 id="penneys-game">Penney’s game</h4>
+<p data-sourcepos="2451:1-2451:1">The original HHT vs HTT problem:</p>
+<p data-sourcepos="2453:1-2453:1">Two players watch a single run of fair coin tosses. A wins if the pattern <strong>HHT</strong> appears first; B wins if <strong>HTT</strong> appears first.</p>
+<p data-sourcepos="2455:1-2455:1">Modeling the process by states defined as “the longest suffix of the running tosses that is also a prefix of either target”.</p>
+<p>Let <span class="math inline">p_0</span> be A’s win probability from the start, and <span class="math inline">p_H, p_{HH}, p_{HT}</span> from states ending with (H, HH, HT) respectively. The fair-coin transitions give:</p>
+<ul data-sourcepos="2459:1-2462:1">
+<li><span class="math inline">p_0=\tfrac12 p_H+\tfrac12 p_0\Rightarrow p_0=p_H</span></li>
+<li><span class="math inline">p_H=\tfrac12 p_{HH}+\tfrac12 p_{HT}</span></li>
+<li><span class="math inline">p_{HH}=\tfrac12\cdot 1+\tfrac12 p_{HH}\Rightarrow p_{HH}=1</span></li>
+<li><span class="math inline">p_{HT}=\tfrac12\cdot 0+\tfrac12 p_H=\tfrac12 p_H</span></li>
+</ul>
+<p>Solving yields <span class="math inline">p_H=\tfrac23</span>, hence <span class="math inline">p_0=\tfrac23</span>.</p>
+<p>The length-3 ‘counter sequence’ rule:</p>
+<p>In Penney’s game, the second player can always pick a length-3 pattern that beats the first player’s choice with probability (2/3). If the first player chooses <span class="math inline">S=a_1a_2a_3</span> (each <span class="math inline">a_i\in\{H,T\})</span>, the counter is</p>
+<p data-sourcepos="2471:1-2471:1"><span class="math display">
+S^\star=\overline{a_2}a_1a_2
+</span></p>
+<p data-sourcepos="2474:1-2474:1">This construction exploits <em>prefix-suffix overlaps</em>: whenever play has lined up the opponent’s first two symbols, your counter tends to complete one step sooner.</p>
+<p>For length <span class="math inline">\geq 3</span>, there is always counter sequence: <a href="https://www.combinatorics.org/ojs/index.php/eljc/article/view/v13i1r35">Optimal Penney Ante Strategy via CorrelationPolynomial Identities</a>.</p>
+<!-- # Probability ([MIT 6.041](https://ocw.mit.edu/courses/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/video_galleries/video-lectures/))
+
+# Theory of Computation ([MIT 18.404](https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/video_galleries/video-lectures/)) -->
+<!-- # Concrete Mathematics -->
+
+      </article>
+    </main>
+
+    <!-- Right Sidebar (TOC) -->
+    <aside class="sidebar right-sidebar collapsed" id="right-sidebar">
+      <div class="sidebar-content" id="spa-toc">
+        <!-- <h4 class="toc-title">On this page</h4> -->
+        <ul class="toc-list"><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#proofs">Proofs</a></div><ul class="toc-children"><li class="toc-child toc-level-3 toc-range"><a href="#propositions">Propositions</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#notations"><span class="toc-icon">·</span>Notations</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#algebra"><span class="toc-icon">·</span>Algebra</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#dnf-and-cnf"><span class="toc-icon">·</span>DNF and CNF</a></li></ul></li><li class="toc-child toc-level-3 toc-range"><a href="#patterns-of-proof">Patterns of Proof</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#methods"><span class="toc-icon">·</span>Methods</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#set"><span class="toc-icon">·</span>Set</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#sequence"><span class="toc-icon">·</span>Sequence</a></li></ul></li><li class="toc-child toc-level-3 toc-range"><a href="#induction">Induction</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#well-ordering-principle"><span class="toc-icon">·</span>Well ordering principle</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#invariant"><span class="toc-icon">·</span>Invariant</a></li></ul></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#number-theory">Number Theory</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#basic">Basic</a></li><li class="toc-child toc-level-3"><a href="#gcd">GCD</a></li><li class="toc-child toc-level-3 toc-range"><a href="#bézouts-identity">Bézout’s Identity</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#proof"><span class="toc-icon">·</span>Proof</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#calc"><span class="toc-icon">·</span>Calc</a></li></ul></li><li class="toc-child toc-level-3"><a href="#inverse">Inverse</a></li><li class="toc-child toc-level-3"><a href="#eulers-theorem">Euler’s Theorem</a></li><li class="toc-child toc-level-3"><a href="#fermats-little-theorem">Fermat’s Little Theorem</a></li><li class="toc-child toc-level-3"><a href="#chinese-remainder-theorem">Chinese Remainder Theorem</a></li><li class="toc-child toc-level-3"><a href="#rsa">RSA</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#graph">Graph</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#introduction">Introduction</a></li><li class="toc-child toc-level-3"><a href="#isomorphism">Isomorphism</a></li><li class="toc-child toc-level-3 toc-range"><a href="#coloring">Coloring</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#dsatur-algorithm"><span class="toc-icon">·</span>DSATUR algorithm</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#upper-bound"><span class="toc-icon">·</span>Upper bound</a></li></ul></li><li class="toc-child toc-level-3"><a href="#bipartite">Bipartite</a></li><li class="toc-child toc-level-3 toc-range"><a href="#matching">Matching</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#halls-theorem"><span class="toc-icon">·</span>Hall’s theorem</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#stable-matching"><span class="toc-icon">·</span>Stable matching</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#other-matching-problems"><span class="toc-icon">·</span>Other matching problems</a></li></ul></li><li class="toc-child toc-level-3"><a href="#selected-problems">Selected Problems</a></li><li class="toc-child toc-level-3"><a href="#tournament-graph">Tournament Graph</a></li><li class="toc-child toc-level-3"><a href="#planar-graph">Planar Graph</a></li><li class="toc-child toc-level-3 toc-range"><a href="#minimum-panning-tree">Minimum Panning Tree</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#lemma-of-cut"><span class="toc-icon">·</span>Lemma of cut</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#proof-1"><span class="toc-icon">·</span>Proof</a></li></ul></li><li class="toc-child toc-level-3 toc-range"><a href="#communication-networks">Communication Networks</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#butterfly-network"><span class="toc-icon">·</span>Butterfly network</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#comparison"><span class="toc-icon">·</span>Comparison</a></li></ul></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#relation">Relation</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#definition">Definition</a></li><li class="toc-child toc-level-3"><a href="#relations-on-a-single-set">Relations on a Single Set</a></li><li class="toc-child toc-level-3"><a href="#equivalence-relations">Equivalence Relations</a></li><li class="toc-child toc-level-3"><a href="#partial-orders">Partial Orders</a></li><li class="toc-child toc-level-3"><a href="#dag">DAG</a></li><li class="toc-child toc-level-3"><a href="#topological-sort">Topological Sort</a></li><li class="toc-child toc-level-3"><a href="#parallel-task-scheduling">Parallel Task Scheduling</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#sum-and-asymptotics">Sum and Asymptotics</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#basics">Basics</a></li><li class="toc-child toc-level-3"><a href="#harmonic-number">Harmonic Number</a></li><li class="toc-child toc-level-3 toc-range"><a href="#n">n!</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#trivial"><span class="toc-icon">·</span>Trivial</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#stirlings-formula"><span class="toc-icon">·</span>Stirling’s formula</a></li></ul></li><li class="toc-child toc-level-3"><a href="#asymptotic-notation">Asymptotic Notation</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#recurrence">Recurrence</a></div><ul class="toc-children"><li class="toc-child toc-level-3 toc-range"><a href="#linear-recurrence">Linear Recurrence</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#numerical-solution"><span class="toc-icon">·</span>Numerical solution</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#non-homogeneous"><span class="toc-icon">·</span>Non-homogeneous</a></li></ul></li><li class="toc-child toc-level-3"><a href="#arka-bazzi-method">Arka-Bazzi Method</a></li><li class="toc-child toc-level-3"><a href="#master-theorem">Master Theorem</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#counting">Counting</a></div><ul class="toc-children"><li class="toc-child toc-level-3 toc-range"><a href="#rules">Rules</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#productive"><span class="toc-icon">·</span>Productive</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#sum"><span class="toc-icon">·</span>Sum</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#division"><span class="toc-icon">·</span>Division</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#bookkeeper"><span class="toc-icon">·</span>Bookkeeper</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#binomial-and-multinomial"><span class="toc-icon">·</span>Binomial and multinomial</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#pascals-identity"><span class="toc-icon">·</span>Pascal’s identity</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#pigeonhole-principle"><span class="toc-icon">·</span>Pigeonhole principle</a></li></ul></li><li class="toc-child toc-level-3 toc-range"><a href="#generating-functions">Generating Functions</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#rules-1"><span class="toc-icon">·</span>Rules</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#from-generating-function-to-sequence"><span class="toc-icon">·</span>From generating function to sequence</a></li></ul></li><li class="toc-child toc-level-3"><a href="#sets">Sets</a></li><li class="toc-child toc-level-3"><a href="#cantors-theorem">Cantor’s Theorem</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#probability">Probability</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#basic-1">Basic</a></li><li class="toc-child toc-level-3"><a href="#conditional">Conditional</a></li><li class="toc-child toc-level-3 toc-range"><a href="#independence">Independence</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#mutual-independence"><span class="toc-icon">·</span>Mutual independence</a></li></ul></li><li class="toc-child toc-level-3 toc-range"><a href="#random-variables">Random Variables</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#independence-1"><span class="toc-icon">·</span>Independence</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#distribution-functions"><span class="toc-icon">·</span>Distribution functions</a></li><li class="toc-child toc-level-4 toc-deep toc-range"><a href="#binomial-distribution"><span class="toc-icon">·</span>Binomial distribution</a><ul class="toc-children"><li class="toc-child toc-level-5 toc-deep"><a href="#aproximation"><span class="toc-icon">·</span>aproximation</a></li><li class="toc-child toc-level-5 toc-deep"><a href="#sampling"><span class="toc-icon">·</span>sampling</a></li></ul></li></ul></li><li class="toc-child toc-level-3 toc-range"><a href="#expectation">Expectation</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#geometric-distribution"><span class="toc-icon">·</span>Geometric distribution</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#rules-2"><span class="toc-icon">·</span>Rules</a></li></ul></li><li class="toc-child toc-level-3 toc-range"><a href="#deviation">Deviation</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#rules-3"><span class="toc-icon">·</span>Rules</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#markovs-theorem"><span class="toc-icon">·</span>Markov’s theorem</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#chebyshevs-theorem"><span class="toc-icon">·</span>Chebyshev’s theorem</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#cantellis-inequality"><span class="toc-icon">·</span>Cantelli’s inequality</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#chernoff-bound"><span class="toc-icon">·</span>Chernoff bound</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#murphya-law"><span class="toc-icon">·</span>Murphy’a law</a></li></ul></li><li class="toc-child toc-level-3 toc-range"><a href="#random-walk">Random Walk</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep toc-range"><a href="#recurrence-1"><span class="toc-icon">·</span>Recurrence</a><ul class="toc-children"><li class="toc-child toc-level-5 toc-deep"><a href="#p-neq-q"><span class="toc-icon">·</span>p \neq q</a></li><li class="toc-child toc-level-5 toc-deep"><a href="#p-q"><span class="toc-icon">·</span>p = q</a></li></ul></li><li class="toc-child toc-level-4 toc-deep"><a href="#destiny"><span class="toc-icon">·</span>Destiny</a></li><li class="toc-child toc-level-4 toc-deep toc-range"><a href="#lifespan"><span class="toc-icon">·</span>Lifespan</a><ul class="toc-children"><li class="toc-child toc-level-5 toc-deep"><a href="#p-neq-q-1"><span class="toc-icon">·</span>p \neq q</a></li><li class="toc-child toc-level-5 toc-deep"><a href="#p-q-1"><span class="toc-icon">·</span>p = q</a></li></ul></li></ul></li><li class="toc-child toc-level-3 toc-range"><a href="#applications">Applications</a><ul class="toc-children"><li class="toc-child toc-level-4 toc-deep"><a href="#birthday-paradox-and-hash-collision"><span class="toc-icon">·</span>Birthday paradox and hash collision</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#nontransitive-dice"><span class="toc-icon">·</span>Nontransitive dice</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#coupon-collector-problem"><span class="toc-icon">·</span>Coupon collector problem</a></li><li class="toc-child toc-level-4 toc-deep"><a href="#penneys-game"><span class="toc-icon">·</span>Penney’s game</a></li></ul></li></ul></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <script src="/static/shell-lifecycle.js"></script>
+  <script src="/static/shell-preferences.js"></script>
+  <script src="/static/scrollbar-visibility.js?v=c659b99"></script>
+  <script src="/static/sidebar-panel.js"></script>
+  <script src="/static/svg-theme.js"></script>
+  <script src="/static/render-on-demand.js"></script>
+  <script src="/static/shell-bootstrap.js"></script>
+  <script src="/static/main.js"></script>
+  <script src="/static/reading-navigation-state.js"></script>
+  <script src="/static/shell-layout.js"></script>
+  <script src="/static/shell-search-settings.js"></script>
+  <script src="/static/shell-router.js"></script>
+  <script src="/static/link-preview.js"></script>
+  <script src="/static/text-anchor.js"></script>
+  <script src="/static/comments.js"></script>
+  <script src="/static/themes.js"></script>
+  <script src="/static/table-enhance.js"></script>
+  <script src="/static/syllabus-enhance.js"></script>
+  <script src="/static/core/ink-stroke-format.js"></script>
+  <script src="/static/drawing-engine-render.js"></script>
+  <script>
+  // highlight.js: on-demand language loader + post-load highlight pass.
+  //
+  // Core (highlight.min.js) bundles ~37 common languages. Pages that use
+  // additional languages from _HLJS_EXTRA trigger an extra CDN fetch only
+  // when the page actually contains a matching code block. The service
+  // worker caches each module after the first fetch, so subsequent pages
+  // pay nothing for already-loaded languages.
+  //
+  // _HLJS_ALIAS maps user-facing class names to module filenames that
+  // differ from the class name. Pure aliases that hljs core already knows
+  // (e.g. ts → typescript, sh → bash) are resolved by hljs.getLanguage()
+  // and don't need entries — only include aliases whose target module is
+  // in _HLJS_EXTRA.
+  window._HLJS_BASE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/languages/';
+  window._HLJS_ALIAS = {
+    tex: 'latex', docker: 'dockerfile', ps: 'powershell', ps1: 'powershell',
+    ml: 'ocaml', hs: 'haskell', clj: 'clojure', cljs: 'clojure',
+    erl: 'erlang', coffee: 'coffeescript', f90: 'fortran', f95: 'fortran',
+    pascal: 'delphi'
+  };
+  window._HLJS_EXTRA = [
+    // Tier 1/2: build/config, scientific, FP, scripting, editor
+    'dockerfile','nginx','cmake','http','latex','julia','matlab','fortran',
+    'haskell','scala','ocaml','fsharp','clojure','elixir','dart','vim','powershell',
+    // Tier 3: FP & academic
+    'erlang','scheme','lisp','prolog',
+    // Tier 3: hardware / assembly
+    'verilog','vhdl','x86asm','armasm',
+    // Tier 3: modern systems
+    'crystal','nim','d','delphi',
+    // Tier 3: build / config
+    'groovy','nix','dts',
+    // Tier 3: markup / templating
+    'asciidoc','handlebars','gherkin',
+    // Tier 3: shell / scripting
+    'awk','tcl','coffeescript',
+    // Tier 3: stats
+    'stan'
+  ];
+  window._hljsLoaded = {};
+
+  // Run the highlight + line-number pass against `root` (defaults to document).
+  window._hljsRun = function(root) {
+    root = root || document;
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (name) {
+        var resolved = hljs.getLanguage(name) ? name : 'plaintext';
+        code.classList.add('language-' + resolved);
+      }
+    });
+    hljs.configure({ cssSelector: 'pre:not(.mermaid) > code' });
+    hljs.highlightAll();
+    root.querySelectorAll('pre:not(.mermaid) > code').forEach(function(code) {
+      if (code.querySelector('.code-line')) return;
+      var html = code.innerHTML;
+      if (html.charAt(html.length - 1) === '\n') html = html.slice(0, -1);
+      var lines = html.split('\n');
+      var openTags = [];
+      code.innerHTML = lines.map(function(line) {
+        var prefix = openTags.join('');
+        var re = /<\/?span[^>]*>/gi, m;
+        while ((m = re.exec(line)) !== null) {
+          if (m[0][1] === '/') openTags.pop();
+          else openTags.push(m[0]);
+        }
+        var suffix = '';
+        for (var i = 0; i < openTags.length; i++) suffix += '</span>';
+        return '<span class="code-line">' + prefix + (line || ' ') + suffix + '</span>';
+      }).join('');
+    });
+  };
+
+  // Scan `root` for code blocks, fetch any missing allowlisted language
+  // modules, then run the highlight pass once they finish loading (or fail).
+  // Called once from the highlight.min.js onload handler, and again from
+  // main.js after each SPA navigation (scoped to #spa-content).
+  window._hljsInit = function(root) {
+    root = root || document;
+    if (typeof hljs === 'undefined') return;
+    var allow = {};
+    for (var i = 0; i < window._HLJS_EXTRA.length; i++) allow[window._HLJS_EXTRA[i]] = true;
+    var need = {};
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (!name || hljs.getLanguage(name)) return;
+      if (allow[name] && !window._hljsLoaded[name]) need[name] = true;
+    });
+    var keys = Object.keys(need);
+    if (!keys.length) { window._hljsRun(root); return; }
+    var pending = keys.length;
+    keys.forEach(function(l) {
+      window._hljsLoaded[l] = true; // mark in-flight to dedupe across SPA nav
+      var s = document.createElement('script');
+      s.src = window._HLJS_BASE + l + '.min.js';
+      s.onload = s.onerror = function() { if (--pending === 0) window._hljsRun(root); };
+      document.head.appendChild(s);
+    });
+  };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    onload="window._hljsInit();"></script>
+  <script id="rprint-mermaid" async src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('mermaid')}else{var t=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'default';mermaid.initialize({startOnLoad:false,theme:t});document.querySelectorAll('pre.mermaid > code').forEach(function(c){var src=c.textContent;c.parentElement.setAttribute('data-mermaid-source',src);c.parentElement.textContent=src;});mermaid.run()}"></script>
+  <script>document.getElementById('rprint-mermaid').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('mermaid',new Error('Mermaid failed to load'))}});</script>
+  
+  
+  
+</body>
+</html>

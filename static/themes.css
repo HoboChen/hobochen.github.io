@@ -1,0 +1,565 @@
+/* ===== Dark Theme ===== */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #0d1117;
+  --color-bg-alt: #161b22;
+  --color-border: #30363d;
+  --color-text: #c9d1d9;
+  --color-text-muted: #8b949e;
+  --color-primary: #58a6ff;
+  --color-primary-hover: #79b8ff;
+  --color-banner-bg: #010409;
+  --color-banner-text: #f0f6fc;
+  --color-dropdown-bg: #1c2128;
+  --color-active-bg: #1f2937;
+  --color-scrollbar: #484f58;
+  --color-scrollbar-hover: #6e7681;
+
+  /* Status colors flip to brighter variants for dark backgrounds. */
+  --color-danger: #f85149;
+  --color-danger-hover: #ff7b72;
+  --color-danger-fg: #f85149;
+  --color-danger-subtle: rgba(248, 81, 73, 0.15);
+  --color-danger-muted: rgba(248, 81, 73, 0.4);
+
+  --color-success: #3fb950;
+  --color-success-hover: #56d364;
+  --color-success-fg: #3fb950;
+  --color-success-subtle: rgba(63, 185, 80, 0.15);
+
+  --color-warning: #d29922;
+  --color-warning-hover: #e3b341;
+  --color-warning-fg: #d29922;
+  --color-warning-subtle: rgba(187, 128, 9, 0.15);
+  --color-warning-muted: rgba(187, 128, 9, 0.4);
+
+  --color-info: #58a6ff;
+  --color-info-hover: #79b8ff;
+  --color-info-subtle: rgba(56, 139, 253, 0.15);
+
+  /* Heavier shadows on dark surfaces. */
+  --shadow-popover: 0 8px 30px rgba(0,0,0,0.5);
+  --shadow-dropdown: 0 4px 16px rgba(0,0,0,0.4);
+  --shadow-dialog: 0 16px 48px rgba(0,0,0,0.6);
+}
+
+[data-theme="dark"] .article pre {
+  /* hljs dark theme handles colors */
+}
+
+[data-theme="dark"] .article code {
+  background: #1c2128;
+  border-color: #30363d;
+}
+
+[data-theme="dark"] .style-panel {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+/* ===== Kindle Theme ===== */
+[data-theme="kindle"] {
+  --color-bg: #ffffff;
+  --color-bg-alt: #ffffff;
+  --color-border: #d0d0d0;
+  --color-text: #000000;
+  --color-text-muted: #444444;
+  --color-primary: #000000;
+  --color-primary-hover: #333333;
+  --color-banner-bg: #ffffff;
+  --color-banner-text: #000000;
+  --color-dropdown-bg: #f5f5f5;
+  --color-active-bg: #e8e8e8;
+  --color-scrollbar: #000000;
+  --color-scrollbar-hover: #333333;
+
+  /* E-ink: collapse every semantic status color to grayscale. Hue carries
+     no meaning on a monochrome panel, so danger/success/warning/info all
+     read as black text on a faint gray tint with a mid-gray border. */
+  --color-danger: #000000;
+  --color-danger-hover: #333333;
+  --color-danger-fg: #000000;
+  --color-danger-subtle: #ececec;
+  --color-danger-muted: #999999;
+
+  --color-success: #000000;
+  --color-success-hover: #333333;
+  --color-success-fg: #000000;
+  --color-success-subtle: #ececec;
+
+  --color-warning: #000000;
+  --color-warning-hover: #333333;
+  --color-warning-fg: #000000;
+  --color-warning-subtle: #ececec;
+  --color-warning-muted: #999999;
+
+  --color-info: #000000;
+  --color-info-hover: #333333;
+  --color-info-subtle: #ececec;
+
+  /* E-ink: no elevation. Blurred drop shadows turn muddy on e-ink, so the
+     popover/dropdown/dialog tokens fall back to a flat gray border instead. */
+  --shadow-popover: none;
+  --shadow-dropdown: none;
+  --shadow-dialog: none;
+
+  scroll-behavior: auto;
+  font-weight: 500;
+}
+
+[data-theme="kindle"] .top-banner {
+  border-bottom: 1px solid #d0d0d0;
+}
+
+/* Kindle: shared overrides for the .banner-icon-btn group. Mirror the
+   selector list in main.css. */
+[data-theme="kindle"] .banner-toggle,
+[data-theme="kindle"] .banner-right-toggle,
+[data-theme="kindle"] .theme-btn,
+[data-theme="kindle"] .settings-btn,
+[data-theme="kindle"] .search-btn,
+[data-theme="kindle"] .comment-btn {
+  border-color: rgba(0,0,0,0.2);
+  color: rgba(0,0,0,0.5);
+}
+[data-theme="kindle"] .banner-toggle:hover,
+[data-theme="kindle"] .banner-right-toggle:hover,
+[data-theme="kindle"] .banner-right-toggle.active,
+[data-theme="kindle"] .theme-btn:hover, [data-theme="kindle"] .theme-btn.open,
+[data-theme="kindle"] .settings-btn:hover, [data-theme="kindle"] .settings-btn.open,
+[data-theme="kindle"] .search-btn:hover,
+[data-theme="kindle"] .comment-btn:hover {
+  background: rgba(0,0,0,0.05);
+  border-color: rgba(0,0,0,0.4);
+  color: #000;
+}
+[data-theme="kindle"] .banner-toggle.active {
+  background: rgba(0,0,0,0.08);
+  color: #000;
+}
+
+[data-theme="kindle"] .nav-link {
+  color: rgba(0,0,0,0.7);
+}
+[data-theme="kindle"] .nav-link:hover {
+  color: #000;
+  background: rgba(0,0,0,0.05);
+}
+
+[data-theme="kindle"] .nav-dropdown {
+  background: #f5f5f5;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+[data-theme="kindle"] .nav-dropdown li a {
+  color: rgba(0,0,0,0.7);
+}
+[data-theme="kindle"] .nav-dropdown li a:hover {
+  background: rgba(0,0,0,0.05);
+  color: #000;
+}
+
+[data-theme="kindle"] a {
+  color: #000;
+  text-decoration: underline;
+}
+[data-theme="kindle"] a:hover {
+  color: #333;
+}
+
+[data-theme="kindle"] .sidebar-list li.active a {
+  font-weight: 700;
+  color: #000;
+}
+
+[data-theme="kindle"] .toc-heading a.active {
+  font-weight: 700;
+  color: #000;
+}
+[data-theme="kindle"] .toc-child a.active {
+  font-weight: 700;
+  color: #000;
+}
+
+/* Kindle: code blocks — white background, black text, no color highlighting */
+[data-theme="kindle"] .article pre {
+  border: 1px solid #d0d0d0;
+  background: #fff;
+}
+
+[data-theme="kindle"] .article pre code.hljs {
+  background: #fff !important;
+}
+
+[data-theme="kindle"] .article pre code,
+[data-theme="kindle"] .article pre code span {
+  color: #000 !important;
+  background: none !important;
+}
+
+[data-theme="kindle"] .article code {
+  background: #f5f5f5;
+  border-color: #d0d0d0;
+  color: #000;
+}
+
+[data-theme="kindle"] .article blockquote {
+  border-left-color: #000;
+  background: #f9f9f9;
+  color: #333;
+}
+
+/* Kindle: CodeMirror — monochrome, bold for keywords/defs only */
+[data-theme="kindle"] .nb-source-wrap .CodeMirror {
+  color: #000;
+}
+[data-theme="kindle"] .nb-source-wrap .cm-keyword { color: #000; font-weight: bold; }
+[data-theme="kindle"] .nb-source-wrap .cm-def { color: #000; font-weight: bold; }
+[data-theme="kindle"] .nb-source-wrap .cm-builtin { color: #000; font-weight: bold; }
+[data-theme="kindle"] .nb-source-wrap .cm-variable { color: #000; font-weight: normal; }
+[data-theme="kindle"] .nb-source-wrap .cm-variable-2 { color: #000; font-weight: normal; }
+[data-theme="kindle"] .nb-source-wrap .cm-string { color: #000; font-weight: normal; }
+[data-theme="kindle"] .nb-source-wrap .cm-number { color: #000; font-weight: normal; }
+[data-theme="kindle"] .nb-source-wrap .cm-comment { color: #666; font-weight: normal; font-style: italic; }
+[data-theme="kindle"] .nb-source-wrap .cm-operator { color: #000; font-weight: bold; }
+[data-theme="kindle"] .nb-source-wrap .cm-meta { color: #000; font-weight: bold; }
+[data-theme="kindle"] .nb-source-wrap .cm-property { color: #000; font-weight: normal; }
+[data-theme="kindle"] .nb-source-wrap .cm-atom { color: #000; font-weight: bold; }
+[data-theme="kindle"] .nb-source-wrap .cm-type { color: #000; font-weight: bold; }
+[data-theme="kindle"] .nb-source-wrap .CodeMirror-cursor { border-left-color: #000; }
+
+/* ===== Background Color Variants ===== */
+/* Light backgrounds */
+[data-theme="light"][data-bg="green"] {
+  --color-bg: #f4faf6;
+  --color-bg-alt: #e8f5ec;
+}
+[data-theme="light"][data-bg="cool"] {
+  --color-bg: #eef2f7;
+  --color-bg-alt: #e4eaf2;
+}
+[data-theme="light"][data-bg="gray"] {
+  --color-bg: #f2f2f2;
+  --color-bg-alt: #eaeaea;
+}
+
+/* Dark backgrounds */
+[data-theme="dark"][data-bg="green"] {
+  --color-bg: #0b1210;
+  --color-bg-alt: #131f1b;
+}
+[data-theme="dark"][data-bg="cool"] {
+  --color-bg: #0d1520;
+  --color-bg-alt: #141d2d;
+}
+[data-theme="dark"][data-bg="gray"] {
+  --color-bg: #1e1e1e;
+  --color-bg-alt: #252526;
+}
+
+/* Background swatch UI */
+.bg-swatch-group {
+  display: flex;
+  gap: 6px;
+}
+.bg-swatch {
+  flex: 1;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  background: var(--swatch-color);
+  transition: all 0.15s;
+  padding: 0;
+}
+.bg-swatch:hover {
+  border-color: var(--color-primary);
+}
+.bg-swatch.active {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+/* Swatch preview colors per theme — tinted to represent actual backgrounds */
+[data-theme="light"] .bg-swatch[data-bg="default"] { --swatch-color: #ffffff; }
+[data-theme="light"] .bg-swatch[data-bg="green"]   { --swatch-color: #d4edda; }
+[data-theme="light"] .bg-swatch[data-bg="cool"]    { --swatch-color: #d0e3f5; }
+[data-theme="light"] .bg-swatch[data-bg="gray"]    { --swatch-color: #dcdcdc; }
+
+[data-theme="dark"] .bg-swatch[data-bg="default"]  { --swatch-color: #1c2128; }
+[data-theme="dark"] .bg-swatch[data-bg="green"]    { --swatch-color: #1a3328; }
+[data-theme="dark"] .bg-swatch[data-bg="cool"]     { --swatch-color: #182940; }
+[data-theme="dark"] .bg-swatch[data-bg="gray"]     { --swatch-color: #2d2d2d; }
+
+/* Hide bg picker for kindle theme */
+[data-theme="kindle"] .bg-picker-section { display: none; }
+
+/* ===== CodeMirror selection fix ===== */
+.nb-source-wrap .CodeMirror-selected,
+.nb-source-wrap .CodeMirror-focused .CodeMirror-selected {
+  background: rgba(3, 102, 214, 0.2);
+}
+[data-theme="dark"] .nb-source-wrap .CodeMirror-selected,
+[data-theme="dark"] .nb-source-wrap .CodeMirror-focused .CodeMirror-selected {
+  background: rgba(88, 166, 255, 0.25);
+}
+[data-theme="kindle"] .nb-source-wrap .CodeMirror-selected,
+[data-theme="kindle"] .nb-source-wrap .CodeMirror-focused .CodeMirror-selected {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* =====================================================================
+   E-Ink (kindle) global guards
+   ---------------------------------------------------------------------
+   These three rules enforce the e-ink contract across every module so we
+   don't have to chase each animation/shadow individually:
+     1. No motion   — animations + transitions are disabled (e-ink panels
+        ghost and smear on redraw, so movement is never wanted).
+     2. No shadow   — box/text/drop shadows are stripped (blur reads as a
+        muddy gray smear on a 1-bit/grayscale panel).
+   Color is handled by the grayscale token overrides above plus the
+   per-module rules that follow. Keep these `!important` — they must win
+   over inline-ish module rules and hardcoded values.
+   ===================================================================== */
+[data-theme="kindle"],
+[data-theme="kindle"] *,
+[data-theme="kindle"] *::before,
+[data-theme="kindle"] *::after {
+  animation: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  scroll-behavior: auto !important;
+}
+
+/* =====================================================================
+   E-Ink (kindle) per-module color overrides
+   ---------------------------------------------------------------------
+   The long tail of hardcoded (non-token) hues that the grayscale token
+   swap above can't reach. Everything collapses to black / white / gray.
+   These are additive, kindle-scoped rules — the light/dark themes are
+   untouched. Grouped by module to stay discoverable.
+   ===================================================================== */
+
+/* --- Comments: highlight + resolved/danger/orphan chrome --- */
+[data-theme="kindle"] .comment-current {
+  outline-color: #000 !important;
+}
+[data-theme="kindle"] .comment-highlight {
+  background: #ececec;
+  border-bottom: 1px solid #000;
+}
+[data-theme="kindle"] .comment-highlight:hover {
+  background: #dcdcdc;
+}
+[data-theme="kindle"] .comment-popup-resolved-tag {
+  background: #ececec;
+  color: #000;
+}
+[data-theme="kindle"] .comment-popup-actions .comment-btn-danger {
+  color: #000;
+}
+[data-theme="kindle"] .comment-popup-actions .comment-btn-danger:hover {
+  background: #ececec;
+}
+[data-theme="kindle"] .comment-orphans {
+  background: #f5f5f5;
+  border-color: #999;
+}
+
+/* --- Notebook: status dots, stderr/error, timeout banner --- */
+[data-theme="kindle"] .nb-status-dot.idle,
+[data-theme="kindle"] .nb-status-dot.loading,
+[data-theme="kindle"] .nb-status-dot.ready,
+[data-theme="kindle"] .nb-status-dot.running {
+  background: #000 !important;
+}
+[data-theme="kindle"] .nb-status-dot.idle {
+  background: #999 !important;
+}
+[data-theme="kindle"] .nb-run-btn.nb-stopping {
+  color: #000;
+}
+[data-theme="kindle"] .nb-run-btn.nb-stopping:hover {
+  background: #ececec;
+}
+[data-theme="kindle"] .nb-stream.nb-stderr,
+[data-theme="kindle"] .nb-error {
+  color: #000;
+  background: #f0f0f0;
+}
+[data-theme="kindle"] .nb-timeout-warning,
+[data-theme="kindle"] .nb-timeout-reset {
+  color: #000;
+  background: #f0f0f0;
+  border-color: #999;
+}
+[data-theme="kindle"] .nb-timeout-reset:hover {
+  background: #e2e2e2;
+}
+
+/* --- Tables: error text --- */
+[data-theme="kindle"] .th-dd-err {
+  color: #000;
+}
+
+/* --- Whiteboard: loading spinner + ink text editor --- */
+[data-theme="kindle"] .ink-loading {
+  border-top-color: #000 !important;
+}
+[data-theme="kindle"] .ink-text-editor {
+  border-color: #000 !important;
+}
+
+/* --- Exhibit (board library): hardcoded status + hover chrome.
+   (card-add hover, export hover fill and the drop target are token-driven,
+   so they already collapse to grayscale — only the literal hues remain.) --- */
+[data-theme="kindle"] .ink-boards-status-err,
+[data-theme="kindle"] .ink-boards-status-ok {
+  border-color: #999 !important;
+  background: #f0f0f0 !important;
+  color: #000 !important;
+}
+[data-theme="kindle"] .ink-boards-card-del:hover,
+[data-theme="kindle"] .ink-boards-card-export:hover,
+[data-theme="kindle"] .ink-boards-recycle-purge:hover {
+  background: #000 !important;
+  color: #fff !important;
+}
+[data-theme="kindle"] .ink-boards-recycle-restore:hover {
+  background: #333 !important;
+}
+
+/* --- Ink toolbar: active button + pen-only lock (chrome, not pen color) --- */
+[data-theme="kindle"] .ink-l1-btn.active {
+  background: #000 !important;
+  color: #fff !important;
+}
+[data-theme="kindle"] .ink-l1-btn[data-action="penonly"].active,
+[data-theme="kindle"] .ink-l1-btn[data-action="penonly"].active:hover {
+  background: #000 !important;
+  border-color: #000 !important;
+  color: #fff !important;
+}
+
+/* --- PDF annotator: warning banner, find highlight, progress, badges --- */
+[data-theme="kindle"] .pdfa-size-warning {
+  background: #ececec !important;
+  color: #000 !important;
+  border-bottom-color: #999 !important;
+}
+[data-theme="kindle"] .textLayer .highlight {
+  background-color: rgba(0, 0, 0, 0.18) !important;
+}
+[data-theme="kindle"] .textLayer .highlight.selected {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+[data-theme="kindle"] .pdfa-progress-fill {
+  background: #000 !important;
+}
+[data-theme="kindle"] .pdfa-toolbar-unfold-btn {
+  background: #000 !important;
+}
+[data-theme="kindle"] .pdfa-toolbar-unfold-btn:hover {
+  background: #333 !important;
+}
+[data-theme="kindle"] #pdf-annotator-container .ink-text-editor:focus {
+  border-color: #000 !important;
+}
+[data-theme="kindle"] #pdf-annotator-container .textLayer ::selection {
+  background: rgba(0, 0, 0, 0.25) !important;
+}
+[data-theme="kindle"] .pdfa-library-card:hover .pdfa-library-thumb {
+  filter: none !important;
+  transform: none !important;
+}
+[data-theme="kindle"] .pdfa-crop-auto-btn.done {
+  background: #ececec !important;
+  color: #000 !important;
+}
+
+/* --- Content highlights: text selection + markdown <mark> stay grayscale --- */
+[data-theme="kindle"] ::selection {
+  background: #cfcfcf;
+  color: #000;
+}
+[data-theme="kindle"] .article mark {
+  background: #ececec;
+  color: #000;
+}
+
+/* --- Syllabus DAG: edge/dependency/taken highlight colors --- */
+[data-theme="kindle"] .syllabus-dag {
+  --sd-edge-hi: #000;
+  --sd-dep-hi: #000;
+  --sd-taken-border: #000;
+}
+
+/* --- Main: visibility-level banner badges + tag underlines + mod dot --- */
+[data-theme="kindle"] .site-title[data-level="secret"],
+[data-theme="kindle"] .site-title[data-level="private"],
+[data-theme="kindle"] .site-title[data-level="internal"] {
+  --banner-bg: #333333;
+}
+[data-theme="kindle"] a[data-tag] {
+  text-decoration-color: #000 !important;
+}
+[data-theme="kindle"] .shp-mod-dot.on {
+  background: #000;
+}
+
+/* --- Whiteboard widgets: config-dialog chrome (pickers, focus, save) --- */
+[data-theme="kindle"] .ink-widget-library,
+[data-theme="kindle"] .ink-clock-zone-picker,
+[data-theme="kindle"] .ink-weather-location-picker,
+[data-theme="kindle"] .ink-date-countdown-picker {
+  background: #f5f5f5 !important;
+  border-color: #999 !important;
+}
+[data-theme="kindle"] .ink-clock-zone-search:focus,
+[data-theme="kindle"] .ink-weather-location-search:focus,
+[data-theme="kindle"] .ink-date-countdown-input:focus {
+  border-color: #000 !important;
+}
+[data-theme="kindle"] .ink-widget-preview-hit:hover {
+  border-color: #000 !important;
+}
+[data-theme="kindle"] .ink-clock-zone-result:hover,
+[data-theme="kindle"] .ink-clock-zone-result.active,
+[data-theme="kindle"] .ink-clock-zone-result.selected,
+[data-theme="kindle"] .ink-weather-location-result:hover,
+[data-theme="kindle"] .ink-weather-location-result.active,
+[data-theme="kindle"] .ink-weather-location-result.selected {
+  border-color: #000 !important;
+  background: #e6e6e6 !important;
+}
+[data-theme="kindle"] .ink-clock-zone-save,
+[data-theme="kindle"] .ink-weather-location-save {
+  background: #000 !important;
+  border-color: #000 !important;
+  color: #fff !important;
+}
+[data-theme="kindle"] .ink-todo-dom-text.selected,
+[data-theme="kindle"] .ink-todo-dom-count.selected {
+  color: #000 !important;
+}
+/* Todo accent is a user-chosen hue set inline as --todo-accent-color; an
+   !important author rule still beats an inline *normal* declaration, so the
+   checkbox ring + dot collapse to black while the fill stays white. */
+[data-theme="kindle"] .ink-todo-dom-control {
+  --todo-accent-color: #000 !important;
+}
+[data-theme="kindle"] .ink-todo-dom-check {
+  background: #f0f0f0 !important;
+}
+[data-theme="kindle"] .ink-todo-dom-check.done {
+  background: #fff !important;
+}
+[data-theme="kindle"] .ink-todo-dom-row.draft:hover::before,
+[data-theme="kindle"] .ink-todo-dom-row.draft.editing::before,
+[data-theme="kindle"] .ink-todo-dom-row.list:hover::before,
+[data-theme="kindle"] .ink-todo-dom-row.list.selected::before {
+  border-color: #000 !important;
+  background: #e6e6e6 !important;
+}
+[data-theme="kindle"] .ink-todo-dom-control.remove .ink-todo-dom-remove-mark {
+  background: #000 !important;
+}

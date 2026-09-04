@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="build-commit" content="c659b99">
+  <title>Financial 1001 - Jingqi's Interpositive</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/main.css?v=c659b99">
+  <link rel="stylesheet" href="/static/link-preview.css">
+  <link rel="stylesheet" href="/static/sidebar-panel.css">
+  <link rel="stylesheet" href="/static/table-enhance.css">
+  <link rel="stylesheet" href="/static/syllabus-enhance.css">
+  <link rel="stylesheet" href="/static/comments.css">
+  <link rel="stylesheet" href="/static/notebook.css">
+  <link rel="stylesheet" href="/static/themes.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var linkPreviewEmbed=false;
+      try{
+        var previewUrl=new URL(location.href);
+        linkPreviewEmbed=previewUrl.searchParams.get('rprint-preview')==='1'&&window.parent!==window&&window.parent.location.origin===location.origin;
+      }catch(e){}
+      if(linkPreviewEmbed){
+        document.documentElement.classList.add('link-preview-embed');
+        var previewArticleLink=function(target){return target&&target.closest&&target.closest('.article a[href]');};
+        var blockPreviewLink=function(event){if(previewArticleLink(event.target)){event.preventDefault();event.stopImmediatePropagation();}};
+        document.addEventListener('click',blockPreviewLink,true);
+        document.addEventListener('auxclick',blockPreviewLink,true);
+        document.addEventListener('keydown',function(event){if(event.key==='Enter')blockPreviewLink(event);},true);
+        document.addEventListener('dblclick',function(event){if(event.target&&event.target.closest&&event.target.closest('.article')){event.preventDefault();event.stopImmediatePropagation();}},true);
+      }
+      var bc=document.querySelector('meta[name="build-commit"]');
+      var commit=bc?bc.getAttribute('content'):'';
+      if(commit&&commit!=='unknown'){
+        var prev=localStorage.getItem('kb-build-commit');
+        if(prev&&prev!==commit){
+          var keys=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf('kb-')===0)keys.push(k);}
+          keys.forEach(function(k){localStorage.removeItem(k);});
+          localStorage.setItem('kb-build-commit',commit);
+          if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+            navigator.serviceWorker.controller.postMessage('clearCaches');
+          }
+          window.location.reload();
+          return;
+        }
+        localStorage.setItem('kb-build-commit',commit);
+      }
+      // Resume last visited page on PWA/browser launch. PWA launches carry
+      // `?pwa=1`; a normal browser launch is a plain root URL without a same-
+      // origin referrer. `/index.html` is an explicit home navigation, so it
+      // never resumes. Runs before paint to avoid a flash of the home page.
+      // Validates the stored path is a same-origin absolute path (rejects
+      // `//host` / `/\host` open-redirects).
+      var resumeLaunch=/[?&]pwa=1(&|$)/.test(location.search);
+      try{
+        var launchUrl=new URL(location.href);
+        launchUrl.searchParams.delete('pwa');
+        var sameOriginReferrer=false;
+        try{sameOriginReferrer=!!document.referrer&&new URL(document.referrer,location.href).origin===location.origin;}catch(e){}
+        resumeLaunch=resumeLaunch||(launchUrl.pathname==='/'&&!launchUrl.search&&!launchUrl.hash&&!sameOriginReferrer);
+      }catch(e){}
+      if(resumeLaunch){
+        try{
+          var last=localStorage.getItem('kb-last-location');
+          var lastPath=last&&last.split('#')[0].split('?')[0];
+          if(last&&/^\/[^/\\]/.test(last)&&lastPath!=='/'&&lastPath!=='/index.html'){
+            try{sessionStorage.setItem('kb-resume-last-scroll','1');}catch(e){}
+            location.replace(last);return;
+          }
+        }catch(e){}
+      }
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      var mob=window.matchMedia('(max-width:650px)').matches;
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.style.colorScheme=t==='dark'?'dark':'light';
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      var w=p.contentWidth||(mob?'100':'90');
+      document.documentElement.style.setProperty('--content-max-width',w+'%');
+      var edge=p.ignoreCorners!==undefined?p.ignoreCorners==='on':false;
+      if(edge&&w==='100')document.documentElement.setAttribute('data-ignore-corners','on');
+      if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches||window.matchMedia('(display-mode:fullscreen)').matches)document.documentElement.classList.add('pwa-standalone');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'kaiti';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.0};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+      var ht=t==='dark'?'github-dark':'github';
+      var writes='<link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/'+ht+'.min.css">';
+      document.write(writes);
+    })();
+  </script>
+  <style>.math{opacity:0;transition:opacity .15s}.math.rprint-render-failed{opacity:1}</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css" integrity="sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM" crossorigin="anonymous">
+  <script id="rprint-katex" defer src="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.js" integrity="sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI" crossorigin="anonymous"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('katex')}else{document.querySelectorAll('.math').forEach(function(el){var src=el.textContent;el.setAttribute('data-latex',src);katex.render(src,el,{displayMode:el.classList.contains('display'),throwOnError:false,trust:function(ctx){return ctx&&ctx.command==='\\href'&&typeof ctx.url==='string'&&/^#[A-Za-z0-9:._-]+$/.test(ctx.url);}});el.querySelectorAll('mtable[columnspacing=\'\']').forEach(function(t){t.removeAttribute('columnspacing')});el.style.opacity='1';})}"></script>
+  <script>document.getElementById('rprint-katex').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('katex',new Error('KaTeX failed to load'))}else{document.querySelectorAll('.math').forEach(function(el){el.style.opacity='1'})}});</script>
+</head>
+<body data-page-type="markdown">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <button class="banner-toggle" id="left-toggle" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h12v1.5H2V3zm0 4h12v1.5H2V7zm0 4h12v1.5H2V11z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-center">
+        <div class="banner-center-inner">
+          <a href="/index.html" class="site-title" data-short="Interpositive">Jingqi's Interpositive</a>
+          <span class="spa-health-wrap" id="spa-health-wrap">
+            <span class="spa-health-dot" id="spa-health-dot" title="SPA server status"></span>
+            <div class="spa-health-popup" id="spa-health-popup">
+              <div class="shp-header">
+                <span class="shp-title">Server Status</span>
+                <span class="shp-heart" id="shp-heart"></span>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-metrics">
+                <div class="shp-row"><span class="shp-label">Ping</span><span class="shp-value" id="shp-ping">—</span></div>
+                <div class="shp-row"><span class="shp-label">Uptime</span><span class="shp-value" id="shp-uptime">—</span></div>
+                <div class="shp-row"><span class="shp-label">Memory</span><span class="shp-value" id="shp-memory">—</span></div>
+                <div class="shp-row"><span class="shp-label">CPU Time</span><span class="shp-value" id="shp-cpu-time">—</span></div>
+                <div class="shp-row"><span class="shp-label">Load</span><span class="shp-value" id="shp-load">—</span></div>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-modules">
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-watch"></span> Watch</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-jupyter"></span> Jupyter</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-terminal"></span> Terminal</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-proxy"></span> Proxy</div>
+              </div>
+            </div>
+          </span>
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="/cs-notes/" class="nav-link" data-short="CS">CS</a><ul class="nav-dropdown"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li><a href="/cs-notes/mit-gir/index.html">MIT GIR</a></li><li><a href="/cs-notes/cs-math/index.html">CS Math</a></li></ul></li><li class="nav-item"><a href="/not-cs-notes/" class="nav-link" data-short="Not-CS">Not-CS</a><ul class="nav-dropdown"><li><a href="/not-cs-notes/mit-math-requirements.html">MIT Math Syllabus</a></li></ul></li><li class="nav-item"><a href="/notebook/" class="nav-link" data-short="Mixed">Mixed</a><ul class="nav-dropdown"><li><a href="/notebook/mind/index.html">Mind</a></li><li><a href="/notebook/matter/index.html">Matter</a></li><li><a href="/notebook/practice/index.html">Practice</a></li><li><a href="/notebook/toolbox/index.html">Toolbox</a></li></ul></li><li class="nav-item"><a href="/years/" class="nav-link" data-short="Years">Years</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="banner-right">
+        <button class="banner-right-toggle" title="More controls">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="search-wrap" id="search-wrap">
+          <button class="search-btn" id="search-btn" title="Search (Ctrl+K)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-input-wrap" id="search-input-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search…" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+        <div class="comment-wrap" id="comment-wrap">
+          <button class="comment-btn" id="comment-btn" title="Review Comments (A)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <span class="comment-nav-count" id="comment-nav-count"></span>
+          <button class="comment-nav-btn" id="comment-nav-prev" title="Previous comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="comment-nav-btn" id="comment-nav-next" title="Next comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <button class="settings-btn" id="settings-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="settings-panel" id="settings-panel">
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Native Jupyter <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="native-jupyter-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Global Search <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="content-search-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Quick Edit <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="quick-edit-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section resource-pack-setting" id="resource-pack-setting" hidden>
+            <div class="settings-row resource-pack-row">
+              <span class="settings-desc">Offline resources</span>
+              <button type="button" class="settings-action-btn" id="resource-pack-import-btn">Import</button>
+            </div>
+            <input type="file" id="resource-pack-input" accept=".rpack,application/vnd.rprint.resource-pack" hidden>
+            <div class="resource-pack-status" id="resource-pack-status" aria-live="polite"></div>
+            <button type="button" class="settings-link-btn" id="resource-pack-rollback-btn" hidden>Undo last import</button>
+          </div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent link-preview-settings-parent">
+            <label class="style-label" id="link-preview-label">Link Preview <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="link-preview-switch" role="switch" aria-labelledby="link-preview-label" aria-checked="false" aria-expanded="false" aria-controls="link-preview-settings-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children link-preview-settings-children" id="link-preview-settings-children" hidden>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-same-page-only-label">Same-page links only</label>
+              <button class="style-switch style-switch-compact" id="link-preview-same-page-only-switch" role="switch" aria-labelledby="link-preview-same-page-only-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-auto-close-label">Auto-close</label>
+              <button class="style-switch style-switch-compact" id="link-preview-auto-close-switch" role="switch" aria-labelledby="link-preview-auto-close-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-overwrite-jumping-label">Overwrite Link Jumping</label>
+              <button class="style-switch style-switch-compact" id="link-preview-overwrite-jumping-switch" role="switch" aria-labelledby="link-preview-overwrite-jumping-label" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+            </div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-row settings-title-row settings-dependent-parent">
+            <span class="settings-panel-title">Keyboard Shortcuts</span>
+            <button class="style-switch" id="kb-enabled-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children keyboard-shortcuts-children">
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="search"><span class="settings-desc">Search</span><span class="settings-keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="scroll"><span class="settings-desc">Scroll down / up</span><span class="settings-keys"><kbd>J</kbd> <kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="section"><span class="settings-desc">Next / prev section</span><span class="settings-keys"><kbd>U</kbd> <kbd>I</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="sidebar-toc"><span class="settings-desc"><span data-shortcut-part="sidebar">Sidebar / </span>TOC</span><span class="settings-keys"><kbd data-shortcut-part="sidebar">S</kbd> <kbd>T</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="spread"><span class="settings-desc">Next / prev spread</span><span class="settings-keys"><kbd>PgDn</kbd> <kbd>PgUp</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="comments"><span class="settings-desc">Comments</span><span class="settings-keys"><kbd>A</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="fold"><span class="settings-desc">Fold banner</span><span class="settings-keys"><kbd>F</kbd></span></div>
+            
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="dismiss"><span class="settings-desc">Close / Dismiss</span><span class="settings-keys"><kbd>Esc</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="settings"><span class="settings-desc">Show this panel</span><span class="settings-keys"><kbd>?</kbd></span></div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent">
+            <label class="style-label">Debug Mode</label>
+            <button class="style-switch" id="debug-mode-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="debug-children" id="debug-children">
+            <div class="settings-dependent-children">
+              <div class="settings-panel-section settings-dependent-child debug-log-level-setting">
+                <label class="style-label">Client Log Level</label>
+                <div class="style-toggle-group">
+                  <button class="style-toggle-btn debug-level-btn" data-level="error">Error</button>
+                  <button class="style-toggle-btn debug-level-btn" data-level="info">Info</button>
+                  <button class="style-toggle-btn debug-level-btn active" data-level="debug">Debug</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-footer" id="settings-git-version">c659b99</div>
+        </div>
+        <a href="/static/settings.html?v=c659b99" class="theme-btn" id="theme-btn" title="Theme & display">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="13.5" cy="6.5" r=".5"/>
+            <circle cx="17.5" cy="10.5" r=".5"/>
+            <circle cx="8.5" cy="7.5" r=".5"/>
+            <circle cx="6.5" cy="12.5" r=".5"/>
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+          </svg>
+        </a>
+        <div class="style-panel" id="style-panel">
+          <div class="style-panel-section">
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn active" data-theme="light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light
+              </button>
+              <button class="style-toggle-btn" data-theme="dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="style-toggle-btn" data-theme="kindle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                E-Ink
+              </button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn font-btn active" data-font="system">System</button>
+              <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+              <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">字体</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn fontzh-btn active" data-fontzh="default">系统</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="noto-serif">宋体</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+            </div>
+          </div>
+          <div class="style-panel-section bg-picker-section">
+            <label class="style-label">Background</label>
+            <div class="bg-swatch-group" id="bg-swatch-group">
+              <button class="bg-swatch active" data-bg="default" title="Default"></button>
+              <button class="bg-swatch" data-bg="green" title="Green"></button>
+              <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+              <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+              <div class="style-range-ticks">
+                <span class="style-range-tick font-size-tick" data-i="0">12</span>
+                <span class="style-range-tick font-size-tick" data-i="1">14</span>
+                <span class="style-range-tick font-size-tick" data-i="2">16</span>
+                <span class="style-range-tick font-size-tick" data-i="3">18</span>
+                <span class="style-range-tick font-size-tick" data-i="4">24</span>
+                <span class="style-range-tick font-size-tick" data-i="5">32</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+              <div class="style-range-ticks">
+                <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+                <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+                <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+                <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+                <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+                <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Width <span id="width-value">90%</span></label>
+            <div class="style-slider-wrap width-slider-wrap">
+              <input type="range" class="style-range" id="content-width-range" min="0" max="5" step="1" value="3">
+              <div class="style-range-ticks width-ticks">
+                <span class="style-range-tick width-tick" data-i="0">50</span>
+                <span class="style-range-tick width-tick" data-i="1">65</span>
+                <span class="style-range-tick width-tick" data-i="2">80</span>
+                <span class="style-range-tick width-tick" data-i="3">90</span>
+                <span class="style-range-tick width-tick" data-i="4">95</span>
+                <span class="style-range-tick width-tick" data-i="5">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="ignore-corners-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">2 Columns <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+        </div>
+        <button class="banner-toggle" id="fold-banner-btn" title="Fold banner">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 4l4 4-4 4zm10 0l-4 4 4 4z"/>
+          </svg>
+        </button>
+        <button class="banner-toggle" id="right-toggle" title="Toggle table of contents">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-right-dropdown"></div>
+    </div>
+  </header>
+
+  <!-- Floating buttons when banner is folded -->
+  <div class="banner-fold-float" id="banner-fold-float">
+    <button class="banner-fold-float-btn" id="unfold-banner-btn" title="Unfold banner">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M7 4L3 8l4 4zm2 0l4 4-4 4z"/>
+      </svg>
+    </button>
+    <button class="banner-fold-float-btn" id="float-toc-btn" title="Toggle table of contents">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout left-collapsed right-collapsed">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar collapsed" id="left-sidebar">
+      <div class="sidebar-content" id="spa-sidebar">
+        <!-- rprint:sidebar:start -->
+        <a class="sidebar-cat-title" href="/notebook">Mixed</a><ul class="sidebar-list"><li class="sidebar-group" data-priority="0"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/mind/index.html">Mind</a><span class="sidebar-toggle"></span></span><ul><li><a href="/notebook/mind/ideas.html">脑洞</a></li></ul></li><li class="sidebar-group" data-priority="0.001"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/matter/index.html">Matter</a><span class="sidebar-toggle"></span></span><ul><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/matter/vehicle.html">车</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/matter/vehicle/camaro-manual.html">Camaro Manual 📄</a></li><li><a href="/notebook/matter/vehicle/camaro-quickstart.html">Camaro Quick Start 📄</a></li><li><a href="/notebook/matter/vehicle/camaro-hp.html">Camaro High Performance Manual 📄</a></li><li><a href="/notebook/matter/vehicle/r-maintenance.html">Golf R Maintenance Guide 📄</a></li><li><a href="/notebook/matter/vehicle/ct4-us-manual.html">CT4 US Manual 📄</a></li><li><a href="/notebook/matter/vehicle/ct4-maintenance.html">CT4 Maintenance Guide 📄</a></li></ul></li><li><a href="/notebook/matter/optics.html">光学</a></li></ul></li><li class="sidebar-group" data-priority="0.002"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/practice/index.html">Practice</a><span class="sidebar-toggle"></span></span><ul><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/lab.html">玩具间 🚜</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/lab/cloudflare.html">CF 白嫖指南 🚜</a></li><li><a href="/notebook/practice/lab/openwrt-router.html">OpenWrt 软路由 🚜</a></li><li><a href="/notebook/practice/lab/git.html">GitLab https OAuth 配置 🚜</a></li></ul></li><li><a href="/notebook/practice/desktop-os-comparison.html">桌面操作系统比较 🚜</a></li><li><a href="/notebook/practice/linux.html">Linux 101 🚜</a></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/windows.html">Windows 101 🚜</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/windows/disable-telemetry.html">关闭 Windows 遥测 🚜</a></li><li><a href="/notebook/practice/windows/disable-residual.html">关闭 Windows 其他组件 🚜</a></li><li><a href="/notebook/practice/windows/disable-defender.html">关闭 Windows Defender 🚜</a></li></ul></li></ul></li><li class="sidebar-group open" data-priority="0.003"><span class="sidebar-row"><a class="sidebar-group-title active-group" href="/notebook/toolbox/index.html">Toolbox</a><span class="sidebar-toggle"></span></span><ul><li class="active has-children open" data-priority="0"><span class="sidebar-row"><a href="/notebook/toolbox/financial.html">Financial 1001</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/toolbox/financial/tax-us-redmond.html">Simple Income Tax Calc (Redmond) 🐍</a></li><li><a href="/notebook/toolbox/financial/tax-china-suzhou.html">简易个人所得税计算器（苏州） 🐍</a></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/toolbox/hardware.html">Hardware 1001</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/toolbox/hardware/ppi.html">PPI Calculator 🐍</a></li><li><a href="/notebook/toolbox/hardware/disk_array_survival_rate.html">Disk Array Survival Rate 🐍</a></li></ul></li></ul></li></ul>
+        <!-- rprint:sidebar:end -->
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content" id="content">
+      <article class="article" id="spa-content">
+        <p data-sourcepos="1:1-1:1">普通人的财务首先是风险管理，其次才是投资收益。不同国家的制度差异很大，但共同目标都一样：现金流不断、重大风险可承受、长期资产能积累。</p>
+<h2 id="核心框架" data-sourcepos="3:1-3:1">核心框架</h2>
+<p data-sourcepos="5:1-5:1">先把财务问题分成几层：</p>
+<div class="table-wrap"><table data-sourcepos="7:1-16:1">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>层级</th>
+<th>目标</th>
+<th>常见问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>现金流</td>
+<td>收入、支出、应急金能否覆盖日常生活</td>
+<td>月光、消费贷、没有备用金</td>
+</tr>
+<tr>
+<td>社会保障</td>
+<td>医疗、养老、失业、工伤等基础保障是否连续</td>
+<td>断缴、不懂报销、不知道账户权益</td>
+</tr>
+<tr>
+<td>税务</td>
+<td>是否理解扣除、预扣、申报和年度规则</td>
+<td>多交税、漏报、错报</td>
+</tr>
+<tr>
+<td>保险</td>
+<td>大病、意外、家庭责任等低概率高损失风险是否可承受</td>
+<td>买错险、保额不足、重复购买</td>
+</tr>
+<tr>
+<td>负债</td>
+<td>债务利率、期限和现金流压力是否合理</td>
+<td>信用卡循环债、消费贷、房贷压力过高</td>
+</tr>
+<tr>
+<td>投资</td>
+<td>是否理解产品、费用、流动性和最大亏损</td>
+<td>追热点、误信保本高收益、杠杆投机</td>
+</tr>
+<tr>
+<td>养老</td>
+<td>长期储蓄和退休收入来源是否足够分散</td>
+<td>只靠基本社会养老金</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="中国" data-sourcepos="17:1-17:1">中国</h2>
+<h3 id="五险一金" data-sourcepos="19:1-19:1">五险一金</h3>
+<p data-sourcepos="21:1-21:1">五险一金不是额外福利，而是中国普通人的基础财务系统：养老保险、医疗保险、失业保险、工伤保险、生育保险和住房公积金，分别对应退休、医疗、失业、工伤、生育和购房/租房支持。</p>
+<p data-sourcepos="23:1-23:1">最少要确认：</p>
+<ul data-sourcepos="25:1-29:1">
+<li>公司是否足额缴纳。</li>
+<li>缴费基数是不是真实工资。</li>
+<li>离职、换城市、自由职业后怎么续缴。</li>
+<li>公积金能否用于房贷、租房或提取。</li>
+<li>医保异地就医、门诊、住院怎么报销。</li>
+</ul>
+<h3 id="个人所得税" data-sourcepos="31:1-31:1">个人所得税</h3>
+<p data-sourcepos="33:1-33:1">专项附加扣除，常见项目包括子女教育、继续教育、大病医疗、住房贷款利息、住房租金、赡养老人、3 岁以下婴幼儿照护等。</p>
+<p data-sourcepos="35:1-35:1">有孩子、房贷、租房、赡养老人或继续教育支出时，应该每年检查一次个人所得税 App 里的专项附加扣除和年度汇算。</p>
+<h3 id="医保" data-sourcepos="37:1-37:1">医保</h3>
+<p data-sourcepos="39:1-39:1">医保的实用性取决于当地规则和使用方式。至少要知道自己是职工医保还是居民医保，以及门诊、住院、大病、异地就医分别怎么报销。</p>
+<p data-sourcepos="41:1-41:1">优先查清楚：</p>
+<ul data-sourcepos="43:1-47:1">
+<li>定点医院和定点药店。</li>
+<li>起付线、封顶线、报销比例。</li>
+<li>门诊统筹是否覆盖常见检查、治疗和药品。</li>
+<li>异地就医是否需要备案。</li>
+<li>家庭共济、个人账户余额等当地政策。</li>
+</ul>
+<h3 id="房">房</h3>
+<p data-sourcepos="51:1-51:1">中国财务里，房子往往同时是最大资产和最大负债。买房不是只看“能不能上车”，而是看现金流能不能扛住。</p>
+<p data-sourcepos="53:1-53:1">购房前至少要算清：</p>
+<ul data-sourcepos="55:1-60:1">
+<li>首付比例和交易税费。</li>
+<li>等额本息、等额本金的差异。</li>
+<li>商贷、公积金贷、组合贷的成本。</li>
+<li>房贷利率调整方式和提前还款规则。</li>
+<li>物业费、维修基金、中介费、装修和家具成本。</li>
+<li>房价下跌或急需用钱时的流动性风险。</li>
+</ul>
+<h3 id="投资" data-sourcepos="62:1-62:1">投资</h3>
+<p data-sourcepos="64:1-64:1">中国普通人常见投资产品包括银行存款、货币基金、债券基金、混合基金、股票基金、指数基金、银行理财、股票和黄金。重点不是追热点，而是先弄清楚产品到底是什么。</p>
+<p data-sourcepos="66:1-66:1">买入前问这些问题：</p>
+<ul data-sourcepos="68:1-74:1">
+<li>是否保本。</li>
+<li>这个投资品的资产是什么（债、股、还是其他什么）。</li>
+<li>风险等级是多少。</li>
+<li>能不能随时赎回，赎回多久到账。</li>
+<li>最大可能亏损是多少。</li>
+<li>申购费、赎回费、管理费和托管费是多少。</li>
+<li>历史收益是否被短期行情或宣传口径包装过。</li>
+</ul>
+<h3 id="养老" data-sourcepos="76:1-76:1">养老</h3>
+<p data-sourcepos="78:1-78:1">中国养老可以粗略分成三层：</p>
+<div class="table-wrap"><table data-sourcepos="80:1-85:1">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>支柱</th>
+<th>内容</th>
+<th>普通人关注点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一支柱</td>
+<td>基本养老保险</td>
+<td>缴费年限、缴费基数、账户连续性</td>
+</tr>
+<tr>
+<td>第二支柱</td>
+<td>企业年金、职业年金</td>
+<td>单位是否提供，个人是否需要匹配缴纳</td>
+</tr>
+<tr>
+<td>第三支柱</td>
+<td>个人养老金、商业养老保险、长期投资</td>
+<td>税收优惠、费用、流动性、长期收益</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="86:1-86:1">顺序通常是：先保证社保连续，再看单位有没有企业年金，最后再考虑个人养老金、指数基金、商业养老险等补充工具。</p>
+<h3 id="优先级" data-sourcepos="88:1-88:1">优先级</h3>
+<p data-sourcepos="90:1-90:1">一个保守顺序：</p>
+<ol type="1" data-sourcepos="92:1-98:1">
+<li>医保和社保不断缴。</li>
+<li>建立应急金。</li>
+<li>控制消费贷和高息债务。</li>
+<li>配置必要保险。</li>
+<li>做房贷压力测试。</li>
+<li>做长期投资。</li>
+<li>补充养老。</li>
+</ol>
+<p data-sourcepos="100:1-100:1">特别小心：高息网贷、消费贷、民间借贷、虚拟币带单、原始股、资金盘、保本高收益理财。</p>
+<h2 id="美国" data-sourcepos="102:1-102:1">美国</h2>
+<h3 id="信用分" data-sourcepos="104:1-104:1">信用分</h3>
+<p data-sourcepos="106:1-106:1">在美国，信用记录会影响信用卡、车贷、房贷、租房，甚至部分保险费率。信用分的重要性比中国高很多。</p>
+<p data-sourcepos="108:1-108:1">基本动作：</p>
+<ul data-sourcepos="110:1-115:1">
+<li>按时还款。</li>
+<li>控制信用卡利用率。</li>
+<li>不只还最低还款。</li>
+<li>不随便关闭最老的信用卡账户。</li>
+<li>谨慎申请新卡，理解 hard inquiry。</li>
+<li>定期检查信用报告是否有错误或身份盗用。</li>
+</ul>
+<h3 id="税务" data-sourcepos="117:1-117:1">税务</h3>
+<p data-sourcepos="119:1-119:1">美国税务比中国更复杂。普通人至少要知道：</p>
+<ul data-sourcepos="121:1-125:1">
+<li>W-2 通常对应雇员收入。</li>
+<li>1099 常见于自由职业、平台收入、投资收益和银行利息。</li>
+<li>工资预扣不等于最终税额。</li>
+<li>可能同时有联邦税、州税、地方税。</li>
+<li>报税身份会影响税率、扣除和抵免。</li>
+</ul>
+<p data-sourcepos="127:1-127:1">美国标准扣除、税率、退休账户限额等每年可能调整。2026 税年联邦标准扣除额可按 IRS 当年公告复核；不要把往年的软件默认值当成永久规则。</p>
+<h3 id="退休账户" data-sourcepos="129:1-129:1">退休账户</h3>
+<p data-sourcepos="131:1-131:1">美国普通人最该理解的是税收优惠退休账户：401(k)、Traditional IRA、Roth IRA，以及部分雇主提供的 Roth 401(k)。</p>
+<p data-sourcepos="133:1-133:1">关键区别：</p>
+<div class="table-wrap"><table data-sourcepos="135:1-140:1">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>账户</th>
+<th>税务逻辑</th>
+<th>重点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Traditional 401(k) / IRA</td>
+<td>现在可能少交税，退休取出时交税</td>
+<td>适合当前边际税率较高、希望递延纳税的人</td>
+</tr>
+<tr>
+<td>Roth 401(k) / Roth IRA</td>
+<td>现在用税后钱，未来符合条件免税取出</td>
+<td>适合预期未来税率较高或想增加退休税务弹性的人</td>
+</tr>
+<tr>
+<td>HSA</td>
+<td>符合条件时可用于医疗支出税收优惠</td>
+<td>需要搭配 HDHP，规则要单独确认</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="141:1-141:1">公司 match 是非常重要的福利。若现金流允许，通常应优先拿满雇主 match，再考虑 IRA、HSA 和普通投资账户。每年 401(k)、IRA 等额度需要按 IRS 当年公告复核。</p>
+<h3 id="医疗保险" data-sourcepos="143:1-143:1">医疗保险</h3>
+<p data-sourcepos="145:1-145:1">美国医疗费用是普通人最大的财务风险之一。买保险不能只看每月保费，还要看自付结构。</p>
+<p data-sourcepos="147:1-147:1">必须理解：</p>
+<div class="table-wrap"><table data-sourcepos="149:1-158:1">
+<thead>
+<tr>
+<th>术语</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Premium</td>
+<td>每月保费</td>
+</tr>
+<tr>
+<td>Deductible</td>
+<td>免赔额，通常先由个人承担到一定金额</td>
+</tr>
+<tr>
+<td>Copay</td>
+<td>固定自付金额</td>
+</tr>
+<tr>
+<td>Coinsurance</td>
+<td>按比例自付</td>
+</tr>
+<tr>
+<td>Out-of-pocket maximum</td>
+<td>年度自付上限</td>
+</tr>
+<tr>
+<td>In-network / out-of-network</td>
+<td>网内和网外医疗机构差异</td>
+</tr>
+<tr>
+<td>HMO / PPO / HDHP</td>
+<td>不同保险网络和费用结构</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="159:1-159:1">Medicare 也分不同部分：Part A 主要是医院保险，Part B 是医疗保险，Part C 是 Medicare Advantage，Part D 是处方药保险。</p>
+<h3 id="social-security" data-sourcepos="161:1-161:1">Social Security</h3>
+<p data-sourcepos="163:1-163:1">Social Security 是美国退休收入的重要部分，但不能完全依赖。工作年限、收入记录和领取年龄都会影响福利；越早领取，月金额通常越低；延迟领取可能提高月金额。</p>
+<p data-sourcepos="165:1-165:1">普通人应把 Social Security 和 401(k)、IRA、HSA、个人投资账户一起规划，而不是把它当成唯一退休来源。Social Security 和 Medicare payroll tax 的税率与工资上限也会随年份调整，应按 SSA / IRS 当年规则复核。</p>
+<h3 id="债务" data-sourcepos="167:1-167:1">债务</h3>
+<p data-sourcepos="169:1-169:1">美国信用卡利率通常很高。债务可以分层处理：</p>
+<div class="table-wrap"><table data-sourcepos="171:1-176:1">
+<thead>
+<tr>
+<th>风险</th>
+<th>类型</th>
+<th>处理原则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最高</td>
+<td>信用卡循环债、payday loan</td>
+<td>优先消灭，避免长期滚动</td>
+</tr>
+<tr>
+<td>中等</td>
+<td>车贷、个人贷款</td>
+<td>看利率、期限和现金流压力</td>
+</tr>
+<tr>
+<td>可管理但要谨慎</td>
+<td>学生贷款、房贷</td>
+<td>结合税务、利率和职业稳定性判断</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="177:1-177:1">原则很简单：能不背信用卡债，就不要背；已经有信用卡债，优先还。</p>
+<h3 id="美国版优先级" data-sourcepos="179:1-179:1">美国版优先级</h3>
+<p data-sourcepos="181:1-181:1">一个保守顺序：</p>
+<ol type="1" data-sourcepos="183:1-190:1">
+<li>建立应急金。</li>
+<li>保持医疗保险覆盖。</li>
+<li>维护信用记录。</li>
+<li>还高息债。</li>
+<li>拿满 401(k) match。</li>
+<li>考虑 Roth / Traditional IRA。</li>
+<li>考虑 HSA 和长期投资。</li>
+<li>规划房贷和退休。</li>
+</ol>
+<p data-sourcepos="192:1-192:1">特别小心：信用卡循环债、无保险医疗风险、学生贷款压力、车贷过度、报税错误、投资账户频繁交易、crypto / option 高杠杆投机。</p>
+<h2 id="中美对照" data-sourcepos="194:1-194:1">中美对照</h2>
+<div class="table-wrap"><table data-sourcepos="196:1-204:1">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>主题</th>
+<th>中国重点</th>
+<th>美国重点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础保障</td>
+<td>五险一金、医保报销、公积金</td>
+<td>医疗保险、Social Security、Medicare</td>
+</tr>
+<tr>
+<td>税务</td>
+<td>专项附加扣除、年度汇算</td>
+<td>W-2 / 1099、预扣税、标准扣除、州税</td>
+</tr>
+<tr>
+<td>信用</td>
+<td>征信重要，但日常覆盖面相对有限</td>
+<td>信用分影响借贷、租房和部分保险</td>
+</tr>
+<tr>
+<td>房产</td>
+<td>家庭资产高度集中，公积金和房贷规则重要</td>
+<td>房贷、房产税、保险、维护成本重要</td>
+</tr>
+<tr>
+<td>投资账户</td>
+<td>普通证券账户、基金、银行理财、个人养老金</td>
+<td>401(k)、IRA、Roth、HSA、brokerage</td>
+</tr>
+<tr>
+<td>最大坑</td>
+<td>高息网贷、资金盘、保本高收益、房产流动性</td>
+<td>信用卡债、医疗账单、报税错误、高杠杆投机</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="205:1-205:1">一句话概括：</p>
+<ul data-sourcepos="207:1-208:1">
+<li>中国版重点：社保医保、公积金、房贷、个税扣除、家庭资产集中在房产的风险。</li>
+<li>美国版重点：信用分、医疗保险、税务申报、401(k) / IRA、信用卡债和退休账户。</li>
+</ul>
+<h2 id="最小行动清单" data-sourcepos="210:1-210:1">最小行动清单</h2>
+<p data-sourcepos="212:1-212:1">每年检查一次：</p>
+<ul data-sourcepos="214:1-220:1">
+<li>社保、医保、公积金或美国医疗保险是否连续。</li>
+<li>税务扣除、预扣、年度申报是否正确。</li>
+<li>应急金是否能覆盖 3 到 6 个月必要支出。</li>
+<li>是否有高息债务需要优先处理。</li>
+<li>保险是否覆盖真正无法承受的风险。</li>
+<li>投资产品的费用、风险等级、流动性是否清楚。</li>
+<li>退休账户或长期储蓄是否在稳定推进。</li>
+</ul>
+<p data-sourcepos="222:1-222:1">做个人财务决策时，先问三个问题：</p>
+<ol type="1" data-sourcepos="224:1-226:1">
+<li>最坏情况下会亏多少，能不能承受。</li>
+<li>这件事会不会让现金流断裂。</li>
+<li>规则是不是来自官方、合同或可验证来源。</li>
+</ol>
+
+      </article>
+    </main>
+
+    <!-- Right Sidebar (TOC) -->
+    <aside class="sidebar right-sidebar collapsed" id="right-sidebar">
+      <div class="sidebar-content" id="spa-toc">
+        <!-- <h4 class="toc-title">On this page</h4> -->
+        <ul class="toc-list"><li class="toc-section"><div class="toc-heading"><a href="#核心框架">核心框架</a></div></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#中国">中国</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#五险一金">五险一金</a></li><li class="toc-child toc-level-3"><a href="#个人所得税">个人所得税</a></li><li class="toc-child toc-level-3"><a href="#医保">医保</a></li><li class="toc-child toc-level-3"><a href="#房">房</a></li><li class="toc-child toc-level-3"><a href="#投资">投资</a></li><li class="toc-child toc-level-3"><a href="#养老">养老</a></li><li class="toc-child toc-level-3"><a href="#优先级">优先级</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#美国">美国</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#信用分">信用分</a></li><li class="toc-child toc-level-3"><a href="#税务">税务</a></li><li class="toc-child toc-level-3"><a href="#退休账户">退休账户</a></li><li class="toc-child toc-level-3"><a href="#医疗保险">医疗保险</a></li><li class="toc-child toc-level-3"><a href="#social-security">Social Security</a></li><li class="toc-child toc-level-3"><a href="#债务">债务</a></li><li class="toc-child toc-level-3"><a href="#美国版优先级">美国版优先级</a></li></ul></li><li class="toc-section"><div class="toc-heading"><a href="#中美对照">中美对照</a></div></li><li class="toc-section"><div class="toc-heading"><a href="#最小行动清单">最小行动清单</a></div></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <script src="/static/shell-lifecycle.js"></script>
+  <script src="/static/shell-preferences.js"></script>
+  <script src="/static/scrollbar-visibility.js?v=c659b99"></script>
+  <script src="/static/sidebar-panel.js"></script>
+  <script src="/static/svg-theme.js"></script>
+  <script src="/static/render-on-demand.js"></script>
+  <script src="/static/shell-bootstrap.js"></script>
+  <script src="/static/main.js"></script>
+  <script src="/static/reading-navigation-state.js"></script>
+  <script src="/static/shell-layout.js"></script>
+  <script src="/static/shell-search-settings.js"></script>
+  <script src="/static/shell-router.js"></script>
+  <script src="/static/link-preview.js"></script>
+  <script src="/static/text-anchor.js"></script>
+  <script src="/static/comments.js"></script>
+  <script src="/static/themes.js"></script>
+  <script src="/static/table-enhance.js"></script>
+  <script src="/static/syllabus-enhance.js"></script>
+  <script src="/static/core/ink-stroke-format.js"></script>
+  <script src="/static/drawing-engine-render.js"></script>
+  <script>
+  // highlight.js: on-demand language loader + post-load highlight pass.
+  //
+  // Core (highlight.min.js) bundles ~37 common languages. Pages that use
+  // additional languages from _HLJS_EXTRA trigger an extra CDN fetch only
+  // when the page actually contains a matching code block. The service
+  // worker caches each module after the first fetch, so subsequent pages
+  // pay nothing for already-loaded languages.
+  //
+  // _HLJS_ALIAS maps user-facing class names to module filenames that
+  // differ from the class name. Pure aliases that hljs core already knows
+  // (e.g. ts → typescript, sh → bash) are resolved by hljs.getLanguage()
+  // and don't need entries — only include aliases whose target module is
+  // in _HLJS_EXTRA.
+  window._HLJS_BASE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/languages/';
+  window._HLJS_ALIAS = {
+    tex: 'latex', docker: 'dockerfile', ps: 'powershell', ps1: 'powershell',
+    ml: 'ocaml', hs: 'haskell', clj: 'clojure', cljs: 'clojure',
+    erl: 'erlang', coffee: 'coffeescript', f90: 'fortran', f95: 'fortran',
+    pascal: 'delphi'
+  };
+  window._HLJS_EXTRA = [
+    // Tier 1/2: build/config, scientific, FP, scripting, editor
+    'dockerfile','nginx','cmake','http','latex','julia','matlab','fortran',
+    'haskell','scala','ocaml','fsharp','clojure','elixir','dart','vim','powershell',
+    // Tier 3: FP & academic
+    'erlang','scheme','lisp','prolog',
+    // Tier 3: hardware / assembly
+    'verilog','vhdl','x86asm','armasm',
+    // Tier 3: modern systems
+    'crystal','nim','d','delphi',
+    // Tier 3: build / config
+    'groovy','nix','dts',
+    // Tier 3: markup / templating
+    'asciidoc','handlebars','gherkin',
+    // Tier 3: shell / scripting
+    'awk','tcl','coffeescript',
+    // Tier 3: stats
+    'stan'
+  ];
+  window._hljsLoaded = {};
+
+  // Run the highlight + line-number pass against `root` (defaults to document).
+  window._hljsRun = function(root) {
+    root = root || document;
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (name) {
+        var resolved = hljs.getLanguage(name) ? name : 'plaintext';
+        code.classList.add('language-' + resolved);
+      }
+    });
+    hljs.configure({ cssSelector: 'pre:not(.mermaid) > code' });
+    hljs.highlightAll();
+    root.querySelectorAll('pre:not(.mermaid) > code').forEach(function(code) {
+      if (code.querySelector('.code-line')) return;
+      var html = code.innerHTML;
+      if (html.charAt(html.length - 1) === '\n') html = html.slice(0, -1);
+      var lines = html.split('\n');
+      var openTags = [];
+      code.innerHTML = lines.map(function(line) {
+        var prefix = openTags.join('');
+        var re = /<\/?span[^>]*>/gi, m;
+        while ((m = re.exec(line)) !== null) {
+          if (m[0][1] === '/') openTags.pop();
+          else openTags.push(m[0]);
+        }
+        var suffix = '';
+        for (var i = 0; i < openTags.length; i++) suffix += '</span>';
+        return '<span class="code-line">' + prefix + (line || ' ') + suffix + '</span>';
+      }).join('');
+    });
+  };
+
+  // Scan `root` for code blocks, fetch any missing allowlisted language
+  // modules, then run the highlight pass once they finish loading (or fail).
+  // Called once from the highlight.min.js onload handler, and again from
+  // main.js after each SPA navigation (scoped to #spa-content).
+  window._hljsInit = function(root) {
+    root = root || document;
+    if (typeof hljs === 'undefined') return;
+    var allow = {};
+    for (var i = 0; i < window._HLJS_EXTRA.length; i++) allow[window._HLJS_EXTRA[i]] = true;
+    var need = {};
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      var name = window._HLJS_ALIAS[raw] || raw;
+      if (!name || hljs.getLanguage(name)) return;
+      if (allow[name] && !window._hljsLoaded[name]) need[name] = true;
+    });
+    var keys = Object.keys(need);
+    if (!keys.length) { window._hljsRun(root); return; }
+    var pending = keys.length;
+    keys.forEach(function(l) {
+      window._hljsLoaded[l] = true; // mark in-flight to dedupe across SPA nav
+      var s = document.createElement('script');
+      s.src = window._HLJS_BASE + l + '.min.js';
+      s.onload = s.onerror = function() { if (--pending === 0) window._hljsRun(root); };
+      document.head.appendChild(s);
+    });
+  };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    onload="window._hljsInit();"></script>
+  <script id="rprint-mermaid" async src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('mermaid')}else{var t=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'default';mermaid.initialize({startOnLoad:false,theme:t});document.querySelectorAll('pre.mermaid > code').forEach(function(c){var src=c.textContent;c.parentElement.setAttribute('data-mermaid-source',src);c.parentElement.textContent=src;});mermaid.run()}"></script>
+  <script>document.getElementById('rprint-mermaid').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('mermaid',new Error('Mermaid failed to load'))}});</script>
+  
+  
+  
+</body>
+</html>

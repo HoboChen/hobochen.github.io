@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display Settings</title>
+  <link rel="stylesheet" href="/static/main.css?v=c659b99">
+  <link rel="stylesheet" href="/static/themes.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      document.documentElement.setAttribute('data-theme',t);
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      document.documentElement.style.setProperty('--content-max-width','100%');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'kaiti';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.2};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+    })();
+  </script>
+  <style>
+    body {
+      font-family: var(--font-latin), var(--font-zh), sans-serif;
+      color: var(--color-text);
+      background: var(--color-bg);
+      margin: 0;
+      padding: 24px 16px;
+    }
+    .settings-page {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .settings-page h1 {
+      font-size: 22px;
+      margin: 0 0 8px;
+    }
+    .settings-back {
+      display: inline-block;
+      margin-bottom: 24px;
+      color: var(--color-primary);
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .settings-back:hover {
+      text-decoration: underline;
+    }
+    .settings-page .style-panel-section {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .settings-page .style-panel-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    /* Make buttons full-size for touch targets */
+    .settings-page .style-toggle-btn {
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+    /* Preview text for font changes — inherits body font-size */
+    .settings-preview {
+      margin-top: 16px;
+      padding: 12px;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="settings-page">
+    <a class="settings-back" href="javascript:history.back()">&#8592; Back</a>
+    <h1>Display Settings</h1>
+
+    <div class="style-panel-section">
+      <label class="style-label">Theme</label>
+      <div class="style-toggle-group">
+        <button class="style-toggle-btn" data-theme="light">Light</button>
+        <button class="style-toggle-btn" data-theme="dark">Dark</button>
+        <button class="style-toggle-btn" data-theme="kindle">E-Ink</button>
+      </div>
+    </div>
+
+    <div class="style-panel-section">
+      <label class="style-label">Font</label>
+      <div class="style-toggle-group">
+        <button class="style-toggle-btn font-btn" data-font="system">System</button>
+        <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+        <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+      </div>
+    </div>
+
+    <div class="style-panel-section">
+      <label class="style-label">字体</label>
+      <div class="style-toggle-group">
+        <button class="style-toggle-btn fontzh-btn" data-fontzh="default">系统</button>
+        <button class="style-toggle-btn fontzh-btn" data-fontzh="noto-serif">宋体</button>
+        <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+      </div>
+    </div>
+
+    <div class="style-panel-section bg-picker-section">
+      <label class="style-label">Background</label>
+      <div class="bg-swatch-group" id="bg-swatch-group">
+        <button class="bg-swatch" data-bg="default" title="Default"></button>
+        <button class="bg-swatch" data-bg="green" title="Green"></button>
+        <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+        <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+      </div>
+    </div>
+
+    <div class="style-panel-section">
+      <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+      <div class="style-slider-wrap">
+        <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+        <div class="style-range-ticks">
+          <span class="style-range-tick font-size-tick" data-i="0">12</span>
+          <span class="style-range-tick font-size-tick" data-i="1">14</span>
+          <span class="style-range-tick font-size-tick" data-i="2">16</span>
+          <span class="style-range-tick font-size-tick" data-i="3">18</span>
+          <span class="style-range-tick font-size-tick" data-i="4">24</span>
+          <span class="style-range-tick font-size-tick" data-i="5">32</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="style-panel-section">
+      <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+      <div class="style-slider-wrap">
+        <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+        <div class="style-range-ticks">
+          <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+          <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+          <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+          <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+          <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+          <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="style-panel-section">
+      <label class="style-label">Width <span id="width-value">90%</span></label>
+      <div class="style-toggle-group">
+        <button class="style-toggle-btn width-btn" data-width="50">50</button>
+        <button class="style-toggle-btn width-btn" data-width="65">65</button>
+        <button class="style-toggle-btn width-btn" data-width="80">80</button>
+        <button class="style-toggle-btn width-btn" data-width="90">90</button>
+        <button class="style-toggle-btn width-btn" data-width="95">95</button>
+        <button class="style-toggle-btn width-btn" data-width="100">100</button>
+      </div>
+    </div>
+
+    <div class="style-panel-section style-switch-row">
+      <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+      <button class="style-switch" id="ignore-corners-switch" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+    </div>
+
+    <div class="style-panel-section style-switch-row">
+      <label class="style-label">2 Columns <span style="font-size:10px;font-weight:500;color:#4a90d9;opacity:0.85;margin-left:4px;">[lab]</span> <span style="font-weight:normal;font-size:11px;color:var(--color-text-muted);opacity:0.7;">(article pages only)</span></label>
+      <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+    </div>
+
+    <div class="settings-preview">
+      The quick brown fox jumps over the lazy dog.<br>
+      天地玄黄，宇宙洪荒。日月盈昃，辰宿列张。
+    </div>
+
+    <div class="settings-footer" style="text-align:center;font-size:11px;color:var(--color-text-muted);margin-top:16px;opacity:0.6;">v0.0.1</div>
+  </div>
+
+  <script src="/static/shell-preferences.js"></script>
+  <script>
+    // Standalone settings page — reads/writes the same localStorage key as
+    // themes.js, via the shared shell-preferences module (window.KbPreferences).
+    (function() {
+      var STORAGE_KEY = 'kb-display-prefs';
+      function getPrefs() {
+        if (window.KbPreferences) return window.KbPreferences.get();
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; }
+      }
+      function savePrefs(prefs) {
+        if (window.KbPreferences) { window.KbPreferences.replace(prefs); return; }
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+      }
+
+      var fontLatinMap = {
+        'system': '',
+        'literata': '"Literata", Georgia',
+        'ibm-plex': '"IBM Plex Serif", Georgia'
+      };
+      var fontZhMap = {
+        'default': '"Noto Sans SC", "PingFang SC", "Microsoft YaHei"',
+        'noto-serif': '"Noto Serif SC"',
+        'kaiti': '"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'
+      };
+      var fontSizeStops = [12, 14, 16, 18, 24, 32];
+      var lineHeightStops = [1.2, 1.4, 1.6, 1.7, 1.8, 2.2];
+
+      function normalizeFontSize(value, source) {
+        var legacy = source === 'page'
+          ? { normal: 16, large: 24, larger: 30 }
+          : { normal: 16, large: 20, larger: 24 };
+        var size = Object.prototype.hasOwnProperty.call(legacy, value) ? legacy[value] : Number(value);
+        if (fontSizeStops.indexOf(size) >= 0) return size;
+        if (size === 20) return 18;
+        if (size === 30) return 32;
+        return 18;
+      }
+
+      function normalizeLineHeight(value) {
+        var legacy = { normal: 1.6, relaxed: 1.8, airy: 2.2 };
+        var height = Object.prototype.hasOwnProperty.call(legacy, value) ? legacy[value] : Number(value);
+        if (lineHeightStops.indexOf(height) >= 0) return height;
+        if (height === 1.5) return 1.4;
+        if (height === 2) return 2.2;
+        return 1.8;
+      }
+
+      var prefs = getPrefs();
+      var defaultTheme = 'light';
+      try { if (window.matchMedia('(prefers-color-scheme:dark)').matches) defaultTheme = 'dark'; } catch(e) {}
+
+      // --- Apply & highlight current state ---
+      function setActive(selector, attrName, value) {
+        var btns = document.querySelectorAll(selector);
+        for (var i = 0; i < btns.length; i++) {
+          var btn = btns[i];
+          if (btn.getAttribute(attrName) === value) {
+            btn.className = btn.className.replace(/ *active */g, ' ').replace(/^ | $/g, '') + ' active';
+          } else {
+            btn.className = btn.className.replace(/ *active */g, ' ').replace(/^ | $/g, '');
+          }
+        }
+      }
+
+      function applyTheme(t) {
+        document.documentElement.setAttribute('data-theme', t);
+        setActive('.style-toggle-btn[data-theme]', 'data-theme', t);
+      }
+      function setSliderState(rangeId, valueId, tickSelector, stops, value, suffix) {
+        var range = document.getElementById(rangeId);
+        var index = stops.indexOf(value);
+        if (range && index >= 0) range.value = String(index);
+        var label = document.getElementById(valueId);
+        if (label) label.textContent = String(value) + (suffix || '');
+        var ticks = document.querySelectorAll(tickSelector);
+        for (var i = 0; i < ticks.length; i++) {
+          var active = stops[parseInt(ticks[i].getAttribute('data-i'), 10)] === value;
+          ticks[i].classList.toggle('active', active);
+        }
+      }
+
+      function applyFontSize(value, source) {
+        var size = normalizeFontSize(value, source);
+        document.documentElement.setAttribute('data-font-size', String(size));
+        document.documentElement.style.setProperty('--page-font-size', size + 'px');
+        setSliderState('font-size-range', 'font-size-value', '.font-size-tick', fontSizeStops, size, 'px');
+      }
+      function applyLineHeight(value) {
+        var height = normalizeLineHeight(value);
+        document.documentElement.setAttribute('data-line-height', String(height));
+        document.documentElement.style.setProperty('--page-line-height', String(height));
+        setSliderState('line-height-range', 'line-height-value', '.line-height-tick', lineHeightStops, height, '');
+        var label = document.getElementById('line-height-value');
+        if (label) label.textContent = height.toFixed(1);
+      }
+      function applyFont(f) {
+        if (fontLatinMap[f] !== undefined) {
+          document.documentElement.style.setProperty('--font-latin', fontLatinMap[f] || '');
+        }
+        setActive('.font-btn', 'data-font', f);
+      }
+      function applyFontZh(f) {
+        if (fontZhMap[f] !== undefined) {
+          document.documentElement.style.setProperty('--font-zh', fontZhMap[f] || '');
+        }
+        setActive('.fontzh-btn', 'data-fontzh', f);
+      }
+      function applyBgColor(bg) {
+        document.documentElement.setAttribute('data-bg', bg);
+        setActive('.bg-swatch', 'data-bg', bg);
+      }
+
+      // Apply saved state
+      applyTheme(prefs.theme || defaultTheme);
+      applyFontSize(prefs.fontSize || 'large', prefs.fontSizeSource);
+      applyLineHeight(prefs.lineHeight || 'relaxed');
+      applyFont(prefs.fontFamily || 'ibm-plex');
+      applyFontZh(prefs.fontZh || 'kaiti');
+      applyBgColor(prefs.bgColor || 'default');
+
+      // --- Wire up buttons ---
+      function addClickListeners(selector, attrName, callback) {
+        var btns = document.querySelectorAll(selector);
+        for (var i = 0; i < btns.length; i++) {
+          (function(btn) {
+            btn.onclick = function() {
+              var val = btn.getAttribute(attrName);
+              callback(val);
+              prefs = getPrefs();
+            };
+          })(btns[i]);
+        }
+      }
+
+      addClickListeners('.style-toggle-btn[data-theme]', 'data-theme', function(t) {
+        applyTheme(t);
+        var p = getPrefs(); p.theme = t; savePrefs(p);
+      });
+      addClickListeners('.font-btn', 'data-font', function(f) {
+        applyFont(f);
+        var p = getPrefs(); p.fontFamily = f; savePrefs(p);
+      });
+      addClickListeners('.fontzh-btn', 'data-fontzh', function(f) {
+        applyFontZh(f);
+        var p = getPrefs(); p.fontZh = f; savePrefs(p);
+      });
+      addClickListeners('.bg-swatch', 'data-bg', function(bg) {
+        applyBgColor(bg);
+        var p = getPrefs(); p.bgColor = bg; savePrefs(p);
+      });
+
+      function bindSnapSlider(rangeId, tickSelector, stops, applyValue, saveValue) {
+        var range = document.getElementById(rangeId);
+        if (range) {
+          range.oninput = function() {
+            var value = stops[parseInt(range.value, 10)];
+            applyValue(value);
+            saveValue(value);
+          };
+        }
+        var ticks = document.querySelectorAll(tickSelector);
+        for (var i = 0; i < ticks.length; i++) {
+          (function(tick) {
+            tick.onclick = function() {
+              var index = parseInt(tick.getAttribute('data-i'), 10);
+              var value = stops[index];
+              if (range) range.value = String(index);
+              applyValue(value);
+              saveValue(value);
+            };
+          })(ticks[i]);
+        }
+      }
+
+      bindSnapSlider('font-size-range', '.font-size-tick', fontSizeStops, applyFontSize, function(size) {
+        var p = getPrefs(); p.fontSize = String(size); p.fontSizeSource = 'page'; savePrefs(p);
+      });
+      bindSnapSlider('line-height-range', '.line-height-tick', lineHeightStops, applyLineHeight, function(height) {
+        var p = getPrefs(); p.lineHeight = String(height); savePrefs(p);
+      });
+
+      // --- Width ---
+      var edgeSwitch = document.getElementById('ignore-corners-switch');
+      var currentWidth = String(prefs.contentWidth || '90');
+
+      function applyIgnoreCorners(on) {
+        var available = currentWidth === '100';
+        var enabled = available && !!on;
+        if (edgeSwitch) {
+          edgeSwitch.disabled = !available;
+          edgeSwitch.setAttribute('aria-checked', enabled ? 'true' : 'false');
+        }
+        if (enabled) document.documentElement.setAttribute('data-ignore-corners', 'on');
+        else document.documentElement.removeAttribute('data-ignore-corners');
+      }
+
+      function applyWidth(w) {
+        currentWidth = String(w);
+        document.documentElement.style.setProperty('--content-max-width', currentWidth + '%');
+        var label = document.getElementById('width-value');
+        if (label) label.textContent = currentWidth + '%';
+        setActive('.width-btn', 'data-width', currentWidth);
+        if (currentWidth !== '100') applyIgnoreCorners(false);
+        else if (edgeSwitch) edgeSwitch.disabled = false;
+      }
+      applyWidth(currentWidth);
+      applyIgnoreCorners(prefs.ignoreCorners === 'on');
+
+      addClickListeners('.width-btn', 'data-width', function(w) {
+        applyWidth(w);
+        var p = getPrefs();
+        p.contentWidth = w;
+        if (w !== '100') p.ignoreCorners = 'off';
+        savePrefs(p);
+      });
+
+      if (edgeSwitch) {
+        edgeSwitch.onclick = function() {
+          if (edgeSwitch.disabled) return;
+          var on = edgeSwitch.getAttribute('aria-checked') !== 'true';
+          applyIgnoreCorners(on);
+          var p = getPrefs(); p.ignoreCorners = on ? 'on' : 'off'; savePrefs(p);
+        };
+      }
+
+      // --- 2 Columns ---
+      var colSwitch = document.getElementById('two-columns-switch');
+      function applyColumns(cols) {
+        if (colSwitch) colSwitch.setAttribute('aria-checked', cols === '2' ? 'true' : 'false');
+      }
+      applyColumns(prefs.columns || '1');
+
+      if (colSwitch) {
+        colSwitch.onclick = function() {
+          var current = colSwitch.getAttribute('aria-checked') === 'true';
+          var next = current ? '1' : '2';
+          applyColumns(next);
+          var p = getPrefs(); p.columns = next; savePrefs(p);
+        };
+      }
+    })();
+  </script>
+</body>
+</html>
