@@ -1,0 +1,1200 @@
+/* Ink Toolbar — shared toolbar styles for whiteboard & pdf-annotator.
+ *
+ * Phase 6b: toolbar, L2/L3 panels, color palette, size slider, settings.
+ * Canvas-specific rules (.ink-canvas-wrap, .ink-container) stay in whiteboard.css.
+ */
+
+/* Panel background / shadow as custom properties so backdrop-filter
+ * compositing layers repaint reliably on theme change. */
+:root {
+  --ink-panel-bg: rgba(246, 248, 250, 0.8);
+  --ink-panel-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+[data-theme="dark"] {
+  --ink-panel-bg: rgba(22, 27, 34, 0.8);
+  --ink-panel-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Shared surface for toolbar panels, including host-owned floating content. */
+.ink-l2-bar,
+.ink-l3-panel,
+.ink-floating-panel {
+  background: var(--ink-panel-bg);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border, #d0d7de);
+  border-radius: 10px;
+  box-shadow: var(--ink-panel-shadow);
+}
+
+/* --- L1 Toolbar --- */
+
+.ink-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  background: var(--color-bg-secondary, #f6f8fa);
+  border: 1px solid var(--color-border, #d0d7de);
+  flex-shrink: 0;
+  min-height: 38px;
+}
+
+[data-theme="dark"] .ink-toolbar {
+  background: var(--color-bg-secondary, #161b22);
+  border-color: var(--color-border, #30363d);
+}
+
+.ink-toolbar .ink-sep {
+  width: 1px;
+  height: 20px;
+  background: var(--color-border, #d0d7de);
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .ink-toolbar .ink-sep {
+  background: var(--color-border, #30363d);
+}
+
+/* L1 buttons */
+
+.ink-l1-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-text, #1f2328);
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s;
+}
+
+.ink-l1-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.ink-l1-btn:hover {
+  background: var(--color-bg-tertiary, #eaeef2);
+}
+
+[data-theme="dark"] .ink-l1-btn:hover {
+  background: var(--color-bg-tertiary, #21262d);
+}
+
+.ink-l1-btn.active {
+  background: var(--color-primary, #0550ae);
+  color: #fff;
+  border-color: var(--color-primary, #0550ae);
+}
+
+.ink-l1-btn.active:hover {
+  background: var(--color-primary-hover, #0969da);
+}
+
+[data-theme="dark"] .ink-l1-btn.active {
+  background: var(--color-primary, #58a6ff);
+  color: #0d1117;
+}
+
+[data-theme="dark"] .ink-l1-btn.active:hover {
+  background: #79c0ff;
+}
+
+.ink-l1-btn:disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* --- L2 floating bars --- */
+
+.ink-l2-bar {
+  position: absolute;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  background: var(--ink-panel-bg);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border, #d0d7de);
+  border-radius: 10px;
+  box-shadow: var(--ink-panel-shadow);
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.ink-l2-bar .ink-sep {
+  width: 1px;
+  height: 20px;
+  background: var(--color-border, #d0d7de);
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .ink-l2-bar .ink-sep {
+  background: var(--color-border, #30363d);
+}
+
+.ink-l2-bar button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-text, #1f2328);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.1s;
+  white-space: nowrap;
+}
+
+.ink-l2-bar button svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.ink-l2-bar button:hover {
+  background: var(--color-bg-tertiary, #eaeef2);
+}
+
+[data-theme="dark"] .ink-l2-bar button:hover {
+  background: var(--color-bg-tertiary, #21262d);
+}
+
+.ink-l2-bar button.active {
+  background: var(--color-primary, #0550ae);
+  color: #fff;
+  border-color: var(--color-primary, #0550ae);
+}
+
+.ink-l2-bar button.active:hover {
+  background: var(--color-primary-hover, #0969da);
+}
+
+[data-theme="dark"] .ink-l2-bar button.active {
+  background: var(--color-primary, #58a6ff);
+  color: #0d1117;
+}
+
+[data-theme="dark"] .ink-l2-bar button.active:hover {
+  background: #79c0ff;
+}
+
+/* L2 settings has vertical layout */
+
+.ink-l2-settings {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  padding: 8px 0;
+  min-width: 220px;
+}
+
+.ink-settings-section {
+  padding: 0 12px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text, #1f2328);
+  opacity: 0.5;
+  margin-top: 4px;
+}
+
+.ink-settings-section:first-child {
+  margin-top: 0;
+}
+
+.ink-settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 12px;
+  font-size: 13px;
+  color: var(--color-text, #1f2328);
+  cursor: default;
+}
+
+.ink-settings-row:hover {
+  background: var(--color-bg-tertiary, #eaeef2);
+}
+
+[data-theme="dark"] .ink-settings-row:hover {
+  background: var(--color-bg-tertiary, #21262d);
+}
+
+.ink-settings-row .ink-settings-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ink-settings-row .ink-settings-label svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.ink-smooth-slider {
+  width: 80px;
+  cursor: pointer;
+}
+
+/* Toggle switch */
+
+.ink-toggle {
+  position: relative;
+  width: 32px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.ink-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.ink-toggle-track {
+  position: absolute;
+  inset: 0;
+  background: var(--color-border, #d0d7de);
+  border-radius: 9px;
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.ink-toggle-track::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.15s;
+}
+
+.ink-toggle input:checked + .ink-toggle-track {
+  background: var(--color-primary, #0550ae);
+}
+
+.ink-toggle input:checked + .ink-toggle-track::after {
+  transform: translateX(14px);
+}
+
+.ink-toggle-track:hover {
+  background: #b0b8c1;
+}
+
+[data-theme="dark"] .ink-toggle-track {
+  background: var(--color-border, #30363d);
+}
+
+[data-theme="dark"] .ink-toggle-track:hover {
+  background: #484f58;
+}
+
+[data-theme="dark"] .ink-toggle input:checked + .ink-toggle-track {
+  background: var(--color-primary, #58a6ff);
+}
+
+[data-theme="dark"] .ink-toggle-track::after {
+  background: #ccc;
+}
+
+.ink-settings-divider {
+  height: 1px;
+  background: var(--color-border, #d0d7de);
+  margin: 4px 0;
+}
+
+[data-theme="dark"] .ink-settings-divider {
+  background: var(--color-border, #30363d);
+}
+
+.ink-l2-bar button.ink-settings-action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  padding: 5px 12px;
+  font-size: 13px;
+  color: var(--color-text, #1f2328);
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  height: auto;
+  min-width: 0;
+  border-radius: 0;
+}
+
+.ink-settings-action:hover {
+  background: var(--color-bg-tertiary, #eaeef2);
+}
+
+[data-theme="dark"] .ink-settings-action:hover {
+  background: var(--color-bg-tertiary, #21262d);
+}
+
+.ink-settings-action svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.ink-settings-action.ink-danger {
+  color: #cf222e;
+}
+
+[data-theme="dark"] .ink-settings-action.ink-danger {
+  color: #f85149;
+}
+
+/* --- Clear All two-stage confirmation --- */
+
+/* Armed: pulsing red border (stage 1 → user must press-and-hold to confirm). */
+.ink-clear-btn.ink-armed,
+.ink-clear-btn.ink-armed:hover,
+.ink-clear-btn.ink-holding,
+.ink-clear-btn.ink-holding:hover {
+  color: #fff;
+  background: #cf222e;
+  border-color: #cf222e;
+  position: relative;
+  overflow: hidden;
+}
+
+.ink-clear-btn.ink-armed {
+  animation: ink-clear-flash 0.6s ease-in-out infinite alternate;
+}
+
+[data-theme="dark"] .ink-clear-btn.ink-armed,
+[data-theme="dark"] .ink-clear-btn.ink-armed:hover,
+[data-theme="dark"] .ink-clear-btn.ink-holding,
+[data-theme="dark"] .ink-clear-btn.ink-holding:hover {
+  background: #f85149;
+  border-color: #f85149;
+  color: #1f1f1f;
+}
+
+@keyframes ink-clear-flash {
+  from { box-shadow: 0 0 0 0 rgba(207, 34, 46, 0.0); }
+  to   { box-shadow: 0 0 0 4px rgba(207, 34, 46, 0.55); }
+}
+
+/* Holding: fill from left to right over the hold duration. */
+.ink-clear-btn.ink-holding {
+  animation: none; /* pause flash while filling */
+}
+
+.ink-clear-btn.ink-holding::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.35);
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: ink-clear-fill var(--ink-clear-hold-duration, 3000ms) linear forwards;
+  pointer-events: none;
+}
+
+@keyframes ink-clear-fill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* --- L3 Panel (color + size) --- */
+
+.ink-l3-panel {
+  position: absolute;
+  z-index: 160;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+}
+
+/* --- Color swatches --- */
+
+.ink-colors {
+  display: block;
+}
+
+.ink-l3-panel .ink-colors {
+  width: calc(4 * 28px + 3 * 4px);
+}
+
+/* --- Color carousel --- */
+
+.ink-color-carousel {
+  overflow: hidden;
+  width: calc(4 * 28px + 3 * 4px);
+  touch-action: pan-y;
+}
+
+.ink-color-carousel-track {
+  display: flex;
+  transition: transform 0.25s ease;
+}
+
+.ink-color-page {
+  display: grid;
+  grid-template-columns: repeat(4, 28px);
+  gap: 4px;
+  flex-shrink: 0;
+  width: calc(4 * 28px + 3 * 4px);
+}
+
+/* --- Color pagination dots --- */
+
+.ink-color-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.ink-color-dot-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-border, #d0d7de);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.ink-color-dot-indicator.active {
+  background: var(--color-text, #1f2328);
+}
+
+[data-theme="dark"] .ink-color-dot-indicator {
+  background: #30363d;
+}
+
+[data-theme="dark"] .ink-color-dot-indicator.active {
+  background: #e6edf3;
+}
+
+.ink-color-btn {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  border: 2px solid transparent !important;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  cursor: pointer;
+}
+
+.ink-color-btn.active {
+  border-color: var(--color-primary, #0550ae) !important;
+  background: none !important;
+}
+
+/* No dark-theme override needed: --color-primary already resolves to a
+ * brighter blue (#58a6ff) under [data-theme="dark"], so the ring stays
+ * visible against the dark toolbar without a separate rule. */
+
+.ink-color-btn .ink-color-dot {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  transition: transform 0.1s;
+}
+
+.ink-color-btn:hover .ink-color-dot {
+  transform: scale(1.3);
+}
+
+.ink-color-btn:hover .ink-add-color-dot {
+  border-color: var(--color-text, #1f2328);
+  color: var(--color-text, #1f2328);
+}
+
+[data-theme="dark"] .ink-color-btn:hover .ink-add-color-dot {
+  border-color: #e6edf3;
+  color: #e6edf3;
+}
+
+/* --- Add custom color button --- */
+
+.ink-add-color-btn .ink-add-color-dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--color-text-secondary, #656d76);
+  font-size: 13px;
+  line-height: 1;
+  color: var(--color-text-secondary, #656d76);
+  background: transparent;
+}
+
+[data-theme="dark"] .ink-add-color-btn .ink-add-color-dot {
+  border-color: #848d97;
+  color: #848d97;
+}
+
+/* --- Size slider --- */
+
+.ink-sizes {
+  display: block;
+}
+
+.ink-size-slider-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  width: calc(4 * 28px + 3 * 4px);
+  padding: 2px 0;
+}
+
+.ink-size-preview-canvas {
+  display: block;
+  width: 100%;
+  height: 56px;
+  background: var(--color-canvas-subtle, #f6f8fa);
+  border: 1px solid var(--color-border, #d0d7de);
+  border-radius: 6px;
+}
+
+[data-theme="dark"] .ink-size-preview-canvas {
+  background: #161b22;
+  border-color: #30363d;
+}
+
+.ink-size-slider-track {
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.ink-size-slider-track::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 4px;
+  transform: translateY(-50%);
+  background: linear-gradient(to right,
+    var(--color-primary, #0550ae) var(--fill-pct, 0%),
+    var(--color-border, #d0d7de) var(--fill-pct, 0%));
+  border-radius: 2px;
+}
+
+[data-theme="dark"] .ink-size-slider-track::before {
+  background: linear-gradient(to right,
+    var(--color-primary, #58a6ff) var(--fill-pct, 0%),
+    var(--color-border, #30363d) var(--fill-pct, 0%));
+}
+
+.ink-size-slider-thumb {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  margin-top: -7px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--color-primary, #0550ae);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+}
+
+[data-theme="dark"] .ink-size-slider-thumb {
+  background: #0d1117;
+  border-color: var(--color-primary, #58a6ff);
+}
+
+.ink-size-slider-tick {
+  position: absolute;
+  top: 50%;
+  width: 2px;
+  height: 10px;
+  margin-left: -1px;
+  transform: translateY(-50%);
+  background: var(--color-text, #1f2328);
+  opacity: 0.25;
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .ink-size-slider-tick {
+  background: #c9d1d9;
+  opacity: 0.35;
+}
+
+/* --- Ink L2 bar: transparent, icons only --- */
+
+.ink-l2-ink {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  gap: 2px;
+}
+
+.ink-l2-ink .ink-sep {
+  background: var(--color-border, #d0d7de);
+  opacity: 0.4;
+}
+
+[data-theme="dark"] .ink-l2-ink {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .ink-l2-ink .ink-sep {
+  background: var(--color-border, #30363d);
+}
+
+/* --- Hand L2 bar: transparent, icon only --- */
+
+.ink-l2-hand {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  gap: 2px;
+}
+
+[data-theme="dark"] .ink-l2-hand {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* --- Text L2 bar: 4-column grid --- */
+
+.ink-l2-text {
+  display: grid;
+  grid-template-columns: repeat(4, 36px);
+  gap: 2px;
+  padding: 6px;
+  max-width: none;
+}
+
+.ink-l2-text .ink-text-font-group,
+.ink-l2-text .ink-text-size-group {
+  display: contents;
+}
+
+.ink-l2-text .ink-colors {
+  grid-column: 1 / -1;
+}
+
+.ink-l2-text .ink-sep {
+  display: none;
+}
+
+.ink-l2-text .ink-text-size-btn {
+  min-width: 36px !important;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Pen-only active indicator --- */
+
+.ink-l1-btn[data-action="penonly"].active {
+  background: #cf222e;
+  border-color: #cf222e;
+  color: #fff;
+}
+
+.ink-l1-btn[data-action="penonly"].active:hover {
+  background: #e5534b;
+}
+
+[data-theme="dark"] .ink-l1-btn[data-action="penonly"].active {
+  background: #f85149;
+  border-color: #f85149;
+  color: #0d1117;
+}
+
+[data-theme="dark"] .ink-l1-btn[data-action="penonly"].active:hover {
+  background: #ff7b72;
+}
+
+/* --- Print --- */
+
+@media print {
+  .ink-toolbar, .ink-l2-bar, .ink-l3-panel { display: none; }
+}
+
+/* --- Embed theme controls --- */
+
+.ink-theme-group {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--color-border, #d0d7de);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.ink-theme-btn {
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  background: transparent;
+  color: var(--color-text, #1f2328);
+  border: none;
+  border-right: 1px solid var(--color-border, #d0d7de);
+  cursor: pointer;
+  white-space: nowrap;
+  min-width: 0;
+  height: auto;
+  border-radius: 0;
+}
+
+.ink-theme-btn:last-child {
+  border-right: none;
+}
+
+.ink-theme-btn:hover {
+  background: var(--color-bg-tertiary, #eaeef2);
+}
+
+.ink-theme-btn.active {
+  background: var(--color-primary, #0550ae);
+  color: #fff;
+}
+
+.ink-theme-btn.active:hover {
+  background: var(--color-primary-hover, #0969da);
+}
+
+[data-theme="dark"] .ink-theme-group {
+  border-color: var(--color-border, #30363d);
+}
+
+[data-theme="dark"] .ink-theme-btn {
+  color: var(--color-text, #e6edf3);
+  border-right-color: var(--color-border, #30363d);
+}
+
+[data-theme="dark"] .ink-theme-btn:hover {
+  background: var(--color-bg-tertiary, #21262d);
+}
+
+[data-theme="dark"] .ink-theme-btn.active {
+  background: var(--color-primary, #58a6ff);
+  color: #0d1117;
+}
+
+[data-theme="dark"] .ink-theme-btn.active:hover {
+  background: #79c0ff;
+}
+
+.ink-bg-swatches {
+  display: flex;
+  gap: 6px;
+}
+
+.ink-bg-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border, #d0d7de);
+  cursor: pointer;
+  padding: 0;
+  min-width: 0;
+  background: transparent;
+}
+
+.ink-bg-swatch:hover {
+  border-color: var(--color-text-muted, #656d76);
+}
+
+.ink-bg-swatch.active {
+  border-color: var(--color-primary, #0550ae);
+  box-shadow: 0 0 0 1px var(--color-primary, #0550ae);
+}
+
+/* Light theme swatch colors */
+.ink-bg-swatch[data-bg-value="default"] { background: #ffffff; }
+.ink-bg-swatch[data-bg-value="green"]   { background: #d4edda; }
+.ink-bg-swatch[data-bg-value="cool"]    { background: #cfe2f3; }
+.ink-bg-swatch[data-bg-value="gray"]    { background: #e0e0e0; }
+
+/* Dark theme swatch colors */
+[data-theme="dark"] .ink-bg-swatch { border-color: var(--color-border, #30363d); }
+[data-theme="dark"] .ink-bg-swatch:hover { border-color: #848d97; }
+[data-theme="dark"] .ink-bg-swatch.active {
+  border-color: var(--color-primary, #58a6ff);
+  box-shadow: 0 0 0 1px var(--color-primary, #58a6ff);
+}
+[data-theme="dark"] .ink-bg-swatch[data-bg-value="default"] { background: #1c2128; }
+[data-theme="dark"] .ink-bg-swatch[data-bg-value="green"]   { background: #1a3328; }
+[data-theme="dark"] .ink-bg-swatch[data-bg-value="cool"]    { background: #1a2535; }
+[data-theme="dark"] .ink-bg-swatch[data-bg-value="gray"]    { background: #2d2d2d; }
+
+/* --- Responsive --- */
+
+@media (max-width: 650px) {
+  .ink-toolbar {
+    padding: 3px 6px;
+    gap: 3px;
+  }
+  .ink-l1-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    border-radius: 6px;
+  }
+  .ink-l2-bar,
+  .ink-l3-panel,
+  .ink-floating-panel {
+    left: 4px !important;
+    right: 4px !important;
+    max-width: calc(100vw - 8px);
+  }
+  .ink-l2-bar button {
+    min-width: 28px;
+    height: 28px;
+    font-size: 12px;
+    padding: 0 5px;
+  }
+}
+
+/* ---- Selection delete button (shared by whiteboard & pdf-annotator) ---- */
+.ink-selection-delete {
+  position: absolute;
+  pointer-events: auto;
+  z-index: 50;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--ink-panel-bg, rgba(246, 248, 250, 0.85));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--ink-border, rgba(0, 0, 0, 0.1));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transform: translate(0, -50%);
+  transition: background 0.15s, box-shadow 0.15s;
+  color: var(--color-text, #1f2328);
+}
+.ink-selection-delete svg {
+  width: 16px;
+  height: 16px;
+}
+.ink-selection-delete:hover {
+  background: var(--ink-hover-bg, rgba(220, 53, 69, 0.12));
+  color: #cf222e;
+  border-color: rgba(220, 53, 69, 0.3);
+}
+.ink-selection-delete:active {
+  background: rgba(220, 53, 69, 0.22);
+  color: #a40e26;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ink-widget-resize-handle {
+  position: absolute;
+  pointer-events: auto;
+  z-index: 51;
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  cursor: nwse-resize;
+  transform: translate(-50%, -50%);
+  background: var(--ink-panel-bg, rgba(246, 248, 250, 0.9));
+  border: 1px solid var(--ink-border, rgba(0, 0, 0, 0.18));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+}
+.ink-widget-resize-handle::before,
+.ink-widget-resize-handle::after {
+  content: '';
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 8px;
+  height: 1px;
+  background: var(--color-text, #1f2328);
+  transform: rotate(-45deg);
+  transform-origin: right center;
+  opacity: 0.72;
+}
+.ink-widget-resize-handle::after {
+  right: 4px;
+  bottom: 8px;
+  width: 5px;
+}
+@media (prefers-color-scheme: dark) {
+  .ink-selection-delete {
+    background: var(--ink-panel-bg, rgba(40, 44, 52, 0.85));
+    border-color: var(--ink-border, rgba(255, 255, 255, 0.1));
+    color: var(--color-text, #e6edf3);
+  }
+  .ink-widget-resize-handle {
+    background: var(--ink-panel-bg, rgba(40, 44, 52, 0.9));
+    border-color: var(--ink-border, rgba(255, 255, 255, 0.16));
+  }
+  .ink-widget-resize-handle::before,
+  .ink-widget-resize-handle::after {
+    background: var(--color-text, #e6edf3);
+  }
+  .ink-selection-delete:hover {
+    background: rgba(220, 53, 69, 0.2);
+    color: #f85149;
+    border-color: rgba(220, 53, 69, 0.4);
+  }
+  .ink-selection-delete:active {
+    background: rgba(220, 53, 69, 0.3);
+    color: #ff7b72;
+  }
+}
+
+/* =============================================================
+ * Force-light overrides
+ * =============================================================
+ *
+ * Marker class `.ink-force-light` is set by `InkToolbar.create()` on every
+ * root toolbar element (`.ink-toolbar`, every `.ink-l2-bar`, `.ink-l3-panel`)
+ * when the host passes `forceLightPalette: true`.  Currently only the PDF
+ * annotator does this — the toolbar sits over a paper-colored PDF viewport
+ * and must stay readable even when the rest of the page (and the OS) is in
+ * dark mode.
+ *
+ * Strategy: re-assert the light palette by undoing every `[data-theme="dark"]`
+ * rule above with an equal-or-higher-specificity override.  Selectors here
+ * use either `.X.ink-force-light` (when the styled element is itself a root)
+ * or `.ink-force-light .Y` (when the styled element is a descendant of a
+ * root).  Source order plus the marker class ensure we win the cascade.
+ *
+ * `--ink-panel-bg` and `--ink-panel-shadow` are declared on `:root` /
+ * `[data-theme="dark"]`, so we override them once on the marker class and
+ * every panel that consumes them via `var()` automatically follows.
+ * The override uses an OPAQUE light value (not the default 80% rgba) so
+ * the panel reads as solid white over a dark page — translucent panels
+ * over a black page composite to a muddy gray and look broken.
+ *
+ * **When you add a new `[data-theme="dark"]` rule above, add the matching
+ *   force-light override here.**  Otherwise that bit of the toolbar stays
+ *   dark on PDF pages and looks broken.
+ */
+
+.ink-force-light {
+  --ink-panel-bg: #f6f8fa;
+  --ink-panel-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* The force-light panel bg is opaque, so the backdrop-filter blur is
+ * wasted GPU work — disable it on every panel that consumes the var. */
+.ink-l2-bar.ink-force-light,
+.ink-l3-panel.ink-force-light {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* L1 toolbar */
+[data-theme="dark"] .ink-toolbar.ink-force-light {
+  background: #f6f8fa;
+  border-color: #d0d7de;
+}
+[data-theme="dark"] .ink-toolbar.ink-force-light .ink-sep {
+  background: #d0d7de;
+}
+[data-theme="dark"] .ink-toolbar.ink-force-light .ink-l1-btn {
+  color: #1f2328;
+}
+[data-theme="dark"] .ink-toolbar.ink-force-light .ink-l1-btn:hover {
+  background: #eaeef2;
+}
+[data-theme="dark"] .ink-toolbar.ink-force-light .ink-l1-btn.active {
+  background: var(--surface-light-accent);
+  color: #fff;
+  border-color: var(--surface-light-accent);
+}
+[data-theme="dark"] .ink-toolbar.ink-force-light .ink-l1-btn.active:hover {
+  background: var(--surface-light-accent-hover);
+}
+[data-theme="dark"] .ink-toolbar.ink-force-light .ink-l1-btn[data-action="penonly"].active {
+  background: #cf222e;
+  border-color: #cf222e;
+  color: #fff;
+}
+[data-theme="dark"] .ink-toolbar.ink-force-light .ink-l1-btn[data-action="penonly"].active:hover {
+  background: #e5534b;
+}
+
+/* L2 floating bars
+ *
+ * Pen and hand subtypes remove their panel surface in every theme. Restore
+ * the opaque force-light surface in every theme too, so PDF content cannot
+ * show through the pen picker on light or Kindle pages. */
+.ink-l2-bar.ink-force-light,
+[data-theme="dark"] .ink-l2-bar.ink-force-light {
+  background: var(--ink-panel-bg);
+  border: 1px solid #d0d7de;
+  box-shadow: var(--ink-panel-shadow);
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-sep {
+  background: #d0d7de;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light button {
+  color: #1f2328;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light button:hover {
+  background: #eaeef2;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light button.active {
+  background: var(--surface-light-accent);
+  color: #fff;
+  border-color: var(--surface-light-accent);
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light button.active:hover {
+  background: var(--surface-light-accent-hover);
+}
+
+/* L2 settings panel internals */
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-settings-section {
+  color: #1f2328;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-settings-row {
+  color: #1f2328;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-settings-row:hover {
+  background: #eaeef2;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-toggle-track {
+  background: #d0d7de;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-toggle-track:hover {
+  background: #b0b8c1;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-toggle input:checked + .ink-toggle-track {
+  background: #0550ae;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-toggle-track::after {
+  background: #fff;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-settings-divider {
+  background: #d0d7de;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light button.ink-settings-action {
+  color: #1f2328;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-settings-action:hover {
+  background: #eaeef2;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-settings-action.ink-danger {
+  color: #cf222e;
+}
+
+/* Embed theme controls (inside L2 settings) */
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-theme-group {
+  border-color: #d0d7de;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-theme-btn {
+  color: #1f2328;
+  border-right-color: #d0d7de;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-theme-btn:hover {
+  background: #eaeef2;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-theme-btn.active {
+  background: var(--surface-light-accent);
+  color: #fff;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-theme-btn.active:hover {
+  background: var(--surface-light-accent-hover);
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-bg-swatch {
+  border-color: #d0d7de;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-bg-swatch:hover {
+  border-color: #656d76;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-bg-swatch.active {
+  border-color: #0550ae;
+  box-shadow: 0 0 0 1px #0550ae;
+}
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-bg-swatch[data-bg-value="default"] { background: #ffffff; }
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-bg-swatch[data-bg-value="green"]   { background: #d4edda; }
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-bg-swatch[data-bg-value="cool"]    { background: #cfe2f3; }
+[data-theme="dark"] .ink-l2-bar.ink-force-light .ink-bg-swatch[data-bg-value="gray"]    { background: #e0e0e0; }
+
+/* L3 panel: color swatches + size slider */
+[data-theme="dark"] .ink-l3-panel.ink-force-light {
+  border-color: #d0d7de;
+}
+[data-theme="dark"] .ink-l3-panel.ink-force-light .ink-color-dot-indicator {
+  background: #d0d7de;
+}
+[data-theme="dark"] .ink-l3-panel.ink-force-light .ink-color-dot-indicator.active {
+  background: #1f2328;
+}
+[data-theme="dark"] .ink-l3-panel.ink-force-light .ink-color-btn.active {
+  border-color: #1f2328 !important;
+}
+[data-theme="dark"] .ink-l3-panel.ink-force-light .ink-color-btn:hover .ink-add-color-dot {
+  border-color: #1f2328;
+  color: #1f2328;
+}
+[data-theme="dark"] .ink-l3-panel.ink-force-light .ink-add-color-btn .ink-add-color-dot {
+  border-color: #656d76;
+  color: #656d76;
+}
+[data-theme="dark"] .ink-l3-panel.ink-force-light .ink-size-preview-canvas {
+  background: #f6f8fa;
+  border-color: #d0d7de;
+}
+[data-theme="dark"] .ink-l3-panel.ink-force-light .ink-size-slider-track::before {
+  background: linear-gradient(to right,
+    #0550ae var(--fill-pct, 0%),
+    #d0d7de var(--fill-pct, 0%));
+}
+[data-theme="dark"] .ink-l3-panel.ink-force-light .ink-size-slider-thumb {
+  background: #fff;
+  border-color: #0550ae;
+}
+[data-theme="dark"] .ink-l3-panel.ink-force-light .ink-size-slider-tick {
+  background: #1f2328;
+  opacity: 0.25;
+}
+
+/* Keep the ink row separator light on dark-themed pages too. */
+[data-theme="dark"] .ink-l2-bar.ink-force-light.ink-l2-ink .ink-sep {
+  background: #d0d7de;
+}

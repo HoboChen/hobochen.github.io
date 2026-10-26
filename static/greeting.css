@@ -1,0 +1,7 @@
+/* Dynamic greeting animation in content */
+.greeting-cycle {
+  display: inline-block;
+  font-weight: 700;
+  min-height: 1.2em;
+  vertical-align: baseline;
+}

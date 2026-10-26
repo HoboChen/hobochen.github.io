@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="build-commit" content="733754f1">
+  <title>Windows 版本 - Jingqi's Interpositive</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/comments.css">
+<link rel="stylesheet" href="/static/sidebar-panel.css">
+<link rel="stylesheet" href="/static/link-preview.css">
+<link rel="stylesheet" href="/static/main.css?v=733754f1">
+<link rel="stylesheet" href="/static/themes.css?v=733754f1">
+<link rel="stylesheet" href="/static/ink-toolbar.css?v=733754f1">
+<link rel="stylesheet" href="/static/image-viewer.css?v=733754f1">
+<link rel="stylesheet" href="/static/syllabus-enhance.css">
+<link rel="stylesheet" href="/static/table-enhance.css">
+<link rel="stylesheet" href="/static/greeting.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var linkPreviewEmbed=false;
+      try{
+        var previewUrl=new URL(location.href);
+        linkPreviewEmbed=previewUrl.searchParams.get('rprint-preview')==='1'&&window.parent!==window&&window.parent.location.origin===location.origin;
+      }catch(e){}
+      if(linkPreviewEmbed){
+        document.documentElement.classList.add('link-preview-embed');
+        var previewArticleLink=function(target){return target&&target.closest&&target.closest('.article a[href]');};
+        var blockPreviewLink=function(event){if(previewArticleLink(event.target)){event.preventDefault();event.stopImmediatePropagation();}};
+        document.addEventListener('click',blockPreviewLink,true);
+        document.addEventListener('auxclick',blockPreviewLink,true);
+        document.addEventListener('keydown',function(event){if(event.key==='Enter')blockPreviewLink(event);},true);
+        document.addEventListener('dblclick',function(event){if(event.target&&event.target.closest&&event.target.closest('.article')){event.preventDefault();event.stopImmediatePropagation();}},true);
+      }
+      var bc=document.querySelector('meta[name="build-commit"]');
+      var commit=bc?bc.getAttribute('content'):'';
+      if(commit&&commit!=='unknown'){
+        var prev=localStorage.getItem('kb-build-commit');
+        if(prev&&prev!==commit){
+          var keys=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf('kb-')===0)keys.push(k);}
+          keys.forEach(function(k){localStorage.removeItem(k);});
+          localStorage.setItem('kb-build-commit',commit);
+          if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+            navigator.serviceWorker.controller.postMessage('clearCaches');
+          }
+          window.location.reload();
+          return;
+        }
+        localStorage.setItem('kb-build-commit',commit);
+      }
+      // Resume last visited page on PWA/browser launch. PWA launches carry
+      // `?pwa=1`; a normal browser launch is a plain root URL without a same-
+      // origin referrer. `/index.html` is an explicit home navigation, so it
+      // never resumes. Runs before paint to avoid a flash of the home page.
+      // Validates the stored path is a same-origin absolute path (rejects
+      // `//host` / `/\host` open-redirects).
+      var resumeLaunch=/[?&]pwa=1(&|$)/.test(location.search);
+      try{
+        var launchUrl=new URL(location.href);
+        launchUrl.searchParams.delete('pwa');
+        var sameOriginReferrer=false;
+        try{sameOriginReferrer=!!document.referrer&&new URL(document.referrer,location.href).origin===location.origin;}catch(e){}
+        resumeLaunch=resumeLaunch||(launchUrl.pathname==='/'&&!launchUrl.search&&!launchUrl.hash&&!sameOriginReferrer);
+      }catch(e){}
+      if(resumeLaunch){
+        try{
+          var last=localStorage.getItem('kb-last-location');
+          var lastPath=last&&last.split('#')[0].split('?')[0];
+          if(last&&/^\/[^/\\]/.test(last)&&lastPath!=='/'&&lastPath!=='/index.html'){
+            try{sessionStorage.setItem('kb-resume-last-scroll','1');}catch(e){}
+            location.replace(last);return;
+          }
+        }catch(e){}
+      }
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      var mob=window.matchMedia('(max-width:650px)').matches;
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.style.colorScheme=t==='dark'?'dark':'light';
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      var w=p.contentWidth||(mob?'100':'90');
+      document.documentElement.style.setProperty('--content-max-width',w+'%');
+      document.documentElement.dataset.contentWidth=String(w);
+      var edge=p.ignoreCorners!==undefined?p.ignoreCorners==='on':false;
+      if(edge&&Number(w)===100)document.documentElement.setAttribute('data-ignore-corners','on');
+      if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches||window.matchMedia('(display-mode:fullscreen)').matches)document.documentElement.classList.add('pwa-standalone');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'noto-serif';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.0};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+      var ht=t==='dark'?'github-dark':'github';
+      var writes='<link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/'+ht+'.min.css">';
+      document.write(writes);
+    })();
+  </script>
+  <style>.math{opacity:0;transition:opacity .15s}.math.rprint-render-failed{opacity:1}</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css" integrity="sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM" crossorigin="anonymous">
+  <script id="rprint-katex" defer src="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.js" integrity="sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI" crossorigin="anonymous"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('katex')}else{document.querySelectorAll('.math').forEach(function(el){var src=el.textContent;el.setAttribute('data-latex',src);katex.render(src,el,{displayMode:el.classList.contains('display'),throwOnError:false,trust:function(ctx){return ctx&&ctx.command==='\\href'&&typeof ctx.url==='string'&&/^#[A-Za-z0-9:._-]+$/.test(ctx.url);}});el.querySelectorAll('mtable[columnspacing=\'\']').forEach(function(t){t.removeAttribute('columnspacing')});el.style.opacity='1';})}"></script>
+  <script>document.getElementById('rprint-katex').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('katex',new Error('KaTeX failed to load'))}else{document.querySelectorAll('.math').forEach(function(el){el.style.opacity='1'})}});</script>
+</head>
+<body data-page-type="markdown">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <button class="banner-toggle" id="left-toggle" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h12v1.5H2V3zm0 4h12v1.5H2V7zm0 4h12v1.5H2V11z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-center">
+        <div class="banner-center-inner">
+          <a href="/index.html" class="site-title" data-short="Interpositive">Jingqi's Interpositive</a>
+          <span class="spa-health-wrap" id="spa-health-wrap">
+            <span class="spa-health-dot" id="spa-health-dot" title="SPA server status"></span>
+            <div class="spa-health-popup" id="spa-health-popup">
+              <div class="shp-header">
+                <span class="shp-title">Server Status</span>
+                <span class="shp-heart" id="shp-heart"></span>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-metrics">
+                <div class="shp-row"><span class="shp-label">Ping</span><span class="shp-value" id="shp-ping">—</span></div>
+                <div class="shp-row"><span class="shp-label">Uptime</span><span class="shp-value" id="shp-uptime">—</span></div>
+                <div class="shp-row"><span class="shp-label">Memory</span><span class="shp-value" id="shp-memory">—</span></div>
+                <div class="shp-row"><span class="shp-label">CPU Time</span><span class="shp-value" id="shp-cpu-time">—</span></div>
+                <div class="shp-row"><span class="shp-label">Load</span><span class="shp-value" id="shp-load">—</span></div>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-modules">
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-watch"></span> Watch</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-jupyter"></span> Jupyter</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-terminal"></span> Terminal</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-proxy"></span> Proxy</div>
+              </div>
+              <div id="shp-module-diagnostics" role="status" aria-live="polite"></div>
+            </div>
+          </span>
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="/cs-notes/" class="nav-link" data-short="CS">CS</a><ul class="nav-dropdown"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li><a href="/cs-notes/mit-gir/index.html">MIT GIR</a></li><li><a href="/cs-notes/cs-math/index.html">CS Math</a></li></ul></li><li class="nav-item"><a href="/not-cs-notes/" class="nav-link" data-short="CS$^\complement$">CS$^\complement$</a><ul class="nav-dropdown"><li><a href="/not-cs-notes/arts/index.html">书影音</a></li></ul></li><li class="nav-item"><a href="/notebook/" class="nav-link" data-short="Mixed">Mixed</a><ul class="nav-dropdown"><li><a href="/notebook/mind/index.html">Mind</a></li><li><a href="/notebook/matter/index.html">Matter</a></li><li><a href="/notebook/practice/index.html">Practice</a></li><li><a href="/notebook/toolbox/index.html">Toolbox</a></li></ul></li><li class="nav-item"><a href="/years/" class="nav-link" data-short="Years">Years</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="banner-right">
+        <button class="banner-right-toggle" title="More controls">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="search-wrap" id="search-wrap">
+          <button class="search-btn" id="search-btn" title="Search (Ctrl+K)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-input-wrap" id="search-input-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search…" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+        <div class="comment-wrap" id="comment-wrap">
+          <button class="comment-btn" id="comment-btn" title="Review Comments (A)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <span class="comment-nav-count" id="comment-nav-count"></span>
+          <button class="comment-nav-btn" id="comment-nav-prev" title="Previous comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="comment-nav-btn" id="comment-nav-next" title="Next comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <button class="settings-btn" id="settings-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="settings-panel" id="settings-panel">
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Native Jupyter <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="native-jupyter-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Global Search <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="content-search-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Quick Edit <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="quick-edit-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section resource-pack-setting" id="resource-pack-setting" hidden>
+            <div class="settings-row resource-pack-row">
+              <span class="settings-desc">Offline resources</span>
+              <button type="button" class="settings-action-btn" id="resource-pack-import-btn">Import</button>
+            </div>
+            <input type="file" id="resource-pack-input" accept=".rpack,application/vnd.rprint.resource-pack" hidden>
+            <div class="resource-pack-status" id="resource-pack-status" aria-live="polite"></div>
+            <div class="resource-pack-list" id="resource-pack-list" aria-label="Installed resource packs"></div>
+          </div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent link-preview-settings-parent">
+            <label class="style-label" id="link-preview-label">Link Preview <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="link-preview-switch" role="switch" aria-labelledby="link-preview-label" aria-checked="false" aria-expanded="false" aria-controls="link-preview-settings-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children link-preview-settings-children" id="link-preview-settings-children" hidden>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-same-page-only-label">Same-page links only</label>
+              <button class="style-switch style-switch-compact" id="link-preview-same-page-only-switch" role="switch" aria-labelledby="link-preview-same-page-only-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-auto-close-label">Auto-close</label>
+              <button class="style-switch style-switch-compact" id="link-preview-auto-close-switch" role="switch" aria-labelledby="link-preview-auto-close-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-overwrite-jumping-label">Overwrite Link Jumping</label>
+              <button class="style-switch style-switch-compact" id="link-preview-overwrite-jumping-switch" role="switch" aria-labelledby="link-preview-overwrite-jumping-label" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+            </div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-row settings-title-row settings-dependent-parent">
+            <span class="settings-panel-title">Keyboard Shortcuts</span>
+            <button class="style-switch" id="kb-enabled-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children keyboard-shortcuts-children">
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="search"><span class="settings-desc">Search</span><span class="settings-keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="scroll"><span class="settings-desc">Scroll down / up</span><span class="settings-keys"><kbd>J</kbd> <kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="section"><span class="settings-desc">Next / prev section</span><span class="settings-keys"><kbd>U</kbd> <kbd>I</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="sidebar-toc"><span class="settings-desc"><span data-shortcut-part="sidebar">Sidebar / </span>TOC</span><span class="settings-keys"><kbd data-shortcut-part="sidebar">S</kbd> <kbd>T</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="spread"><span class="settings-desc">Next / prev spread</span><span class="settings-keys"><kbd>PgDn</kbd> <kbd>PgUp</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="columns"><span class="settings-desc">2 Columns</span><span class="settings-keys"><kbd>C</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="comments"><span class="settings-desc">Comments<span class="spa-only-setting" style="display: none;"> / add to selection</span></span><span class="settings-keys"><kbd>A</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="fold"><span class="settings-desc">Fold banner</span><span class="settings-keys"><kbd>F</kbd></span></div>
+            
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="dismiss"><span class="settings-desc">Close / Dismiss</span><span class="settings-keys"><kbd>Esc</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="settings"><span class="settings-desc">Show this panel</span><span class="settings-keys"><kbd>?</kbd></span></div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent">
+            <label class="style-label" id="debug-mode-label">Debug Mode</label>
+            <button class="style-switch" id="debug-mode-switch" role="switch" aria-labelledby="debug-mode-label" aria-checked="false" aria-expanded="false" aria-controls="debug-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="debug-children" id="debug-children" hidden>
+            <div class="settings-dependent-children">
+              <div class="settings-panel-section settings-dependent-child debug-log-level-setting">
+                <label class="style-label">Client Log Level</label>
+                <div class="style-toggle-group">
+                  <button class="style-toggle-btn debug-level-btn" data-level="error">Error</button>
+                  <button class="style-toggle-btn debug-level-btn" data-level="info">Info</button>
+                  <button class="style-toggle-btn debug-level-btn active" data-level="debug">Debug</button>
+                </div>
+              </div>
+              <div class="settings-footer is-dirty" id="settings-git-version">
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Branch</span>
+                  <span class="settings-footer-value" id="settings-build-branch">main</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Commit</span>
+                  <span class="settings-footer-value" id="settings-build-commit">733754f1</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Commit time</span>
+                  <span class="settings-footer-value" id="settings-build-commit-time" data-iso="2026-10-25T21:34:38-07:00" title="2026-10-25T21:34:38-07:00">—</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Generated</span>
+                  <span class="settings-footer-value" id="settings-build-generated-at" data-iso="" title="">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="theme-wrap" id="theme-wrap">
+          <a href="/static/settings.html?v=733754f1" class="theme-btn" id="theme-btn" title="Theme & display">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="13.5" cy="6.5" r=".5"/>
+              <circle cx="17.5" cy="10.5" r=".5"/>
+              <circle cx="8.5" cy="7.5" r=".5"/>
+              <circle cx="6.5" cy="12.5" r=".5"/>
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+            </svg>
+          </a>
+          <output class="book-position" id="book-position" aria-label="Reading pages" aria-live="polite" aria-atomic="true" hidden></output>
+          <button type="button" class="book-nav-btn book-prev" id="book-prev" title="Previous spread" aria-label="Previous spread" hidden disabled>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="book-nav-btn book-next" id="book-next" title="Next spread" aria-label="Next spread" hidden disabled>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <div class="style-panel" id="style-panel">
+          <div class="style-panel-section">
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn active" data-theme="light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light
+              </button>
+              <button class="style-toggle-btn" data-theme="dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="style-toggle-btn" data-theme="kindle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                E-Ink
+              </button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn font-btn active" data-font="system">System</button>
+              <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+              <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">字体</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="default">系统</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+              <button class="style-toggle-btn fontzh-btn active" data-fontzh="noto-serif">宋体</button>
+            </div>
+          </div>
+          <div class="style-panel-section bg-picker-section">
+            <label class="style-label">Background</label>
+            <div class="bg-swatch-group" id="bg-swatch-group">
+              <button class="bg-swatch active" data-bg="default" title="Default"></button>
+              <button class="bg-swatch" data-bg="green" title="Green"></button>
+              <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+              <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+              <div class="style-range-ticks">
+                <span class="style-range-tick font-size-tick" data-i="0">12</span>
+                <span class="style-range-tick font-size-tick" data-i="1">14</span>
+                <span class="style-range-tick font-size-tick" data-i="2">16</span>
+                <span class="style-range-tick font-size-tick" data-i="3">18</span>
+                <span class="style-range-tick font-size-tick" data-i="4">24</span>
+                <span class="style-range-tick font-size-tick" data-i="5">32</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+              <div class="style-range-ticks">
+                <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+                <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+                <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+                <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+                <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+                <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Width <span id="width-value">90%</span></label>
+            <div class="style-slider-wrap width-slider-wrap">
+              <input type="range" class="style-range" id="content-width-range" min="0" max="5" step="1" value="3">
+              <div class="style-range-ticks width-ticks">
+                <span class="style-range-tick width-tick" data-i="0">50</span>
+                <span class="style-range-tick width-tick" data-i="1">65</span>
+                <span class="style-range-tick width-tick" data-i="2">80</span>
+                <span class="style-range-tick width-tick" data-i="3">90</span>
+                <span class="style-range-tick width-tick" data-i="4">95</span>
+                <span class="style-range-tick width-tick" data-i="5">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="ignore-corners-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">2 Columns <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+        </div>
+        <button class="banner-toggle" id="fold-banner-btn" title="Fold banner">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4v16M3.5 7.5 8 12l-4.5 4.5M20.5 7.5 16 12l4.5 4.5"/>
+          </svg>
+        </button>
+        <button class="banner-toggle" id="right-toggle" title="Toggle table of contents">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-right-dropdown"></div>
+    </div>
+  </header>
+
+  <!-- Floating buttons when banner is folded -->
+  <div class="banner-fold-float" id="banner-fold-float">
+    <button class="banner-fold-float-btn" id="unfold-banner-btn" title="Unfold banner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 4v16M8 7.5 3.5 12 8 16.5M16 7.5 20.5 12 16 16.5"/>
+      </svg>
+    </button>
+    <button class="banner-fold-float-btn" id="float-toc-btn" title="Toggle table of contents">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout left-collapsed right-collapsed">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar collapsed" id="left-sidebar">
+      <div class="sidebar-content" id="spa-sidebar">
+        <!-- rprint:sidebar:start -->
+        <a class="sidebar-cat-title" href="/notebook">Mixed</a><ul class="sidebar-list"><li class="sidebar-group" data-priority="0"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/mind/index.html">Mind</a><span class="sidebar-toggle"></span></span><ul><li><a href="/notebook/mind/ideas.html">脑洞</a></li></ul></li><li class="sidebar-group" data-priority="0.001"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/matter/index.html">Matter</a><span class="sidebar-toggle"></span></span><ul><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/matter/vehicle.html">车</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/matter/vehicle/model3-us-manual.html">Model 3 US Manual 📄</a></li><li><a href="/notebook/matter/vehicle/r-maintenance.html">Golf R Maintenance Guide 📄</a></li><li><a href="/notebook/matter/vehicle/ct4-us-manual.html">CT4 US Manual 📄</a></li><li><a href="/notebook/matter/vehicle/ct4-maintenance.html">CT4 Maintenance Guide 📄</a></li></ul></li><li><a href="/notebook/matter/optics.html">光学</a></li></ul></li><li class="sidebar-group open" data-priority="0.002"><span class="sidebar-row"><a class="sidebar-group-title active-group" href="/notebook/practice/index.html">Practice</a><span class="sidebar-toggle"></span></span><ul><li class="has-children open" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows.html">工作流</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li class="has-children open" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/desktop-os-comparison.html">桌面OS比较</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/workflows/desktop-os-comparison/linux.html">Linux 发行版</a></li><li class="active"><a href="/notebook/practice/workflows/desktop-os-comparison/windows.html">Windows 版本</a></li></ul></li><li><a href="/notebook/practice/workflows/rime.html">Rime 配置手册</a></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/reference.html">速查</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/workflows/reference/vim.html">Vim</a></li><li><a href="/notebook/practice/workflows/reference/hyper-v.html">Hyper-V</a></li><li><a href="/notebook/practice/workflows/reference/zfs-common-commands.html">ZFS</a></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/setup.html">初始化</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/setup/linux.html">Linux</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/workflows/setup/linux/zfs-mirror-zbm-install.html">Ubuntu Root on ZFS via ZBM</a></li><li><a href="/notebook/practice/workflows/setup/linux/wayland-rdp.html">配置Wayland RDP</a></li><li><a href="/notebook/practice/workflows/setup/linux/inotify-limits.html">提高 inotify 文件监听限制</a></li></ul></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/investigations.html">问题调查</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/workflows/investigations/ubuntu-privacy-snap.html">Ubuntu遥测和Snap</a></li><li><a href="/notebook/practice/workflows/investigations/windows-components.html">Windows 遥测与可选组件</a></li><li><a href="/notebook/practice/workflows/investigations/macpro-2013-4k-sst-fix.html">Mac Pro 2013 的 4K SST 右侧闪烁</a></li><li><a href="/notebook/practice/workflows/investigations/zfs-spotlight-high-cpu.html">ZFS 卷上 Spotlight 持续高 CPU</a></li><li><a href="/notebook/practice/workflows/investigations/wayland-rdp-audio.html">Wayland RDP Low Audio Quality</a></li><li><a href="/notebook/practice/workflows/investigations/nautilus-thumbnail-fix.html">Nautilus 缩略图生成失败</a></li></ul></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/ai.html">虚假情报</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/ai/copilot-api.html">通过 Copilot API 接入 Codex</a></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/lab.html">在线</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/lab/access.html">域名与认证</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/lab/access/git.html">配置Git HTTPS OAuth到自建GitLab</a></li></ul></li></ul></li></ul></li><li class="sidebar-group" data-priority="0.003"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/toolbox/index.html">Toolbox</a><span class="sidebar-toggle"></span></span><ul><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/toolbox/financial.html">Financial 1001</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/toolbox/financial/tax-us-redmond.html">Simple Income Tax Calc (Redmond) 🐍</a></li><li><a href="/notebook/toolbox/financial/tax-china-suzhou.html">简易个人所得税计算器（苏州） 🐍</a></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/toolbox/hardware.html">Hardware 1001</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/toolbox/hardware/ppi.html">PPI Calculator 🐍</a></li><li><a href="/notebook/toolbox/hardware/disk_array_survival_rate.html">Disk Array Survival Rate 🐍</a></li></ul></li></ul></li></ul>
+        <!-- rprint:sidebar:end -->
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content" id="content">
+      <article class="article" id="spa-content">
+        <h2 id="版本区别" data-sourcepos="1:1-1:1">版本区别</h2>
+<p data-sourcepos="3:1-3:1">桌面版以 Windows 11（x64）为准，Server 以 2025 为准。</p>
+<style>
+.windows-editions table { width: 100%; min-width: 44rem; table-layout: fixed; }
+.windows-editions th, .windows-editions td { white-space: normal; overflow-wrap: break-word; vertical-align: top; }
+.windows-editions col:nth-child(1) { width: 19% !important; }
+.windows-editions col:nth-child(2) { width: 39% !important; }
+.windows-editions col:nth-child(3) { width: 15% !important; }
+.windows-editions col:nth-child(4) { width: 27% !important; }
+</style>
+<div class="windows-editions">
+<div class="table-wrap"><table data-sourcepos="16:1-28:1">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>版本</th>
+<th>功能差异</th>
+<th>支持周期</th>
+<th>硬件与授权</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.microsoft.com/windows/business/compare-windows-11">Home</a></td>
+<td>基本桌面、WSL 2、Dev Drive；有条件支持设备加密</td>
+<td>每个发布版本 24 个月</td>
+<td>常规 Windows 11 硬件要求；OEM、零售</td>
+</tr>
+<tr>
+<td>Pro</td>
+<td>Home ＋ Hyper-V、Sandbox、Windows Containers、完整 BitLocker、RDP 主机、AD / Entra 加入、组策略与更新策略</td>
+<td>同 Home</td>
+<td>同 Home；另有组织授权</td>
+</tr>
+<tr>
+<td>Enterprise</td>
+<td>Pro ＋ 组织级安全、部署与管理能力</td>
+<td>每个发布版本 36 个月</td>
+<td>同 Home 的硬件要求；组织授权</td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/en-us/windows/whats-new/ltsc/whats-new-windows-11-2024">Enterprise LTSC 2024</a></td>
+<td>Enterprise 的桌面与管理能力；固定于 24H2，持续接收安全与质量更新；Store 及部分应用、工具支持受限</td>
+<td><a href="https://learn.microsoft.com/en-us/lifecycle/products/windows-11-enterprise-ltsc-2024">5 年，至 2029 年</a></td>
+<td>同 Enterprise 的硬件要求；企业批量授权</td>
+</tr>
+<tr>
+<td>IoT Enterprise LTSC 2024</td>
+<td>同 Enterprise LTSC 2024；面向固定用途设备</td>
+<td><a href="https://learn.microsoft.com/en-us/lifecycle/products/windows-11-iot-enterprise-ltsc-2024">10 年，至 2034 年</a></td>
+<td><a href="https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/hardware/system_requirements">可选最低配置</a>：2 GB 内存、16 GB 存储、BIOS，TPM 与 Secure Boot 可选；固定用途设备的 OEM 或批量授权</td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/en-us/windows-server/get-started/editions-comparison">Server Standard</a></td>
+<td><a href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview">AD DS</a> 域控制器、DHCP / DNS、文件服务、IIS、Hyper-V、RDS</td>
+<td>10 年，至 2034 年</td>
+<td>按核心授权；整机足额授权含 2 个 Windows Server 虚拟环境，可叠加</td>
+</tr>
+<tr>
+<td>Server Datacenter</td>
+<td>Standard ＋ <a href="https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/storage-spaces-direct-overview">Storage Spaces Direct</a>、Network Controller</td>
+<td>同 Standard</td>
+<td>同 Standard；虚拟环境数量不限</td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/en-us/windows-server/get-started/azure-edition">Server Datacenter: Azure Edition</a></td>
+<td>Datacenter 的主要能力 ＋ Azure 激活与平台集成，另有年度产品更新</td>
+<td>同 Standard</td>
+<td>仅 Azure / Azure Local 虚拟机；按平台授权</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p data-sourcepos="29:1-29:1">Server 的虚拟环境权益以物理系统仅承载与管理虚拟机为前提；<a href="https://www.microsoft.com/licensing/guidance/Windows-Server-2025">按虚拟机或用量授权</a>另有规则。RDS 多用户桌面与 RemoteApp 另需 <a href="https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-client-access-license">RDS CAL</a>。</p>
+<p data-sourcepos="31:1-31:1"><a href="https://learn.microsoft.com/en-us/windows-server/get-started/install-options-server-core-desktop-experience">Server 安装选项</a>：Core 无完整桌面，Desktop Experience 带图形界面；互换需重装。LTSC 的应用与驱动支持期由厂商决定。</p>
+<h2 id="包管理与软件分发" data-sourcepos="33:1-33:1">包管理与软件分发</h2>
+<p data-sourcepos="35:1-35:1">Windows 没有像多数 Linux 发行版那样，由同一个仓库和包管理器统一维护系统与大部分应用。系统组件由 Windows Update 维护，应用则由厂商安装包、Store 或第三方包管理工具分发；装了包管理器也不意味着应用的更新全部归它管理。</p>
+<ul data-sourcepos="37:1-39:1">
+<li><strong><a href="https://learn.microsoft.com/en-us/windows/package-manager/winget/">WinGet</a></strong>：微软工具，App Installer 提供；用清单调用 EXE / MSI / MSIX 等安装包，支持安装、升级、卸载和清单导入 / 导出。安装范围与提权由具体包决定。</li>
+<li><strong><a href="https://github.com/ScoopInstaller/Scoop">Scoop</a></strong>：偏命令行与便携工具，默认装到用户目录，shim 提供命令入口；JSON manifest + bucket 管理下载和依赖。</li>
+<li><strong><a href="https://docs.chocolatey.org/en-us/features/powershell/">Chocolatey</a></strong>：包 + PowerShell 脚本自动化，适合传统软件与组织内部仓库。</li>
+</ul>
+<p data-sourcepos="41:1-41:1">这些工具管理的安装包也有不同的部署模型：</p>
+<ul data-sourcepos="43:1-46:1">
+<li><strong><a href="https://learn.microsoft.com/en-us/windows/win32/msi/overview-of-windows-installer">MSI</a> / EXE</strong>：MSI 有标准安装、修复和卸载机制；EXE 由厂商定义。更新多由应用或包管理工具负责。</li>
+<li><strong><a href="https://learn.microsoft.com/en-us/windows/msix/desktop/desktop-to-uwp-behind-the-scenes">MSIX / AppX</a></strong>：系统管理部署、包身份和卸载；桌面应用可为 full trust 或 <a href="https://learn.microsoft.com/en-us/windows/win32/secauthz/appcontainer-isolation">AppContainer</a>，打包本身不保证沙箱隔离。</li>
+<li><strong>Store</strong>：分发渠道，可承载不同应用类型；更新方式取决于打包方式。</li>
+<li><strong>便携软件</strong>：解压运行、替换升级；配置仍可能写入 AppData 或注册表。</li>
+</ul>
+<p data-sourcepos="48:1-48:1">与 Linux 的共享库依赖管理相比，Windows 桌面应用常自带依赖，或要求另装 VC++ 等运行库，多种版本可以共存。WinGet 主要自动化已有安装流程，并不把整个系统转换成统一的依赖树。</p>
+<h2 id="发布模型" data-sourcepos="50:1-50:1">发布模型</h2>
+<div class="table-wrap"><table data-sourcepos="52:1-57:1">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>通道</th>
+<th>功能更新</th>
+<th>安全与质量更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://learn.microsoft.com/en-us/windows/release-health/windows11-release-information">GA</a></td>
+<td>通常年度更新，部分新功能分批推出</td>
+<td>月度累计补丁</td>
+</tr>
+<tr>
+<td><a href="https://learn.microsoft.com/en-us/windows/whats-new/ltsc/overview">LTSC</a></td>
+<td>固定功能基线</td>
+<td>月度累计补丁</td>
+</tr>
+<tr>
+<td><a href="https://www.microsoft.com/en-us/windowsinsider/understand-flighting">Insider</a></td>
+<td>按预览通道提前发布</td>
+<td>随预览构建更新</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="58:1-58:1">Home 可暂停更新、调整重启；Pro / Education / Enterprise 还可通过<a href="https://learn.microsoft.com/en-us/windows/deployment/update/windows-update-client-policies">组策略或 MDM</a>控制更新类型、延迟与部署节奏。</p>
+<h2 id="虚拟化与容器" data-sourcepos="60:1-60:1">虚拟化与容器</h2>
+<p data-sourcepos="62:1-62:1">Windows 原生应用接口与 Linux 不同，普通 Linux ELF 程序不能直接作为 Windows 应用运行。WSL 2 通过运行 Linux 内核提供 Linux 环境；Windows Containers 则运行 Windows 用户空间，两者的容器镜像不能互换。</p>
+<ul data-sourcepos="64:1-67:1">
+<li><strong><a href="https://learn.microsoft.com/en-us/windows/wsl/faq">WSL 2</a></strong>：Virtual Machine Platform（Hyper-V 子集）+ 轻量虚拟机 + 完整 Linux 内核，Home 可用。Linux 容器需另装 Docker 等运行时。</li>
+<li><strong><a href="https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/overview?pivots=windows">Hyper-V</a></strong>：Type-1 hypervisor，Pro / Enterprise / Education 提供完整虚拟机工具。<a href="https://learn.microsoft.com/en-us/windows/security/hardware-security/enable-virtualization-based-protection-of-code-integrity">VBS / HVCI</a> 等共享 Windows hypervisor，无需先安装完整 Hyper-V 功能。</li>
+<li><strong><a href="https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/">Sandbox</a></strong>：一次性隔离桌面，关闭清空，Pro / Enterprise / Education 可用。</li>
+<li><strong><a href="https://learn.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment">Windows Containers</a></strong>：<a href="https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/hyperv-container">Process isolation</a> 共享宿主内核，受版本兼容约束；Hyper-V isolation 使用独立内核。Win11 Pro / Enterprise 默认后者，面向开发测试。</li>
+</ul>
+<h2 id="服务配置与日志" data-sourcepos="69:1-69:1">服务、配置与日志</h2>
+<p data-sourcepos="71:1-71:1">Windows 的这些职责分散在几个系统组件中，没有一个与 systemd 完全对应的管理入口：</p>
+<div class="table-wrap"><table data-sourcepos="73:1-79:1">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>职责</th>
+<th>Windows 中的主要机制</th>
+<th>与常见 Linux 环境的对应关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>后台服务</td>
+<td>Service Control Manager（SCM），通过 <code>services.msc</code>、<code>sc.exe</code> 或 PowerShell 管理</td>
+<td>类似 service unit 的启动、停止、依赖和故障恢复；不承担全部启动流程</td>
+</tr>
+<tr>
+<td>定时与触发任务</td>
+<td>Task Scheduler（任务计划程序）</td>
+<td>类似 cron / systemd timer，也支持登录、事件等触发条件</td>
+</tr>
+<tr>
+<td>结构化系统日志</td>
+<td>Windows Event Log（事件日志），通过 Event Viewer 查看</td>
+<td>类似 journal 的一部分用途；应用也可能另写日志文件</td>
+</tr>
+<tr>
+<td>系统与应用配置</td>
+<td><a href="https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry">Registry</a>（注册表）、配置文件、组策略</td>
+<td>配置分散在多种存储中，不统一放在 <code>/etc</code>；组策略用于施加管理规则</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="80:1-80:1">注册表按键组织配置，<code>HKLM</code> 主要保存机器级设置，<code>HKCU</code> 保存当前用户设置。应用文件通常在 <code>Program Files</code>，机器共享数据在 <code>ProgramData</code>，用户配置和缓存常在 <code>%APPDATA%</code> / <code>%LOCALAPPDATA%</code>。备份应用环境时，只复制程序目录往往不够。</p>
+<p data-sourcepos="82:1-82:1">PowerShell 是常用管理入口，管道主要传递对象，服务、进程和事件日志等可通过 cmdlet 查询；它不是系统的服务管理器本身。</p>
+<h2 id="文件系统与权限" data-sourcepos="84:1-84:1">文件系统与权限</h2>
+<ul data-sourcepos="86:1-91:1">
+<li><strong>卷与路径</strong>：常见路径以 <code>C:</code> 等盘符开头，也可将卷挂载到目录。默认通常保留文件名大小写、但按大小写不敏感方式查找；涉及 Linux 工具链时需要留意<a href="https://learn.microsoft.com/en-us/windows/wsl/case-sensitivity">目录的大小写设置</a>。</li>
+<li><strong>NTFS</strong>：常规系统卷使用的文件系统，支持日志、访问控制列表（ACL）、硬链接等。其日志主要用于崩溃后恢复文件系统一致性，不提供一般文件内容的端到端校验。</li>
+<li><strong><a href="https://learn.microsoft.com/en-us/windows-server/storage/refs/refs-overview">ReFS</a> / <a href="https://learn.microsoft.com/en-us/windows/dev-drive/">Dev Drive</a></strong>：ReFS 不能作为启动卷；Dev Drive 面向源码、包缓存和构建产物。文件数据校验可选，发现损坏后的自动修复需要冗余副本。</li>
+<li><strong>身份与 ACL</strong>：用户和组以 SID 标识，文件等对象的 ACL 决定访问权限，比 Unix 的 owner / group / other 模型更细。微软账户是登录方式之一，本地访问控制仍基于 Windows 身份与<a href="https://learn.microsoft.com/en-us/windows/win32/secauthz/access-tokens">访问令牌</a>。</li>
+<li><strong><a href="https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/how-it-works">UAC</a> 与提权</strong>：管理员日常通常也使用受限令牌，执行管理操作时再提权。UAC 不等于应用沙箱；传统桌面应用通常可以访问当前用户有权访问的文件。</li>
+<li><strong><a href="https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/">BitLocker</a></strong>：保护卷上的静态数据，作用类似 LUKS；解锁后，运行中的应用能否访问文件仍由权限和隔离机制决定。</li>
+</ul>
+
+      </article>
+    </main>
+
+    <!-- Right Sidebar (TOC) -->
+    <aside class="sidebar right-sidebar collapsed" id="right-sidebar">
+      <div class="sidebar-content" id="spa-toc">
+        <!-- <h4 class="toc-title">On this page</h4> -->
+        <ul class="toc-list"><li class="toc-section"><div class="toc-heading"><a href="#版本区别">版本区别</a></div></li><li class="toc-section"><div class="toc-heading"><a href="#包管理与软件分发">包管理与软件分发</a></div></li><li class="toc-section"><div class="toc-heading"><a href="#发布模型">发布模型</a></div></li><li class="toc-section"><div class="toc-heading"><a href="#虚拟化与容器">虚拟化与容器</a></div></li><li class="toc-section"><div class="toc-heading"><a href="#服务配置与日志">服务、配置与日志</a></div></li><li class="toc-section"><div class="toc-heading"><a href="#文件系统与权限">文件系统与权限</a></div></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <script src="/static/text-anchor.js"></script>
+<script src="/static/comments.js"></script>
+<script src="/static/core/code-blocks.js"></script>
+<script src="/static/scrollbar-visibility.js?v=733754f1"></script>
+<script src="/static/sidebar-panel.js"></script>
+<script src="/static/core/theme-colors.js?v=733754f1"></script>
+<script src="/static/svg-theme.js?v=733754f1"></script>
+<script src="/static/render-on-demand.js"></script>
+<script src="/static/reading-navigation-state.js"></script>
+<script src="/static/link-preview.js"></script>
+<script src="/static/shell-lifecycle.js"></script>
+<script src="/static/module-browser.js"></script>
+<script src="/static/shell-preferences.js"></script>
+<script src="/static/shell-bootstrap.js"></script>
+<script src="/static/main.js?v=733754f1"></script>
+<script src="/static/shell-layout.js"></script>
+<script src="/static/shell-search-settings.js?v=733754f1"></script>
+<script src="/static/shell-router.js"></script>
+<script src="/static/themes.js?v=733754f1"></script>
+<script src="/static/core/ink-theme-colors.js?v=733754f1"></script>
+<script src="/static/ink-toolbar.js?v=733754f1"></script>
+<script src="/static/image-viewer.js?v=733754f1"></script>
+<script src="/static/page-scripts.js?v=733754f1"></script>
+<script src="/static/vendor/js-yaml.js"></script>
+<script src="/static/core/syllabus-spec.js"></script>
+<script src="/static/syllabus-enhance.js"></script>
+<script src="/static/table-enhance.js"></script>
+<script src="/static/theme-colors.js?v=733754f1"></script>
+<script src="/static/greeting.js"></script>
+<script src="/static/draftbook-loader.js"></script>
+  <script>
+  // highlight.js: on-demand language loader + post-load highlight pass.
+  //
+  // Core (highlight.min.js) bundles ~37 common languages. Pages that use
+  // additional languages from _HLJS_EXTRA trigger an extra CDN fetch only
+  // when the page actually contains a matching code block. The service
+  // worker caches each module after the first fetch, so subsequent pages
+  // pay nothing for already-loaded languages.
+  //
+  // _HLJS_ALIAS maps user-facing class names to module filenames that
+  // differ from the class name. Pure aliases that hljs core already knows
+  // (e.g. ts → typescript, sh → bash) are resolved by hljs.getLanguage()
+  // and don't need entries — only include aliases whose target module is
+  // in _HLJS_EXTRA.
+  window._HLJS_BASE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/languages/';
+  window._HLJS_ALIAS = {
+    tex: 'latex', docker: 'dockerfile', ps: 'powershell', ps1: 'powershell',
+    ml: 'ocaml', hs: 'haskell', clj: 'clojure', cljs: 'clojure',
+    erl: 'erlang', coffee: 'coffeescript', f90: 'fortran', f95: 'fortran',
+    pascal: 'delphi'
+  };
+  window._HLJS_EXTRA = [
+    // Tier 1/2: build/config, scientific, FP, scripting, editor
+    'dockerfile','nginx','cmake','http','latex','julia','matlab','fortran',
+    'haskell','scala','ocaml','fsharp','clojure','elixir','dart','vim','powershell',
+    // Tier 3: FP & academic
+    'erlang','scheme','lisp','prolog',
+    // Tier 3: hardware / assembly
+    'verilog','vhdl','x86asm','armasm',
+    // Tier 3: modern systems
+    'crystal','nim','d','delphi',
+    // Tier 3: build / config
+    'groovy','nix','dts',
+    // Tier 3: markup / templating
+    'asciidoc','handlebars','gherkin',
+    // Tier 3: shell / scripting
+    'awk','tcl','coffeescript',
+    // Tier 3: stats
+    'stan'
+  ];
+  // Generation counter, bumped on every _hljsInit() call, kept for
+  // introspection/back-compat with existing tests/tooling. The staleness
+  // guard used below is tracked per-root (see _hljsRootGeneration), not off
+  // this global counter, so unrelated concurrent roots never invalidate one
+  // another (see _hljsRootGeneration's comment).
+  window._hljsGeneration = 0;
+  // #spa-content is reused (not recreated) across SPA navigations — only
+  // its innerHTML is replaced — so a still-in-flight CDN language module
+  // fetch triggered by an earlier page must not run a stale _hljsRun()
+  // against whatever page now happens to occupy that same element once it
+  // finally resolves. Generations are tracked per root object (WeakMap)
+  // rather than with one shared counter: a single global counter would let
+  // an unrelated, still-live root (e.g. a second independently-mounted
+  // section needing the same on-demand language) be wrongly treated as
+  // stale merely because some other root's _hljsInit() ran afterward. Each
+  // fetch's callback captures the generation current *for its own root*
+  // when it started and only proceeds if no newer _hljsInit() call has
+  // happened for that same root meanwhile.
+  window._hljsRootGeneration = window._hljsRootGeneration || new WeakMap();
+
+  window._hljsReportError = function(error) {
+    if (window._log && typeof window._log.error === 'function') {
+      window._log.error('code-blocks', 'Syntax highlighting failed', error.message);
+    } else {
+      console.error('[code-blocks] Syntax highlighting failed', error);
+    }
+  };
+
+  // Run the highlight + line-number pass against `root` (defaults to
+  // document). Delegates to the shared reading-domain code-block owner
+  // (window.CodeBlocks, see src/features/reading/client/code-blocks.js) for
+  // language resolution, source capture and line-wrapping, and highlights
+  // element-by-element scoped to `root` — not hljs.highlightAll(), which
+  // ignores its argument and always rescans the whole document.
+  window._hljsRun = function(root) {
+    window.CodeBlocks.highlightScope(root, {
+      hljs: hljs,
+      aliasMap: window._HLJS_ALIAS,
+      isAllowedLanguage: function(name) { return window._HLJS_EXTRA.indexOf(name) !== -1; },
+      onError: window._hljsReportError
+    });
+  };
+
+  // Scan `root` for code blocks, fetch any missing allowlisted language
+  // modules, then run the highlight pass once they finish loading (or fail).
+  // Called once from the highlight.min.js onload handler, and again from
+  // main.js after each SPA navigation (scoped to #spa-content). Returns a
+  // disposer: the page-content lifecycle registry (src/features/shell/core/
+  // lifecycle.js, wired in app.js) calls it on unmount so a still-pending
+  // language-module wait tied to a root being torn down is retired
+  // immediately instead of only becoming a no-op once its shared fetch
+  // eventually settles.
+  //
+  // Single-flight per language: if two _hljsInit calls — on the same root
+  // (e.g. a stale SPA reinit) or on two independent roots (e.g. two
+  // concurrently-mounted sections) — both need the same not-yet-loaded
+  // language, only the first triggers a CDN fetch. Every caller (the first
+  // and any later one) awaits the *same* shared Promise
+  // (`_hljsPending[lang]`), so every one of them reliably gets highlighted
+  // once the module actually loads — no separate "in-flight flag" +
+  // "waiter callback list" bookkeeping that a caller could observe in an
+  // inconsistent order (e.g. treating "fetch requested" as "fetch done").
+  window._hljsPending = window._hljsPending || Object.create(null);
+  window._hljsInit = function(root) {
+    root = root || document;
+    if (typeof hljs === 'undefined') return function () {};
+    window._hljsGeneration++;
+    var generation = (window._hljsRootGeneration.get(root) || 0) + 1;
+    window._hljsRootGeneration.set(root, generation);
+    function isCurrent() { return generation === window._hljsRootGeneration.get(root); }
+    function dispose() {
+      // Bumping this root's generation again makes any pending promise
+      // continuation below (still awaiting a shared fetch) see itself as
+      // stale via `isCurrent()` and no-op, exactly as a later _hljsInit()
+      // call for the same root would — this just does it explicitly, on
+      // unmount, instead of only implicitly the next time this root is
+      // reused.
+      if (isCurrent()) window._hljsRootGeneration.set(root, generation + 1);
+    }
+    var allow = Object.create(null);
+    for (var i = 0; i < window._HLJS_EXTRA.length; i++) allow[window._HLJS_EXTRA[i]] = true;
+    var need = Object.create(null);
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      // Tokenizes `raw` the same way CodeBlocks.resolveLanguage does, rather
+      // than treating the whole className as one language name — a real
+      // Pandoc fenced block carries extra classes (e.g. "sourceCode julia
+      // numberLines"), and a naive whole-string check never recognizes the
+      // language token, so it never gets fetched.
+      var name = window.CodeBlocks.resolvePrefetchLanguage(raw, window._HLJS_ALIAS, function(candidate) {
+        return !!hljs.getLanguage(candidate);
+      }, function(candidate) { return !!allow[candidate]; });
+      if (name) need[name] = true;
+    });
+    var keys = Object.keys(need);
+    if (!keys.length) { window._hljsRun(root); return dispose; }
+    Promise.all(keys.map(function(l) {
+      // The shared fetch Promise itself is process-wide (one CDN module,
+      // however many independent roots need it), not tied to any one
+      // root's generation — only the *continuation* below is.
+      if (window._hljsPending[l]) return window._hljsPending[l];
+      var loading = new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        var settled = false;
+        function finish(loaded) {
+          if (settled) return;
+          settled = true;
+          s.onload = s.onerror = null;
+          s.remove();
+          if (loaded) resolve({ loaded: true });
+          else reject(new Error('Could not load syntax language: ' + l));
+        }
+        s.src = window._HLJS_BASE + l + '.min.js';
+        s.onload = function() { finish(!!hljs.getLanguage(l)); };
+        s.onerror = function() { finish(false); };
+        document.head.appendChild(s);
+      });
+      var pending = loading.then(function(result) { return result; }, function(error) {
+        if (window._hljsPending[l] === pending) delete window._hljsPending[l];
+        window._hljsReportError(error);
+        return { loaded: false };
+      });
+      window._hljsPending[l] = pending;
+      return pending;
+    })).then(function() {
+      if (isCurrent()) window._hljsRun(root);
+    });
+    return dispose;
+  };
+  </script>
+  <script id="rprint-highlight" async src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    onload="window._hljsInit();"></script>
+  <script>document.getElementById('rprint-highlight').addEventListener('error',function(){window._hljsReportError(new Error('Could not load highlight.js'))});</script>
+  <script id="rprint-mermaid" async src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+    onload="mermaid.initialize({startOnLoad:false});if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('mermaid')}else{var t=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'default';mermaid.initialize({startOnLoad:false,theme:t});document.querySelectorAll('pre.mermaid > code').forEach(function(c){var src=c.textContent;c.parentElement.setAttribute('data-mermaid-source',src);c.parentElement.textContent=src;});mermaid.run()}"></script>
+  <script>document.getElementById('rprint-mermaid').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('mermaid',new Error('Mermaid failed to load'))}});</script>
+  <!-- rprint:page-assets:start --><!-- rprint:page-assets:end -->
+  
+  
+<script type="application/json" data-rprint-page-assets>{"version":1,"entries":[]}</script>
+</body>
+</html>

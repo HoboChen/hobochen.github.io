@@ -1,0 +1,282 @@
+/* ===== Review Comments ===== */
+
+/* --- Comment wrap (toolbar container in banner) --- */
+.comment-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-radius: 8px;
+  transition: border-color 0.15s;
+  border: 1px solid transparent;
+  padding: 0;
+}
+.comment-wrap.active {
+  border-color: var(--color-primary);
+  padding: 2px;
+}
+.comment-wrap .comment-nav-count,
+.comment-wrap .comment-nav-btn {
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition: width 0.1s ease, opacity 0.1s ease, margin 0.1s ease;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.comment-wrap.active .comment-nav-count,
+.comment-wrap.active .comment-nav-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+.comment-wrap.active .comment-nav-count {
+  width: auto;
+  margin: 0 4px;
+}
+.comment-wrap.active .comment-nav-btn {
+  width: 26px;
+  margin-left: 2px;
+}
+
+/* --- Toolbar button --- */
+/* .comment-btn base lives in the shared .banner-icon-btn group in main.css.
+   Keep only the active-wrap variants here. */
+.comment-wrap.active .comment-btn {
+  background: none;
+  border-color: transparent;
+  color: #fff;
+}
+.comment-wrap.active .comment-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* --- Nav count & buttons in toolbar --- */
+.comment-nav-count {
+  font-size: 0.75em;
+  color: rgba(255,255,255,0.7);
+  white-space: nowrap;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+.comment-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  background: none;
+  color: rgba(255,255,255,0.7);
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.12s, color 0.12s;
+}
+.comment-nav-btn:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+
+/* --- Current comment highlight during navigation --- */
+.comment-current {
+  outline: 2px solid rgba(59,130,246,0.7);
+  outline-offset: 1px;
+  border-radius: 2px;
+}
+
+/* --- Comment highlights in article --- */
+.comment-highlight {
+  background: rgba(255,213,79,0.25);
+  border-bottom: 2px solid rgba(255,213,79,0.7);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.15s;
+}
+.comment-highlight:hover {
+  background: rgba(255,213,79,0.45);
+}
+.comment-underline {
+  border-bottom: 2px dotted rgba(150,150,150,0.5);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.comment-underline:hover {
+  border-bottom-color: rgba(150,150,150,0.9);
+}
+
+/* --- Floating popup --- */
+.comment-popup {
+  position: absolute;
+  z-index: 1003;
+  width: 340px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  font-family: inherit;
+  font-size: 0.92em;
+  line-height: 1.55;
+  color: var(--color-text);
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+}
+.comment-popup:active { cursor: grabbing; }
+.comment-popup-body {
+  padding: 10px 12px;
+  max-height: 300px;
+  overflow-y: auto;
+  user-select: text;
+  cursor: text;
+}
+.comment-popup-body textarea {
+  width: 100%;
+  min-height: 1.5em;
+  max-height: 280px;
+  padding: 0;
+  background: transparent;
+  color: var(--color-text);
+  border: none;
+  border-radius: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
+  display: block;
+  overflow-y: auto;
+  cursor: text;
+}
+.comment-popup-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  cursor: text;
+}
+.comment-popup-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78em;
+  color: var(--color-text-muted);
+  margin-top: 6px;
+}
+.comment-popup-resolved-tag {
+  display: inline-block;
+  font-size: 0.92em;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(46,160,67,0.15);
+  color: #2ea043;
+  font-weight: 600;
+}
+.comment-popup-actions {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+  padding: 6px 8px;
+  border-top: 1px solid var(--color-border);
+}
+.comment-popup-actions .comment-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background var(--transition-base, 0.12s), color var(--transition-base, 0.12s);
+}
+.comment-popup-actions .comment-btn-icon:hover {
+  background: var(--color-active-bg);
+  color: var(--color-text);
+}
+.comment-popup-actions .comment-btn-icon svg {
+  display: block;
+}
+.comment-popup-actions .comment-btn-primary {
+  color: var(--color-primary);
+}
+.comment-popup-actions .comment-btn-primary:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+.comment-popup-actions .comment-btn-danger {
+  color: #cf222e;
+}
+.comment-popup-actions .comment-btn-danger:hover {
+  background: rgba(207,34,46,0.12);
+  color: #cf222e;
+}
+
+/* --- "Add comment" mini-popup shown on text selection --- */
+.comment-add-btn {
+  position: absolute;
+  z-index: 1004;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  color: var(--color-text);
+  font-size: 0.82em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s;
+}
+.comment-add-btn:hover {
+  background: var(--color-active-bg);
+}
+.comment-add-btn svg {
+  flex-shrink: 0;
+}
+
+/* --- Orphaned comments banner --- */
+.comment-orphans {
+  margin-bottom: 20px;
+  padding: 10px 14px;
+  background: rgba(207,34,46,0.04);
+  border: 1px solid rgba(207,34,46,0.2);
+  border-radius: 8px;
+  font-size: 0.88em;
+}
+.comment-orphans-title {
+  font-size: 0.78em;
+  font-weight: 600;
+  color: #cf222e;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.comment-orphan-item {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  padding: 4px 0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.12s;
+}
+.comment-orphan-item:hover {
+  background: rgba(207,34,46,0.06);
+}
+.comment-orphan-anchor {
+  color: var(--color-text-muted);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  flex-shrink: 0;
+}
+.comment-orphan-anchor::before { content: '\201c'; }
+.comment-orphan-anchor::after { content: '\201d'; }
+.comment-orphan-body {
+  color: var(--color-text);
+}

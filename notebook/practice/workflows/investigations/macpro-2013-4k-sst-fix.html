@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="build-commit" content="733754f1">
+  <title>Mac Pro 2013 的 4K SST 右侧闪烁 - Jingqi's Interpositive</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/comments.css">
+<link rel="stylesheet" href="/static/sidebar-panel.css">
+<link rel="stylesheet" href="/static/link-preview.css">
+<link rel="stylesheet" href="/static/main.css?v=733754f1">
+<link rel="stylesheet" href="/static/themes.css?v=733754f1">
+<link rel="stylesheet" href="/static/ink-toolbar.css?v=733754f1">
+<link rel="stylesheet" href="/static/image-viewer.css?v=733754f1">
+<link rel="stylesheet" href="/static/syllabus-enhance.css">
+<link rel="stylesheet" href="/static/table-enhance.css">
+<link rel="stylesheet" href="/static/greeting.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var linkPreviewEmbed=false;
+      try{
+        var previewUrl=new URL(location.href);
+        linkPreviewEmbed=previewUrl.searchParams.get('rprint-preview')==='1'&&window.parent!==window&&window.parent.location.origin===location.origin;
+      }catch(e){}
+      if(linkPreviewEmbed){
+        document.documentElement.classList.add('link-preview-embed');
+        var previewArticleLink=function(target){return target&&target.closest&&target.closest('.article a[href]');};
+        var blockPreviewLink=function(event){if(previewArticleLink(event.target)){event.preventDefault();event.stopImmediatePropagation();}};
+        document.addEventListener('click',blockPreviewLink,true);
+        document.addEventListener('auxclick',blockPreviewLink,true);
+        document.addEventListener('keydown',function(event){if(event.key==='Enter')blockPreviewLink(event);},true);
+        document.addEventListener('dblclick',function(event){if(event.target&&event.target.closest&&event.target.closest('.article')){event.preventDefault();event.stopImmediatePropagation();}},true);
+      }
+      var bc=document.querySelector('meta[name="build-commit"]');
+      var commit=bc?bc.getAttribute('content'):'';
+      if(commit&&commit!=='unknown'){
+        var prev=localStorage.getItem('kb-build-commit');
+        if(prev&&prev!==commit){
+          var keys=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf('kb-')===0)keys.push(k);}
+          keys.forEach(function(k){localStorage.removeItem(k);});
+          localStorage.setItem('kb-build-commit',commit);
+          if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+            navigator.serviceWorker.controller.postMessage('clearCaches');
+          }
+          window.location.reload();
+          return;
+        }
+        localStorage.setItem('kb-build-commit',commit);
+      }
+      // Resume last visited page on PWA/browser launch. PWA launches carry
+      // `?pwa=1`; a normal browser launch is a plain root URL without a same-
+      // origin referrer. `/index.html` is an explicit home navigation, so it
+      // never resumes. Runs before paint to avoid a flash of the home page.
+      // Validates the stored path is a same-origin absolute path (rejects
+      // `//host` / `/\host` open-redirects).
+      var resumeLaunch=/[?&]pwa=1(&|$)/.test(location.search);
+      try{
+        var launchUrl=new URL(location.href);
+        launchUrl.searchParams.delete('pwa');
+        var sameOriginReferrer=false;
+        try{sameOriginReferrer=!!document.referrer&&new URL(document.referrer,location.href).origin===location.origin;}catch(e){}
+        resumeLaunch=resumeLaunch||(launchUrl.pathname==='/'&&!launchUrl.search&&!launchUrl.hash&&!sameOriginReferrer);
+      }catch(e){}
+      if(resumeLaunch){
+        try{
+          var last=localStorage.getItem('kb-last-location');
+          var lastPath=last&&last.split('#')[0].split('?')[0];
+          if(last&&/^\/[^/\\]/.test(last)&&lastPath!=='/'&&lastPath!=='/index.html'){
+            try{sessionStorage.setItem('kb-resume-last-scroll','1');}catch(e){}
+            location.replace(last);return;
+          }
+        }catch(e){}
+      }
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      var mob=window.matchMedia('(max-width:650px)').matches;
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.style.colorScheme=t==='dark'?'dark':'light';
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      var w=p.contentWidth||(mob?'100':'90');
+      document.documentElement.style.setProperty('--content-max-width',w+'%');
+      document.documentElement.dataset.contentWidth=String(w);
+      var edge=p.ignoreCorners!==undefined?p.ignoreCorners==='on':false;
+      if(edge&&Number(w)===100)document.documentElement.setAttribute('data-ignore-corners','on');
+      if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches||window.matchMedia('(display-mode:fullscreen)').matches)document.documentElement.classList.add('pwa-standalone');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'noto-serif';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.0};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+      var ht=t==='dark'?'github-dark':'github';
+      var writes='<link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/'+ht+'.min.css">';
+      document.write(writes);
+    })();
+  </script>
+  <style>.math{opacity:0;transition:opacity .15s}.math.rprint-render-failed{opacity:1}</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css" integrity="sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM" crossorigin="anonymous">
+  <script id="rprint-katex" defer src="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.js" integrity="sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI" crossorigin="anonymous"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('katex')}else{document.querySelectorAll('.math').forEach(function(el){var src=el.textContent;el.setAttribute('data-latex',src);katex.render(src,el,{displayMode:el.classList.contains('display'),throwOnError:false,trust:function(ctx){return ctx&&ctx.command==='\\href'&&typeof ctx.url==='string'&&/^#[A-Za-z0-9:._-]+$/.test(ctx.url);}});el.querySelectorAll('mtable[columnspacing=\'\']').forEach(function(t){t.removeAttribute('columnspacing')});el.style.opacity='1';})}"></script>
+  <script>document.getElementById('rprint-katex').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('katex',new Error('KaTeX failed to load'))}else{document.querySelectorAll('.math').forEach(function(el){el.style.opacity='1'})}});</script>
+</head>
+<body data-page-type="markdown">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <button class="banner-toggle" id="left-toggle" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h12v1.5H2V3zm0 4h12v1.5H2V7zm0 4h12v1.5H2V11z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-center">
+        <div class="banner-center-inner">
+          <a href="/index.html" class="site-title" data-short="Interpositive">Jingqi's Interpositive</a>
+          <span class="spa-health-wrap" id="spa-health-wrap">
+            <span class="spa-health-dot" id="spa-health-dot" title="SPA server status"></span>
+            <div class="spa-health-popup" id="spa-health-popup">
+              <div class="shp-header">
+                <span class="shp-title">Server Status</span>
+                <span class="shp-heart" id="shp-heart"></span>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-metrics">
+                <div class="shp-row"><span class="shp-label">Ping</span><span class="shp-value" id="shp-ping">—</span></div>
+                <div class="shp-row"><span class="shp-label">Uptime</span><span class="shp-value" id="shp-uptime">—</span></div>
+                <div class="shp-row"><span class="shp-label">Memory</span><span class="shp-value" id="shp-memory">—</span></div>
+                <div class="shp-row"><span class="shp-label">CPU Time</span><span class="shp-value" id="shp-cpu-time">—</span></div>
+                <div class="shp-row"><span class="shp-label">Load</span><span class="shp-value" id="shp-load">—</span></div>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-modules">
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-watch"></span> Watch</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-jupyter"></span> Jupyter</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-terminal"></span> Terminal</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-proxy"></span> Proxy</div>
+              </div>
+              <div id="shp-module-diagnostics" role="status" aria-live="polite"></div>
+            </div>
+          </span>
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="/cs-notes/" class="nav-link" data-short="CS">CS</a><ul class="nav-dropdown"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li><a href="/cs-notes/mit-gir/index.html">MIT GIR</a></li><li><a href="/cs-notes/cs-math/index.html">CS Math</a></li></ul></li><li class="nav-item"><a href="/not-cs-notes/" class="nav-link" data-short="CS$^\complement$">CS$^\complement$</a><ul class="nav-dropdown"><li><a href="/not-cs-notes/arts/index.html">书影音</a></li></ul></li><li class="nav-item"><a href="/notebook/" class="nav-link" data-short="Mixed">Mixed</a><ul class="nav-dropdown"><li><a href="/notebook/mind/index.html">Mind</a></li><li><a href="/notebook/matter/index.html">Matter</a></li><li><a href="/notebook/practice/index.html">Practice</a></li><li><a href="/notebook/toolbox/index.html">Toolbox</a></li></ul></li><li class="nav-item"><a href="/years/" class="nav-link" data-short="Years">Years</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="banner-right">
+        <button class="banner-right-toggle" title="More controls">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="search-wrap" id="search-wrap">
+          <button class="search-btn" id="search-btn" title="Search (Ctrl+K)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-input-wrap" id="search-input-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search…" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+        <div class="comment-wrap" id="comment-wrap">
+          <button class="comment-btn" id="comment-btn" title="Review Comments (A)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <span class="comment-nav-count" id="comment-nav-count"></span>
+          <button class="comment-nav-btn" id="comment-nav-prev" title="Previous comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="comment-nav-btn" id="comment-nav-next" title="Next comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <button class="settings-btn" id="settings-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="settings-panel" id="settings-panel">
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Native Jupyter <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="native-jupyter-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Global Search <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="content-search-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Quick Edit <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="quick-edit-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section resource-pack-setting" id="resource-pack-setting" hidden>
+            <div class="settings-row resource-pack-row">
+              <span class="settings-desc">Offline resources</span>
+              <button type="button" class="settings-action-btn" id="resource-pack-import-btn">Import</button>
+            </div>
+            <input type="file" id="resource-pack-input" accept=".rpack,application/vnd.rprint.resource-pack" hidden>
+            <div class="resource-pack-status" id="resource-pack-status" aria-live="polite"></div>
+            <div class="resource-pack-list" id="resource-pack-list" aria-label="Installed resource packs"></div>
+          </div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent link-preview-settings-parent">
+            <label class="style-label" id="link-preview-label">Link Preview <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="link-preview-switch" role="switch" aria-labelledby="link-preview-label" aria-checked="false" aria-expanded="false" aria-controls="link-preview-settings-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children link-preview-settings-children" id="link-preview-settings-children" hidden>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-same-page-only-label">Same-page links only</label>
+              <button class="style-switch style-switch-compact" id="link-preview-same-page-only-switch" role="switch" aria-labelledby="link-preview-same-page-only-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-auto-close-label">Auto-close</label>
+              <button class="style-switch style-switch-compact" id="link-preview-auto-close-switch" role="switch" aria-labelledby="link-preview-auto-close-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-overwrite-jumping-label">Overwrite Link Jumping</label>
+              <button class="style-switch style-switch-compact" id="link-preview-overwrite-jumping-switch" role="switch" aria-labelledby="link-preview-overwrite-jumping-label" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+            </div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-row settings-title-row settings-dependent-parent">
+            <span class="settings-panel-title">Keyboard Shortcuts</span>
+            <button class="style-switch" id="kb-enabled-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children keyboard-shortcuts-children">
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="search"><span class="settings-desc">Search</span><span class="settings-keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="scroll"><span class="settings-desc">Scroll down / up</span><span class="settings-keys"><kbd>J</kbd> <kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="section"><span class="settings-desc">Next / prev section</span><span class="settings-keys"><kbd>U</kbd> <kbd>I</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="sidebar-toc"><span class="settings-desc"><span data-shortcut-part="sidebar">Sidebar / </span>TOC</span><span class="settings-keys"><kbd data-shortcut-part="sidebar">S</kbd> <kbd>T</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="spread"><span class="settings-desc">Next / prev spread</span><span class="settings-keys"><kbd>PgDn</kbd> <kbd>PgUp</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="columns"><span class="settings-desc">2 Columns</span><span class="settings-keys"><kbd>C</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="comments"><span class="settings-desc">Comments<span class="spa-only-setting" style="display: none;"> / add to selection</span></span><span class="settings-keys"><kbd>A</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="fold"><span class="settings-desc">Fold banner</span><span class="settings-keys"><kbd>F</kbd></span></div>
+            
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="dismiss"><span class="settings-desc">Close / Dismiss</span><span class="settings-keys"><kbd>Esc</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="settings"><span class="settings-desc">Show this panel</span><span class="settings-keys"><kbd>?</kbd></span></div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent">
+            <label class="style-label" id="debug-mode-label">Debug Mode</label>
+            <button class="style-switch" id="debug-mode-switch" role="switch" aria-labelledby="debug-mode-label" aria-checked="false" aria-expanded="false" aria-controls="debug-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="debug-children" id="debug-children" hidden>
+            <div class="settings-dependent-children">
+              <div class="settings-panel-section settings-dependent-child debug-log-level-setting">
+                <label class="style-label">Client Log Level</label>
+                <div class="style-toggle-group">
+                  <button class="style-toggle-btn debug-level-btn" data-level="error">Error</button>
+                  <button class="style-toggle-btn debug-level-btn" data-level="info">Info</button>
+                  <button class="style-toggle-btn debug-level-btn active" data-level="debug">Debug</button>
+                </div>
+              </div>
+              <div class="settings-footer is-dirty" id="settings-git-version">
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Branch</span>
+                  <span class="settings-footer-value" id="settings-build-branch">main</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Commit</span>
+                  <span class="settings-footer-value" id="settings-build-commit">733754f1</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Commit time</span>
+                  <span class="settings-footer-value" id="settings-build-commit-time" data-iso="2026-10-25T21:34:38-07:00" title="2026-10-25T21:34:38-07:00">—</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Generated</span>
+                  <span class="settings-footer-value" id="settings-build-generated-at" data-iso="" title="">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="theme-wrap" id="theme-wrap">
+          <a href="/static/settings.html?v=733754f1" class="theme-btn" id="theme-btn" title="Theme & display">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="13.5" cy="6.5" r=".5"/>
+              <circle cx="17.5" cy="10.5" r=".5"/>
+              <circle cx="8.5" cy="7.5" r=".5"/>
+              <circle cx="6.5" cy="12.5" r=".5"/>
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+            </svg>
+          </a>
+          <output class="book-position" id="book-position" aria-label="Reading pages" aria-live="polite" aria-atomic="true" hidden></output>
+          <button type="button" class="book-nav-btn book-prev" id="book-prev" title="Previous spread" aria-label="Previous spread" hidden disabled>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="book-nav-btn book-next" id="book-next" title="Next spread" aria-label="Next spread" hidden disabled>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <div class="style-panel" id="style-panel">
+          <div class="style-panel-section">
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn active" data-theme="light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light
+              </button>
+              <button class="style-toggle-btn" data-theme="dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="style-toggle-btn" data-theme="kindle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                E-Ink
+              </button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn font-btn active" data-font="system">System</button>
+              <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+              <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">字体</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="default">系统</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+              <button class="style-toggle-btn fontzh-btn active" data-fontzh="noto-serif">宋体</button>
+            </div>
+          </div>
+          <div class="style-panel-section bg-picker-section">
+            <label class="style-label">Background</label>
+            <div class="bg-swatch-group" id="bg-swatch-group">
+              <button class="bg-swatch active" data-bg="default" title="Default"></button>
+              <button class="bg-swatch" data-bg="green" title="Green"></button>
+              <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+              <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+              <div class="style-range-ticks">
+                <span class="style-range-tick font-size-tick" data-i="0">12</span>
+                <span class="style-range-tick font-size-tick" data-i="1">14</span>
+                <span class="style-range-tick font-size-tick" data-i="2">16</span>
+                <span class="style-range-tick font-size-tick" data-i="3">18</span>
+                <span class="style-range-tick font-size-tick" data-i="4">24</span>
+                <span class="style-range-tick font-size-tick" data-i="5">32</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+              <div class="style-range-ticks">
+                <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+                <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+                <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+                <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+                <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+                <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Width <span id="width-value">90%</span></label>
+            <div class="style-slider-wrap width-slider-wrap">
+              <input type="range" class="style-range" id="content-width-range" min="0" max="5" step="1" value="3">
+              <div class="style-range-ticks width-ticks">
+                <span class="style-range-tick width-tick" data-i="0">50</span>
+                <span class="style-range-tick width-tick" data-i="1">65</span>
+                <span class="style-range-tick width-tick" data-i="2">80</span>
+                <span class="style-range-tick width-tick" data-i="3">90</span>
+                <span class="style-range-tick width-tick" data-i="4">95</span>
+                <span class="style-range-tick width-tick" data-i="5">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="ignore-corners-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">2 Columns <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+        </div>
+        <button class="banner-toggle" id="fold-banner-btn" title="Fold banner">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4v16M3.5 7.5 8 12l-4.5 4.5M20.5 7.5 16 12l4.5 4.5"/>
+          </svg>
+        </button>
+        <button class="banner-toggle" id="right-toggle" title="Toggle table of contents">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-right-dropdown"></div>
+    </div>
+  </header>
+
+  <!-- Floating buttons when banner is folded -->
+  <div class="banner-fold-float" id="banner-fold-float">
+    <button class="banner-fold-float-btn" id="unfold-banner-btn" title="Unfold banner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 4v16M8 7.5 3.5 12 8 16.5M16 7.5 20.5 12 16 16.5"/>
+      </svg>
+    </button>
+    <button class="banner-fold-float-btn" id="float-toc-btn" title="Toggle table of contents">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout left-collapsed right-collapsed">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar collapsed" id="left-sidebar">
+      <div class="sidebar-content" id="spa-sidebar">
+        <!-- rprint:sidebar:start -->
+        <a class="sidebar-cat-title" href="/notebook">Mixed</a><ul class="sidebar-list"><li class="sidebar-group" data-priority="0"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/mind/index.html">Mind</a><span class="sidebar-toggle"></span></span><ul><li><a href="/notebook/mind/ideas.html">脑洞</a></li></ul></li><li class="sidebar-group" data-priority="0.001"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/matter/index.html">Matter</a><span class="sidebar-toggle"></span></span><ul><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/matter/vehicle.html">车</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/matter/vehicle/model3-us-manual.html">Model 3 US Manual 📄</a></li><li><a href="/notebook/matter/vehicle/r-maintenance.html">Golf R Maintenance Guide 📄</a></li><li><a href="/notebook/matter/vehicle/ct4-us-manual.html">CT4 US Manual 📄</a></li><li><a href="/notebook/matter/vehicle/ct4-maintenance.html">CT4 Maintenance Guide 📄</a></li></ul></li><li><a href="/notebook/matter/optics.html">光学</a></li></ul></li><li class="sidebar-group open" data-priority="0.002"><span class="sidebar-row"><a class="sidebar-group-title active-group" href="/notebook/practice/index.html">Practice</a><span class="sidebar-toggle"></span></span><ul><li class="has-children open" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows.html">工作流</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/desktop-os-comparison.html">桌面OS比较</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/workflows/desktop-os-comparison/linux.html">Linux 发行版</a></li><li><a href="/notebook/practice/workflows/desktop-os-comparison/windows.html">Windows 版本</a></li></ul></li><li><a href="/notebook/practice/workflows/rime.html">Rime 配置手册</a></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/reference.html">速查</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/workflows/reference/vim.html">Vim</a></li><li><a href="/notebook/practice/workflows/reference/hyper-v.html">Hyper-V</a></li><li><a href="/notebook/practice/workflows/reference/zfs-common-commands.html">ZFS</a></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/setup.html">初始化</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/setup/linux.html">Linux</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/workflows/setup/linux/zfs-mirror-zbm-install.html">Ubuntu Root on ZFS via ZBM</a></li><li><a href="/notebook/practice/workflows/setup/linux/wayland-rdp.html">配置Wayland RDP</a></li><li><a href="/notebook/practice/workflows/setup/linux/inotify-limits.html">提高 inotify 文件监听限制</a></li></ul></li></ul></li><li class="has-children open" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/investigations.html">问题调查</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/workflows/investigations/ubuntu-privacy-snap.html">Ubuntu遥测和Snap</a></li><li><a href="/notebook/practice/workflows/investigations/windows-components.html">Windows 遥测与可选组件</a></li><li class="active"><a href="/notebook/practice/workflows/investigations/macpro-2013-4k-sst-fix.html">Mac Pro 2013 的 4K SST 右侧闪烁</a></li><li><a href="/notebook/practice/workflows/investigations/zfs-spotlight-high-cpu.html">ZFS 卷上 Spotlight 持续高 CPU</a></li><li><a href="/notebook/practice/workflows/investigations/wayland-rdp-audio.html">Wayland RDP Low Audio Quality</a></li><li><a href="/notebook/practice/workflows/investigations/nautilus-thumbnail-fix.html">Nautilus 缩略图生成失败</a></li></ul></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/ai.html">虚假情报</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/ai/copilot-api.html">通过 Copilot API 接入 Codex</a></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/lab.html">在线</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/lab/access.html">域名与认证</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/lab/access/git.html">配置Git HTTPS OAuth到自建GitLab</a></li></ul></li></ul></li></ul></li><li class="sidebar-group" data-priority="0.003"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/toolbox/index.html">Toolbox</a><span class="sidebar-toggle"></span></span><ul><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/toolbox/financial.html">Financial 1001</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/toolbox/financial/tax-us-redmond.html">Simple Income Tax Calc (Redmond) 🐍</a></li><li><a href="/notebook/toolbox/financial/tax-china-suzhou.html">简易个人所得税计算器（苏州） 🐍</a></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/toolbox/hardware.html">Hardware 1001</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/toolbox/hardware/ppi.html">PPI Calculator 🐍</a></li><li><a href="/notebook/toolbox/hardware/disk_array_survival_rate.html">Disk Array Survival Rate 🐍</a></li></ul></li></ul></li></ul>
+        <!-- rprint:sidebar:end -->
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content" id="content">
+      <article class="article" id="spa-content">
+        <h1 id="mac-pro-2013-的-4k-sst-右侧闪烁" data-sourcepos="1:1-1:1">Mac Pro 2013 的 4K SST 右侧闪烁</h1>
+<p data-sourcepos="3:1-3:1">结论：将 Mavericks 显示初始化的 DISPCLK 请求从 ROM 默认的 500 MHz 提高至 600 MHz 后，一次重启对照中右侧闪烁消失，物理输出仍为 4K60。这支持显示时钟裕量不足的假设；活动 DISPCLK 未直接测量，也未完成恢复原版的 A/B/A 对照。</p>
+<p data-sourcepos="5:1-5:1">适用范围仅为 MacPro6,1 双 D500 + OS X 10.9.5 <code>13F1911</code>。本文提供完整构建、部署与验证脚本：从目标机自己的原版驱动生成补丁，不需要作者的实验项目或采集目录。其他显卡、系统构建或二进制身份不匹配时停止。</p>
+<h2 id="symptom" data-sourcepos="7:1-7:1">symptom</h2>
+<p data-sourcepos="9:1-9:1">Mac Pro 2013 双 D500 在 Mavericks 下输出 4K60 时，屏幕右侧约一英寸宽的区域持续闪烁、重影或撕裂，其余画面正常。</p>
+<p data-sourcepos="11:1-11:1">显示器通过 mini DisplayPort 直连，使用 SST（Single-Stream Transport，单流传输）传送整幅画面。</p>
+<div class="table-wrap"><table data-sourcepos="13:1-20:1">
+<thead>
+<tr>
+<th>项目</th>
+<th>实测环境</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>机器</td>
+<td><code>MacPro6,1</code>，双 FirePro D500，PCI <code>1002:679e</code>，每卡 3 GB</td>
+</tr>
+<tr>
+<td>系统</td>
+<td>OS X 10.9.5 / <code>13F1911</code>，内核 <code>xnu-2422.115.15~1</code></td>
+</tr>
+<tr>
+<td>驱动</td>
+<td>AMD <code>1.24.39</code>，bundle version <code>1.2.4</code></td>
+</tr>
+<tr>
+<td>显示器</td>
+<td><code>NE173QUM_NY1</code></td>
+</tr>
+<tr>
+<td>输出</td>
+<td>3840×2160，60 Hz，像素时钟 533.28 MHz</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="21:1-21:1">系统显示的“1080p”是 HiDPI 逻辑桌面尺寸，物理输出仍为 3840×2160。</p>
+<h2 id="evidence" data-sourcepos="23:1-23:1">evidence</h2>
+<h3 id="display-pipeline" data-sourcepos="25:1-25:1">display pipeline</h3>
+<p data-sourcepos="27:1-27:1">显示路径可以简化为：</p>
+<pre class="mermaid" data-sourcepos="29:1-36:1"><code>flowchart LR
+    A[帧缓冲中的图像] --&gt; B[显示引擎取数与处理]
+    B --&gt; C[按显示时序扫描输出]
+    C --&gt; D[DisplayPort 编码与传输]
+    D --&gt; E[显示器面板]</code></pre>
+<p data-sourcepos="37:1-37:1">显示器已经能够接收 4K60，排查重点是各阶段能否持续跟上输出时序。内部显示引擎负责取数和处理，DP 链路负责传输，两者有各自的时钟要求。</p>
+<p data-sourcepos="39:1-39:1">本机加载了 <code>AMD7000Controller</code>、<code>AMDFramebuffer</code>、<code>AMDSupport</code> 和 <code>AMDTahitiGraphicsAccelerator</code>，D500 的 framebuffer personality 为 <code>ATY,Kani/KaniS</code>。对比这些组件的 Mavericks 与 Yosemite 版本，可以追踪显示初始化和时钟管理的变化。</p>
+<h3 id="pixel-clock" data-sourcepos="41:1-41:1">pixel clock</h3>
+<p data-sourcepos="43:1-43:1">可见像素的更新量为：</p>
+<pre class="text" data-sourcepos="45:1-48:1"><code>3840 × 2160 × 60 = 497,664,000 像素/秒</code></pre>
+<p data-sourcepos="49:1-49:1">加上行、场消隐，本次模式每帧共有 8,888,000 个时序像素：</p>
+<pre class="text" data-sourcepos="51:1-54:1"><code>像素时钟 = 8,888,000 × 60 = 533,280,000 Hz = 533.28 MHz</code></pre>
+<p data-sourcepos="55:1-55:1">排查涉及三个量：</p>
+<div class="table-wrap"><table data-sourcepos="57:1-62:1">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+<th>本次数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>像素时钟</td>
+<td>决定显示扫描时序</td>
+<td>533.28 MHz</td>
+</tr>
+<tr>
+<td>DISPCLK</td>
+<td>驱动 GPU 内部显示引擎</td>
+<td>ROM 默认值 500 MHz；补丁请求值 600 MHz</td>
+</tr>
+<tr>
+<td>DP 链路速率</td>
+<td>决定通道传输能力</td>
+<td>修复后为 4 lanes，每 lane 5.40 Gbps</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="63:1-63:1">DISPCLK 对像素时钟的需求取决于缩放、像素处理方式和流水线。500 MHz 的默认值低于本模式的 533.28 MHz 像素时钟，因此需要检查它是否为显示引擎留出了足够裕量。</p>
+<h3 id="rom-default" data-sourcepos="65:1-65:1">rom default</h3>
+<p data-sourcepos="67:1-67:1">两张 D500 的 ATOM ROM 中，FirmwareInfo v2.2 的 <code>+0x28</code> 字段均为 <code>50000</code>，对应 <code>ulDefaultDispEngineClkFreq</code>。<a href="https://github.com/torvalds/linux/blob/v4.0/drivers/gpu/drm/radeon/atombios.h#L2693-L2730">字段定义</a>给出的单位是 10 kHz：</p>
+<pre class="text" data-sourcepos="69:1-72:1"><code>50000 × 10 kHz = 500 MHz</code></pre>
+<p data-sourcepos="73:1-73:1">反汇编确认了这条调用路径：</p>
+<ol type="1" data-sourcepos="75:1-77:1">
+<li><code>AMDSupport</code> 的 <code>AtiAtomBiosSharedServices::getDefaultDisplayEngineClock()</code> 读取该字段。</li>
+<li><code>AMD7000Controller::hwInitializeDCLK()</code> 在缓存时钟为零时，通过 <code>AtomBiosProxy::getDefaultDisplayEngineClock()</code> 取得默认值并写入缓存。</li>
+<li>随后调用 <code>hwProgramDcPixelClock()</code>，沿 BIOS 接口请求设置显示引擎时钟。</li>
+</ol>
+<p data-sourcepos="79:1-79:1">旧初始化路径使用 ROM 的 500 MHz 默认值。实验将提高这个请求值，检验显示时钟裕量不足的假设。</p>
+<h3 id="yosemite-comparison" data-sourcepos="81:1-81:1">yosemite comparison</h3>
+<p data-sourcepos="83:1-83:1">用于对比的三个版本：</p>
+<div class="table-wrap"><table data-sourcepos="85:1-90:1">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>系统</th>
+<th>Build</th>
+<th>AMD 驱动</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mavericks 10.9.5</td>
+<td><code>13F1911</code></td>
+<td><code>1.24.39</code></td>
+<td>D500 真机导出</td>
+</tr>
+<tr>
+<td>Yosemite 10.10.2</td>
+<td><code>14C109</code></td>
+<td><code>1.30.5</code></td>
+<td><a href="https://support.apple.com/en-us/106475">Apple Combo Update</a></td>
+</tr>
+<tr>
+<td>Yosemite 10.10.3</td>
+<td><code>14D136</code></td>
+<td><code>1.32.20</code></td>
+<td><a href="https://support.apple.com/en-us/106473">Apple Combo Update</a></td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="91:1-91:1">更新包只用来提取二进制对照。</p>
+<p data-sourcepos="93:1-93:1">两个 Yosemite 版本都增加了 <code>SIDisplayEngineClock</code>，由控制器初始化路径创建。它根据显示模式计算时钟，考虑缩放、颜色条件和裕量系数。</p>
+<p data-sourcepos="95:1-95:1">其静态 <code>MaxClocksByState</code> 表中，state 3 的显示时钟为 <code>600000 kHz</code>，即 600 MHz。初始化时还会按 GPU revision 改表：<code>getActualRevisionId() &lt; 0x14</code> 时，该项改为 <code>500000 kHz</code>。对 D500 设备 <code>0x679e</code> 的静态分析显示，它也会进入这个分支。</p>
+<p data-sourcepos="97:1-97:1">Yosemite 在初始化后还会按显示模式计算和设置时钟。本实验参考静态表选取 600 MHz，检验提高 Mavericks 初始化请求值的效果。</p>
+<h3 id="interpretation" data-sourcepos="99:1-99:1">interpretation</h3>
+<p data-sourcepos="101:1-101:1">后续真机对照中，只将默认时钟 getter 的返回值改为 600 MHz 请求值，右侧异常便消失，物理输出保持 4K60。这支持“旧初始化值在该模式下缺少显示时钟裕量”的判断。具体发生欠载的硬件环节仍待定位。</p>
+<h2 id="reproduction" data-sourcepos="103:1-103:1">reproduction</h2>
+<h3 id="clock-request" data-sourcepos="105:1-105:1">clock request</h3>
+<p data-sourcepos="107:1-107:1">保留 Mavericks 驱动，在 <code>hwInitializeDCLK()</code> 读取 BIOS 默认值的位置返回 <code>60000</code>（10 kHz 单位）。后续缓存写入和 BIOS 编程沿用原逻辑。</p>
+<p data-sourcepos="109:1-109:1">核心改动的伪代码：</p>
+<pre class="diff" data-sourcepos="111:1-115:1"><code>- clock_10khz = bios.getDefaultDisplayEngineClock();
++ clock_10khz = 60000;</code></pre>
+<p data-sourcepos="116:1-116:1">保留旧驱动是为了兼容原系统接口。例如控制器虚表的 <code>0xcc8</code> 槽位，在 Mavericks 中是 <code>regw32</code>，在 10.10.2 中却是 <code>regw16</code>；直接搬入新函数机器码可能调用错误的方法。</p>
+<h3 id="relocation" data-sourcepos="118:1-118:1">relocation</h3>
+<p data-sourcepos="120:1-120:1">修改位置是一条等待外部重定位的 CALL：</p>
+<div class="table-wrap"><table data-sourcepos="122:1-129:1">
+<thead>
+<tr>
+<th>项目</th>
+<th>原版</th>
+<th>补丁版</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指令地址</td>
+<td><code>0x27d84</code>，由 Mach-O 段信息映射到文件位置</td>
+<td>相同</td>
+</tr>
+<tr>
+<td>指令字节</td>
+<td><code>E8 00 00 00 00</code></td>
+<td><code>B8 60 EA 00 00</code></td>
+</tr>
+<tr>
+<td>行为</td>
+<td>调用默认时钟 getter</td>
+<td><code>mov eax, 60000</code></td>
+</tr>
+<tr>
+<td>对应重定位</td>
+<td><code>X86_64_RELOC_BRANCH</code></td>
+<td>删除</td>
+</tr>
+<tr>
+<td>外部重定位总数</td>
+<td>5212</td>
+<td>5211</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="130:1-130:1">原指令后四字节保存调用位移，由链接器填入；新指令同一位置保存立即数 <code>60000</code>。必须删除原重定位，否则链接器会覆盖时钟值。</p>
+<p data-sourcepos="132:1-132:1">构建工具压紧重定位表、更新记录数，保留其余记录的顺序和内容，并更换 Mach-O UUID 以识别补丁版。文件长度不变，共改变 2119 个字节位置。</p>
+<h3 id="build" data-sourcepos="134:1-134:1">build</h3>
+<p data-sourcepos="136:1-136:1">在目标 Mavericks 的终端执行。先准备工作目录，再将文末 <a href="#tools">tools</a> 中三个完整脚本分别保存到该目录，文件名保持一致。脚本兼容系统自带的 Python 2.7，不需要安装 Python 3。</p>
+<pre class="bash" data-sourcepos="138:1-142:1"><code>mkdir -p &quot;$HOME/d500-dispclk600&quot;
+cd &quot;$HOME/d500-dispclk600&quot;</code></pre>
+<p data-sourcepos="143:1-143:1">先核对系统、双 D500、磁盘原件、启动缓存和已加载 UUID：</p>
+<pre class="bash" data-sourcepos="145:1-148:1"><code>sudo /usr/bin/python -B manage-dispclk600.py verify --expect original</code></pre>
+<p data-sourcepos="149:1-149:1">预期：UUID 为 <code>5dd5f117-8f64-3b72-9e71-9f20af1c76ae</code>，<code>started</code>、<code>prelinked</code> 均为 <code>true</code>。任何身份或缓存检查失败都停止，不修改偏移、摘要或 UUID 来绕过检查。</p>
+<p data-sourcepos="151:1-151:1">复制本机原版 bundle，离线构建：</p>
+<pre class="bash" data-sourcepos="153:1-160:1"><code>ditto --rsrc --extattr --acl \
+  /System/Library/Extensions/AMD7000Controller.kext original.kext
+/usr/bin/python -B dispclk600.py \
+  --source original.kext/Contents/MacOS/AMD7000Controller \
+  --output output</code></pre>
+<p data-sourcepos="161:1-161:1"><code>output</code> 必须尚不存在。预期生成 <code>output/AMD7000Controller</code> 和 <code>output/report.json</code>，报告状态为 <code>built-not-installed</code>；源文件不变。构建器核对源 SHA-256、Mach-O 结构、原指令、重定位目标和成品 SHA-256，输出应与文末 <a href="#binary-identity">binary identity</a> 一致。</p>
+<h3 id="install" data-sourcepos="163:1-163:1">install</h3>
+<p data-sourcepos="165:1-165:1">安装前保留可启动的恢复环境，并确认能在恢复终端访问 Mavericks 系统卷。安装命令只适用于已通过上一节检查、且存在相同右侧闪烁问题的机器。</p>
+<pre class="bash" data-sourcepos="167:1-171:1"><code>sudo /usr/bin/python -B manage-dispclk600.py install \
+  --candidate &quot;$PWD/output/AMD7000Controller&quot;</code></pre>
+<p data-sourcepos="172:1-172:1">脚本在新建的 <code>/var/db/d500-dispclk600/</code> 中保存完整原 bundle、全部 kext 缓存、目录时间和日志，先运行 Mavericks 原生 <code>kextutil -no-load</code> 预检，再替换控制器可执行文件。已有事务目录时拒绝覆盖，不要删除唯一备份重跑。</p>
+<p data-sourcepos="174:1-174:1">随后依次执行目标系统自己的 <code>kextcache -system-prelinked-kernel</code> 和 <code>kextcache -system-caches</code>，解压启动缓存、核对 Adler-32、内嵌控制器 UUID、bundle 路径与组件清单。原缓存中的组件必须保留；仅允许历史实验中出现的原生 <code>msdosfs 1.9</code> 增项，其他清单变化会失败。替换后的构建或检查失败时自动恢复原文件与缓存；若进程被强制终止或恢复也失败，按 <a href="#rollback">rollback</a> 操作。</p>
+<p data-sourcepos="176:1-176:1">预期末行含 <code>Ready for a manual reboot</code>。它表示磁盘和启动缓存已通过检查，当前运行的驱动仍是原版。脚本不重启、不热卸载或热加载显卡驱动。</p>
+<h3 id="verify" data-sourcepos="178:1-178:1">verify</h3>
+<p data-sourcepos="180:1-180:1">保存工作并正常重启后，回到工作目录：</p>
+<pre class="bash" data-sourcepos="182:1-188:1"><code>cd &quot;$HOME/d500-dispclk600&quot;
+sudo /usr/bin/python -B manage-dispclk600.py verify --expect patched
+system_profiler SPDisplaysDataType
+ioreg -l -w 0 -r -c IOFramebuffer &gt; after-framebuffers.txt</code></pre>
+<p data-sourcepos="189:1-189:1">预期：磁盘文件和启动缓存匹配补丁身份，内核查询返回 UUID <code>39e1d05a-4681-55b2-affb-f495f92edf3e</code>，<code>started</code>、<code>prelinked</code> 均为 <code>true</code>。</p>
+<p data-sourcepos="191:1-191:1">实际画面仍需单独验收：</p>
+<ul data-sourcepos="193:1-195:1">
+<li>在显示器输入信息中确认 <strong>3840×2160、60 Hz</strong>；若可读取物理时序，本次参考值为像素时钟 533.28 MHz、每帧 8,888,000 个时序像素。<code>system_profiler</code> 仅显示逻辑“1080p”不能证明物理输出降级或保持 4K60。</li>
+<li>在相同分辨率、刷新率、线材与显示器设置下，检查右侧区域在静态画面、窗口拖动和视频播放时是否仍闪烁、重影或撕裂。记录结果；加载成功本身不证明问题已解决。</li>
+<li>如需加强因果判断，保留补丁版结果，再按下一节恢复原版、正常重启，以相同条件检查症状是否回来。原实验尚未完成这个 A/B/A 对照。</li>
+</ul>
+<h3 id="observed-result" data-sourcepos="197:1-197:1">observed result</h3>
+<p data-sourcepos="199:1-199:1">2026-09-19，双 D500 正常重启后的对照结果：</p>
+<div class="table-wrap"><table data-sourcepos="201:1-208:1">
+<thead>
+<tr>
+<th>检查项</th>
+<th>原版</th>
+<th>补丁版</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>右侧异常</td>
+<td>持续可见</td>
+<td>消失，目视反馈“非常正常”</td>
+</tr>
+<tr>
+<td>物理分辨率</td>
+<td>3840×2160</td>
+<td>3840×2160</td>
+</tr>
+<tr>
+<td>像素时钟</td>
+<td>533.28 MHz</td>
+<td>533.28 MHz</td>
+</tr>
+<tr>
+<td>刷新率</td>
+<td>60 Hz</td>
+<td>60 Hz</td>
+</tr>
+<tr>
+<td>已加载控制器</td>
+<td>原版 UUID</td>
+<td>补丁 UUID</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="209:1-209:1">内核查询确认补丁 UUID 已加载，<code>OSBundleStarted</code>、<code>OSBundlePrelinked</code> 均为 <code>true</code>。图形组件的 63 条采集记录中，仅 <code>AMD7000Controller</code> 可执行文件改变，其余 62 条保持一致；kext 缓存按部署流程重新生成。</p>
+<h3 id="signature" data-sourcepos="211:1-211:1">signature</h3>
+<p data-sourcepos="213:1-213:1">补丁使原 Apple 签名失效，缓存构建记录 <code>WARNING - Invalid signature</code>。位于 <code>/System/Library/Extensions</code> 的候选仍进入预链接缓存，并在重启后加载。本实验沿用系统原有签名策略。</p>
+<p data-sourcepos="215:1-215:1">Mavericks 的 <a href="https://github.com/apple-oss-distributions/kext_tools/blob/4c3bdd0ba3735548244f095061219e4affac7132/kextutil_main.c#L1371-L1400"><code>kextutil</code> 诊断代码</a>分别处理签名和可加载性。<a href="https://github.com/apple-oss-distributions/kext_tools/blob/4c3bdd0ba3735548244f095061219e4affac7132/kextutil_main.c#L1186-L1236">加载分支</a>会拒绝 <code>/Library/Extensions</code> 中的无效签名及证书吊销，部署路径须与本次实验一致。</p>
+<h3 id="rollback" data-sourcepos="217:1-217:1">rollback</h3>
+<p data-sourcepos="219:1-219:1">以下回退以安装后未更新系统或变更其他 kext 为前提。系统仍可启动时，在同一工作目录恢复：</p>
+<pre class="bash" data-sourcepos="221:1-224:1"><code>sudo /usr/bin/python -B manage-dispclk600.py rollback</code></pre>
+<p data-sourcepos="225:1-225:1">预期：原文件及原启动缓存的摘要、UUID 均通过检查，输出 <code>Original file and caches restored</code>。脚本保留恢复前的缓存为 <code>/System/Library/Caches/com.apple.kext.caches.dispclk600-displaced</code>，不合并两套缓存。正常重启后核对：</p>
+<pre class="bash" data-sourcepos="227:1-231:1"><code>cd &quot;$HOME/d500-dispclk600&quot;
+sudo /usr/bin/python -B manage-dispclk600.py verify --expect original</code></pre>
+<p data-sourcepos="232:1-232:1">无法启动图形系统时，从恢复环境打开终端，将 <code>target_volume</code> 改为实际挂载的 Mavericks 系统卷。下面只恢复该卷自己的原 bundle 和缓存，不使用恢复系统的 <code>kextcache</code> 重建目标系统缓存：</p>
+<pre class="bash"><code>(
+  set -eu
+  target_volume=&#39;/Volumes/Mavericks&#39;
+  backup_dir=&quot;$target_volume/private/var/db/d500-dispclk600&quot;
+  cache_dir=&quot;$target_volume/System/Library/Caches/com.apple.kext.caches&quot;
+  test &quot;$(/usr/libexec/PlistBuddy -c &#39;Print :ProductBuildVersion&#39; \
+    &quot;$target_volume/System/Library/CoreServices/SystemVersion.plist&quot;)&quot; = &#39;13F1911&#39;
+  test &quot;$(shasum -a 256 \
+    &quot;$backup_dir/original.kext/Contents/MacOS/AMD7000Controller&quot; \
+    | awk &#39;{print $1}&#39;)&quot; = \
+    &#39;41f2200d2c3eb614af971235fd860355b8de2473214fe829e99039fedcc2aa82&#39;
+  test -f &quot;$backup_dir/backup.json&quot;
+  test -f &quot;$backup_dir/caches/Startup/kernelcache&quot;
+  (cd &quot;$backup_dir&quot; &amp;&amp; shasum -a 256 -c SHA256SUMS)
+  test ! -e &quot;$cache_dir.dispclk600-recovery&quot;
+  ditto --rsrc --extattr --acl &quot;$backup_dir/original.kext&quot; \
+    &quot;$target_volume/System/Library/Extensions/AMD7000Controller.kext&quot;
+  if test -d &quot;$cache_dir&quot;; then
+    mv &quot;$cache_dir&quot; &quot;$cache_dir.dispclk600-recovery&quot;
+  fi
+  ditto --rsrc --extattr --acl &quot;$backup_dir/caches&quot; &quot;$cache_dir&quot;
+  sync
+)</code></pre>
+<p data-sourcepos="260:1-260:1">命令成功后从 Mavericks 卷正常启动，再执行 <code>verify --expect original</code>。如缺少完整备份或系统卷身份不符，停止恢复，不混用其他机器、系统构建的驱动或缓存。</p>
+<h2 id="scope" data-sourcepos="262:1-262:1">scope</h2>
+<ul data-sourcepos="264:1-269:1">
+<li>已验证：当前双 D500、<code>13F1911</code> 和上述显示配置的一次正常重启对照。</li>
+<li>待验证：D700、D300、<code>13F34</code>，睡眠恢复、热插拔、多屏、反复冷启动、长期运行、图形加速性能，以及恢复原版后的 A/B/A 对照。</li>
+<li>时钟数据：500 MHz 来自 ROM，600 MHz 是补丁请求值；活动 DISPCLK 尚未直接测量。</li>
+<li>补丁采用固定初始化值。扩展适用范围还需增加 SST、像素时钟条件，并评估低分辨率下的功耗与温度。</li>
+<li>Yosemite 的动态时钟管理、DMIF 和 DP training 变化尚未移植。</li>
+<li>本文独立脚本经过原版副本的离线复建与恢复流程模拟检查；没有在此次文章修改中重新执行真机部署、重启或画面验收。</li>
+</ul>
+<h2 id="tools" data-sourcepos="271:1-271:1">tools</h2>
+<p data-sourcepos="273:1-273:1">将三个代码块分别保存为 <code>dispclk600.py</code>、<code>kernelcache.py</code> 和 <code>manage-dispclk600.py</code>，放在 <code>$HOME/d500-dispclk600/</code> 中。它们只依赖 Python 标准库与 Mavericks 自带工具；不包含或分发 Apple 驱动二进制。</p>
+<details>
+<summary>
+dispclk600.py：核对原版并离线生成补丁
+</summary>
+<pre class="python"><code>&quot;&quot;&quot;Build the fixed D500 / 13F1911 controller from an original file; never install.&quot;&quot;&quot;
+
+from __future__ import print_function
+
+import argparse
+import binascii
+import hashlib
+import json
+import os
+import struct
+import uuid
+
+
+SOURCE_SHA256 = &quot;41f2200d2c3eb614af971235fd860355b8de2473214fe829e99039fedcc2aa82&quot;
+EXPECTED_OUTPUT_SHA256 = &quot;fbe104660895d00f4f42ba633a3b3006f78795eeabbb07d9d95b3eb5383d45ee&quot;
+CALL_ADDRESS = 0x27D84
+CALLEE = &quot;__ZN13AtomBiosProxy28getDefaultDisplayEngineClockEv&quot;
+CLOCK_10KHZ = 60000
+PROBE_UUID = uuid.uuid5(uuid.NAMESPACE_URL, &quot;osx109/sst/dispclk600/v1/&quot; + SOURCE_SHA256)
+
+
+def unpack(data, layout, offset):
+    if offset &lt; 0 or offset + struct.calcsize(layout) &gt; len(data):
+        raise ValueError(&quot;Mach-O structure is outside the file&quot;)
+    return struct.unpack_from(layout, data, offset)
+
+
+def image_layout(data):
+    header = unpack(data, &quot;&lt;8I&quot;, 0)
+    if header[0] != 0xFEEDFACF or header[1] != 0x01000007 or header[3] != 11:
+        raise ValueError(&quot;Expected a thin x86_64 MH_KEXT_BUNDLE&quot;)
+    commands_end = 32 + header[5]
+    if commands_end &gt; len(data) or header[4] &gt; header[5] // 8:
+        raise ValueError(&quot;Invalid Mach-O load-command region&quot;)
+    cursor = 32
+    segments = []
+    tables = {}
+    for _ in range(header[4]):
+        command, size = unpack(data, &quot;&lt;II&quot;, cursor)
+        if size &lt; 8 or size % 8 or cursor + size &gt; commands_end:
+            raise ValueError(&quot;Invalid Mach-O load-command size&quot;)
+        if command == 0x19:
+            if size &lt; 72:
+                raise ValueError(&quot;Truncated segment command&quot;)
+            segment = unpack(data, &quot;&lt;II16sQQQQiiII&quot;, cursor)
+            if segment[5] + segment[6] &gt; len(data):
+                raise ValueError(&quot;Segment is outside the file&quot;)
+            segments.append((segment[3], segment[5], segment[6]))
+        elif command in (2, 11, 0x1B):
+            required = {2: 24, 11: 80, 0x1B: 24}[command]
+            if size != required or command in tables:
+                raise ValueError(&quot;Invalid or duplicate symbol/UUID command&quot;)
+            tables[command] = cursor
+        cursor += size
+    if cursor != commands_end or set(tables) != {2, 11, 0x1B}:
+        raise ValueError(&quot;Missing or inconsistent Mach-O metadata&quot;)
+    symtab = unpack(data, &quot;&lt;6I&quot;, tables[2])
+    dysymtab = unpack(data, &quot;&lt;20I&quot;, tables[11])
+    if (symtab[2] + symtab[3] * 16 &gt; len(data)
+            or symtab[4] + symtab[5] &gt; len(data)
+            or dysymtab[16] + dysymtab[17] * 8 &gt; len(data)):
+        raise ValueError(&quot;Mach-O symbol or relocation table is truncated&quot;)
+    names = []
+    strings_end = symtab[4] + symtab[5]
+    for index in range(symtab[3]):
+        string_index = unpack(data, &quot;&lt;I&quot;, symtab[2] + index * 16)[0]
+        if string_index &gt;= symtab[5]:
+            raise ValueError(&quot;Invalid Mach-O string index&quot;)
+        start = symtab[4] + string_index
+        end = data.find(b&quot;\0&quot;, start, strings_end)
+        if end &lt; 0:
+            raise ValueError(&quot;Unterminated Mach-O symbol&quot;)
+        names.append(data[start:end].decode(&quot;utf-8&quot;))
+    relocations = []
+    for index in range(dysymtab[17]):
+        start = dysymtab[16] + index * 8
+        address, flags = unpack(data, &quot;&lt;iI&quot;, start)
+        external = bool(flags &amp; (1 &lt;&lt; 27))
+        symbol_index = flags &amp; 0xFFFFFF
+        if external and symbol_index &gt;= len(names):
+            raise ValueError(&quot;Invalid external relocation symbol&quot;)
+        relocations.append({
+            &quot;address&quot;: address, &quot;flags&quot;: flags, &quot;external&quot;: external,
+            &quot;symbol&quot;: names[symbol_index] if external else None,
+            &quot;raw&quot;: data[start:start + 8],
+        })
+    return {
+        &quot;segments&quot;: segments, &quot;relocations&quot;: relocations,
+        &quot;relocation_offset&quot;: dysymtab[16],
+        &quot;relocation_count_offset&quot;: tables[11] + 17 * 4,
+        &quot;uuid_offset&quot;: tables[0x1B] + 8,
+    }
+
+
+def replace_clock_call(data, call_address, callee, marker):
+    image = image_layout(data)
+    offsets = [file_offset + call_address - address
+               for address, file_offset, length in image[&quot;segments&quot;]
+               if address &lt;= call_address and call_address + 5 &lt;= address + length]
+    if len(offsets) != 1:
+        raise ValueError(&quot;Clock call is not in exactly one file-backed segment&quot;)
+    code_offset = offsets[0]
+    if data[code_offset:code_offset + 5] != b&quot;\xe8\0\0\0\0&quot;:
+        raise ValueError(&quot;Expected an unrelocated five-byte CALL&quot;)
+    matches = [index for index, relocation in enumerate(image[&quot;relocations&quot;])
+               if relocation[&quot;address&quot;] == call_address + 1]
+    if len(matches) != 1:
+        raise ValueError(&quot;Expected exactly one relocation for the clock call&quot;)
+    index = matches[0]
+    relocation = image[&quot;relocations&quot;][index]
+    if (relocation[&quot;symbol&quot;] != callee or not relocation[&quot;external&quot;]
+            or relocation[&quot;flags&quot;] &gt;&gt; 24 != 0x2D):
+        raise ValueError(&quot;Clock call has the wrong symbol or relocation type&quot;)
+    result = bytearray(data)
+    result[code_offset:code_offset + 5] = b&quot;\xb8&quot; + struct.pack(&quot;&lt;I&quot;, CLOCK_10KHZ)
+    remaining = image[&quot;relocations&quot;][:index] + image[&quot;relocations&quot;][index + 1:]
+    table = b&quot;&quot;.join(record[&quot;raw&quot;] for record in remaining) + b&quot;\0&quot; * 8
+    start = image[&quot;relocation_offset&quot;]
+    result[start:start + len(table)] = table
+    struct.pack_into(&quot;&lt;I&quot;, result, image[&quot;relocation_count_offset&quot;], len(remaining))
+    old_uuid = uuid.UUID(bytes=data[image[&quot;uuid_offset&quot;]:image[&quot;uuid_offset&quot;] + 16])
+    result[image[&quot;uuid_offset&quot;]:image[&quot;uuid_offset&quot;] + 16] = marker.bytes
+    result = bytes(result)
+    checked = image_layout(result)
+    if (len(result) != len(data)
+            or [r[&quot;raw&quot;] for r in checked[&quot;relocations&quot;]] != [r[&quot;raw&quot;] for r in remaining]):
+        raise ValueError(&quot;Probe changed unrelated relocation records or file size&quot;)
+    return result, {
+        &quot;code_vm_address&quot;: hex(call_address), &quot;code_file_offset&quot;: hex(code_offset),
+        &quot;original_instruction&quot;: binascii.hexlify(data[code_offset:code_offset + 5]).decode(&quot;ascii&quot;),
+        &quot;replacement_instruction&quot;: binascii.hexlify(result[code_offset:code_offset + 5]).decode(&quot;ascii&quot;),
+        &quot;removed_relocation_symbol&quot;: callee,
+        &quot;old_external_relocations&quot;: len(image[&quot;relocations&quot;]),
+        &quot;new_external_relocations&quot;: len(remaining),
+        &quot;original_uuid&quot;: str(old_uuid), &quot;probe_uuid&quot;: str(marker),
+        &quot;changed_file_bytes&quot;: sum(a != b for a, b in zip(data, result)),
+    }
+
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(&quot;--source&quot;, required=True, help=&quot;Original AMD7000Controller file&quot;)
+    parser.add_argument(&quot;--output&quot;, required=True, help=&quot;New output directory&quot;)
+    args = parser.parse_args()
+    with open(args.source, &quot;rb&quot;) as stream:
+        data = stream.read()
+    if hashlib.sha256(data).hexdigest() != SOURCE_SHA256:
+        parser.error(&quot;Unexpected original SHA-256; no file has been changed&quot;)
+    probe, changes = replace_clock_call(data, CALL_ADDRESS, CALLEE, PROBE_UUID)
+    if (changes[&quot;original_uuid&quot;] != &quot;5dd5f117-8f64-3b72-9e71-9f20af1c76ae&quot;
+            or changes[&quot;old_external_relocations&quot;] != 5212
+            or hashlib.sha256(probe).hexdigest() != EXPECTED_OUTPUT_SHA256):
+        parser.error(&quot;Result differs from the verified fix&quot;)
+    report = {
+        &quot;status&quot;: &quot;built-not-installed&quot;, &quot;source_sha256&quot;: SOURCE_SHA256,
+        &quot;probe_sha256&quot;: EXPECTED_OUTPUT_SHA256, &quot;changes&quot;: changes,
+    }
+    os.umask(0o077)
+    os.makedirs(args.output)
+    with open(os.path.join(args.output, &quot;AMD7000Controller&quot;), &quot;wb&quot;) as stream:
+        stream.write(probe)
+    with open(os.path.join(args.output, &quot;report.json&quot;), &quot;w&quot;) as stream:
+        json.dump(report, stream, indent=2)
+        stream.write(&quot;\n&quot;)
+    print(json.dumps(report, indent=2))
+
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre>
+</details>
+<details>
+<summary>
+kernelcache.py：解析启动缓存及内嵌 UUID
+</summary>
+<pre class="python"><code>&quot;&quot;&quot;Inspect a Mavericks boot cache without loading or modifying it.&quot;&quot;&quot;
+
+from __future__ import print_function
+
+import argparse
+import base64
+import json
+import numbers
+import struct
+import uuid
+from xml.etree import ElementTree
+import zlib
+
+
+def lzss_decode(data, expected_size):
+    window = bytearray(b&quot; &quot; * 4078 + b&quot;\0&quot; * 18)
+    position = 4078
+    flags = 0
+    index = 0
+    output = bytearray()
+    while index &lt; len(data):
+        flags &gt;&gt;= 1
+        if not flags &amp; 0x100:
+            flags = data[index] | 0xFF00
+            index += 1
+        if flags &amp; 1:
+            if index &gt;= len(data):
+                raise ValueError(&quot;Truncated LZSS literal&quot;)
+            values = (data[index],)
+            index += 1
+            for value in values:
+                output.append(value)
+                window[position] = value
+                position = (position + 1) &amp; 4095
+        else:
+            if index + 2 &gt; len(data):
+                raise ValueError(&quot;Truncated LZSS reference&quot;)
+            reference = data[index] | ((data[index + 1] &amp; 0xF0) &lt;&lt; 4)
+            length = (data[index + 1] &amp; 15) + 3
+            index += 2
+            for offset in range(length):
+                value = window[(reference + offset) &amp; 4095]
+                output.append(value)
+                window[position] = value
+                position = (position + 1) &amp; 4095
+        if len(output) &gt; expected_size:
+            raise ValueError(&quot;LZSS output exceeds declared size&quot;)
+    if len(output) != expected_size:
+        raise ValueError(&quot;LZSS output size mismatch&quot;)
+    return bytes(output)
+
+
+def uncompress(data):
+    if data[:4] == b&quot;\xca\xfe\xba\xbe&quot;:
+        count = struct.unpack_from(&quot;&gt;I&quot;, data, 4)[0]
+        if count &gt; 16 or 8 + count * 20 &gt; len(data):
+            raise ValueError(&quot;Invalid universal cache header&quot;)
+        slices = []
+        for index in range(count):
+            cpu, subtype, offset, size, alignment = struct.unpack_from(
+                &quot;&gt;5I&quot;, data, 8 + index * 20)
+            if cpu == 0x01000007:
+                if offset + size &gt; len(data):
+                    raise ValueError(&quot;Truncated universal cache&quot;)
+                slices.append(data[offset:offset + size])
+        if len(slices) != 1:
+            raise ValueError(&quot;Expected one x86_64 cache slice&quot;)
+        data = slices[0]
+    if data[:4] == b&quot;comp&quot;:
+        if len(data) &lt; 384 or data[4:8] != b&quot;lzss&quot;:
+            raise ValueError(&quot;Unsupported compressed cache format&quot;)
+        checksum, size, compressed_size = struct.unpack_from(&quot;&gt;3I&quot;, data, 8)
+        if size &gt; 512 * 1024 * 1024 or compressed_size != len(data) - 384:
+            raise ValueError(&quot;Invalid compressed cache sizes&quot;)
+        data = lzss_decode(bytearray(data[384:]), size)
+        if zlib.adler32(data) &amp; 0xFFFFFFFF != checksum:
+            raise ValueError(&quot;Kernelcache Adler-32 mismatch&quot;)
+    return data
+
+
+def macho(data, base=0, limit=None):
+    limit = len(data) if limit is None else limit
+    if base &lt; 0 or base + 32 &gt; limit:
+        raise ValueError(&quot;Truncated Mach-O header&quot;)
+    header = struct.unpack_from(&quot;&lt;8I&quot;, data, base)
+    if header[0] != 0xFEEDFACF or header[1] != 0x01000007:
+        raise ValueError(&quot;Expected x86_64 Mach-O&quot;)
+    end = base + 32 + header[5]
+    if end &gt; limit or header[4] &gt; header[5] // 8:
+        raise ValueError(&quot;Invalid Mach-O commands&quot;)
+    cursor = base + 32
+    segments = []
+    identifier = None
+    for _ in range(header[4]):
+        command, size = struct.unpack_from(&quot;&lt;II&quot;, data, cursor)
+        if size &lt; 8 or size % 8 or cursor + size &gt; end:
+            raise ValueError(&quot;Invalid Mach-O command size&quot;)
+        if command == 0x19:
+            if size &lt; 72:
+                raise ValueError(&quot;Truncated Mach-O segment&quot;)
+            fields = struct.unpack_from(&quot;&lt;II16sQQQQiiII&quot;, data, cursor)
+            segments.append({
+                &quot;name&quot;: fields[2].rstrip(b&quot;\0&quot;).decode(&quot;ascii&quot;),
+                &quot;address&quot;: fields[3], &quot;offset&quot;: fields[5], &quot;size&quot;: fields[6],
+            })
+        elif command == 0x1B:
+            if size != 24 or identifier is not None:
+                raise ValueError(&quot;Invalid Mach-O UUID command&quot;)
+            identifier = str(uuid.UUID(bytes=bytes(data[cursor + 8:cursor + 24])))
+        cursor += size
+    if cursor != end:
+        raise ValueError(&quot;Mach-O command length mismatch&quot;)
+    return segments, identifier
+
+
+def prelink_dictionary(xml):
+    objects = {}
+
+    def decode(node):
+        reference = node.get(&quot;IDREF&quot;)
+        if reference is not None:
+            if reference not in objects:
+                raise ValueError(&quot;Unresolved IOKit XML reference&quot;)
+            return objects[reference]
+        if node.tag == &quot;dict&quot;:
+            children = list(node)
+            if len(children) % 2:
+                raise ValueError(&quot;Invalid IOKit dictionary&quot;)
+            value = {}
+            for index in range(0, len(children), 2):
+                if children[index].tag != &quot;key&quot;:
+                    raise ValueError(&quot;Missing IOKit dictionary key&quot;)
+                key = decode(children[index])
+                if key in value:
+                    raise ValueError(&quot;Duplicate IOKit dictionary key&quot;)
+                value[key] = decode(children[index + 1])
+        elif node.tag == &quot;array&quot;:
+            value = [decode(child) for child in node]
+        elif node.tag in (&quot;key&quot;, &quot;string&quot;):
+            value = node.text or &quot;&quot;
+        elif node.tag == &quot;integer&quot;:
+            text = node.text or &quot;&quot;
+            value = int(text, 16 if text.startswith(&quot;0x&quot;) else 10)
+        elif node.tag == &quot;data&quot;:
+            value = base64.b64decode(&quot;&quot;.join((node.text or &quot;&quot;).split()))
+        elif node.tag in (&quot;true&quot;, &quot;false&quot;):
+            value = node.tag == &quot;true&quot;
+        else:
+            raise ValueError(&quot;Unsupported IOKit XML type: &quot; + node.tag)
+        identifier = node.get(&quot;ID&quot;)
+        if identifier is not None:
+            if identifier in objects:
+                raise ValueError(&quot;Duplicate IOKit XML object ID&quot;)
+            objects[identifier] = value
+        return value
+
+    return decode(ElementTree.fromstring(xml))
+
+
+def inspect(cache, bundle_id, expected_uuid, include_inventory=False):
+    data = uncompress(cache)
+    segments, kernel_uuid = macho(data)
+    metadata = [segment for segment in segments if segment[&quot;name&quot;] == &quot;__PRELINK_INFO&quot;]
+    if len(metadata) != 1:
+        raise ValueError(&quot;Expected one prelink metadata segment&quot;)
+    info = metadata[0]
+    if info[&quot;offset&quot;] + info[&quot;size&quot;] &gt; len(data):
+        raise ValueError(&quot;Prelink metadata is outside the cache&quot;)
+    xml = data[info[&quot;offset&quot;]:info[&quot;offset&quot;] + info[&quot;size&quot;]].rstrip(b&quot;\0&quot;)
+    document = prelink_dictionary(xml)
+    entries = document[&quot;_PrelinkInfoDictionary&quot;]
+    matches = [entry for entry in entries if entry.get(&quot;CFBundleIdentifier&quot;) == bundle_id]
+    if len(matches) != 1:
+        raise ValueError(&quot;Expected exactly one target bundle in the cache&quot;)
+    entry = matches[0]
+    address = entry[&quot;_PrelinkExecutableSourceAddr&quot;]
+    length = entry[&quot;_PrelinkExecutableSize&quot;]
+    if not isinstance(address, numbers.Integral) or not isinstance(length, numbers.Integral):
+        raise ValueError(&quot;Prelinked executable address and size must be integers&quot;)
+    locations = [segment[&quot;offset&quot;] + address - segment[&quot;address&quot;]
+                 for segment in segments
+                 if segment[&quot;address&quot;] &lt;= address
+                 and address + length &lt;= segment[&quot;address&quot;] + segment[&quot;size&quot;]]
+    if len(locations) != 1:
+        raise ValueError(&quot;Prelinked executable has no unique file-backed location&quot;)
+    offset = locations[0]
+    _, identifier = macho(data, offset, offset + length)
+    if identifier != expected_uuid:
+        raise ValueError(&quot;Cached driver UUID mismatch: %s, expected %s&quot;
+                         % (identifier, expected_uuid))
+    result = {
+        &quot;bundle_id&quot;: bundle_id, &quot;uuid&quot;: identifier,
+        &quot;bundle_path&quot;: entry.get(&quot;_PrelinkBundlePath&quot;),
+        &quot;kernel_uuid&quot;: kernel_uuid, &quot;bundle_count&quot;: len(entries),
+        &quot;uncompressed_bytes&quot;: len(data),
+    }
+    if include_inventory:
+        inventory = {}
+        for item in entries:
+            name = item[&quot;CFBundleIdentifier&quot;]
+            if name in inventory:
+                raise ValueError(&quot;Duplicate prelinked bundle identifier&quot;)
+            inventory[name] = {
+                &quot;path&quot;: item.get(&quot;_PrelinkBundlePath&quot;),
+                &quot;version&quot;: item.get(&quot;CFBundleVersion&quot;),
+            }
+        result[&quot;inventory&quot;] = inventory
+    return result
+
+
+def verify_inventory(original, candidate):
+    before = original[&quot;inventory&quot;]
+    after = candidate[&quot;inventory&quot;]
+    for identifier, metadata in before.items():
+        if after.get(identifier) != metadata:
+            raise ValueError(&quot;Original cached bundle changed or disappeared: &quot; + identifier)
+    allowed = {
+        &quot;com.apple.filesystems.msdosfs&quot;: {
+            &quot;path&quot;: &quot;/System/Library/Extensions/msdosfs.kext&quot;, &quot;version&quot;: &quot;1.9&quot;,
+        },
+    }
+    additions = sorted(set(after) - set(before))
+    for identifier in additions:
+        if identifier not in allowed or after[identifier] != allowed[identifier]:
+            raise ValueError(&quot;Unexpected cache addition: &quot; + identifier)
+    return additions
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(&quot;cache&quot;)
+    parser.add_argument(&quot;--bundle-id&quot;, default=&quot;com.apple.kext.AMD7000Controller&quot;)
+    parser.add_argument(&quot;--expect-uuid&quot;, required=True)
+    args = parser.parse_args()
+    with open(args.cache, &quot;rb&quot;) as stream:
+        result = inspect(stream.read(), args.bundle_id, args.expect_uuid)
+    print(json.dumps(result, indent=2))
+
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre>
+</details>
+<details>
+<summary>
+manage-dispclk600.py：目标机检查、部署、验证与回退
+</summary>
+<pre class="python"><code>&quot;&quot;&quot;Mavericks-only install, verify and rollback. Never reboot or hot-load a kext.&quot;&quot;&quot;
+
+from __future__ import print_function
+
+import argparse
+import ctypes
+import hashlib
+import json
+import os
+import plistlib
+import stat
+import subprocess
+import sys
+import threading
+import time
+import uuid
+
+import dispclk600
+import kernelcache
+
+
+ROOT = &quot;/var/db/d500-dispclk600&quot;
+EXTENSIONS = &quot;/System/Library/Extensions&quot;
+BUNDLE = EXTENSIONS + &quot;/AMD7000Controller.kext&quot;
+EXECUTABLE = &quot;Contents/MacOS/AMD7000Controller&quot;
+CACHES = &quot;/System/Library/Caches/com.apple.kext.caches&quot;
+BUNDLE_ID = &quot;com.apple.kext.AMD7000Controller&quot;
+ORIGINAL_UUID = &quot;5dd5f117-8f64-3b72-9e71-9f20af1c76ae&quot;
+PATCHED_UUID = str(dispclk600.PROBE_UUID)
+
+
+def digest(path):
+    result = hashlib.sha256()
+    with open(path, &quot;rb&quot;) as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b&quot;&quot;):
+            result.update(block)
+    return result.hexdigest()
+
+
+def require_hash(path, expected):
+    if digest(path) != expected:
+        raise ValueError(&quot;Unexpected SHA-256: &quot; + path)
+
+
+def load_plist(data):
+    if hasattr(plistlib, &quot;loads&quot;):
+        return plistlib.loads(data)
+    return plistlib.readPlistFromString(data)
+
+
+def property_bytes(value):
+    return getattr(value, &quot;data&quot;, value)
+
+
+def loaded_controller():
+    core = ctypes.CDLL(&quot;/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation&quot;)
+    iokit = ctypes.CDLL(&quot;/System/Library/Frameworks/IOKit.framework/IOKit&quot;)
+    iokit.OSKextCopyLoadedKextInfo.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
+    iokit.OSKextCopyLoadedKextInfo.restype = ctypes.c_void_p
+    core.CFPropertyListCreateXMLData.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
+    core.CFPropertyListCreateXMLData.restype = ctypes.c_void_p
+    core.CFDataGetLength.argtypes = [ctypes.c_void_p]
+    core.CFDataGetLength.restype = ctypes.c_long
+    core.CFDataGetBytePtr.argtypes = [ctypes.c_void_p]
+    core.CFDataGetBytePtr.restype = ctypes.c_void_p
+    core.CFRelease.argtypes = [ctypes.c_void_p]
+    core.CFRelease.restype = None
+    information = iokit.OSKextCopyLoadedKextInfo(None, None)
+    if not information:
+        raise RuntimeError(&quot;Cannot query loaded kexts&quot;)
+    xml = None
+    try:
+        xml = core.CFPropertyListCreateXMLData(None, information)
+        if not xml:
+            raise RuntimeError(&quot;Cannot serialize loaded kext information&quot;)
+        data = ctypes.string_at(core.CFDataGetBytePtr(xml), core.CFDataGetLength(xml))
+        entry = load_plist(data)[BUNDLE_ID]
+        return {
+            &quot;uuid&quot;: str(uuid.UUID(bytes=property_bytes(entry[&quot;OSBundleUUID&quot;]))),
+            &quot;started&quot;: entry.get(&quot;OSBundleStarted&quot;) is True,
+            &quot;prelinked&quot;: entry.get(&quot;OSBundlePrelinked&quot;) is True,
+        }
+    finally:
+        if xml:
+            core.CFRelease(xml)
+        core.CFRelease(information)
+
+
+def check_environment():
+    if sys.platform != &quot;darwin&quot; or os.geteuid() != 0:
+        raise RuntimeError(&quot;Run with sudo on the target Mavericks Mac&quot;)
+    for arguments, expected in (
+            ([&quot;/usr/bin/sw_vers&quot;, &quot;-productVersion&quot;], b&quot;10.9.5&quot;),
+            ([&quot;/usr/bin/sw_vers&quot;, &quot;-buildVersion&quot;], b&quot;13F1911&quot;),
+            ([&quot;/usr/sbin/sysctl&quot;, &quot;-n&quot;, &quot;hw.model&quot;], b&quot;MacPro6,1&quot;)):
+        if subprocess.check_output(arguments).strip() != expected:
+            raise RuntimeError(&quot;Unsupported system or hardware&quot;)
+    nodes = load_plist(subprocess.check_output(
+        [&quot;/usr/sbin/ioreg&quot;, &quot;-a&quot;, &quot;-l&quot;, &quot;-r&quot;, &quot;-c&quot;, &quot;IOPCIDevice&quot;, &quot;-w&quot;, &quot;0&quot;]))
+    graphics = []
+
+    def visit(entries):
+        for entry in entries:
+            if (property_bytes(entry.get(&quot;vendor-id&quot;)) == b&quot;\x02\x10\0\0&quot;
+                    and entry.get(&quot;IOName&quot;) == &quot;display&quot;):
+                graphics.append(entry)
+            visit(entry.get(&quot;IORegistryEntryChildren&quot;, []))
+
+    visit(nodes)
+    if len(graphics) != 2 or any(property_bytes(entry.get(&quot;device-id&quot;)) != b&quot;\x9e\x67\0\0&quot;
+                                 for entry in graphics):
+        raise RuntimeError(&quot;Exactly two D500 display devices are required&quot;)
+
+
+def inspect_cache(path, expected_uuid):
+    with open(path, &quot;rb&quot;) as stream:
+        result = kernelcache.inspect(stream.read(), BUNDLE_ID, expected_uuid,
+                                     include_inventory=True)
+    if result[&quot;bundle_path&quot;] != BUNDLE:
+        raise ValueError(&quot;Unexpected controller path in boot cache&quot;)
+    return result
+
+
+def run(label, arguments):
+    log_path = os.path.join(ROOT, label + &quot;.log&quot;)
+    with open(log_path, &quot;wb&quot;) as log:
+        process = subprocess.Popen(arguments, stdout=log, stderr=subprocess.STDOUT)
+        start = time.time()
+        waiter = threading.Event()
+        while process.poll() is None:
+            if time.time() - start &gt; 360:
+                process.terminate()
+                for _ in range(20):
+                    if process.poll() is not None:
+                        break
+                    waiter.wait(0.25)
+                if process.poll() is None:
+                    process.kill()
+                process.wait()
+                raise RuntimeError(&quot;Command timed out; see &quot; + log_path)
+            waiter.wait(0.25)
+    if process.returncode:
+        raise RuntimeError(&quot;Command failed; see &quot; + log_path)
+
+
+def replace_executable(source, expected_sha):
+    target = os.path.join(BUNDLE, EXECUTABLE)
+    temporary = target + &quot;.dispclk600-new&quot;
+    if os.path.lexists(temporary):
+        raise RuntimeError(&quot;Temporary executable already exists: &quot; + temporary)
+    try:
+        run(&quot;replace&quot;, [&quot;/usr/bin/ditto&quot;, &quot;--rsrc&quot;, &quot;--extattr&quot;, &quot;--acl&quot;,
+                        source, temporary])
+        require_hash(temporary, expected_sha)
+        os.chown(temporary, 0, 0)
+        os.chmod(temporary, 0o755)
+        os.rename(temporary, target)
+        require_hash(target, expected_sha)
+    finally:
+        if os.path.isfile(temporary) and not os.path.islink(temporary):
+            os.unlink(temporary)
+
+
+def backup_metadata():
+    info = os.lstat(ROOT)
+    if not stat.S_ISDIR(info.st_mode) or info.st_uid != 0 or info.st_mode &amp; 0o077:
+        raise RuntimeError(&quot;Backup directory must be root-owned with mode 0700&quot;)
+    with open(os.path.join(ROOT, &quot;backup.json&quot;)) as stream:
+        metadata = json.load(stream)
+    require_hash(os.path.join(ROOT, &quot;original.kext&quot;, EXECUTABLE), dispclk600.SOURCE_SHA256)
+    require_hash(os.path.join(ROOT, &quot;caches/Startup/kernelcache&quot;), metadata[&quot;cache_sha256&quot;])
+    inspect_cache(os.path.join(ROOT, &quot;caches/Startup/kernelcache&quot;), ORIGINAL_UUID)
+    return metadata
+
+
+def rollback():
+    metadata = backup_metadata()
+    if (digest(os.path.join(BUNDLE, EXECUTABLE)) == dispclk600.SOURCE_SHA256
+            and digest(os.path.join(CACHES, &quot;Startup/kernelcache&quot;)) == metadata[&quot;cache_sha256&quot;]):
+        inspect_cache(os.path.join(CACHES, &quot;Startup/kernelcache&quot;), ORIGINAL_UUID)
+        for path, values in metadata[&quot;directory_times&quot;].items():
+            os.utime(path, tuple(values))
+        print(&quot;Original file and caches restored already; running driver unchanged.&quot;)
+        return
+    temporary = CACHES + &quot;.dispclk600-restore&quot;
+    displaced = CACHES + &quot;.dispclk600-displaced&quot;
+    if os.path.lexists(temporary) or os.path.lexists(displaced):
+        raise RuntimeError(&quot;Unfinished cache restore; use the documented recovery procedure&quot;)
+    run(&quot;restore-cache-copy&quot;, [&quot;/usr/bin/ditto&quot;, &quot;--rsrc&quot;, &quot;--extattr&quot;, &quot;--acl&quot;,
+                               os.path.join(ROOT, &quot;caches&quot;), temporary])
+    require_hash(os.path.join(temporary, &quot;Startup/kernelcache&quot;), metadata[&quot;cache_sha256&quot;])
+    replace_executable(os.path.join(ROOT, &quot;original.kext&quot;, EXECUTABLE),
+                       dispclk600.SOURCE_SHA256)
+    os.rename(CACHES, displaced)
+    try:
+        os.rename(temporary, CACHES)
+    except Exception:
+        os.rename(displaced, CACHES)
+        raise
+    for path, values in metadata[&quot;directory_times&quot;].items():
+        os.utime(path, tuple(values))
+    inspect_cache(os.path.join(CACHES, &quot;Startup/kernelcache&quot;), ORIGINAL_UUID)
+    require_hash(os.path.join(CACHES, &quot;Startup/kernelcache&quot;), metadata[&quot;cache_sha256&quot;])
+    run(&quot;rollback-sync&quot;, [&quot;/bin/sync&quot;])
+    print(&quot;Original file and caches restored. Running driver unchanged; reboot manually.&quot;)
+
+
+def install(candidate):
+    require_hash(candidate, dispclk600.EXPECTED_OUTPUT_SHA256)
+    require_hash(os.path.join(BUNDLE, EXECUTABLE), dispclk600.SOURCE_SHA256)
+    loaded = loaded_controller()
+    if loaded != {&quot;uuid&quot;: ORIGINAL_UUID, &quot;started&quot;: True, &quot;prelinked&quot;: True}:
+        raise RuntimeError(&quot;Boot the matching original driver before installing&quot;)
+    original_cache = inspect_cache(os.path.join(CACHES, &quot;Startup/kernelcache&quot;), ORIGINAL_UUID)
+    cache_sha = digest(os.path.join(CACHES, &quot;Startup/kernelcache&quot;))
+    directory_times = {path: (os.stat(path).st_atime, os.stat(path).st_mtime)
+                       for path in (BUNDLE, EXTENSIONS)}
+    os.umask(0o077)
+    os.mkdir(ROOT, 0o700)
+    for source, destination in ((BUNDLE, &quot;original.kext&quot;), (CACHES, &quot;caches&quot;),
+                                (BUNDLE, &quot;candidate.kext&quot;)):
+        run(&quot;backup-&quot; + destination, [&quot;/usr/bin/ditto&quot;, &quot;--rsrc&quot;, &quot;--extattr&quot;, &quot;--acl&quot;,
+                                      source, os.path.join(ROOT, destination)])
+    require_hash(os.path.join(ROOT, &quot;original.kext&quot;, EXECUTABLE), dispclk600.SOURCE_SHA256)
+    require_hash(os.path.join(ROOT, &quot;caches/Startup/kernelcache&quot;), cache_sha)
+    metadata = {&quot;cache_sha256&quot;: cache_sha, &quot;directory_times&quot;: directory_times}
+    with open(os.path.join(ROOT, &quot;backup.json&quot;), &quot;w&quot;) as stream:
+        json.dump(metadata, stream, indent=2)
+    with open(os.path.join(ROOT, &quot;SHA256SUMS&quot;), &quot;w&quot;) as stream:
+        stream.write(dispclk600.SOURCE_SHA256 + &quot;  original.kext/&quot; + EXECUTABLE + &quot;\n&quot;)
+        stream.write(cache_sha + &quot;  caches/Startup/kernelcache\n&quot;)
+    staged = os.path.join(ROOT, &quot;candidate.kext&quot;, EXECUTABLE)
+    run(&quot;stage&quot;, [&quot;/usr/bin/ditto&quot;, &quot;--rsrc&quot;, &quot;--extattr&quot;, &quot;--acl&quot;, candidate, staged])
+    os.chown(staged, 0, 0)
+    os.chmod(staged, 0o755)
+    require_hash(staged, dispclk600.EXPECTED_OUTPUT_SHA256)
+    diagnostic = [&quot;/usr/bin/kextutil&quot;, &quot;-no-load&quot;, &quot;-print-diagnostics&quot;, &quot;-no-caches&quot;,
+                  &quot;-no-loaded-check&quot;, &quot;-verbose&quot;, &quot;3&quot;, &quot;-arch&quot;, &quot;x86_64&quot;, &quot;--&quot;]
+    run(&quot;preflight-original&quot;, diagnostic + [BUNDLE])
+    run(&quot;preflight-candidate&quot;, diagnostic + [os.path.join(ROOT, &quot;candidate.kext&quot;)])
+    require_hash(os.path.join(BUNDLE, EXECUTABLE), dispclk600.SOURCE_SHA256)
+    require_hash(os.path.join(CACHES, &quot;Startup/kernelcache&quot;), cache_sha)
+    run(&quot;backup-sync&quot;, [&quot;/bin/sync&quot;])
+    try:
+        replace_executable(staged, dispclk600.EXPECTED_OUTPUT_SHA256)
+        os.utime(BUNDLE, None)
+        os.utime(EXTENSIONS, None)
+        run(&quot;prelinked-kernel&quot;, [&quot;/usr/sbin/kextcache&quot;, &quot;-verbose&quot;, &quot;3&quot;,
+                                 &quot;-system-prelinked-kernel&quot;])
+        run(&quot;system-caches&quot;, [&quot;/usr/sbin/kextcache&quot;, &quot;-verbose&quot;, &quot;3&quot;, &quot;-system-caches&quot;])
+        result = inspect_cache(os.path.join(CACHES, &quot;Startup/kernelcache&quot;), PATCHED_UUID)
+        additions = kernelcache.verify_inventory(original_cache, result)
+        require_hash(os.path.join(BUNDLE, EXECUTABLE), dispclk600.EXPECTED_OUTPUT_SHA256)
+        run(&quot;sync&quot;, [&quot;/bin/sync&quot;])
+    except BaseException:
+        print(&quot;Install failed; restoring original file and caches.&quot;)
+        rollback()
+        raise
+    print(&quot;Patched cache verified. Additional stock cache entries: &quot; + repr(additions))
+    print(&quot;Ready for a manual reboot. Running driver has not been hot-loaded.&quot;)
+
+
+def verify(expected):
+    sha = dispclk600.EXPECTED_OUTPUT_SHA256 if expected == &quot;patched&quot; else dispclk600.SOURCE_SHA256
+    identifier = PATCHED_UUID if expected == &quot;patched&quot; else ORIGINAL_UUID
+    require_hash(os.path.join(BUNDLE, EXECUTABLE), sha)
+    result = loaded_controller()
+    if result != {&quot;uuid&quot;: identifier, &quot;started&quot;: True, &quot;prelinked&quot;: True}:
+        raise RuntimeError(&quot;Loaded UUID/start/prelink mismatch: &quot; + repr(result))
+    inspect_cache(os.path.join(CACHES, &quot;Startup/kernelcache&quot;), identifier)
+    print(json.dumps(result, indent=2))
+    print(&quot;Disk, boot cache and loaded UUID match; inspect physical output and flicker separately.&quot;)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(&quot;action&quot;, choices=(&quot;install&quot;, &quot;verify&quot;, &quot;rollback&quot;))
+    parser.add_argument(&quot;--candidate&quot;)
+    parser.add_argument(&quot;--expect&quot;, choices=(&quot;original&quot;, &quot;patched&quot;), default=&quot;patched&quot;)
+    args = parser.parse_args()
+    if args.action == &quot;install&quot; and not args.candidate:
+        parser.error(&quot;install requires --candidate&quot;)
+    check_environment()
+    if args.action == &quot;install&quot;:
+        install(os.path.abspath(args.candidate))
+    elif args.action == &quot;rollback&quot;:
+        rollback()
+    else:
+        verify(args.expect)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre>
+</details>
+<h2 id="binary-identity" data-sourcepos="299:1-299:1">binary identity</h2>
+<pre class="text" data-sourcepos="301:1-312:1"><code>原版 UUID
+5dd5f117-8f64-3b72-9e71-9f20af1c76ae
+原版 SHA-256
+41f2200d2c3eb614af971235fd860355b8de2473214fe829e99039fedcc2aa82
+
+补丁版 UUID
+39e1d05a-4681-55b2-affb-f495f92edf3e
+补丁版 SHA-256
+fbe104660895d00f4f42ba633a3b3006f78795eeabbb07d9d95b3eb5383d45ee</code></pre>
+
+      </article>
+    </main>
+
+    <!-- Right Sidebar (TOC) -->
+    <aside class="sidebar right-sidebar collapsed" id="right-sidebar">
+      <div class="sidebar-content" id="spa-toc">
+        <!-- <h4 class="toc-title">On this page</h4> -->
+        <ul class="toc-list"><li class="toc-section"><div class="toc-heading"><a href="#symptom">symptom</a></div></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#evidence">evidence</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#display-pipeline">display pipeline</a></li><li class="toc-child toc-level-3"><a href="#pixel-clock">pixel clock</a></li><li class="toc-child toc-level-3"><a href="#rom-default">rom default</a></li><li class="toc-child toc-level-3"><a href="#yosemite-comparison">yosemite comparison</a></li><li class="toc-child toc-level-3"><a href="#interpretation">interpretation</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#reproduction">reproduction</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#clock-request">clock request</a></li><li class="toc-child toc-level-3"><a href="#relocation">relocation</a></li><li class="toc-child toc-level-3"><a href="#build">build</a></li><li class="toc-child toc-level-3"><a href="#install">install</a></li><li class="toc-child toc-level-3"><a href="#verify">verify</a></li><li class="toc-child toc-level-3"><a href="#observed-result">observed result</a></li><li class="toc-child toc-level-3"><a href="#signature">signature</a></li><li class="toc-child toc-level-3"><a href="#rollback">rollback</a></li></ul></li><li class="toc-section"><div class="toc-heading"><a href="#scope">scope</a></div></li><li class="toc-section"><div class="toc-heading"><a href="#tools">tools</a></div></li><li class="toc-section"><div class="toc-heading"><a href="#binary-identity">binary identity</a></div></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <script src="/static/text-anchor.js"></script>
+<script src="/static/comments.js"></script>
+<script src="/static/core/code-blocks.js"></script>
+<script src="/static/scrollbar-visibility.js?v=733754f1"></script>
+<script src="/static/sidebar-panel.js"></script>
+<script src="/static/core/theme-colors.js?v=733754f1"></script>
+<script src="/static/svg-theme.js?v=733754f1"></script>
+<script src="/static/render-on-demand.js"></script>
+<script src="/static/reading-navigation-state.js"></script>
+<script src="/static/link-preview.js"></script>
+<script src="/static/shell-lifecycle.js"></script>
+<script src="/static/module-browser.js"></script>
+<script src="/static/shell-preferences.js"></script>
+<script src="/static/shell-bootstrap.js"></script>
+<script src="/static/main.js?v=733754f1"></script>
+<script src="/static/shell-layout.js"></script>
+<script src="/static/shell-search-settings.js?v=733754f1"></script>
+<script src="/static/shell-router.js"></script>
+<script src="/static/themes.js?v=733754f1"></script>
+<script src="/static/core/ink-theme-colors.js?v=733754f1"></script>
+<script src="/static/ink-toolbar.js?v=733754f1"></script>
+<script src="/static/image-viewer.js?v=733754f1"></script>
+<script src="/static/page-scripts.js?v=733754f1"></script>
+<script src="/static/vendor/js-yaml.js"></script>
+<script src="/static/core/syllabus-spec.js"></script>
+<script src="/static/syllabus-enhance.js"></script>
+<script src="/static/table-enhance.js"></script>
+<script src="/static/theme-colors.js?v=733754f1"></script>
+<script src="/static/greeting.js"></script>
+<script src="/static/draftbook-loader.js"></script>
+  <script>
+  // highlight.js: on-demand language loader + post-load highlight pass.
+  //
+  // Core (highlight.min.js) bundles ~37 common languages. Pages that use
+  // additional languages from _HLJS_EXTRA trigger an extra CDN fetch only
+  // when the page actually contains a matching code block. The service
+  // worker caches each module after the first fetch, so subsequent pages
+  // pay nothing for already-loaded languages.
+  //
+  // _HLJS_ALIAS maps user-facing class names to module filenames that
+  // differ from the class name. Pure aliases that hljs core already knows
+  // (e.g. ts → typescript, sh → bash) are resolved by hljs.getLanguage()
+  // and don't need entries — only include aliases whose target module is
+  // in _HLJS_EXTRA.
+  window._HLJS_BASE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/languages/';
+  window._HLJS_ALIAS = {
+    tex: 'latex', docker: 'dockerfile', ps: 'powershell', ps1: 'powershell',
+    ml: 'ocaml', hs: 'haskell', clj: 'clojure', cljs: 'clojure',
+    erl: 'erlang', coffee: 'coffeescript', f90: 'fortran', f95: 'fortran',
+    pascal: 'delphi'
+  };
+  window._HLJS_EXTRA = [
+    // Tier 1/2: build/config, scientific, FP, scripting, editor
+    'dockerfile','nginx','cmake','http','latex','julia','matlab','fortran',
+    'haskell','scala','ocaml','fsharp','clojure','elixir','dart','vim','powershell',
+    // Tier 3: FP & academic
+    'erlang','scheme','lisp','prolog',
+    // Tier 3: hardware / assembly
+    'verilog','vhdl','x86asm','armasm',
+    // Tier 3: modern systems
+    'crystal','nim','d','delphi',
+    // Tier 3: build / config
+    'groovy','nix','dts',
+    // Tier 3: markup / templating
+    'asciidoc','handlebars','gherkin',
+    // Tier 3: shell / scripting
+    'awk','tcl','coffeescript',
+    // Tier 3: stats
+    'stan'
+  ];
+  // Generation counter, bumped on every _hljsInit() call, kept for
+  // introspection/back-compat with existing tests/tooling. The staleness
+  // guard used below is tracked per-root (see _hljsRootGeneration), not off
+  // this global counter, so unrelated concurrent roots never invalidate one
+  // another (see _hljsRootGeneration's comment).
+  window._hljsGeneration = 0;
+  // #spa-content is reused (not recreated) across SPA navigations — only
+  // its innerHTML is replaced — so a still-in-flight CDN language module
+  // fetch triggered by an earlier page must not run a stale _hljsRun()
+  // against whatever page now happens to occupy that same element once it
+  // finally resolves. Generations are tracked per root object (WeakMap)
+  // rather than with one shared counter: a single global counter would let
+  // an unrelated, still-live root (e.g. a second independently-mounted
+  // section needing the same on-demand language) be wrongly treated as
+  // stale merely because some other root's _hljsInit() ran afterward. Each
+  // fetch's callback captures the generation current *for its own root*
+  // when it started and only proceeds if no newer _hljsInit() call has
+  // happened for that same root meanwhile.
+  window._hljsRootGeneration = window._hljsRootGeneration || new WeakMap();
+
+  window._hljsReportError = function(error) {
+    if (window._log && typeof window._log.error === 'function') {
+      window._log.error('code-blocks', 'Syntax highlighting failed', error.message);
+    } else {
+      console.error('[code-blocks] Syntax highlighting failed', error);
+    }
+  };
+
+  // Run the highlight + line-number pass against `root` (defaults to
+  // document). Delegates to the shared reading-domain code-block owner
+  // (window.CodeBlocks, see src/features/reading/client/code-blocks.js) for
+  // language resolution, source capture and line-wrapping, and highlights
+  // element-by-element scoped to `root` — not hljs.highlightAll(), which
+  // ignores its argument and always rescans the whole document.
+  window._hljsRun = function(root) {
+    window.CodeBlocks.highlightScope(root, {
+      hljs: hljs,
+      aliasMap: window._HLJS_ALIAS,
+      isAllowedLanguage: function(name) { return window._HLJS_EXTRA.indexOf(name) !== -1; },
+      onError: window._hljsReportError
+    });
+  };
+
+  // Scan `root` for code blocks, fetch any missing allowlisted language
+  // modules, then run the highlight pass once they finish loading (or fail).
+  // Called once from the highlight.min.js onload handler, and again from
+  // main.js after each SPA navigation (scoped to #spa-content). Returns a
+  // disposer: the page-content lifecycle registry (src/features/shell/core/
+  // lifecycle.js, wired in app.js) calls it on unmount so a still-pending
+  // language-module wait tied to a root being torn down is retired
+  // immediately instead of only becoming a no-op once its shared fetch
+  // eventually settles.
+  //
+  // Single-flight per language: if two _hljsInit calls — on the same root
+  // (e.g. a stale SPA reinit) or on two independent roots (e.g. two
+  // concurrently-mounted sections) — both need the same not-yet-loaded
+  // language, only the first triggers a CDN fetch. Every caller (the first
+  // and any later one) awaits the *same* shared Promise
+  // (`_hljsPending[lang]`), so every one of them reliably gets highlighted
+  // once the module actually loads — no separate "in-flight flag" +
+  // "waiter callback list" bookkeeping that a caller could observe in an
+  // inconsistent order (e.g. treating "fetch requested" as "fetch done").
+  window._hljsPending = window._hljsPending || Object.create(null);
+  window._hljsInit = function(root) {
+    root = root || document;
+    if (typeof hljs === 'undefined') return function () {};
+    window._hljsGeneration++;
+    var generation = (window._hljsRootGeneration.get(root) || 0) + 1;
+    window._hljsRootGeneration.set(root, generation);
+    function isCurrent() { return generation === window._hljsRootGeneration.get(root); }
+    function dispose() {
+      // Bumping this root's generation again makes any pending promise
+      // continuation below (still awaiting a shared fetch) see itself as
+      // stale via `isCurrent()` and no-op, exactly as a later _hljsInit()
+      // call for the same root would — this just does it explicitly, on
+      // unmount, instead of only implicitly the next time this root is
+      // reused.
+      if (isCurrent()) window._hljsRootGeneration.set(root, generation + 1);
+    }
+    var allow = Object.create(null);
+    for (var i = 0; i < window._HLJS_EXTRA.length; i++) allow[window._HLJS_EXTRA[i]] = true;
+    var need = Object.create(null);
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      // Tokenizes `raw` the same way CodeBlocks.resolveLanguage does, rather
+      // than treating the whole className as one language name — a real
+      // Pandoc fenced block carries extra classes (e.g. "sourceCode julia
+      // numberLines"), and a naive whole-string check never recognizes the
+      // language token, so it never gets fetched.
+      var name = window.CodeBlocks.resolvePrefetchLanguage(raw, window._HLJS_ALIAS, function(candidate) {
+        return !!hljs.getLanguage(candidate);
+      }, function(candidate) { return !!allow[candidate]; });
+      if (name) need[name] = true;
+    });
+    var keys = Object.keys(need);
+    if (!keys.length) { window._hljsRun(root); return dispose; }
+    Promise.all(keys.map(function(l) {
+      // The shared fetch Promise itself is process-wide (one CDN module,
+      // however many independent roots need it), not tied to any one
+      // root's generation — only the *continuation* below is.
+      if (window._hljsPending[l]) return window._hljsPending[l];
+      var loading = new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        var settled = false;
+        function finish(loaded) {
+          if (settled) return;
+          settled = true;
+          s.onload = s.onerror = null;
+          s.remove();
+          if (loaded) resolve({ loaded: true });
+          else reject(new Error('Could not load syntax language: ' + l));
+        }
+        s.src = window._HLJS_BASE + l + '.min.js';
+        s.onload = function() { finish(!!hljs.getLanguage(l)); };
+        s.onerror = function() { finish(false); };
+        document.head.appendChild(s);
+      });
+      var pending = loading.then(function(result) { return result; }, function(error) {
+        if (window._hljsPending[l] === pending) delete window._hljsPending[l];
+        window._hljsReportError(error);
+        return { loaded: false };
+      });
+      window._hljsPending[l] = pending;
+      return pending;
+    })).then(function() {
+      if (isCurrent()) window._hljsRun(root);
+    });
+    return dispose;
+  };
+  </script>
+  <script id="rprint-highlight" async src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    onload="window._hljsInit();"></script>
+  <script>document.getElementById('rprint-highlight').addEventListener('error',function(){window._hljsReportError(new Error('Could not load highlight.js'))});</script>
+  <script id="rprint-mermaid" async src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+    onload="mermaid.initialize({startOnLoad:false});if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('mermaid')}else{var t=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'default';mermaid.initialize({startOnLoad:false,theme:t});document.querySelectorAll('pre.mermaid > code').forEach(function(c){var src=c.textContent;c.parentElement.setAttribute('data-mermaid-source',src);c.parentElement.textContent=src;});mermaid.run()}"></script>
+  <script>document.getElementById('rprint-mermaid').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('mermaid',new Error('Mermaid failed to load'))}});</script>
+  <!-- rprint:page-assets:start --><!-- rprint:page-assets:end -->
+  
+  
+<script type="application/json" data-rprint-page-assets>{"version":1,"entries":[]}</script>
+</body>
+</html>

@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="build-commit" content="733754f1">
+  <title>古典音乐选 - Jingqi's Interpositive</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/comments.css">
+<link rel="stylesheet" href="/static/sidebar-panel.css">
+<link rel="stylesheet" href="/static/link-preview.css">
+<link rel="stylesheet" href="/static/main.css?v=733754f1">
+<link rel="stylesheet" href="/static/themes.css?v=733754f1">
+<link rel="stylesheet" href="/static/ink-toolbar.css?v=733754f1">
+<link rel="stylesheet" href="/static/image-viewer.css?v=733754f1">
+<link rel="stylesheet" href="/static/syllabus-enhance.css">
+<link rel="stylesheet" href="/static/table-enhance.css">
+<link rel="stylesheet" href="/static/greeting.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var linkPreviewEmbed=false;
+      try{
+        var previewUrl=new URL(location.href);
+        linkPreviewEmbed=previewUrl.searchParams.get('rprint-preview')==='1'&&window.parent!==window&&window.parent.location.origin===location.origin;
+      }catch(e){}
+      if(linkPreviewEmbed){
+        document.documentElement.classList.add('link-preview-embed');
+        var previewArticleLink=function(target){return target&&target.closest&&target.closest('.article a[href]');};
+        var blockPreviewLink=function(event){if(previewArticleLink(event.target)){event.preventDefault();event.stopImmediatePropagation();}};
+        document.addEventListener('click',blockPreviewLink,true);
+        document.addEventListener('auxclick',blockPreviewLink,true);
+        document.addEventListener('keydown',function(event){if(event.key==='Enter')blockPreviewLink(event);},true);
+        document.addEventListener('dblclick',function(event){if(event.target&&event.target.closest&&event.target.closest('.article')){event.preventDefault();event.stopImmediatePropagation();}},true);
+      }
+      var bc=document.querySelector('meta[name="build-commit"]');
+      var commit=bc?bc.getAttribute('content'):'';
+      if(commit&&commit!=='unknown'){
+        var prev=localStorage.getItem('kb-build-commit');
+        if(prev&&prev!==commit){
+          var keys=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf('kb-')===0)keys.push(k);}
+          keys.forEach(function(k){localStorage.removeItem(k);});
+          localStorage.setItem('kb-build-commit',commit);
+          if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+            navigator.serviceWorker.controller.postMessage('clearCaches');
+          }
+          window.location.reload();
+          return;
+        }
+        localStorage.setItem('kb-build-commit',commit);
+      }
+      // Resume last visited page on PWA/browser launch. PWA launches carry
+      // `?pwa=1`; a normal browser launch is a plain root URL without a same-
+      // origin referrer. `/index.html` is an explicit home navigation, so it
+      // never resumes. Runs before paint to avoid a flash of the home page.
+      // Validates the stored path is a same-origin absolute path (rejects
+      // `//host` / `/\host` open-redirects).
+      var resumeLaunch=/[?&]pwa=1(&|$)/.test(location.search);
+      try{
+        var launchUrl=new URL(location.href);
+        launchUrl.searchParams.delete('pwa');
+        var sameOriginReferrer=false;
+        try{sameOriginReferrer=!!document.referrer&&new URL(document.referrer,location.href).origin===location.origin;}catch(e){}
+        resumeLaunch=resumeLaunch||(launchUrl.pathname==='/'&&!launchUrl.search&&!launchUrl.hash&&!sameOriginReferrer);
+      }catch(e){}
+      if(resumeLaunch){
+        try{
+          var last=localStorage.getItem('kb-last-location');
+          var lastPath=last&&last.split('#')[0].split('?')[0];
+          if(last&&/^\/[^/\\]/.test(last)&&lastPath!=='/'&&lastPath!=='/index.html'){
+            try{sessionStorage.setItem('kb-resume-last-scroll','1');}catch(e){}
+            location.replace(last);return;
+          }
+        }catch(e){}
+      }
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      var mob=window.matchMedia('(max-width:650px)').matches;
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.style.colorScheme=t==='dark'?'dark':'light';
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      var w=p.contentWidth||(mob?'100':'90');
+      document.documentElement.style.setProperty('--content-max-width',w+'%');
+      document.documentElement.dataset.contentWidth=String(w);
+      var edge=p.ignoreCorners!==undefined?p.ignoreCorners==='on':false;
+      if(edge&&Number(w)===100)document.documentElement.setAttribute('data-ignore-corners','on');
+      if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches||window.matchMedia('(display-mode:fullscreen)').matches)document.documentElement.classList.add('pwa-standalone');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'noto-serif';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.0};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+      var ht=t==='dark'?'github-dark':'github';
+      var writes='<link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/'+ht+'.min.css">';
+      document.write(writes);
+    })();
+  </script>
+  <style>.math{opacity:0;transition:opacity .15s}.math.rprint-render-failed{opacity:1}</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css" integrity="sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM" crossorigin="anonymous">
+  <script id="rprint-katex" defer src="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.js" integrity="sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI" crossorigin="anonymous"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('katex')}else{document.querySelectorAll('.math').forEach(function(el){var src=el.textContent;el.setAttribute('data-latex',src);katex.render(src,el,{displayMode:el.classList.contains('display'),throwOnError:false,trust:function(ctx){return ctx&&ctx.command==='\\href'&&typeof ctx.url==='string'&&/^#[A-Za-z0-9:._-]+$/.test(ctx.url);}});el.querySelectorAll('mtable[columnspacing=\'\']').forEach(function(t){t.removeAttribute('columnspacing')});el.style.opacity='1';})}"></script>
+  <script>document.getElementById('rprint-katex').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('katex',new Error('KaTeX failed to load'))}else{document.querySelectorAll('.math').forEach(function(el){el.style.opacity='1'})}});</script>
+</head>
+<body data-page-type="markdown">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <button class="banner-toggle" id="left-toggle" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h12v1.5H2V3zm0 4h12v1.5H2V7zm0 4h12v1.5H2V11z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-center">
+        <div class="banner-center-inner">
+          <a href="/index.html" class="site-title" data-short="Interpositive">Jingqi's Interpositive</a>
+          <span class="spa-health-wrap" id="spa-health-wrap">
+            <span class="spa-health-dot" id="spa-health-dot" title="SPA server status"></span>
+            <div class="spa-health-popup" id="spa-health-popup">
+              <div class="shp-header">
+                <span class="shp-title">Server Status</span>
+                <span class="shp-heart" id="shp-heart"></span>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-metrics">
+                <div class="shp-row"><span class="shp-label">Ping</span><span class="shp-value" id="shp-ping">—</span></div>
+                <div class="shp-row"><span class="shp-label">Uptime</span><span class="shp-value" id="shp-uptime">—</span></div>
+                <div class="shp-row"><span class="shp-label">Memory</span><span class="shp-value" id="shp-memory">—</span></div>
+                <div class="shp-row"><span class="shp-label">CPU Time</span><span class="shp-value" id="shp-cpu-time">—</span></div>
+                <div class="shp-row"><span class="shp-label">Load</span><span class="shp-value" id="shp-load">—</span></div>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-modules">
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-watch"></span> Watch</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-jupyter"></span> Jupyter</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-terminal"></span> Terminal</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-proxy"></span> Proxy</div>
+              </div>
+              <div id="shp-module-diagnostics" role="status" aria-live="polite"></div>
+            </div>
+          </span>
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="/cs-notes/" class="nav-link" data-short="CS">CS</a><ul class="nav-dropdown"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li><a href="/cs-notes/mit-gir/index.html">MIT GIR</a></li><li><a href="/cs-notes/cs-math/index.html">CS Math</a></li></ul></li><li class="nav-item"><a href="/not-cs-notes/" class="nav-link" data-short="CS$^\complement$">CS$^\complement$</a><ul class="nav-dropdown"><li><a href="/not-cs-notes/arts/index.html">书影音</a></li></ul></li><li class="nav-item"><a href="/notebook/" class="nav-link" data-short="Mixed">Mixed</a><ul class="nav-dropdown"><li><a href="/notebook/mind/index.html">Mind</a></li><li><a href="/notebook/matter/index.html">Matter</a></li><li><a href="/notebook/practice/index.html">Practice</a></li><li><a href="/notebook/toolbox/index.html">Toolbox</a></li></ul></li><li class="nav-item"><a href="/years/" class="nav-link" data-short="Years">Years</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="banner-right">
+        <button class="banner-right-toggle" title="More controls">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="search-wrap" id="search-wrap">
+          <button class="search-btn" id="search-btn" title="Search (Ctrl+K)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-input-wrap" id="search-input-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search…" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+        <div class="comment-wrap" id="comment-wrap">
+          <button class="comment-btn" id="comment-btn" title="Review Comments (A)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <span class="comment-nav-count" id="comment-nav-count"></span>
+          <button class="comment-nav-btn" id="comment-nav-prev" title="Previous comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="comment-nav-btn" id="comment-nav-next" title="Next comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <button class="settings-btn" id="settings-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="settings-panel" id="settings-panel">
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Native Jupyter <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="native-jupyter-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Global Search <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="content-search-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Quick Edit <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="quick-edit-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section resource-pack-setting" id="resource-pack-setting" hidden>
+            <div class="settings-row resource-pack-row">
+              <span class="settings-desc">Offline resources</span>
+              <button type="button" class="settings-action-btn" id="resource-pack-import-btn">Import</button>
+            </div>
+            <input type="file" id="resource-pack-input" accept=".rpack,application/vnd.rprint.resource-pack" hidden>
+            <div class="resource-pack-status" id="resource-pack-status" aria-live="polite"></div>
+            <div class="resource-pack-list" id="resource-pack-list" aria-label="Installed resource packs"></div>
+          </div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent link-preview-settings-parent">
+            <label class="style-label" id="link-preview-label">Link Preview <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="link-preview-switch" role="switch" aria-labelledby="link-preview-label" aria-checked="false" aria-expanded="false" aria-controls="link-preview-settings-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children link-preview-settings-children" id="link-preview-settings-children" hidden>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-same-page-only-label">Same-page links only</label>
+              <button class="style-switch style-switch-compact" id="link-preview-same-page-only-switch" role="switch" aria-labelledby="link-preview-same-page-only-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-auto-close-label">Auto-close</label>
+              <button class="style-switch style-switch-compact" id="link-preview-auto-close-switch" role="switch" aria-labelledby="link-preview-auto-close-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-overwrite-jumping-label">Overwrite Link Jumping</label>
+              <button class="style-switch style-switch-compact" id="link-preview-overwrite-jumping-switch" role="switch" aria-labelledby="link-preview-overwrite-jumping-label" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+            </div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-row settings-title-row settings-dependent-parent">
+            <span class="settings-panel-title">Keyboard Shortcuts</span>
+            <button class="style-switch" id="kb-enabled-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children keyboard-shortcuts-children">
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="search"><span class="settings-desc">Search</span><span class="settings-keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="scroll"><span class="settings-desc">Scroll down / up</span><span class="settings-keys"><kbd>J</kbd> <kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="section"><span class="settings-desc">Next / prev section</span><span class="settings-keys"><kbd>U</kbd> <kbd>I</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="sidebar-toc"><span class="settings-desc"><span data-shortcut-part="sidebar">Sidebar / </span>TOC</span><span class="settings-keys"><kbd data-shortcut-part="sidebar">S</kbd> <kbd>T</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="spread"><span class="settings-desc">Next / prev spread</span><span class="settings-keys"><kbd>PgDn</kbd> <kbd>PgUp</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="columns"><span class="settings-desc">2 Columns</span><span class="settings-keys"><kbd>C</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="comments"><span class="settings-desc">Comments<span class="spa-only-setting" style="display: none;"> / add to selection</span></span><span class="settings-keys"><kbd>A</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="fold"><span class="settings-desc">Fold banner</span><span class="settings-keys"><kbd>F</kbd></span></div>
+            
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="dismiss"><span class="settings-desc">Close / Dismiss</span><span class="settings-keys"><kbd>Esc</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="settings"><span class="settings-desc">Show this panel</span><span class="settings-keys"><kbd>?</kbd></span></div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent">
+            <label class="style-label" id="debug-mode-label">Debug Mode</label>
+            <button class="style-switch" id="debug-mode-switch" role="switch" aria-labelledby="debug-mode-label" aria-checked="false" aria-expanded="false" aria-controls="debug-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="debug-children" id="debug-children" hidden>
+            <div class="settings-dependent-children">
+              <div class="settings-panel-section settings-dependent-child debug-log-level-setting">
+                <label class="style-label">Client Log Level</label>
+                <div class="style-toggle-group">
+                  <button class="style-toggle-btn debug-level-btn" data-level="error">Error</button>
+                  <button class="style-toggle-btn debug-level-btn" data-level="info">Info</button>
+                  <button class="style-toggle-btn debug-level-btn active" data-level="debug">Debug</button>
+                </div>
+              </div>
+              <div class="settings-footer is-dirty" id="settings-git-version">
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Branch</span>
+                  <span class="settings-footer-value" id="settings-build-branch">main</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Commit</span>
+                  <span class="settings-footer-value" id="settings-build-commit">733754f1</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Commit time</span>
+                  <span class="settings-footer-value" id="settings-build-commit-time" data-iso="2026-10-25T21:34:38-07:00" title="2026-10-25T21:34:38-07:00">—</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Generated</span>
+                  <span class="settings-footer-value" id="settings-build-generated-at" data-iso="" title="">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="theme-wrap" id="theme-wrap">
+          <a href="/static/settings.html?v=733754f1" class="theme-btn" id="theme-btn" title="Theme & display">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="13.5" cy="6.5" r=".5"/>
+              <circle cx="17.5" cy="10.5" r=".5"/>
+              <circle cx="8.5" cy="7.5" r=".5"/>
+              <circle cx="6.5" cy="12.5" r=".5"/>
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+            </svg>
+          </a>
+          <output class="book-position" id="book-position" aria-label="Reading pages" aria-live="polite" aria-atomic="true" hidden></output>
+          <button type="button" class="book-nav-btn book-prev" id="book-prev" title="Previous spread" aria-label="Previous spread" hidden disabled>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="book-nav-btn book-next" id="book-next" title="Next spread" aria-label="Next spread" hidden disabled>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <div class="style-panel" id="style-panel">
+          <div class="style-panel-section">
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn active" data-theme="light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light
+              </button>
+              <button class="style-toggle-btn" data-theme="dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="style-toggle-btn" data-theme="kindle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                E-Ink
+              </button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn font-btn active" data-font="system">System</button>
+              <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+              <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">字体</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="default">系统</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+              <button class="style-toggle-btn fontzh-btn active" data-fontzh="noto-serif">宋体</button>
+            </div>
+          </div>
+          <div class="style-panel-section bg-picker-section">
+            <label class="style-label">Background</label>
+            <div class="bg-swatch-group" id="bg-swatch-group">
+              <button class="bg-swatch active" data-bg="default" title="Default"></button>
+              <button class="bg-swatch" data-bg="green" title="Green"></button>
+              <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+              <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+              <div class="style-range-ticks">
+                <span class="style-range-tick font-size-tick" data-i="0">12</span>
+                <span class="style-range-tick font-size-tick" data-i="1">14</span>
+                <span class="style-range-tick font-size-tick" data-i="2">16</span>
+                <span class="style-range-tick font-size-tick" data-i="3">18</span>
+                <span class="style-range-tick font-size-tick" data-i="4">24</span>
+                <span class="style-range-tick font-size-tick" data-i="5">32</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+              <div class="style-range-ticks">
+                <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+                <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+                <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+                <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+                <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+                <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Width <span id="width-value">90%</span></label>
+            <div class="style-slider-wrap width-slider-wrap">
+              <input type="range" class="style-range" id="content-width-range" min="0" max="5" step="1" value="3">
+              <div class="style-range-ticks width-ticks">
+                <span class="style-range-tick width-tick" data-i="0">50</span>
+                <span class="style-range-tick width-tick" data-i="1">65</span>
+                <span class="style-range-tick width-tick" data-i="2">80</span>
+                <span class="style-range-tick width-tick" data-i="3">90</span>
+                <span class="style-range-tick width-tick" data-i="4">95</span>
+                <span class="style-range-tick width-tick" data-i="5">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="ignore-corners-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">2 Columns <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+        </div>
+        <button class="banner-toggle" id="fold-banner-btn" title="Fold banner">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4v16M3.5 7.5 8 12l-4.5 4.5M20.5 7.5 16 12l4.5 4.5"/>
+          </svg>
+        </button>
+        <button class="banner-toggle" id="right-toggle" title="Toggle table of contents">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-right-dropdown"></div>
+    </div>
+  </header>
+
+  <!-- Floating buttons when banner is folded -->
+  <div class="banner-fold-float" id="banner-fold-float">
+    <button class="banner-fold-float-btn" id="unfold-banner-btn" title="Unfold banner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 4v16M8 7.5 3.5 12 8 16.5M16 7.5 20.5 12 16 16.5"/>
+      </svg>
+    </button>
+    <button class="banner-fold-float-btn" id="float-toc-btn" title="Toggle table of contents">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout left-collapsed right-collapsed">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar collapsed" id="left-sidebar">
+      <div class="sidebar-content" id="spa-sidebar">
+        <!-- rprint:sidebar:start -->
+        <a class="sidebar-cat-title" href="/not-cs-notes">CS$^\complement$</a><ul class="sidebar-list"><li class="sidebar-group open" data-priority="0"><span class="sidebar-row"><a class="sidebar-group-title active-group" href="/not-cs-notes/arts/index.html">书影音</a><span class="sidebar-toggle"></span></span><ul><li class="active"><a href="/not-cs-notes/arts/brief-classical-music-history.html">古典音乐选</a></li><li><a href="/not-cs-notes/arts/classical-music-selections-supplement.html">古典音乐选·补</a></li></ul></li></ul>
+        <!-- rprint:sidebar:end -->
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content" id="content">
+      <article class="article" id="spa-content">
+        <h1 id="古典音乐选" data-sourcepos="1:1-1:1">古典音乐选</h1>
+<p data-sourcepos="3:1-3:1">西方古典音乐的发展，与教会、宫廷、城市和公共生活的变化紧密相连。从中世纪圣咏到战后实验音乐，这些作品呈现了人们如何组织声音、表达情感，并不断改变音乐在社会中的位置。</p>
+<h2 id="中世纪礼仪修院与复调的诞生" data-sourcepos="5:1-5:1">中世纪：礼仪、修院与复调的诞生</h2>
+<p data-sourcepos="7:1-7:1">约 8—14 世纪，西欧的修院、教堂与宫廷，既组织信仰生活，也提供教育、抄写与歌唱训练。祈祷在一天和一年的固定时刻反复举行，音乐因而参与安排共同体的时间。加洛林统治者推动礼仪整合，歌手、谱本与教学又使曲目跨地区传播；地方传统并未因此完全一致。今天保留下来的书面音乐尤其接近这些机构的生活，宫廷歌曲、舞蹈和口头传唱则提醒我们，中世纪的声音远比宗教谱本所呈现的广阔。</p>
+<p data-sourcepos="9:1-9:1">圣咏通常由一人或众人齐唱同一条旋律，重点在经文怎样被说出、延展和停驻。所谓“调式”，可以先从旋律常在哪些音附近活动、音域怎样展开、最终落在哪里来理解；这种音高秩序塑造着旋律的行进与停驻。一字一音使词句清楚，长花腔则让一个音节拥有更宽的时间；聆听时，呼吸与语意往往比寻找整齐小节更有帮助。<a href="https://regoldberg.people.ysu.edu/Guide_to_chant_analysis.pdf">扬斯敦州立大学：圣咏的调式与旋律分析</a></p>
+<p data-sourcepos="11:1-11:1">在圣咏上添加其他旋律，是早期复调实践的一条重要路径。复调让两条或更多有各自走向的声部同时发声。不同声部怎样协调，需要歌手的训练，也推动记谱和节奏组织的探索。巴黎圣母院以此闻名，圣咏也始终留在礼仪中心，单声与多声在长期共存中承担着不同的用途。<a href="https://www.cambridge.org/core/books/cambridge-companion-to-french-music/from-abbey-to-cathedral-and-court-music-under-the-merovingian-carolingian-and-capetian-kings-in-france-until-louis-ix/8F643DC11843E5BAC62EA2DC453E60B0">剑桥大学出版社：修院、大教堂与宫廷的音乐生活</a></p>
+<p data-sourcepos="13:1-13:1">本章从共同祈祷进入音乐，也借希尔德加德听见声音怎样承担角色与行动。佩罗坦把不同速度的声部叠成开阔空间，马肖又让四个声部在一套弥撒中反复相遇。把它们连起来听，既能辨认技法的变化，也能听见礼仪、纪念与集体协作的延续；下一章更均衡的声部关系，仍从这片长期积累的土壤中展开。</p>
+<h3 id="格里高利圣咏传统chant" data-sourcepos="15:1-15:1">格里高利圣咏传统：《Chant》</h3>
+<p data-sourcepos="17:1-17:1"><strong>年代：曲调与礼仪层累形成，核心曲目在 8—9 世纪逐渐定型；唱片是后世选编。</strong></p>
+<p data-sourcepos="19:1-19:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/941446442">Monks of Santo Domingo de Silos</a>。</p>
+<p data-sourcepos="21:1-21:1">这里听到的不是某位作曲家的一部套曲，而是一种延续许多世纪的拉丁礼仪传统。典型的格里高利圣咏由独唱或齐唱展开一条旋律，以教会调式和词句组织音乐；有时一字一音，有时一个音节舒展成很长的花腔。聆听时可以先放下寻找节拍和和弦高潮的习惯，跟随呼吸、语气与旋律的停驻。它也并非单纯供人放松的背景声：不同歌种分别承担诵读、行列、冥想等礼仪任务。<a href="https://bartholomew.stanford.edu/onliturgy/introtext.html">斯坦福大学：礼仪与圣咏</a></p>
+<p data-sourcepos="23:1-23:1">“格里高利”这个名称联系着教宗格里高利一世，却不能理解成他亲手写出了整套音乐。加洛林时期，法兰克统治者推行罗马礼仪、组织歌唱教育，促成曲目的整理和广泛传播；罗马与地方传统如何融合，仍有学术争论。宗教权威、王权与跨地区文化整合，在这段历史中紧密相连。<a href="https://www.cambridge.org/core/books/cambridge-companion-to-french-music/from-abbey-to-cathedral-and-court-music-under-the-merovingian-carolingian-and-capetian-kings-in-france-until-louis-ix/8F643DC11843E5BAC62EA2DC453E60B0">剑桥大学出版社：从修院到大教堂与宫廷</a></p>
+<p data-sourcepos="25:1-25:1">它留给后世的不只有曲调，还有围绕记谱、调式、歌唱教学和共同礼仪建立的音乐文化；许多复调作品也以圣咏为基础。可以从唱片中一首较短的交替圣歌听起，再比较一首花腔较长的阿肋路亚：同一传统也能拥有不同的时间感。</p>
+<h3 id="希尔德加德美德之序" data-sourcepos="27:1-27:1">希尔德加德：《美德之序》</h3>
+<p data-sourcepos="29:1-29:1"><strong>年代：约 1151 年。</strong> <a href="https://www.hildegard.com/product/ordo-virtutum-digital-edition-hildegard-von-bingen/">乐谱出版说明</a></p>
+<p data-sourcepos="31:1-31:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1441778233">Maria Jonas / Ars Choralis Coeln</a>。本录音以 Lucia Mense 的笛声表现魔鬼，是当代演出处理；下文所述无旋律的说喊，指原作安排。<a href="https://www.asinamusic.com/en/rk-3701.html">唱片公司说明</a></p>
+<p data-sourcepos="33:1-33:1">这是一出以灵魂、美德与魔鬼为角色的拉丁语宗教音乐戏剧。灵魂受到诱惑，又在美德们的帮助下回归；歌唱的单旋律可以盘旋、跃升、长时间延展。最醒目的安排是魔鬼没有歌唱旋律，只能说话或喊叫：在这套神学世界观中，能否参与和谐，本身就是戏剧意义。先听灵魂与美德的对答，再听魔鬼插入，便能理解声音怎样直接承担角色塑造。<a href="https://read.uolpress.co.uk/read/european-religious-cultures/section/685c3a8c-2f8f-494d-9b94-63c47118de43">伦敦大学出版社：中世纪修院礼仪中的魔鬼</a></p>
+<p data-sourcepos="35:1-35:1">希尔德加德是修院领袖、神学写作者和作曲者。她的音乐来自共同祈祷与修院教育，不能简单套进现代的“孤独天才反抗一切”故事。中世纪女性进入大学和公开发言受到严格限制，修院却也提供读写、音乐实践和领导共同体的空间；她正是在宗教制度之内，逐渐取得了罕见的公共权威。<a href="https://www.hildegard-society.org/p/music.html?m=0">国际希尔德加德研究学会：音乐与修院语境</a></p>
+<p data-sourcepos="37:1-37:1">作品让我们看见：欧洲早期音乐剧场的历史不仅属于宫廷与男性作者，也包含女性共同体对伦理选择的演练。它并非后世歌剧的直接模板，其分量首先在于保存了一种完整而鲜明的中世纪音乐想象；现代演出也让今天的听众注意到，中世纪女性共同体曾拥有怎样的创作能力。</p>
+<h3 id="佩罗坦众人皆见" data-sourcepos="39:1-39:1">佩罗坦：《众人皆见》</h3>
+<p data-sourcepos="41:1-41:1"><strong>年代：约 1200 年；常见的 1198 年定年带有推定性质。</strong></p>
+<p data-sourcepos="43:1-43:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1452341609">The Hilliard Ensemble / Paul Hillier</a>。</p>
+<p data-sourcepos="45:1-45:1">底部声部把原有圣咏拉得极慢，上方三个声部却不断交换短小旋律与节奏。听起来像稳固的地基托起持续活动的建筑：一个元音可以绵延很久，换字、换音反而成为大事。作品在延长音上的华丽歌唱、较整齐的复调段落和单声圣咏之间转换，不能一概理解成从头到尾的“低音持续音”。<a href="https://www.blueheron.org/wp-content/uploads/2013/08/heron_081220web.pdf">Blue Heron：作品结构与原始文献</a></p>
+<p data-sourcepos="47:1-47:1">它属于巴黎圣母院的礼仪音乐环境，原曲是圣诞节的升阶经。我们对佩罗坦本人的生平所知极少，重要归属证据来自较晚写作的“无名氏第四”理论文献。因此，既不宜为他编织详细传记，也不宜把约定俗成的首演日期写成已经坐实的档案事实。巴黎大教堂、学校与抄写网络，共同提供了这种精密集体歌唱的条件。</p>
+<p data-sourcepos="49:1-49:1">它的重要突破，是让多个声部在可组织的节奏中协调运动，显示出复调及其记谱技术的新规模。大教堂音乐既装饰节日，也把专业知识、机构资源与公共宗教生活连接起来；它的社会作用也体现在这种日常而持续的宗教参与之中。<a href="https://bartholomew.stanford.edu/onliturgy/introtext.html">斯坦福大学：圣母院复调与经院文化</a></p>
+<p data-sourcepos="51:1-51:1">第一次听，只须守住最慢的底层，再听上层如何循环、错开、聚合；不必急着分辨每一个音。</p>
+<h3 id="马肖圣母弥撒" data-sourcepos="53:1-53:1">马肖：《圣母弥撒》</h3>
+<p data-sourcepos="55:1-55:1"><strong>年代：约 1360 年代，确切创作场合仍有争论。</strong></p>
+<p data-sourcepos="57:1-57:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/machaut-messe-de-notre-dame/1721137986">The Hilliard Ensemble / Paul Hillier</a>。</p>
+<p data-sourcepos="59:1-59:1">四个声部时而棱角分明地交织，时而共同清晰地推进经文。较短文本的乐章常借助反复的节奏组织构成大结构；《荣耀经》《信经》文字更多，处理也更接近随语句展开的宣告。若觉得声音粗粝或陌生，可以先听《垂怜经》，把注意力放在下层反复的节奏，再体会高声部的活动。<a href="https://www.hyperion-records.co.uk/dc.asp?dc=D_CDA66358">Hyperion：作品结构与马肖的创作观</a></p>
+<p data-sourcepos="61:1-61:1">马肖兼具诗人、宫廷服务者与兰斯教堂教士身份，生活在<a href="https://www.hyperion-records.co.uk/dc.asp?dc=D_CDA68417">百年战争、疫病</a>与宗教机构仍深刻参与社会生活的时代。此曲通常与兰斯的圣母敬礼联系起来，过去流行的“专为查理五世加冕而作”说法缺少充分依据。为亡者与捐助者持续举行礼仪，是理解这类作品社会用途的重要背景。</p>
+<p data-sourcepos="63:1-63:1">它并非人类历史上第一部弥撒，也不是最早出现的多声弥撒音乐；它的特殊地位，在于作为一位已知作者所作、完整传世并被作为整体保存的常规弥撒套曲，具有里程碑意义。<a href="https://www.larousse.fr/encyclopedie/oeuvre/Messe_de_Notre-Dame/183442">拉鲁斯百科：归属、用途与历史地位</a></p>
+<p data-sourcepos="65:1-65:1">马肖主动经营作品的书面保存，也使个人作者从匿名传统中更加清晰地浮现。宗教共同体的纪念实践与作者意识，在这里相遇：乐声既服务眼前的仪式，也成为可以跨世纪重新阅读、重新演唱的作品。</p>
+<h2 id="文艺复兴复调的均衡与信仰的分裂" data-sourcepos="67:1-67:1">文艺复兴：复调的均衡与信仰的分裂</h2>
+<p data-sourcepos="69:1-69:1">约 15—16 世纪，教堂与宫廷仍是职业音乐家的重要雇主，歌手和作曲家往来于欧洲不同地区，把训练、曲目与写作经验带入新的机构。十六世纪初发展的乐谱印刷，又让音乐较容易越出单一合唱团：作品能被购买、携带和反复演唱，富裕的业余者也扩大了参与。读谱与熟练合奏需要学习，拥有乐器和闲暇也有赖于物质条件；音乐的传播依靠市场，也依靠家庭、学校和长期的赞助关系。<a href="https://www.metmuseum.org/essays/music-in-the-renaissance">大都会艺术博物馆：文艺复兴音乐的社会条件</a></p>
+<p data-sourcepos="71:1-71:1">这时的复调常让几个声部以相近的旋律先后进入，再各自继续，像同一句话在不同位置得到回应。这种“模仿”不要求所有人从头到尾唱得一样；作曲家还会改变参与的声部数量，让两两对唱、密集交织和共同宣告互相转换。听众既能跟随一条横向流动的旋律，也能感受它与其他声部相遇时的和声。这种均衡来自对各声部关系的细致安排，延迟解决的不协和音与突然汇合的合唱，也使平稳的线条带着期待和张力。<a href="https://www.columbia.edu/itc/music/modules/mod9/module9_print.html">哥伦比亚大学：模仿复调</a></p>
+<p data-sourcepos="73:1-73:1">宗教改革使歌唱的语言、参加者与用途成为现实争论。路德宗礼拜发展出会众参与的德语众赞歌，天主教内部改革也强调礼仪纪律与经文的可理解性；不同地区的选择并不相同。音乐家往往需要同时顾及精密的交织和词句的清楚，让听者既感到庄重的整体，也能辨认重要经文；同一作品可以在不同段落调整两者的分量。</p>
+<p data-sourcepos="75:1-75:1">本章两部作品把这种安排放在不同尺度上。若斯坎以短小经文歌让问候、赞颂和祈求逐段展开，帕莱斯特里纳则在弥撒的长文本中调节声部与密度。两者都让声音的秩序服务于文本，但没有唯一的表达配方。到了下一章，独唱者与伴奏会提供另一种突出语言和人物的办法；多声合唱并未退场，而将与新的戏剧手段继续共存。</p>
+<h3 id="若斯坎圣母颂" data-sourcepos="77:1-77:1">若斯坎：《圣母颂》</h3>
+<p data-sourcepos="79:1-79:1"><strong>年代：15 世纪后半叶，确切定年仍有讨论；1502 年收入佩特鲁奇印行的经文歌集。</strong></p>
+<p data-sourcepos="81:1-81:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1323798607">The Tallis Scholars / Peter Phillips</a>。这里指四声部经文歌《Ave Maria…virgo serena》。</p>
+<p data-sourcepos="83:1-83:1">开头同一旋律依次从高声部传到低声部，像一句问候在不同的人之间流动。随后两两对唱、四声部汇合和节奏变化交替出现，歌词的段落也因此变得清楚。可先跟随最初的旋律，听它怎样在新的声部中获得回应，再留意结尾所有人共同放慢的祈求：复调的意义，既在独立线条的交织，也在适时共同说话。<a href="https://www.columbia.edu/itc/music/modules/mod9/module9_print.html">哥伦比亚大学：模仿复调导聆</a></p>
+<p data-sourcepos="85:1-85:1">若斯坎所处的教堂与宫廷网络，聚集了能熟练阅读、演唱复杂音乐的职业歌手。圣母敬礼为作品提供宗教内容，清楚分节的拉丁诗句则给作曲家组织音乐的线索。这种细致的文字表达，使信仰经验既具有共同体的秩序，也容纳个人向神圣者求助的语气。</p>
+<p data-sourcepos="87:1-87:1">它后来成为文艺复兴复调的代表教材，但这种地位也经过长期形成。作品在早期抄本和印本中传播，又被后来的作曲家借用；二十世纪的研究、唱片与教育，进一步把它树立为经典。听它可以理解，印刷如何帮助声音越出一个合唱团，而现代人又如何从庞大的旧曲目中选择自己的音乐史。<a href="https://www.cambridge.org/core/journals/early-music-history/article/abs/remaking-a-motet-how-and-when-josquins-ave-maria-virgo-serena-became-the-ave-maria/8B0AF66074B33F1DC2E35E199BC37AC2">剑桥大学出版社：作品的早期传播与现代经典化</a></p>
+<h3 id="帕莱斯特里纳教皇马尔切洛弥撒" data-sourcepos="89:1-89:1">帕莱斯特里纳：《教皇马尔切洛弥撒》</h3>
+<p data-sourcepos="91:1-91:1"><strong>年代：16 世纪中叶；1567 年出版。</strong></p>
+<p data-sourcepos="93:1-93:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1777294579">Stile Antico / The Golden Renaissance</a>。</p>
+<p data-sourcepos="95:1-95:1">作品以六声部为主，各声部并不始终一起密集地唱，而是以不同组合交接、呼应，再汇聚成宽阔的音响。旋律大多平稳流动，不协和音经过细致控制，张力往往藏在延迟解决的音里。《荣耀经》《信经》的较清楚宣叙，与其他部分更精巧的复调形成对比。先听《荣耀经》，留意怎样在声部繁多时仍让词句的骨架显现。<a href="https://www.hyperion-records.co.uk/dw.asp?dc=W747_819942">Gimell／Hyperion：歌词处理与 1567 年出版</a></p>
+<p data-sourcepos="97:1-97:1">帕莱斯特里纳长期在罗马的教会机构任职。作品以马尔切洛二世命名，所处背景是宗教改革之后，天主教会重新审视礼仪、纪律与经文可理解性的年代。音乐的精致并非脱离制度的纯形式：合唱团如何训练、词句如何被听见、神圣空间应当怎样发声，都涉及宗教生活的组织。</p>
+<p data-sourcepos="99:1-99:1">然而，“特伦托会议即将禁绝复调，他用这一部弥撒挽救了教会音乐”是逐渐形成的传说，不能当作事件经过。其真实历史价值，是成为兼顾复调技艺与经文表达的突出范例，并在后世被树立为理想的教会风格。传说本身也有影响：它帮助后人把复杂的宗教改革史，讲成一位大师以美说服权力的故事。<a href="https://www.hyperion-records.co.uk/dc.asp?dc=D_CDA66266">Hyperion：帕莱斯特里纳传说与史实</a></p>
+<h2 id="巴洛克戏剧秩序与感情的多条路径" data-sourcepos="101:1-101:1">巴洛克：戏剧、秩序与感情的多条路径</h2>
+<p data-sourcepos="103:1-103:1">约 1600—1750 年间，音乐生活同时围绕宫廷、教堂、剧院与家庭展开，各地变化的速度和方向也不相同。意大利宫廷把歌唱、舞蹈、器乐与舞台奇观放进庆典，人文主义者对古代戏剧的兴趣，又使人物如何借歌声说话成为新的实验。歌剧后来进入面向购票公众的剧院，需要持续的演出、专业歌手和经营组织；宫廷赞助仍在，观众却不再只来自受邀的圈子。<a href="https://www.metmuseum.org/essays/the-opera">大都会艺术博物馆：从宫廷到公共剧院</a></p>
+<p data-sourcepos="105:1-105:1">与这种表达相连的一项手段是通奏低音：以写出的低音线为基础，羽管键琴、管风琴或拨弦乐器的演奏者补出和声，低音乐器也常加入支撑。谱上的数字有时提示应奏哪些音程，具体织体仍留给演奏者处理。演奏者可以随着低音的移动、声部的变化和话语的转折，调整和声与伴奏的疏密，给上方的独唱或器乐留下活动空间。<a href="https://ccnmtl.columbia.edu/projects/sonicg/terms/basso_continuo.html">哥伦比亚大学：通奏低音的演奏与作用</a></p>
+<p data-sourcepos="107:1-107:1">听觉上，音乐可以鲜明地区分说话般的叙述与舒展开来的歌唱，让独奏和合奏形成对答，也借反复、变奏与不同音色维持较长的过程。复调同样继续发展：一个主题在多个声部中被接过、追逐，可以建立秩序，也可以积累戏剧张力。多声部相互交织的写法与旋律突出、低音支撑的写法，在同一时代乃至同一部作品里交替出现，使巴洛克的声音既能流畅延展，又能形成鲜明的层次与对比。</p>
+<p data-sourcepos="109:1-109:1">本章所选作品把这些手段带入不同场合。蒙特威尔第让音乐推动舞台行动，维瓦尔第在独奏与合奏之间展开景象；巴赫让舞曲的步态、赋格的呼应与礼拜的集体声音进入不同体裁，连独奏小提琴也能显出多声部的轮廓。亨德尔则让宗教文本进入公共演出与慈善实践。它们共享部分语言，却回应不同的日常工作与听众；后来的古典主义将继续使用这些体裁和技巧，重新安排乐句、对话和人物关系。</p>
+<h3 id="蒙特威尔第奥菲欧" data-sourcepos="111:1-111:1">蒙特威尔第：《奥菲欧》</h3>
+<p data-sourcepos="113:1-113:1"><strong>年代：1607 年，曼图亚宫廷首演。</strong></p>
+<p data-sourcepos="115:1-115:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1580758924">Leonardo García Alarcón / Cappella Mediterranea</a>。</p>
+<p data-sourcepos="117:1-117:1">奥菲欧用歌声追索死去的爱人，音乐因而同时是叙事工具和故事主题。蒙特威尔第把近乎说话的宣叙、抒情独唱、合唱、舞蹈与器乐段落组合起来；不同乐器和织体区分牧歌世界、哀悼与冥界。可先听开场托卡塔，再听第三幕《强大的精灵》（Possente spirto）：前者展示仪式的辉煌，后者把装饰歌唱变成人物竭力求告的行动。</p>
+<p data-sourcepos="119:1-119:1">这部作品为贡扎加家族治下的曼图亚宫廷而写，脚本出自小亚历山德罗·斯特里焦。它继承人文主义者重访古代戏剧的兴趣，也依靠贵族赞助、专业歌手与乐师。首批观众是宫廷社会的一部分；歌剧成为面向购票公众的常设娱乐，是后来才进一步展开的变化。<a href="https://www.metmuseum.org/it/essays/the-opera">大都会艺术博物馆：从宫廷到公共剧院的歌剧史</a></p>
+<p data-sourcepos="121:1-121:1">《奥菲欧》不是历史上第一部歌剧，而是最早一批歌剧中，戏剧、声乐与器乐组织尤其成熟、持续活跃于现代舞台的杰作。它帮助确立音乐能够塑造人物、推进戏剧的长久可能性；其历史影响，体现在一种新艺术制度和表达方式的成长。<a href="https://www.opera-comique.com/en/production-rent-l-orfeo">法国喜歌剧院：作品与首演资料</a></p>
+<h3 id="维瓦尔第四季" data-sourcepos="123:1-123:1">维瓦尔第：《四季》</h3>
+<p data-sourcepos="125:1-125:1"><strong>年代与范围：四首小提琴协奏曲，RV 269、315、293、297；1725 年作为 Op.8 的前四首出版。</strong></p>
+<p data-sourcepos="127:1-127:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1669553879">Rachel Podger / Brecon Baroque</a>。</p>
+<p data-sourcepos="129:1-129:1">《四季》的新鲜感不只在悦耳，而在音乐能够描写具体事件：鸟鸣、犬吠、醉后的舞步、雷暴，以及冰面上的踉跄。每首采用快—慢—快三乐章，合奏中反复出现的段落像路标，独奏则把情境引向变化。初听可把《春》第一乐章的鸟鸣与《夏》终乐章的风暴对照：前者让乐句彼此应答，后者以急速运动制造几乎失控的压力。乐谱附有十四行诗，某些文字还直接标在演奏声部中；它们是理解音乐的线索，而非后人随意添加的故事。<a href="https://www.laphil.com/works/the-four-seasons">洛杉矶爱乐作品说明</a></p>
+<p data-sourcepos="131:1-131:1">维瓦尔第既是神父，也是威尼斯皮耶塔慈善教育机构的音乐教师、剧院作曲家和巡演小提琴家。他的生活显示，巴洛克音乐早已连接宗教机构、女性音乐教育与跨国商业。出版让贵族和富裕业余演奏者也能接触这些作品；四首协奏曲原本不必像一部交响曲那样连续演完。它们把描绘性构思与清晰的协奏曲结构结合起来，成为理解后来标题音乐的一个重要先例。其社会影响也延续在跨地域的音乐传播、演奏和日常文化中。<a href="https://www.laphil.com/works/spring-and-summer-from-the-four-seasons-op-8-nos-1-and-2">洛杉矶爱乐：《春》《夏》</a></p>
+<h3 id="巴赫第二无伴奏小提琴组曲-bwv-1004" data-sourcepos="133:1-133:1">巴赫：第二无伴奏小提琴组曲 BWV 1004</h3>
+<p data-sourcepos="135:1-135:1"><strong>年代：约 1720 年；现存六首无伴奏小提琴作品的巴赫誊清手稿标有 1720 年。</strong></p>
+<p data-sourcepos="137:1-137:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/687738815">Isabelle Faust</a>。</p>
+<p data-sourcepos="139:1-139:1">巴赫用双音、和弦、音区转换和留在记忆中的低音，让一把小提琴呈现出多声部的听觉，旋律仿佛同时带着自己的伴奏。前四首是阿勒曼德、库朗特、萨拉班德与吉格；最后的《夏空》把短小的和声骨架展开为长篇变奏。可先听萨拉班德中和弦的重量，再进入《夏空》：变化的不只是速度和技巧，还有一段音乐怎样被反复看见。<a href="https://www.bachvereniging.nl/en/bwv/bwv-1004">荷兰巴赫学会：结构与独奏复调</a></p>
+<p data-sourcepos="141:1-141:1">舞曲来自身体与社交生活，在这里却成为精密的独奏艺术。巴赫继承德语地区无伴奏弦乐的传统，把演奏技术与对位思考推向极高密度。这与他在科滕宫廷任职时重视器乐的工作环境相联系，也显示巴洛克音乐并非只有宏大教堂声响：一个演奏者就能支撑完整的声音世界。</p>
+<p data-sourcepos="143:1-143:1">《夏空》中段从 d 小调转向 D 大调，和声与音色突然敞开；回到小调之后，最初的材料也带上了经过长途跋涉的分量。1720 年也是巴赫第一任妻子玛丽亚·芭芭拉去世之年，但把它确定为悼亡作品，超出了现存证据。它的长久力量并不依赖单一传记谜底：听众可以在反复、变化与返回中，体验失去、坚持或重新获得平衡。<a href="https://www.bachvereniging.nl/en/bwv/bwv-1004-ii">荷兰巴赫学会：另一场演出与作品背景</a></p>
+<h3 id="巴赫平均律钢琴曲集两卷" data-sourcepos="145:1-145:1">巴赫：《平均律钢琴曲集》两卷</h3>
+<p data-sourcepos="147:1-147:1"><strong>年代与范围：BWV 846—893；第一卷 1722 年，第二卷约 1740—1742 年汇集。</strong></p>
+<p data-sourcepos="149:1-149:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1452366102">András Schiff</a>。</p>
+<p data-sourcepos="151:1-151:1">每卷按半音上行排列二十四组“前奏曲与赋格”，遍历十二个大调与十二个小调。前奏曲容纳自由的手势、舞蹈或歌唱，赋格让一个主题在不同声部进入，产生追逐、碰撞与协作。第一卷 C 大调前奏曲用不断流动的分解和弦，让缓慢变化的和声显现；随后听赋格，不必数全所有主题，只要跟随同一旋律如何从一个声部转到另一个声部。两种写法并置，使这部曲集既像实验室，也像性格各异的短篇集。<a href="https://www.bachvereniging.nl/en/bwv/bwv-846">荷兰巴赫学会：BWV 846 与曲集背景</a></p>
+<p data-sourcepos="153:1-153:1">巴赫第一卷编成于科滕宫廷任职时期，部分素材来自给儿子威廉·弗里德曼的教学；第二卷则在莱比锡时期汇集。题页同时面向求学的青年和已经熟练的演奏者，说明作曲、家庭教育和专业训练在这里并未分开。中文“平均律”容易误导：原题的“良好调律”意味着各调均可使用，不能据此断言巴赫采用现代十二平均律，更不是他发明了这种律制；确切方案仍有争论。这套作品长期成为键盘教育、对位思考与作曲训练的资源，其历史作用是积累性的：一代代人通过它学习、组织和理解声音。<a href="https://www.tandfonline.com/doi/full/10.1080/09298215.2024.2375552">关于调律问题的音乐学研究</a></p>
+<h3 id="巴赫马太受难曲" data-sourcepos="155:1-155:1">巴赫：《马太受难曲》</h3>
+<p data-sourcepos="157:1-157:1"><strong>年代与范围：BWV 244；首演通常定为 1727 年，1736 年有重要修订；早期演出年代仍有讨论。</strong></p>
+<p data-sourcepos="159:1-159:1"><strong>歌单录音</strong>：首选 <a href="https://music.apple.com/us/album/1452138402">John Eliot Gardiner / English Baroque Soloists / Monteverdi Choir</a>（1988 年录音）；对照 <a href="https://music.apple.com/us/album/1553472123">Philippe Herreweghe / Collegium Vocale Gent</a>（1998 年录音）。</p>
+<p data-sourcepos="161:1-161:1">这部为莱比锡耶稣受难日礼拜写成的作品，把三种时间交织起来：福音史家以宣叙调讲述受难经过，众赞歌让熟悉路德宗圣诗的会众获得共同立场，咏叹调则暂停情节，容纳个人的恐惧、怜悯与自责。双合唱团、双乐队不仅扩大声势，也使提问与回答、旁观与参与形成空间。可先听开场合唱的层层叠置，再听《怜悯我吧》中独奏小提琴与女低音的相互牵引，最后回到安葬合唱；悲剧的重量来自集体声响与脆弱独白之间的转换。<a href="https://www.bachvereniging.nl/en/bwv/bwv-244">荷兰巴赫学会作品与文本说明</a></p>
+<p data-sourcepos="163:1-163:1">巴赫担任圣托马斯教堂乐长时，宗教教育、学校训练与城市管理彼此交织，音乐承担的是具体的礼拜职责。作品中的群众呼喊和经文也带有基督教受难叙事的反犹问题，欣赏其同情力量时，应同时辨认这种历史负担。1829 年，门德尔松在柏林指挥删节演出，成为巴赫大型声乐作品重新进入公共音乐生活的重要转折。这并非从彻底遗忘中凭空“发现”巴赫，却推动了复兴、研究和经典化：过去的礼拜音乐逐渐成为音乐厅里被反复保存与重释的文化遗产。<a href="https://www.loc.gov/collections/felix-mendelssohn/articles-and-essays/felix-mendelssohn-reviving-the-works-of-bach/">美国国会图书馆：门德尔松与巴赫复兴</a></p>
+<h3 id="亨德尔弥赛亚" data-sourcepos="165:1-165:1">亨德尔：《弥赛亚》</h3>
+<p data-sourcepos="167:1-167:1"><strong>年代与范围：HWV 56；1741 年作曲，1742 年 4 月 13 日在都柏林首演。</strong></p>
+<p data-sourcepos="169:1-169:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1535772477">John Butt / Dunedin Consort</a>。当前收藏采用 1742 年都柏林版本。</p>
+<p data-sourcepos="171:1-171:1">《弥赛亚》是三部分的英语清唱剧，查尔斯·詹南斯从《圣经》编选文本，以预言与降生、受难与救赎、复活与永生组织全曲。它没有歌剧式的固定人物表，合唱反而承担最显著的集体表达。听点不应只停在《哈利路亚》：开头《安慰我的百姓》的宣叙语气、《他被藐视》的缓慢痛楚、终曲“阿门”赋格逐步聚合的力量，能显示亨德尔如何让语言、舞蹈节奏与对位相互支持。《哈利路亚》位于第二部分末尾，放回上下文，既有喜悦，也有胜利宣告的强烈意味。<a href="https://baroque.boston/handel-messiah">波士顿巴洛克乐团节目说明</a></p>
+<p data-sourcepos="173:1-173:1">亨德尔是旅英的德意志作曲家，作品诞生于他由意大利歌剧经营转向英语清唱剧的时期。后者接近本地语言和公共音乐市场，也让宗教题材越出纯粹的礼拜场景。都柏林首演为慈善募款，后来他在伦敦育婴堂举行的年度演出，使《弥赛亚》与照顾弃婴的制度长期相连。这是音乐产生社会作用的具体案例：收入、捐赠和反复参与形成可见的公共实践。此后英语世界的大合唱传统又不断重塑它；今天熟悉的庞大阵容和节庆习惯，并不全等同于亨德尔时代的演出规模。<a href="https://foundlingmuseum.org.uk/event/by-george/">育婴堂博物馆：亨德尔与育婴堂</a></p>
+<h3 id="巴赫b-小调弥撒" data-sourcepos="175:1-175:1">巴赫：《b 小调弥撒》</h3>
+<p data-sourcepos="177:1-177:1"><strong>年代与范围：BWV 232；1733 年《慈悲经》《荣耀经》为重要基础，1748—1749 年汇编、改作与补写为完整常规弥撒。</strong></p>
+<p data-sourcepos="179:1-179:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1794898888">Raphaël Pichon / Pygmalion</a>。</p>
+<p data-sourcepos="181:1-181:1">这里的“弥撒”指为固定礼仪文本谱曲，但作品的规模与风格广度，使它也像巴赫声乐艺术的总汇。严密的赋格、古风合唱、舞蹈性的欢庆和亲密的独唱并存。可沿《信经》聆听《钉十字架》的反复低音如何压住悲痛，继而感受《复活了》的速度、音色与空间突然打开；《羔羊经》的独唱又把宏大结构收回个人的祈求。各段材料来自不同年代，统一感却由调性、声部配置与文本关系重新建立，并非简单把旧曲拼成合集。<a href="https://www.laphil.com/works/mass-in-b-minor-bwv-232">洛杉矶爱乐作品说明</a></p>
+<p data-sourcepos="183:1-183:1">1733 年，巴赫把《慈悲经》《荣耀经》的演出分谱献给德累斯顿的萨克森选侯，同时请求宫廷头衔；这提醒我们，精神性的音乐也存在于职业保障和赞助关系中。路德宗作曲家为拉丁文弥撒谱曲，并不自动意味着他改宗，亦不能仅凭文本断言最终用途。晚年的完整形态为何而作，没有公认答案；也无可靠证据证明全曲在他生前完整公演。它后来的影响主要属于演出、保存与经典史：一部跨越旧式对位与当代声乐语言的巨作，逐渐被当作欧洲宗教音乐的重要遗产。<a href="https://www.loc.gov/item/2021667915/">美国国会图书馆：1733 年《Missa》手稿背景</a></p>
+<h2 id="古典主义公共交往与舞台上的人" data-sourcepos="185:1-185:1">古典主义：公共交往与舞台上的人</h2>
+<p data-sourcepos="187:1-187:1">“古典音乐”是这条传统的宽泛名称，“古典主义”则特指约 1750—1820 年的一段风格。十八世纪后半叶，宫廷与教会仍然雇用音乐家，购票音乐会、城市剧院、家庭演奏和出版市场却使作品面对更多不同的听众。海顿既为王公服务，也凭乐谱传播与伦敦音乐会获得广泛声誉；莫扎特则在委约、教学和公开演出之间经营自己的事业。启蒙时代关于交往、判断和人的尊严的讨论，为理解这种音乐文化提供了背景，具体的演出机会、收入与赞助关系仍然影响着作曲家的日常。<a href="https://www.gresham.ac.uk/watch-now/haydn-london-enlightenment-and-revolution">格雷沙姆学院：海顿、启蒙与公共音乐生活</a></p>
+<p data-sourcepos="189:1-189:1">在声音上，许多作品把乐句写得更容易分辨：一句像提出问题，下一句像回答；旋律与伴奏的层次清楚，停顿、强弱和音色又能突然改变话语的方向。听众逐渐建立的期待，成为作曲家可以运用的材料。海顿的幽默常出现在本该结束却没有结束的地方，莫扎特则能让明朗的旋律因和声或伴奏的变化透出不安。均衡的形式由此容纳着机智、犹豫和冲突。<a href="https://pressbooks.cuny.edu/understandingmusicbmcc/chapter/2-music-in-the-classical-period/">纽约市立大学：古典主义的乐句、织体与演出环境</a></p>
+<p data-sourcepos="191:1-191:1">奏鸣曲式把这种期待组织到更长的时间里：音乐在一个调性中出发，建立新的主题与调性关系，经过拆分、转移和发展，再让熟悉的材料回到原来的调性。返回带来辨认的喜悦，也能使人意识到同一段旋律已经有了不同的处境。每部作品对转折和返回的安排各异，初听时可以先记住开头的一小段，再留意它何时回来、由谁接过、前后发生了什么。<a href="https://sfcm.edu/study/majors/academics/music-theory-and-musicianship/sfcm-theory/online-materials/analysis-lectures/sonata-form-exposition">旧金山音乐学院：奏鸣曲式的主题、转调与期待</a></p>
+<p data-sourcepos="193:1-193:1">本节作品把这些关系放在不同规模中展开：海顿的四重奏让四个人轮流发言，莫扎特的协奏曲让钢琴与乐队保持各自的判断，《朱庇特》则把短小动机汇成复杂的共同运动。《费加罗的婚礼》与《唐璜》进一步让多个立场在同一时刻相遇，人物的社会身份、欲望与责任都能通过音乐彼此碰撞。沿着这些对话进入贝多芬，便能听见他如何延长冲突、推迟解决，并改变一次返回所能承受的分量。</p>
+<h3 id="海顿六首弦乐四重奏-op.33" data-sourcepos="195:1-195:1">海顿：六首弦乐四重奏 Op.33</h3>
+<p data-sourcepos="197:1-197:1"><strong>年代与范围：Hob.III:37—42；1781 年作曲，1782 年出版，通称“俄罗斯”四重奏。</strong></p>
+<p data-sourcepos="199:1-199:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/haydn-quatuors-op-33/1188419172">Quatuor Mosaïques</a>。</p>
+<p data-sourcepos="201:1-201:1">两把小提琴、一把中提琴和一把大提琴，在海顿手中能够轮流发问、补充和打断。Op.33 的成熟之处，在于主题刚出现便被拆分、交换和发展：发展不是等到某个专门段落才开始，而是贯穿说话的过程。第二首《玩笑》的终乐章最适合作为入口；反复回来的轻快旋律逐渐被休止切开，听众对“结束”的判断本身成了笑话。第五首的轻盈和第三首《鸟》的灵巧，也能显示严密构思何以不妨碍亲切与娱乐。<a href="https://www.laphil.com/works/string-quartet-in-e-flat-op-33-no-2-the-joke">洛杉矶爱乐：Op.33 第二首</a></p>
+<p data-sourcepos="203:1-203:1">海顿长期任职于埃斯特哈齐宫廷，却也为贵族订阅者和更广的乐谱市场写作。把六首作品以一组出版，有利于家庭、沙龙和专业乐手反复演奏，亲自参与成为理解音乐的重要方式。Op.33 不宜被说成凭空发明了四重奏；它是在长期实践中，把动机发展、各声部的互动和幽默进一步结合起来。莫扎特随后写作并题献给海顿的六首四重奏，清楚显示这种创作交流的成果。它让合作、倾听与共同推理成为可实践的音乐经验，并为后来的室内乐文化提供了持续有效的范式。<a href="https://www.chandos.net/products/catalogue/CHAN%2020129">Chandos 原厂：作品组与对莫扎特的启发</a></p>
+<h3 id="莫扎特第24钢琴协奏曲-k.491" data-sourcepos="205:1-205:1">莫扎特：第24钢琴协奏曲 K.491</h3>
+<p data-sourcepos="207:1-207:1"><strong>年代：1786 年；3 月 24 日完成。</strong></p>
+<p data-sourcepos="209:1-209:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1761598178">Jean-Efflam Bavouzet / Manchester Camerata / Gábor Takács-Nagy</a>。</p>
+<p data-sourcepos="211:1-211:1">乐队开场的 c 小调主题棱角分明，独奏钢琴进入时却提出自己的语句，仿佛没有立即接受大家刚才的判断。木管也不是弦乐的装饰：双簧管、单簧管与巴松各有色彩，常常接过话题，把独奏带入新的关系。可以先听第二乐章钢琴与木管的问答，再回到第一乐章，比较同一种交流怎样从温柔转成不安。<a href="https://www.laphil.com/works/piano-concerto-no-24-in-c-minor-k-491">洛杉矶爱乐：木管角色与音乐结构</a></p>
+<p data-sourcepos="213:1-213:1">作品写于莫扎特在维也纳经营作曲、演奏与音乐会事业的时期，与《费加罗的婚礼》的完成相邻。协奏曲既向公众展示钢琴家的能力，也让乐队拥有接近舞台人物的行动空间。歌剧中的心理敏感进入器乐，人物关系却不必落实为具体姓名和情节；听众在音乐厅里，可以只凭音色、停顿与回应，感到独处和交往之间的张力。<a href="https://www.laphil.com/works/piano-concerto-no-24">洛杉矶爱乐：与歌剧创作的联系</a></p>
+<p data-sourcepos="215:1-215:1">末乐章采用变奏曲，主题经过不同织体与情绪的照明，最终仍留在小调。它让古典形式的均衡容纳了没有轻易排解的阴影，也使协奏曲的独奏者成为思考和倾听的人。作品的历史价值，在于拓宽了这种公共体裁的内在生活：炫技可以参与表达，个人声音也可以在合奏中保持复杂。</p>
+<h3 id="莫扎特费加罗的婚礼" data-sourcepos="217:1-217:1">莫扎特：《费加罗的婚礼》</h3>
+<p data-sourcepos="219:1-219:1"><strong>年代与范围：K.492；达·蓬特编剧；1786 年 5 月 1 日维也纳首演。</strong></p>
+<p data-sourcepos="221:1-221:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/solti-mozart-the-operas/1452760946">Sir Georg Solti / London Philharmonic Orchestra</a>。链接为歌剧合集，请定位《费加罗的婚礼》。</p>
+<p data-sourcepos="223:1-223:1">歌剧发生于婚礼当天：仆人费加罗与苏珊娜准备成婚，伯爵却试图凭地位追逐苏珊娜；伯爵夫人与仆人们组成临时同盟，反制他的欲望。莫扎特最重要的手段是重唱：同一时刻，不同人物可以说不同的真话、撒不同的谎，音乐仍把他们纳入连续变化的整体。先听第二幕终场，跟随人物不断加入所带来的节奏与调性变化；再听伯爵夫人的两首咏叹调与末幕请求宽恕的片刻，喜剧的速度就会与真实的失落发生联系。<a href="https://www.metopera.org/user-information/old-seasons/2024-25-season/le-nozze-di-figaro/">大都会歌剧院作品介绍</a></p>
+<p data-sourcepos="225:1-225:1">博马舍原剧对贵族特权的批评曾受到审查，约瑟夫二世允许它出版，却不准在维也纳上演；达·蓬特删去不少直接政治言论，才使歌剧获得许可。因而，作品既产生于启蒙时代对身份与尊严的质疑，也受宫廷剧院制度约束。它较持久的文化力量，是把仆人、贵族、女性与少年都写成值得聆听的人：阶级权力与性别关系通过行动、欲望和宽恕具体呈现。伯爵必须请求原谅，平静的应答比口号更有重量；音乐让观众练习从另一个人的处境理解世界。<a href="https://www.laphil.com/works/the-marriage-of-figaro">洛杉矶爱乐：原剧审查与改编经过</a></p>
+<h3 id="莫扎特唐璜" data-sourcepos="227:1-227:1">莫扎特：《唐璜》</h3>
+<p data-sourcepos="229:1-229:1"><strong>年代与范围：K.527；达·蓬特编剧；1787 年 10 月 29 日布拉格首演，1788 年维也纳演出另有改写。</strong></p>
+<p data-sourcepos="231:1-231:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/mozart-don-giovanni-k-527/1838463077">Carlo Maria Giulini / Philharmonia Orchestra &amp; Chorus</a>。</p>
+<p data-sourcepos="233:1-233:1">《唐璜》把喜剧、恐惧和严肃的道德审判放在同一舞台。主人公以魅力与权势追逐女性，仆人莱波雷洛一面抱怨，一面协助；被伤害的人并不共享同一种立场。音乐让这群人的社会身份与欲望彼此碰撞：舞会中不同舞曲叠置，体现同时存在而并不相同的世界；唐璜与采琳娜的二重唱则让诱惑以亲密的语气展开。听过这些轻巧段落，再听石像赴宴时的低沉和声与管弦乐重量，会感到喜剧世界的地板忽然裂开。布拉格版与维也纳版的曲目差别，也会改变人物的分量。<a href="https://kv.mozarteum.at/en/work/il-dissoluto-punito-o-sia-il-don-giovanni-opera-buffa-dramma-giocoso-in-2-acts-12013">莫扎特基金会：作品、首演与版本</a></p>
+<p data-sourcepos="235:1-235:1">作品接续《费加罗》在布拉格的成功，又重新处理早已流传的唐璜传说。它与十八世纪有关贵族特权、个人自由和道德责任的矛盾相接，但既不是对放纵的单纯赞美，也不宜仅当惩恶寓言。十九世纪的文学与哲学继续借它讨论欲望，克尔凯郭尔便把它置于自己的审美思考中心。其历史影响主要在这种持续争论与舞台重释中：不同年代的观众，反复询问魅力何时成为支配，自由为何不能免除对他人的责任。<a href="https://www.lamonnaiedemunt.be/en/static-pages/357-don-giovanni">比利时皇家铸币局歌剧院：克尔凯郭尔与《唐璜》接受史</a></p>
+<h3 id="莫扎特第四十一交响曲朱庇特" data-sourcepos="237:1-237:1">莫扎特：第四十一交响曲《朱庇特》</h3>
+<p data-sourcepos="239:1-239:1"><strong>年代：1788 年，K.551；与第三十九、第四十交响曲同年夏季写成。</strong></p>
+<p data-sourcepos="241:1-241:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1535767041">Scottish Chamber Orchestra / Sir Charles Mackerras</a>。</p>
+<p data-sourcepos="243:1-243:1">第一乐章以强烈的全奏和轻柔的弦乐回答开场，庄严、机智与歌唱性很快并置。慢乐章表面从容，切分与不协和音却使安定不断受到触动。最值得反复听的是终乐章：先认出开头四个长音，再听其他短小动机如何进入、追逐，到结尾竟能同时组合。复杂对位在这里具有飞快的运动感，不必先看总谱，也能听见多个念头汇合的喜悦。<a href="https://www.laphil.com/works/symphony-no-41-jupiter">洛杉矶爱乐：四乐章结构与终曲对位</a></p>
+<p data-sourcepos="245:1-245:1">莫扎特写作时并没有给它取“朱庇特”这个名字；三首晚期交响曲的确切委约和最初演出安排，也没有完整文献可供复原。作品所面对的，是维也纳城市音乐会与乐谱市场，而其中庄重的对位，又连接着教会音乐及作曲训练的旧传统。古典交响曲的成熟，并不意味着它与更早的声音秩序决裂。</p>
+<p data-sourcepos="247:1-247:1">它的重要性尤其在于，把容易把握的短句组织成极丰富的共同运动。终曲没有把“学问”留作停下来供人赞叹的段落，而是让它成为戏剧的推进力。这种清晰与复杂并存的理想，使作品长期成为演奏、教学和聆听中的参照；对普通听众而言，它也提供了一种直接经验：许多声音保持各自性格时，仍然能够构成完整的整体。</p>
+<h2 id="贝多芬与浪漫主义个人共同体与神话" data-sourcepos="249:1-249:1">贝多芬：古典形式的扩张</h2>
+<p data-sourcepos="251:1-251:1">十九世纪初的维也纳，贵族宅邸、剧院与乐谱市场共同支撑音乐生活。贝多芬通过教学、演奏和出版争取收入，也需要王公提供排练与创作的条件。1809 年，三位贵族承诺支付年金，希望他留在维也纳；战争造成的货币贬值与资助者的财务困难，又使这份保障变得不稳。艺术家的自主因而是一种需要不断经营的关系。<a href="https://internet.beethoven.de/en/exhibition/beethovens-capital/">贝多芬故居：收入、资助与出版</a></p>
+<p data-sourcepos="253:1-253:1">法国革命与拿破仑战争使自由、权威和英雄成为切身议题，也让贝多芬所处的公共生活充满希望与冲突。在音乐中，他重新安排着听众的期待：一个很短的节奏可以渗入长篇结构，主题的返回可以遭遇新的阻力，结尾也可以在似乎即将到来时继续展开。《英雄》的广阔与《第五》的集中，展示了两种不同的组织力量；篇幅和音量只是其中一部分。</p>
+<p data-sourcepos="255:1-255:1">这种扩张也发生在从容与轻声之中。小提琴协奏曲让独奏和乐队长期交换材料，《第九》让器乐的历程走向人声；晚期奏鸣曲与四重奏则用变奏、赋格和连续转换，改变人对时间的感受。面向音乐厅的公共表达，与适合反复读谱、细听的复杂关系，在这些作品中互相贯通。四件弦乐器同样能够展开漫长而多变的过程。<a href="https://www.laphil.com/works/string-quartet-no-14-in-c-sharp-minor-op-131">洛杉矶爱乐：Op.131 的连续结构</a></p>
+<p data-sourcepos="257:1-257:1">聆听这一章，可以先记住一个短节奏、一条低音或一个朴素主题，再听它怎样换声部、换速度、获得新的重量。尤其留意乐章之间的连接，以及音乐如何结束：有时冲向明亮的合奏，有时逐渐安静下来。把这些差别保留下来，才能听见贝多芬在继承古典形式的同时，怎样持续改变它的尺度与用途。</p>
+<h3 id="贝多芬第三交响曲英雄" data-sourcepos="259:1-259:1">贝多芬：第三交响曲《英雄》</h3>
+<p data-sourcepos="261:1-261:1"><strong>年代：</strong>主要写于 1803—1804 年；1804 年私人试演，1805 年 4 月 7 日公开首演。</p>
+<p data-sourcepos="263:1-263:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1436349386">Manfred Honeck / Pittsburgh Symphony</a>。</p>
+<p data-sourcepos="265:1-265:1">开头两个强烈和弦之后，大提琴提出看似朴素的主题，音乐却不断被错位重音、不协和音与漫长的发展推向危机。第二乐章是葬礼进行曲；第三乐章恢复运动，三支圆号带来宽阔空间；终曲把一个曾用于《普罗米修斯的创造》的主题写成层层变形的巨大变奏。聆听重点是整部作品怎样从冲突、哀悼走向重新组织起来的力量，而不只是“雄壮”。它显著扩大了交响曲的篇幅与表达重量。<a href="https://www.laphil.com/works/symphony-no-3-in-e-flat-major-op-55-eroica">洛杉矶爱乐作品解说</a></p>
+<p data-sourcepos="267:1-267:1">贝多芬正面对听力恶化，欧洲则处于法国革命与拿破仑战争的震荡中。“献给拿破仑又愤而撤回”的故事有文献基础：现存经他修改的总谱抄本确有遭划除的 Bonaparte 字样；但发怒撕纸的完整情节来自里斯后来的回忆，不宜当作逐字现场记录。作品最终献给资助他的洛布科维茨亲王，提醒我们，个人自主的艺术理想仍依赖贵族资源。<a href="https://www.beethoven.de/en/work/view/ag9iZWV0aG92ZW4tdml1cjNyEQsSBHdvcmsYgICArO2t6QkM/Symphony%2Bno.%2B3%2B%26%23040%3BE-flat%2Bmajor%26%23041%3B%2Bop.%2B55%2B%26%23040%3BSinfonia%2Beroica%26%23041%3B">贝多芬故居作品档案</a></p>
+<p data-sourcepos="269:1-269:1">它使交响曲获得近乎历史剧的规模，也为后世把作曲家视作独立精神英雄提供了范本；作品也参与塑造了欧洲的英雄想象：听众开始把没有具体剧情的器乐，理解为具有公共精神分量的艺术。</p>
+<h3 id="贝多芬d大调小提琴协奏曲-op.61" data-sourcepos="271:1-271:1">贝多芬：D大调小提琴协奏曲 Op.61</h3>
+<p data-sourcepos="273:1-273:1"><strong>年代：1806 年创作；12 月 23 日由弗朗茨·克莱门特在维也纳首演，1807 年修订独奏声部。</strong></p>
+<p data-sourcepos="275:1-275:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/495900549">Isabelle Faust / Claudio Abbado / Orchestra Mozart</a>。</p>
+<p data-sourcepos="277:1-277:1">开头定音鼓的轻敲像一个不急于说明身份的节奏，此后在明亮旋律下屡次返回。独奏小提琴不是一出场就夺走全部空间，而是沿高音、音阶与悠长乐句，把乐队已经展开的世界重新照亮。听第一乐章时，可以留意这几个敲击般的音怎样穿过不同声部；慢乐章中则听独奏如何在平静的合奏上细细装饰，最后连接到带着舞蹈感的回旋曲。</p>
+<p data-sourcepos="279:1-279:1">作品为克莱门特的音乐会写作，此后又因伦敦出版商克莱门蒂的建议改成钢琴协奏曲；修订与交易显示，这种看似自足的杰作也在演奏者、作曲家和出版网络的合作中成形。它把协奏曲的重量放在大结构、歌唱与持续交流上，对独奏者的要求因此超出技巧展示。<a href="https://www.beethoven.de/en/work/view/6051325007626240/Concerto%20for%20violin%20and%20orchestra%20%28D%20major%29%20op.%2061?fromArchive=5066929207246848">贝多芬故居：创作、首演与修订档案</a></p>
+<p data-sourcepos="281:1-281:1">它并非一问世就稳居今日的核心曲目。约阿希姆 1844 年在门德尔松指挥下演出，是接受史的重要转折；后来的演奏家持续为它争取听众，才使它成为小提琴文化的中心作品之一。经典的形成因而也有演出者的功劳：他们让另一代人听见，力量可以来自从容的延展，以及一条旋律被耐心守护的过程。<a href="https://academic.oup.com/em/article/53/3/351/8473459">牛津大学出版社：约阿希姆与作品的公共接受</a></p>
+<h3 id="贝多芬第五交响曲" data-sourcepos="283:1-283:1">贝多芬：第五交响曲</h3>
+<p data-sourcepos="285:1-285:1"><strong>年代：</strong>1804 年前后开始构思，1808 年完成并首演。</p>
+<p data-sourcepos="287:1-287:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1467914115">Riccardo Chailly / Gewandhausorchester</a>。</p>
+<p data-sourcepos="289:1-289:1">著名的“短短短长”首先是一种可以拆分、移动、相互追逐的节奏材料。它渗入旋律与伴奏，使第一乐章像一场高度集中的论证。慢乐章以变奏舒展呼吸，第三乐章的暗影经过几乎屏住呼吸的连接，冲入 C 大调终曲；新增的长号、短笛与低音巴松让终点具有公共庆典般的声音。注意终曲中阴影还会返回，胜利不是一出现就稳固了。1808 年维也纳那场漫长的作曲家自办音乐会，同时推出了第五、第六等新作，体现了贝多芬向付费公众争取承认的处境。<a href="https://www.esm.rochester.edu/beethoven/symphony-no-5/">伊斯曼音乐学院导聆</a></p>
+<p data-sourcepos="291:1-291:1">当时维也纳受到战争与政治动荡影响，贝多芬仍在贵族资助、出版交易和公开演出之间维持事业。把作品听成“从黑暗走向光明”很有解释力，但“命运在敲门”出自可信度有问题的辛德勒叙述，不能当作作曲家的可靠宣言。<a href="https://www.beethoven.de/en/work/view/6260401733894144/Sinfonie%2BNr.%2B5%2B%28c-Moll%29%2Bop.%2B67">贝多芬故居作品档案</a></p>
+<p data-sourcepos="293:1-293:1">这部作品成为动机发展与跨乐章戏剧统一的典范，也成为公众最容易辨识的古典音乐符号之一。第二次世界大战期间，开头的节奏因近似摩尔斯电码字母 V，被 BBC 的对欧广播用于“V 代表胜利”的声音标志；一部德语文化中的杰作，由此参与了反纳粹的公共传播。这是后人重新赋义的具体历史，而非贝多芬预先写定的政治信息。<a href="https://lvbeethoven.eu/en/l-v-beethoven-the-man-the-genius-the-myth/the-myth/beethoven-in-history-and-politics/">贝多芬博物馆：战时广播与 V 符号的实物史料</a></p>
+<h3 id="贝多芬第32钢琴奏鸣曲-op.111" data-sourcepos="295:1-295:1">贝多芬：第32钢琴奏鸣曲 Op.111</h3>
+<p data-sourcepos="297:1-297:1"><strong>年代：1822 年完成；1823 年出版。</strong></p>
+<p data-sourcepos="299:1-299:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/669189760">Igor Levit</a>。</p>
+<p data-sourcepos="301:1-301:1">全曲只有两个乐章，却容纳了极远的心理距离。第一乐章从沉重的附点节奏出发，以紧迫的运动和复调交织积累冲突；第二乐章《小咏叹调》却唱出近乎朴素的 C 大调主题。随后变奏不断细分节奏，使表面活动越来越密集，再转向高音区、颤音与稀薄的声响。主题回来时音符并不陌生，听它的人却已经经历了一次时间的改变。<a href="https://www.laphil.com/works/piano-sonata-no-32-in-c-minor-op-111">洛杉矶爱乐：两乐章的结构与变奏进程</a></p>
+<p data-sourcepos="303:1-303:1">它来自贝多芬与柏林出版商施莱辛格约定的三首奏鸣曲计划。十九世纪的钢琴普及和印刷市场，使奏鸣曲同时面向专业演奏者与家庭中的读谱者；这首作品却把熟悉的体裁带到需要高度专注才能进入的地方。公开销售的乐谱与极私密的聆听经验，可以出现在同一部作品中。</p>
+<p data-sourcepos="305:1-305:1">后半段的难忘之处，是运动越密，感到的时间反而可能越宽。可以把注意力放在低音如何支撑和声、旋律如何从颤音中浮现，而不把每次加速都听成通往高潮的阶梯。作为贝多芬最后的钢琴奏鸣曲，它为后世留下了关于“结束”的强烈想象：作品未必要用辉煌终曲封口，也可以让最简单的材料逐渐显出深度，使倾听成为理解结构的一部分。</p>
+<h3 id="贝多芬第九交响曲合唱" data-sourcepos="307:1-307:1">贝多芬：第九交响曲《合唱》</h3>
+<p data-sourcepos="309:1-309:1"><strong>年代：</strong>1822—1824 年集中创作；1824 年 5 月 7 日维也纳首演。</p>
+<p data-sourcepos="311:1-311:1"><strong>歌单录音</strong>：首选 <a href="https://music.apple.com/us/album/1575697279">Herbert von Karajan / Berlin Philharmonic</a>（1962 年录音）；对照 <a href="https://music.apple.com/us/album/1627069272">Yannick Nézet-Séguin / Chamber Orchestra of Europe</a>（2021 年现场录音）。</p>
+<p data-sourcepos="313:1-313:1">这部交响曲从仿佛尚未成形的空旷音响开始，经过冲突强烈的第一乐章、猛烈的谐谑曲和广阔慢乐章，终曲才引入独唱与合唱。低音弦乐先像人声般“说话”，回顾并拒绝此前的音乐；朴素的《欢乐颂》旋律随后扩展为变奏、进行曲与复杂的合唱织体。建议完整聆听前三乐章，再感受人声到来的分量。它并非音乐史上第一首使用人声的交响作品，却以空前的影响力，使交响曲成为能够明确说出伦理理想的公共艺术。<a href="https://www.esm.rochester.edu/beethoven/symphony-no-9/">伊斯曼音乐学院导聆</a></p>
+<p data-sourcepos="315:1-315:1">贝多芬晚年听力已严重受损，作品诞生于拿破仑战争结束后的欧洲复辟时期；席勒诗中的友爱愿景因而具有跨越现实分裂的张力。但这里既有人的团结，也有超越性的宗教想象，不能简化为现代政治口号。</p>
+<p data-sourcepos="317:1-317:1">终曲旋律后来进入典礼、教育与政治生活。欧洲委员会 1972 年采用其主题，欧洲共同体领导人于 1985 年采用为颂歌；正式颂歌是器乐，没有把席勒德语歌词定为官方文本。这种国际象征不是作品从诞生起就拥有的固定身份，而是后世作出的选择。听懂它，也包括辨认人们怎样借同一音乐表达不同的共同体理想。<a href="https://european-union.europa.eu/principles-countries-history/symbols/european-anthem_en">欧盟颂歌说明</a></p>
+<h3 id="贝多芬第14弦乐四重奏-op.131" data-sourcepos="319:1-319:1">贝多芬：第14弦乐四重奏 Op.131</h3>
+<p data-sourcepos="321:1-321:1"><strong>年代：1826 年，升 c 小调；七个部分连续演奏。</strong></p>
+<p data-sourcepos="323:1-323:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1513485499">Takács Quartet</a>。</p>
+<p data-sourcepos="325:1-325:1">它以缓慢赋格开始：四件乐器逐一进入，克制的旋律彼此缠绕。随后音乐几乎不停地穿过轻快舞蹈、短促宣叙、宽广变奏与猛烈终曲。七个部分有的像完整乐章，有的只是改变方向的桥梁；先不急着数清它们，可以听第一段的沉思如何在后来的速度和性格中留下记忆。中央变奏的长呼吸，与谐谑曲突然出现的古怪音色，尤其能显示这条旅程的跨度。<a href="https://www.laphil.com/works/string-quartet-no-14-in-c-sharp-minor-op-131">洛杉矶爱乐：七部分结构与主题关系</a></p>
+<p data-sourcepos="327:1-327:1">晚期贝多芬的四重奏依赖职业乐手的紧密协作，也通过出版面向比一个私人圈子更广的读者。1826 年他与朔特出版社往来的付款文献，仍保存着这些高度个人化作品进入市场的实际过程。作曲家的探索并非与物质条件脱离：有人刻谱、付款、排练，才有后世不断重新接近它的机会。<a href="https://internet.beethoven.de/pdf-sonderausstellung/In-guter-Gesellschaft-Brief-Guide.pdf">贝多芬故居：出版与商业往来档案</a></p>
+<p data-sourcepos="329:1-329:1">瓦格纳后来把它听成充满激情与世界图景的长篇叙事，说明这类没有文字的室内乐也能进入哲学和文学想象。作品本身却不需要一个固定故事：四个声部时而各自坚持，时而共同停驻，以最少的人数承载极大的形式野心。它使弦乐四重奏成为后世探索连续结构、历史记忆与内心变化的重要参照。</p>
+<h2 id="浪漫主义的展开歌唱幻想与钢琴" data-sourcepos="331:1-331:1">浪漫主义的展开：歌唱、幻想与钢琴</h2>
+<p data-sourcepos="333:1-333:1">十九世纪前半叶，音乐在家庭聚会、沙龙与售票音乐会之间流动。钢琴既能独奏，也能支持歌唱和室内乐；乐谱与改编本则让人们在家重听、重弹舞台上的声音。乐器制造、教学和出版相互促进，尤其吸引拥有闲暇、乐器与读谱教育的城市家庭。音乐因此获得更多进入日常生活的机会，演奏家的巡演又把熟悉的乐器带向令人惊叹的技巧与音响。<a href="https://www.metmuseum.org/essays/nineteenth-century-classical-music">大都会艺术博物馆：家庭音乐与公共舞台</a></p>
+<p data-sourcepos="335:1-335:1">诗歌为这段音乐提供了重要的组织线索：一句话的停顿、景物的变化、回忆中的语气，都能改变旋律与伴奏的关系。舒伯特的歌曲在朋友聚会、歌者演出和印刷传播之间成长；一位歌者与一架琴，足以使许多短小片刻连接成持续的心理历程。他的弦乐五重奏又通过音色对比、骤然停驻与悠长旋律，打开另一种时间感。<a href="https://data.onb.ac.at/nlv_lex/perslex/Sch/Schubert_Franz.html">奥地利国家图书馆：舒伯特的聚会、歌曲与出版</a></p>
+<p data-sourcepos="337:1-337:1">文学与幻想也能进入庞大的乐队。《幻想交响曲》用一个不断变形的主题贯穿不同场景，使听众在音色变化中辨认同一个执念。钢琴写作则有多种尺度：肖邦把鲜明性格压进短篇，李斯特让少数材料承担连续的长篇发展；舒曼的五重奏使钢琴与弦乐彼此推动，既保留歌唱，也形成充满行动感的合奏。它们对于结构的经营，与感情的强烈同样值得注意。</p>
+<p data-sourcepos="339:1-339:1">同一条旋律从歌唱变成步伐、从抒情转向紧张时，也使回忆拥有了可听见的形状。段落的中断与重新开始，短篇中的留白与长篇中的返回，各有自己的分量。浪漫主义的丰富，正在于记忆、舞蹈、文学想象与器乐思考能够互相进入；亲密的声音可以走上公共舞台，炫目的技巧也能服务于极细小的情绪变化。</p>
+<h3 id="舒伯特冬之旅" data-sourcepos="341:1-341:1">舒伯特：《冬之旅》</h3>
+<p data-sourcepos="343:1-343:1"><strong>年代：1827 年，D.911；为人声与钢琴所作的二十四首歌曲。</strong></p>
+<p data-sourcepos="345:1-345:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1596788106">Mark Padmore / Paul Lewis</a>。</p>
+<p data-sourcepos="347:1-347:1">一个失恋的旅人走入冬天，景物不断转成心中的回声。开头《晚安》稳定的钢琴步伐，使前行听起来既是动作，也是无法停下的念头；《菩提树》的温暖回忆很快受到寒风侵扰。最后《老艺人》中，钢琴模拟手摇风琴的持续低音与短小旋律，人声面对一个无人理会的演奏者，没有得到明确答案。歌者与钢琴因此共同叙述，伴奏不仅衬托情绪，还构成旅人所感知的世界。</p>
+<p data-sourcepos="349:1-349:1">舒伯特先为威廉·缪勒的十二首诗谱曲，后来发现其余诗篇，再续成全套。这种分阶段的形成，留下了与诗集原有排列不同的音乐顺序。维也纳的私人聚会、家庭钢琴与歌曲出版，为艺术歌曲提供传播空间；一位歌者和一架琴，已经能够容纳具有长篇分量的心理戏剧。<a href="https://media.wigmore-hall.org.uk/documents/Programme_25_June_2022__730pmFULL.pdf">威格莫尔音乐厅：诗集、创作过程与独白结构</a></p>
+<p data-sourcepos="351:1-351:1">旅人的第一人称不能直接当作舒伯特日记，但其中的失落和无所归属，使浪漫主义“漫游者”形象获得了持久的声音。作品让艺术歌曲越出一时的抒情，把二十四个片刻连成内心经验的连续体；它也让后来的人以极少的舞台条件，认真面对孤独、衰老与被共同体忽视的生活。末曲的乐器并非空泛象征，而关联着真实街头艺人的谋生世界。<a href="https://www.europeana.eu/en/stories/the-hurdy-gurdy-in-schuberts-winterreise">Europeana：手摇风琴与《冬之旅》</a></p>
+<h3 id="舒伯特c大调弦乐五重奏-d.956" data-sourcepos="353:1-353:1">舒伯特：C大调弦乐五重奏 D.956</h3>
+<p data-sourcepos="355:1-355:1"><strong>年代：1828 年；1850 年有记载的公开演出，1853 年出版。</strong></p>
+<p data-sourcepos="357:1-357:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1712802315">Takács Quartet / Ralph Kirshbaum</a>。</p>
+<p data-sourcepos="359:1-359:1">在标准四重奏之外增加第二把大提琴，使低音既能稳住地基，也能分出另一个歌唱者。第一乐章两把大提琴的旋律尤其温厚；慢乐章里，中层声部缓缓歌唱，第二大提琴拨弦，小提琴像在句子之间试探着开口。中段突然涌起的激烈运动，又使前后的安宁显得格外脆弱。可以先跟随这三个层次，再听平静回来时，外侧声部怎样改变了它的呼吸。<a href="https://www.hyperion-records.co.uk/dw.asp?dc=W6016_67864">Hyperion：配器与慢乐章导聆</a></p>
+<p data-sourcepos="361:1-361:1">舒伯特在去世前不久写给出版商的信里，提到刚完成这部五重奏，希望找到发行机会；作品却直到多年后才进入公开演出和出版。它的命运显示，十九世纪音乐市场并不自动奖励今天看来最重要的创作。歌曲较容易进入家庭和出版流通，篇幅宏大的室内乐则需要合适的乐手、场地与长期投入。</p>
+<p data-sourcepos="363:1-363:1">作品扩大室内乐的音响，也让舒伯特式的时间感充分展开：旋律不只服务于快速前进，还可以长久停留，让细小和声变化逐渐显出意义。明亮与阴影常常相邻，听众很难为它指定一种单纯情绪。这种不急于解决矛盾的能力，使它成为室内乐文化中反复被演奏、讨论和亲近的作品；五个人之间的细致关系，也能容纳接近交响曲的幅度。<a href="https://www.laphil.com/works/quintet-in-c-major-d-956">洛杉矶爱乐：晚期作品的规模与情绪对照</a></p>
+<h3 id="柏辽兹幻想交响曲" data-sourcepos="365:1-365:1">柏辽兹：《幻想交响曲》</h3>
+<p data-sourcepos="367:1-367:1"><strong>年代：</strong>1830 年创作并首演，后续多年修订；五乐章标题交响曲。</p>
+<p data-sourcepos="369:1-369:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1480519891">François-Xavier Roth / Les Siècles</a>。</p>
+<p data-sourcepos="371:1-371:1">一位青年艺术家因迷恋、嫉妒与幻觉走向刑场和女巫夜会：这是柏辽兹提供给听众的故事，不应当作真实生活纪录。代表爱人的“固定乐思”贯穿五个乐章，在舞会中翩然出现，在末乐章又被尖锐的单簧管扭成怪笑。英国管与双簧管隔空相答、末尾的钟声、低音声部的《震怒之日》圣咏和弦乐以弓杆敲击琴弦，说明音色已经参与叙事。先认出固定乐思，再听它怎样被环境改变，是进入全曲最直接的办法。<a href="https://www.berliner-philharmoniker.de/en/programme-notes/hector-berlioz-symphonie-fantastique-op-14/">柏林爱乐作品解说</a></p>
+<p data-sourcepos="373:1-373:1">柏辽兹受到莎士比亚戏剧与演员哈丽雅特·史密森的激发，也生活在文学浪漫主义兴起的巴黎。作品诞生于七月革命前后的巴黎，自传式的艺术家形象也进入日益活跃的城市文化。自传式想象、公开分发的文字说明与大胆配器，让作曲家的私人心理成为公众讨论的对象。<a href="https://pad.philharmoniedeparis.fr/0301457-symphonie-fantastique-de-hector-berlioz.aspx?_lg=fr-FR">巴黎爱乐作品背景</a></p>
+<p data-sourcepos="375:1-375:1">作品为标题交响曲、主题变形和后来的交响诗打开了道路，也扩大了管弦乐表现心理与幻象的能力。它留下的长期文化影响，是一种新的艺术家形象：个人的欲望、失控与痛苦，也可以成为值得全社会倾听的题材。</p>
+<h3 id="肖邦二十四首前奏曲-op.28" data-sourcepos="377:1-377:1">肖邦：二十四首前奏曲 Op.28</h3>
+<p data-sourcepos="379:1-379:1"><strong>年代：1830 年代陆续构思，1838—1839 年集中整理完成；1839 年出版。</strong></p>
+<p data-sourcepos="381:1-381:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1452310472">Seong-Jin Cho，2015 年肖邦国际钢琴比赛现场</a>。</p>
+<p data-sourcepos="383:1-383:1">二十四首小曲遍历全部大小调，却不再等待一首赋格或其他大曲接上来。“前奏”本身成为完整的表达：第 4 首 e 小调在缓慢和弦上反复叹息，第 15 首降 D 大调让同一个音穿过明暗变化，第 16 首降 b 小调则用急速运动突然卷走前一首的余韵。它们按五度关系连接，并把大调与关系小调配对；连续聆听时，微小篇幅之间也能形成巨大的情绪距离。<a href="https://chopin.nifc.pl/en/chopin/gatunki/12_preludia">肖邦研究院：体裁、调性布局与创作年代</a></p>
+<p data-sourcepos="385:1-385:1">肖邦在巴黎以教学、出版和少量演出维持生活，沙龙与家庭钢琴文化为他的音乐提供听众。这些作品的一部分在与乔治·桑赴马略卡岛期间完成，不能把整套简单说成异乡风景的写生。它们的精密之处在触键、内声部和踏板：同一个反复音，因下方和声变化，可以从安慰变成逼近。<a href="https://www.chopin.pl/france.en.html">肖邦协会：巴黎生活与创作条件</a></p>
+<p data-sourcepos="387:1-387:1">前奏曲在这里获得了独立性，也显示浪漫主义的表达不一定需要庞大规模。一页乐谱可以保留一个无法轻易命名的状态，不必把它发展成故事的结局。对后来的钢琴写作和日常聆听而言，这是一项持久的扩展：短小并不意味着浅薄，稍纵即逝的感受，也值得以最细致的声音保存。</p>
+<h3 id="舒曼降-e-大调钢琴五重奏-op.44" data-sourcepos="389:1-389:1">舒曼：降 E 大调钢琴五重奏 Op.44</h3>
+<p data-sourcepos="391:1-391:1"><strong>年代与范围：1842 年；为钢琴、两把小提琴、中提琴与大提琴而作；1843 年 1 月 8 日在莱比锡公开首演。</strong></p>
+<p data-sourcepos="393:1-393:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/712138978">Leif Ove Andsnes / Artemis Quartet</a>。</p>
+<p data-sourcepos="395:1-395:1">开场五件乐器共同推出宽阔而有力的主题，钢琴随后又与弦乐交换更柔和的语气。第二乐章以沉重的进行曲反复返回，中间却出现明亮歌唱与激烈动荡；第三乐章把简单音阶变成充满冲力的奔跑。可先记住第一乐章的开头，再听终曲结尾：最初的主题重新出现，与新的材料交织，让分开的四个乐章获得共同归宿。<a href="https://www.laphil.com/works/piano-quintet-in-e-flat-major-op-44">洛杉矶爱乐：四乐章结构与主题返回</a></p>
+<p data-sourcepos="397:1-397:1">1842 年是舒曼集中创作室内乐的一年。他研究海顿、莫扎特与贝多芬的四重奏，随后写出自己的弦乐四重奏及钢琴室内乐。这部五重奏献给克拉拉，她也担任公开首演的钢琴演奏者；作曲、家庭合作与职业音乐家的演出生活，在这里紧密相连。<a href="https://www.henle.de/media/a5/8f/1c/1690886046/0355-1690886046-sync.pdf">亨乐原典版前言：创作、题献与首演</a></p>
+<p data-sourcepos="399:1-399:1">钢琴具有接近协奏曲的辉煌，四件弦乐又保留彼此倾听和接续的空间。它使强烈的个人表达与集体合作成为同一种音乐经验，也为后来浪漫主义钢琴五重奏的发展提供了重要参照。</p>
+<h3 id="李斯特b-小调钢琴奏鸣曲" data-sourcepos="401:1-401:1">李斯特：b 小调钢琴奏鸣曲</h3>
+<p data-sourcepos="403:1-403:1"><strong>年代与范围：S.178；1853 年完成。</strong></p>
+<p data-sourcepos="405:1-405:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1452176730">Krystian Zimerman</a>。</p>
+<p data-sourcepos="407:1-407:1">开头的下行音阶、低音中的短促敲击与突然奔涌的音群，像几种尚未说明关系的力量。随后，同一材料能变成庄严宣告、柔软歌唱或急促追逐；真正的戏剧来自主题怎样改变身份。全曲连续演奏，却容纳慢板、赋格化段落与奏鸣曲的展开、回归。初听可记住开头的几个手势，等它们在抒情段落中重新出现；技巧的惊人之处，逐渐转成对记忆的组织。<a href="https://www.laphil.com/works/piano-sonata-in-b-minor">洛杉矶爱乐：结构与主题的变形</a></p>
+<p data-sourcepos="409:1-409:1">李斯特在 1847 年结束密集的巡演生涯，转向魏玛的宫廷指挥和创作。欧洲城市、铁路、出版与明星演奏家共同扩大的音乐市场，曾使他成为钢琴炫技的象征；这首作品则显露舞台名声背后的结构思考。它题献给舒曼，最初的接受并不一致，今天熟悉的经典地位经过了长期演奏与重估。<a href="https://www.laphil.com/works/sonata-in-b-minor">洛杉矶爱乐：魏玛时期与早期接受</a></p>
+<p data-sourcepos="411:1-411:1">它扩展了钢琴独奏承担长篇戏剧的能力：不同性格可以来自同一主题，形式可以在连续变化中维持统一。听众不必先替音乐确定一个浮士德故事；更直接的经验，是认出熟悉声音竟能变得陌生。尾声经过强烈积累，最终仍退向安静，让演奏家的力量也包含收住声音的能力。</p>
+<h2 id="浪漫主义中后期舞台神话与共同体" data-sourcepos="413:1-413:1">浪漫主义中后期：舞台、神话与共同体</h2>
+<p data-sourcepos="415:1-415:1">十九世纪中叶以后，剧院与音乐厅成为城市文化中越来越醒目的场所。歌剧和芭蕾需要把歌者、舞者、乐队与舞台人员组织在一起，大型交响曲和合唱作品也依靠持续的排练与经费。观众的期待、赞助与商业收入，共同影响哪些作品能够上演。里科尔迪等出版商向剧院提供演出材料，也出售钢琴改编谱，让歌剧进入家庭弹唱；出版因而连接着舞台生产与日常音乐生活。<a href="https://www.archivioricordi.com/en/features/the-founder">里科尔迪档案：剧院、出版与家庭用谱</a></p>
+<p data-sourcepos="417:1-417:1">这些条件并未导向单一的音乐语言。威尔第和普契尼从人物的交谈、相遇与告别中生长旋律，让金钱、身份和生活困境进入歌唱；瓦格纳以神话展开更长的关系网络，乐队不断唤回早先的材料，使当下场面带着记忆和预感。为《指环》演出而建的拜罗伊特剧院，也显示舞台理想会要求改变观看与聆听的空间。芭蕾则把主题、节拍与身体动作紧密相连，舞蹈中的重复有着具体的表演需要。<a href="https://www.bayreuther-festspiele.de/en/festival/history/">拜罗伊特音乐节：剧院与演出构想</a></p>
+<p data-sourcepos="419:1-419:1">音乐厅中的共同体验同样有许多方向。勃拉姆斯以合唱容纳悼念与安慰，柴可夫斯基使舞步、进行曲和脆弱的旋律相互牵动，德沃夏克让跨文化接触进入交响写作；马勒则把歌曲、仪式与远近不同的声音纳入漫长的展开。共同体可以是一群观众、一种宗教记忆，也可以是关于地方与身份的想象，作品之间并没有相同的答案。</p>
+<p data-sourcepos="421:1-421:1">聆听时，不妨留意熟悉材料怎样回来：同一旋律换了乐器，是在确认感情，还是暴露其变化？辉煌的进行曲之后，音乐又走向哪里？越来越大的规模，并不保证更确定的终点；爱情、权力、死亡与信仰，常常使音乐保留未能解决的张力。这些不同方向一直延续到世纪之交，与后来所谓的现代主义彼此交错。</p>
+<h3 id="威尔第茶花女" data-sourcepos="423:1-423:1">威尔第：《茶花女》</h3>
+<p data-sourcepos="425:1-425:1"><strong>年代与范围：三幕歌剧；1853 年威尼斯首演，1854 年修订后重演。</strong></p>
+<p data-sourcepos="427:1-427:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1779103843">Angela Gheorghiu / Frank Lopardo / Leo Nucci / Sir Georg Solti / Orchestra of the Royal Opera House</a>。当前收藏为 1994 年伦敦现场。</p>
+<p data-sourcepos="429:1-429:1">前奏曲的高音弦乐已让人听见脆弱，接下来的宴会却忙着制造欢乐。《饮酒歌》的轻快、薇奥莱塔第一幕独唱的花腔和末幕《永别了，过去的美梦》的衰弱语气，连成一个人从社交表演走向私人痛苦的过程。尤其值得听的是第二幕她与老热尔蒙的长篇对唱：请求、拒绝、动摇与让步随着乐句改变，礼貌的声音也能施加很重的压力。</p>
+<p data-sourcepos="431:1-431:1">皮亚韦的脚本改编自小仲马《茶花女》，故事追溯到巴黎交际花玛丽·迪普莱西的生活。威尔第希望面对接近当代的社会，首演剧院却要求采用较早的时代背景。作品的尖锐处，在于体面家庭要求一名被排斥的女性牺牲爱情，来维护自己的名誉；所谓道德秩序由谁承担代价，成为可听见的冲突。<a href="https://www.laopera.org/discover-la-opera/explore/blog/from-page-to-stage-la-traviata">洛杉矶歌剧院：改编、时代背景与首演</a></p>
+<p data-sourcepos="433:1-433:1">它使歌剧的悲剧中心落在社会边缘者身上，也要求女高音把华丽技巧、亲密语气与身体衰弱组织成同一人物。薇奥莱塔具有欲望、判断和尊严，观众必须听她如何选择，又如何被误解。作品长久的文化生命，正在于不断让不同年代的剧场重新审视金钱、性别与同情之间的关系。</p>
+<h3 id="瓦格纳特里斯坦与伊索尔德" data-sourcepos="435:1-435:1">瓦格纳：《特里斯坦与伊索尔德》</h3>
+<p data-sourcepos="437:1-437:1"><strong>年代：</strong>1857—1859 年创作；1865 年慕尼黑首演；三幕音乐戏剧。</p>
+<p data-sourcepos="439:1-439:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/693358922">Antonio Pappano / Royal Opera House</a>。</p>
+<p data-sourcepos="441:1-441:1">前奏曲的和声不断提出期待，却一次次延迟安定下来。所谓“特里斯坦和弦”的意义，主要在声部怎样继续移动，以及解决怎样被推迟，而不只是四个音的配方。第二幕爱情二重唱与末尾通常称为《爱之死》的场景，把欲望、等待和终结写成一条漫长呼吸。聆听时可留意歌声与乐队谁在说出人物不愿承认的感情：乐队已经成为心理叙事者。<a href="https://www.sfopera.com/operas/tristan-and-isolde/articles/the-music-of-love/">旧金山歌剧院音乐解说</a></p>
+<p data-sourcepos="443:1-443:1">瓦格纳写作时仍处于参加德累斯顿革命后的流亡阶段；他对玛蒂尔德·魏森东克的感情，以及叔本华关于欲望与痛苦的哲学，都为这部中世纪爱情故事提供了新的心理深度。私人情感和哲学思考，在这里被转化为超出个人经历的音乐戏剧。<a href="https://www.metopera.org/user-information/nightly-met-opera-streams/articles/edge-of-the-unknown/">大都会歌剧院背景文章</a></p>
+<p data-sourcepos="445:1-445:1">它把半音化和连续发展推到极高强度，为十九世纪末的和声探索提供了重要参照，也改变了人们用声音想象内心世界的方式。不过，这仍是一部高度扩展调性张力的作品，不能说它“发明了无调性”。其更广影响主要发生在审美和思想生活中：爱情、身体与无意识可以通过长时间的声音过程被体验，而不只靠剧情说明。</p>
+<h3 id="勃拉姆斯德意志安魂曲" data-sourcepos="447:1-447:1">勃拉姆斯：《德意志安魂曲》</h3>
+<p data-sourcepos="449:1-449:1"><strong>年代与范围：Op.45；主要写作于 1860 年代，1868 年补成七乐章，1869 年完整首演。</strong></p>
+<p data-sourcepos="451:1-451:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/769140566">Dorothea Röschmann / Thomas Quasthoff / Sir Simon Rattle / Berliner Philharmoniker / Rundfunkchor Berlin</a>。</p>
+<p data-sourcepos="453:1-453:1">开头不使用小提琴，较低的弦乐与合唱形成温厚而暗淡的音色。第二乐章沉重行进，第四乐章却有近乎散步的轻盈；第五乐章女高音的抚慰，又与第六乐章巨大赋格的集体力量相接。全曲的安慰通过不同重量和速度取得，不是从头到尾保持肃穆。可先比较第一、末乐章的柔和收束，再听中部怎样经过恐惧与激动，才重新抵达平静。<a href="https://www.laphil.com/works/a-german-requiem">洛杉矶爱乐：音色、结构与戏剧性</a></p>
+<p data-sourcepos="455:1-455:1">舒曼与母亲的去世是其创作的重要个人背景。勃拉姆斯没有采用天主教安魂弥撒的固定拉丁文本，而从德语《圣经》中自行编选，以仍然活着、需要安慰的人为中心；“德意志”首先指出语言，不能直接读成民族胜利的宣言。1868 年不来梅演出的是六乐章形态，后来加入女高音乐章，才成为现存的七乐章。<a href="https://www.bso.org/works/a-german-requiem">波士顿交响乐团：文本、悼念与版本形成</a></p>
+<p data-sourcepos="457:1-457:1">这部作品把宗教语言、私人哀悼与公共合唱文化结合起来，也确立了勃拉姆斯作为大型作品作者的声望。它保存传统对位的力量，却让合唱更多承担陪伴与支撑：独唱者说出的有限生命，被许多人共同接住。听过那些宏大的段落，再回到最后的温柔，便能体会纪念为何也关乎留下来的人怎样继续生活。</p>
+<h3 id="瓦格纳尼伯龙根的指环" data-sourcepos="459:1-459:1">瓦格纳：《尼伯龙根的指环》</h3>
+<p data-sourcepos="461:1-461:1"><strong>年代：</strong>1848 年起酝酿，1874 年完成总谱；1876 年拜罗伊特首次作为完整四联剧上演。</p>
+<p data-sourcepos="463:1-463:1"><strong>歌单录音</strong>：Georg Solti / Vienna Philharmonic, 2022 Remaster；<a href="https://music.apple.com/us/album/1651971225">莱茵的黄金</a>；<a href="https://music.apple.com/us/album/1656339570">女武神</a>；<a href="https://music.apple.com/us/album/1677698744">齐格弗里德</a>；<a href="https://music.apple.com/us/album/1691839513">众神的黄昏</a>。</p>
+<p data-sourcepos="465:1-465:1">四部是《莱茵的黄金》《女武神》《齐格弗里德》《众神的黄昏》。指环把财富、权力与爱情的代价连成跨世代神话；不断返回并变化的主导动机，让听众在当前场景中听见往事、隐情与预兆。可以先听《黄金》的水之开端、《女武神》第一幕及沃坦告别、《齐格弗里德》的森林场景，再到《黄昏》的葬礼进行曲与终场；认识动机之后，再连续体验全剧。</p>
+<p data-sourcepos="467:1-467:1">构思横跨 1848—1849 年革命、流亡以及德意志统一时期。瓦格纳对旧秩序的批判，与后来依靠巴伐利亚国王路德维希二世的资助形成鲜明张力。为完整演出而建的拜罗伊特剧院，把剧场建筑、隐蔽乐池、诗歌、表演与音乐整合为一种集中观看的经验；1876 年首届音乐节也说明，艺术理想需要巨大的组织和经济资源。<a href="https://www.bayreuther-festspiele.de/en/festival/history/">拜罗伊特音乐节官方历史</a></p>
+<p data-sourcepos="469:1-469:1">《指环》深化了主题网络和连续音乐戏剧，对后来舞台、电影配乐的叙事思维产生长远影响。<a href="https://inte.sfopera.com/experience-wagners-ring/">旧金山歌剧院《指环》导览</a> 其社会接受史还必须包含瓦格纳本人的反犹言论，以及后世瓦格纳家族部分成员、拜罗伊特音乐节与纳粹的联系；这些需要明确讨论，也应与十九世纪的作品创作分开。不能把乐曲说成纳粹主义的直接成因，更不能用音乐成就抹去真实的排斥与迫害。<a href="https://www.bayreuther-festspiele.de/en/festspiele/news/2026/commemorative-event-silenced-voices-with-professor-michel-friedman/">拜罗伊特关于历史责任的说明</a></p>
+<h3 id="柴可夫斯基天鹅湖" data-sourcepos="471:1-471:1">柴可夫斯基：《天鹅湖》</h3>
+<p data-sourcepos="473:1-473:1"><strong>年代与范围：Op.20；1875—1876 年作曲，1877 年莫斯科首演；1895 年圣彼得堡重排深刻影响后世舞台版本。</strong></p>
+<p data-sourcepos="475:1-475:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1761632691">Neeme Järvi / Bergen Philharmonic Orchestra</a>。</p>
+<p data-sourcepos="477:1-477:1">湖畔主题由双簧管唱出，竖琴与弦乐托住旋律，声音已经把期待和危险放在一起。宫廷圆舞曲、各国性格舞与天鹅群舞拥有不同的步态，反复出现的主题又把舞段连成悲剧。可先听第二幕湖畔场景，再比较第三幕的庆典：华丽音响越热闹，人与人辨认错误的代价便越突出。《四小天鹅舞曲》的整齐短句，则让音乐的分寸直接成为身体协调的条件。</p>
+<p data-sourcepos="479:1-479:1">作品来自俄国帝国剧院的芭蕾生产体系，必须与舞者、编舞和舞台安排共同工作。今天熟悉的传统，主要经由彼季帕与伊凡诺夫 1895 年重排确立；德里戈同时调整乐谱，移动、删削和增添若干段落。因此，1877 年的音乐创作、1895 年的舞台重塑与后来各剧团的演出形态，需要放在各自的位置理解。<a href="https://www.pnb.org/repertory/swan-lake/">太平洋西北芭蕾舞团：首演、重排与音乐调整</a></p>
+<p data-sourcepos="481:1-481:1">《天鹅湖》让管弦乐持续参与人物命运，推动芭蕾音乐越出为动作计时的任务。它的世界影响也通过剧团训练与身体记忆延续：群舞如何成为共同体，同一位舞者怎样塑造奥杰塔与奥吉莉娅，都不断产生新的解释。离开舞台听全曲时，仍可从主题的返回和配器的变化，感受誓言如何被动摇，又如何留下难以消除的痕迹。</p>
+<h3 id="柴可夫斯基第六交响曲悲怆" data-sourcepos="483:1-483:1">柴可夫斯基：第六交响曲《悲怆》</h3>
+<p data-sourcepos="485:1-485:1"><strong>年代与范围：b 小调，Op.74；1893 年作曲并在圣彼得堡首演。</strong></p>
+<p data-sourcepos="487:1-487:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1452656431">Semyon Bychkov / Czech Philharmonic</a>。</p>
+<p data-sourcepos="489:1-489:1">低音管从暗处开始，第一乐章让宽广的抒情与突如其来的暴烈彼此撕扯。第二乐章像圆舞曲，却以五拍的摇摆使脚步略微失去平衡；第三乐章逐渐累积成辉煌进行曲，很容易被当成最终胜利。真正的终曲却放慢下来，让下行旋律逐渐失去支撑。初听最好完整保留最后两乐章的次序：被激动起来的身体，必须继续经历它怎样沉静、衰弱。<a href="https://www.laphil.com/works/symphony-no-6-pathetique">洛杉矶爱乐：节拍、乐章次序与结尾</a></p>
+<p data-sourcepos="491:1-491:1">柴可夫斯基亲自指挥首演，九天后去世，这个时间距离使作品很快被笼罩在告别的叙事中。他曾提到不愿公开的纲领，却没有留下可以替每段音乐确定情节的完整说明。与其把它当成已经证实的自杀遗书，更可靠的是承认创作中的情绪强度，同时让传记、后世想象与乐谱各自提供证据。<a href="https://www.bso.org/works/tchaikovsky-symphony-no-6">波士顿交响乐团：创作经过与解释问题</a></p>
+<p data-sourcepos="493:1-493:1">它的重要改变发生在交响曲的终点：苦难经过搏斗，也可能不以凯旋解决。慢板把公共音乐厅变成容纳脆弱的空间，让听众面对一种无法靠热烈掌声立即抹平的体验。作品此后的接受也提醒我们，录音和传播会替音乐附加人生故事；即使暂时放下这些故事，最后低弦的消退仍足以使人重新理解“结束”。</p>
+<h3 id="德沃夏克第九交响曲自新大陆" data-sourcepos="495:1-495:1">德沃夏克：第九交响曲《自新大陆》</h3>
+<p data-sourcepos="497:1-497:1"><strong>年代与范围：e 小调，Op.95，B.178；1893 年作曲，同年纽约首演。</strong></p>
+<p data-sourcepos="499:1-499:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/6768216884">Manfred Honeck / Pittsburgh Symphony Orchestra</a>。</p>
+<p data-sourcepos="501:1-501:1">第一乐章圆号的短促宣告，第二乐章英国管的长线歌唱，第三乐章急促的舞步，构成鲜明而易记的性格。重要的是它们并未各自唱完便离场：早先的主题会进入后面的乐章，在终曲重新相遇。可把英国管旋律当作入口，再听末乐章怎样召回它；熟悉的旋律换了环境，便同时带来安顿与不安。民族色彩之外，这种跨乐章的记忆组织，是全曲有力的原因。</p>
+<p data-sourcepos="503:1-503:1">德沃夏克 1892 年赴纽约主持国家音乐学院，接触到哈里·伯利演唱的非裔美国灵歌，并公开讨论美国艺术音乐可以从哪些本地传统出发。《新世界》受灵歌的音阶、节奏与语气启发，仍然由他自己的主题和成熟的交响技艺构成；它不宜被当成现成黑人歌曲或原住民歌曲的拼贴。<a href="https://www.antonin-dvorak.cz/en/work/symphony-no-9/">德沃夏克作品档案：创作、伯利与素材问题</a></p>
+<p data-sourcepos="505:1-505:1">1893 年纽约爱乐在卡内基音乐厅的首演，使一位波希米亚作曲家对美国声音的想象成为公共事件。<a href="https://www.carnegiehall.org/Education/Programs/Link-Up/New-York-City/New-World-Symphony">卡内基音乐厅：任职与首演</a> 它也留下持续的问题：谁有权代表一个地方，文化接触如何改变创作，本土传统怎样进入被视为高雅的机构。音乐中的远行与回望能够被不同地方的听众认领，而这种开放，也使作品超出任何单一国族标签。</p>
+<h3 id="马勒第二交响曲复活" data-sourcepos="507:1-507:1">马勒：第二交响曲《复活》</h3>
+<p data-sourcepos="509:1-509:1"><strong>年代与范围：c 小调；1888—1894 年作曲，1895 年柏林完整首演。</strong></p>
+<p data-sourcepos="511:1-511:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1669520542">Iván Fischer / Budapest Festival Orchestra</a>。</p>
+<p data-sourcepos="513:1-513:1">开场弦乐的猛烈震动，把听众直接卷入葬礼般的行进；随后舞蹈的回忆、循环不止的谐谑曲与女低音《原光》，让死亡问题穿过不同生活经验。终曲先扩大恐惧，再让远处号声、鸟鸣般的木管与接近耳语的合唱依次出现。应当特别留意合唱首次进入的轻声：最终的宏大并非仅靠不断加响，而是先使一个几乎无力的声音获得被听见的可能。</p>
+<p data-sourcepos="515:1-515:1">马勒在繁忙的歌剧指挥工作间隙推进创作，最初的《葬礼》乐章经过多年才找到整体归宿。1894 年参加彪罗追思礼时，他听见克洛普施托克的复活颂歌，终于取得终曲的文本起点，又自行补写诗句。<a href="https://mahlerfoundation.org/mahler/compositions/symphony-no-2/symphony-no-2-history/">马勒基金会：创作时间与终曲形成</a> 宗教意象在这里经过个人重释；他留下的纲领中，最终的救赎没有以区分善恶、审判众人为结局。<a href="https://www.mahlerfoundation.org/mahler/compositions/symphony-no-2/symphony-no-2-introduction/">马勒基金会：纲领与信仰想象</a></p>
+<p data-sourcepos="517:1-517:1">它延续贝多芬《第九》让人声进入交响曲的道路，又把歌曲、回忆、仪式与空间性的声音融成更长的心理历程。对宏大意义的渴望，与对意义的怀疑在同一场演出中共存。今天即使不接受歌词中的信仰，仍能参与作品提出的问题：有限的生命怎样获得分量，人又凭什么在失去之后重新相信生活。</p>
+<h3 id="普契尼波希米亚人" data-sourcepos="519:1-519:1">普契尼：《波希米亚人》</h3>
+<p data-sourcepos="521:1-521:1"><strong>年代与范围：四幕歌剧；1896 年都灵首演。</strong></p>
+<p data-sourcepos="523:1-523:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1804679810">Mirella Freni / Luciano Pavarotti / Herbert von Karajan / Berliner Philharmoniker</a>。</p>
+<p data-sourcepos="525:1-525:1">一群年轻艺术家在阁楼里玩笑、挨饿，爱情从找钥匙、触碰冰冷的手这样细小的动作开始。普契尼让短促对白自然流向宽广旋律，再迅速回到交谈；人物不必停止生活，才获得歌唱的空间。先听第一幕鲁道夫与咪咪相识的连续段落，再听第三幕告别时几个人同时表达相反的感情。末幕熟悉主题返回，第一次相遇的温暖已经变成无法挽留的记忆。</p>
+<p data-sourcepos="527:1-527:1">伊利卡与贾科萨根据米尔热描写巴黎艺术青年生活的文字编剧，普契尼把零散片段组织为亲密相遇与疾病、贫困相互交织的戏剧。咪咪的病情与住处的寒冷、无力照料她的现实联系在一起；浪漫阁楼因此也有具体的物质条件。1896 年托斯卡尼尼指挥都灵首演，作品此后逐渐进入各地剧院的核心曲目。<a href="https://www.metopera.org/discover/education/educator-guides/la-boheme/the-operas-plot-and-creation/">大都会歌剧院：文本来源与创作过程</a></p>
+<p data-sourcepos="529:1-529:1">它把日常生活的细部变成大型歌剧值得认真对待的内容，也把旋律与舞台时间结合得格外紧密。观众可以喜欢这些人的轻率，同时看见轻率无法消除的生活困难。作品传播中的“波希米亚”常被浪漫化为自由青春；重听终幕，却会发现真正留下的还有照顾他人的能力、失去后的迟钝，以及朋友聚在一起仍不能改变的结局。<a href="https://www.laopera.org/discover-la-opera/explore/blog/from-page-to-stage-la-boheme">洛杉矶歌剧院：从城市生活书写到歌剧</a></p>
+<h2 id="现代主义的几条道路音色节奏与新秩序" data-sourcepos="531:1-531:1">现代主义的几条道路：音色、节奏与新秩序</h2>
+<p data-sourcepos="533:1-533:1">约 1890—1945 年，欧洲与美国的城市音乐生活中，诗歌、绘画、戏剧和舞蹈不断与作曲相遇，音乐厅、歌剧院及跨国演出也把不同观众带到一起。如何组织一段声音，逐渐有了许多同时成立的答案。德彪西《牧神午后前奏曲》让和声悬置与音色变化影响时间的流向；拉威尔《夜之幽灵》则把水光、钟声与鬼魅的文学想象，化成钢琴上的不同声响层次。细微的明暗、疏密与停顿，也能支撑完整的音乐经验。</p>
+<p data-sourcepos="535:1-535:1">节奏和身体提供了另一条道路。《春之祭》的重音、反复与音块，使舞蹈动作和乐队的集体冲力重新获得分量。巴托克长期研究民间音乐，把节奏、调式和语言般的旋律转化为创作方法；《弦乐、打击乐与钢片琴音乐》中的赋格、夜色与舞蹈，因而能够属于同一个声音世界。格什温《蓝色狂想曲》把爵士语汇与钢琴、乐队的公开演出结合起来，又让都市娱乐和音乐厅之间的往来进入作品；这种交流同时带着美国社会的种族与文化等级。<a href="https://blogs.loc.gov/loc/2024/02/gershwins-rhapsody-at-100-still-capturing-the-american-character/">美国国会图书馆：《蓝色狂想曲》的委约、手稿与传播</a></p>
+<p data-sourcepos="537:1-537:1">音高与形式的探索同样有多种方向。勋伯格《月迷彼埃罗》以自由无调性的写法、近乎说话的歌唱和古老对位手法共同塑造戏剧；后来发展出的十二音方法，则用有序音列及其变形建立材料关系。<a href="https://schoenberg.at/en/exhibitions/online-exhibitions/composition-with-12tones-online">阿诺德·勋伯格中心：十二音方法的形成与历史联系</a> 贝尔格的小提琴协奏曲使这种组织方式与三和弦、民歌和众赞歌相接，较早的《沃采克》则以自由无调性的语言结合严密形式，承载破碎的生活。与此同时，西贝柳斯第七交响曲在调性与传统乐队之内，把速度的过渡、材料的生长和整体结构压缩进一个连续乐章。旧形式始终参与着新语言的形成。</p>
+<p data-sourcepos="539:1-539:1">两次世界大战、政治迫害、流亡与囚禁，改变了这些音乐的创作、演出和传播条件。梅西安在战俘营中的合作，让信仰、鸟鸣与特殊节奏构成另一种时间经验；肖斯塔科维奇第七交响曲则通过战时演出与传播进入公共动员。个人记忆、宗教想象和集体政治可以在同一时期采用迥异的声音。聆听本章时，可以比较一段音乐怎样让我们等待、移动、辨认或失去方向，再把这种感受放回它所处的生活与历史之中。</p>
+<h3 id="德彪西牧神午后前奏曲" data-sourcepos="541:1-541:1">德彪西：《牧神午后前奏曲》</h3>
+<p data-sourcepos="543:1-543:1"><strong>年代：1892—1894 年写作，1894 年巴黎首演。</strong></p>
+<p data-sourcepos="545:1-545:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1592804280">François-Xavier Roth / London Symphony Orchestra</a>。</p>
+<p data-sourcepos="547:1-547:1">长笛独奏像一个尚未说完的念头：旋律半音游移，和声迟迟不把人带到确定的终点；竖琴、木管和弦乐接力，音色的变化本身就构成音乐的进程。它取材于马拉美的诗，围绕牧神朦胧的欲望、回忆与梦境展开，却不逐句翻译诗歌。先听开头长笛，再留意同一个念头回来时，背景与光泽怎样改变。<a href="https://www.laphil.com/works/prelude-to-the-afternoon-of-a-faun-l-86">洛杉矶爱乐：作品与诗歌背景</a></p>
+<p data-sourcepos="549:1-549:1">十九世纪末的巴黎，诗歌、绘画和音乐都在寻找暗示、瞬间感受与不确定性的表达。德彪西没有把浪漫主义管弦乐单纯扩大，而是以疏密、色彩、停顿与和声悬置，改变听众感受时间的方法。称它为“印象主义”可以帮助联想，但不能代替对声音结构的倾听。<a href="https://www.conservatoiredeparis.fr/fr/enquete-autour-du-prelude-lapres-midi-dun-faune-de-debussy">巴黎音乐学院：诗歌、音乐与叙事的关系</a></p>
+<p data-sourcepos="551:1-551:1">这部短作成为音乐现代性的重要入口：发展不一定依靠主题的激烈冲突，也可以依靠细微的音色、节奏与和声变化。它在更广阔的文化史上，展示了象征主义诗歌与音乐之间富有成果的对话；其影响也发生在感知层面：音乐可以让人以另一种方式体验时间与记忆。</p>
+<h3 id="拉威尔夜之幽灵" data-sourcepos="553:1-553:1">拉威尔：《夜之幽灵》</h3>
+<p data-sourcepos="555:1-555:1"><strong>年代与范围：1908 年；钢琴独奏三部曲；1909 年 1 月 9 日由里卡多·维涅斯在巴黎首演。</strong> <a href="https://ressources.ircam.fr/en/work/gaspard-de-la-nuit">IRCAM：作品与首演资料</a></p>
+<p data-sourcepos="557:1-557:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1705736213">Steven Osborne</a>。</p>
+<p data-sourcepos="559:1-559:1">《水妖》的细密音型像水面不断变化的光，歌唱的线条从波纹中浮起；《绞刑架》反复敲响同一个钟音，周围和声缓慢改变，时间仿佛被悬住。《斯卡尔博》则让短促动机、突然爆发和骤然安静交替出现，鬼魅不断逼近，又忽然消失。可先比较前两首的流动与静止，再听第三首怎样把等待变成惊惧。<a href="https://www.laphil.com/works/gaspard-de-la-nuit">洛杉矶爱乐：三首诗与声音层次</a></p>
+<p data-sourcepos="561:1-561:1">拉威尔从阿洛伊修斯·贝特朗的同名散文诗集中选取三篇，把十九世纪文学中的诱惑、死亡与怪诞带入二十世纪的钢琴写作。诗歌提供人物和景象，音乐则通过音区、力度、反复与停顿，使这些形象获得各自的时间与重量。</p>
+<p data-sourcepos="563:1-563:1">作品对演奏者的控制力要求极高，而听众最值得追随的是声音的远近：旋律怎样穿过密集背景，同一个钟声怎样承受不断改变的阴影。一架钢琴由此成为拥有多层空间的剧场，技巧也成为塑造感知与想象的具体手段。</p>
+<h3 id="勋伯格月迷彼埃罗" data-sourcepos="565:1-565:1">勋伯格：《月迷彼埃罗》</h3>
+<p data-sourcepos="567:1-567:1"><strong>年代与范围：Op.21；1912 年，二十一首诗分为三组。</strong></p>
+<p data-sourcepos="569:1-569:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1452181812">Christine Schäfer / Ensemble Intercontemporain / Pierre Boulez</a>。</p>
+<p data-sourcepos="571:1-571:1">人声停在歌唱与说话之间：音高有记谱，却不按通常的歌唱方式把音稳定维持。长笛、单簧管、弦乐与钢琴以不断变化的组合围绕它，时而苍白，时而尖刻。可从第一首《月醉》进入，再听第八首《夜》：后者用低沉、反复纠缠的短小动机，使阴影仿佛获得重量。这里的陌生并非随机，而来自语调、节奏与器乐细节之间极精密的配合。</p>
+<p data-sourcepos="573:1-573:1">作品由朗诵演员阿尔贝蒂娜·策梅委约，以阿尔贝·吉罗诗作的德语改写为文本。月亮、小丑、血与梦魇属于世纪之交文艺中反复出现的意象；勋伯格把这种充满裂缝的主观世界，搬进都市的小型演出空间。他同时采用卡农、赋格、帕萨卡利亚等旧手法，使古老技艺在怪诞情境里重新发声。<a href="https://schoenberg.at/de/schoenberg/kompositionen/pierrot-lunaire-op-21">阿诺德·勋伯格中心：委约、声乐处理与作品结构</a></p>
+<p data-sourcepos="575:1-575:1">《月迷彼埃罗》属于自由无调性时期，尚未采用后来确立的十二音方法。它让现代音乐的革新同时发生在音高、语言和表演身份上：声音能够表达一个人的不安，也能让人怀疑自己听见的是独白、幻觉还是戏剧。少量乐器组合出高度独立的色彩，后来也成为现代室内乐反复探索的资源。</p>
+<h3 id="斯特拉文斯基春之祭" data-sourcepos="577:1-577:1">斯特拉文斯基：《春之祭》</h3>
+<p data-sourcepos="579:1-579:1"><strong>年代：1910—1913 年创作；1913 年 5 月 29 日巴黎首演，后来多次修订。</strong></p>
+<p data-sourcepos="581:1-581:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/stravinsky-the-rite-of-spring/881240687">Esa-Pekka Salonen / Los Angeles Philharmonic</a>。</p>
+<p data-sourcepos="583:1-583:1">开头是高音区的巴松，随后不同层次的短句、重音与节奏不断叠加；看似重复的和弦，因为落点改变而让身体失去预期。旋律没有消失，但节奏、音色和音块获得了前所未有的支配力。可以从《春之预兆》中连续的弦乐和弦入手，再听最后《献祭之舞》怎样用不断变化的重音组织紧张感。</p>
+<p data-sourcepos="585:1-585:1">作品为佳吉列夫的俄罗斯芭蕾舞团而作，尼金斯基编舞，罗里奇参与构思与视觉设计；舞台呈现的是想象中的古代异教仪式，以少女献祭迎接春天。这里的“原始俄罗斯”经过现代艺术家的加工，也回应了巴黎观众对于异域的期待，不能作为古代生活的写实记录。<a href="https://www.laphil.com/works/the-rite-of-spring">洛杉矶爱乐：创作、剧情与首演</a></p>
+<p data-sourcepos="587:1-587:1">首演确有叫喊与冲突，但“所有人只因不协和音乐而暴动”过度简化了现场：舞蹈姿态、观众群体与演出环境同样重要。它后来成为管弦乐与舞蹈现代主义的核心作品，扩大了音乐组织身体运动、集体力量与仪式感的方式。直到今天，演奏它仍要求乐队重新协调复杂的节奏与身体感。<a href="https://www.sfcm.edu/discover/newsroom/rite-of-spring-riot-premiere-sfcm">旧金山音乐学院：首演事件的多重因素</a></p>
+<h3 id="贝尔格沃采克" data-sourcepos="589:1-589:1">贝尔格：《沃采克》</h3>
+<p data-sourcepos="591:1-591:1"><strong>年代与范围：主要写于 1917—1922 年；1925 年在柏林首演，三幕十五场。</strong></p>
+<p data-sourcepos="593:1-593:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1452168885">Franz Grundheber / Claudio Abbado / Vienna Philharmonic 等</a>。</p>
+<p data-sourcepos="595:1-595:1">一个贫穷士兵为了维持生活，接受上尉的羞辱和医生的实验，最终在嫉妒与精神崩溃中杀死伴侣玛丽。贝尔格没有让人物一直停在尖叫中：摇篮曲、军乐、酒馆舞曲与近乎说话的人声，构成可以辨认的日常世界。先听第一幕医生一场，重复发展的音乐材料像一套冷酷程序；再听第三幕结尾，儿童继续游戏的轻快，与观众已经知道的灾难形成刺痛。</p>
+<p data-sourcepos="597:1-597:1">脚本改编自毕希纳留下的戏剧《沃伊采克》。贝尔格经历第一次世界大战服役，写作则跨越战争及其后的社会动荡；但舞台所揭示的压迫，首先来自具体关系：军阶、贫困、医学权威，以及亲密关系中施加给女性的暴力。主人公既是受害者，也对他人造成不可挽回的伤害。<a href="https://www.metopera.org/discover/education/educator-guides/wozzeck/the-operas-plot-creation/">大都会歌剧院：剧情、原作与创作经过</a></p>
+<p data-sourcepos="599:1-599:1">表面破碎的戏剧，背后有组曲、帕萨卡利亚和交响性组织支撑。形式不要求观众当场识别，却帮助不同场景积累成完整悲剧。《沃采克》显示，无调性语言同样能够进入大型歌剧，以极细致的音乐联系争取对弱者的理解；现代主义的难题由此成为人怎样对待人的问题。<a href="https://www.metopera.org/discover/articles/modern-maestro/">大都会歌剧院：旧形式与现代戏剧</a></p>
+<h3 id="西贝柳斯第七交响曲" data-sourcepos="601:1-601:1">西贝柳斯：第七交响曲</h3>
+<p data-sourcepos="603:1-603:1"><strong>年代与范围：C 大调，Op.105；1924 年完成，同年斯德哥尔摩首演。</strong></p>
+<p data-sourcepos="605:1-605:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1725552972">Osmo Vänskä / Minnesota Orchestra</a>。</p>
+<p data-sourcepos="607:1-607:1">全曲只有一个连续乐章，慢与快、宽广与急促却像天气一样逐渐改变。长号的庄严主题在几处关键位置升起，周围的弦乐和木管已经换了速度、密度与方向。初听可以不忙着划分段落，只认出长号几次归来，再听快速音型怎样从先前的缓慢运动里生长出来。终点的 C 大调并未立即消除紧张；经过不断挤压后，最后的和弦才获得自己的重量。<a href="https://www.bso.org/works/sibelius-symphony-no-7">波士顿交响乐团：连续结构与长号主题</a></p>
+<p data-sourcepos="609:1-609:1">它起初以《交响幻想曲》之名首演，后来才成为第七交响曲。早年民族题材与芬兰公共生活的联系，曾帮助确立西贝柳斯的地位；此时他更专注于让音乐材料自身的变化决定形式。漫长草拟与浓缩的结果，在首演乐团保留的日记和创作说明中清晰可见。<a href="https://www.konserthuset.se/en/about-us/our-operation/festivals/grande-finale/liner-notes-and-curious-facts/the-symphonies/symphony-no.-7/">斯德哥尔摩音乐厅：首演档案与形式构思</a></p>
+<p data-sourcepos="611:1-611:1">这首作品显示，二十世纪的更新也可以发生在调性与传统乐队之内：改变的核心是人怎样感受时间、怎样把几个相异场景听成同一过程。这是西贝柳斯最后完成的交响曲。那种把广阔压进短篇的能力，让听众感到完整并不依赖庞大，力量也可以来自节制、过渡与耐心。</p>
+<h3 id="格什温蓝色狂想曲" data-sourcepos="613:1-613:1">格什温：《蓝色狂想曲》</h3>
+<p data-sourcepos="615:1-615:1"><strong>年代：1924 年；2 月 12 日在纽约首演。</strong></p>
+<p data-sourcepos="617:1-617:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1452186665">Jean-Yves Thibaudet / Baltimore Symphony Orchestra / Marin Alsop</a>。</p>
+<p data-sourcepos="619:1-619:1">单簧管向上滑出的开场，立即打破庄严音乐会惯常的姿态。钢琴时而独自炫技，时而接上乐队的切分节奏；宽阔的抒情主题又让急促活动暂时停下来。可以跟随几条旋律怎样反复出现、改变速度和音色，而不必把它当作严格的古典协奏曲。音乐中既有都市的忙碌，也有一个人在拥挤生活里忽然放大情感的时刻。</p>
+<p data-sourcepos="621:1-621:1">保罗·怀特曼为其“现代音乐实验”音乐会邀请格什温创作，费尔德·格罗菲承担配器。歌单采用的蒂博代录音回到早期爵士乐队版本，其较轻巧、带鲜明管乐个性的声音，有助于听见作品与舞厅、剧院和流行歌曲工业的联系。<a href="https://www.deccaclassics.com/de/kuenstler-innen/jeanyvesthibaudet/pressestimmen/back-to-the-roots-91278">Decca：本录音的版本选择</a></p>
+<p data-sourcepos="623:1-623:1">这次跨界也带着时代的不平等：源自黑人音乐实践的爵士语汇，通过白人乐队与商业音乐会获得另一种公共声望。它没有消除种族与文化等级，却让美国音乐会曲目更明确地面对本地都市声音。其长久魅力，在于即兴般的自由与精心安排的高潮能够共存，流行旋律也能承担复杂而持久的情感。<a href="https://blogs.loc.gov/loc/2024/02/gershwins-rhapsody-at-100-still-capturing-the-american-character/">美国国会图书馆：音乐会与社会背景</a></p>
+<h3 id="贝尔格小提琴协奏曲纪念一位天使" data-sourcepos="625:1-625:1">贝尔格：小提琴协奏曲《纪念一位天使》</h3>
+<p data-sourcepos="627:1-627:1"><strong>年代与范围：1935 年；两个大乐章，各含两个部分；1936 年 4 月 19 日在巴塞罗那首演。</strong></p>
+<p data-sourcepos="629:1-629:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/495900549">Isabelle Faust / Orchestra Mozart / Claudio Abbado</a>。链接与前文贝多芬小提琴协奏曲同属一张专辑，请定位贝尔格作品。</p>
+<p data-sourcepos="631:1-631:1">独奏小提琴从四根空弦的轻触开始，声音像在寻找方向，随后逐渐进入歌唱、舞蹈和乡间旋律。第二大乐章骤然变得暴烈，经过强烈高潮后，众赞歌《已经足够》缓缓出现。初听可以沿着这条路径前行：从试探和生活的步态，经过破裂，再听熟悉的宗教旋律怎样与独奏相互承接。<a href="https://www.bso.org/works/berg-violin-concerto">波士顿交响乐团：结构、音列与众赞歌</a></p>
+<p data-sourcepos="633:1-633:1">作品来自小提琴家路易斯·克拉斯纳的委约。创作期间，贝尔格得知十八岁的曼侬·格罗皮乌斯去世，遂把协奏曲写成对她的纪念，并题上“纪念一位天使”。他在同年年底去世，未能亲耳听见这部最后完成的作品；作品的悼念对象与后来附加的告别意味，应当分别理解。<a href="https://www.laphil.com/works/violin-concerto-berg">洛杉矶爱乐：委约、曼侬与首演</a></p>
+<p data-sourcepos="635:1-635:1">十二音方法以十二个音级组成的有序音列及其移调、倒影、逆行等形态组织音高，不由传统调性中心统摄全曲；它不是随机选音，也不意味着禁止一切音符重复。<a href="https://schoenberg.at/en/exhibitions/online-exhibitions/composition-with-12tones-online">阿诺德·勋伯格中心：十二音创作专题</a> 贝尔格的音列容纳大小三和弦，并与众赞歌的音程相接；这首众赞歌的旋律出自阿勒，经巴赫配和声后进入协奏曲。严密的音高组织、民歌记忆与个人哀悼共同展开，使新的写作方法获得可感的抒情力量。</p>
+<h3 id="巴托克弦乐打击乐与钢片琴音乐" data-sourcepos="637:1-637:1">巴托克：《弦乐、打击乐与钢片琴音乐》</h3>
+<p data-sourcepos="639:1-639:1"><strong>年代与范围：1936 年作曲，1937 年首演；四个乐章。</strong></p>
+<p data-sourcepos="641:1-641:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1452540560">Chicago Symphony Orchestra / Pierre Boulez</a>。</p>
+<p data-sourcepos="643:1-643:1">弦乐分列两组，钢琴、竖琴、钢片琴与打击乐在其间构成另一层声音。第一乐章从中提琴低声提出主题，各声部逐一加入，膨胀至强烈高潮后重新收拢。第三乐章则像夜里感官突然敏锐起来：木琴的单音、定音鼓的滑音与细微弦乐互相照见。先比较这两段，便能发现严密对位与奇异音色并不分离，而是同一种结构的不同面貌。</p>
+<p data-sourcepos="645:1-645:1">作品来自保罗·萨赫为巴塞尔室内乐团成立十周年的委约。私人赞助和专业乐团，为这样的配器实验提供了条件。巴托克长期研究匈牙利及周边地区的民间音乐，但这里很少让人只听见可摘出的民歌曲调；舞蹈节奏、调式和语言般的旋律走向，已经进入组织音乐的方式。<a href="https://www.laphil.com/works/music-for-strings-percussion-and-celesta">洛杉矶爱乐：委约、民间材料与四乐章分析</a></p>
+<p data-sourcepos="647:1-647:1">终乐章把夜色转换为充满身体冲力的舞蹈，第一乐章主题又在新环境中返回。作品为二十世纪音乐提供了一条有分量的道路：作曲家能够从地方传统汲取方法，同时重新思考空间、音色与大结构。地方传统与现代技法在这里共同产生既陌生又有生命力的声音。</p>
+<h3 id="梅西安时间终结四重奏" data-sourcepos="649:1-649:1">梅西安：《时间终结四重奏》</h3>
+<p data-sourcepos="651:1-651:1"><strong>年代与范围：1940—1941 年；1941 年 1 月 15 日在格尔利茨 Stalag VIII-A 战俘营首演，八个乐章。</strong></p>
+<p data-sourcepos="653:1-653:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/416955662">Tashi / Peter Serkin / Ida Kavafian / Fred Sherry / Richard Stoltzman</a>。</p>
+<p data-sourcepos="655:1-655:1">钢琴、小提琴、大提琴与单簧管，并非始终四人同奏。《鸟之深渊》让单簧管独自经历极长的呼吸与突然迸出的鸟鸣；《赞美耶稣的永恒》中，大提琴的缓慢长线条悬在钢琴和弦上。与之相对，《为七支号角而作的愤怒之舞》用整齐同奏、不断变化的时值制造坚硬冲力。时间既可以被拉长，也可以失去惯常的匀速刻度。</p>
+<p data-sourcepos="657:1-657:1">梅西安被俘后，在营中与其他演奏者合作完成并演出作品。首演邀请函留下了日期与地点；它的意义无需依靠破损乐器或夸大听众人数的传奇来成立。作品题名与《启示录》相连，作曲者关注的是超越过去和未来的永恒，而非简单描绘战争末日。<a href="https://www.auditorium-lyon.com/fr/quatuor-fin-du-temps">里昂国立管弦乐团：首演文献与作曲者说明</a></p>
+<p data-sourcepos="659:1-659:1">鸟鸣、特殊调式与复杂节奏，在这里服务于高度个人化的天主教想象，也开辟了战后音乐继续探索的方向。面对囚禁这一极端现实，四个人仍能共同创造另一种时间经验。这段合作也让我们听见，在肉身受限制时，注意力、信仰和相互倾听仍能保存怎样的自由。<a href="https://www.laphil.com/works/quartet-for-the-end-of-time">洛杉矶爱乐：音乐语言与宗教时间</a></p>
+<h3 id="肖斯塔科维奇第七交响曲列宁格勒" data-sourcepos="661:1-661:1">肖斯塔科维奇：第七交响曲《列宁格勒》</h3>
+<p data-sourcepos="663:1-663:1"><strong>年代与范围：Op.60；1941 年作曲，1942 年 3 月 5 日在古比雪夫首演；四个乐章。</strong></p>
+<p data-sourcepos="665:1-665:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1786772340">Boston Symphony Orchestra / Andris Nelsons</a>。</p>
+<p data-sourcepos="667:1-667:1">第一乐章最醒目的段落，由轻巧得近乎平庸的旋律与小鼓开始，反复越来越响，配器越来越拥挤，最终成为压倒性的力量。可先听它如何从可以忽略的背景变成无法摆脱的威胁，再听随后展开的悲歌怎样承接这场冲击。后面仍有舞蹈、回忆与抒情；终乐章的强大结束，也并不轻易抹去前面的损失。</p>
+<p data-sourcepos="669:1-669:1">前三个乐章写于 1941 年的列宁格勒，终乐章在作曲者撤离至古比雪夫后完成。1942 年 8 月 9 日，埃利亚斯贝格在仍遭围困的列宁格勒指挥演出，是其接受史上的重要事件，却不是世界首演。创作、撤离与围城演出属于彼此相连的不同阶段。<a href="https://shostakovich-en.ru/152en">肖斯塔科维奇官方档案：创作与演出年表</a></p>
+<p data-sourcepos="671:1-671:1">作品通过广播和盟国演出成为反纳粹抵抗的公共象征，这是音乐与战争动员产生具体联系的案例。战后，它又因规模与宣告语气受到质疑。今天重听，可同时承认其历史用途与音乐的多义性：机械重复究竟代表何种暴力，胜利怎样与创痛共存，作品留下的张力比单一的政治标签更长久。<a href="https://www.boosey.com/cr/music/Dmitri-Shostakovich-Symphony-No-7-in-C-major-Leningrad/7103">Boosey &amp; Hawkes：战时传播与接受史</a></p>
+<h2 id="战后音乐记忆实验与聆听" data-sourcepos="673:1-673:1">战后音乐：记忆、实验与聆听</h2>
+<p data-sourcepos="675:1-675:1">1945 年以后，战争造成的死亡与创伤持续进入公共纪念，作曲家也在共同仪式与个人经验之间寻找表达。布里顿《战争安魂曲》为重建的考文垂主教座堂而作，把拉丁礼仪与欧文的一战诗歌并置，让宗教安慰与士兵的质问相互牵动。<a href="https://www.brittenpearsarts.org/news/work-of-the-week-special-war-requiem">Britten Pears Arts：考文垂、战争诗与公共纪念</a> 潘德列茨基《广岛受难者挽歌》则使音簇、滑音与弦乐的特殊发音，进入核战争记忆的语境；它的纪念标题是在成曲后加入的，作品的声音实验与后来形成的意义需要一起理解。悼念由此既可以借助熟悉的人声与经文，也可以从陌生的音响中发生。</p>
+<p data-sourcepos="677:1-677:1">新的创作机会也依靠具体机构与技术。音乐节、广播机构、艺术学校和实验剧场，让作曲家与演奏者、工程师及视觉艺术家形成不同合作。广播实验室提供磁带、发生器与滤波设备，声音可以经过剪接、连接和电子处理，创作的一部分因而转移到录音室的反复试听与调整。波兰广播实验室就是这样的工作场所。这些实践与合唱、器乐及舞台作品并行，声音的密度、位置和发音方式，也逐渐成为作曲与聆听可以持续关注的对象。<a href="https://post.moma.org/spatial-music-design-and-the-polish-radio-experimental-studio/">MoMA：波兰广播实验室的设备、空间与合作</a></p>
+<p data-sourcepos="679:1-679:1">凯奇把注意转向演出现场本身。黑山学院等跨学科环境促成音乐、舞蹈与视觉艺术的交流；《4分33秒》则用明确的时间边界，使风雨、呼吸与观众的动作进入聆听。演奏者暂时停止主动发声，仍然需要组织时间和表演行为，听众也需要重新意识到自己如何分配注意力。与《广岛受难者挽歌》主动塑造强烈声响的做法相比，这里获得分量的是环境中不断发生、却常被忽略的声音；两种实践让声音与意义的关系显出不同面貌。</p>
+<p data-sourcepos="681:1-681:1">到 1970 年代，赖希与格拉斯通过自组乐团和长期合作，发展出以反复、脉动和细微变化维系大结构的音乐。《十八位音乐家的音乐》把稳定节拍与演奏者的呼吸并置，和声与声部的替换不断改变听觉重心；《海滩上的爱因斯坦》则让重复音型、唱名、朗诵、舞蹈与图像共同建立长时间的剧场。规律与变化、身体与技术、私人感受与公共仪式，在本章几种实践中以不同关系共存，听众也从中学习辨认新的时间尺度。<a href="https://www.boosey.com/cr/music/Steve-Reich-Music-for-18-Musicians/548">赖希自述：脉动、呼吸与合奏结构</a></p>
+<h3 id="凯奇4分33秒" data-sourcepos="683:1-683:1">凯奇：《4分33秒》</h3>
+<p data-sourcepos="685:1-685:1"><strong>年代：1952 年；8 月 29 日由大卫·都铎在纽约州伍德斯托克首演。</strong></p>
+<p data-sourcepos="687:1-687:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/dempster-gamper-oliveros-traffic-prayers-deep-hockets/456290670">Julie Steinberg（钢琴不奏，保留音乐厅环境）</a>。</p>
+<p data-sourcepos="689:1-689:1">演奏者在三个乐章中不主动发出乐器声，时间却仍在流逝：风、雨、呼吸、椅子与人的动作进入注意范围。作品不是一段要求数字绝对静音的音频，而是用演出框架，使原本被当作“背景”的声音成为聆听对象。约翰·凯奇基金会的作品目录，也将它放在偶然方法与声音、休止关系的探索中。<a href="https://data-johncage.org/pp/John-Cage-Work-Detail.cfm?work_ID=17">约翰·凯奇作品目录：编制、时长与创作观念</a></p>
+<p data-sourcepos="691:1-691:1">在战后实验艺术中，乐谱、演出与观众的关系被重新提问：作曲家必须控制所有声音吗？作品必须以旋律、和声或个人情感为中心吗？首演时，都铎用键盘盖的开合标示段落，使一个明确的行为和时间边界承载了这场实验。</p>
+<p data-sourcepos="693:1-693:1">其影响跨入声音艺术、行为与观念艺术的讨论：听众从接收预先安排的音符，转向意识到自己的环境与期待也参与了作品。它扩展了“什么可以进入音乐”的边界。听当前的 Julie Steinberg 录音时，可以比较所录环境与你此刻房间中的声音：前者是一次演出的留存，后者让这部作品的问题继续发生。<a href="https://www.moma.org/collection/works/163616">纽约现代艺术博物馆：乐谱、首演与环境声音</a></p>
+<h3 id="潘德列茨基广岛受难者挽歌" data-sourcepos="695:1-695:1">潘德列茨基：《广岛受难者挽歌》</h3>
+<p data-sourcepos="697:1-697:1"><strong>年代与范围：1960 年；为五十二件弦乐器而作，1961 年开始传播与公开演出。</strong></p>
+<p data-sourcepos="699:1-699:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/570042761">Antoni Wit / Polish National Radio Symphony Orchestra</a>。</p>
+<p data-sourcepos="701:1-701:1">开场的高音没有温柔的旋律轮廓，像一道逐渐形成的灼热音带。随后是密集音簇、滑动、颤动，以及敲击和特殊拉奏形成的碎裂声音。初听可以暂时不追求主题，把注意力放在声音怎样由窄变宽、由静止变得躁动，以及强音骤退后留下的空白。五十二件同属弦乐家族的乐器，竟能呈现仿佛跨出传统乐队的听觉世界。</p>
+<p data-sourcepos="703:1-703:1">作品原名《8分37秒》，以时长命名；献给广岛受难者的标题是在成曲、听到音响之后才加入。因此不能把每一声都说成预先设计的爆炸或惨叫。后来确定的献名，引导这项声音实验进入核战争的记忆，也使抽象音乐成为可以共同悼念的场所。<a href="https://iam.pl/en/node/10419">亚当·密茨凯维奇研究院：创作、改名与献词</a></p>
+<p data-sourcepos="705:1-705:1">它诞生于波兰文化解冻后，新音乐节与广播机构促进交流的环境，显示音色、密度和发音方式本身能够承担结构与情感。其分量也在于改变“音乐如何表达”的预期：无需熟悉的歌唱旋律，声音仍能唤起恐惧、脆弱与同情。听众的历史知识参与了意义的生成，而音乐的力量又使献名获得持久回响。</p>
+<h3 id="布里顿战争安魂曲" data-sourcepos="707:1-707:1">布里顿：《战争安魂曲》</h3>
+<p data-sourcepos="709:1-709:1"><strong>年代与范围：Op.66；1961—1962 年，1962 年 5 月 30 日在考文垂新主教座堂首演。</strong></p>
+<p data-sourcepos="711:1-711:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/1708394694">Benjamin Britten / London Symphony Orchestra / Melos Ensemble / London Symphony Chorus 等</a>。歌单采用作曲者指挥的 1963 年录音。</p>
+<p data-sourcepos="713:1-713:1">拉丁安魂弥撒的合唱，与威尔弗雷德·欧文写下的战争诗并置，却不总互相安慰。大合唱和乐队像公共仪式，男声独唱与室内乐则把人带到士兵近旁，童声从另一层空间传来。可听《震怒之日》的巨大声势怎样被具体生命的恐惧打断，再听结尾两名敌军士兵在死后相认：宏大纪念因此不断被个人经验追问。</p>
+<p data-sourcepos="715:1-715:1">考文垂旧教堂在 1940 年轰炸中毁坏，新教堂的落成使作品同时面对两次世界大战的死者。布里顿长期坚持和平主义，把一战士兵诗人的文字放进宗教礼仪，既寻求哀悼，也拒绝把牺牲轻易美化成荣耀。这种冲突进入了文本和音响的安排，而非只停在作品标题。<a href="https://www.brittenpearsarts.org/news/work-of-the-week-special-war-requiem">Britten Pears Arts：考文垂委约、文本与和平主义</a></p>
+<p data-sourcepos="717:1-717:1">他原拟由英国、德国与苏联歌唱家共同担任独唱；苏联女高音维什涅夫斯卡娅未获准参加首演，却参与了歌单这份录音，跨国和解的愿望也真实遭遇冷战边界。作品继承大型合唱传统，又让仪式内部保留异议：纪念不能替活人免除责任，共同歌唱也不意味着关于战争的疑问已经解决。</p>
+<h3 id="赖希十八位音乐家的音乐" data-sourcepos="719:1-719:1">赖希：《十八位音乐家的音乐》</h3>
+<p data-sourcepos="721:1-721:1"><strong>年代与范围：1974—1976 年；1976 年 4 月 24 日在纽约首演。</strong></p>
+<p data-sourcepos="723:1-723:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/79577274">Steve Reich Ensemble</a>。</p>
+<p data-sourcepos="725:1-725:1">钢琴与键盘打击乐维持稳定脉动，人声、单簧管和弦乐在其中浮现、交接。开头展示十一和弦的循环，随后各段把和弦内部的活动逐渐放大；收尾再回到最初的脉动。可先跟住一条反复音型，再把注意力转向低音或另一件乐器：材料未必大幅改变，听见的重心却已经转移。重复因而可以容纳持续的发现。</p>
+<p data-sourcepos="727:1-727:1">赖希把两种时间同时放进作品：持续的节拍，以及演奏者一口气能够维持的长度。许多转换由颤音琴的可听提示带出，演奏者需要彼此倾听，不只跟随外在指挥。这是作曲家与自己的乐团长期合作所形成的实践；木琴、钢琴、人声的发音差异，也让整齐脉搏保留身体感。<a href="https://www.boosey.com/cr/music/Steve-Reich-Music-for-18-Musicians/548">Boosey &amp; Hawkes：赖希自述配器、呼吸与演出提示</a></p>
+<p data-sourcepos="729:1-729:1">和声变化、声部替换与节奏重音的重新组合，都在塑造长程体验。它标志着极简主义从早期鲜明的单一过程，发展出更丰厚的合奏关系。音乐没有要求听者接受一种思想结论，却使共同维持节奏、等待微小变化成为充实的经验；个人的呼吸与集体秩序，在同一段时间里互相支持。</p>
+<h3 id="格拉斯海滩上的爱因斯坦" data-sourcepos="731:1-731:1">格拉斯：《海滩上的爱因斯坦》</h3>
+<p data-sourcepos="733:1-733:1"><strong>年代与范围：1976 年在阿维尼翁首演；四幕歌剧，与罗伯特·威尔逊共同创作。</strong></p>
+<p data-sourcepos="735:1-735:1"><strong>歌单录音</strong>：<a href="https://music.apple.com/us/album/637056287">The Philip Glass Ensemble / Michael Riesman</a>。</p>
+<p data-sourcepos="737:1-737:1">数字、唱名、朗诵、管乐与键盘的快速音型不断循环，变化常从微小增减中出现。这里没有可以一路追随的传记剧情，爱因斯坦更像一个召集科学、时间与现代想象的形象。可先听《Knee 1》的数字与和声，再进入《Train 1》：重复让人逐渐改变关注的位置，原本像背景的重音、音色或呼吸，会突然成为前景。</p>
+<p data-sourcepos="739:1-739:1">格拉斯与威尔逊把音乐、舞蹈、文字和视觉场景共同组织为剧场。连接四幕的短段称作“膝接段”，仿佛关节使庞大身体能够活动；原舞台演出长达数小时，观众可以自由进出。它来自实验剧场与作曲家自组乐团的合作，重新安排了歌剧的生产方式与观演习惯。<a href="https://robertwilson.com/einstein-on-the-beach">罗伯特·威尔逊档案：结构、舞台与观众</a></p>
+<p data-sourcepos="741:1-741:1">这部作品使重复性的音乐语言进入大规模音乐戏剧，证明舞台能够依靠图像、动作与持续的声音建立联系。唱片保存了其中的音乐时间，舞台则增加另一层经验。聆听时可以暂时放下寻找情节答案，让注意力在熟悉与变化之间往返。<a href="https://philipglass.com/compositions/einstein_on_the_beach/">格拉斯官网：作品构想与首演</a></p>
+
+      </article>
+    </main>
+
+    <!-- Right Sidebar (TOC) -->
+    <aside class="sidebar right-sidebar collapsed" id="right-sidebar">
+      <div class="sidebar-content" id="spa-toc">
+        <!-- <h4 class="toc-title">On this page</h4> -->
+        <ul class="toc-list"><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#中世纪礼仪修院与复调的诞生">中世纪：礼仪、修院与复调的诞生</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#格里高利圣咏传统chant">格里高利圣咏传统：《Chant》</a></li><li class="toc-child toc-level-3"><a href="#希尔德加德美德之序">希尔德加德：《美德之序》</a></li><li class="toc-child toc-level-3"><a href="#佩罗坦众人皆见">佩罗坦：《众人皆见》</a></li><li class="toc-child toc-level-3"><a href="#马肖圣母弥撒">马肖：《圣母弥撒》</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#文艺复兴复调的均衡与信仰的分裂">文艺复兴：复调的均衡与信仰的分裂</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#若斯坎圣母颂">若斯坎：《圣母颂》</a></li><li class="toc-child toc-level-3"><a href="#帕莱斯特里纳教皇马尔切洛弥撒">帕莱斯特里纳：《教皇马尔切洛弥撒》</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#巴洛克戏剧秩序与感情的多条路径">巴洛克：戏剧、秩序与感情的多条路径</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#蒙特威尔第奥菲欧">蒙特威尔第：《奥菲欧》</a></li><li class="toc-child toc-level-3"><a href="#维瓦尔第四季">维瓦尔第：《四季》</a></li><li class="toc-child toc-level-3"><a href="#巴赫第二无伴奏小提琴组曲-bwv-1004">巴赫：第二无伴奏小提琴组曲 BWV 1004</a></li><li class="toc-child toc-level-3"><a href="#巴赫平均律钢琴曲集两卷">巴赫：《平均律钢琴曲集》两卷</a></li><li class="toc-child toc-level-3"><a href="#巴赫马太受难曲">巴赫：《马太受难曲》</a></li><li class="toc-child toc-level-3"><a href="#亨德尔弥赛亚">亨德尔：《弥赛亚》</a></li><li class="toc-child toc-level-3"><a href="#巴赫b-小调弥撒">巴赫：《b 小调弥撒》</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#古典主义公共交往与舞台上的人">古典主义：公共交往与舞台上的人</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#海顿六首弦乐四重奏-op.33">海顿：六首弦乐四重奏 Op.33</a></li><li class="toc-child toc-level-3"><a href="#莫扎特第24钢琴协奏曲-k.491">莫扎特：第24钢琴协奏曲 K.491</a></li><li class="toc-child toc-level-3"><a href="#莫扎特费加罗的婚礼">莫扎特：《费加罗的婚礼》</a></li><li class="toc-child toc-level-3"><a href="#莫扎特唐璜">莫扎特：《唐璜》</a></li><li class="toc-child toc-level-3"><a href="#莫扎特第四十一交响曲朱庇特">莫扎特：第四十一交响曲《朱庇特》</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#贝多芬与浪漫主义个人共同体与神话">贝多芬：古典形式的扩张</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#贝多芬第三交响曲英雄">贝多芬：第三交响曲《英雄》</a></li><li class="toc-child toc-level-3"><a href="#贝多芬d大调小提琴协奏曲-op.61">贝多芬：D大调小提琴协奏曲 Op.61</a></li><li class="toc-child toc-level-3"><a href="#贝多芬第五交响曲">贝多芬：第五交响曲</a></li><li class="toc-child toc-level-3"><a href="#贝多芬第32钢琴奏鸣曲-op.111">贝多芬：第32钢琴奏鸣曲 Op.111</a></li><li class="toc-child toc-level-3"><a href="#贝多芬第九交响曲合唱">贝多芬：第九交响曲《合唱》</a></li><li class="toc-child toc-level-3"><a href="#贝多芬第14弦乐四重奏-op.131">贝多芬：第14弦乐四重奏 Op.131</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#浪漫主义的展开歌唱幻想与钢琴">浪漫主义的展开：歌唱、幻想与钢琴</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#舒伯特冬之旅">舒伯特：《冬之旅》</a></li><li class="toc-child toc-level-3"><a href="#舒伯特c大调弦乐五重奏-d.956">舒伯特：C大调弦乐五重奏 D.956</a></li><li class="toc-child toc-level-3"><a href="#柏辽兹幻想交响曲">柏辽兹：《幻想交响曲》</a></li><li class="toc-child toc-level-3"><a href="#肖邦二十四首前奏曲-op.28">肖邦：二十四首前奏曲 Op.28</a></li><li class="toc-child toc-level-3"><a href="#舒曼降-e-大调钢琴五重奏-op.44">舒曼：降 E 大调钢琴五重奏 Op.44</a></li><li class="toc-child toc-level-3"><a href="#李斯特b-小调钢琴奏鸣曲">李斯特：b 小调钢琴奏鸣曲</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#浪漫主义中后期舞台神话与共同体">浪漫主义中后期：舞台、神话与共同体</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#威尔第茶花女">威尔第：《茶花女》</a></li><li class="toc-child toc-level-3"><a href="#瓦格纳特里斯坦与伊索尔德">瓦格纳：《特里斯坦与伊索尔德》</a></li><li class="toc-child toc-level-3"><a href="#勃拉姆斯德意志安魂曲">勃拉姆斯：《德意志安魂曲》</a></li><li class="toc-child toc-level-3"><a href="#瓦格纳尼伯龙根的指环">瓦格纳：《尼伯龙根的指环》</a></li><li class="toc-child toc-level-3"><a href="#柴可夫斯基天鹅湖">柴可夫斯基：《天鹅湖》</a></li><li class="toc-child toc-level-3"><a href="#柴可夫斯基第六交响曲悲怆">柴可夫斯基：第六交响曲《悲怆》</a></li><li class="toc-child toc-level-3"><a href="#德沃夏克第九交响曲自新大陆">德沃夏克：第九交响曲《自新大陆》</a></li><li class="toc-child toc-level-3"><a href="#马勒第二交响曲复活">马勒：第二交响曲《复活》</a></li><li class="toc-child toc-level-3"><a href="#普契尼波希米亚人">普契尼：《波希米亚人》</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#现代主义的几条道路音色节奏与新秩序">现代主义的几条道路：音色、节奏与新秩序</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#德彪西牧神午后前奏曲">德彪西：《牧神午后前奏曲》</a></li><li class="toc-child toc-level-3"><a href="#拉威尔夜之幽灵">拉威尔：《夜之幽灵》</a></li><li class="toc-child toc-level-3"><a href="#勋伯格月迷彼埃罗">勋伯格：《月迷彼埃罗》</a></li><li class="toc-child toc-level-3"><a href="#斯特拉文斯基春之祭">斯特拉文斯基：《春之祭》</a></li><li class="toc-child toc-level-3"><a href="#贝尔格沃采克">贝尔格：《沃采克》</a></li><li class="toc-child toc-level-3"><a href="#西贝柳斯第七交响曲">西贝柳斯：第七交响曲</a></li><li class="toc-child toc-level-3"><a href="#格什温蓝色狂想曲">格什温：《蓝色狂想曲》</a></li><li class="toc-child toc-level-3"><a href="#贝尔格小提琴协奏曲纪念一位天使">贝尔格：小提琴协奏曲《纪念一位天使》</a></li><li class="toc-child toc-level-3"><a href="#巴托克弦乐打击乐与钢片琴音乐">巴托克：《弦乐、打击乐与钢片琴音乐》</a></li><li class="toc-child toc-level-3"><a href="#梅西安时间终结四重奏">梅西安：《时间终结四重奏》</a></li><li class="toc-child toc-level-3"><a href="#肖斯塔科维奇第七交响曲列宁格勒">肖斯塔科维奇：第七交响曲《列宁格勒》</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#战后音乐记忆实验与聆听">战后音乐：记忆、实验与聆听</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#凯奇4分33秒">凯奇：《4分33秒》</a></li><li class="toc-child toc-level-3"><a href="#潘德列茨基广岛受难者挽歌">潘德列茨基：《广岛受难者挽歌》</a></li><li class="toc-child toc-level-3"><a href="#布里顿战争安魂曲">布里顿：《战争安魂曲》</a></li><li class="toc-child toc-level-3"><a href="#赖希十八位音乐家的音乐">赖希：《十八位音乐家的音乐》</a></li><li class="toc-child toc-level-3"><a href="#格拉斯海滩上的爱因斯坦">格拉斯：《海滩上的爱因斯坦》</a></li></ul></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <script src="/static/text-anchor.js"></script>
+<script src="/static/comments.js"></script>
+<script src="/static/core/code-blocks.js"></script>
+<script src="/static/scrollbar-visibility.js?v=733754f1"></script>
+<script src="/static/sidebar-panel.js"></script>
+<script src="/static/core/theme-colors.js?v=733754f1"></script>
+<script src="/static/svg-theme.js?v=733754f1"></script>
+<script src="/static/render-on-demand.js"></script>
+<script src="/static/reading-navigation-state.js"></script>
+<script src="/static/link-preview.js"></script>
+<script src="/static/shell-lifecycle.js"></script>
+<script src="/static/module-browser.js"></script>
+<script src="/static/shell-preferences.js"></script>
+<script src="/static/shell-bootstrap.js"></script>
+<script src="/static/main.js?v=733754f1"></script>
+<script src="/static/shell-layout.js"></script>
+<script src="/static/shell-search-settings.js?v=733754f1"></script>
+<script src="/static/shell-router.js"></script>
+<script src="/static/themes.js?v=733754f1"></script>
+<script src="/static/core/ink-theme-colors.js?v=733754f1"></script>
+<script src="/static/ink-toolbar.js?v=733754f1"></script>
+<script src="/static/image-viewer.js?v=733754f1"></script>
+<script src="/static/page-scripts.js?v=733754f1"></script>
+<script src="/static/vendor/js-yaml.js"></script>
+<script src="/static/core/syllabus-spec.js"></script>
+<script src="/static/syllabus-enhance.js"></script>
+<script src="/static/table-enhance.js"></script>
+<script src="/static/theme-colors.js?v=733754f1"></script>
+<script src="/static/greeting.js"></script>
+<script src="/static/draftbook-loader.js"></script>
+  <script>
+  // highlight.js: on-demand language loader + post-load highlight pass.
+  //
+  // Core (highlight.min.js) bundles ~37 common languages. Pages that use
+  // additional languages from _HLJS_EXTRA trigger an extra CDN fetch only
+  // when the page actually contains a matching code block. The service
+  // worker caches each module after the first fetch, so subsequent pages
+  // pay nothing for already-loaded languages.
+  //
+  // _HLJS_ALIAS maps user-facing class names to module filenames that
+  // differ from the class name. Pure aliases that hljs core already knows
+  // (e.g. ts → typescript, sh → bash) are resolved by hljs.getLanguage()
+  // and don't need entries — only include aliases whose target module is
+  // in _HLJS_EXTRA.
+  window._HLJS_BASE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/languages/';
+  window._HLJS_ALIAS = {
+    tex: 'latex', docker: 'dockerfile', ps: 'powershell', ps1: 'powershell',
+    ml: 'ocaml', hs: 'haskell', clj: 'clojure', cljs: 'clojure',
+    erl: 'erlang', coffee: 'coffeescript', f90: 'fortran', f95: 'fortran',
+    pascal: 'delphi'
+  };
+  window._HLJS_EXTRA = [
+    // Tier 1/2: build/config, scientific, FP, scripting, editor
+    'dockerfile','nginx','cmake','http','latex','julia','matlab','fortran',
+    'haskell','scala','ocaml','fsharp','clojure','elixir','dart','vim','powershell',
+    // Tier 3: FP & academic
+    'erlang','scheme','lisp','prolog',
+    // Tier 3: hardware / assembly
+    'verilog','vhdl','x86asm','armasm',
+    // Tier 3: modern systems
+    'crystal','nim','d','delphi',
+    // Tier 3: build / config
+    'groovy','nix','dts',
+    // Tier 3: markup / templating
+    'asciidoc','handlebars','gherkin',
+    // Tier 3: shell / scripting
+    'awk','tcl','coffeescript',
+    // Tier 3: stats
+    'stan'
+  ];
+  // Generation counter, bumped on every _hljsInit() call, kept for
+  // introspection/back-compat with existing tests/tooling. The staleness
+  // guard used below is tracked per-root (see _hljsRootGeneration), not off
+  // this global counter, so unrelated concurrent roots never invalidate one
+  // another (see _hljsRootGeneration's comment).
+  window._hljsGeneration = 0;
+  // #spa-content is reused (not recreated) across SPA navigations — only
+  // its innerHTML is replaced — so a still-in-flight CDN language module
+  // fetch triggered by an earlier page must not run a stale _hljsRun()
+  // against whatever page now happens to occupy that same element once it
+  // finally resolves. Generations are tracked per root object (WeakMap)
+  // rather than with one shared counter: a single global counter would let
+  // an unrelated, still-live root (e.g. a second independently-mounted
+  // section needing the same on-demand language) be wrongly treated as
+  // stale merely because some other root's _hljsInit() ran afterward. Each
+  // fetch's callback captures the generation current *for its own root*
+  // when it started and only proceeds if no newer _hljsInit() call has
+  // happened for that same root meanwhile.
+  window._hljsRootGeneration = window._hljsRootGeneration || new WeakMap();
+
+  window._hljsReportError = function(error) {
+    if (window._log && typeof window._log.error === 'function') {
+      window._log.error('code-blocks', 'Syntax highlighting failed', error.message);
+    } else {
+      console.error('[code-blocks] Syntax highlighting failed', error);
+    }
+  };
+
+  // Run the highlight + line-number pass against `root` (defaults to
+  // document). Delegates to the shared reading-domain code-block owner
+  // (window.CodeBlocks, see src/features/reading/client/code-blocks.js) for
+  // language resolution, source capture and line-wrapping, and highlights
+  // element-by-element scoped to `root` — not hljs.highlightAll(), which
+  // ignores its argument and always rescans the whole document.
+  window._hljsRun = function(root) {
+    window.CodeBlocks.highlightScope(root, {
+      hljs: hljs,
+      aliasMap: window._HLJS_ALIAS,
+      isAllowedLanguage: function(name) { return window._HLJS_EXTRA.indexOf(name) !== -1; },
+      onError: window._hljsReportError
+    });
+  };
+
+  // Scan `root` for code blocks, fetch any missing allowlisted language
+  // modules, then run the highlight pass once they finish loading (or fail).
+  // Called once from the highlight.min.js onload handler, and again from
+  // main.js after each SPA navigation (scoped to #spa-content). Returns a
+  // disposer: the page-content lifecycle registry (src/features/shell/core/
+  // lifecycle.js, wired in app.js) calls it on unmount so a still-pending
+  // language-module wait tied to a root being torn down is retired
+  // immediately instead of only becoming a no-op once its shared fetch
+  // eventually settles.
+  //
+  // Single-flight per language: if two _hljsInit calls — on the same root
+  // (e.g. a stale SPA reinit) or on two independent roots (e.g. two
+  // concurrently-mounted sections) — both need the same not-yet-loaded
+  // language, only the first triggers a CDN fetch. Every caller (the first
+  // and any later one) awaits the *same* shared Promise
+  // (`_hljsPending[lang]`), so every one of them reliably gets highlighted
+  // once the module actually loads — no separate "in-flight flag" +
+  // "waiter callback list" bookkeeping that a caller could observe in an
+  // inconsistent order (e.g. treating "fetch requested" as "fetch done").
+  window._hljsPending = window._hljsPending || Object.create(null);
+  window._hljsInit = function(root) {
+    root = root || document;
+    if (typeof hljs === 'undefined') return function () {};
+    window._hljsGeneration++;
+    var generation = (window._hljsRootGeneration.get(root) || 0) + 1;
+    window._hljsRootGeneration.set(root, generation);
+    function isCurrent() { return generation === window._hljsRootGeneration.get(root); }
+    function dispose() {
+      // Bumping this root's generation again makes any pending promise
+      // continuation below (still awaiting a shared fetch) see itself as
+      // stale via `isCurrent()` and no-op, exactly as a later _hljsInit()
+      // call for the same root would — this just does it explicitly, on
+      // unmount, instead of only implicitly the next time this root is
+      // reused.
+      if (isCurrent()) window._hljsRootGeneration.set(root, generation + 1);
+    }
+    var allow = Object.create(null);
+    for (var i = 0; i < window._HLJS_EXTRA.length; i++) allow[window._HLJS_EXTRA[i]] = true;
+    var need = Object.create(null);
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      // Tokenizes `raw` the same way CodeBlocks.resolveLanguage does, rather
+      // than treating the whole className as one language name — a real
+      // Pandoc fenced block carries extra classes (e.g. "sourceCode julia
+      // numberLines"), and a naive whole-string check never recognizes the
+      // language token, so it never gets fetched.
+      var name = window.CodeBlocks.resolvePrefetchLanguage(raw, window._HLJS_ALIAS, function(candidate) {
+        return !!hljs.getLanguage(candidate);
+      }, function(candidate) { return !!allow[candidate]; });
+      if (name) need[name] = true;
+    });
+    var keys = Object.keys(need);
+    if (!keys.length) { window._hljsRun(root); return dispose; }
+    Promise.all(keys.map(function(l) {
+      // The shared fetch Promise itself is process-wide (one CDN module,
+      // however many independent roots need it), not tied to any one
+      // root's generation — only the *continuation* below is.
+      if (window._hljsPending[l]) return window._hljsPending[l];
+      var loading = new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        var settled = false;
+        function finish(loaded) {
+          if (settled) return;
+          settled = true;
+          s.onload = s.onerror = null;
+          s.remove();
+          if (loaded) resolve({ loaded: true });
+          else reject(new Error('Could not load syntax language: ' + l));
+        }
+        s.src = window._HLJS_BASE + l + '.min.js';
+        s.onload = function() { finish(!!hljs.getLanguage(l)); };
+        s.onerror = function() { finish(false); };
+        document.head.appendChild(s);
+      });
+      var pending = loading.then(function(result) { return result; }, function(error) {
+        if (window._hljsPending[l] === pending) delete window._hljsPending[l];
+        window._hljsReportError(error);
+        return { loaded: false };
+      });
+      window._hljsPending[l] = pending;
+      return pending;
+    })).then(function() {
+      if (isCurrent()) window._hljsRun(root);
+    });
+    return dispose;
+  };
+  </script>
+  <script id="rprint-highlight" async src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    onload="window._hljsInit();"></script>
+  <script>document.getElementById('rprint-highlight').addEventListener('error',function(){window._hljsReportError(new Error('Could not load highlight.js'))});</script>
+  <script id="rprint-mermaid" async src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+    onload="mermaid.initialize({startOnLoad:false});if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('mermaid')}else{var t=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'default';mermaid.initialize({startOnLoad:false,theme:t});document.querySelectorAll('pre.mermaid > code').forEach(function(c){var src=c.textContent;c.parentElement.setAttribute('data-mermaid-source',src);c.parentElement.textContent=src;});mermaid.run()}"></script>
+  <script>document.getElementById('rprint-mermaid').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('mermaid',new Error('Mermaid failed to load'))}});</script>
+  <!-- rprint:page-assets:start --><!-- rprint:page-assets:end -->
+  
+  
+<script type="application/json" data-rprint-page-assets>{"version":1,"entries":[]}</script>
+</body>
+</html>

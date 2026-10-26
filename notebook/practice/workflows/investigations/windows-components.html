@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="build-commit" content="733754f1">
+  <title>Windows 遥测与可选组件 - Jingqi's Interpositive</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/comments.css">
+<link rel="stylesheet" href="/static/sidebar-panel.css">
+<link rel="stylesheet" href="/static/link-preview.css">
+<link rel="stylesheet" href="/static/main.css?v=733754f1">
+<link rel="stylesheet" href="/static/themes.css?v=733754f1">
+<link rel="stylesheet" href="/static/ink-toolbar.css?v=733754f1">
+<link rel="stylesheet" href="/static/image-viewer.css?v=733754f1">
+<link rel="stylesheet" href="/static/syllabus-enhance.css">
+<link rel="stylesheet" href="/static/table-enhance.css">
+<link rel="stylesheet" href="/static/greeting.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var linkPreviewEmbed=false;
+      try{
+        var previewUrl=new URL(location.href);
+        linkPreviewEmbed=previewUrl.searchParams.get('rprint-preview')==='1'&&window.parent!==window&&window.parent.location.origin===location.origin;
+      }catch(e){}
+      if(linkPreviewEmbed){
+        document.documentElement.classList.add('link-preview-embed');
+        var previewArticleLink=function(target){return target&&target.closest&&target.closest('.article a[href]');};
+        var blockPreviewLink=function(event){if(previewArticleLink(event.target)){event.preventDefault();event.stopImmediatePropagation();}};
+        document.addEventListener('click',blockPreviewLink,true);
+        document.addEventListener('auxclick',blockPreviewLink,true);
+        document.addEventListener('keydown',function(event){if(event.key==='Enter')blockPreviewLink(event);},true);
+        document.addEventListener('dblclick',function(event){if(event.target&&event.target.closest&&event.target.closest('.article')){event.preventDefault();event.stopImmediatePropagation();}},true);
+      }
+      var bc=document.querySelector('meta[name="build-commit"]');
+      var commit=bc?bc.getAttribute('content'):'';
+      if(commit&&commit!=='unknown'){
+        var prev=localStorage.getItem('kb-build-commit');
+        if(prev&&prev!==commit){
+          var keys=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf('kb-')===0)keys.push(k);}
+          keys.forEach(function(k){localStorage.removeItem(k);});
+          localStorage.setItem('kb-build-commit',commit);
+          if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+            navigator.serviceWorker.controller.postMessage('clearCaches');
+          }
+          window.location.reload();
+          return;
+        }
+        localStorage.setItem('kb-build-commit',commit);
+      }
+      // Resume last visited page on PWA/browser launch. PWA launches carry
+      // `?pwa=1`; a normal browser launch is a plain root URL without a same-
+      // origin referrer. `/index.html` is an explicit home navigation, so it
+      // never resumes. Runs before paint to avoid a flash of the home page.
+      // Validates the stored path is a same-origin absolute path (rejects
+      // `//host` / `/\host` open-redirects).
+      var resumeLaunch=/[?&]pwa=1(&|$)/.test(location.search);
+      try{
+        var launchUrl=new URL(location.href);
+        launchUrl.searchParams.delete('pwa');
+        var sameOriginReferrer=false;
+        try{sameOriginReferrer=!!document.referrer&&new URL(document.referrer,location.href).origin===location.origin;}catch(e){}
+        resumeLaunch=resumeLaunch||(launchUrl.pathname==='/'&&!launchUrl.search&&!launchUrl.hash&&!sameOriginReferrer);
+      }catch(e){}
+      if(resumeLaunch){
+        try{
+          var last=localStorage.getItem('kb-last-location');
+          var lastPath=last&&last.split('#')[0].split('?')[0];
+          if(last&&/^\/[^/\\]/.test(last)&&lastPath!=='/'&&lastPath!=='/index.html'){
+            try{sessionStorage.setItem('kb-resume-last-scroll','1');}catch(e){}
+            location.replace(last);return;
+          }
+        }catch(e){}
+      }
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      var mob=window.matchMedia('(max-width:650px)').matches;
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.style.colorScheme=t==='dark'?'dark':'light';
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      var w=p.contentWidth||(mob?'100':'90');
+      document.documentElement.style.setProperty('--content-max-width',w+'%');
+      document.documentElement.dataset.contentWidth=String(w);
+      var edge=p.ignoreCorners!==undefined?p.ignoreCorners==='on':false;
+      if(edge&&Number(w)===100)document.documentElement.setAttribute('data-ignore-corners','on');
+      if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches||window.matchMedia('(display-mode:fullscreen)').matches)document.documentElement.classList.add('pwa-standalone');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'noto-serif';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.0};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+      var ht=t==='dark'?'github-dark':'github';
+      var writes='<link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/'+ht+'.min.css">';
+      document.write(writes);
+    })();
+  </script>
+  <style>.math{opacity:0;transition:opacity .15s}.math.rprint-render-failed{opacity:1}</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css" integrity="sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM" crossorigin="anonymous">
+  <script id="rprint-katex" defer src="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.js" integrity="sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI" crossorigin="anonymous"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('katex')}else{document.querySelectorAll('.math').forEach(function(el){var src=el.textContent;el.setAttribute('data-latex',src);katex.render(src,el,{displayMode:el.classList.contains('display'),throwOnError:false,trust:function(ctx){return ctx&&ctx.command==='\\href'&&typeof ctx.url==='string'&&/^#[A-Za-z0-9:._-]+$/.test(ctx.url);}});el.querySelectorAll('mtable[columnspacing=\'\']').forEach(function(t){t.removeAttribute('columnspacing')});el.style.opacity='1';})}"></script>
+  <script>document.getElementById('rprint-katex').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('katex',new Error('KaTeX failed to load'))}else{document.querySelectorAll('.math').forEach(function(el){el.style.opacity='1'})}});</script>
+</head>
+<body data-page-type="markdown">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <button class="banner-toggle" id="left-toggle" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h12v1.5H2V3zm0 4h12v1.5H2V7zm0 4h12v1.5H2V11z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-center">
+        <div class="banner-center-inner">
+          <a href="/index.html" class="site-title" data-short="Interpositive">Jingqi's Interpositive</a>
+          <span class="spa-health-wrap" id="spa-health-wrap">
+            <span class="spa-health-dot" id="spa-health-dot" title="SPA server status"></span>
+            <div class="spa-health-popup" id="spa-health-popup">
+              <div class="shp-header">
+                <span class="shp-title">Server Status</span>
+                <span class="shp-heart" id="shp-heart"></span>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-metrics">
+                <div class="shp-row"><span class="shp-label">Ping</span><span class="shp-value" id="shp-ping">—</span></div>
+                <div class="shp-row"><span class="shp-label">Uptime</span><span class="shp-value" id="shp-uptime">—</span></div>
+                <div class="shp-row"><span class="shp-label">Memory</span><span class="shp-value" id="shp-memory">—</span></div>
+                <div class="shp-row"><span class="shp-label">CPU Time</span><span class="shp-value" id="shp-cpu-time">—</span></div>
+                <div class="shp-row"><span class="shp-label">Load</span><span class="shp-value" id="shp-load">—</span></div>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-modules">
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-watch"></span> Watch</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-jupyter"></span> Jupyter</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-terminal"></span> Terminal</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-proxy"></span> Proxy</div>
+              </div>
+              <div id="shp-module-diagnostics" role="status" aria-live="polite"></div>
+            </div>
+          </span>
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="/cs-notes/" class="nav-link" data-short="CS">CS</a><ul class="nav-dropdown"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li><a href="/cs-notes/mit-gir/index.html">MIT GIR</a></li><li><a href="/cs-notes/cs-math/index.html">CS Math</a></li></ul></li><li class="nav-item"><a href="/not-cs-notes/" class="nav-link" data-short="CS$^\complement$">CS$^\complement$</a><ul class="nav-dropdown"><li><a href="/not-cs-notes/arts/index.html">书影音</a></li></ul></li><li class="nav-item"><a href="/notebook/" class="nav-link" data-short="Mixed">Mixed</a><ul class="nav-dropdown"><li><a href="/notebook/mind/index.html">Mind</a></li><li><a href="/notebook/matter/index.html">Matter</a></li><li><a href="/notebook/practice/index.html">Practice</a></li><li><a href="/notebook/toolbox/index.html">Toolbox</a></li></ul></li><li class="nav-item"><a href="/years/" class="nav-link" data-short="Years">Years</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="banner-right">
+        <button class="banner-right-toggle" title="More controls">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="search-wrap" id="search-wrap">
+          <button class="search-btn" id="search-btn" title="Search (Ctrl+K)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-input-wrap" id="search-input-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search…" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+        <div class="comment-wrap" id="comment-wrap">
+          <button class="comment-btn" id="comment-btn" title="Review Comments (A)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <span class="comment-nav-count" id="comment-nav-count"></span>
+          <button class="comment-nav-btn" id="comment-nav-prev" title="Previous comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="comment-nav-btn" id="comment-nav-next" title="Next comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <button class="settings-btn" id="settings-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="settings-panel" id="settings-panel">
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Native Jupyter <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="native-jupyter-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Global Search <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="content-search-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Quick Edit <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="quick-edit-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section resource-pack-setting" id="resource-pack-setting" hidden>
+            <div class="settings-row resource-pack-row">
+              <span class="settings-desc">Offline resources</span>
+              <button type="button" class="settings-action-btn" id="resource-pack-import-btn">Import</button>
+            </div>
+            <input type="file" id="resource-pack-input" accept=".rpack,application/vnd.rprint.resource-pack" hidden>
+            <div class="resource-pack-status" id="resource-pack-status" aria-live="polite"></div>
+            <div class="resource-pack-list" id="resource-pack-list" aria-label="Installed resource packs"></div>
+          </div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent link-preview-settings-parent">
+            <label class="style-label" id="link-preview-label">Link Preview <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="link-preview-switch" role="switch" aria-labelledby="link-preview-label" aria-checked="false" aria-expanded="false" aria-controls="link-preview-settings-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children link-preview-settings-children" id="link-preview-settings-children" hidden>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-same-page-only-label">Same-page links only</label>
+              <button class="style-switch style-switch-compact" id="link-preview-same-page-only-switch" role="switch" aria-labelledby="link-preview-same-page-only-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-auto-close-label">Auto-close</label>
+              <button class="style-switch style-switch-compact" id="link-preview-auto-close-switch" role="switch" aria-labelledby="link-preview-auto-close-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-overwrite-jumping-label">Overwrite Link Jumping</label>
+              <button class="style-switch style-switch-compact" id="link-preview-overwrite-jumping-switch" role="switch" aria-labelledby="link-preview-overwrite-jumping-label" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+            </div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-row settings-title-row settings-dependent-parent">
+            <span class="settings-panel-title">Keyboard Shortcuts</span>
+            <button class="style-switch" id="kb-enabled-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children keyboard-shortcuts-children">
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="search"><span class="settings-desc">Search</span><span class="settings-keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="scroll"><span class="settings-desc">Scroll down / up</span><span class="settings-keys"><kbd>J</kbd> <kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="section"><span class="settings-desc">Next / prev section</span><span class="settings-keys"><kbd>U</kbd> <kbd>I</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="sidebar-toc"><span class="settings-desc"><span data-shortcut-part="sidebar">Sidebar / </span>TOC</span><span class="settings-keys"><kbd data-shortcut-part="sidebar">S</kbd> <kbd>T</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="spread"><span class="settings-desc">Next / prev spread</span><span class="settings-keys"><kbd>PgDn</kbd> <kbd>PgUp</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="columns"><span class="settings-desc">2 Columns</span><span class="settings-keys"><kbd>C</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="comments"><span class="settings-desc">Comments<span class="spa-only-setting" style="display: none;"> / add to selection</span></span><span class="settings-keys"><kbd>A</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="fold"><span class="settings-desc">Fold banner</span><span class="settings-keys"><kbd>F</kbd></span></div>
+            
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="dismiss"><span class="settings-desc">Close / Dismiss</span><span class="settings-keys"><kbd>Esc</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="settings"><span class="settings-desc">Show this panel</span><span class="settings-keys"><kbd>?</kbd></span></div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent">
+            <label class="style-label" id="debug-mode-label">Debug Mode</label>
+            <button class="style-switch" id="debug-mode-switch" role="switch" aria-labelledby="debug-mode-label" aria-checked="false" aria-expanded="false" aria-controls="debug-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="debug-children" id="debug-children" hidden>
+            <div class="settings-dependent-children">
+              <div class="settings-panel-section settings-dependent-child debug-log-level-setting">
+                <label class="style-label">Client Log Level</label>
+                <div class="style-toggle-group">
+                  <button class="style-toggle-btn debug-level-btn" data-level="error">Error</button>
+                  <button class="style-toggle-btn debug-level-btn" data-level="info">Info</button>
+                  <button class="style-toggle-btn debug-level-btn active" data-level="debug">Debug</button>
+                </div>
+              </div>
+              <div class="settings-footer is-dirty" id="settings-git-version">
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Branch</span>
+                  <span class="settings-footer-value" id="settings-build-branch">main</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Commit</span>
+                  <span class="settings-footer-value" id="settings-build-commit">733754f1</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Commit time</span>
+                  <span class="settings-footer-value" id="settings-build-commit-time" data-iso="2026-10-25T21:34:38-07:00" title="2026-10-25T21:34:38-07:00">—</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Generated</span>
+                  <span class="settings-footer-value" id="settings-build-generated-at" data-iso="" title="">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="theme-wrap" id="theme-wrap">
+          <a href="/static/settings.html?v=733754f1" class="theme-btn" id="theme-btn" title="Theme & display">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="13.5" cy="6.5" r=".5"/>
+              <circle cx="17.5" cy="10.5" r=".5"/>
+              <circle cx="8.5" cy="7.5" r=".5"/>
+              <circle cx="6.5" cy="12.5" r=".5"/>
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+            </svg>
+          </a>
+          <output class="book-position" id="book-position" aria-label="Reading pages" aria-live="polite" aria-atomic="true" hidden></output>
+          <button type="button" class="book-nav-btn book-prev" id="book-prev" title="Previous spread" aria-label="Previous spread" hidden disabled>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="book-nav-btn book-next" id="book-next" title="Next spread" aria-label="Next spread" hidden disabled>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <div class="style-panel" id="style-panel">
+          <div class="style-panel-section">
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn active" data-theme="light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light
+              </button>
+              <button class="style-toggle-btn" data-theme="dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="style-toggle-btn" data-theme="kindle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                E-Ink
+              </button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn font-btn active" data-font="system">System</button>
+              <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+              <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">字体</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="default">系统</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+              <button class="style-toggle-btn fontzh-btn active" data-fontzh="noto-serif">宋体</button>
+            </div>
+          </div>
+          <div class="style-panel-section bg-picker-section">
+            <label class="style-label">Background</label>
+            <div class="bg-swatch-group" id="bg-swatch-group">
+              <button class="bg-swatch active" data-bg="default" title="Default"></button>
+              <button class="bg-swatch" data-bg="green" title="Green"></button>
+              <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+              <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+              <div class="style-range-ticks">
+                <span class="style-range-tick font-size-tick" data-i="0">12</span>
+                <span class="style-range-tick font-size-tick" data-i="1">14</span>
+                <span class="style-range-tick font-size-tick" data-i="2">16</span>
+                <span class="style-range-tick font-size-tick" data-i="3">18</span>
+                <span class="style-range-tick font-size-tick" data-i="4">24</span>
+                <span class="style-range-tick font-size-tick" data-i="5">32</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+              <div class="style-range-ticks">
+                <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+                <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+                <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+                <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+                <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+                <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Width <span id="width-value">90%</span></label>
+            <div class="style-slider-wrap width-slider-wrap">
+              <input type="range" class="style-range" id="content-width-range" min="0" max="5" step="1" value="3">
+              <div class="style-range-ticks width-ticks">
+                <span class="style-range-tick width-tick" data-i="0">50</span>
+                <span class="style-range-tick width-tick" data-i="1">65</span>
+                <span class="style-range-tick width-tick" data-i="2">80</span>
+                <span class="style-range-tick width-tick" data-i="3">90</span>
+                <span class="style-range-tick width-tick" data-i="4">95</span>
+                <span class="style-range-tick width-tick" data-i="5">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="ignore-corners-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">2 Columns <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+        </div>
+        <button class="banner-toggle" id="fold-banner-btn" title="Fold banner">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4v16M3.5 7.5 8 12l-4.5 4.5M20.5 7.5 16 12l4.5 4.5"/>
+          </svg>
+        </button>
+        <button class="banner-toggle" id="right-toggle" title="Toggle table of contents">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-right-dropdown"></div>
+    </div>
+  </header>
+
+  <!-- Floating buttons when banner is folded -->
+  <div class="banner-fold-float" id="banner-fold-float">
+    <button class="banner-fold-float-btn" id="unfold-banner-btn" title="Unfold banner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 4v16M8 7.5 3.5 12 8 16.5M16 7.5 20.5 12 16 16.5"/>
+      </svg>
+    </button>
+    <button class="banner-fold-float-btn" id="float-toc-btn" title="Toggle table of contents">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout left-collapsed right-collapsed">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar collapsed" id="left-sidebar">
+      <div class="sidebar-content" id="spa-sidebar">
+        <!-- rprint:sidebar:start -->
+        <a class="sidebar-cat-title" href="/notebook">Mixed</a><ul class="sidebar-list"><li class="sidebar-group" data-priority="0"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/mind/index.html">Mind</a><span class="sidebar-toggle"></span></span><ul><li><a href="/notebook/mind/ideas.html">脑洞</a></li></ul></li><li class="sidebar-group" data-priority="0.001"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/matter/index.html">Matter</a><span class="sidebar-toggle"></span></span><ul><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/matter/vehicle.html">车</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/matter/vehicle/model3-us-manual.html">Model 3 US Manual 📄</a></li><li><a href="/notebook/matter/vehicle/r-maintenance.html">Golf R Maintenance Guide 📄</a></li><li><a href="/notebook/matter/vehicle/ct4-us-manual.html">CT4 US Manual 📄</a></li><li><a href="/notebook/matter/vehicle/ct4-maintenance.html">CT4 Maintenance Guide 📄</a></li></ul></li><li><a href="/notebook/matter/optics.html">光学</a></li></ul></li><li class="sidebar-group open" data-priority="0.002"><span class="sidebar-row"><a class="sidebar-group-title active-group" href="/notebook/practice/index.html">Practice</a><span class="sidebar-toggle"></span></span><ul><li class="has-children open" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows.html">工作流</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/desktop-os-comparison.html">桌面OS比较</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/workflows/desktop-os-comparison/linux.html">Linux 发行版</a></li><li><a href="/notebook/practice/workflows/desktop-os-comparison/windows.html">Windows 版本</a></li></ul></li><li><a href="/notebook/practice/workflows/rime.html">Rime 配置手册</a></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/reference.html">速查</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/workflows/reference/vim.html">Vim</a></li><li><a href="/notebook/practice/workflows/reference/hyper-v.html">Hyper-V</a></li><li><a href="/notebook/practice/workflows/reference/zfs-common-commands.html">ZFS</a></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/setup.html">初始化</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/setup/linux.html">Linux</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/workflows/setup/linux/zfs-mirror-zbm-install.html">Ubuntu Root on ZFS via ZBM</a></li><li><a href="/notebook/practice/workflows/setup/linux/wayland-rdp.html">配置Wayland RDP</a></li><li><a href="/notebook/practice/workflows/setup/linux/inotify-limits.html">提高 inotify 文件监听限制</a></li></ul></li></ul></li><li class="has-children open" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/workflows/investigations.html">问题调查</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/workflows/investigations/ubuntu-privacy-snap.html">Ubuntu遥测和Snap</a></li><li class="active"><a href="/notebook/practice/workflows/investigations/windows-components.html">Windows 遥测与可选组件</a></li><li><a href="/notebook/practice/workflows/investigations/macpro-2013-4k-sst-fix.html">Mac Pro 2013 的 4K SST 右侧闪烁</a></li><li><a href="/notebook/practice/workflows/investigations/zfs-spotlight-high-cpu.html">ZFS 卷上 Spotlight 持续高 CPU</a></li><li><a href="/notebook/practice/workflows/investigations/wayland-rdp-audio.html">Wayland RDP Low Audio Quality</a></li><li><a href="/notebook/practice/workflows/investigations/nautilus-thumbnail-fix.html">Nautilus 缩略图生成失败</a></li></ul></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/ai.html">虚假情报</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/ai/copilot-api.html">通过 Copilot API 接入 Codex</a></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/lab.html">在线</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/practice/lab/access.html">域名与认证</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/practice/lab/access/git.html">配置Git HTTPS OAuth到自建GitLab</a></li></ul></li></ul></li></ul></li><li class="sidebar-group" data-priority="0.003"><span class="sidebar-row"><a class="sidebar-group-title" href="/notebook/toolbox/index.html">Toolbox</a><span class="sidebar-toggle"></span></span><ul><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/toolbox/financial.html">Financial 1001</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/toolbox/financial/tax-us-redmond.html">Simple Income Tax Calc (Redmond) 🐍</a></li><li><a href="/notebook/toolbox/financial/tax-china-suzhou.html">简易个人所得税计算器（苏州） 🐍</a></li></ul></li><li class="has-children" data-priority="0"><span class="sidebar-row"><a href="/notebook/toolbox/hardware.html">Hardware 1001</a><span class="sidebar-toggle"></span></span><ul class="sidebar-subpages"><li><a href="/notebook/toolbox/hardware/ppi.html">PPI Calculator 🐍</a></li><li><a href="/notebook/toolbox/hardware/disk_array_survival_rate.html">Disk Array Survival Rate 🐍</a></li></ul></li></ul></li></ul>
+        <!-- rprint:sidebar:end -->
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content" id="content">
+      <article class="article" id="spa-content">
+        <p data-sourcepos="1:1-1:1">分别调整 Windows 遥测、其他组件和 Defender，三部分可以独立执行。使用管理员 Windows PowerShell 5.1；策略是否生效取决于 Windows 版本、Edition 和组织管理状态。</p>
+<pre class="powershell" data-sourcepos="3:1-7:1"><code>Get-ComputerInfo | Select-Object WindowsProductName, WindowsVersion, OsBuildNumber
+$PSVersionTable.PSVersion</code></pre>
+<p data-sourcepos="8:1-8:1">完整脚本在对应章节的折叠代码块中，按说明保存到桌面后执行，不需要其他本地文件。脚本会安装并导入 <a href="https://github.com/dlwyatt/PolicyFileEditor">PolicyFileEditor</a>，通过 <code>Registry.pol</code> 写入本地组策略。当前用户偏好和应用卸载作用于运行脚本的账户；用另一个管理员账户提权时，这些操作会落到那个账户。</p>
+<h2 id="telemetry" data-sourcepos="10:1-10:1">关闭 Windows 遥测</h2>
+<p data-sourcepos="12:1-12:1">默认配置覆盖以下项目；不会默认关闭服务、计划任务或定位：</p>
+<div class="table-wrap"><table data-sourcepos="14:1-23:1">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>范围</th>
+<th>配置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>诊断数据</td>
+<td><code>AllowTelemetry=0</code>，限制诊断日志和转储收集，关闭诊断级别选择界面、变更通知及反馈提示，不发送设备名</td>
+</tr>
+<tr>
+<td>远程配置</td>
+<td><code>DisableOneSettingsDownloads=1</code>，阻止 OneSettings 配置下载</td>
+</tr>
+<tr>
+<td>广告与推荐</td>
+<td>广告 ID、消费者体验、云优化内容、第三方建议、基于诊断数据的个性化体验、Spotlight</td>
+</tr>
+<tr>
+<td>用户内容推荐</td>
+<td>当前用户的 <code>SubscribedContent-*</code> 和 <code>SilentInstalledAppsEnabled</code> 偏好</td>
+</tr>
+<tr>
+<td>错误报告</td>
+<td>WER 关闭、禁止附加数据和日志；同意级别设为“始终询问”</td>
+</tr>
+<tr>
+<td>输入隐私</td>
+<td>手写错误报告、输入与手写数据收集、自动学习、在线语音识别</td>
+</tr>
+<tr>
+<td>活动历史</td>
+<td><code>EnableActivityFeed=0</code>、<code>PublishUserActivities=0</code>、<code>UploadUserActivities=0</code></td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="24:1-24:1">Home / Pro 的 <code>AllowTelemetry=0</code> 会受最低支持级别限制，不能据此声称零上报。CloudContent 中部分策略只适用于 Enterprise / Education 等 Edition。<code>ContentDeliveryManager</code> 是版本相关的用户偏好，写入 <code>HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager</code>；输入自动学习偏好写入 <code>HKCU:\Software\Microsoft\InputPersonalization</code>，均与机器策略分开保存。</p>
+<p data-sourcepos="26:1-26:1"><code>ConfigureWindowsSpotlight=0</code> 才是关闭锁屏 Spotlight，<code>2</code> 表示强制开启。<code>DefaultConsent=1</code> 表示始终询问，关闭 WER 由 <code>Disabled=1</code> 完成；不使用未文档化的 <code>DefaultConsent=0</code> 来宣称“永不发送”。关闭在线语音识别会影响依赖云端识别的听写功能。</p>
+<p data-sourcepos="28:1-28:1">基础：<a href="https://learn.microsoft.com/en-us/windows/privacy/configure-windows-diagnostic-data-in-your-organization">诊断数据</a>、<a href="https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system">OneSettings 与诊断策略</a>、<a href="https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience">CloudContent / Spotlight</a>、<a href="https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-textinput#allowlinguisticdatacollection">输入与手写数据</a>、<a href="https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services#1821-inking--typing">输入偏好与活动历史</a>、<a href="https://learn.microsoft.com/en-us/windows/win32/wer/wer-settings">WER 设置</a>。</p>
+<h3 id="完整脚本与可选关闭项" data-sourcepos="30:1-30:1">完整脚本与可选关闭项</h3>
+<p data-sourcepos="32:1-32:1">将以下代码保存为 <code>~/Desktop/disable-telemetry.ps1</code>：</p>
+<details>
+<summary>
+disable-telemetry.ps1：诊断、推荐、输入隐私、活动历史及可选服务和任务
+</summary>
+<pre class="powershell"><code>#Requires -Version 5.1
+#Requires -RunAsAdministrator
+[CmdletBinding()]
+param(
+    [switch]$Compatibility,
+    [switch]$Location,
+    [switch]$Services,
+    [switch]$Tasks,
+    [switch]$LegacyAnalytics
+)
+
+$ErrorActionPreference = &#39;Stop&#39;
+if (-not (Get-Module -ListAvailable -Name PolicyFileEditor)) {
+    Install-Module PolicyFileEditor -Scope CurrentUser -Force
+}
+Import-Module PolicyFileEditor
+$MachinePol = &quot;$env:SystemRoot\System32\GroupPolicy\Machine\Registry.pol&quot;
+$UserPol = &quot;$env:SystemRoot\System32\GroupPolicy\User\Registry.pol&quot;
+$Policies = [System.Collections.Generic.List[object]]::new()
+$Preferences = [System.Collections.Generic.List[object]]::new()
+$ServiceNames = @()
+$TaskNames = @()
+$FeatureBefore = @()
+$Packages = @()
+$ProvisionedPackages = @()
+
+function Add-Policy {
+    param([string]$Scope, [string]$Key, [hashtable]$Values)
+    foreach ($name in $Values.Keys) {
+        $path = if ($Scope -eq &#39;Machine&#39;) { $MachinePol } else { $UserPol }
+        $hive = if ($Scope -eq &#39;Machine&#39;) { &#39;HKLM:\&#39; } else { &#39;HKCU:\&#39; }
+        $Policies.Add([pscustomobject]@{
+            Path = $path; Key = $Key; Name = $name
+            RegistryPath = $hive + $Key; Data = $Values[$name]
+        })
+    }
+}
+
+function Get-RegistryValueBefore {
+    param([string]$Path, [string]$Name)
+    if (Test-Path -LiteralPath $Path) {
+        $key = Get-Item -LiteralPath $Path
+        if ($key.GetValueNames() -contains $Name) {
+            return [pscustomobject]@{
+                Exists = $true; Type = $key.GetValueKind($Name).ToString()
+                Data = $key.GetValue($Name, $null,
+                    [Microsoft.Win32.RegistryValueOptions]::DoNotExpandEnvironmentNames)
+            }
+        }
+    }
+    return [pscustomobject]@{ Exists = $false; Type = $null; Data = $null }
+}
+
+$BackupLabel = &#39;telemetry&#39;
+$dc = &#39;SOFTWARE\Policies\Microsoft\Windows\DataCollection&#39;
+Add-Policy Machine $dc @{
+    AllowTelemetry = 0
+    DisableTelemetryOptInSettingsUx = 1
+    DisableTelemetryOptInChangeNotification = 1
+    DoNotShowFeedbackNotifications = 1
+    LimitDiagnosticLogCollection = 1
+    LimitDumpCollection = 1
+    DisableOneSettingsDownloads = 1
+    AllowDeviceNameInTelemetry = 0
+}
+if ($LegacyAnalytics) {
+    # Legacy processor/analytics policies do not turn off all diagnostic data.
+    Add-Policy Machine $dc @{
+        AllowDesktopAnalyticsProcessing = 0
+        AllowCommercialDataPipeline = 0
+        LimitEnhancedDiagnosticDataWindowsAnalytics = 1
+    }
+}
+if ($Compatibility) {
+    Add-Policy Machine &#39;SOFTWARE\Policies\Microsoft\Windows\AppCompat&#39; @{
+        AITEnable = 0; DisableInventory = 1; DisableUAR = 1; DisablePCA = 1
+    }
+    Add-Policy Machine &#39;SOFTWARE\Policies\Microsoft\SQMClient\Windows&#39; @{ CEIPEnable = 0 }
+}
+
+$cloud = &#39;SOFTWARE\Policies\Microsoft\Windows\CloudContent&#39;
+Add-Policy Machine $cloud @{
+    DisableCloudOptimizedContent = 1; DisableConsumerAccountStateContent = 1
+    DisableSoftLanding = 1; DisableWindowsConsumerFeatures = 1
+}
+Add-Policy User $cloud @{
+    DisableThirdPartySuggestions = 1; DisableTailoredExperiencesWithDiagnosticData = 1
+    DisableWindowsSpotlightFeatures = 1; ConfigureWindowsSpotlight = 0
+}
+Add-Policy Machine &#39;SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo&#39; @{
+    DisabledByGroupPolicy = 1
+}
+# These are current-user preferences, not documented CloudContent policies.
+$cdm = &#39;HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager&#39;
+foreach ($name in @(
+    &#39;SubscribedContent-338388Enabled&#39;, &#39;SubscribedContent-338389Enabled&#39;,
+    &#39;SubscribedContent-310093Enabled&#39;, &#39;SubscribedContent-353698Enabled&#39;,
+    &#39;SilentInstalledAppsEnabled&#39;
+)) {
+    $Preferences.Add([pscustomobject]@{ Path = $cdm; Name = $name; Data = 0 })
+}
+
+$wer = &#39;SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting&#39;
+Add-Policy Machine $wer @{ Disabled = 1; DontSendAdditionalData = 1; LoggingDisabled = 1 }
+# 1 = always ask. Disabling reporting is done by Disabled=1, not by consent=0.
+Add-Policy Machine &quot;$wer\Consent&quot; @{ DefaultConsent = 1; DefaultOverrideBehavior = 1 }
+Add-Policy Machine &#39;SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports&#39; @{
+    PreventHandwritingErrorReports = 1
+}
+Add-Policy Machine &#39;SOFTWARE\Policies\Microsoft\InputPersonalization&#39; @{
+    AllowInputPersonalization = 0
+}
+Add-Policy Machine &#39;SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\TextInput&#39; @{
+    AllowLinguisticDataCollection = 0
+}
+foreach ($name in @(&#39;RestrictImplicitInkCollection&#39;, &#39;RestrictImplicitTextCollection&#39;)) {
+    $Preferences.Add([pscustomobject]@{
+        Path = &#39;HKCU:\Software\Microsoft\InputPersonalization&#39;; Name = $name; Data = 1
+    })
+}
+if ($Location) {
+    Add-Policy Machine &#39;SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors&#39; @{
+        DisableLocation = 1; DisableWindowsLocationProvider = 1; DisableLocationScripting = 1
+    }
+}
+Add-Policy Machine &#39;SOFTWARE\Policies\Microsoft\Windows\System&#39; @{
+    EnableActivityFeed = 0; PublishUserActivities = 0; UploadUserActivities = 0
+}
+if ($Services) {
+    $ServiceNames = @(
+        &#39;DiagTrack&#39;, &#39;whesvc&#39;, &#39;InventorySvc&#39;, &#39;diagsvc&#39;, &#39;PcaSvc&#39;, &#39;dmwappushservice&#39;
+    )
+}
+if ($Tasks) {
+    $TaskNames = @(
+        &#39;\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser&#39;,
+        &#39;\Microsoft\Windows\Application Experience\MareBackup&#39;,
+        &#39;\Microsoft\Windows\Application Experience\PcaPatchDbTask&#39;,
+        &#39;\Microsoft\Windows\Application Experience\SdbinstMergeDbTask&#39;,
+        &#39;\Microsoft\Windows\Application Experience\StartupAppTask&#39;,
+        &#39;\Microsoft\Windows\Autochk\Proxy&#39;,
+        &#39;\Microsoft\Windows\Customer Experience Improvement Program\Consolidator&#39;,
+        &#39;\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip&#39;,
+        &#39;\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector&#39;,
+        &#39;\Microsoft\Windows\Feedback\Siuf\DmClient&#39;,
+        &#39;\Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload&#39;,
+        &#39;\Microsoft\Windows\Maps\MapsToastTask&#39;,
+        &#39;\Microsoft\Windows\Maps\MapsUpdateTask&#39;
+    )
+}
+
+# Finish all snapshots before changing any policy, preference, service or task.
+$BackupDirectory = Join-Path $HOME (&quot;windows-{0}-before-{1}&quot; -f $BackupLabel,
+    (Get-Date -Format &#39;yyyyMMdd-HHmmss-fff&#39;))
+New-Item -ItemType Directory -Path $BackupDirectory | Out-Null
+$PolicyBefore = @(
+    foreach ($entry in $Policies) {
+        $old = $null
+        if (Test-Path -LiteralPath $entry.Path) {
+            $old = Get-PolicyFileEntry -Path $entry.Path -Key $entry.Key -ValueName $entry.Name
+        }
+        [pscustomobject]@{
+            Path = $entry.Path; Key = $entry.Key; Name = $entry.Name
+            OldPolicy = $(if ($null -ne $old) {
+                [pscustomobject]@{ Data = $old.Data; Type = $old.Type.ToString() }
+            } else { $null })
+            RegistryPath = $entry.RegistryPath
+            RegistryBefore = Get-RegistryValueBefore $entry.RegistryPath $entry.Name
+        }
+    }
+)
+$PreferenceBefore = @(
+    foreach ($entry in $Preferences) {
+        [pscustomobject]@{
+            Path = $entry.Path; Name = $entry.Name
+            Before = Get-RegistryValueBefore $entry.Path $entry.Name
+        }
+    }
+)
+$ServiceBefore = @(
+    if ($ServiceNames.Count -gt 0) {
+        $existingServices = @(Get-Service)
+        foreach ($name in $ServiceNames) {
+            $service = $existingServices | Where-Object Name -EQ $name
+            if ($null -eq $service) {
+                Write-Host &quot;Service not found; skipped: $name&quot;
+                continue
+            }
+            [pscustomobject]@{
+                Name = $name; StartType = $service.StartType.ToString()
+                WasRunning = ($service.Status -eq &#39;Running&#39;)
+                DelayedAutoStart = Get-RegistryValueBefore `
+                    &quot;HKLM:\SYSTEM\CurrentControlSet\Services\$name&quot; &#39;DelayedAutoStart&#39;
+            }
+        }
+    }
+)
+$TaskBefore = @(
+    if ($TaskNames.Count -gt 0) {
+        $existingTasks = @(Get-ScheduledTask)
+        foreach ($name in ($TaskNames | Sort-Object -Unique)) {
+            $task = $existingTasks | Where-Object { ($_.TaskPath + $_.TaskName) -eq $name }
+            if ($null -eq $task) {
+                Write-Host &quot;Task not found; skipped: $name&quot;
+                continue
+            }
+            [pscustomobject]@{
+                TaskPath = $task.TaskPath; TaskName = $task.TaskName
+                WasEnabled = ($task.State -ne &#39;Disabled&#39;)
+            }
+        }
+    }
+)
+[pscustomobject]@{
+    ComputerName = $env:COMPUTERNAME
+    UserSid = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+    Policies = $PolicyBefore; Preferences = $PreferenceBefore
+    Services = $ServiceBefore; Tasks = $TaskBefore
+    Features = $FeatureBefore; Packages = $Packages
+    ProvisionedPackages = $ProvisionedPackages
+} | Export-Clixml -Path &quot;$BackupDirectory\state.xml&quot; -Depth 10
+Write-Host &quot;Backup directory: $BackupDirectory&quot; -ForegroundColor Cyan
+
+$script:FailureCount = 0
+function Invoke-Change {
+    param([string]$Label, [scriptblock]$Action)
+    try {
+        &amp; $Action
+        Write-Host &quot;Applied: $Label&quot;
+    } catch {
+        $script:FailureCount++
+        Write-Warning (&quot;Failed: {0}: {1}&quot; -f $Label, $_.Exception.Message)
+    }
+}
+
+New-Item -ItemType Directory -Force -Path `
+    (Split-Path $MachinePol), (Split-Path $UserPol) | Out-Null
+foreach ($entry in $Policies) {
+    Invoke-Change &quot;$($entry.Key)\$($entry.Name)&quot; {
+        Set-PolicyFileEntry -Path $entry.Path -Key $entry.Key `
+            -ValueName $entry.Name -Data $entry.Data -Type DWord
+    }
+}
+foreach ($entry in $Preferences) {
+    Invoke-Change &quot;$($entry.Path)\$($entry.Name)&quot; {
+        if (-not (Test-Path -LiteralPath $entry.Path)) {
+            New-Item -Path $entry.Path -Force | Out-Null
+        }
+        New-ItemProperty -LiteralPath $entry.Path -Name $entry.Name `
+            -Value $entry.Data -PropertyType DWord -Force | Out-Null
+    }
+}
+foreach ($entry in $ServiceBefore) {
+    Invoke-Change &quot;Disable service $($entry.Name)&quot; {
+        # Do not force-stop dependent services that have not been backed up.
+        Stop-Service -Name $entry.Name
+        Set-Service -Name $entry.Name -StartupType Disabled
+        $actual = Get-Service -Name $entry.Name
+        if ($actual.Status -ne &#39;Stopped&#39; -or $actual.StartType -ne &#39;Disabled&#39;) {
+            throw &quot;Actual state: $($actual.Status) / $($actual.StartType)&quot;
+        }
+    }
+}
+foreach ($entry in $TaskBefore) {
+    Invoke-Change &quot;Disable task $($entry.TaskPath)$($entry.TaskName)&quot; {
+        Disable-ScheduledTask -TaskPath $entry.TaskPath -TaskName $entry.TaskName | Out-Null
+        $actual = Get-ScheduledTask -TaskPath $entry.TaskPath -TaskName $entry.TaskName
+        if ($actual.State -ne &#39;Disabled&#39;) { throw &quot;Actual state: $($actual.State)&quot; }
+    }
+}
+
+Invoke-Change &#39;Refresh local policy&#39; {
+    &amp; gpupdate.exe /force /wait:-1
+    if ($LASTEXITCODE -ne 0) { throw &quot;gpupdate exit code: $LASTEXITCODE&quot; }
+}
+Write-Host &quot;Backup directory: $BackupDirectory&quot; -ForegroundColor Cyan
+Write-Host &#39;Restart Windows, then verify effective settings and component states.&#39;
+if ($script:FailureCount -gt 0) {
+    throw &quot;$($script:FailureCount) operation(s) failed; review the warnings above.&quot;
+}</code></pre>
+</details>
+<p data-sourcepos="42:1-42:1">只应用上表中的默认配置：</p>
+<pre class="powershell" data-sourcepos="44:1-47:1"><code>powershell.exe -ExecutionPolicy Bypass -File &quot;$HOME\Desktop\disable-telemetry.ps1&quot;</code></pre>
+<p data-sourcepos="48:1-48:1">需要额外关闭的项目通过参数选择：</p>
+<div class="table-wrap"><table data-sourcepos="50:1-57:1">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>参数</th>
+<th>增加的操作与影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-Compatibility</code></td>
+<td>关闭 AIT、Inventory、Steps Recorder、Program Compatibility Assistant 和 CEIP；会失去对应的兼容性辅助功能</td>
+</tr>
+<tr>
+<td><code>-Location</code></td>
+<td>关闭定位、Windows 定位提供程序及定位脚本；应用将无法使用这些定位能力</td>
+</tr>
+<tr>
+<td><code>-Services</code></td>
+<td>停止并禁用下表中的 6 个服务；包含诊断、兼容性和设备管理相关功能</td>
+</tr>
+<tr>
+<td><code>-Tasks</code></td>
+<td>禁用下表中的 13 个计划任务；包含兼容性评估、反馈、磁盘诊断及地图更新</td>
+</tr>
+<tr>
+<td><code>-LegacyAnalytics</code></td>
+<td>写入旧 Desktop Analytics / 商业数据管道策略，并设 <code>LimitEnhancedDiagnosticDataWindowsAnalytics=1</code>；仅用于对应旧环境</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="58:1-58:1">例如，需要同时关闭兼容性收集、这些服务和任务时，使用：</p>
+<pre class="powershell" data-sourcepos="60:1-63:1"><code>powershell.exe -ExecutionPolicy Bypass -File &quot;$HOME\Desktop\disable-telemetry.ps1&quot; -Compatibility -Services -Tasks</code></pre>
+<p data-sourcepos="64:1-64:1"><code>-Services</code> 的具体范围：</p>
+<div class="table-wrap"><table data-sourcepos="66:1-74:1">
+<thead>
+<tr>
+<th>服务</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DiagTrack</code></td>
+<td>Connected User Experiences and Telemetry</td>
+</tr>
+<tr>
+<td><code>whesvc</code></td>
+<td>Windows Health and Optimized Experiences</td>
+</tr>
+<tr>
+<td><code>InventorySvc</code></td>
+<td>清单与兼容性评估</td>
+</tr>
+<tr>
+<td><code>diagsvc</code></td>
+<td>Diagnostic Execution Service</td>
+</tr>
+<tr>
+<td><code>PcaSvc</code></td>
+<td>Program Compatibility Assistant</td>
+</tr>
+<tr>
+<td><code>dmwappushservice</code></td>
+<td>WAP Push 消息路由，涉及部分设备管理场景</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="75:1-75:1"><code>-Tasks</code> 的具体范围，路径均在 <code>\Microsoft\Windows\</code> 下：</p>
+<div class="table-wrap"><table data-sourcepos="77:1-85:1">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>目录</th>
+<th>任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Application Experience</code></td>
+<td>Microsoft Compatibility Appraiser、MareBackup、PcaPatchDbTask、SdbinstMergeDbTask、StartupAppTask</td>
+</tr>
+<tr>
+<td><code>Autochk</code></td>
+<td>Proxy</td>
+</tr>
+<tr>
+<td><code>Customer Experience Improvement Program</code></td>
+<td>Consolidator、UsbCeip</td>
+</tr>
+<tr>
+<td><code>DiskDiagnostic</code></td>
+<td>Microsoft-Windows-DiskDiagnosticDataCollector</td>
+</tr>
+<tr>
+<td><code>Feedback\Siuf</code></td>
+<td>DmClient、DmClientOnScenarioDownload</td>
+</tr>
+<tr>
+<td><code>Maps</code></td>
+<td>MapsToastTask、MapsUpdateTask</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="86:1-86:1">不存在的服务和任务会报告后跳过；写入或禁用失败会输出具体错误，脚本最终返回失败。成功写入策略只表示配置已保存，重启后还要核对实际行为。启用相应参数时，服务预期为 <code>Stopped / Disabled</code>，任务预期为 <code>Disabled</code>。</p>
+<p data-sourcepos="88:1-88:1">旧 <code>AllowDesktopAnalyticsProcessing</code> / <code>AllowCommercialDataPipeline</code> 已弃用，在新版 Windows 上不提供额外的遥测关闭效果。<code>LimitEnhancedDiagnosticDataWindowsAnalytics=1</code> 是在可选诊断级别下限制 Desktop Analytics 数据，不能单独当作关闭诊断数据的开关。</p>
+<p data-sourcepos="90:1-90:1">基础：<a href="https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat">应用兼容性策略</a>、<a href="https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdesktopanalyticsprocessing">旧 Analytics 策略范围</a>。</p>
+<h2 id="components" data-sourcepos="92:1-92:1">关闭 Windows 其他组件</h2>
+<p data-sourcepos="94:1-94:1">默认关闭 Recall 快照和组件启用、搜索联网与云端搜索相关策略，关闭 Delivery Optimization 的 peer 传输，并卸载当前用户的 <code>Microsoft.Copilot</code>。以下组件操作不依赖先关闭 Defender。</p>
+<p data-sourcepos="96:1-96:1">先查看本机实际存在的功能与包：</p>
+<pre class="powershell" data-sourcepos="98:1-106:1"><code>Get-WindowsOptionalFeature -Online | Where-Object FeatureName -EQ Recall
+Get-AppxPackage -AllUsers | Where-Object Name -Match &#39;Copilot|Recall|AIX&#39; |
+  Select-Object Name, PackageFullName
+Get-AppxProvisionedPackage -Online | Where-Object DisplayName -Match &#39;Copilot|Recall|AIX&#39; |
+  Select-Object DisplayName, PackageName
+Get-Service WSearch, SysMain, DoSvc, WSAIFabricSvc -ErrorAction SilentlyContinue</code></pre>
+<h3 id="recallcopilot-与搜索策略" data-sourcepos="107:1-107:1">Recall、Copilot 与搜索策略</h3>
+<div class="table-wrap"><table data-sourcepos="109:1-115:1">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>范围</th>
+<th>默认操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recall 快照</td>
+<td>机器和用户 <code>DisableAIDataAnalysis=1</code></td>
+</tr>
+<tr>
+<td>Recall 组件</td>
+<td>机器 <code>AllowRecallEnablement=0</code>；在支持该策略的系统上移除组件及已有快照，需要重启</td>
+</tr>
+<tr>
+<td>Copilot 应用</td>
+<td>卸载当前用户的 <code>Microsoft.Copilot</code>，不自动处理其他用户或新用户模板</td>
+</tr>
+<tr>
+<td>搜索联网结果</td>
+<td><code>DisableWebSearch=1</code>、<code>ConnectedSearchUseWeb=0</code></td>
+</tr>
+<tr>
+<td>云端与位置搜索</td>
+<td><code>AllowCloudSearch=0</code>、<code>AllowSearchToUseLocation=0</code>，旧 Cortana 环境另设 <code>AllowCortana=0</code></td>
+</tr>
+<tr>
+<td>资源管理器搜索历史</td>
+<td>用户 <code>DisableSearchBoxSuggestions=1</code>，关闭历史查询建议和保存</td>
+</tr>
+<tr>
+<td>Delivery Optimization</td>
+<td><code>DODownloadMode=0</code>，使用 HTTP 下载，不与 peer 共享</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="116:1-116:1"><code>DisableSearchBoxSuggestions</code> 是用户策略，官方定义针对资源管理器历史建议，不能把它单独等同于关闭开始菜单 Bing 搜索。联网搜索策略也有 Edition 限制，例如 <code>ConnectedSearchUseWeb</code> 的官方映射不覆盖 Pro；Home / Pro 上不能只凭注册表值判断联网搜索已关闭。保留本地索引时，不需要禁用 <code>WSearch</code>。</p>
+<p data-sourcepos="121:1-121:1">Recall 的策略以当前 Windows AI 文档中的 <code>DisableAIDataAnalysis</code> 和 <code>AllowRecallEnablement</code> 为准；不写入缺少当前文档依据的 <code>TurnOffSavedSnapshots</code>。<code>AllowRecallEnablement</code> 需要 Windows 11 24H2 的对应更新及支持的设备。关闭组件会删除已有快照，恢复配置不能找回它们。</p>
+<p data-sourcepos="123:1-123:1">当前 Copilot 是独立应用，旧 <code>TurnOffWindowsCopilot</code> 已弃用，不能代替应用卸载或阻止新版应用安装。脚本仅在显式加 <code>-LegacyCopilot</code> 时写入这条用户策略。若需要持续阻止新版应用安装，可使用微软文档中的 AppLocker 应用规则。</p>
+<p data-sourcepos="125:1-125:1">基础：<a href="https://learn.microsoft.com/en-us/windows/client-management/manage-recall">Recall 管理</a>、<a href="https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai">Windows AI 策略</a>、<a href="https://learn.microsoft.com/en-us/windows/client-management/manage-windows-copilot#remove-or-prevent-installation-of-the-microsoft-copilot-app">Copilot 应用移除与安装控制</a>、<a href="https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search">搜索策略</a>、<a href="https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions">资源管理器搜索历史</a>。</p>
+<h3 id="完整脚本与可选组件" data-sourcepos="127:1-127:1">完整脚本与可选组件</h3>
+<p data-sourcepos="129:1-129:1">将以下代码保存为 <code>~/Desktop/disable-residual.ps1</code>。默认的精确包名在顶部 <code>$AppxNames</code> 数组中；需要处理其他应用时先核对实际 <code>Name</code>，再修改数组，不使用 <code>Microsoft.Windows.Ai*</code> 等大范围通配符。</p>
+<details>
+<summary>
+disable-residual.ps1：Recall、Copilot、搜索、传递优化及可选后台组件
+</summary>
+<pre class="powershell"><code>#Requires -Version 5.1
+#Requires -RunAsAdministrator
+[CmdletBinding()]
+param(
+    [string[]]$AppxNames = @(&#39;Microsoft.Copilot&#39;),
+    [switch]$AllUsers,
+    [switch]$RemoveProvisioned,
+    [switch]$RemoveRecall,
+    [switch]$DisableAIFabric,
+    [switch]$DisableMdm,
+    [switch]$DisableSysMain,
+    [switch]$DisableSearchIndex,
+    [switch]$DisableDeliveryService,
+    [switch]$LegacyCopilot
+)
+
+$ErrorActionPreference = &#39;Stop&#39;
+if (-not (Get-Module -ListAvailable -Name PolicyFileEditor)) {
+    Install-Module PolicyFileEditor -Scope CurrentUser -Force
+}
+Import-Module PolicyFileEditor
+$MachinePol = &quot;$env:SystemRoot\System32\GroupPolicy\Machine\Registry.pol&quot;
+$UserPol = &quot;$env:SystemRoot\System32\GroupPolicy\User\Registry.pol&quot;
+$Policies = [System.Collections.Generic.List[object]]::new()
+$Preferences = [System.Collections.Generic.List[object]]::new()
+$ServiceNames = @()
+$TaskNames = @()
+$FeatureBefore = @()
+$Packages = @()
+$ProvisionedPackages = @()
+
+function Add-Policy {
+    param([string]$Scope, [string]$Key, [hashtable]$Values)
+    foreach ($name in $Values.Keys) {
+        $path = if ($Scope -eq &#39;Machine&#39;) { $MachinePol } else { $UserPol }
+        $hive = if ($Scope -eq &#39;Machine&#39;) { &#39;HKLM:\&#39; } else { &#39;HKCU:\&#39; }
+        $Policies.Add([pscustomobject]@{
+            Path = $path; Key = $Key; Name = $name
+            RegistryPath = $hive + $Key; Data = $Values[$name]
+        })
+    }
+}
+
+function Get-RegistryValueBefore {
+    param([string]$Path, [string]$Name)
+    if (Test-Path -LiteralPath $Path) {
+        $key = Get-Item -LiteralPath $Path
+        if ($key.GetValueNames() -contains $Name) {
+            return [pscustomobject]@{
+                Exists = $true; Type = $key.GetValueKind($Name).ToString()
+                Data = $key.GetValue($Name, $null,
+                    [Microsoft.Win32.RegistryValueOptions]::DoNotExpandEnvironmentNames)
+            }
+        }
+    }
+    return [pscustomobject]@{ Exists = $false; Type = $null; Data = $null }
+}
+
+$BackupLabel = &#39;components&#39;
+foreach ($name in $AppxNames) {
+    if ([string]::IsNullOrWhiteSpace($name) -or
+        [System.Management.Automation.WildcardPattern]::ContainsWildcardCharacters($name)) {
+        throw &#39;AppxNames must contain exact package names; wildcards are not accepted.&#39;
+    }
+}
+
+$ai = &#39;SOFTWARE\Policies\Microsoft\Windows\WindowsAI&#39;
+Add-Policy Machine $ai @{ DisableAIDataAnalysis = 1; AllowRecallEnablement = 0 }
+Add-Policy User $ai @{ DisableAIDataAnalysis = 1 }
+# TurnOffSavedSnapshots has no verified current policy mapping.
+if ($LegacyCopilot) {
+    Add-Policy User &#39;SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot&#39; @{
+        TurnOffWindowsCopilot = 1
+    }
+}
+Add-Policy User &#39;SOFTWARE\Policies\Microsoft\Windows\Explorer&#39; @{
+    DisableSearchBoxSuggestions = 1
+}
+Add-Policy Machine &#39;SOFTWARE\Policies\Microsoft\Windows\Windows Search&#39; @{
+    AllowCortana = 0; DisableWebSearch = 1
+    ConnectedSearchUseWeb = 0; AllowSearchToUseLocation = 0
+    AllowCloudSearch = 0
+}
+Add-Policy Machine &#39;SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization&#39; @{
+    DODownloadMode = 0
+}
+if ($DisableAIFabric) { $ServiceNames += &#39;WSAIFabricSvc&#39; }
+if ($DisableSysMain) { $ServiceNames += &#39;SysMain&#39; }
+if ($DisableSearchIndex) { $ServiceNames += &#39;WSearch&#39; }
+if ($DisableDeliveryService) { $ServiceNames += &#39;DoSvc&#39; }
+
+if ($DisableMdm) {
+    Add-Policy Machine &#39;SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\MDM&#39; @{
+        AutoEnrollMDM = 0; DisableRegistration = 1
+    }
+    # Include nested enrollment GUID folders; TaskPath without a wildcard misses them.
+    $roots = @(
+        &#39;\Microsoft\Windows\EnterpriseMgmt\&#39;,
+        &#39;\Microsoft\Windows\Management\Provisioning\&#39;,
+        &#39;\Microsoft\Windows\Workplace Join\&#39;
+    )
+    $TaskNames = @(
+        foreach ($task in (Get-ScheduledTask)) {
+            foreach ($root in $roots) {
+                if ($task.TaskPath.StartsWith($root, [System.StringComparison]::OrdinalIgnoreCase)) {
+                    $task.TaskPath + $task.TaskName
+                    break
+                }
+            }
+        }
+    )
+}
+# AllowRecallEnablement=0 can also remove Recall; capture its state in either mode.
+$feature = Get-WindowsOptionalFeature -Online | Where-Object FeatureName -EQ &#39;Recall&#39;
+if ($null -eq $feature) {
+    Write-Host &#39;Recall optional feature not found; skipped.&#39;
+} elseif ($feature.State -in @(&#39;EnablePending&#39;, &#39;DisablePending&#39;)) {
+    throw &#39;Recall has a pending state; restart Windows before running this script.&#39;
+} elseif ($feature.State -eq &#39;Enabled&#39;) {
+    $FeatureBefore = @([pscustomobject]@{
+        Name = &#39;Recall&#39;; State = $feature.State.ToString()
+    })
+}
+foreach ($name in $AppxNames) {
+    $lookup = @{ Name = $name }
+    if ($AllUsers) { $lookup.AllUsers = $true }
+    foreach ($package in (Get-AppxPackage @lookup)) {
+        $Packages += [pscustomobject]@{
+            Name = $package.Name; PackageFullName = $package.PackageFullName
+            InstallLocation = $package.InstallLocation
+            AllUsers = [bool]$AllUsers
+            PackageUserInformation = @($package.PackageUserInformation | ForEach-Object { $_.ToString() })
+        }
+    }
+}
+if ($RemoveProvisioned) {
+    $ProvisionedPackages = @(
+        Get-AppxProvisionedPackage -Online |
+            Where-Object { $AppxNames -contains $_.DisplayName } |
+            Select-Object -Property @(&#39;DisplayName&#39;, &#39;PackageName&#39;)
+    )
+}
+
+# Finish all snapshots before changing any policy, preference, service or task.
+$BackupDirectory = Join-Path $HOME (&quot;windows-{0}-before-{1}&quot; -f $BackupLabel,
+    (Get-Date -Format &#39;yyyyMMdd-HHmmss-fff&#39;))
+New-Item -ItemType Directory -Path $BackupDirectory | Out-Null
+$PolicyBefore = @(
+    foreach ($entry in $Policies) {
+        $old = $null
+        if (Test-Path -LiteralPath $entry.Path) {
+            $old = Get-PolicyFileEntry -Path $entry.Path -Key $entry.Key -ValueName $entry.Name
+        }
+        [pscustomobject]@{
+            Path = $entry.Path; Key = $entry.Key; Name = $entry.Name
+            OldPolicy = $(if ($null -ne $old) {
+                [pscustomobject]@{ Data = $old.Data; Type = $old.Type.ToString() }
+            } else { $null })
+            RegistryPath = $entry.RegistryPath
+            RegistryBefore = Get-RegistryValueBefore $entry.RegistryPath $entry.Name
+        }
+    }
+)
+$PreferenceBefore = @(
+    foreach ($entry in $Preferences) {
+        [pscustomobject]@{
+            Path = $entry.Path; Name = $entry.Name
+            Before = Get-RegistryValueBefore $entry.Path $entry.Name
+        }
+    }
+)
+$ServiceBefore = @(
+    if ($ServiceNames.Count -gt 0) {
+        $existingServices = @(Get-Service)
+        foreach ($name in $ServiceNames) {
+            $service = $existingServices | Where-Object Name -EQ $name
+            if ($null -eq $service) {
+                Write-Host &quot;Service not found; skipped: $name&quot;
+                continue
+            }
+            [pscustomobject]@{
+                Name = $name; StartType = $service.StartType.ToString()
+                WasRunning = ($service.Status -eq &#39;Running&#39;)
+                DelayedAutoStart = Get-RegistryValueBefore `
+                    &quot;HKLM:\SYSTEM\CurrentControlSet\Services\$name&quot; &#39;DelayedAutoStart&#39;
+            }
+        }
+    }
+)
+$TaskBefore = @(
+    if ($TaskNames.Count -gt 0) {
+        $existingTasks = @(Get-ScheduledTask)
+        foreach ($name in ($TaskNames | Sort-Object -Unique)) {
+            $task = $existingTasks | Where-Object { ($_.TaskPath + $_.TaskName) -eq $name }
+            if ($null -eq $task) {
+                Write-Host &quot;Task not found; skipped: $name&quot;
+                continue
+            }
+            [pscustomobject]@{
+                TaskPath = $task.TaskPath; TaskName = $task.TaskName
+                WasEnabled = ($task.State -ne &#39;Disabled&#39;)
+            }
+        }
+    }
+)
+[pscustomobject]@{
+    ComputerName = $env:COMPUTERNAME
+    UserSid = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+    Policies = $PolicyBefore; Preferences = $PreferenceBefore
+    Services = $ServiceBefore; Tasks = $TaskBefore
+    Features = $FeatureBefore; Packages = $Packages
+    ProvisionedPackages = $ProvisionedPackages
+} | Export-Clixml -Path &quot;$BackupDirectory\state.xml&quot; -Depth 10
+Write-Host &quot;Backup directory: $BackupDirectory&quot; -ForegroundColor Cyan
+
+$script:FailureCount = 0
+function Invoke-Change {
+    param([string]$Label, [scriptblock]$Action)
+    try {
+        &amp; $Action
+        Write-Host &quot;Applied: $Label&quot;
+    } catch {
+        $script:FailureCount++
+        Write-Warning (&quot;Failed: {0}: {1}&quot; -f $Label, $_.Exception.Message)
+    }
+}
+
+New-Item -ItemType Directory -Force -Path `
+    (Split-Path $MachinePol), (Split-Path $UserPol) | Out-Null
+foreach ($entry in $Policies) {
+    Invoke-Change &quot;$($entry.Key)\$($entry.Name)&quot; {
+        Set-PolicyFileEntry -Path $entry.Path -Key $entry.Key `
+            -ValueName $entry.Name -Data $entry.Data -Type DWord
+    }
+}
+foreach ($entry in $Preferences) {
+    Invoke-Change &quot;$($entry.Path)\$($entry.Name)&quot; {
+        if (-not (Test-Path -LiteralPath $entry.Path)) {
+            New-Item -Path $entry.Path -Force | Out-Null
+        }
+        New-ItemProperty -LiteralPath $entry.Path -Name $entry.Name `
+            -Value $entry.Data -PropertyType DWord -Force | Out-Null
+    }
+}
+foreach ($entry in $ServiceBefore) {
+    Invoke-Change &quot;Disable service $($entry.Name)&quot; {
+        # Do not force-stop dependent services that have not been backed up.
+        Stop-Service -Name $entry.Name
+        Set-Service -Name $entry.Name -StartupType Disabled
+        $actual = Get-Service -Name $entry.Name
+        if ($actual.Status -ne &#39;Stopped&#39; -or $actual.StartType -ne &#39;Disabled&#39;) {
+            throw &quot;Actual state: $($actual.Status) / $($actual.StartType)&quot;
+        }
+    }
+}
+foreach ($entry in $TaskBefore) {
+    Invoke-Change &quot;Disable task $($entry.TaskPath)$($entry.TaskName)&quot; {
+        Disable-ScheduledTask -TaskPath $entry.TaskPath -TaskName $entry.TaskName | Out-Null
+        $actual = Get-ScheduledTask -TaskPath $entry.TaskPath -TaskName $entry.TaskName
+        if ($actual.State -ne &#39;Disabled&#39;) { throw &quot;Actual state: $($actual.State)&quot; }
+    }
+}
+
+if ($DisableAIFabric) {
+    $fabric = Get-Service -Name WSAIFabricSvc -ErrorAction SilentlyContinue
+    if ($null -eq $fabric) {
+        Write-Host &#39;Windows AI Fabric service not found; workload process handling skipped.&#39;
+    } else {
+        Invoke-Change &#39;Stop Windows AI workload processes&#39; {
+            if ($fabric.Status -ne &#39;Stopped&#39; -or $fabric.StartType -ne &#39;Disabled&#39;) {
+                throw &#39;WSAIFabricSvc was not confirmed stopped and disabled; processes were left running.&#39;
+            }
+            Get-Process -Name @(&#39;WorkloadsSessionHost&#39;, &#39;WorkloadsSessionManager&#39;) -ErrorAction SilentlyContinue |
+                Stop-Process -Force -ErrorAction Stop
+        }
+    }
+}
+if ($RemoveRecall) {
+    foreach ($entry in $FeatureBefore) {
+        Invoke-Change &quot;Disable optional feature $($entry.Name)&quot; {
+            Disable-WindowsOptionalFeature -Online -FeatureName $entry.Name -NoRestart | Out-Null
+        }
+    }
+}
+foreach ($entry in $Packages) {
+    Invoke-Change &quot;Remove AppX $($entry.PackageFullName)&quot; {
+        $remove = @{ Package = $entry.PackageFullName }
+        if ($entry.AllUsers) { $remove.AllUsers = $true }
+        Remove-AppxPackage @remove
+    }
+}
+foreach ($entry in $ProvisionedPackages) {
+    Invoke-Change &quot;Remove provisioned package $($entry.PackageName)&quot; {
+        Remove-AppxProvisionedPackage -Online -PackageName $entry.PackageName | Out-Null
+    }
+}
+
+Invoke-Change &#39;Refresh local policy&#39; {
+    &amp; gpupdate.exe /force /wait:-1
+    if ($LASTEXITCODE -ne 0) { throw &quot;gpupdate exit code: $LASTEXITCODE&quot; }
+}
+Write-Host &quot;Backup directory: $BackupDirectory&quot; -ForegroundColor Cyan
+Write-Host &#39;Restart Windows, then verify effective settings and component states.&#39;
+if ($script:FailureCount -gt 0) {
+    throw &quot;$($script:FailureCount) operation(s) failed; review the warnings above.&quot;
+}</code></pre>
+</details>
+<pre class="powershell" data-sourcepos="139:1-142:1"><code>powershell.exe -ExecutionPolicy Bypass -File &quot;$HOME\Desktop\disable-residual.ps1&quot;</code></pre>
+<p data-sourcepos="143:1-143:1">额外操作通过参数选择：</p>
+<div class="table-wrap"><table data-sourcepos="145:1-156:1">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>参数</th>
+<th>增加的操作与影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-AllUsers</code></td>
+<td>按精确包名卸载所有现有用户的应用；默认只卸载当前用户</td>
+</tr>
+<tr>
+<td><code>-RemoveProvisioned</code></td>
+<td>移除同名 provisioned 模板包，使新建用户不再从该模板获得应用；不代替现有用户卸载</td>
+</tr>
+<tr>
+<td><code>-RemoveRecall</code></td>
+<td>本机存在已启用的 Recall 可选功能时，另用 DISM 关闭；无此功能则跳过</td>
+</tr>
+<tr>
+<td><code>-DisableAIFabric</code></td>
+<td>停止并禁用 <code>WSAIFabricSvc</code>，确认服务停用后再结束 WorkloadsSessionHost / WorkloadsSessionManager；依赖该服务的本地 AI 功能会受影响</td>
+</tr>
+<tr>
+<td><code>-DisableMdm</code></td>
+<td>设置 <code>AutoEnrollMDM=0</code>、<code>DisableRegistration=1</code>，禁用 EnterpriseMgmt、Management、Workplace Join 下现有任务，包含嵌套目录</td>
+</tr>
+<tr>
+<td><code>-DisableSysMain</code></td>
+<td>停止并禁用 SysMain；按实际性能问题选择，NVMe 本身不是判断依据</td>
+</tr>
+<tr>
+<td><code>-DisableSearchIndex</code></td>
+<td>停止并禁用 WSearch，影响开始菜单、文件及部分 Outlook 搜索</td>
+</tr>
+<tr>
+<td><code>-DisableDeliveryService</code></td>
+<td>停止并禁用 DoSvc，可能影响 Windows Update / Store 下载；只关 P2P 时不需要此参数</td>
+</tr>
+<tr>
+<td><code>-LegacyCopilot</code></td>
+<td>为使用旧 Copilot 侧栏的环境写入 <code>TurnOffWindowsCopilot=1</code> 用户策略</td>
+</tr>
+</tbody>
+</table></div>
+<p data-sourcepos="157:1-157:1">例如，同时处理所有现有用户和新用户模板，并关闭本地搜索索引：</p>
+<pre class="powershell" data-sourcepos="159:1-162:1"><code>powershell.exe -ExecutionPolicy Bypass -File &quot;$HOME\Desktop\disable-residual.ps1&quot; -AllUsers -RemoveProvisioned -DisableSearchIndex</code></pre>
+<p data-sourcepos="163:1-163:1">MDM 参数用于明确不再需要设备注册、预配和工作账户加入任务的机器。它不等于退出已经注册的 Intune / Entra，也不适合直接用于仍由组织管理的设备；可先用 <code>dsregcmd /status</code> 查看加入状态。</p>
+<p data-sourcepos="165:1-165:1"><code>DODownloadMode=0</code> 已足以关闭 peer 传输，DoSvc 可以继续提供 HTTP 下载。<code>DOMaxBackgroundDownloadBandwidth=0</code> / <code>DOMaxForegroundDownloadBandwidth=0</code> 表示动态调整，不表示“禁止下载”，因此不把它们加入关闭脚本。</p>
+<p data-sourcepos="167:1-167:1">预期：所选包不再出现在对应用户或模板的查询结果中，Recall 状态在重启后符合所选策略；显式停用的服务为 <code>Stopped / Disabled</code>，MDM 任务为 <code>Disabled</code>。进程被结束、包卸载成功或策略值存在，都不能证明以后不会被更新重新启用。</p>
+<p data-sourcepos="169:1-169:1">基础：<a href="https://learn.microsoft.com/en-us/windows/client-management/enroll-a-windows-10-device-automatically-using-group-policy">MDM 自动注册</a>、<a href="https://learn.microsoft.com/en-us/windows/deployment/do/waas-delivery-optimization-reference">Delivery Optimization 模式与带宽</a>。</p>
+<h2 id="defender" data-sourcepos="171:1-171:1">关闭 Defender</h2>
+<p data-sourcepos="173:1-173:1">原环境使用过的完整脚本覆盖以下项目，包含 SmartScreen 和三个防火墙配置文件。不需要一起关闭时，删除脚本中对应的 SmartScreen 策略和最后的防火墙命令。</p>
+<div class="table-wrap"><table data-sourcepos="175:1-182:1">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>范围</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>本地组策略</td>
+<td>Defender 开关、实时与行为监控、IOAV、MAPS / 样本提交、启发式扫描、签名更新选项、网络保护</td>
+</tr>
+<tr>
+<td>Defender 偏好</td>
+<td>实时、行为、首次发现阻止、脚本 / 存档扫描、PUA、受控文件夹、云与网络保护等</td>
+</tr>
+<tr>
+<td>扫描任务</td>
+<td>Cache Maintenance、Cleanup、Scheduled Scan、Verification</td>
+</tr>
+<tr>
+<td>安全中心与 SmartScreen</td>
+<td>隐藏“病毒和威胁防护”区域，关闭 Explorer / Edge SmartScreen</td>
+</tr>
+<tr>
+<td>防火墙</td>
+<td>关闭 Domain、Private、Public 三个配置文件</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="执行完整配置" data-sourcepos="183:1-183:1">执行完整配置</h3>
+<p data-sourcepos="185:1-185:1">以管理员身份打开 Windows PowerShell，先在“Windows 安全中心 → 病毒和威胁防护 → 管理设置”关闭篡改防护；受组织管理的设备以管理端策略为准。运行前保存原状态：</p>
+<pre class="powershell" data-sourcepos="187:1-198:1"><code>$DefenderBackup = Join-Path $HOME (&quot;defender-before-&quot; + (Get-Date -Format yyyyMMdd-HHmmss))
+New-Item -ItemType Directory $DefenderBackup | Out-Null
+Get-MpPreference | Export-Clixml &quot;$DefenderBackup\preferences.xml&quot;
+Get-NetFirewallProfile | Select-Object Name, Enabled | Export-Clixml &quot;$DefenderBackup\firewall.xml&quot;
+Get-ScheduledTask -TaskPath &#39;\Microsoft\Windows\Windows Defender\&#39; |
+  Select-Object TaskName, TaskPath, State | Export-Clixml &quot;$DefenderBackup\tasks.xml&quot;
+$MachinePol = &quot;$env:SystemRoot\System32\GroupPolicy\Machine\Registry.pol&quot;
+if (Test-Path $MachinePol) { Copy-Item $MachinePol &quot;$DefenderBackup\Machine-Registry.pol&quot; }
+$DefenderBackup</code></pre>
+<p data-sourcepos="199:1-199:1">记下输出的备份目录。将以下完整脚本保存为 <code>~/Desktop/disable-defender.ps1</code>：</p>
+<details>
+<summary>
+disable-defender.ps1：本地策略、偏好、扫描任务、SmartScreen 与防火墙
+</summary>
+<pre class="powershell"><code>#Requires -RunAsAdministrator
+# Disable Windows Defender - for air-gapped systems
+# Run this script in an elevated PowerShell (Admin)
+# Uses PolicyFileEditor module to set Local Group Policy via command line
+
+Write-Host &quot;=== Disabling Windows Defender via Group Policy ===&quot; -ForegroundColor Cyan
+
+# ---------------------------------------------------------------
+# Step 0: Ensure PolicyFileEditor module is available
+# ---------------------------------------------------------------
+Write-Host &quot;`n[0/5] Checking PolicyFileEditor module...&quot; -ForegroundColor Yellow
+if (-not (Get-Module -ListAvailable -Name PolicyFileEditor)) {
+    Write-Host &quot;  Installing PolicyFileEditor...&quot; -ForegroundColor Gray
+    Install-Module -Name PolicyFileEditor -Force -Scope CurrentUser
+}
+Import-Module PolicyFileEditor
+
+# ---------------------------------------------------------------
+# Step 1: Set Group Policy to disable Defender via PolicyFileEditor
+# ---------------------------------------------------------------
+Write-Host &quot;`n[1/5] Writing Local Group Policy settings...&quot; -ForegroundColor Yellow
+
+$machinePolPath = &quot;$env:SystemRoot\System32\GroupPolicy\Machine\Registry.pol&quot;
+New-Item -ItemType Directory -Force (Split-Path $machinePolPath -Parent) | Out-Null
+
+# -- Turn off Microsoft Defender Antivirus --
+$defenderKey = &quot;SOFTWARE\Policies\Microsoft\Windows Defender&quot;
+Set-PolicyFileEntry -Path $machinePolPath -Key $defenderKey -ValueName &quot;DisableAntiSpyware&quot; -Data 1 -Type DWord
+Set-PolicyFileEntry -Path $machinePolPath -Key $defenderKey -ValueName &quot;DisableAntiVirus&quot; -Data 1 -Type DWord
+Set-PolicyFileEntry -Path $machinePolPath -Key $defenderKey -ValueName &quot;DisableRoutinelyTakingAction&quot; -Data 1 -Type DWord
+Set-PolicyFileEntry -Path $machinePolPath -Key $defenderKey -ValueName &quot;ServiceKeepAlive&quot; -Data 0 -Type DWord
+
+# -- Real-time Protection --
+$rtKey = &quot;$defenderKey\Real-Time Protection&quot;
+Set-PolicyFileEntry -Path $machinePolPath -Key $rtKey -ValueName &quot;DisableRealtimeMonitoring&quot; -Data 1 -Type DWord
+Set-PolicyFileEntry -Path $machinePolPath -Key $rtKey -ValueName &quot;DisableBehaviorMonitoring&quot; -Data 1 -Type DWord
+Set-PolicyFileEntry -Path $machinePolPath -Key $rtKey -ValueName &quot;DisableOnAccessProtection&quot; -Data 1 -Type DWord
+Set-PolicyFileEntry -Path $machinePolPath -Key $rtKey -ValueName &quot;DisableScanOnRealtimeEnable&quot; -Data 1 -Type DWord
+Set-PolicyFileEntry -Path $machinePolPath -Key $rtKey -ValueName &quot;DisableIOAVProtection&quot; -Data 1 -Type DWord
+
+# -- MAPS / SpyNet --
+$spynetKey = &quot;$defenderKey\Spynet&quot;
+Set-PolicyFileEntry -Path $machinePolPath -Key $spynetKey -ValueName &quot;SpynetReporting&quot; -Data 0 -Type DWord
+Set-PolicyFileEntry -Path $machinePolPath -Key $spynetKey -ValueName &quot;SubmitSamplesConsent&quot; -Data 2 -Type DWord
+
+# -- Scan --
+$scanKey = &quot;$defenderKey\Scan&quot;
+Set-PolicyFileEntry -Path $machinePolPath -Key $scanKey -ValueName &quot;DisableHeuristics&quot; -Data 1 -Type DWord
+
+# -- Signature Updates --
+$sigKey = &quot;$defenderKey\Signature Updates&quot;
+Set-PolicyFileEntry -Path $machinePolPath -Key $sigKey -ValueName &quot;ForceUpdateFromMU&quot; -Data 0 -Type DWord
+Set-PolicyFileEntry -Path $machinePolPath -Key $sigKey -ValueName &quot;UpdateOnStartUp&quot; -Data 0 -Type DWord
+
+# -- Network Protection (Exploit Guard) --
+$npKey = &quot;SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\Network Protection&quot;
+Set-PolicyFileEntry -Path $machinePolPath -Key $npKey -ValueName &quot;EnableNetworkProtection&quot; -Data 0 -Type DWord
+
+# -- Windows Security Center UI --
+$wscKey = &quot;SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection&quot;
+Set-PolicyFileEntry -Path $machinePolPath -Key $wscKey -ValueName &quot;UILockdown&quot; -Data 1 -Type DWord
+
+# -- SmartScreen (Explorer) --
+$ssExplorerKey = &quot;SOFTWARE\Policies\Microsoft\Windows\System&quot;
+Set-PolicyFileEntry -Path $machinePolPath -Key $ssExplorerKey -ValueName &quot;EnableSmartScreen&quot; -Data 0 -Type DWord
+
+# -- SmartScreen (Edge) --
+$ssEdgeKey = &quot;SOFTWARE\Policies\Microsoft\Edge&quot;
+Set-PolicyFileEntry -Path $machinePolPath -Key $ssEdgeKey -ValueName &quot;SmartScreenEnabled&quot; -Data 0 -Type DWord
+
+
+# ---------------------------------------------------------------
+# Step 2: Force Group Policy update
+# ---------------------------------------------------------------
+Write-Host &quot;`n[2/5] Applying Group Policy changes...&quot; -ForegroundColor Yellow
+gpupdate /force /wait:0
+
+# ---------------------------------------------------------------
+# Step 3: Disable Defender preferences via PowerShell API
+# ---------------------------------------------------------------
+Write-Host &quot;`n[3/5] Disabling Defender preferences via Set-MpPreference...&quot; -ForegroundColor Yellow
+Set-MpPreference -DisableRealtimeMonitoring $true
+Set-MpPreference -DisableBehaviorMonitoring $true
+Set-MpPreference -DisableBlockAtFirstSeen $true
+Set-MpPreference -DisableIOAVProtection $true
+Set-MpPreference -DisablePrivacyMode $true
+Set-MpPreference -DisableScriptScanning $true
+Set-MpPreference -DisableArchiveScanning $true
+if ((Get-Command Set-MpPreference).Parameters.ContainsKey(&#39;DisableIntrusionPreventionSystem&#39;)) {
+    Set-MpPreference -DisableIntrusionPreventionSystem $true
+} else {
+    Write-Warning &#39;This Defender version does not expose DisableIntrusionPreventionSystem.&#39;
+}
+Set-MpPreference -MAPSReporting Disabled
+Set-MpPreference -SubmitSamplesConsent NeverSend
+Set-MpPreference -SignatureDisableUpdateOnStartupWithoutEngine $true
+Set-MpPreference -PUAProtection Disabled
+Set-MpPreference -EnableControlledFolderAccess Disabled
+Set-MpPreference -EnableNetworkProtection Disabled
+
+# ---------------------------------------------------------------
+# Step 4: Disable scheduled Defender scan tasks
+# ---------------------------------------------------------------
+Write-Host &quot;`n[4/5] Disabling scheduled scan tasks...&quot; -ForegroundColor Yellow
+$tasks = @(
+    &quot;Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance&quot;,
+    &quot;Microsoft\Windows\Windows Defender\Windows Defender Cleanup&quot;,
+    &quot;Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan&quot;,
+    &quot;Microsoft\Windows\Windows Defender\Windows Defender Verification&quot;
+)
+foreach ($task in $tasks) {
+    $taskName = Split-Path $task -Leaf
+    $taskPath = &quot;\$((Split-Path $task -Parent))\&quot;
+    try {
+        Disable-ScheduledTask -TaskPath $taskPath -TaskName $taskName -ErrorAction Stop | Out-Null
+        Write-Host &quot;  Disabled task: $taskName&quot; -ForegroundColor Gray
+    } catch {
+        Write-Warning (&quot;Could not disable {0}: {1}&quot; -f $taskName, $_.Exception.Message)
+    }
+}
+
+# ---------------------------------------------------------------
+# Step 5: Disable Windows Defender Firewall (all profiles)
+# ---------------------------------------------------------------
+Write-Host &quot;`n[5/5] Disabling Windows Defender Firewall...&quot; -ForegroundColor Yellow
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+
+# ---------------------------------------------------------------
+# Summary
+# ---------------------------------------------------------------
+Write-Host &quot;`n=== Configuration attempted; verify after reboot ===&quot; -ForegroundColor Cyan
+Write-Host &quot;A reboot is required for all changes to take full effect.&quot; -ForegroundColor Yellow
+Write-Host &quot;After reboot, verify with: Get-MpComputerStatus | Select-Object AntivirusEnabled, RealTimeProtectionEnabled, IsTamperProtected&quot; -ForegroundColor Yellow</code></pre>
+</details>
+<pre class="powershell" data-sourcepos="209:1-212:1"><code>powershell.exe -ExecutionPolicy Bypass -File &quot;$HOME\Desktop\disable-defender.ps1&quot;</code></pre>
+<p data-sourcepos="213:1-213:1">原环境曾有效，但原记录没有保留 Windows 和 Defender 平台版本，不能据此保证其他版本的永久停用效果。<code>DisableAntiSpyware</code> / <code>DisableAntivirus</code> 是旧策略，在部分新版或已接入 Defender for Endpoint 的设备上会被忽略；<code>DisablePrivacyMode</code> 在当前平台已无效果。脚本保留历史配置，对不存在的 <code>DisableIntrusionPreventionSystem</code> 参数报告并跳过。签名更新两项只修改对应更新选项，不代表切断所有更新来源。</p>
+<p data-sourcepos="215:1-215:1">基础：<a href="https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/security-malware-windows-defender-disableantispyware">旧 Defender 开关的适用范围</a>、<a href="https://learn.microsoft.com/en-us/powershell/module/defender/set-mppreference">Set-MpPreference</a>、<a href="https://learn.microsoft.com/en-us/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection">篡改防护与被阻止的策略变更</a>。</p>
+<h3 id="重启后验证与恢复" data-sourcepos="217:1-217:1">重启后验证与恢复</h3>
+<p data-sourcepos="219:1-219:1">重启后检查实际状态，不能用脚本的执行输出或安全中心区域被隐藏来代替验证：</p>
+<pre class="powershell" data-sourcepos="221:1-235:1"><code>Get-MpComputerStatus | Select-Object AMProductVersion, AMRunningMode, AntivirusEnabled,
+  RealTimeProtectionEnabled, IsTamperProtected, BehaviorMonitorEnabled,
+  IoavProtectionEnabled, OnAccessProtectionEnabled, NISEnabled | Format-List
+Get-MpPreference | Select-Object DisableRealtimeMonitoring, DisableBehaviorMonitoring,
+  DisableIOAVProtection, DisableBlockAtFirstSeen, DisableScriptScanning,
+  DisableArchiveScanning, MAPSReporting, SubmitSamplesConsent, PUAProtection,
+  EnableControlledFolderAccess, EnableNetworkProtection | Format-List
+Get-Service WinDefend, WdNisSvc -ErrorAction SilentlyContinue |
+  Select-Object Name, Status, StartType
+Get-NetFirewallProfile | Select-Object Name, Enabled
+Get-ScheduledTask -TaskPath &#39;\Microsoft\Windows\Windows Defender\&#39; |
+  Select-Object TaskName, State</code></pre>
+<p data-sourcepos="236:1-236:1">原环境的目标是相关保护项为 <code>False</code>、四个任务为 <code>Disabled</code>、三个防火墙配置文件的 <code>Enabled</code> 为 <code>False</code>。<code>WinDefend</code> 仍在运行不能单独证明失败；偏好值已经写入也不能证明保护已停止。若状态未变化，核对篡改防护和组织策略。</p>
+<p data-sourcepos="238:1-238:1">恢复时按备份逐项还原脚本改过的偏好、任务启用状态和防火墙配置；本地策略按下节方法恢复对应值，先还原 <code>UILockdown</code> 才能重新显示管理区域。备份中的 <code>Machine-Registry.pol</code> 可用 <code>Get-PolicyFileEntry -Path '&lt;备份文件路径&gt;' -All</code> 查看原值；无备份文件表示原先没有机器级策略文件。只执行 <code>Set-MpPreference -DisableRealtimeMonitoring $false</code> 不会撤销完整脚本的其他改动。</p>
+<h2 id="restore" data-sourcepos="240:1-240:1">验证与逐项恢复</h2>
+<p data-sourcepos="242:1-242:1">以上配置没有在本次编辑中重新进行 Windows 实测。执行后重启，以实际状态和功能行为为准；域或 MDM 策略可能覆盖本地配置。</p>
+<pre class="powershell" data-sourcepos="244:1-255:1"><code>Import-Module PolicyFileEditor
+$MachinePol = &quot;$env:SystemRoot\System32\GroupPolicy\Machine\Registry.pol&quot;
+$UserPol = &quot;$env:SystemRoot\System32\GroupPolicy\User\Registry.pol&quot;
+if (Test-Path $MachinePol) { Get-PolicyFileEntry -Path $MachinePol -All }
+if (Test-Path $UserPol) { Get-PolicyFileEntry -Path $UserPol -All }
+Get-Service DiagTrack, whesvc, InventorySvc, diagsvc, PcaSvc, dmwappushservice,
+  WSearch, SysMain, DoSvc, WSAIFabricSvc -ErrorAction SilentlyContinue |
+  Select-Object Name, Status, StartType
+gpresult /r</code></pre>
+<p data-sourcepos="256:1-256:1">遥测与其他组件脚本执行前，会将本次所选项的原值保存到输出目录中的 <code>state.xml</code>：本地策略与对应注册表值、当前用户偏好、服务启动类型及延迟启动值、任务启用状态，以及涉及的 Recall 功能和应用包信息。记下输出的 <code>Backup directory</code>，保留此目录。</p>
+<p data-sourcepos="258:1-258:1">查看备份以及其中涉及的任务当前状态：</p>
+<pre class="powershell" data-sourcepos="260:1-270:1"><code>$BackupDirectory = &#39;C:\Users\&lt;用户名&gt;\windows-telemetry-before-&lt;时间戳&gt;&#39;
+$Before = Import-Clixml &quot;$BackupDirectory\state.xml&quot;
+$Before.Policies | Select-Object Key, Name, OldPolicy
+$Before.Services | Format-Table Name, StartType, WasRunning
+foreach ($Task in $Before.Tasks) {
+  Get-ScheduledTask -TaskPath $Task.TaskPath -TaskName $Task.TaskName |
+    Select-Object TaskPath, TaskName, State
+}</code></pre>
+<h3 id="恢复遥测与其他组件" data-sourcepos="271:1-271:1">恢复遥测与其他组件</h3>
+<p data-sourcepos="273:1-273:1">将以下代码保存为 <code>~/Desktop/restore-windows-components.ps1</code>，在原机器上以原账户提权运行。它只恢复备份中列出的项；原有本地策略写回原值，原先不存在的项才删除，保留其他本地策略及原先直接写入的注册表设置。</p>
+<details>
+<summary>
+restore-windows-components.ps1：按修改前记录恢复策略、偏好、服务、任务及 Recall
+</summary>
+<pre class="powershell"><code>#Requires -Version 5.1
+#Requires -RunAsAdministrator
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory)]
+    [string]$BackupDirectory
+)
+
+$ErrorActionPreference = &#39;Stop&#39;
+Import-Module PolicyFileEditor
+$state = Import-Clixml -LiteralPath (Join-Path $BackupDirectory &#39;state.xml&#39;)
+$sid = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+if ($state.ComputerName -ne $env:COMPUTERNAME -or $state.UserSid -ne $sid) {
+    throw &#39;Run the restore on the original computer, elevated as the original user.&#39;
+}
+
+$script:FailureCount = 0
+function Invoke-Restore {
+    param([string]$Label, [scriptblock]$Action)
+    try {
+        &amp; $Action
+        Write-Host &quot;Restored: $Label&quot;
+    } catch {
+        $script:FailureCount++
+        Write-Warning (&quot;Failed: {0}: {1}&quot; -f $Label, $_.Exception.Message)
+    }
+}
+
+function Restore-RegistryValue {
+    param([string]$Path, [string]$Name, $Before)
+    if ($Before.Exists) {
+        if (-not (Test-Path -LiteralPath $Path)) {
+            New-Item -Path $Path -Force | Out-Null
+        }
+        New-ItemProperty -LiteralPath $Path -Name $Name -Value $Before.Data `
+            -PropertyType $Before.Type -Force | Out-Null
+    } elseif (Test-Path -LiteralPath $Path) {
+        $key = Get-Item -LiteralPath $Path
+        if ($key.GetValueNames() -contains $Name) {
+            Remove-ItemProperty -LiteralPath $Path -Name $Name
+        }
+    }
+}
+
+# Touch only the entries listed in this run&#39;s snapshot.
+foreach ($entry in $state.Policies) {
+    Invoke-Restore &quot;$($entry.Key)\$($entry.Name)&quot; {
+        if ($null -ne $entry.OldPolicy) {
+            New-Item -ItemType Directory -Force -Path (Split-Path $entry.Path) | Out-Null
+            Set-PolicyFileEntry -Path $entry.Path -Key $entry.Key -ValueName $entry.Name `
+                -Data $entry.OldPolicy.Data -Type $entry.OldPolicy.Type
+        } elseif (Test-Path -LiteralPath $entry.Path) {
+            Remove-PolicyFileEntry -Path $entry.Path -Key $entry.Key -ValueName $entry.Name
+        }
+    }
+}
+Invoke-Restore &#39;Refresh local policy&#39; {
+    &amp; gpupdate.exe /force /wait:-1
+    if ($LASTEXITCODE -ne 0) { throw &quot;gpupdate exit code: $LASTEXITCODE&quot; }
+}
+foreach ($entry in $state.Policies) {
+    # Preserve pre-existing direct registry settings when there was no local
+    # policy entry. Existing policy entries are reapplied by gpupdate above.
+    if ($null -eq $entry.OldPolicy) {
+        Invoke-Restore &quot;$($entry.RegistryPath)\$($entry.Name)&quot; {
+            Restore-RegistryValue $entry.RegistryPath $entry.Name $entry.RegistryBefore
+        }
+    }
+}
+foreach ($entry in $state.Preferences) {
+    Invoke-Restore &quot;$($entry.Path)\$($entry.Name)&quot; {
+        Restore-RegistryValue $entry.Path $entry.Name $entry.Before
+    }
+}
+foreach ($entry in $state.Services) {
+    Invoke-Restore &quot;Service $($entry.Name)&quot; {
+        # A service can originally be running with its startup type disabled.
+        if ($entry.WasRunning -and $entry.StartType -eq &#39;Disabled&#39;) {
+            Set-Service -Name $entry.Name -StartupType Manual
+            try {
+                Start-Service -Name $entry.Name
+            } finally {
+                Set-Service -Name $entry.Name -StartupType Disabled
+            }
+        } else {
+            Set-Service -Name $entry.Name -StartupType $entry.StartType
+            if ($entry.WasRunning) {
+                Start-Service -Name $entry.Name
+            } else {
+                Stop-Service -Name $entry.Name
+            }
+        }
+        Restore-RegistryValue &quot;HKLM:\SYSTEM\CurrentControlSet\Services\$($entry.Name)&quot; `
+            &#39;DelayedAutoStart&#39; $entry.DelayedAutoStart
+    }
+}
+foreach ($entry in $state.Tasks) {
+    Invoke-Restore &quot;Task $($entry.TaskPath)$($entry.TaskName)&quot; {
+        if ($entry.WasEnabled) {
+            Enable-ScheduledTask -TaskPath $entry.TaskPath -TaskName $entry.TaskName | Out-Null
+        } else {
+            Disable-ScheduledTask -TaskPath $entry.TaskPath -TaskName $entry.TaskName | Out-Null
+        }
+    }
+}
+foreach ($entry in $state.Features) {
+    Invoke-Restore &quot;Optional feature $($entry.Name)&quot; {
+        $actual = Get-WindowsOptionalFeature -Online -FeatureName $entry.Name
+        if ($actual.State -in @(&#39;EnablePending&#39;, &#39;DisablePending&#39;)) {
+            throw &#39;A feature change is pending; restart Windows, then retry the restore.&#39;
+        }
+        if ($entry.State -eq &#39;Enabled&#39;) {
+            Enable-WindowsOptionalFeature -Online -FeatureName $entry.Name -NoRestart | Out-Null
+        }
+    }
+}
+
+if ($state.Packages.Count -gt 0 -or $state.ProvisionedPackages.Count -gt 0) {
+    Write-Warning &#39;AppX applications and provisioned packages need their Store or installation source.&#39;
+    $state.Packages | Select-Object -Property @(&#39;Name&#39;, &#39;PackageFullName&#39;, &#39;AllUsers&#39;) | Format-Table
+    $state.ProvisionedPackages | Select-Object -Property @(&#39;DisplayName&#39;, &#39;PackageName&#39;) | Format-Table
+}
+Write-Host &#39;Restart Windows and verify the restored settings.&#39;
+if ($script:FailureCount -gt 0) {
+    throw &quot;$($script:FailureCount) restore operation(s) failed; review the warnings above.&quot;
+}</code></pre>
+</details>
+<pre class="powershell" data-sourcepos="283:1-286:1"><code>powershell.exe -ExecutionPolicy Bypass -File &quot;$HOME\Desktop\restore-windows-components.ps1&quot; -BackupDirectory $BackupDirectory</code></pre>
+<p data-sourcepos="287:1-287:1">多次执行产生了多份备份时，按时间从新到旧恢复，直到所需的基线。恢复 Recall 可选功能可能需要 Windows Update 或安装源；若功能状态仍为 Pending，先重启再重试。恢复服务后，之前终止的 AI 进程由服务或重新登录、重启重新启动。</p>
+<p data-sourcepos="289:1-289:1">应用包信息用于确认重装范围，恢复脚本不会凭包名自动找回安装文件。已卸载的 AppX 应用需从 Store 或原安装源重装；新用户模板需用原包及依赖执行 <code>Add-AppxProvisionedPackage</code>。Recall 已删除的快照无法恢复。</p>
+<p data-sourcepos="291:1-291:1">Defender 使用其章节中的独立备份，按该节逐项还原偏好、任务、防火墙和本地策略；不使用这里的 <code>state.xml</code>。无论哪种恢复，都不删除整个 <code>Registry.pol</code>。</p>
+<p data-sourcepos="293:1-293:1">单独恢复 Defender 的某个本地策略时，先查备份中的原值。下面以 <code>DisableAntiSpyware</code> 为例；其他项替换 <code>$Key</code> 和 <code>$Name</code>，逐项处理：</p>
+<pre class="powershell" data-sourcepos="295:1-295:1"><code>$DefenderBackup = &#39;C:\Users\&lt;用户名&gt;\defender-before-&lt;时间戳&gt;&#39;
+$MachinePol = &quot;$env:SystemRoot\System32\GroupPolicy\Machine\Registry.pol&quot;
+$Key = &#39;SOFTWARE\Policies\Microsoft\Windows Defender&#39;
+$Name = &#39;DisableAntiSpyware&#39;
+$OriginalFile = Join-Path $DefenderBackup &#39;Machine-Registry.pol&#39;
+$Original = if (Test-Path $OriginalFile) {
+  Get-PolicyFileEntry -Path $OriginalFile -Key $Key -ValueName $Name
+} else { $null }
+if ($null -ne $Original) {
+  Set-PolicyFileEntry -Path $MachinePol -Key $Key -ValueName $Name -Data $Original.Data -Type $Original.Type
+} elseif (Test-Path $MachinePol) {
+  Remove-PolicyFileEntry -Path $MachinePol -Key $Key -ValueName $Name
+}
+gpupdate /force</code></pre>
+<p>尚未验证的其他调优想法保留在 <a href="/blog/practice/workflows/investigations/windows-components/TODO.md">TODO</a>，不视为执行清单。</p>
+
+      </article>
+    </main>
+
+    <!-- Right Sidebar (TOC) -->
+    <aside class="sidebar right-sidebar collapsed" id="right-sidebar">
+      <div class="sidebar-content" id="spa-toc">
+        <!-- <h4 class="toc-title">On this page</h4> -->
+        <ul class="toc-list"><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#telemetry">关闭 Windows 遥测</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#完整脚本与可选关闭项">完整脚本与可选关闭项</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#components">关闭 Windows 其他组件</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#recallcopilot-与搜索策略">Recall、Copilot 与搜索策略</a></li><li class="toc-child toc-level-3"><a href="#完整脚本与可选组件">完整脚本与可选组件</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#defender">关闭 Defender</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#执行完整配置">执行完整配置</a></li><li class="toc-child toc-level-3"><a href="#重启后验证与恢复">重启后验证与恢复</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#restore">验证与逐项恢复</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#恢复遥测与其他组件">恢复遥测与其他组件</a></li></ul></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <script src="/static/text-anchor.js"></script>
+<script src="/static/comments.js"></script>
+<script src="/static/core/code-blocks.js"></script>
+<script src="/static/scrollbar-visibility.js?v=733754f1"></script>
+<script src="/static/sidebar-panel.js"></script>
+<script src="/static/core/theme-colors.js?v=733754f1"></script>
+<script src="/static/svg-theme.js?v=733754f1"></script>
+<script src="/static/render-on-demand.js"></script>
+<script src="/static/reading-navigation-state.js"></script>
+<script src="/static/link-preview.js"></script>
+<script src="/static/shell-lifecycle.js"></script>
+<script src="/static/module-browser.js"></script>
+<script src="/static/shell-preferences.js"></script>
+<script src="/static/shell-bootstrap.js"></script>
+<script src="/static/main.js?v=733754f1"></script>
+<script src="/static/shell-layout.js"></script>
+<script src="/static/shell-search-settings.js?v=733754f1"></script>
+<script src="/static/shell-router.js"></script>
+<script src="/static/themes.js?v=733754f1"></script>
+<script src="/static/core/ink-theme-colors.js?v=733754f1"></script>
+<script src="/static/ink-toolbar.js?v=733754f1"></script>
+<script src="/static/image-viewer.js?v=733754f1"></script>
+<script src="/static/page-scripts.js?v=733754f1"></script>
+<script src="/static/vendor/js-yaml.js"></script>
+<script src="/static/core/syllabus-spec.js"></script>
+<script src="/static/syllabus-enhance.js"></script>
+<script src="/static/table-enhance.js"></script>
+<script src="/static/theme-colors.js?v=733754f1"></script>
+<script src="/static/greeting.js"></script>
+<script src="/static/draftbook-loader.js"></script>
+  <script>
+  // highlight.js: on-demand language loader + post-load highlight pass.
+  //
+  // Core (highlight.min.js) bundles ~37 common languages. Pages that use
+  // additional languages from _HLJS_EXTRA trigger an extra CDN fetch only
+  // when the page actually contains a matching code block. The service
+  // worker caches each module after the first fetch, so subsequent pages
+  // pay nothing for already-loaded languages.
+  //
+  // _HLJS_ALIAS maps user-facing class names to module filenames that
+  // differ from the class name. Pure aliases that hljs core already knows
+  // (e.g. ts → typescript, sh → bash) are resolved by hljs.getLanguage()
+  // and don't need entries — only include aliases whose target module is
+  // in _HLJS_EXTRA.
+  window._HLJS_BASE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/languages/';
+  window._HLJS_ALIAS = {
+    tex: 'latex', docker: 'dockerfile', ps: 'powershell', ps1: 'powershell',
+    ml: 'ocaml', hs: 'haskell', clj: 'clojure', cljs: 'clojure',
+    erl: 'erlang', coffee: 'coffeescript', f90: 'fortran', f95: 'fortran',
+    pascal: 'delphi'
+  };
+  window._HLJS_EXTRA = [
+    // Tier 1/2: build/config, scientific, FP, scripting, editor
+    'dockerfile','nginx','cmake','http','latex','julia','matlab','fortran',
+    'haskell','scala','ocaml','fsharp','clojure','elixir','dart','vim','powershell',
+    // Tier 3: FP & academic
+    'erlang','scheme','lisp','prolog',
+    // Tier 3: hardware / assembly
+    'verilog','vhdl','x86asm','armasm',
+    // Tier 3: modern systems
+    'crystal','nim','d','delphi',
+    // Tier 3: build / config
+    'groovy','nix','dts',
+    // Tier 3: markup / templating
+    'asciidoc','handlebars','gherkin',
+    // Tier 3: shell / scripting
+    'awk','tcl','coffeescript',
+    // Tier 3: stats
+    'stan'
+  ];
+  // Generation counter, bumped on every _hljsInit() call, kept for
+  // introspection/back-compat with existing tests/tooling. The staleness
+  // guard used below is tracked per-root (see _hljsRootGeneration), not off
+  // this global counter, so unrelated concurrent roots never invalidate one
+  // another (see _hljsRootGeneration's comment).
+  window._hljsGeneration = 0;
+  // #spa-content is reused (not recreated) across SPA navigations — only
+  // its innerHTML is replaced — so a still-in-flight CDN language module
+  // fetch triggered by an earlier page must not run a stale _hljsRun()
+  // against whatever page now happens to occupy that same element once it
+  // finally resolves. Generations are tracked per root object (WeakMap)
+  // rather than with one shared counter: a single global counter would let
+  // an unrelated, still-live root (e.g. a second independently-mounted
+  // section needing the same on-demand language) be wrongly treated as
+  // stale merely because some other root's _hljsInit() ran afterward. Each
+  // fetch's callback captures the generation current *for its own root*
+  // when it started and only proceeds if no newer _hljsInit() call has
+  // happened for that same root meanwhile.
+  window._hljsRootGeneration = window._hljsRootGeneration || new WeakMap();
+
+  window._hljsReportError = function(error) {
+    if (window._log && typeof window._log.error === 'function') {
+      window._log.error('code-blocks', 'Syntax highlighting failed', error.message);
+    } else {
+      console.error('[code-blocks] Syntax highlighting failed', error);
+    }
+  };
+
+  // Run the highlight + line-number pass against `root` (defaults to
+  // document). Delegates to the shared reading-domain code-block owner
+  // (window.CodeBlocks, see src/features/reading/client/code-blocks.js) for
+  // language resolution, source capture and line-wrapping, and highlights
+  // element-by-element scoped to `root` — not hljs.highlightAll(), which
+  // ignores its argument and always rescans the whole document.
+  window._hljsRun = function(root) {
+    window.CodeBlocks.highlightScope(root, {
+      hljs: hljs,
+      aliasMap: window._HLJS_ALIAS,
+      isAllowedLanguage: function(name) { return window._HLJS_EXTRA.indexOf(name) !== -1; },
+      onError: window._hljsReportError
+    });
+  };
+
+  // Scan `root` for code blocks, fetch any missing allowlisted language
+  // modules, then run the highlight pass once they finish loading (or fail).
+  // Called once from the highlight.min.js onload handler, and again from
+  // main.js after each SPA navigation (scoped to #spa-content). Returns a
+  // disposer: the page-content lifecycle registry (src/features/shell/core/
+  // lifecycle.js, wired in app.js) calls it on unmount so a still-pending
+  // language-module wait tied to a root being torn down is retired
+  // immediately instead of only becoming a no-op once its shared fetch
+  // eventually settles.
+  //
+  // Single-flight per language: if two _hljsInit calls — on the same root
+  // (e.g. a stale SPA reinit) or on two independent roots (e.g. two
+  // concurrently-mounted sections) — both need the same not-yet-loaded
+  // language, only the first triggers a CDN fetch. Every caller (the first
+  // and any later one) awaits the *same* shared Promise
+  // (`_hljsPending[lang]`), so every one of them reliably gets highlighted
+  // once the module actually loads — no separate "in-flight flag" +
+  // "waiter callback list" bookkeeping that a caller could observe in an
+  // inconsistent order (e.g. treating "fetch requested" as "fetch done").
+  window._hljsPending = window._hljsPending || Object.create(null);
+  window._hljsInit = function(root) {
+    root = root || document;
+    if (typeof hljs === 'undefined') return function () {};
+    window._hljsGeneration++;
+    var generation = (window._hljsRootGeneration.get(root) || 0) + 1;
+    window._hljsRootGeneration.set(root, generation);
+    function isCurrent() { return generation === window._hljsRootGeneration.get(root); }
+    function dispose() {
+      // Bumping this root's generation again makes any pending promise
+      // continuation below (still awaiting a shared fetch) see itself as
+      // stale via `isCurrent()` and no-op, exactly as a later _hljsInit()
+      // call for the same root would — this just does it explicitly, on
+      // unmount, instead of only implicitly the next time this root is
+      // reused.
+      if (isCurrent()) window._hljsRootGeneration.set(root, generation + 1);
+    }
+    var allow = Object.create(null);
+    for (var i = 0; i < window._HLJS_EXTRA.length; i++) allow[window._HLJS_EXTRA[i]] = true;
+    var need = Object.create(null);
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      // Tokenizes `raw` the same way CodeBlocks.resolveLanguage does, rather
+      // than treating the whole className as one language name — a real
+      // Pandoc fenced block carries extra classes (e.g. "sourceCode julia
+      // numberLines"), and a naive whole-string check never recognizes the
+      // language token, so it never gets fetched.
+      var name = window.CodeBlocks.resolvePrefetchLanguage(raw, window._HLJS_ALIAS, function(candidate) {
+        return !!hljs.getLanguage(candidate);
+      }, function(candidate) { return !!allow[candidate]; });
+      if (name) need[name] = true;
+    });
+    var keys = Object.keys(need);
+    if (!keys.length) { window._hljsRun(root); return dispose; }
+    Promise.all(keys.map(function(l) {
+      // The shared fetch Promise itself is process-wide (one CDN module,
+      // however many independent roots need it), not tied to any one
+      // root's generation — only the *continuation* below is.
+      if (window._hljsPending[l]) return window._hljsPending[l];
+      var loading = new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        var settled = false;
+        function finish(loaded) {
+          if (settled) return;
+          settled = true;
+          s.onload = s.onerror = null;
+          s.remove();
+          if (loaded) resolve({ loaded: true });
+          else reject(new Error('Could not load syntax language: ' + l));
+        }
+        s.src = window._HLJS_BASE + l + '.min.js';
+        s.onload = function() { finish(!!hljs.getLanguage(l)); };
+        s.onerror = function() { finish(false); };
+        document.head.appendChild(s);
+      });
+      var pending = loading.then(function(result) { return result; }, function(error) {
+        if (window._hljsPending[l] === pending) delete window._hljsPending[l];
+        window._hljsReportError(error);
+        return { loaded: false };
+      });
+      window._hljsPending[l] = pending;
+      return pending;
+    })).then(function() {
+      if (isCurrent()) window._hljsRun(root);
+    });
+    return dispose;
+  };
+  </script>
+  <script id="rprint-highlight" async src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    onload="window._hljsInit();"></script>
+  <script>document.getElementById('rprint-highlight').addEventListener('error',function(){window._hljsReportError(new Error('Could not load highlight.js'))});</script>
+  <script id="rprint-mermaid" async src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+    onload="mermaid.initialize({startOnLoad:false});if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('mermaid')}else{var t=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'default';mermaid.initialize({startOnLoad:false,theme:t});document.querySelectorAll('pre.mermaid > code').forEach(function(c){var src=c.textContent;c.parentElement.setAttribute('data-mermaid-source',src);c.parentElement.textContent=src;});mermaid.run()}"></script>
+  <script>document.getElementById('rprint-mermaid').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('mermaid',new Error('Mermaid failed to load'))}});</script>
+  <!-- rprint:page-assets:start --><!-- rprint:page-assets:end -->
+  
+  
+<script type="application/json" data-rprint-page-assets>{"version":1,"entries":[]}</script>
+</body>
+</html>

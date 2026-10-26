@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="build-commit" content="733754f1">
+  <title>古典音乐选·补 - Jingqi's Interpositive</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#1a1a2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/comments.css">
+<link rel="stylesheet" href="/static/sidebar-panel.css">
+<link rel="stylesheet" href="/static/link-preview.css">
+<link rel="stylesheet" href="/static/main.css?v=733754f1">
+<link rel="stylesheet" href="/static/themes.css?v=733754f1">
+<link rel="stylesheet" href="/static/ink-toolbar.css?v=733754f1">
+<link rel="stylesheet" href="/static/image-viewer.css?v=733754f1">
+<link rel="stylesheet" href="/static/syllabus-enhance.css">
+<link rel="stylesheet" href="/static/table-enhance.css">
+<link rel="stylesheet" href="/static/greeting.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaigbscreen.css" media="print" onload="this.media='all'">
+  <script>
+    (function(){
+      var linkPreviewEmbed=false;
+      try{
+        var previewUrl=new URL(location.href);
+        linkPreviewEmbed=previewUrl.searchParams.get('rprint-preview')==='1'&&window.parent!==window&&window.parent.location.origin===location.origin;
+      }catch(e){}
+      if(linkPreviewEmbed){
+        document.documentElement.classList.add('link-preview-embed');
+        var previewArticleLink=function(target){return target&&target.closest&&target.closest('.article a[href]');};
+        var blockPreviewLink=function(event){if(previewArticleLink(event.target)){event.preventDefault();event.stopImmediatePropagation();}};
+        document.addEventListener('click',blockPreviewLink,true);
+        document.addEventListener('auxclick',blockPreviewLink,true);
+        document.addEventListener('keydown',function(event){if(event.key==='Enter')blockPreviewLink(event);},true);
+        document.addEventListener('dblclick',function(event){if(event.target&&event.target.closest&&event.target.closest('.article')){event.preventDefault();event.stopImmediatePropagation();}},true);
+      }
+      var bc=document.querySelector('meta[name="build-commit"]');
+      var commit=bc?bc.getAttribute('content'):'';
+      if(commit&&commit!=='unknown'){
+        var prev=localStorage.getItem('kb-build-commit');
+        if(prev&&prev!==commit){
+          var keys=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k.indexOf('kb-')===0)keys.push(k);}
+          keys.forEach(function(k){localStorage.removeItem(k);});
+          localStorage.setItem('kb-build-commit',commit);
+          if(navigator.serviceWorker&&navigator.serviceWorker.controller){
+            navigator.serviceWorker.controller.postMessage('clearCaches');
+          }
+          window.location.reload();
+          return;
+        }
+        localStorage.setItem('kb-build-commit',commit);
+      }
+      // Resume last visited page on PWA/browser launch. PWA launches carry
+      // `?pwa=1`; a normal browser launch is a plain root URL without a same-
+      // origin referrer. `/index.html` is an explicit home navigation, so it
+      // never resumes. Runs before paint to avoid a flash of the home page.
+      // Validates the stored path is a same-origin absolute path (rejects
+      // `//host` / `/\host` open-redirects).
+      var resumeLaunch=/[?&]pwa=1(&|$)/.test(location.search);
+      try{
+        var launchUrl=new URL(location.href);
+        launchUrl.searchParams.delete('pwa');
+        var sameOriginReferrer=false;
+        try{sameOriginReferrer=!!document.referrer&&new URL(document.referrer,location.href).origin===location.origin;}catch(e){}
+        resumeLaunch=resumeLaunch||(launchUrl.pathname==='/'&&!launchUrl.search&&!launchUrl.hash&&!sameOriginReferrer);
+      }catch(e){}
+      if(resumeLaunch){
+        try{
+          var last=localStorage.getItem('kb-last-location');
+          var lastPath=last&&last.split('#')[0].split('?')[0];
+          if(last&&/^\/[^/\\]/.test(last)&&lastPath!=='/'&&lastPath!=='/index.html'){
+            try{sessionStorage.setItem('kb-resume-last-scroll','1');}catch(e){}
+            location.replace(last);return;
+          }
+        }catch(e){}
+      }
+      var p=JSON.parse(localStorage.getItem('kb-display-prefs')||'{}');
+      var t=p.theme||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      var mob=window.matchMedia('(max-width:650px)').matches;
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.style.colorScheme=t==='dark'?'dark':'light';
+      var bg=p.bgColor||'default';
+      document.documentElement.setAttribute('data-bg',bg);
+      var w=p.contentWidth||(mob?'100':'90');
+      document.documentElement.style.setProperty('--content-max-width',w+'%');
+      document.documentElement.dataset.contentWidth=String(w);
+      var edge=p.ignoreCorners!==undefined?p.ignoreCorners==='on':false;
+      if(edge&&Number(w)===100)document.documentElement.setAttribute('data-ignore-corners','on');
+      if(window.navigator.standalone||window.matchMedia('(display-mode:standalone)').matches||window.matchMedia('(display-mode:fullscreen)').matches)document.documentElement.classList.add('pwa-standalone');
+      var f=p.fontFamily||'ibm-plex';
+      var fl={'system':'','literata':'"Literata", Georgia','ibm-plex':'"IBM Plex Serif", Georgia'};
+      if(fl[f])document.documentElement.style.setProperty('--font-latin',fl[f]);
+      var fz=p.fontZh||'noto-serif';
+      var fzl={'default':'','noto-serif':'"Noto Serif SC"','kaiti':'"LXGW WenKai Screen", "LXGW WenKai", "Kaiti SC", KaiTi, STKaiti'};
+      if(fzl[fz])document.documentElement.style.setProperty('--font-zh',fzl[fz]);
+      var fsRaw=p.fontSize||'large';
+      var fsLegacy=p.fontSizeSource==='page'?{normal:16,large:24,larger:30}:{normal:16,large:20,larger:24};
+      var fs=Object.prototype.hasOwnProperty.call(fsLegacy,fsRaw)?fsLegacy[fsRaw]:Number(fsRaw);
+      var fsStops=[12,14,16,18,24,32];
+      if(fsStops.indexOf(fs)<0){fs=fs===20?18:fs===30?32:18;}
+      document.documentElement.setAttribute('data-font-size',String(fs));
+      document.documentElement.style.setProperty('--page-font-size',fs+'px');
+      var lhRaw=p.lineHeight||'relaxed';
+      var lhLegacy={normal:1.6,relaxed:1.8,airy:2.0};
+      var lh=Object.prototype.hasOwnProperty.call(lhLegacy,lhRaw)?lhLegacy[lhRaw]:Number(lhRaw);
+      var lhStops=[1.2,1.4,1.6,1.7,1.8,2.2];
+      if(lhStops.indexOf(lh)<0){lh=lh===1.5?1.4:lh===2?2.2:1.8;}
+      document.documentElement.setAttribute('data-line-height',String(lh));
+      document.documentElement.style.setProperty('--page-line-height',String(lh));
+      var ht=t==='dark'?'github-dark':'github';
+      var writes='<link id="hljs-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/'+ht+'.min.css">';
+      document.write(writes);
+    })();
+  </script>
+  <style>.math{opacity:0;transition:opacity .15s}.math.rprint-render-failed{opacity:1}</style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css" integrity="sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM" crossorigin="anonymous">
+  <script id="rprint-katex" defer src="https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.js" integrity="sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI" crossorigin="anonymous"
+    onload="if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('katex')}else{document.querySelectorAll('.math').forEach(function(el){var src=el.textContent;el.setAttribute('data-latex',src);katex.render(src,el,{displayMode:el.classList.contains('display'),throwOnError:false,trust:function(ctx){return ctx&&ctx.command==='\\href'&&typeof ctx.url==='string'&&/^#[A-Za-z0-9:._-]+$/.test(ctx.url);}});el.querySelectorAll('mtable[columnspacing=\'\']').forEach(function(t){t.removeAttribute('columnspacing')});el.style.opacity='1';})}"></script>
+  <script>document.getElementById('rprint-katex').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('katex',new Error('KaTeX failed to load'))}else{document.querySelectorAll('.math').forEach(function(el){el.style.opacity='1'})}});</script>
+</head>
+<body data-page-type="markdown">
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="banner-left">
+        <button class="banner-toggle" id="left-toggle" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h12v1.5H2V3zm0 4h12v1.5H2V7zm0 4h12v1.5H2V11z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-center">
+        <div class="banner-center-inner">
+          <a href="/index.html" class="site-title" data-short="Interpositive">Jingqi's Interpositive</a>
+          <span class="spa-health-wrap" id="spa-health-wrap">
+            <span class="spa-health-dot" id="spa-health-dot" title="SPA server status"></span>
+            <div class="spa-health-popup" id="spa-health-popup">
+              <div class="shp-header">
+                <span class="shp-title">Server Status</span>
+                <span class="shp-heart" id="shp-heart"></span>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-metrics">
+                <div class="shp-row"><span class="shp-label">Ping</span><span class="shp-value" id="shp-ping">—</span></div>
+                <div class="shp-row"><span class="shp-label">Uptime</span><span class="shp-value" id="shp-uptime">—</span></div>
+                <div class="shp-row"><span class="shp-label">Memory</span><span class="shp-value" id="shp-memory">—</span></div>
+                <div class="shp-row"><span class="shp-label">CPU Time</span><span class="shp-value" id="shp-cpu-time">—</span></div>
+                <div class="shp-row"><span class="shp-label">Load</span><span class="shp-value" id="shp-load">—</span></div>
+              </div>
+              <div class="shp-divider"></div>
+              <div class="shp-modules">
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-watch"></span> Watch</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-jupyter"></span> Jupyter</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-terminal"></span> Terminal</div>
+                <div class="shp-mod"><span class="shp-mod-dot" id="shp-mod-proxy"></span> Proxy</div>
+              </div>
+              <div id="shp-module-diagnostics" role="status" aria-live="polite"></div>
+            </div>
+          </span>
+          <nav class="main-nav">
+            <ul class="nav-list">
+              <li class="nav-item"><a href="/cs-notes/" class="nav-link" data-short="CS">CS</a><ul class="nav-dropdown"><li><a href="/cs-notes/mit-eecs-requirements.html">MIT EECS Syllabus</a></li><li><a href="/cs-notes/mit-gir/index.html">MIT GIR</a></li><li><a href="/cs-notes/cs-math/index.html">CS Math</a></li></ul></li><li class="nav-item"><a href="/not-cs-notes/" class="nav-link" data-short="CS$^\complement$">CS$^\complement$</a><ul class="nav-dropdown"><li><a href="/not-cs-notes/arts/index.html">书影音</a></li></ul></li><li class="nav-item"><a href="/notebook/" class="nav-link" data-short="Mixed">Mixed</a><ul class="nav-dropdown"><li><a href="/notebook/mind/index.html">Mind</a></li><li><a href="/notebook/matter/index.html">Matter</a></li><li><a href="/notebook/practice/index.html">Practice</a></li><li><a href="/notebook/toolbox/index.html">Toolbox</a></li></ul></li><li class="nav-item"><a href="/years/" class="nav-link" data-short="Years">Years</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="banner-right">
+        <button class="banner-right-toggle" title="More controls">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </button>
+        <div class="search-wrap" id="search-wrap">
+          <button class="search-btn" id="search-btn" title="Search (Ctrl+K)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-input-wrap" id="search-input-wrap">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="search-input" id="search-input" placeholder="Search…" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+        <div class="comment-wrap" id="comment-wrap">
+          <button class="comment-btn" id="comment-btn" title="Review Comments (A)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+          <span class="comment-nav-count" id="comment-nav-count"></span>
+          <button class="comment-nav-btn" id="comment-nav-prev" title="Previous comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="comment-nav-btn" id="comment-nav-next" title="Next comment">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <button class="settings-btn" id="settings-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="settings-panel" id="settings-panel">
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Native Jupyter <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="native-jupyter-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Global Search <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="content-search-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section settings-switch-row spa-only-setting" style="display: none;">
+            <label class="style-label">Quick Edit <span class="style-spa-tag">[spa]</span></label>
+            <button class="style-switch" id="quick-edit-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-panel-section resource-pack-setting" id="resource-pack-setting" hidden>
+            <div class="settings-row resource-pack-row">
+              <span class="settings-desc">Offline resources</span>
+              <button type="button" class="settings-action-btn" id="resource-pack-import-btn">Import</button>
+            </div>
+            <input type="file" id="resource-pack-input" accept=".rpack,application/vnd.rprint.resource-pack" hidden>
+            <div class="resource-pack-status" id="resource-pack-status" aria-live="polite"></div>
+            <div class="resource-pack-list" id="resource-pack-list" aria-label="Installed resource packs"></div>
+          </div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent link-preview-settings-parent">
+            <label class="style-label" id="link-preview-label">Link Preview <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="link-preview-switch" role="switch" aria-labelledby="link-preview-label" aria-checked="false" aria-expanded="false" aria-controls="link-preview-settings-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children link-preview-settings-children" id="link-preview-settings-children" hidden>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-same-page-only-label">Same-page links only</label>
+              <button class="style-switch style-switch-compact" id="link-preview-same-page-only-switch" role="switch" aria-labelledby="link-preview-same-page-only-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-auto-close-label">Auto-close</label>
+              <button class="style-switch style-switch-compact" id="link-preview-auto-close-switch" role="switch" aria-labelledby="link-preview-auto-close-label" aria-checked="true" disabled><span class="style-switch-knob"></span></button>
+            </div>
+            <div class="settings-panel-section settings-switch-row settings-dependent-child link-preview-settings-child">
+              <label class="style-label" id="link-preview-overwrite-jumping-label">Overwrite Link Jumping</label>
+              <button class="style-switch style-switch-compact" id="link-preview-overwrite-jumping-switch" role="switch" aria-labelledby="link-preview-overwrite-jumping-label" aria-checked="false" disabled><span class="style-switch-knob"></span></button>
+            </div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-row settings-title-row settings-dependent-parent">
+            <span class="settings-panel-title">Keyboard Shortcuts</span>
+            <button class="style-switch" id="kb-enabled-switch" aria-checked="true"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="settings-dependent-children keyboard-shortcuts-children">
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="search"><span class="settings-desc">Search</span><span class="settings-keys"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="scroll"><span class="settings-desc">Scroll down / up</span><span class="settings-keys"><kbd>J</kbd> <kbd>K</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="section"><span class="settings-desc">Next / prev section</span><span class="settings-keys"><kbd>U</kbd> <kbd>I</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="sidebar-toc"><span class="settings-desc"><span data-shortcut-part="sidebar">Sidebar / </span>TOC</span><span class="settings-keys"><kbd data-shortcut-part="sidebar">S</kbd> <kbd>T</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="spread"><span class="settings-desc">Next / prev spread</span><span class="settings-keys"><kbd>PgDn</kbd> <kbd>PgUp</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="columns"><span class="settings-desc">2 Columns</span><span class="settings-keys"><kbd>C</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="comments"><span class="settings-desc">Comments<span class="spa-only-setting" style="display: none;"> / add to selection</span></span><span class="settings-keys"><kbd>A</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="fold"><span class="settings-desc">Fold banner</span><span class="settings-keys"><kbd>F</kbd></span></div>
+            
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="dismiss"><span class="settings-desc">Close / Dismiss</span><span class="settings-keys"><kbd>Esc</kbd></span></div>
+            <div class="settings-row settings-dependent-child keyboard-shortcut-setting" data-shortcut="settings"><span class="settings-desc">Show this panel</span><span class="settings-keys"><kbd>?</kbd></span></div>
+          </div>
+          <div class="settings-divider"></div>
+          <div class="settings-panel-section settings-switch-row settings-dependent-parent">
+            <label class="style-label" id="debug-mode-label">Debug Mode</label>
+            <button class="style-switch" id="debug-mode-switch" role="switch" aria-labelledby="debug-mode-label" aria-checked="false" aria-expanded="false" aria-controls="debug-children"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="debug-children" id="debug-children" hidden>
+            <div class="settings-dependent-children">
+              <div class="settings-panel-section settings-dependent-child debug-log-level-setting">
+                <label class="style-label">Client Log Level</label>
+                <div class="style-toggle-group">
+                  <button class="style-toggle-btn debug-level-btn" data-level="error">Error</button>
+                  <button class="style-toggle-btn debug-level-btn" data-level="info">Info</button>
+                  <button class="style-toggle-btn debug-level-btn active" data-level="debug">Debug</button>
+                </div>
+              </div>
+              <div class="settings-footer is-dirty" id="settings-git-version">
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Branch</span>
+                  <span class="settings-footer-value" id="settings-build-branch">main</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Commit</span>
+                  <span class="settings-footer-value" id="settings-build-commit">733754f1</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Commit time</span>
+                  <span class="settings-footer-value" id="settings-build-commit-time" data-iso="2026-10-25T21:34:38-07:00" title="2026-10-25T21:34:38-07:00">—</span>
+                </div>
+                <div class="settings-footer-row">
+                  <span class="settings-footer-label">Generated</span>
+                  <span class="settings-footer-value" id="settings-build-generated-at" data-iso="" title="">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="theme-wrap" id="theme-wrap">
+          <a href="/static/settings.html?v=733754f1" class="theme-btn" id="theme-btn" title="Theme & display">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="13.5" cy="6.5" r=".5"/>
+              <circle cx="17.5" cy="10.5" r=".5"/>
+              <circle cx="8.5" cy="7.5" r=".5"/>
+              <circle cx="6.5" cy="12.5" r=".5"/>
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+            </svg>
+          </a>
+          <output class="book-position" id="book-position" aria-label="Reading pages" aria-live="polite" aria-atomic="true" hidden></output>
+          <button type="button" class="book-nav-btn book-prev" id="book-prev" title="Previous spread" aria-label="Previous spread" hidden disabled>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="book-nav-btn book-next" id="book-next" title="Next spread" aria-label="Next spread" hidden disabled>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>
+        <div class="style-panel" id="style-panel">
+          <div class="style-panel-section">
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn active" data-theme="light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light
+              </button>
+              <button class="style-toggle-btn" data-theme="dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="style-toggle-btn" data-theme="kindle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                E-Ink
+              </button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn font-btn active" data-font="system">System</button>
+              <button class="style-toggle-btn font-btn" data-font="literata">Book</button>
+              <button class="style-toggle-btn font-btn" data-font="ibm-plex">News</button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">字体</label>
+            <div class="style-toggle-group">
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="default">系统</button>
+              <button class="style-toggle-btn fontzh-btn" data-fontzh="kaiti">楷体</button>
+              <button class="style-toggle-btn fontzh-btn active" data-fontzh="noto-serif">宋体</button>
+            </div>
+          </div>
+          <div class="style-panel-section bg-picker-section">
+            <label class="style-label">Background</label>
+            <div class="bg-swatch-group" id="bg-swatch-group">
+              <button class="bg-swatch active" data-bg="default" title="Default"></button>
+              <button class="bg-swatch" data-bg="green" title="Green"></button>
+              <button class="bg-swatch" data-bg="cool" title="Cool"></button>
+              <button class="bg-swatch" data-bg="gray" title="Gray"></button>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Font Size <span id="font-size-value">18px</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="font-size-range" min="0" max="5" step="1" value="3" aria-label="Font Size">
+              <div class="style-range-ticks">
+                <span class="style-range-tick font-size-tick" data-i="0">12</span>
+                <span class="style-range-tick font-size-tick" data-i="1">14</span>
+                <span class="style-range-tick font-size-tick" data-i="2">16</span>
+                <span class="style-range-tick font-size-tick" data-i="3">18</span>
+                <span class="style-range-tick font-size-tick" data-i="4">24</span>
+                <span class="style-range-tick font-size-tick" data-i="5">32</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Line Spacing <span id="line-height-value">1.8</span></label>
+            <div class="style-slider-wrap">
+              <input type="range" class="style-range" id="line-height-range" min="0" max="5" step="1" value="4" aria-label="Line Spacing">
+              <div class="style-range-ticks">
+                <span class="style-range-tick line-height-tick" data-i="0">1.2</span>
+                <span class="style-range-tick line-height-tick" data-i="1">1.4</span>
+                <span class="style-range-tick line-height-tick" data-i="2">1.6</span>
+                <span class="style-range-tick line-height-tick" data-i="3">1.7</span>
+                <span class="style-range-tick line-height-tick" data-i="4">1.8</span>
+                <span class="style-range-tick line-height-tick" data-i="5">2.2</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section">
+            <label class="style-label">Width <span id="width-value">90%</span></label>
+            <div class="style-slider-wrap width-slider-wrap">
+              <input type="range" class="style-range" id="content-width-range" min="0" max="5" step="1" value="3">
+              <div class="style-range-ticks width-ticks">
+                <span class="style-range-tick width-tick" data-i="0">50</span>
+                <span class="style-range-tick width-tick" data-i="1">65</span>
+                <span class="style-range-tick width-tick" data-i="2">80</span>
+                <span class="style-range-tick width-tick" data-i="3">90</span>
+                <span class="style-range-tick width-tick" data-i="4">95</span>
+                <span class="style-range-tick width-tick" data-i="5">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">Edge to Edge <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="ignore-corners-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+          <div class="style-panel-section style-switch-row">
+            <label class="style-label">2 Columns <span class="style-lab-tag">[lab]</span></label>
+            <button class="style-switch" id="two-columns-switch" aria-checked="false"><span class="style-switch-knob"></span></button>
+          </div>
+        </div>
+        <button class="banner-toggle" id="fold-banner-btn" title="Fold banner">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4v16M3.5 7.5 8 12l-4.5 4.5M20.5 7.5 16 12l4.5 4.5"/>
+          </svg>
+        </button>
+        <button class="banner-toggle" id="right-toggle" title="Toggle table of contents">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="banner-right-dropdown"></div>
+    </div>
+  </header>
+
+  <!-- Floating buttons when banner is folded -->
+  <div class="banner-fold-float" id="banner-fold-float">
+    <button class="banner-fold-float-btn" id="unfold-banner-btn" title="Unfold banner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 4v16M8 7.5 3.5 12 8 16.5M16 7.5 20.5 12 16 16.5"/>
+      </svg>
+    </button>
+    <button class="banner-fold-float-btn" id="float-toc-btn" title="Toggle table of contents">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2 3h5v1.5H2V3zm0 4h5v1.5H2V7zm0 4h5v1.5H2V11zM9 3h5v1.5H9V3zm0 4h5v1.5H9V7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout left-collapsed right-collapsed">
+    <!-- Left Sidebar -->
+    <aside class="sidebar left-sidebar collapsed" id="left-sidebar">
+      <div class="sidebar-content" id="spa-sidebar">
+        <!-- rprint:sidebar:start -->
+        <a class="sidebar-cat-title" href="/not-cs-notes">CS$^\complement$</a><ul class="sidebar-list"><li class="sidebar-group open" data-priority="0"><span class="sidebar-row"><a class="sidebar-group-title active-group" href="/not-cs-notes/arts/index.html">书影音</a><span class="sidebar-toggle"></span></span><ul><li><a href="/not-cs-notes/arts/brief-classical-music-history.html">古典音乐选</a></li><li class="active"><a href="/not-cs-notes/arts/classical-music-selections-supplement.html">古典音乐选·补</a></li></ul></li></ul>
+        <!-- rprint:sidebar:end -->
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="content" id="content">
+      <article class="article" id="spa-content">
+        <h1 id="古典音乐选补" data-sourcepos="1:1-1:1">古典音乐选·补</h1>
+<h2 id="引子">一</h2>
+<h3 id="帕赫贝尔卡农" data-sourcepos="5:1-5:1">帕赫贝尔：卡农</h3>
+<p data-sourcepos="7:1-7:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/canon-and-gigue-in-d-major-i-canon/1452181309?i=1452182012">Trevor Pinnock / The English Concert</a>。古乐器版。</p>
+<p data-sourcepos="9:1-9:1">短小的低音音型反复出现，三条高声部依次奏出同样的旋律，进入时间错开，形成彼此追随的卡农织体。上方旋律从舒缓的长音逐渐变为细密的音群，层次越来越丰富，低音与和声循环却始终保持稳定。</p>
+<h2 id="初见">二</h2>
+<h3 id="门德尔松春之歌" data-sourcepos="13:1-13:1">门德尔松：春之歌</h3>
+<p data-sourcepos="15:1-15:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/lieder-ohne-worte-op-62-no-6-andante-grazioso-in-a/1424744043?i=1424746652">Daniel Barenboim</a>。</p>
+<p data-sourcepos="17:1-17:1">《无词歌》Op.62 第六首以歌唱性的旋律配上轻盈流动的伴奏，细小的装饰音穿插其间，使平稳的乐句带着灵巧的起伏。旋律在不同音区反复展开，和声与力度随之起落，短暂的浓厚音响之后，又回到透明、柔和的钢琴音色。</p>
+<h3 id="贝多芬致爱丽丝" data-sourcepos="19:1-19:1">贝多芬：致爱丽丝</h3>
+<p data-sourcepos="21:1-21:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/bagatelle-in-a-minor-woo-59-f%C3%BCr-elise/1452239037?i=1452239051">Alfred Brendel</a>。</p>
+<p data-sourcepos="23:1-23:1">开头两个相邻的音反复交替，带出轻柔而略有停顿的主题，左手的分解和弦让旋律保持清楚的轮廓。主题在两个对比段落之间数次回归，较明亮的流动音型与低音反复敲击的紧张段落，使这首短曲有了鲜明的起伏。</p>
+<h3 id="莫扎特土耳其进行曲" data-sourcepos="25:1-25:1">莫扎特：土耳其进行曲</h3>
+<p data-sourcepos="27:1-27:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/piano-sonata-no-11-in-a-k-331-alla-turca-3-alla/1452648570?i=1452648590">Mitsuko Uchida</a>。</p>
+<p data-sourcepos="29:1-29:1">在钢琴奏鸣曲 K.331 的末乐章中，短促的装饰音和跳跃的旋律围绕清楚的重音展开，快速音群与干脆的断奏相互穿插，节奏轻快而鲜明。小调段落与明亮的大调段落交替，响亮的八度与结尾加厚的和弦，把钢琴的音响推向热烈。</p>
+<h3 id="莫扎特g大调弦乐小夜曲" data-sourcepos="31:1-31:1">莫扎特：G大调弦乐小夜曲</h3>
+<p data-sourcepos="33:1-33:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/mozart-eine-kleine-nachtmusik/1452553492">Orpheus Chamber Orchestra</a>。听专辑第 8—11 轨，完整现存四乐章。合奏轻盈清晰，声部之间有鲜活的对话感。</p>
+<p data-sourcepos="35:1-35:1">开场的齐奏以鲜明的上行音型和整齐的停顿突出节拍，随后旋律在高低弦乐之间接续，轻巧的伴奏让线条清楚分明。K.525 现存四个乐章依次展开为快板、抒情的浪漫曲、小步舞曲和回旋曲终章，歌唱性与舞蹈性的节奏交替出现。</p>
+<h3 id="德沃夏克幽默曲第七首" data-sourcepos="37:1-37:1">德沃夏克：幽默曲第七首</h3>
+<p data-sourcepos="39:1-39:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/8-humoresques-op-101-b-187-no-7-poco-lento-e-grazioso/1390008531?i=1390015346">Radoslav Kvapil</a>。钢琴原版。</p>
+<p data-sourcepos="41:1-41:1">旋律把附点节奏、短小停顿与圆滑的连线交替使用，右手轻轻起伏，左手的低音与和弦保持柔和的支撑。中段转为较暗的小调色彩，音区与力度逐渐扩大，随后熟悉的主题重新出现，让明朗与忧郁之间的对照更清楚。</p>
+<h3 id="格里格在山魔王的宫中" data-sourcepos="43:1-43:1">格里格：在山魔王的宫中</h3>
+<p data-sourcepos="45:1-45:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/peer-gynt-suite-no-1-op-46-4-in-the-hall-of-the-mountain-king/1452531179?i=1452532162">Neeme Järvi / Gothenburg Symphony Orchestra</a>。Op.46 管弦乐组曲版。</p>
+<p data-sourcepos="47:1-47:1">短小的主题先由低音区的木管与弦乐轻声奏出，节奏整齐，旋律一次次重复，并向不同的音区扩展。随着速度加快、力度增强，更多乐器逐层加入，铜管和打击乐把音响推到密集的高潮，最后以强烈的全奏收束。</p>
+<h3 id="杜卡魔法师的学徒" data-sourcepos="49:1-49:1">杜卡：魔法师的学徒</h3>
+<p data-sourcepos="51:1-51:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/lapprenti-sorcier/1452507529?i=1452507723">Charles Dutoit / Orchestre symphonique de Montréal</a>。</p>
+<p data-sourcepos="53:1-53:1">幽暗而缓慢的开头之后，大管奏出短促、跳跃的主题，木管与弦乐的接续让节奏逐渐活跃起来。主题经过反复、转调与声部叠加，快速的弦乐音群和强烈的铜管不断增添密度，临近结尾又忽然安静，最后由几记短促和弦结束。</p>
+<h2 id="自主">三</h2>
+<h3 id="肖邦幻想即兴曲" data-sourcepos="57:1-57:1">肖邦：幻想即兴曲</h3>
+<p data-sourcepos="59:1-59:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/impromptu-no-4-in-c-sharp-minor-op-66-fantaisie-impromptu/916940460?i=916942310">Nelson Freire</a>。</p>
+<p data-sourcepos="61:1-61:1">快速的外段中，右手四音一组、左手三音一组同时推进，形成错落而连续的流动，旋律从不断起伏的音群中突出。中段速度放缓，宽广的歌唱旋律在分解和弦上舒展，随后快速段落重现，结尾又让中段旋律在较低的声部再次出现。</p>
+<h3 id="贝多芬第14号钢琴奏鸣曲月光" data-sourcepos="63:1-63:1">贝多芬：第14号钢琴奏鸣曲《月光》</h3>
+<p data-sourcepos="65:1-65:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/beethoven-piano-sonatas-nos-14-moonlight-17-tempest/1452229291">Wilhelm Kempff</a>。听专辑第 1—3 轨，完整三乐章。音色温润，乐句自然，沉静与激烈之间的变化连贯。</p>
+<p data-sourcepos="67:1-67:1">第一乐章以持续的三连音托住缓慢的旋律，低音的移动与和声的细微变化，使平稳的织体始终带着张力。第二乐章以轻巧的三拍子和清晰的重音形成过渡，终乐章随即用急速上冲的分解和弦、突出的重击与强烈对比，将全曲推向激烈的终点。</p>
+<h3 id="巴赫咖啡康塔塔" data-sourcepos="69:1-69:1">巴赫：咖啡康塔塔</h3>
+<p data-sourcepos="71:1-71:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/1452223774">Emma Kirkby / Rogers Covey-Crump / David Thomas；Christopher Hogwood / Academy of Ancient Music</a>。听专辑第 1—5 轨，合计约 25 分钟。</p>
+<p data-sourcepos="73:1-73:1">宣叙调接近说话的节奏，与旋律舒展的咏叹调交替出现，女高音、男高音和男低音的音色使声乐层次分明。弦乐维持轻巧的节拍，长笛在女高音的咏叹调里与人声交织，最后的三重唱让三条声乐线条与乐队合在一起，收束得明快而整齐。</p>
+<h3 id="皮亚佐拉自由探戈" data-sourcepos="75:1-75:1">皮亚佐拉：自由探戈</h3>
+<p data-sourcepos="77:1-77:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/libertango/1329251104?i=1329251107">Astor Piazzolla</a>。1974 年作曲家原录的正式再版。</p>
+<p data-sourcepos="79:1-79:1">低音的固定音型反复推进，切分节奏把重音移向拍子的间隙，班多钮手风琴以紧凑的乐句勾出鲜明的旋律。弦乐的长线条与有棱角的节奏彼此叠合，短小动机在反复中更换音区、增减声部，使稳定的脉搏持续带着紧张感。</p>
+<h2 id="相伴">四</h2>
+<h3 id="埃尔加爱的致意" data-sourcepos="83:1-83:1">埃尔加：爱的致意</h3>
+<p data-sourcepos="85:1-85:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/salut-damour-in-e-major-op-12/697314942?i=697316152">Itzhak Perlman / Samuel Sanders</a>。小提琴与钢琴版。</p>
+<p data-sourcepos="87:1-87:1">小提琴在钢琴轻柔的分解和弦衬托下，拉出连贯的长句，旋律常在句尾略作停留，又以细小的装饰继续展开。中段的音区与力度逐渐上扬，开头的主题随后重新出现，在放缓的节奏与轻声的尾句中收束。</p>
+<h3 id="李斯特爱之梦第三首" data-sourcepos="89:1-89:1">李斯特：爱之梦第三首</h3>
+<p data-sourcepos="91:1-91:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/liebestraum-no-3-in-a-flat/427972467?i=427972516">Arthur Rubinstein</a>。</p>
+<p data-sourcepos="93:1-93:1">宽广的旋律从流动的分解和弦中浮现，有时夹在双手交织的音型之间，长音与细密的伴奏形成清楚的层次。主题在不同音区反复展开，逐渐增厚为饱满的和弦，其间穿插急速的华彩，最后回到轻柔而舒缓的尾声。</p>
+<h3 id="肖邦降e大调夜曲" data-sourcepos="95:1-95:1">肖邦：降E大调夜曲</h3>
+<p data-sourcepos="97:1-97:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/nocturnes-op-9-no-2-in-e-flat-major/594180316?i=594180660">Arthur Rubinstein</a>。歌唱自然，速度伸缩与装饰从容，保留了夜曲亲密的气质。</p>
+<p data-sourcepos="99:1-99:1">在 Op.9 No.2 中，左手以低音与和弦维持轻轻摇动的十二八拍，右手的歌唱旋律从容铺开，句尾常有回旋与短暂的停顿。旋律每次重现都会添上更细密的装饰，临近结尾时展开一段自由的华彩，随后在轻柔的和弦中落定。</p>
+<h3 id="拉赫玛尼诺夫练声曲" data-sourcepos="101:1-101:1">拉赫玛尼诺夫：练声曲</h3>
+<p data-sourcepos="103:1-103:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/vocalise-op-34-no-14/1452696967?i=1452697407">Elisabeth Söderström / Vladimir Ashkenazy</a>。女高音与钢琴原版。</p>
+<p data-sourcepos="105:1-105:1">人声不唱歌词，以连贯的元音拉出宽长的旋律，钢琴的流动伴奏在下方不断变换和声，衬出乐句之间的呼吸。旋律逐渐攀向高音，力度也随之增强，随后音量缓缓回落，长音与缓慢移动的和弦使结尾延展开来。</p>
+<h3 id="柴可夫斯基如歌的行板" data-sourcepos="107:1-107:1">柴可夫斯基：如歌的行板</h3>
+<p data-sourcepos="109:1-109:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/string-quartet-no-1-in-d-major-op-11-andante-cantabile/202506431?i=202507450">Borodin Quartet</a>。弦乐四重奏原版。</p>
+<p data-sourcepos="111:1-111:1">第一小提琴唱出朴素而舒缓的旋律，其余三件弦乐器以轻柔的和声衬托，旋律中的停顿与长音清晰可闻。另一段较为流动的旋律伴着清脆的拨弦出现，与前面的连贯拉奏形成对照，两段材料交替重现，结尾渐渐放轻。</p>
+<h3 id="瓦格纳齐格弗里德牧歌" data-sourcepos="113:1-113:1">瓦格纳：齐格弗里德牧歌</h3>
+<p data-sourcepos="115:1-115:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/siegfried-idyll/1452288373?i=1452288476">Neville Marriner / Academy of St Martin in the Fields</a>。室内乐团版，全曲。</p>
+<p data-sourcepos="117:1-117:1">弦乐先以轻声的长句铺开，木管与圆号随后加入，在相互接续的短句中改变旋律的颜色，也逐渐增加声部的厚度。几个主题不断交织，音乐由舒缓推向明亮而饱满的高潮，再让开头的旋律重新浮现，慢慢归于轻声。</p>
+<h2 id="入世">五</h2>
+<h3 id="约翰施特劳斯二世蓝色多瑙河" data-sourcepos="121:1-121:1">约翰·施特劳斯二世：蓝色多瑙河</h3>
+<p data-sourcepos="123:1-123:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/an-der-sch%C3%B6nen-blauen-donau-walzer-op-314/259225022?i=259225572">Carlos Kleiber / Vienna Philharmonic</a>。1989 年维也纳新年音乐会实况。</p>
+<p data-sourcepos="125:1-125:1">轻颤的弦乐托出圆号柔和的短句，序奏经过几次蓄势，才转入低音与和弦交替支撑的三拍子圆舞曲。弦乐与木管轮流唱出一组组旋律，舒展的长句与轻快的节奏不断更换，尾声回顾熟悉的主题后，以明亮有力的合奏结束。</p>
+<h3 id="勃拉姆斯匈牙利舞曲第五号" data-sourcepos="127:1-127:1">勃拉姆斯：匈牙利舞曲第五号</h3>
+<p data-sourcepos="129:1-129:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/hungarian-dances-nos-1-21-no-5-in-f-sharp-minor-allegro/1452219747?i=1452220181">Aloys &amp; Alfons Kontarsky</a>。钢琴四手联弹原版。</p>
+<p data-sourcepos="131:1-131:1">这首升F小调的钢琴四手联弹，以厚实的低音和鲜明的和弦重音托起跳跃的旋律，短促的停顿使乐句频繁收住。音乐常在舒展与急促之间突然转换，同一旋律也随力度和音区改变面貌，后段重新带回开头的舞曲节奏。</p>
+<h3 id="李斯特第二号匈牙利狂想曲" data-sourcepos="133:1-133:1">李斯特：第二号匈牙利狂想曲</h3>
+<p data-sourcepos="135:1-135:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/19-hungarian-rhapsodies-s-244-no-2-in-c-sharp-minor/691349969?i=691349971">György Cziffra</a>。钢琴独奏原版，全曲。慢段的自由与快段的凌厉相映，舞蹈感鲜活。</p>
+<p data-sourcepos="137:1-137:1">开头的低音与和弦以缓慢的节奏落下，旋律在停顿、装饰音与突然加重的音响之间伸缩，速度富于弹性。后半部转为轻巧而急促的舞曲，反复的短音不断叠加，随后扩展成快速的八度、跳跃与密集音群，推动钢琴奏出强烈的结尾。</p>
+<h3 id="肖斯塔科维奇第二圆舞曲" data-sourcepos="139:1-139:1">肖斯塔科维奇：第二圆舞曲</h3>
+<p data-sourcepos="141:1-141:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/jazz-suite-no-2-vi-waltz-ii/1452515651?i=1452516048">Riccardo Chailly / Royal Concertgebouw Orchestra</a>。专辑沿用“Jazz Suite No. 2”旧题，实际出自《综艺管弦乐组曲》。</p>
+<p data-sourcepos="143:1-143:1">萨克斯管以圆润而略带鼻音的音色唱出主旋律，低音与小鼓保持规整的三拍子节奏，乐句末尾的停顿十分鲜明。主旋律在萨克斯管与长号之间转换，中段则转入明亮的大调，最后再回到开头的旋律与伴奏。</p>
+<h3 id="圣桑骷髅之舞" data-sourcepos="145:1-145:1">圣桑：骷髅之舞</h3>
+<p data-sourcepos="147:1-147:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/danse-macabre-op-40/1452505758?i=1452506045">Charles Dutoit / Philharmonia Orchestra</a>。</p>
+<p data-sourcepos="149:1-149:1">竖琴先在同一音高上重复十二次，独奏小提琴随后奏出尖锐而不协和的音程，弦乐很快带出轻巧的三拍子舞曲。主题在不同乐器之间交替出现，木琴清脆的短音穿插其间，密集的合奏不断增强，直到双簧管的短句使音乐转入收束。</p>
+<h3 id="奥尔夫啊命运女神" data-sourcepos="151:1-151:1">奥尔夫：啊，命运女神</h3>
+<p data-sourcepos="153:1-153:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/carmina-burana-fortuna-imperatrix-mundi-o-fortuna/968866035?i=968866368">Eugen Jochum / Chor und Orchester der Deutschen Oper Berlin</a>。《布兰诗歌》第 1 轨开场。</p>
+<p data-sourcepos="155:1-155:1">合唱与乐队以沉重的和弦强奏开场，随后突然压低音量，人声以整齐、短促的音节，反复推进同一节奏。后段转回全力强奏，铜管和打击乐与人声一同加厚音响，连续的重音将结尾推向饱满而急促的合奏。</p>
+<h2 id="失落">六</h2>
+<h3 id="普契尼菊花" data-sourcepos="159:1-159:1">普契尼：菊花</h3>
+<p data-sourcepos="161:1-161:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/chrysanthemen-crisantemi/1643037207?i=1643037608">Quartetto di Cremona</a>。弦乐四重奏原版。</p>
+<p data-sourcepos="163:1-163:1">两把小提琴、中提琴与大提琴交织出绵长的旋律，半音的细小移动使和声不断染上暗色，声部之间的接续保留着歌唱的连贯。中段的旋律逐渐舒展，四件乐器汇成更饱满的合奏，随后熟悉的乐句再现，缓缓收回柔和的音量。</p>
+<h3 id="舒伯特圣母颂" data-sourcepos="165:1-165:1">舒伯特：圣母颂</h3>
+<p data-sourcepos="167:1-167:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/ellens-gesang-iii-d-839-ave-maria/261069375?i=261069383">Barbara Bonney / Geoffrey Parsons</a>。德文原词，女高音与钢琴。</p>
+<p data-sourcepos="169:1-169:1">《艾伦之歌第三首》D.839 中，钢琴用均匀而绵密的分解和弦铺出起伏，人声在其上拉开长长的乐句，旋律几次向高处攀升，再以柔和的装饰音回落。反复出现的曲调始终保持歌唱的连贯，乐句间的停顿与强弱变化，以及钢琴在歌声间隙的回应，使平稳的伴奏保有细腻的呼吸。</p>
+<h3 id="莫扎特圣体颂" data-sourcepos="171:1-171:1">莫扎特：圣体颂</h3>
+<p data-sourcepos="173:1-173:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/ave-verum-corpus-k-618/1452133665?i=1452133671">Neville Marriner / Academy of St Martin in the Fields（合唱团与乐团）</a>。</p>
+<p data-sourcepos="175:1-175:1">弦乐与管风琴衬着四部合唱，人声大多按相同节奏缓缓推进，清楚的旋律与柔和的和弦融成平衡的音响。几处半音变化和暂不解决的不协和，让平稳的乐句出现细微的牵引，临近结尾的声部交错又汇入安静的终止。</p>
+<h3 id="肖邦第一叙事曲" data-sourcepos="177:1-177:1">肖邦：第一叙事曲</h3>
+<p data-sourcepos="179:1-179:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/ballade-no-1-in-g-minor-op-23/1440776206?i=1440776370">Krystian Zimerman</a>。抒情、紧张的积聚与急速尾声层次清楚，戏剧推进完整。</p>
+<p data-sourcepos="181:1-181:1">低音区的八度引子逐渐上行，随后让位于轻声歌唱的小调旋律，较为宽广的大调主题又带来明亮的对比。两个主题在返回时不断改变力度、速度与伴奏，快速的音群和厚重的和弦逐步积聚，最终冲入急速而猛烈的尾声。</p>
+<h3 id="舒曼梦幻曲" data-sourcepos="183:1-183:1">舒曼：梦幻曲</h3>
+<p data-sourcepos="185:1-185:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/kinderszenen-op-15-7-tr%C3%A4umerei/1452244270?i=1452244854">Vladimir Horowitz</a>。</p>
+<p data-sourcepos="187:1-187:1">《童年情景》第七曲的旋律从弱拍起步，以长音与细小转折连成歌唱，内声部也在和弦之间缓慢移动，使伴奏保持柔软的流动。相似的乐句几次回来，中间的和声略显浓暗，回到开头时又重新变得澄明，结尾在渐弱的和弦中收住。</p>
+<h2 id="安静">七</h2>
+<h3 id="勋伯格升华之夜" data-sourcepos="191:1-191:1">勋伯格：升华之夜</h3>
+<p data-sourcepos="193:1-193:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/verkl%C3%A4rte-nacht-op-4/695698780?i=695699204">Artemis Quartet / Thomas Kakuska / Valentin Erben</a>。弦乐六重奏原版，完整单轨。</p>
+<p data-sourcepos="195:1-195:1">两把小提琴、两把中提琴与两把大提琴层层交织，短小的音型不断变形，浓密的半音和声与骤起的强奏积聚出持续的张力。后半部转向明亮的大调，弱音器与泛音改变了弦乐的质感，先前的主题也随之舒展，最终在柔和的共鸣中结束。</p>
+<h3 id="拉威尔悼念公主的帕凡舞曲" data-sourcepos="197:1-197:1">拉威尔：悼念公主的帕凡舞曲</h3>
+<p data-sourcepos="199:1-199:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/pavane-pour-une-infante-d%C3%A9funte-m-19/1705736213?i=1705736424">Steven Osborne</a>。钢琴原版，与主篇《夜之幽灵》同专辑。</p>
+<p data-sourcepos="201:1-201:1">钢琴以缓慢而规整的步调展开，清楚的上声部旋律浮在低音与和弦之上，圆润的句尾让每一次停驻都留下余韵。主旋律在几段对比音乐之间反复回来，较密的音符与更宽的音区短暂增添光泽，随后又收拢为简洁而柔和的音响。</p>
+<h3 id="德彪西月光" data-sourcepos="203:1-203:1">德彪西：月光</h3>
+<p data-sourcepos="205:1-205:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/suite-bergamasque-l-75-iii-clair-de-lune/1533315984?i=1533321413">Ivan Moravec</a>。</p>
+<p data-sourcepos="207:1-207:1">开头的钢琴和弦轻而疏朗，旋律在长音、停顿与细小的起伏之间展开，踏板留下的余音使音与音之间仍有柔和的联系。中段涌出连续的分解和弦，音区与力度逐渐扩展，随后开头的材料回到更轻的织体中，最后的共鸣缓缓消散。</p>
+<h3 id="萨蒂第一首吉姆诺佩迪" data-sourcepos="209:1-209:1">萨蒂：第一首吉姆诺佩迪</h3>
+<p data-sourcepos="211:1-211:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/3-gymnop%C3%A9dies-no-1/1452550612?i=1452557104">Jean-Yves Thibaudet</a>。</p>
+<p data-sourcepos="213:1-213:1">低音与和弦按缓慢的三拍子交替，上方的旋律以疏落的长音和小幅度的起伏展开，清楚的节拍中带着轻微的悬浮感。相近的乐句与伴奏音型不断出现，和声却悄悄改变色泽，几处未被立即化解的音程摩擦，使简单的织体始终带着微妙的张力。</p>
+<h3 id="巴赫咏叹调" data-sourcepos="215:1-215:1">巴赫：咏叹调</h3>
+<p data-sourcepos="217:1-217:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/suite-no-3-in-d-bwv-1068-ii-air/1452317629?i=1452318154">Trevor Pinnock / The English Concert</a>。</p>
+<p data-sourcepos="219:1-219:1">第三管弦乐组曲 BWV 1068 的第二乐章，让第一小提琴的长线条在稳步流动的低音上舒展，其他弦乐声部以各自的走向填入其间。旋律中的延留与低音的移动牵动和声，乐句在轻微的紧张与舒缓之间前行，两段音乐的反复使声部之间的呼应更加可辨。</p>
+<h3 id="凯奇in-a-landscape" data-sourcepos="221:1-221:1">凯奇：In a Landscape</h3>
+<p data-sourcepos="223:1-223:1"><strong>推荐录音</strong>：<a href="https://music.apple.com/us/album/in-a-landscape/1452289023?i=1452289717">Sarah Rothenberg</a>。钢琴独奏。</p>
+<p data-sourcepos="225:1-225:1">钢琴以均匀而轻柔的音符展开旋律，短小音型在反复中略作变化，线条在不同音区之间平缓移动，节奏从容而连贯。踏板持续保留先前音符的余响，让新落下的声音与尚未消散的共鸣相叠，清晰的琴音由此渐渐融成柔软而朦胧的层次。</p>
+
+      </article>
+    </main>
+
+    <!-- Right Sidebar (TOC) -->
+    <aside class="sidebar right-sidebar collapsed" id="right-sidebar">
+      <div class="sidebar-content" id="spa-toc">
+        <!-- <h4 class="toc-title">On this page</h4> -->
+        <ul class="toc-list"><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#引子">一</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#帕赫贝尔卡农">帕赫贝尔：卡农</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#初见">二</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#门德尔松春之歌">门德尔松：春之歌</a></li><li class="toc-child toc-level-3"><a href="#贝多芬致爱丽丝">贝多芬：致爱丽丝</a></li><li class="toc-child toc-level-3"><a href="#莫扎特土耳其进行曲">莫扎特：土耳其进行曲</a></li><li class="toc-child toc-level-3"><a href="#莫扎特g大调弦乐小夜曲">莫扎特：G大调弦乐小夜曲</a></li><li class="toc-child toc-level-3"><a href="#德沃夏克幽默曲第七首">德沃夏克：幽默曲第七首</a></li><li class="toc-child toc-level-3"><a href="#格里格在山魔王的宫中">格里格：在山魔王的宫中</a></li><li class="toc-child toc-level-3"><a href="#杜卡魔法师的学徒">杜卡：魔法师的学徒</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#自主">三</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#肖邦幻想即兴曲">肖邦：幻想即兴曲</a></li><li class="toc-child toc-level-3"><a href="#贝多芬第14号钢琴奏鸣曲月光">贝多芬：第14号钢琴奏鸣曲《月光》</a></li><li class="toc-child toc-level-3"><a href="#巴赫咖啡康塔塔">巴赫：咖啡康塔塔</a></li><li class="toc-child toc-level-3"><a href="#皮亚佐拉自由探戈">皮亚佐拉：自由探戈</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#相伴">四</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#埃尔加爱的致意">埃尔加：爱的致意</a></li><li class="toc-child toc-level-3"><a href="#李斯特爱之梦第三首">李斯特：爱之梦第三首</a></li><li class="toc-child toc-level-3"><a href="#肖邦降e大调夜曲">肖邦：降E大调夜曲</a></li><li class="toc-child toc-level-3"><a href="#拉赫玛尼诺夫练声曲">拉赫玛尼诺夫：练声曲</a></li><li class="toc-child toc-level-3"><a href="#柴可夫斯基如歌的行板">柴可夫斯基：如歌的行板</a></li><li class="toc-child toc-level-3"><a href="#瓦格纳齐格弗里德牧歌">瓦格纳：齐格弗里德牧歌</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#入世">五</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#约翰施特劳斯二世蓝色多瑙河">约翰·施特劳斯二世：蓝色多瑙河</a></li><li class="toc-child toc-level-3"><a href="#勃拉姆斯匈牙利舞曲第五号">勃拉姆斯：匈牙利舞曲第五号</a></li><li class="toc-child toc-level-3"><a href="#李斯特第二号匈牙利狂想曲">李斯特：第二号匈牙利狂想曲</a></li><li class="toc-child toc-level-3"><a href="#肖斯塔科维奇第二圆舞曲">肖斯塔科维奇：第二圆舞曲</a></li><li class="toc-child toc-level-3"><a href="#圣桑骷髅之舞">圣桑：骷髅之舞</a></li><li class="toc-child toc-level-3"><a href="#奥尔夫啊命运女神">奥尔夫：啊，命运女神</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#失落">六</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#普契尼菊花">普契尼：菊花</a></li><li class="toc-child toc-level-3"><a href="#舒伯特圣母颂">舒伯特：圣母颂</a></li><li class="toc-child toc-level-3"><a href="#莫扎特圣体颂">莫扎特：圣体颂</a></li><li class="toc-child toc-level-3"><a href="#肖邦第一叙事曲">肖邦：第一叙事曲</a></li><li class="toc-child toc-level-3"><a href="#舒曼梦幻曲">舒曼：梦幻曲</a></li></ul></li><li class="toc-section has-children"><div class="toc-heading"><span class="toc-toggle" aria-label="Toggle section">▸</span><a href="#安静">七</a></div><ul class="toc-children"><li class="toc-child toc-level-3"><a href="#勋伯格升华之夜">勋伯格：升华之夜</a></li><li class="toc-child toc-level-3"><a href="#拉威尔悼念公主的帕凡舞曲">拉威尔：悼念公主的帕凡舞曲</a></li><li class="toc-child toc-level-3"><a href="#德彪西月光">德彪西：月光</a></li><li class="toc-child toc-level-3"><a href="#萨蒂第一首吉姆诺佩迪">萨蒂：第一首吉姆诺佩迪</a></li><li class="toc-child toc-level-3"><a href="#巴赫咏叹调">巴赫：咏叹调</a></li><li class="toc-child toc-level-3"><a href="#凯奇in-a-landscape">凯奇：In a Landscape</a></li></ul></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <script src="/static/text-anchor.js"></script>
+<script src="/static/comments.js"></script>
+<script src="/static/core/code-blocks.js"></script>
+<script src="/static/scrollbar-visibility.js?v=733754f1"></script>
+<script src="/static/sidebar-panel.js"></script>
+<script src="/static/core/theme-colors.js?v=733754f1"></script>
+<script src="/static/svg-theme.js?v=733754f1"></script>
+<script src="/static/render-on-demand.js"></script>
+<script src="/static/reading-navigation-state.js"></script>
+<script src="/static/link-preview.js"></script>
+<script src="/static/shell-lifecycle.js"></script>
+<script src="/static/module-browser.js"></script>
+<script src="/static/shell-preferences.js"></script>
+<script src="/static/shell-bootstrap.js"></script>
+<script src="/static/main.js?v=733754f1"></script>
+<script src="/static/shell-layout.js"></script>
+<script src="/static/shell-search-settings.js?v=733754f1"></script>
+<script src="/static/shell-router.js"></script>
+<script src="/static/themes.js?v=733754f1"></script>
+<script src="/static/core/ink-theme-colors.js?v=733754f1"></script>
+<script src="/static/ink-toolbar.js?v=733754f1"></script>
+<script src="/static/image-viewer.js?v=733754f1"></script>
+<script src="/static/page-scripts.js?v=733754f1"></script>
+<script src="/static/vendor/js-yaml.js"></script>
+<script src="/static/core/syllabus-spec.js"></script>
+<script src="/static/syllabus-enhance.js"></script>
+<script src="/static/table-enhance.js"></script>
+<script src="/static/theme-colors.js?v=733754f1"></script>
+<script src="/static/greeting.js"></script>
+<script src="/static/draftbook-loader.js"></script>
+  <script>
+  // highlight.js: on-demand language loader + post-load highlight pass.
+  //
+  // Core (highlight.min.js) bundles ~37 common languages. Pages that use
+  // additional languages from _HLJS_EXTRA trigger an extra CDN fetch only
+  // when the page actually contains a matching code block. The service
+  // worker caches each module after the first fetch, so subsequent pages
+  // pay nothing for already-loaded languages.
+  //
+  // _HLJS_ALIAS maps user-facing class names to module filenames that
+  // differ from the class name. Pure aliases that hljs core already knows
+  // (e.g. ts → typescript, sh → bash) are resolved by hljs.getLanguage()
+  // and don't need entries — only include aliases whose target module is
+  // in _HLJS_EXTRA.
+  window._HLJS_BASE = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/languages/';
+  window._HLJS_ALIAS = {
+    tex: 'latex', docker: 'dockerfile', ps: 'powershell', ps1: 'powershell',
+    ml: 'ocaml', hs: 'haskell', clj: 'clojure', cljs: 'clojure',
+    erl: 'erlang', coffee: 'coffeescript', f90: 'fortran', f95: 'fortran',
+    pascal: 'delphi'
+  };
+  window._HLJS_EXTRA = [
+    // Tier 1/2: build/config, scientific, FP, scripting, editor
+    'dockerfile','nginx','cmake','http','latex','julia','matlab','fortran',
+    'haskell','scala','ocaml','fsharp','clojure','elixir','dart','vim','powershell',
+    // Tier 3: FP & academic
+    'erlang','scheme','lisp','prolog',
+    // Tier 3: hardware / assembly
+    'verilog','vhdl','x86asm','armasm',
+    // Tier 3: modern systems
+    'crystal','nim','d','delphi',
+    // Tier 3: build / config
+    'groovy','nix','dts',
+    // Tier 3: markup / templating
+    'asciidoc','handlebars','gherkin',
+    // Tier 3: shell / scripting
+    'awk','tcl','coffeescript',
+    // Tier 3: stats
+    'stan'
+  ];
+  // Generation counter, bumped on every _hljsInit() call, kept for
+  // introspection/back-compat with existing tests/tooling. The staleness
+  // guard used below is tracked per-root (see _hljsRootGeneration), not off
+  // this global counter, so unrelated concurrent roots never invalidate one
+  // another (see _hljsRootGeneration's comment).
+  window._hljsGeneration = 0;
+  // #spa-content is reused (not recreated) across SPA navigations — only
+  // its innerHTML is replaced — so a still-in-flight CDN language module
+  // fetch triggered by an earlier page must not run a stale _hljsRun()
+  // against whatever page now happens to occupy that same element once it
+  // finally resolves. Generations are tracked per root object (WeakMap)
+  // rather than with one shared counter: a single global counter would let
+  // an unrelated, still-live root (e.g. a second independently-mounted
+  // section needing the same on-demand language) be wrongly treated as
+  // stale merely because some other root's _hljsInit() ran afterward. Each
+  // fetch's callback captures the generation current *for its own root*
+  // when it started and only proceeds if no newer _hljsInit() call has
+  // happened for that same root meanwhile.
+  window._hljsRootGeneration = window._hljsRootGeneration || new WeakMap();
+
+  window._hljsReportError = function(error) {
+    if (window._log && typeof window._log.error === 'function') {
+      window._log.error('code-blocks', 'Syntax highlighting failed', error.message);
+    } else {
+      console.error('[code-blocks] Syntax highlighting failed', error);
+    }
+  };
+
+  // Run the highlight + line-number pass against `root` (defaults to
+  // document). Delegates to the shared reading-domain code-block owner
+  // (window.CodeBlocks, see src/features/reading/client/code-blocks.js) for
+  // language resolution, source capture and line-wrapping, and highlights
+  // element-by-element scoped to `root` — not hljs.highlightAll(), which
+  // ignores its argument and always rescans the whole document.
+  window._hljsRun = function(root) {
+    window.CodeBlocks.highlightScope(root, {
+      hljs: hljs,
+      aliasMap: window._HLJS_ALIAS,
+      isAllowedLanguage: function(name) { return window._HLJS_EXTRA.indexOf(name) !== -1; },
+      onError: window._hljsReportError
+    });
+  };
+
+  // Scan `root` for code blocks, fetch any missing allowlisted language
+  // modules, then run the highlight pass once they finish loading (or fail).
+  // Called once from the highlight.min.js onload handler, and again from
+  // main.js after each SPA navigation (scoped to #spa-content). Returns a
+  // disposer: the page-content lifecycle registry (src/features/shell/core/
+  // lifecycle.js, wired in app.js) calls it on unmount so a still-pending
+  // language-module wait tied to a root being torn down is retired
+  // immediately instead of only becoming a no-op once its shared fetch
+  // eventually settles.
+  //
+  // Single-flight per language: if two _hljsInit calls — on the same root
+  // (e.g. a stale SPA reinit) or on two independent roots (e.g. two
+  // concurrently-mounted sections) — both need the same not-yet-loaded
+  // language, only the first triggers a CDN fetch. Every caller (the first
+  // and any later one) awaits the *same* shared Promise
+  // (`_hljsPending[lang]`), so every one of them reliably gets highlighted
+  // once the module actually loads — no separate "in-flight flag" +
+  // "waiter callback list" bookkeeping that a caller could observe in an
+  // inconsistent order (e.g. treating "fetch requested" as "fetch done").
+  window._hljsPending = window._hljsPending || Object.create(null);
+  window._hljsInit = function(root) {
+    root = root || document;
+    if (typeof hljs === 'undefined') return function () {};
+    window._hljsGeneration++;
+    var generation = (window._hljsRootGeneration.get(root) || 0) + 1;
+    window._hljsRootGeneration.set(root, generation);
+    function isCurrent() { return generation === window._hljsRootGeneration.get(root); }
+    function dispose() {
+      // Bumping this root's generation again makes any pending promise
+      // continuation below (still awaiting a shared fetch) see itself as
+      // stale via `isCurrent()` and no-op, exactly as a later _hljsInit()
+      // call for the same root would — this just does it explicitly, on
+      // unmount, instead of only implicitly the next time this root is
+      // reused.
+      if (isCurrent()) window._hljsRootGeneration.set(root, generation + 1);
+    }
+    var allow = Object.create(null);
+    for (var i = 0; i < window._HLJS_EXTRA.length; i++) allow[window._HLJS_EXTRA[i]] = true;
+    var need = Object.create(null);
+    root.querySelectorAll('pre[class]:not(.mermaid) > code').forEach(function(code) {
+      var raw = code.parentElement.className.trim();
+      // Tokenizes `raw` the same way CodeBlocks.resolveLanguage does, rather
+      // than treating the whole className as one language name — a real
+      // Pandoc fenced block carries extra classes (e.g. "sourceCode julia
+      // numberLines"), and a naive whole-string check never recognizes the
+      // language token, so it never gets fetched.
+      var name = window.CodeBlocks.resolvePrefetchLanguage(raw, window._HLJS_ALIAS, function(candidate) {
+        return !!hljs.getLanguage(candidate);
+      }, function(candidate) { return !!allow[candidate]; });
+      if (name) need[name] = true;
+    });
+    var keys = Object.keys(need);
+    if (!keys.length) { window._hljsRun(root); return dispose; }
+    Promise.all(keys.map(function(l) {
+      // The shared fetch Promise itself is process-wide (one CDN module,
+      // however many independent roots need it), not tied to any one
+      // root's generation — only the *continuation* below is.
+      if (window._hljsPending[l]) return window._hljsPending[l];
+      var loading = new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        var settled = false;
+        function finish(loaded) {
+          if (settled) return;
+          settled = true;
+          s.onload = s.onerror = null;
+          s.remove();
+          if (loaded) resolve({ loaded: true });
+          else reject(new Error('Could not load syntax language: ' + l));
+        }
+        s.src = window._HLJS_BASE + l + '.min.js';
+        s.onload = function() { finish(!!hljs.getLanguage(l)); };
+        s.onerror = function() { finish(false); };
+        document.head.appendChild(s);
+      });
+      var pending = loading.then(function(result) { return result; }, function(error) {
+        if (window._hljsPending[l] === pending) delete window._hljsPending[l];
+        window._hljsReportError(error);
+        return { loaded: false };
+      });
+      window._hljsPending[l] = pending;
+      return pending;
+    })).then(function() {
+      if (isCurrent()) window._hljsRun(root);
+    });
+    return dispose;
+  };
+  </script>
+  <script id="rprint-highlight" async src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    onload="window._hljsInit();"></script>
+  <script>document.getElementById('rprint-highlight').addEventListener('error',function(){window._hljsReportError(new Error('Could not load highlight.js'))});</script>
+  <script id="rprint-mermaid" async src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+    onload="mermaid.initialize({startOnLoad:false});if(window.RenderOnDemand){window.RenderOnDemand.libraryReady('mermaid')}else{var t=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'default';mermaid.initialize({startOnLoad:false,theme:t});document.querySelectorAll('pre.mermaid > code').forEach(function(c){var src=c.textContent;c.parentElement.setAttribute('data-mermaid-source',src);c.parentElement.textContent=src;});mermaid.run()}"></script>
+  <script>document.getElementById('rprint-mermaid').addEventListener('error',function(){if(window.RenderOnDemand){window.RenderOnDemand.libraryFailed('mermaid',new Error('Mermaid failed to load'))}});</script>
+  <!-- rprint:page-assets:start --><!-- rprint:page-assets:end -->
+  
+  
+<script type="application/json" data-rprint-page-assets>{"version":1,"entries":[]}</script>
+</body>
+</html>
